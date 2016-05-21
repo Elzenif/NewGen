@@ -22,8 +22,7 @@ public class Main {
       e.printStackTrace();
     }
 
-    MainFrame mainFrame = new MainFrame();
-    mainFrame.setVisible(true);
+    new MainFrame();
   }
 
 
