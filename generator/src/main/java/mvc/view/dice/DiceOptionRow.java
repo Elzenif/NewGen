@@ -4,6 +4,7 @@ import mvc.controller.dice.RollDiceController;
 import mvc.view.Constants;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -20,6 +21,7 @@ public class DiceOptionRow extends JPanel {
   private JLabel infoLabel;
   private JSpinner numberOfDiceSpinner;
   private SpinnerNumberModel numberOfDiceModel;
+  private JCheckBox sumCheckBox;
   private JButton rollDiceButton;
 
   DiceOptionRow(int diceNumber) {
@@ -37,12 +39,11 @@ public class DiceOptionRow extends JPanel {
     numberOfDiceSpinner = new JSpinner(numberOfDiceModel);
     add(numberOfDiceSpinner);
 
+    sumCheckBox = new JCheckBox("Sum");
+    add(sumCheckBox);
+
     rollDiceButton = new JButton("Roll " + numberOfDiceModel.getNumber() + "D" + diceNumber);
     add(rollDiceButton);
-  }
-
-  public int getNumberOfDiceSelected() {
-    return numberOfDiceModel.getNumber().intValue();
   }
 
   void setController(RollDiceController rollDiceController) {
@@ -50,7 +51,15 @@ public class DiceOptionRow extends JPanel {
     rollDiceButton.addChangeListener(rollDiceController);
   }
 
+  public int getNumberOfDiceSelected() {
+    return numberOfDiceModel.getNumber().intValue();
+  }
+
   public void updateNumberOfDiceOnButton() {
     rollDiceButton.setText("Roll " + getNumberOfDiceSelected() + "D" + diceNumber);
+  }
+
+  public boolean sumCheckBoxIsSelected() {
+    return sumCheckBox.isSelected();
   }
 }

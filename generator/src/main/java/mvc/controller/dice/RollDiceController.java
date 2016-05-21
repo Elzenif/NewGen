@@ -25,8 +25,14 @@ public class RollDiceController implements ActionListener, ChangeListener {
 
   public void actionPerformed(ActionEvent e) {
     String result = "";
+    int sum = 0;
     for (int i = 0; i < diceOptionRow.getNumberOfDiceSelected(); i++) {
-      result += String.valueOf(rollDice(1, diceMax)) + " ";
+      int rd = rollDice(1, diceMax);
+      sum += rd;
+      result += String.valueOf(rd) + " ";
+    }
+    if (diceOptionRow.sumCheckBoxIsSelected()) {
+      result += "sum = " + sum;
     }
     diceResultRow.setResult(result);
   }
