@@ -1,6 +1,6 @@
 package mvc.view.dice;
 
-import mvc.controller.dice.RollDiceButtonController;
+import mvc.controller.dice.RollDiceController;
 import mvc.view.Constants;
 
 import javax.swing.JButton;
@@ -14,8 +14,6 @@ import java.awt.FlowLayout;
  * Created by Germain on 21/05/2016.
  */
 public class DiceOptionRow extends JPanel {
-
-  // TODO add a controller that changes the text of the rollDiceButton according to options selected
 
   private int diceNumber;
 
@@ -47,9 +45,9 @@ public class DiceOptionRow extends JPanel {
     return numberOfDiceModel.getNumber().intValue();
   }
 
-  void setController(RollDiceButtonController rollDiceButtonController) {
-    rollDiceButton.addActionListener(rollDiceButtonController);
-    rollDiceButton.addChangeListener(rollDiceButtonController);
+  void setController(RollDiceController rollDiceController) {
+    rollDiceButton.addActionListener(rollDiceController);
+    rollDiceButton.addChangeListener(rollDiceController);
   }
 
   public void updateNumberOfDiceOnButton() {

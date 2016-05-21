@@ -20,7 +20,6 @@ public class MainFrame extends JFrame {
 
     setTitle("Generator");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//    setLocationRelativeTo(null);
     setSize(Constants.JFRAME_WIDTH, Constants.JFRAME_HEIGHT);
     setResizable(false);
     setVisible(true);
