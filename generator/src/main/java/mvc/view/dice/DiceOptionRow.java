@@ -2,6 +2,7 @@ package mvc.view.dice;
 
 import mvc.controller.dice.RollDiceController;
 import mvc.view.Constants;
+import utils.StringUtils;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -16,12 +17,22 @@ import java.awt.FlowLayout;
  */
 public class DiceOptionRow extends JPanel {
 
+  private final int JLABEL_SIZE = 4;
+  private final int JBUTTON_SIZE = 11;
+
   private int diceNumber;
 
   private JLabel infoLabel;
+
   private JSpinner numberOfDiceSpinner;
   private SpinnerNumberModel numberOfDiceModel;
+
   private JCheckBox sumCheckBox;
+
+  private JCheckBox addScoreCheckBox;
+  private JSpinner addScoreSpinner;
+  private SpinnerNumberModel addScoreModel;
+
   private JButton rollDiceButton;
 
   DiceOptionRow(int diceNumber) {
@@ -32,17 +43,25 @@ public class DiceOptionRow extends JPanel {
   private void setComponents() {
     setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
 
-    infoLabel = new JLabel("D" + diceNumber);
-    add(infoLabel);
-
     numberOfDiceModel = new SpinnerNumberModel(1, 0, 20, 1);
     numberOfDiceSpinner = new JSpinner(numberOfDiceModel);
     add(numberOfDiceSpinner);
 
-    sumCheckBox = new JCheckBox("Sum");
+    infoLabel = new JLabel(StringUtils.center(JLABEL_SIZE, "D" + diceNumber));
+    add(infoLabel);
+
+    sumCheckBox = new JCheckBox("Sum results");
     add(sumCheckBox);
 
-    rollDiceButton = new JButton("Roll " + numberOfDiceModel.getNumber() + "D" + diceNumber);
+    addScoreCheckBox = new JCheckBox("Add score");
+    addScoreModel = new SpinnerNumberModel(1, 1, 99, 1);
+    addScoreSpinner = new JSpinner(addScoreModel);
+    addScoreSpinner.setEnabled(false);
+    add(addScoreCheckBox);
+    add(addScoreSpinner);
+
+    rollDiceButton = new JButton(StringUtils.center(
+            JBUTTON_SIZE, "Roll " + numberOfDiceModel.getNumber() + "D" + diceNumber));
     add(rollDiceButton);
   }
 
@@ -56,7 +75,8 @@ public class DiceOptionRow extends JPanel {
   }
 
   public void updateNumberOfDiceOnButton() {
-    rollDiceButton.setText("Roll " + getNumberOfDiceSelected() + "D" + diceNumber);
+    rollDiceButton.setText(StringUtils.center(
+            JBUTTON_SIZE, "Roll " + getNumberOfDiceSelected() + "D" + diceNumber));
   }
 
   public boolean sumCheckBoxIsSelected() {
