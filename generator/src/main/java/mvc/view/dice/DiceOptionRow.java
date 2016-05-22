@@ -7,6 +7,7 @@ import mvc.controller.dice.RollDiceActionListener;
 import mvc.view.Constants;
 import utils.StringUtils;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -20,7 +21,7 @@ import java.awt.FlowLayout;
  */
 public class DiceOptionRow extends JPanel {
 
-  private final int JLABEL_SIZE = 4;
+  private final int JLABEL_SIZE = 5;
   private final int JBUTTON_SIZE = 14;
 
   private int diceNumber;
@@ -55,25 +56,31 @@ public class DiceOptionRow extends JPanel {
     infoLabel = new JLabel(StringUtils.center(JLABEL_SIZE, "D" + diceNumber));
     add(infoLabel);
 
-    sumCheckBox = new JCheckBox("Sum");
-    add(sumCheckBox);
-
-    meanCheckBox = new JCheckBox("Mean");
-    add(meanCheckBox);
-
+    JPanel jPanel1 = new JPanel();
+    jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
     addScoreCheckBox = new JCheckBox("Add score");
+    addScoreCheckBox.setAlignmentX(RIGHT_ALIGNMENT);
     addScoreModel = new SpinnerNumberModel(1, 1, 99, 1);
     addScoreSpinner = new JSpinner(addScoreModel);
     addScoreSpinner.setEnabled(false);
-    add(addScoreCheckBox);
-    add(addScoreSpinner);
+    addScoreSpinner.setAlignmentX(RIGHT_ALIGNMENT);
+    jPanel1.add(addScoreCheckBox);
+    jPanel1.add(addScoreSpinner);
+    add(jPanel1);
+
+    JPanel jPanel2 = new JPanel();
+    jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.Y_AXIS));
+    sumCheckBox = new JCheckBox("Sum");
+    jPanel2.add(sumCheckBox);
+    meanCheckBox = new JCheckBox("Mean");
+    jPanel2.add(meanCheckBox);
+    add(jPanel2);
 
     rollDiceButton = new JButton();
     updateTextButton();
     add(rollDiceButton);
   }
 
-  // TODO change the layout of some options
   // TODO add a comparison test to rolls
 
   void setControllers(DiceResultRow diceResultRow) {
