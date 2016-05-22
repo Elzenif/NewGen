@@ -68,8 +68,6 @@ public class DiceOptionRow extends JPanel {
     add(rollDiceButton);
   }
 
-  // TODO print dice results in different colors if critic
-  // TODO change the result dice font size
   // TODO add a mean result checkbox
   // TODO change the layout of some options
   // TODO add a comparison test to rolls
