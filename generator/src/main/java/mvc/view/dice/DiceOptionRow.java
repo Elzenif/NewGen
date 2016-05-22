@@ -32,6 +32,8 @@ public class DiceOptionRow extends JPanel {
 
   private JCheckBox sumCheckBox;
 
+  private JCheckBox meanCheckBox;
+
   private JCheckBox addScoreCheckBox;
   private JSpinner addScoreSpinner;
   private SpinnerNumberModel addScoreModel;
@@ -53,8 +55,11 @@ public class DiceOptionRow extends JPanel {
     infoLabel = new JLabel(StringUtils.center(JLABEL_SIZE, "D" + diceNumber));
     add(infoLabel);
 
-    sumCheckBox = new JCheckBox("Sum results");
+    sumCheckBox = new JCheckBox("Sum");
     add(sumCheckBox);
+
+    meanCheckBox = new JCheckBox("Mean");
+    add(meanCheckBox);
 
     addScoreCheckBox = new JCheckBox("Add score");
     addScoreModel = new SpinnerNumberModel(1, 1, 99, 1);
@@ -68,7 +73,6 @@ public class DiceOptionRow extends JPanel {
     add(rollDiceButton);
   }
 
-  // TODO add a mean result checkbox
   // TODO change the layout of some options
   // TODO add a comparison test to rolls
 
@@ -93,6 +97,10 @@ public class DiceOptionRow extends JPanel {
 
   public boolean sumCheckBoxIsSelected() {
     return sumCheckBox.isSelected();
+  }
+
+  public boolean meanCheckBoxIsSelected() {
+    return meanCheckBox.isSelected();
   }
 
   public boolean isAddScoreCheckBoxSelected() {

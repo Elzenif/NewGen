@@ -46,6 +46,10 @@ public class RollDiceActionListener implements ActionListener {
     if (diceOptionRow.sumCheckBoxIsSelected()) {
       results.add(new Pair<String, EDiceResultType>("sum = " + sum, EDiceResultType.NORMAL));
     }
+    if (diceOptionRow.meanCheckBoxIsSelected()) {
+      double mean = (double) sum / diceOptionRow.getNumberOfDiceSelected();
+      results.add(new Pair<String, EDiceResultType>("mean = " + mean, EDiceResultType.NORMAL));
+    }
     diceResultRow.setResults(results);
   }
 
