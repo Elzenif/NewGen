@@ -1,6 +1,5 @@
 package mvc.view.dice;
 
-import mvc.controller.dice.RollDiceController;
 import mvc.model.dice.EDiceNumber;
 import mvc.view.Constants;
 
@@ -28,7 +27,7 @@ public class DicePanel extends JPanel {
     for (EDiceNumber eDiceNumber : EDiceNumber.values()) {
       DiceOptionRow diceOptionRow = new DiceOptionRow(eDiceNumber.getDiceNumber());
       DiceResultRow diceResultRow = new DiceResultRow(eDiceNumber.getDiceNumber());
-      diceOptionRow.setController(new RollDiceController(eDiceNumber.getDiceNumber(), diceOptionRow, diceResultRow));
+      diceOptionRow.setControllers(diceResultRow);
       leftPanel.add(diceOptionRow);
       rightPanel.add(diceResultRow);
     }

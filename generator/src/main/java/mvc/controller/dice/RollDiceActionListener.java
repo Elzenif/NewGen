@@ -3,21 +3,19 @@ package mvc.controller.dice;
 import mvc.view.dice.DiceOptionRow;
 import mvc.view.dice.DiceResultRow;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
  * Created by Germain on 07/05/2016.
  */
-public class RollDiceController implements ActionListener, ChangeListener {
+public class RollDiceActionListener implements ActionListener {
 
   private int diceMax;
   private DiceOptionRow diceOptionRow;
   private DiceResultRow diceResultRow;
 
-  public RollDiceController(int diceMax, DiceOptionRow diceOptionRow, DiceResultRow diceResultRow) {
+  public RollDiceActionListener(int diceMax, DiceOptionRow diceOptionRow, DiceResultRow diceResultRow) {
     this.diceMax = diceMax;
     this.diceOptionRow = diceOptionRow;
     this.diceResultRow = diceResultRow;
@@ -27,7 +25,7 @@ public class RollDiceController implements ActionListener, ChangeListener {
     String result = "";
     int sum = 0;
     for (int i = 0; i < diceOptionRow.getNumberOfDiceSelected(); i++) {
-      int rd = rollDice(1, diceMax);
+      int rd = rollDice(1, diceMax) + diceOptionRow.getAddScore();
       sum += rd;
       result += String.valueOf(rd) + " ";
     }
@@ -35,10 +33,6 @@ public class RollDiceController implements ActionListener, ChangeListener {
       result += "sum = " + sum;
     }
     diceResultRow.setResult(result);
-  }
-
-  public void stateChanged(ChangeEvent e) {
-    diceOptionRow.updateNumberOfDiceOnButton();
   }
 
   private int rollDice(int min, int max) {

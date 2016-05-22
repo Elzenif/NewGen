@@ -1,6 +1,9 @@
 package mvc.view.dice;
 
-import mvc.controller.dice.RollDiceController;
+import mvc.controller.dice.AddScoreCheckBoxItemListener;
+import mvc.controller.dice.AddScoreSpinnerChangeListener;
+import mvc.controller.dice.NumberOfDiceChangeListener;
+import mvc.controller.dice.RollDiceActionListener;
 import mvc.view.Constants;
 import utils.StringUtils;
 
@@ -18,7 +21,7 @@ import java.awt.FlowLayout;
 public class DiceOptionRow extends JPanel {
 
   private final int JLABEL_SIZE = 4;
-  private final int JBUTTON_SIZE = 11;
+  private final int JBUTTON_SIZE = 14;
 
   private int diceNumber;
 
@@ -60,26 +63,49 @@ public class DiceOptionRow extends JPanel {
     add(addScoreCheckBox);
     add(addScoreSpinner);
 
-    rollDiceButton = new JButton(StringUtils.center(
-            JBUTTON_SIZE, "Roll " + numberOfDiceModel.getNumber() + "D" + diceNumber));
+    rollDiceButton = new JButton();
+    updateTextButton();
     add(rollDiceButton);
   }
 
-  void setController(RollDiceController rollDiceController) {
-    rollDiceButton.addActionListener(rollDiceController);
-    rollDiceButton.addChangeListener(rollDiceController);
+  // TODO print dice results in different colors if critic
+  // TODO change the result dice font size
+  // TODO add a mean result checkbox
+  // TODO change the layout of some options
+  // TODO add a comparison test to rolls
+
+  void setControllers(DiceResultRow diceResultRow) {
+    rollDiceButton.addActionListener(new RollDiceActionListener(diceNumber, this, diceResultRow));
+    numberOfDiceSpinner.addChangeListener(new NumberOfDiceChangeListener(this));
+    addScoreCheckBox.addItemListener(new AddScoreCheckBoxItemListener(this));
+    addScoreSpinner.addChangeListener(new AddScoreSpinnerChangeListener(this));
   }
 
   public int getNumberOfDiceSelected() {
     return numberOfDiceModel.getNumber().intValue();
   }
 
-  public void updateNumberOfDiceOnButton() {
-    rollDiceButton.setText(StringUtils.center(
-            JBUTTON_SIZE, "Roll " + getNumberOfDiceSelected() + "D" + diceNumber));
+  public void updateTextButton() {
+    String s = "Roll " + getNumberOfDiceSelected() + "D" + diceNumber;
+    if (isAddScoreCheckBoxSelected()) {
+      s += "+" + getAddScore();
+    }
+    rollDiceButton.setText(StringUtils.center(JBUTTON_SIZE, s));
   }
 
   public boolean sumCheckBoxIsSelected() {
     return sumCheckBox.isSelected();
+  }
+
+  public boolean isAddScoreCheckBoxSelected() {
+    return addScoreCheckBox.isSelected();
+  }
+
+  public void updateAddScoreSpinnerAbility() {
+    addScoreSpinner.setEnabled(isAddScoreCheckBoxSelected());
+  }
+
+  public int getAddScore() {
+    return isAddScoreCheckBoxSelected() ? addScoreModel.getNumber().intValue() : 0;
   }
 }
