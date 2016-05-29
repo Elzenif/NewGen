@@ -1,9 +1,11 @@
 package mvc.controller.dice;
 
+import mvc.model.dice.DiceResult;
 import mvc.model.dice.EDiceResultType;
+import mvc.model.dice.EDiceTestResult;
 import mvc.view.dice.DiceOptionRow;
 import mvc.view.dice.DiceResultRow;
-import utils.Pair;
+import org.jetbrains.annotations.Contract;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,9 +17,9 @@ import java.util.List;
  */
 public class RollDiceActionListener implements ActionListener {
 
-  private int diceMax;
-  private DiceOptionRow diceOptionRow;
-  private DiceResultRow diceResultRow;
+  private final int diceMax;
+  private final DiceOptionRow diceOptionRow;
+  private final DiceResultRow diceResultRow;
 
   public RollDiceActionListener(int diceMax, DiceOptionRow diceOptionRow, DiceResultRow diceResultRow) {
     this.diceMax = diceMax;
@@ -27,34 +29,49 @@ public class RollDiceActionListener implements ActionListener {
 
   public void actionPerformed(ActionEvent e) {
     diceResultRow.clearResults();
-    List<Pair<String, EDiceResultType>> results = new LinkedList<Pair<String, EDiceResultType>>();
+    List<DiceResult> results = new LinkedList<DiceResult>();
     int sum = 0;
     for (int i = 0; i < diceOptionRow.getNumberOfDiceSelected(); i++) {
       int rd = rollDice(1, diceMax);
-      EDiceResultType drt;
-      if (rd == 1) {
-        drt = EDiceResultType.CRITIC;
-      } else if (rd == diceMax) {
-        drt = EDiceResultType.FUMBLE;
-      } else {
-        drt = EDiceResultType.NORMAL;
-      }
       rd += diceOptionRow.getAddScore();
       sum += rd;
-      results.add(new Pair<String, EDiceResultType>(String.valueOf(rd) + " ", drt));
+      results.add(new DiceResult(String.valueOf(rd) + " ", getDiceResultType(rd), getDiceTestResult(rd)));
     }
     if (diceOptionRow.sumCheckBoxIsSelected()) {
-      results.add(new Pair<String, EDiceResultType>("sum = " + sum, EDiceResultType.NORMAL));
+      results.add(new DiceResult("sum = " + sum));
     }
     if (diceOptionRow.meanCheckBoxIsSelected()) {
       double mean = (double) sum / diceOptionRow.getNumberOfDiceSelected();
-      results.add(new Pair<String, EDiceResultType>("mean = " + mean, EDiceResultType.NORMAL));
+      results.add(new DiceResult("mean = " + mean));
     }
     diceResultRow.setResults(results);
   }
 
   private int rollDice(int min, int max) {
     return (int) (Math.random() * (max - min + 1) + min);
+  }
+
+  @Contract(pure = true)
+  private EDiceResultType getDiceResultType(int rd) {
+    if (rd == 1) {
+      return EDiceResultType.CRITIC;
+    } else if (rd == diceMax) {
+      return EDiceResultType.FUMBLE;
+    } else {
+      return EDiceResultType.NORMAL;
+    }
+  }
+
+  private EDiceTestResult getDiceTestResult(int rd) {
+    if (diceOptionRow.isTestCheckBoxSelected()) {
+      if (diceOptionRow.getTestComboBoxOperator().apply(rd, diceOptionRow.getTestSpinnerValue())) {
+        return EDiceTestResult.VALID;
+      } else {
+        return EDiceTestResult.INVALID;
+      }
+    } else {
+      return EDiceTestResult.NO_TEST;
+    }
   }
 
 }

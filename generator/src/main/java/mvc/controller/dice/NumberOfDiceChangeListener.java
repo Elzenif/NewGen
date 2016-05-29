@@ -10,7 +10,7 @@ import javax.swing.event.ChangeListener;
  */
 public class NumberOfDiceChangeListener implements ChangeListener {
 
-  private DiceOptionRow diceOptionRow;
+  private final DiceOptionRow diceOptionRow;
 
   public NumberOfDiceChangeListener(DiceOptionRow diceOptionRow) {
     this.diceOptionRow = diceOptionRow;

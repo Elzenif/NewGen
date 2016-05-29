@@ -10,7 +10,7 @@ import javax.swing.event.ChangeListener;
  */
 public class AddScoreSpinnerChangeListener implements ChangeListener {
 
-  private DiceOptionRow diceOptionRow;
+  private final DiceOptionRow diceOptionRow;
 
   public AddScoreSpinnerChangeListener(DiceOptionRow diceOptionRow) {
     this.diceOptionRow = diceOptionRow;

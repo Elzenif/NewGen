@@ -1,8 +1,7 @@
 package mvc.view.dice;
 
-import mvc.model.dice.EDiceResultType;
+import mvc.model.dice.DiceResult;
 import mvc.view.Constants;
-import utils.Pair;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -42,11 +41,12 @@ public class DiceResultRow extends JPanel {
     resultDices.clear();
   }
 
-  public void setResults(List<Pair<String, EDiceResultType>> results) {
-    for (Pair result : results) {
-      JLabel resultDice = new JLabel((String) result.getLeft());
-      resultDice.setFont(new Font(null, Font.PLAIN, 13));
-      resultDice.setForeground(((EDiceResultType) result.getRigth()).getColor());
+  @SuppressWarnings("MagicConstant")
+  public void setResults(List<DiceResult> results) {
+    for (DiceResult result : results) {
+      JLabel resultDice = new JLabel(result.getResult());
+      resultDice.setFont(new Font(null, result.getEDiceResultType().getFontStyle(), 13));
+      resultDice.setForeground(result.getEDiceTestResult().getColor());
       resultDices.add(resultDice);
       add(resultDice);
     }

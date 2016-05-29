@@ -8,6 +8,6 @@ public class Constants {
   public static final int JFRAME_HEIGHT = 800;
   public static final int JFRAME_WIDTH = 1200;
 
-  public static final int JPANEL_HGAP = 10;
-  public static final int JPANEL_VGAP = 10;
+  public static final int JPANEL_HGAP = 15;
+  public static final int JPANEL_VGAP = 15;
 }

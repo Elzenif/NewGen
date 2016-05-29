@@ -1,23 +1,23 @@
 package mvc.model.dice;
 
-import java.awt.Color;
+import java.awt.Font;
 
 /**
  * Created by Germain on 22/05/2016.
  */
 public enum EDiceResultType {
 
-  NORMAL(Color.BLACK),
-  CRITIC(Color.BLUE),
-  FUMBLE(Color.RED);
+  NORMAL(Font.PLAIN),
+  CRITIC(Font.BOLD),
+  FUMBLE(Font.BOLD);
 
-  private Color color;
+  private int fontStyle;
 
-  EDiceResultType(Color color) {
-    this.color = color;
+  EDiceResultType(int fontStyle) {
+    this.fontStyle = fontStyle;
   }
 
-  public Color getColor() {
-    return color;
+  public int getFontStyle() {
+    return fontStyle;
   }
 }
