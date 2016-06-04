@@ -5,7 +5,7 @@ import mvc.controller.dice.AddScoreSpinnerChangeListener;
 import mvc.controller.dice.NumberOfDiceChangeListener;
 import mvc.controller.dice.RollDiceActionListener;
 import mvc.controller.dice.TestCheckBoxListener;
-import mvc.view.Constants;
+import mvc.view.commons.Constants;
 import utils.EOperator;
 import utils.StringUtils;
 

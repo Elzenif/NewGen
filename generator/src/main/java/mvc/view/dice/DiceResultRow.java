@@ -1,7 +1,7 @@
 package mvc.view.dice;
 
 import mvc.model.dice.DiceResult;
-import mvc.view.Constants;
+import mvc.view.commons.Constants;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

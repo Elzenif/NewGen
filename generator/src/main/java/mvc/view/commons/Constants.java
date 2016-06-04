@@ -1,4 +1,4 @@
-package mvc.view;
+package mvc.view.commons;
 
 /**
  * Created by Germain on 08/05/2016.

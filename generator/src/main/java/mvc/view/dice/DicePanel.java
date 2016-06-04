@@ -1,29 +1,19 @@
 package mvc.view.dice;
 
 import mvc.model.dice.EDiceNumber;
-import mvc.view.Constants;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import java.awt.GridLayout;
+import mvc.view.commons.DoublePanel;
 
 /**
  * Created by Germain on 07/05/2016.
  */
-public class DicePanel extends JPanel {
-
-  private JPanel leftPanel;
-  private JPanel rightPanel;
-
-  private final int NB_ROWS = 8;
-  private final int NB_COLS = 1;
+public class DicePanel extends DoublePanel {
 
   public DicePanel() {
-    setLayout(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+    super(setPanel("Options", 8, 1), setPanel("Results", 8, 1));
+  }
 
-    leftPanel = setPanel("Options");
-    rightPanel = setPanel("Results");
-
+  @Override
+  protected void setPanelsComponents() {
     for (EDiceNumber eDiceNumber : EDiceNumber.values()) {
       DiceOptionRow diceOptionRow = new DiceOptionRow(eDiceNumber.getDiceNumber());
       DiceResultRow diceResultRow = new DiceResultRow(eDiceNumber.getDiceNumber());
@@ -31,14 +21,5 @@ public class DicePanel extends JPanel {
       leftPanel.add(diceOptionRow);
       rightPanel.add(diceResultRow);
     }
-
-    add(leftPanel);
-    add(rightPanel);
-  }
-
-  private JPanel setPanel(String title) {
-    JPanel jPanel = new JPanel(new GridLayout(NB_ROWS, NB_COLS, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
-    jPanel.setBorder(BorderFactory.createTitledBorder(title));
-    return jPanel;
   }
 }
