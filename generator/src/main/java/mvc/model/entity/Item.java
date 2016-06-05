@@ -30,10 +30,10 @@ public abstract class Item {
     @Nullable
     private <E extends Enum<E> & ItemType> E selectRandomItemType(Map<E, Integer> itemTypes) {
       int probaMax = itemTypes.values().stream().reduce(0, Integer::sum);
-      int random = MathUtils.random(0, probaMax);
+      int random = MathUtils.random(1, probaMax);
       for (Map.Entry<E, Integer> pair : itemTypes.entrySet()) {
         int proba = pair.getValue();
-        if (random < proba) {
+        if (random <= proba) {
           return pair.getKey();
         } else {
           random -= proba;

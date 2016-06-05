@@ -5,9 +5,11 @@ import mvc.controller.dice.AddScoreSpinnerChangeListener;
 import mvc.controller.dice.NumberOfDiceChangeListener;
 import mvc.controller.dice.RollDiceActionListener;
 import mvc.controller.dice.TestCheckBoxListener;
+import mvc.model.dice.EDiceNumber;
 import mvc.view.commons.Constants;
 import mvc.view.commons.PanelRow;
 import utils.EOperator;
+import utils.MathUtils;
 import utils.StringUtils;
 
 import javax.swing.BoxLayout;
@@ -25,24 +27,24 @@ import java.awt.FlowLayout;
  */
 public class DiceOptionRow extends PanelRow {
 
-  private final int JLABEL_SIZE = 5;
-  private final int JBUTTON_SIZE = 14;
+  private static final int JLABEL_SIZE = MathUtils.maxLength(EDiceNumber.values());
+  private final int JBUTTON_SIZE = "Roll 99D100+99".length();
 
-  private final int diceNumber;
+  private final EDiceNumber diceNumber;
 
-  private JSpinner numberOfDiceSpinner;
-  private SpinnerNumberModel numberOfDiceModel;
+  private final JSpinner numberOfDiceSpinner;
+  private final SpinnerNumberModel numberOfDiceModel;
 
-  private JLabel infoLabel;
+  private final JLabel infoLabel;
 
-  private JCheckBox addScoreCheckBox;
-  private JSpinner addScoreSpinner;
-  private SpinnerNumberModel addScoreModel;
+  private final JCheckBox addScoreCheckBox;
+  private final JSpinner addScoreSpinner;
+  private final SpinnerNumberModel addScoreModel;
 
-  private JCheckBox testCheckBox;
-  private JComboBox<EOperator> testComboBox;
-  private JSpinner testSpinner;
-  private SpinnerNumberModel testModel;
+  private final JCheckBox testCheckBox;
+  private final JComboBox<EOperator> testComboBox;
+  private final JSpinner testSpinner;
+  private final SpinnerNumberModel testModel;
 
 
   private JCheckBox sumCheckBox;
@@ -50,18 +52,16 @@ public class DiceOptionRow extends PanelRow {
 
   private JButton rollDiceButton;
 
-  DiceOptionRow(int diceNumber) {
+  DiceOptionRow(EDiceNumber diceNumber) {
     super();
     this.diceNumber = diceNumber;
-    setComponents();
-  }
 
-  private void setComponents() {
     numberOfDiceModel = new SpinnerNumberModel(1, 0, 20, 1);
     numberOfDiceSpinner = new JSpinner(numberOfDiceModel);
     add(numberOfDiceSpinner);
 
-    infoLabel = new JLabel(StringUtils.center(JLABEL_SIZE, "D" + diceNumber));
+    ;
+    infoLabel = new JLabel(StringUtils.leftAlign(JLABEL_SIZE, diceNumber.getName()));
     add(infoLabel);
 
     JPanel jPanel1 = new JPanel();
@@ -84,7 +84,7 @@ public class DiceOptionRow extends PanelRow {
     jPanel21.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, 0));
     testComboBox = new JComboBox<>(EOperator.values());
     testComboBox.setEnabled(false);
-    testModel = new SpinnerNumberModel(diceNumber / 2, 1, 99, 1);
+    testModel = new SpinnerNumberModel(diceNumber.getDiceNumber() / 2, 1, 99, 1);
     testSpinner = new JSpinner(testModel);
     testSpinner.setEnabled(false);
     jPanel21.add(testComboBox);
@@ -119,7 +119,7 @@ public class DiceOptionRow extends PanelRow {
   }
 
   public void updateTextButton() {
-    String s = "Roll " + getNumberOfDiceSelected() + "D" + diceNumber;
+    String s = "Roll " + getNumberOfDiceSelected() + diceNumber.getName();
     if (isAddScoreCheckBoxSelected()) {
       s += "+" + getAddScore();
     }

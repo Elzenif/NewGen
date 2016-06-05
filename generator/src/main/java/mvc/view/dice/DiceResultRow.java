@@ -1,5 +1,6 @@
 package mvc.view.dice;
 
+import mvc.model.dice.EDiceNumber;
 import mvc.model.dice.results.DiceResult;
 import mvc.view.commons.ResultRow;
 
@@ -11,8 +12,8 @@ import java.awt.Font;
  */
 public class DiceResultRow extends ResultRow<DiceResult> {
 
-  DiceResultRow(int diceNumber) {
-    super("D" + diceNumber);
+  DiceResultRow(EDiceNumber diceNumber) {
+    super(diceNumber.getName());
   }
 
   @Override

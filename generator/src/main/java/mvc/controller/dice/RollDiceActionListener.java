@@ -1,5 +1,6 @@
 package mvc.controller.dice;
 
+import mvc.model.dice.EDiceNumber;
 import mvc.model.dice.results.DiceResult;
 import mvc.model.dice.results.enums.EDiceResultType;
 import mvc.model.dice.results.enums.EDiceTestResult;
@@ -22,8 +23,8 @@ public class RollDiceActionListener implements ActionListener {
   private final DiceOptionRow diceOptionRow;
   private final DiceResultRow diceResultRow;
 
-  public RollDiceActionListener(int diceMax, DiceOptionRow diceOptionRow, DiceResultRow diceResultRow) {
-    this.diceMax = diceMax;
+  public RollDiceActionListener(EDiceNumber diceNumber, DiceOptionRow diceOptionRow, DiceResultRow diceResultRow) {
+    this.diceMax = diceNumber.getDiceNumber();
     this.diceOptionRow = diceOptionRow;
     this.diceResultRow = diceResultRow;
   }

@@ -1,7 +1,5 @@
 package mvc.view.entity;
 
-import mvc.model.commons.Result;
-import mvc.model.entity.Item;
 import mvc.model.entity.enums.EAvailableItem;
 import mvc.view.commons.DoublePanel;
 
@@ -16,9 +14,9 @@ public class EntityPanel extends DoublePanel {
   }
 
   protected void setPanelsComponents() {
-    for (EAvailableItem availableItem: EAvailableItem.values()) {
-      EntityOptionRow<Item, Result> entityOptionRow = new EntityOptionRow<>(availableItem);
-      EntityResultRow<Result> entityResultRow = new EntityResultRow<>(availableItem);
+    for (EAvailableItem availableItem : EAvailableItem.values()) {
+      EntityOptionRow entityOptionRow = new EntityOptionRow(availableItem);
+      EntityResultRow entityResultRow = new EntityResultRow(availableItem);
       entityOptionRow.setControllers(entityResultRow);
       leftPanel.add(entityOptionRow);
       rightPanel.add(entityResultRow);

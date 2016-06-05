@@ -1,6 +1,6 @@
 package mvc.view.dice;
 
-import mvc.model.dice.results.enums.EDiceNumber;
+import mvc.model.dice.EDiceNumber;
 import mvc.view.commons.DoublePanel;
 
 /**
@@ -16,8 +16,8 @@ public class DicePanel extends DoublePanel {
   @Override
   protected void setPanelsComponents() {
     for (EDiceNumber eDiceNumber : EDiceNumber.values()) {
-      DiceOptionRow diceOptionRow = new DiceOptionRow(eDiceNumber.getDiceNumber());
-      DiceResultRow diceResultRow = new DiceResultRow(eDiceNumber.getDiceNumber());
+      DiceOptionRow diceOptionRow = new DiceOptionRow(eDiceNumber);
+      DiceResultRow diceResultRow = new DiceResultRow(eDiceNumber);
       diceOptionRow.setControllers(diceResultRow);
       leftPanel.add(diceOptionRow);
       rightPanel.add(diceResultRow);

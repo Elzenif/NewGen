@@ -1,11 +1,9 @@
 package mvc.model.entity.results;
 
-import mvc.model.commons.Result;
-
 /**
  * Created by Germain on 05/06/2016.
  */
-public class WeaponResult implements Result {
+public class WeaponResult implements ItemResult {
 
   private final String result;
 

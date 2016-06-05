@@ -1,9 +1,11 @@
-package mvc.model.dice.results.enums;
+package mvc.model.dice;
+
+import mvc.model.commons.HasName;
 
 /**
  * Created by Germain on 21/05/2016.
  */
-public enum EDiceNumber {
+public enum EDiceNumber implements HasName {
 
   D4(4),
   D6(6),
@@ -14,12 +16,19 @@ public enum EDiceNumber {
   D100(100);
 
   private final int diceNumber;
+  private final String name;
 
   EDiceNumber(int diceNumber) {
     this.diceNumber = diceNumber;
+    this.name = "D" + diceNumber;
   }
 
   public int getDiceNumber() {
     return diceNumber;
+  }
+
+  @Override
+  public String getName() {
+    return name;
   }
 }

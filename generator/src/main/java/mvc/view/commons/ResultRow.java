@@ -4,6 +4,7 @@ import mvc.model.commons.Result;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,10 +31,11 @@ public abstract class ResultRow<T extends Result> extends PanelRow {
     resultsToPrint.clear();
   }
 
-  public void setResultsToPrint(List<T> results) {
-    for (T result: results) {
+  @SuppressWarnings("unchecked")
+  public void setResultsToPrint(Collection<T> results) {
+    for (Result result: results) {
       JLabel resultToPrint = new JLabel(result.getRawResult());
-      makePretty(resultToPrint, result);
+      makePretty(resultToPrint, (T) result);
       resultsToPrint.add(resultToPrint);
       add(resultToPrint);
     }
