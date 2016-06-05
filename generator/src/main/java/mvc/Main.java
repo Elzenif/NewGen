@@ -10,7 +10,7 @@ import java.util.Enumeration;
 /**
  * Created by Germain on 01/05/2016.
  */
-public class Main {
+class Main {
 
   public static void main(String[] args) {
     try {

@@ -28,12 +28,12 @@ public class DiceOptionRow extends PanelRow {
   private final int JLABEL_SIZE = 5;
   private final int JBUTTON_SIZE = 14;
 
-  private int diceNumber;
-
-  private JLabel infoLabel;
+  private final int diceNumber;
 
   private JSpinner numberOfDiceSpinner;
   private SpinnerNumberModel numberOfDiceModel;
+
+  private JLabel infoLabel;
 
   private JCheckBox addScoreCheckBox;
   private JSpinner addScoreSpinner;

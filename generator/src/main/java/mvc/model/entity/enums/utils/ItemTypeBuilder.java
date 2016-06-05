@@ -9,7 +9,7 @@ import java.util.List;
  */
 public abstract class ItemTypeBuilder {
 
-  private List<String> names = new ArrayList<>();
+  private final List<String> names = new ArrayList<>();
   private int proba = 0;
 
   public List<String> getNames() {

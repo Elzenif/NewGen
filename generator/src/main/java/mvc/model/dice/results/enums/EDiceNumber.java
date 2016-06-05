@@ -1,4 +1,4 @@
-package mvc.model.dice;
+package mvc.model.dice.results.enums;
 
 /**
  * Created by Germain on 21/05/2016.
@@ -13,7 +13,7 @@ public enum EDiceNumber {
   D20(20),
   D100(100);
 
-  private int diceNumber;
+  private final int diceNumber;
 
   EDiceNumber(int diceNumber) {
     this.diceNumber = diceNumber;

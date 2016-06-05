@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class MathUtils {
 
-  private static Random seed = new Random();
+  private static final Random seed = new Random();
 
   public static int random(int min, int max) {
     return seed.nextInt(max - min + 1) + min;

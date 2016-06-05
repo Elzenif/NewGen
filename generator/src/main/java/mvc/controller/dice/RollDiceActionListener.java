@@ -1,8 +1,8 @@
 package mvc.controller.dice;
 
-import mvc.model.dice.DiceResult;
-import mvc.model.dice.EDiceResultType;
-import mvc.model.dice.EDiceTestResult;
+import mvc.model.dice.results.DiceResult;
+import mvc.model.dice.results.enums.EDiceResultType;
+import mvc.model.dice.results.enums.EDiceTestResult;
 import mvc.view.dice.DiceOptionRow;
 import mvc.view.dice.DiceResultRow;
 import org.jetbrains.annotations.Contract;
@@ -45,7 +45,7 @@ public class RollDiceActionListener implements ActionListener {
       double mean = (double) sum / diceOptionRow.getNumberOfDiceSelected();
       results.add(new DiceResult("mean = " + mean));
     }
-    diceResultRow.setResults(results);
+    diceResultRow.setResultsToPrint(results);
   }
 
   private int rollDice(int max) {

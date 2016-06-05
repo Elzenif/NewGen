@@ -1,9 +1,13 @@
-package mvc.model.dice;
+package mvc.model.dice.results;
+
+import mvc.model.commons.Result;
+import mvc.model.dice.results.enums.EDiceResultType;
+import mvc.model.dice.results.enums.EDiceTestResult;
 
 /**
  * Created by Germain on 28/05/2016.
  */
-public class DiceResult {
+public class DiceResult implements Result {
 
   private final String result;
   private final EDiceResultType eDiceResultType;
@@ -19,7 +23,8 @@ public class DiceResult {
     this(result, EDiceResultType.NORMAL, EDiceTestResult.NO_TEST);
   }
 
-  public String getResult() {
+  @Override
+  public String getRawResult() {
     return result;
   }
 

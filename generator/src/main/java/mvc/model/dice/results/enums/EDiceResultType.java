@@ -1,4 +1,4 @@
-package mvc.model.dice;
+package mvc.model.dice.results.enums;
 
 import java.awt.Font;
 
@@ -11,7 +11,7 @@ public enum EDiceResultType {
   CRITIC(Font.BOLD),
   FUMBLE(Font.BOLD);
 
-  private int fontStyle;
+  private final int fontStyle;
 
   EDiceResultType(int fontStyle) {
     this.fontStyle = fontStyle;

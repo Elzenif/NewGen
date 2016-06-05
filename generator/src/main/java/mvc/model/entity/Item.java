@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Germain on 04/06/2016.
  */
-abstract class Item {
+public abstract class Item {
 
   abstract static class ItemBuilder {
 
@@ -22,6 +22,7 @@ abstract class Item {
       return selectRandomItemType(fillMap(Arrays.asList(values), predicate));
     }
 
+    @SuppressWarnings("Convert2MethodRef")
     private <E extends Enum<E> & ItemType> Map<E, Integer> fillMap(List<E> values, Predicate<E> predicate) {
       return values.stream().filter(predicate).collect(Collectors.toMap(Function.identity(), e -> e.getProba()));
     }

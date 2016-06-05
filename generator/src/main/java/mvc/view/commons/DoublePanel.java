@@ -12,7 +12,7 @@ public abstract class DoublePanel extends JPanel {
   protected final JPanel leftPanel;
   protected final JPanel rightPanel;
 
-  public DoublePanel(JPanel leftPanel, JPanel rightPanel) {
+  protected DoublePanel(JPanel leftPanel, JPanel rightPanel) {
     this.leftPanel = leftPanel;
     this.rightPanel = rightPanel;
 
@@ -23,8 +23,8 @@ public abstract class DoublePanel extends JPanel {
     add(this.rightPanel);
   }
 
-  protected static JPanel setPanel(String title, int nb_rows, int nb_cols) {
-    JPanel jPanel = new JPanel(new GridLayout(nb_rows, nb_cols, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+  protected static JPanel setPanel(String title, int nb_rows) {
+    JPanel jPanel = new JPanel(new GridLayout(nb_rows, 1, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
     jPanel.setBorder(BorderFactory.createTitledBorder(title));
     return jPanel;
   }

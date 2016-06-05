@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 public class MainMenu extends JMenuBar {
 
   private JMenu gameMenu;
-  private ButtonGroup buttonGroup = new ButtonGroup();
+  private final ButtonGroup buttonGroup = new ButtonGroup();
   private JRadioButtonMenuItem rbNoGame;
   private JRadioButtonMenuItem rbNaheulbeuk;
 
@@ -17,7 +17,7 @@ public class MainMenu extends JMenuBar {
     setGameMenu();
   }
 
-  public void setGameMenu() {
+  private void setGameMenu() {
     gameMenu = new JMenu("Game");
     gameMenu.setMnemonic(KeyEvent.VK_G);
 

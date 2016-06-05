@@ -1,6 +1,6 @@
 package mvc.view.dice;
 
-import mvc.model.dice.EDiceNumber;
+import mvc.model.dice.results.enums.EDiceNumber;
 import mvc.view.commons.DoublePanel;
 
 /**
@@ -9,7 +9,8 @@ import mvc.view.commons.DoublePanel;
 public class DicePanel extends DoublePanel {
 
   public DicePanel() {
-    super(setPanel("Options", 8, 1), setPanel("Results", 8, 1));
+    super(setPanel("Options", EDiceNumber.values().length),
+            setPanel("Results", EDiceNumber.values().length));
   }
 
   @Override

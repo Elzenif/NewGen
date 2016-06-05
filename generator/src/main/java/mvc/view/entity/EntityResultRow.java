@@ -1,27 +1,25 @@
 package mvc.view.entity;
 
-import mvc.view.commons.PanelRow;
+import mvc.model.commons.Result;
+import mvc.model.entity.enums.EAvailableItem;
+import mvc.view.commons.ResultRow;
 
 import javax.swing.JLabel;
 
 /**
  * Created by Germain on 05/06/2016.
  */
-public class EntityResultRow extends PanelRow {
+public class EntityResultRow<T extends Result> extends ResultRow<T> {
 
-  private JLabel resultItem;
+  private final EAvailableItem availableItem;
 
-  EntityResultRow() {
-    setComponents();
+  EntityResultRow(EAvailableItem availableItem) {
+    super(availableItem.getName());
+    this.availableItem = availableItem;
   }
 
-  private void setComponents() {
-    resultItem = new JLabel();
-    add(resultItem);
-  }
+  @Override
+  protected void makePretty(JLabel resultToPrint, T result) {
 
-  public void printItem(String info) {
-    resultItem.setText(info);
   }
-
 }
