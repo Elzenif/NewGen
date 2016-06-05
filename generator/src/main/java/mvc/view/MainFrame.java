@@ -1,6 +1,8 @@
 package mvc.view;
 
+import mvc.view.commons.Constants;
 import mvc.view.dice.DicePanel;
+import mvc.view.entity.EntityPanel;
 import mvc.view.menu.MainMenu;
 
 import javax.swing.JFrame;
@@ -30,8 +32,9 @@ public class MainFrame extends JFrame {
     setJMenuBar(new MainMenu());
 
     JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
-    tabbedPane.addTab("Hidding", new JPanel());
+    tabbedPane.addTab("Hidden", new JPanel());
     tabbedPane.addTab("Dice", new DicePanel());
+    tabbedPane.addTab("Entity", new EntityPanel());
     container.add(tabbedPane);
   }
 

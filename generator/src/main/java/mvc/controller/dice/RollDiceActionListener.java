@@ -6,6 +6,7 @@ import mvc.model.dice.EDiceTestResult;
 import mvc.view.dice.DiceOptionRow;
 import mvc.view.dice.DiceResultRow;
 import org.jetbrains.annotations.Contract;
+import utils.MathUtils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,10 +30,10 @@ public class RollDiceActionListener implements ActionListener {
 
   public void actionPerformed(ActionEvent e) {
     diceResultRow.clearResults();
-    List<DiceResult> results = new LinkedList<DiceResult>();
+    List<DiceResult> results = new LinkedList<>();
     int sum = 0;
     for (int i = 0; i < diceOptionRow.getNumberOfDiceSelected(); i++) {
-      int rd = rollDice(1, diceMax);
+      int rd = rollDice(diceMax);
       rd += diceOptionRow.getAddScore();
       sum += rd;
       results.add(new DiceResult(String.valueOf(rd) + " ", getDiceResultType(rd), getDiceTestResult(rd)));
@@ -47,8 +48,8 @@ public class RollDiceActionListener implements ActionListener {
     diceResultRow.setResults(results);
   }
 
-  private int rollDice(int min, int max) {
-    return (int) (Math.random() * (max - min + 1) + min);
+  private int rollDice(int max) {
+    return MathUtils.random(1, max);
   }
 
   @Contract(pure = true)

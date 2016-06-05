@@ -6,6 +6,7 @@ import mvc.controller.dice.NumberOfDiceChangeListener;
 import mvc.controller.dice.RollDiceActionListener;
 import mvc.controller.dice.TestCheckBoxListener;
 import mvc.view.commons.Constants;
+import mvc.view.commons.PanelRow;
 import utils.EOperator;
 import utils.StringUtils;
 
@@ -22,7 +23,7 @@ import java.awt.FlowLayout;
 /**
  * Created by Germain on 21/05/2016.
  */
-public class DiceOptionRow extends JPanel {
+public class DiceOptionRow extends PanelRow {
 
   private final int JLABEL_SIZE = 5;
   private final int JBUTTON_SIZE = 14;
@@ -50,13 +51,12 @@ public class DiceOptionRow extends JPanel {
   private JButton rollDiceButton;
 
   DiceOptionRow(int diceNumber) {
+    super();
     this.diceNumber = diceNumber;
     setComponents();
   }
 
   private void setComponents() {
-    setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
-
     numberOfDiceModel = new SpinnerNumberModel(1, 0, 20, 1);
     numberOfDiceSpinner = new JSpinner(numberOfDiceModel);
     add(numberOfDiceSpinner);
@@ -82,7 +82,7 @@ public class DiceOptionRow extends JPanel {
     testCheckBox.setAlignmentX(CENTER_ALIGNMENT);
     JPanel jPanel21 = new JPanel();
     jPanel21.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, 0));
-    testComboBox = new JComboBox<EOperator>(EOperator.values());
+    testComboBox = new JComboBox<>(EOperator.values());
     testComboBox.setEnabled(false);
     testModel = new SpinnerNumberModel(diceNumber / 2, 1, 99, 1);
     testSpinner = new JSpinner(testModel);

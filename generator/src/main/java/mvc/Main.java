@@ -16,20 +16,15 @@ public class Main {
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
       setUIFont(new FontUIResource("Source Code Pro", Font.PLAIN, 12));
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    } catch (InstantiationException e) {
-      e.printStackTrace();
-    } catch (IllegalAccessException e) {
-      e.printStackTrace();
-    } catch (UnsupportedLookAndFeelException e) {
+    } catch (ClassNotFoundException | UnsupportedLookAndFeelException | InstantiationException
+            | IllegalAccessException e) {
       e.printStackTrace();
     }
 
     new MainFrame();
   }
 
-  public static void setUIFont(FontUIResource font) {
+  private static void setUIFont(FontUIResource font) {
     Enumeration keys = UIManager.getDefaults().keys();
     while (keys.hasMoreElements()) {
       Object key = keys.nextElement();
