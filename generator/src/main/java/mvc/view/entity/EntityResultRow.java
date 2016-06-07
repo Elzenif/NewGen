@@ -17,6 +17,6 @@ public class EntityResultRow extends ResultRow<ItemResult> {
 
   @Override
   protected void makePretty(JLabel resultToPrint, ItemResult result) {
-
+    resultToPrint.setForeground(result.getItemResultRarity().getColor());
   }
 }

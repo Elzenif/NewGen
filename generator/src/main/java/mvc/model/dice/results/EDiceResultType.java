@@ -1,4 +1,4 @@
-package mvc.model.dice.results.enums;
+package mvc.model.dice.results;
 
 import java.awt.Font;
 

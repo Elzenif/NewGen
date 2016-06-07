@@ -1,7 +1,8 @@
 package mvc.model.entity.enums;
 
-import mvc.model.entity.enums.utils.ItemTypeBuilder;
-import mvc.model.entity.enums.utils.ItemType;
+import mvc.model.entity.utils.ERarity;
+import mvc.model.entity.utils.ItemTypeBuilder;
+import mvc.model.entity.utils.ItemType;
 import utils.MathUtils;
 
 import java.util.List;
@@ -10,34 +11,34 @@ import java.util.List;
  * Created by Germain on 04/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum WeaponType implements ItemType {
+public enum EWeaponType implements ItemType {
 
   SWORD(new WeaponTypeBuilder()
           .setNames("épée", "sabre", "rapière", "katana")
-          .setProba(10)
+          .setRarity(ERarity.COMMON)
           .oneHand()),
   WAR_AXE(new WeaponTypeBuilder()
           .setNames("hache", "hache de guerre")
-          .setProba(8)
+          .setRarity(ERarity.UNCOMMON)
           .oneHand()),
   WARHAMMER(new WeaponTypeBuilder()
           .setNames("marteau", "marteau de guerre")
-          .setProba(9)
+          .setRarity(ERarity.RARE)
           .twoHands());
 
   private final List<String> names;
-  private final int proba;
+  private final ERarity rarity;
   private final int nbHands;
 
-  WeaponType(WeaponTypeBuilder builder) {
+  EWeaponType(WeaponTypeBuilder builder) {
     this.names = builder.getNames();
-    this.proba = builder.getProba();
+    this.rarity = builder.getRarity();
     this.nbHands = builder.getNbHands();
   }
 
   @Override
-  public int getProba() {
-    return proba;
+  public ERarity getRarity() {
+    return rarity;
   }
 
   public int getNbHands() {
@@ -62,8 +63,8 @@ public enum WeaponType implements ItemType {
     }
 
     @Override
-    protected WeaponTypeBuilder setProba(int proba) {
-      return (WeaponTypeBuilder) super.setProba(proba);
+    protected WeaponTypeBuilder setRarity(ERarity rarity) {
+      return (WeaponTypeBuilder) super.setRarity(rarity);
     }
 
     WeaponTypeBuilder oneHand() {

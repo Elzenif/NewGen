@@ -1,4 +1,6 @@
-package mvc.model.dice.results.enums;
+package mvc.model.dice.results;
+
+import utils.ColorUtils;
 
 import java.awt.Color;
 
@@ -7,9 +9,9 @@ import java.awt.Color;
  */
 public enum EDiceTestResult {
 
-  NO_TEST(Color.BLACK),
-  VALID(new Color(0, 180, 0)),
-  INVALID(Color.RED);
+  NO_TEST(ColorUtils.BLACK),
+  VALID(ColorUtils.GREEN),
+  INVALID(ColorUtils.RED);
 
   private final Color color;
 

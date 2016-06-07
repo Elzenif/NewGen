@@ -1,9 +1,12 @@
 package mvc.model.entity;
 
-import mvc.model.entity.enums.utils.ItemType;
+import mvc.model.entity.utils.ERarity;
+import mvc.model.entity.utils.HasRarity;
+import mvc.model.entity.utils.ItemType;
 import org.jetbrains.annotations.Nullable;
 import utils.MathUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +17,15 @@ import java.util.stream.Collectors;
 /**
  * Created by Germain on 04/06/2016.
  */
-public abstract class Item {
+public abstract class Item implements HasRarity {
+
+  protected final List<HasRarity> rarities = new ArrayList<>();
+  protected ERarity rarity;
+
+  @Override
+  public ERarity getRarity() {
+    return rarity;
+  }
 
   abstract static class ItemBuilder {
 
@@ -24,7 +35,8 @@ public abstract class Item {
 
     @SuppressWarnings("Convert2MethodRef")
     private <E extends Enum<E> & ItemType> Map<E, Integer> fillMap(List<E> values, Predicate<E> predicate) {
-      return values.stream().filter(predicate).collect(Collectors.toMap(Function.identity(), e -> e.getProba()));
+      return values.stream().filter(predicate)
+              .collect(Collectors.toMap(Function.identity(), e -> e.getRarity().getProba()));
     }
 
     @Nullable

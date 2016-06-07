@@ -1,4 +1,4 @@
-package mvc.model.entity.enums.utils;
+package mvc.model.entity.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,14 +10,14 @@ import java.util.List;
 public abstract class ItemTypeBuilder {
 
   private final List<String> names = new ArrayList<>();
-  private int proba = 0;
+  private ERarity rarity = ERarity.UNCOMMON;
 
   public List<String> getNames() {
     return names;
   }
 
-  public int getProba() {
-    return proba;
+  public ERarity getRarity() {
+    return rarity;
   }
 
   protected ItemTypeBuilder setNames(String mainName, String... otherNames) {
@@ -26,8 +26,8 @@ public abstract class ItemTypeBuilder {
     return this;
   }
 
-  protected ItemTypeBuilder setProba(int proba) {
-    this.proba = proba;
+  protected ItemTypeBuilder setRarity(ERarity rarity) {
+    this.rarity = rarity;
     return this;
   }
 }

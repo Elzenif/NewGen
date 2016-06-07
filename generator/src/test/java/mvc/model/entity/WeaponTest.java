@@ -1,6 +1,6 @@
 package mvc.model.entity;
 
-import mvc.model.entity.enums.WeaponType;
+import mvc.model.entity.enums.EWeaponType;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -32,8 +32,8 @@ public class WeaponTest {
   @Test
   public void testWeaponTypeIsValid() {
     weapon = Weapon.createWeaponWithoutConstraints();
-    Set<WeaponType> weaponTypes = new HashSet<>(Arrays.asList(WeaponType.values()));
-    assertNotNull("The weapon type should be a WeaponType enum :" + weapon.getWeaponType().toString(),
+    Set<EWeaponType> weaponTypes = new HashSet<>(Arrays.asList(EWeaponType.values()));
+    assertNotNull("The weapon type should be a EWeaponType enum :" + weapon.getWeaponType().toString(),
             weaponTypes.contains(weapon.getWeaponType()));
   }
 

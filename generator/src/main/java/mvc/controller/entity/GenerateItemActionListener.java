@@ -2,8 +2,8 @@ package mvc.controller.entity;
 
 import mvc.model.entity.Item;
 import mvc.model.entity.Weapon;
+import mvc.model.entity.results.EItemResultRarity;
 import mvc.model.entity.results.ItemResult;
-import mvc.model.entity.results.WeaponResult;
 import mvc.view.entity.EntityOptionRow;
 import mvc.view.entity.EntityResultRow;
 import utils.exception.WrongClassException;
@@ -54,7 +54,7 @@ public class GenerateItemActionListener implements ActionListener {
     Item item;
     if (clazz == Weapon.class) {
       item = generateWeapon();
-      return new WeaponResult(item.toString());
+      return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
     }
     throw new WrongClassException(clazz.getName());
   }

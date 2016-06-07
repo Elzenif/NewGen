@@ -1,6 +1,7 @@
 package mvc.model.entity;
 
-import mvc.model.entity.enums.WeaponType;
+import mvc.model.entity.enums.EWeaponType;
+import mvc.model.entity.utils.ERarity;
 
 import java.util.function.Predicate;
 
@@ -9,7 +10,7 @@ import java.util.function.Predicate;
  */
 public class Weapon extends Item {
 
-  private final WeaponType weaponType;
+  private final EWeaponType weaponType;
 
   public static Weapon createWeaponWithoutConstraints() {
     return new WeaponBuilder().build();
@@ -19,7 +20,7 @@ public class Weapon extends Item {
     return new WeaponBuilder().setWeaponType(p -> p.getNbHands() == nbHands).build();
   }
 
-  WeaponType getWeaponType() {
+  EWeaponType getWeaponType() {
     return weaponType;
   }
 
@@ -30,17 +31,19 @@ public class Weapon extends Item {
 
   private Weapon(WeaponBuilder builder) {
     this.weaponType = builder.weaponType;
+    rarities.add(weaponType);
+    rarity = ERarity.computeRarity(rarities);
   }
 
   private static class WeaponBuilder extends ItemBuilder {
 
-    private WeaponType weaponType = null;
+    private EWeaponType weaponType = null;
 
     private WeaponBuilder() {
     }
 
-    private WeaponBuilder setWeaponType(Predicate<WeaponType> predicate) {
-      this.weaponType = selectRandomItemType(WeaponType.values(), predicate);
+    private WeaponBuilder setWeaponType(Predicate<EWeaponType> predicate) {
+      this.weaponType = selectRandomItemType(EWeaponType.values(), predicate);
       return this;
     }
 

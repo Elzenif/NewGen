@@ -2,8 +2,8 @@ package mvc.controller.dice;
 
 import mvc.model.dice.EDiceNumber;
 import mvc.model.dice.results.DiceResult;
-import mvc.model.dice.results.enums.EDiceResultType;
-import mvc.model.dice.results.enums.EDiceTestResult;
+import mvc.model.dice.results.EDiceResultType;
+import mvc.model.dice.results.EDiceTestResult;
 import mvc.view.dice.DiceOptionRow;
 import mvc.view.dice.DiceResultRow;
 import org.jetbrains.annotations.Contract;

@@ -1,8 +1,6 @@
 package mvc.model.dice.results;
 
 import mvc.model.commons.Result;
-import mvc.model.dice.results.enums.EDiceResultType;
-import mvc.model.dice.results.enums.EDiceTestResult;
 
 /**
  * Created by Germain on 28/05/2016.
