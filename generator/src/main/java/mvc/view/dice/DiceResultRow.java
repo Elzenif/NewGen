@@ -19,7 +19,7 @@ public class DiceResultRow extends ResultRow<DiceResult> {
   @Override
   @SuppressWarnings("MagicConstant")
   protected void makePretty(JLabel resultToPrint, DiceResult result) {
-    resultToPrint.setFont(new Font(null, result.getEDiceResultType().getFontStyle(), 13));
+    resultToPrint.setFont(new Font(null, result.getEDiceResultType().getFontStyle(), 12));
     resultToPrint.setForeground(result.getEDiceTestResult().getColor());
   }
 }

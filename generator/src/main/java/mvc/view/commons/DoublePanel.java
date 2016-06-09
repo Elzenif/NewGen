@@ -16,7 +16,7 @@ public abstract class DoublePanel<O extends OptionRow<R>, R extends ResultRow> e
   protected JPanel leftPanel;
   protected JPanel rightPanel;
 
-  protected DoublePanel() {
+  private DoublePanel() {
     setLayout(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
 

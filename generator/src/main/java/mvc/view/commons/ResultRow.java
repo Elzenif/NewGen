@@ -20,7 +20,7 @@ public abstract class ResultRow<T extends Result> extends PanelRow {
     super();
 
     infoLabel = new JLabel(labelText + " : ");
-    infoLabel.setFont(new Font(null, Font.BOLD, 13));
+    infoLabel.setFont(new Font(null, Font.BOLD, 12));
     add(infoLabel);
 
     resultsToPrint = new LinkedList<>();

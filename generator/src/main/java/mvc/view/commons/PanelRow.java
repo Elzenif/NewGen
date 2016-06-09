@@ -9,6 +9,9 @@ import java.awt.FlowLayout;
 abstract class PanelRow extends JPanel {
 
   PanelRow() {
-    setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+    FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP);
+    flowLayout.setAlignOnBaseline(true);
+    setLayout(flowLayout);
+//    setBorder(BorderFactory.createTitledBorder(""));
   }
 }

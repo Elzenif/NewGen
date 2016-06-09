@@ -18,12 +18,7 @@ public class DicePanel extends DoublePanel<DiceOptionRow, DiceResultRow> {
   public DicePanel() {
     super(setPanel("Options", EDiceNumber.values().length),
             setPanel("Results", EDiceNumber.values().length));
-    setPanelsComponents();
-    add(leftPanel);
-    add(rightPanel);
-  }
 
-  private void setPanelsComponents() {
     for (EDiceNumber eDiceNumber : EDiceNumber.values()) {
       DiceOptionRow diceOptionRow = new DiceOptionRow(eDiceNumber);
       DiceResultRow diceResultRow = new DiceResultRow(eDiceNumber);
@@ -31,6 +26,8 @@ public class DicePanel extends DoublePanel<DiceOptionRow, DiceResultRow> {
       leftPanel.add(diceOptionRow);
       rightPanel.add(diceResultRow);
     }
+    add(leftPanel);
+    add(rightPanel);
   }
 
   @Override
