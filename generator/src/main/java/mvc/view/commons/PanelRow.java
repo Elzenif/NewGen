@@ -6,9 +6,9 @@ import java.awt.FlowLayout;
 /**
  * Created by Germain on 05/06/2016.
  */
-public abstract class PanelRow extends JPanel {
+abstract class PanelRow extends JPanel {
 
-  protected PanelRow() {
+  PanelRow() {
     setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
 }

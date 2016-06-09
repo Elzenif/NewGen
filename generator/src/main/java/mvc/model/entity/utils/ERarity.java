@@ -13,9 +13,9 @@ import java.util.stream.Stream;
  */
 public enum  ERarity {
 
-  COMMON(0, 50),
-  UNCOMMON(1, 35),
-  RARE(2, 20),
+  COMMON(0, 49),
+  UNCOMMON(1, 30),
+  RARE(2, 15),
   EPIC(4, 5),
   LEGENDARY(8, 1);
 

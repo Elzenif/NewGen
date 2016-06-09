@@ -1,36 +1,43 @@
 package mvc.view.menu;
 
-import javax.swing.*;
-import java.awt.event.KeyEvent;
+import mvc.controller.intf.Controller;
+import mvc.controller.menu.GameMenuActionListener;
+import mvc.model.entity.enums.EGame;
+import mvc.view.MainFrame;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JRadioButtonMenuItem;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Germain on 05/05/2016.
  */
-public class MainMenu extends JMenuBar {
+public class MainMenu extends JMenuBar implements Controller {
 
-  private JMenu gameMenu;
+  private final JMenu gameMenu;
   private final ButtonGroup buttonGroup = new ButtonGroup();
-  private JRadioButtonMenuItem rbNoGame;
-  private JRadioButtonMenuItem rbNaheulbeuk;
+  private final Set<JRadioButtonMenuItem> gameButtons;
 
   public MainMenu() {
-    setGameMenu();
-  }
-
-  private void setGameMenu() {
     gameMenu = new JMenu("Game");
-    gameMenu.setMnemonic(KeyEvent.VK_G);
 
-    rbNoGame = new JRadioButtonMenuItem("No game", true);
-    rbNoGame.setMnemonic(KeyEvent.VK_0);
-    buttonGroup.add(rbNoGame);
-    gameMenu.add(rbNoGame);
+    gameButtons = new HashSet<>(EGame.values().length);
 
-    rbNaheulbeuk = new JRadioButtonMenuItem("Naheulbeuk");
-    rbNaheulbeuk.setMnemonic(KeyEvent.VK_N);
-    buttonGroup.add(rbNaheulbeuk);
-    gameMenu.add(rbNaheulbeuk);
+    EGame.GAMES.keySet().stream().forEach(eGame -> {
+      JRadioButtonMenuItem rb = new JRadioButtonMenuItem(eGame.getName(), eGame.isDefault());
+      gameButtons.add(rb);
+      buttonGroup.add(rb);
+      gameMenu.add(rb);
+    });
 
     add(gameMenu);
+  }
+
+  @Override
+  public void setControllers(MainFrame view) {
+    gameButtons.stream().forEach(rb -> rb.addActionListener(new GameMenuActionListener(view, rb.getText())));
   }
 }

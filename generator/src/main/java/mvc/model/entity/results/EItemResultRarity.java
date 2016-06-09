@@ -40,13 +40,13 @@ public enum  EItemResultRarity implements HasRarity {
     return rarity;
   }
 
-  private static final Map<ERarity, EItemResultRarity> map = new HashMap<>(
+  private static final Map<ERarity, EItemResultRarity> MAP = new HashMap<>(
           Stream.of(EItemResultRarity.values()).
                   collect(Collectors.toMap(EItemResultRarity::getRarity, Function.identity()))
   );
 
   public static EItemResultRarity getItemResultRarity(ERarity rarity) {
-    return map.get(rarity);
+    return MAP.get(rarity);
   }
 
 }

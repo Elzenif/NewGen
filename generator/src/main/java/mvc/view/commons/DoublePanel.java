@@ -1,26 +1,37 @@
 package mvc.view.commons;
 
+import mvc.controller.intf.Controller;
+import utils.Pair;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.util.List;
 
 /**
  * Created by Germain on 04/06/2016.
  */
-public abstract class DoublePanel extends JPanel {
+public abstract class DoublePanel<O extends OptionRow<R>, R extends ResultRow> extends JPanel implements Controller {
 
-  protected final JPanel leftPanel;
-  protected final JPanel rightPanel;
+  protected JPanel leftPanel;
+  protected JPanel rightPanel;
+
+  protected DoublePanel() {
+    setLayout(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+  }
 
   protected DoublePanel(JPanel leftPanel, JPanel rightPanel) {
+    this();
     this.leftPanel = leftPanel;
     this.rightPanel = rightPanel;
+  }
 
-    setLayout(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+  public JPanel getLeftPanel() {
+    return leftPanel;
+  }
 
-    setPanelsComponents();
-    add(this.leftPanel);
-    add(this.rightPanel);
+  public JPanel getRightPanel() {
+    return rightPanel;
   }
 
   protected static JPanel setPanel(String title, int nb_rows) {
@@ -29,6 +40,7 @@ public abstract class DoublePanel extends JPanel {
     return jPanel;
   }
 
-  protected abstract void setPanelsComponents();
-
+  protected void setControllers(List<Pair<O, R>> rowPairs) {
+    rowPairs.stream().forEach(rowPair -> rowPair.getLeft().setControllers(rowPair.getRight()));
+  }
 }

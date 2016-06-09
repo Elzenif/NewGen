@@ -3,7 +3,7 @@ package mvc.view.entity;
 import mvc.controller.entity.GenerateItemActionListener;
 import mvc.model.entity.Item;
 import mvc.model.entity.enums.EAvailableItem;
-import mvc.view.commons.PanelRow;
+import mvc.view.commons.OptionRow;
 import utils.MathUtils;
 import utils.StringUtils;
 
@@ -15,7 +15,7 @@ import javax.swing.SpinnerNumberModel;
 /**
  * Created by Germain on 05/06/2016.
  */
-public class EntityOptionRow extends PanelRow {
+public abstract class EntityOptionRow extends OptionRow<EntityResultRow> {
 
   private final int JLABEL_SIZE = MathUtils.maxLength(EAvailableItem.values());
   private final Class<? extends Item> itemClass;
@@ -29,7 +29,7 @@ public class EntityOptionRow extends PanelRow {
 
   private final JButton generateItemButton;
 
-  EntityOptionRow(EAvailableItem availableItem) {
+  protected EntityOptionRow(EAvailableItem availableItem) {
     super();
     this.itemName = availableItem.getName();
     this.itemClass = availableItem.getItemClass();
@@ -45,7 +45,8 @@ public class EntityOptionRow extends PanelRow {
     add(generateItemButton);
   }
 
-  void setControllers(EntityResultRow entityResultRow) {
+  @Override
+  public void setControllers(EntityResultRow entityResultRow) {
     generateItemButton.addActionListener(new GenerateItemActionListener(this, entityResultRow, itemClass));
   }
 

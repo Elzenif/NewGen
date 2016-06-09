@@ -7,7 +7,7 @@ import mvc.controller.dice.RollDiceActionListener;
 import mvc.controller.dice.TestCheckBoxListener;
 import mvc.model.dice.EDiceNumber;
 import mvc.view.commons.Constants;
-import mvc.view.commons.PanelRow;
+import mvc.view.commons.OptionRow;
 import utils.EOperator;
 import utils.MathUtils;
 import utils.StringUtils;
@@ -25,7 +25,7 @@ import java.awt.FlowLayout;
 /**
  * Created by Germain on 21/05/2016.
  */
-public class DiceOptionRow extends PanelRow {
+public class DiceOptionRow extends OptionRow<DiceResultRow> {
 
   private static final int JLABEL_SIZE = MathUtils.maxLength(EDiceNumber.values());
   private final int JBUTTON_SIZE = "Roll 99D100+99".length();
@@ -60,7 +60,6 @@ public class DiceOptionRow extends PanelRow {
     numberOfDiceSpinner = new JSpinner(numberOfDiceModel);
     add(numberOfDiceSpinner);
 
-    ;
     infoLabel = new JLabel(StringUtils.leftAlign(JLABEL_SIZE, diceNumber.getName()));
     add(infoLabel);
 
@@ -106,7 +105,8 @@ public class DiceOptionRow extends PanelRow {
     add(rollDiceButton);
   }
 
-  void setControllers(DiceResultRow diceResultRow) {
+  @Override
+  public void setControllers(DiceResultRow diceResultRow) {
     rollDiceButton.addActionListener(new RollDiceActionListener(diceNumber, this, diceResultRow));
     numberOfDiceSpinner.addChangeListener(new NumberOfDiceChangeListener(this));
     addScoreCheckBox.addItemListener(new AddScoreCheckBoxItemListener(this));
