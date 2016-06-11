@@ -15,8 +15,6 @@ public class ERarityTest {
   @Test
   public void testGetRarity() {
     assertEquals(ERarity.COMMON, ERarity.getRarity(0));
-    Stream.of(ERarity.values()).forEach(eRarity -> {
-      assertEquals("ERarity.getRarity should return : " + eRarity, eRarity, ERarity.getRarity(eRarity.getRarityLevel()));
-    });
+    Stream.of(ERarity.values()).forEach(eRarity -> assertEquals(eRarity, ERarity.getRarity(eRarity.getRarityLevel())));
   }
 }

@@ -2,6 +2,11 @@ package utils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 /**
  * Created by Germain on 22/05/2016.
  */
@@ -32,5 +37,17 @@ public class StringUtils {
       sb.append(" ");
     }
     return sb.toString();
+  }
+
+  private static final DecimalFormat format = setFormat();
+
+  private static DecimalFormat setFormat() {
+    DecimalFormat format = new DecimalFormat("#.###", DecimalFormatSymbols.getInstance(Locale.FRANCE));
+    format.setRoundingMode(RoundingMode.DOWN);
+    return format;
+  }
+
+  public static String format(double nb) {
+    return format.format(nb);
   }
 }

@@ -35,6 +35,6 @@ public enum EGame {
   );
 
   public static EGame defaultGame() {
-    return Arrays.asList(EGame.values()).stream().filter(EGame::isDefault).findFirst().get();
+    return Arrays.asList(EGame.values()).stream().filter(EGame::isDefault).findFirst().orElse(NBK);
   }
 }

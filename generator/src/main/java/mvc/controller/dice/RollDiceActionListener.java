@@ -8,6 +8,7 @@ import mvc.view.dice.DiceOptionRow;
 import mvc.view.dice.DiceResultRow;
 import org.jetbrains.annotations.Contract;
 import utils.MathUtils;
+import utils.StringUtils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +45,7 @@ public class RollDiceActionListener implements ActionListener {
     }
     if (diceOptionRow.meanCheckBoxIsSelected()) {
       double mean = (double) sum / diceOptionRow.getNumberOfDiceSelected();
-      results.add(new DiceResult("mean = " + mean));
+      results.add(new DiceResult("mean = " + StringUtils.format(mean)));
     }
     diceResultRow.setResultsToPrint(results);
   }

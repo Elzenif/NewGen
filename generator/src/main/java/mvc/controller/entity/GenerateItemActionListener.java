@@ -1,19 +1,21 @@
 package mvc.controller.entity;
 
 import mvc.model.entity.Item;
+import mvc.model.entity.RandomlyGeneratedWeapon;
 import mvc.model.entity.Weapon;
 import mvc.model.entity.results.EItemResultRarity;
 import mvc.model.entity.results.ItemResult;
+import mvc.model.entity.utils.Constraints;
 import mvc.view.entity.EntityOptionRow;
 import mvc.view.entity.EntityResultRow;
 import utils.exception.WrongClassException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Queue;
-import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Created by Germain on 04/06/2016.
@@ -33,33 +35,36 @@ public class GenerateItemActionListener implements ActionListener {
 
   public void actionPerformed(ActionEvent e) {
     entityResultRow.clearResults();
-    Set<Integer> numbers = new HashSet<>(entityOptionRow.getNumberOfItemSelected());
-    Queue<ItemResult> results = new ConcurrentLinkedQueue<>();
-    // check options
-    for (int i = 0; i < entityOptionRow.getNumberOfItemSelected(); i++) {
-      numbers.add(i);
+    try {
+      entityResultRow.setResultsToPrint(generate(entityOptionRow.getNumberOfItemsSelected(), getConstraints()));
+    } catch (WrongClassException e1) {
+      e1.printStackTrace();
     }
-    numbers.parallelStream().forEach(itemResult -> {
-      try {
-        results.add(generate(itemClass));
-      } catch (WrongClassException e1) {
-        e1.printStackTrace();
-      }
-    });
-    entityResultRow.setResultsToPrint(results);
   }
 
-  @SuppressWarnings("unchecked")
-  private ItemResult generate(Class<? extends Item> clazz) throws WrongClassException {
-    Item item;
+  private Constraints getConstraints() {
+    return entityOptionRow.isConstraintsCheckBoxSelected()
+            ? entityOptionRow.getConstraints()
+            : new Constraints();
+  }
+
+  private Collection<ItemResult> generate(int numberOfItems, Constraints constraints) throws WrongClassException {
+    List<ItemResult> results = new ArrayList<>(numberOfItems);
+    IntStream.rangeClosed(1, entityOptionRow.getNumberOfItemsSelected())
+            .forEach(i -> results.add(generate(itemClass, constraints)));
+    return results;
+  }
+
+  private ItemResult generate(Class<? extends Item> clazz, Constraints constraints) throws WrongClassException {
+    Item item = null;
     if (clazz == Weapon.class) {
-      item = generateWeapon();
-      return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
+      item = RandomlyGeneratedWeapon.createWeapon(constraints);
     }
-    throw new WrongClassException(clazz.getName());
+    if (item != null) {
+      return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
+    } else {
+      throw new WrongClassException(clazz.getName());
+    }
   }
 
-  private Weapon generateWeapon() {
-    return Weapon.createWeaponWithoutConstraints();
-  }
 }

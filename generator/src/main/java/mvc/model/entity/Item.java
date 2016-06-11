@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
  */
 public abstract class Item implements HasRarity {
 
-  protected final List<HasRarity> rarities = new ArrayList<>();
   protected ERarity rarity;
 
   @Override
@@ -28,6 +27,12 @@ public abstract class Item implements HasRarity {
   }
 
   abstract static class ItemBuilder {
+
+    protected final List<HasRarity> rarities = new ArrayList<>();
+
+    ERarity computeRarity() {
+      return ERarity.computeRarity(rarities);
+    }
 
     <E extends Enum<E> & ItemType> E selectRandomItemType(E[] values, Predicate<E> predicate) {
       return selectRandomItemType(fillMap(Arrays.asList(values), predicate));

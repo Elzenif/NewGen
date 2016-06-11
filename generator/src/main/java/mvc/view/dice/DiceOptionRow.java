@@ -47,10 +47,10 @@ public class DiceOptionRow extends OptionRow<DiceResultRow> {
   private final SpinnerNumberModel testModel;
 
 
-  private JCheckBox sumCheckBox;
-  private JCheckBox meanCheckBox;
+  private final JCheckBox sumCheckBox;
+  private final JCheckBox meanCheckBox;
 
-  private JButton rollDiceButton;
+  private final JButton rollDiceButton;
 
   DiceOptionRow(EDiceNumber diceNumber) {
     super();
