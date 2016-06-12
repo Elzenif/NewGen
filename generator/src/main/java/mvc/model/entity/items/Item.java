@@ -1,4 +1,4 @@
-package mvc.model.entity;
+package mvc.model.entity.items;
 
 import mvc.model.entity.utils.ERarity;
 import mvc.model.entity.utils.HasRarity;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 public abstract class Item implements HasRarity {
 
-  protected ERarity rarity;
+  ERarity rarity;
 
   @Override
   public ERarity getRarity() {
@@ -28,7 +28,7 @@ public abstract class Item implements HasRarity {
 
   abstract static class ItemBuilder {
 
-    protected final List<HasRarity> rarities = new ArrayList<>();
+    final List<HasRarity> rarities = new ArrayList<>();
 
     ERarity computeRarity() {
       return ERarity.computeRarity(rarities);

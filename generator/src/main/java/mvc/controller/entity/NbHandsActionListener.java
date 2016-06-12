@@ -1,6 +1,6 @@
 package mvc.controller.entity;
 
-import mvc.model.entity.enums.EWeaponType;
+import mvc.model.entity.enums.ENbkWeaponType;
 import mvc.view.entity.EntityOptionRow;
 
 import java.awt.event.ActionEvent;
@@ -13,9 +13,9 @@ import java.util.function.Predicate;
 public class NbHandsActionListener implements ActionListener {
 
   private final EntityOptionRow entityOptionRow;
-  private final Predicate<EWeaponType> predicate;
+  private final Predicate<ENbkWeaponType> predicate;
 
-  public NbHandsActionListener(EntityOptionRow entityOptionRow, Predicate<EWeaponType> predicate) {
+  public NbHandsActionListener(EntityOptionRow entityOptionRow, Predicate<ENbkWeaponType> predicate) {
     this.entityOptionRow = entityOptionRow;
     this.predicate = predicate;
   }

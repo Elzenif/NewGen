@@ -21,13 +21,14 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.FlowLayout;
+import java.util.Arrays;
 
 /**
  * Created by Germain on 21/05/2016.
  */
 public class DiceOptionRow extends OptionRow<DiceResultRow> {
 
-  private static final int JLABEL_SIZE = MathUtils.maxLength(EDiceNumber.values());
+  private static final int JLABEL_SIZE = MathUtils.maxLength(Arrays.asList(EDiceNumber.values()));
   private final int JBUTTON_SIZE = "Roll 99D100+99".length();
 
   private final EDiceNumber diceNumber;

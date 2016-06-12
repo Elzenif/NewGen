@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Germain on 04/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum EWeaponType implements ItemType {
+public enum ENbkWeaponType implements ItemType {
 
   SWORD(new WeaponTypeBuilder()
           .setNames("épée", "sabre", "rapière", "katana")
@@ -30,7 +30,7 @@ public enum EWeaponType implements ItemType {
   private final ERarity rarity;
   private final int nbHands;
 
-  EWeaponType(WeaponTypeBuilder builder) {
+  ENbkWeaponType(WeaponTypeBuilder builder) {
     this.names = builder.getNames();
     this.rarity = builder.getRarity();
     this.nbHands = builder.getNbHands();

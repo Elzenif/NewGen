@@ -1,6 +1,6 @@
-package mvc.model.entity;
+package mvc.model.entity.items;
 
-import mvc.model.entity.enums.EWeaponType;
+import mvc.model.entity.enums.ENbkWeaponType;
 import mvc.model.entity.utils.Constraints;
 import mvc.model.entity.utils.GenericConstraint;
 import org.junit.Before;
@@ -16,10 +16,10 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by Germain on 04/06/2016.
  */
-public class WeaponTest {
+public class NbkWeaponTest {
 
   private Constraints constraints;
-  private RandomlyGeneratedWeapon weapon;
+  private NbkWeapon weapon;
 
   @Before
   public void init() {
@@ -27,28 +27,28 @@ public class WeaponTest {
   }
 
   @Test
-  public void testRandomlyGeneratedWeaponNotNull() {
-    weapon = RandomlyGeneratedWeapon.createWeapon(constraints);
+  public void testWeaponNotNull() {
+    weapon = NbkWeapon.create(constraints);
     assertNotNull("The weapon should not be null", weapon);
   }
 
   @Test
   public void testWeaponTypeNotNull() {
-    weapon = RandomlyGeneratedWeapon.createWeapon(constraints);
+    weapon = NbkWeapon.create(constraints);
     assertNotNull("The weapon type should not be null", weapon.getWeaponType());
   }
 
   @Test
   public void testWeaponTypeIsValid() {
-    weapon = RandomlyGeneratedWeapon.createWeapon(constraints);
-    Set<EWeaponType> weaponTypes = new HashSet<>(Arrays.asList(EWeaponType.values()));
-    assertNotNull("The weapon type should be a EWeaponType enum :" + weapon.getWeaponType().toString(),
+    weapon = NbkWeapon.create(constraints);
+    Set<ENbkWeaponType> weaponTypes = new HashSet<>(Arrays.asList(ENbkWeaponType.values()));
+    assertNotNull("The weapon type should be a ENbkWeaponType enum :" + weapon.getWeaponType().toString(),
             weaponTypes.contains(weapon.getWeaponType()));
   }
 
   @Test
   public void testWeaponToStringIsNotNull() {
-    weapon = RandomlyGeneratedWeapon.createWeapon(constraints);
+    weapon = NbkWeapon.create(constraints);
     assertNotNull("The weapon type should not be null", weapon.toString());
   }
 
@@ -56,8 +56,8 @@ public class WeaponTest {
   public void testCreateWeaponWithHandsConstraint() {
     for (int i = 1; i <= 2; i ++) {
       final int nbHands = i;
-      constraints.put(EWeaponType.class, new GenericConstraint<>(wt -> wt.getNbHands() == nbHands));
-      weapon = RandomlyGeneratedWeapon.createWeapon(constraints);
+      constraints.put(ENbkWeaponType.class, new GenericConstraint<>(wt -> wt.getNbHands() == nbHands));
+      weapon = NbkWeapon.create(constraints);
       assertNotNull("The weapon should not be null");
       assertEquals("The weapon should be one hand", nbHands, weapon.getWeaponType().getNbHands());
     }

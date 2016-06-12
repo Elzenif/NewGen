@@ -2,7 +2,6 @@ package utils;
 
 import mvc.model.commons.HasName;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -23,8 +22,8 @@ public class MathUtils {
     return list.get(random(0, list.size() - 1));
   }
 
-  public static <E extends HasName> int maxLength(E[] namedEnumValues) {
-    Optional<Integer> max = Arrays.asList(namedEnumValues).stream().map(e -> e.getName().length()).reduce(Integer::max);
+  public static <E extends HasName> int maxLength(List<E> namedEnumValues) {
+    Optional<Integer> max = namedEnumValues.stream().map(e -> e.getName().length()).reduce(Integer::max);
     if (max.isPresent())
       return max.get();
     else

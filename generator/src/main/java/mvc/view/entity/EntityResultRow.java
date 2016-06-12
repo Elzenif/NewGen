@@ -1,7 +1,7 @@
 package mvc.view.entity;
 
-import mvc.model.entity.enums.EAvailableItem;
 import mvc.model.entity.results.ItemResult;
+import mvc.model.entity.utils.IAvailableItem;
 import mvc.view.commons.ResultRow;
 
 import javax.swing.JLabel;
@@ -11,7 +11,7 @@ import javax.swing.JLabel;
  */
 public class EntityResultRow extends ResultRow<ItemResult> {
 
-  EntityResultRow(EAvailableItem availableItem) {
+  EntityResultRow(IAvailableItem availableItem) {
     super(availableItem.getName());
   }
 

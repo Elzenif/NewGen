@@ -3,11 +3,11 @@ package mvc.view.entity;
 import mvc.controller.entity.ConstraintsItemListener;
 import mvc.controller.entity.GenerateItemActionListener;
 import mvc.controller.entity.NbHandsActionListener;
-import mvc.model.entity.Item;
-import mvc.model.entity.enums.EAvailableItem;
-import mvc.model.entity.enums.EWeaponType;
+import mvc.model.entity.enums.ENbkWeaponType;
+import mvc.model.entity.items.Item;
 import mvc.model.entity.utils.Constraints;
 import mvc.model.entity.utils.GenericConstraint;
+import mvc.model.entity.utils.IAvailableItem;
 import mvc.view.commons.OptionRow;
 import utils.MathUtils;
 import utils.StringUtils;
@@ -30,7 +30,7 @@ import java.util.function.Predicate;
  */
 public abstract class EntityOptionRow extends OptionRow<EntityResultRow> {
 
-  private final int JLABEL_SIZE = MathUtils.maxLength(EAvailableItem.values());
+  private final int labelSize;
   private final Class<? extends Item> itemClass;
 
   private final String itemName;
@@ -47,15 +47,17 @@ public abstract class EntityOptionRow extends OptionRow<EntityResultRow> {
 
   private final JPanel nbHandsPanel;
   private final ButtonGroup nbHandsButtonGroup;
-  private final Map<JRadioButton, Predicate<EWeaponType>> nbHandsButtons;
+  private final Map<JRadioButton, Predicate<ENbkWeaponType>> nbHandsButtons;
   private final JRadioButton noHandButton;
   private final JRadioButton oneHandButton;
   private final JRadioButton twoHandsButton;
 
   private final JButton generateItemButton;
 
-  protected EntityOptionRow(EAvailableItem availableItem) {
+
+  EntityOptionRow(IAvailableItem availableItem) {
     super();
+    labelSize = MathUtils.maxLength(IAvailableItem.getValues(availableItem.getClass()));
     this.itemName = availableItem.getName();
     this.itemClass = availableItem.getItemClass();
 
@@ -63,7 +65,7 @@ public abstract class EntityOptionRow extends OptionRow<EntityResultRow> {
     numberOfItemsSpinner = new JSpinner(numberOfItemsModel);
     add(numberOfItemsSpinner);
 
-    infoLabel = new JLabel(StringUtils.leftAlign(JLABEL_SIZE, itemName));
+    infoLabel = new JLabel(StringUtils.leftAlign(labelSize, itemName));
     add(infoLabel);
 
     // constraints
@@ -80,8 +82,8 @@ public abstract class EntityOptionRow extends OptionRow<EntityResultRow> {
 
     // hands constraints
     noHandButton = new JRadioButton("no", true);
-    oneHandButton = new JRadioButton("1", false);
-    twoHandsButton = new JRadioButton("2", false);
+    oneHandButton = new JRadioButton("1h", false);
+    twoHandsButton = new JRadioButton("2h", false);
     nbHandsButtons = new LinkedHashMap<>(3);
     nbHandsButtons.put(noHandButton, wt -> true);
     nbHandsButtons.put(oneHandButton, wt -> wt.getNbHands() == 1);
@@ -96,7 +98,7 @@ public abstract class EntityOptionRow extends OptionRow<EntityResultRow> {
       nbHandsPanel.add(rb);
     });
     add(nbHandsPanel);
-    constraints.put(EWeaponType.class, new GenericConstraint<>());
+    constraints.put(ENbkWeaponType.class, new GenericConstraint<>());
 
     generateItemButton = new JButton("Generate");
     add(generateItemButton);
@@ -127,7 +129,7 @@ public abstract class EntityOptionRow extends OptionRow<EntityResultRow> {
     nbHandsButtons.keySet().stream().forEach(rb -> rb.setEnabled(checkBoxSelected));
   }
 
-  public void updateNbHandsConstraint(Predicate<EWeaponType> predicate) {
-    constraints.put(EWeaponType.class, new GenericConstraint<>(predicate));
+  public void updateNbHandsConstraint(Predicate<ENbkWeaponType> predicate) {
+    constraints.put(ENbkWeaponType.class, new GenericConstraint<>(predicate));
   }
 }

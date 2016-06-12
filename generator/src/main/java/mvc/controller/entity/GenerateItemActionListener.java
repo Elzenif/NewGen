@@ -1,8 +1,7 @@
 package mvc.controller.entity;
 
-import mvc.model.entity.Item;
-import mvc.model.entity.RandomlyGeneratedWeapon;
-import mvc.model.entity.Weapon;
+import mvc.model.entity.items.Item;
+import mvc.model.entity.items.NbkWeapon;
 import mvc.model.entity.results.EItemResultRarity;
 import mvc.model.entity.results.ItemResult;
 import mvc.model.entity.utils.Constraints;
@@ -51,19 +50,19 @@ public class GenerateItemActionListener implements ActionListener {
   private Collection<ItemResult> generate(int numberOfItems, Constraints constraints) throws WrongClassException {
     List<ItemResult> results = new ArrayList<>(numberOfItems);
     IntStream.rangeClosed(1, entityOptionRow.getNumberOfItemsSelected())
-            .forEach(i -> results.add(generate(itemClass, constraints)));
+            .forEach(i -> results.add(generate(constraints)));
     return results;
   }
 
-  private ItemResult generate(Class<? extends Item> clazz, Constraints constraints) throws WrongClassException {
+  private ItemResult generate(Constraints constraints) throws WrongClassException {
     Item item = null;
-    if (clazz == Weapon.class) {
-      item = RandomlyGeneratedWeapon.createWeapon(constraints);
+    if (itemClass == NbkWeapon.class) {
+      item = NbkWeapon.create(constraints);
     }
     if (item != null) {
       return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
     } else {
-      throw new WrongClassException(clazz.getName());
+      throw new WrongClassException(itemClass.getName());
     }
   }
 
