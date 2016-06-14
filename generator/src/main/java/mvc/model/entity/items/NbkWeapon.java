@@ -1,6 +1,7 @@
 package mvc.model.entity.items;
 
 import mvc.model.entity.enums.ENbkWeaponType;
+import mvc.model.entity.game.*;
 import mvc.model.entity.utils.Constraints;
 import org.jetbrains.annotations.Contract;
 
@@ -9,7 +10,7 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 11/06/2016.
  */
-public class NbkWeapon extends Item {
+public class NbkWeapon extends Item<NbkGame> {
   
   private final ENbkWeaponType weaponType;
 

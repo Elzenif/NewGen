@@ -1,16 +1,11 @@
 package mvc.view.entity;
 
 import mvc.controller.intf.Controller;
-import mvc.model.entity.game.EGame;
-import mvc.model.entity.game.Game;
-import mvc.model.entity.game.NbkGame;
-import mvc.model.entity.game.TesGame;
 import mvc.view.MainFrame;
 
 import javax.swing.JPanel;
 import java.awt.CardLayout;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static utils.CollectionUtils.setMaxSize;
 
@@ -24,16 +19,13 @@ public class EntityPanel extends JPanel implements Controller {
   public EntityPanel() {
     cardLayout = new CardLayout();
     setLayout(cardLayout);
-    gamePanels = setMaxSize(new ArrayList<>(), Game.NB_GAMES);
+    gamePanels = setMaxSize(new ArrayList<>(), EGame.NB_GAMES);
 
-    // NBK
-    EntityPanelEmbedded panelEmbedded = new NbkEntityPanelEmbedded();
-    gamePanels.add(panelEmbedded);
-    add(NbkGame.getInstance().getName(), panelEmbedded);
-    //TES
-    panelEmbedded = new TesEntityPanelEmbedded();
-    gamePanels.add(panelEmbedded);
-    add(TesGame.getInstance().getName(), panelEmbedded);
+    Arrays.asList(EGame.values()).stream().forEach(eGame -> {
+      EntityPanelEmbedded panelEmbedded = eGame.getEntityPanelEmbedded();
+      gamePanels.add(panelEmbedded);
+      add(eGame.getGame().getName(), panelEmbedded);
+    });
 
     cardLayout.show(this, EGame.getDefault().getName());
   }

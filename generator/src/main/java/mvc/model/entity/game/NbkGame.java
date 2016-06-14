@@ -1,6 +1,6 @@
 package mvc.model.entity.game;
 
-import mvc.model.entity.enums.ENbkAvailableItem;
+import mvc.view.entity.nbk.ENbkAvailableItem;
 
 /**
  * Created by Germain on 12/06/2016.

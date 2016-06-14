@@ -2,8 +2,7 @@ package mvc.view.menu;
 
 import mvc.controller.intf.Controller;
 import mvc.controller.menu.GameMenuActionListener;
-import mvc.model.entity.game.EGame;
-import mvc.model.entity.game.Game;
+import mvc.view.entity.EGame;
 import mvc.view.MainFrame;
 
 import javax.swing.ButtonGroup;
@@ -28,7 +27,7 @@ public class MainMenu extends JMenuBar implements Controller {
   public MainMenu() {
     gameMenu = new JMenu("Game");
 
-    gameButtons = setMaxSize(new ArrayList<>(), Game.NB_GAMES);
+    gameButtons = setMaxSize(new ArrayList<>(), EGame.NB_GAMES);
 
     Arrays.asList(EGame.values()).stream().forEach(eGame -> {
       JRadioButtonMenuItem rb = new JRadioButtonMenuItem(eGame.getGame().getName(), eGame.isDefault());

@@ -1,13 +1,11 @@
 package mvc.model.entity.game;
 
-import mvc.model.entity.utils.IAvailableItem;
+import mvc.view.entity.IAvailableItem;
 
 /**
  * Created by Germain on 12/06/2016.
  */
 public abstract class Game {
-
-  public static final int NB_GAMES = 2;
 
   private final String name;
   private final Class<? extends IAvailableItem> availableItems;

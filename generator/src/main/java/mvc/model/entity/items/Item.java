@@ -1,5 +1,6 @@
 package mvc.model.entity.items;
 
+import mvc.model.entity.game.*;
 import mvc.model.entity.utils.ERarity;
 import mvc.model.entity.utils.HasRarity;
 import mvc.model.entity.utils.ItemType;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Germain on 04/06/2016.
  */
-public abstract class Item implements HasRarity {
+public abstract class Item<T extends Game> implements HasRarity {
 
   ERarity rarity;
 

@@ -1,9 +1,7 @@
 package mvc.controller.entity;
 
-import mvc.model.entity.items.Item;
-import mvc.model.entity.items.NbkWeapon;
-import mvc.model.entity.results.EItemResultRarity;
-import mvc.model.entity.results.ItemResult;
+import mvc.model.entity.items.*;
+import mvc.model.entity.results.*;
 import mvc.model.entity.utils.Constraints;
 import mvc.view.entity.EntityOptionRow;
 import mvc.view.entity.EntityResultRow;
@@ -19,23 +17,20 @@ import java.util.stream.IntStream;
 /**
  * Created by Germain on 04/06/2016.
  */
-public class GenerateItemActionListener implements ActionListener {
+public abstract class GenerateItemActionListener implements ActionListener {
 
   private final EntityOptionRow entityOptionRow;
   private final EntityResultRow entityResultRow;
-  private final Class<? extends Item> itemClass;
 
-  public GenerateItemActionListener(EntityOptionRow entityOptionRow, EntityResultRow entityResultRow,
-                                    Class<? extends Item> itemClass) {
+  protected GenerateItemActionListener(EntityOptionRow entityOptionRow, EntityResultRow entityResultRow) {
     this.entityOptionRow = entityOptionRow;
     this.entityResultRow = entityResultRow;
-    this.itemClass = itemClass;
   }
 
   public void actionPerformed(ActionEvent e) {
     entityResultRow.clearResults();
     try {
-      entityResultRow.setResultsToPrint(generate(entityOptionRow.getNumberOfItemsSelected(), getConstraints()));
+      entityResultRow.setResultsToPrint(generateResults(entityOptionRow.getNumberOfItemsSelected(), getConstraints()));
     } catch (WrongClassException e1) {
       e1.printStackTrace();
     }
@@ -47,23 +42,18 @@ public class GenerateItemActionListener implements ActionListener {
             : new Constraints();
   }
 
-  private Collection<ItemResult> generate(int numberOfItems, Constraints constraints) throws WrongClassException {
+  private Collection<ItemResult> generateResults(int numberOfItems, Constraints constraints) throws WrongClassException {
     List<ItemResult> results = new ArrayList<>(numberOfItems);
     IntStream.rangeClosed(1, entityOptionRow.getNumberOfItemsSelected())
-            .forEach(i -> results.add(generate(constraints)));
+            .forEach(i -> results.add(generateResult(constraints)));
     return results;
   }
 
-  private ItemResult generate(Constraints constraints) throws WrongClassException {
-    Item item = null;
-    if (itemClass == NbkWeapon.class) {
-      item = NbkWeapon.create(constraints);
-    }
-    if (item != null) {
-      return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
-    } else {
-      throw new WrongClassException(itemClass.getName());
-    }
+  private ItemResult generateResult(Constraints constraints) {
+    Item item = generate(constraints);
+    return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
   }
+
+  protected abstract Item generate(Constraints constraints);
 
 }

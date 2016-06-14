@@ -1,7 +1,8 @@
-package mvc.model.entity.utils;
+package mvc.view.entity;
 
 import mvc.model.commons.HasName;
-import mvc.model.entity.items.Item;
+import mvc.model.entity.game.*;
+import org.jetbrains.annotations.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,10 +10,11 @@ import java.util.List;
 /**
  * Created by Germain on 11/06/2016.
  */
-public interface IAvailableItem extends HasName {
+public interface IAvailableItem<T extends Game> extends HasName {
 
-  Class<? extends Item> getItemClass();
+  EntityOptionRow<T> getEntityOptionRow();
 
+  @NotNull
   static List<? extends IAvailableItem> getValues(Class<? extends IAvailableItem> clazz) {
     return Arrays.asList(clazz.getEnumConstants());
   }

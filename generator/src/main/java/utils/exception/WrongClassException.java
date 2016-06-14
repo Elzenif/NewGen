@@ -1,7 +1,7 @@
 package utils.exception;
 
 /**
- * Created by Germain on 05/06/2016.
+ * Created by Germain on 14/06/2016.
  */
 public class WrongClassException extends RuntimeException {
   public WrongClassException(String className) {

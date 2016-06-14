@@ -1,7 +1,6 @@
 package mvc.view.entity;
 
 import mvc.model.entity.game.Game;
-import mvc.model.entity.utils.IAvailableItem;
 import mvc.view.MainFrame;
 import mvc.view.commons.DoublePanel;
 import utils.Pair;
@@ -14,14 +13,25 @@ import static utils.CollectionUtils.setMaxSize;
 /**
  * Created by Germain on 09/06/2016.
  */
-class EntityPanelEmbedded extends DoublePanel<EntityOptionRow, EntityResultRow> {
+public abstract class EntityPanelEmbedded<S extends Game, T extends IAvailableItem<S>>
+        extends DoublePanel<EntityOptionRow<S>, EntityResultRow> {
 
-  final List<Pair<EntityOptionRow, EntityResultRow>> rowPairs;
+  private final List<Pair<EntityOptionRow<S>, EntityResultRow>> rowPairs;
 
-  EntityPanelEmbedded(Game game) {
+  protected EntityPanelEmbedded(S game, T[] availableItems) {
     super(setPanel("Options", IAvailableItem.getValues(game.getAvailableItems()).size()),
             setPanel("Results", IAvailableItem.getValues(game.getAvailableItems()).size()));
+
     rowPairs = setMaxSize(new ArrayList<>(), IAvailableItem.getValues(game.getAvailableItems()).size());
+    for (IAvailableItem<S> availableItem : availableItems) {
+      EntityOptionRow<S> entityOptionRow = availableItem.getEntityOptionRow();
+      EntityResultRow entityResultRow = new EntityResultRow(availableItem);
+      rowPairs.add(new Pair<>(entityOptionRow, entityResultRow));
+      leftPanel.add(entityOptionRow);
+      rightPanel.add(entityResultRow);
+    }
+    add(leftPanel);
+    add(rightPanel);
   }
 
   @Override

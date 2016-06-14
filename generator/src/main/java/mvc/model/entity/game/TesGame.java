@@ -1,6 +1,6 @@
 package mvc.model.entity.game;
 
-import mvc.model.entity.enums.ETesAvailableItem;
+import mvc.view.entity.tes.ETesAvailableItem;
 
 /**
  * Created by Germain on 12/06/2016.
