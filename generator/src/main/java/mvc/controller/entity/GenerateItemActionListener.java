@@ -1,8 +1,10 @@
 package mvc.controller.entity;
 
-import mvc.model.entity.items.*;
-import mvc.model.entity.results.*;
-import mvc.model.entity.utils.Constraints;
+import mvc.model.entity.constraints.GlobalConstraints;
+import mvc.model.entity.game.Game;
+import mvc.model.entity.items.Item;
+import mvc.model.entity.results.EItemResultRarity;
+import mvc.model.entity.results.ItemResult;
 import mvc.view.entity.EntityOptionRow;
 import mvc.view.entity.EntityResultRow;
 import utils.exception.WrongClassException;
@@ -17,12 +19,12 @@ import java.util.stream.IntStream;
 /**
  * Created by Germain on 04/06/2016.
  */
-public abstract class GenerateItemActionListener implements ActionListener {
+public abstract class GenerateItemActionListener<T extends Game> implements ActionListener {
 
-  private final EntityOptionRow entityOptionRow;
+  private final EntityOptionRow<T> entityOptionRow;
   private final EntityResultRow entityResultRow;
 
-  protected GenerateItemActionListener(EntityOptionRow entityOptionRow, EntityResultRow entityResultRow) {
+  protected GenerateItemActionListener(EntityOptionRow<T> entityOptionRow, EntityResultRow entityResultRow) {
     this.entityOptionRow = entityOptionRow;
     this.entityResultRow = entityResultRow;
   }
@@ -36,24 +38,24 @@ public abstract class GenerateItemActionListener implements ActionListener {
     }
   }
 
-  private Constraints getConstraints() {
+  private GlobalConstraints getConstraints() {
     return entityOptionRow.isConstraintsCheckBoxSelected()
-            ? entityOptionRow.getConstraints()
-            : new Constraints();
+            ? entityOptionRow.getGlobalConstraints()
+            : new GlobalConstraints();
   }
 
-  private Collection<ItemResult> generateResults(int numberOfItems, Constraints constraints) throws WrongClassException {
+  private Collection<ItemResult> generateResults(int numberOfItems, GlobalConstraints globalConstraints) throws WrongClassException {
     List<ItemResult> results = new ArrayList<>(numberOfItems);
     IntStream.rangeClosed(1, entityOptionRow.getNumberOfItemsSelected())
-            .forEach(i -> results.add(generateResult(constraints)));
+            .forEach(i -> results.add(generateResult(globalConstraints)));
     return results;
   }
 
-  private ItemResult generateResult(Constraints constraints) {
-    Item item = generate(constraints);
+  private ItemResult generateResult(GlobalConstraints globalConstraints) {
+    Item<T> item = generate(globalConstraints);
     return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
   }
 
-  protected abstract Item generate(Constraints constraints);
+  protected abstract Item<T> generate(GlobalConstraints globalConstraints);
 
 }

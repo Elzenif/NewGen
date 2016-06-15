@@ -1,8 +1,8 @@
 package mvc.model.entity.items;
 
+import mvc.model.entity.constraints.GlobalConstraints;
 import mvc.model.entity.enums.ENbkWeaponType;
-import mvc.model.entity.game.*;
-import mvc.model.entity.utils.Constraints;
+import mvc.model.entity.game.NbkGame;
 import org.jetbrains.annotations.Contract;
 
 import java.util.function.Predicate;
@@ -15,8 +15,8 @@ public class NbkWeapon extends Item<NbkGame> {
   private final ENbkWeaponType weaponType;
 
   @Contract("_ -> !null")
-  public static NbkWeapon create(Constraints constraints) {
-    return new NbkWeapon.WeaponBuilder(constraints).build();
+  public static NbkWeapon create(GlobalConstraints globalConstraints) {
+    return new NbkWeapon.WeaponBuilder(globalConstraints).build();
   }
 
   ENbkWeaponType getWeaponType() {
@@ -37,11 +37,11 @@ public class NbkWeapon extends Item<NbkGame> {
 
     private ENbkWeaponType weaponType;
 
-    private WeaponBuilder(Constraints constraints) {
-      setWeaponType(constraints.get(ENbkWeaponType.class).getPredicate());
+    private WeaponBuilder(GlobalConstraints globalConstraints) {
+      setWeaponType(globalConstraints.getConstraint(ENbkWeaponType.class));
     }
 
-    private void setWeaponType(Predicate<ENbkWeaponType> predicate) {
+    private void setWeaponType(Predicate predicate) {
       weaponType = selectRandomItemType(ENbkWeaponType.values(), predicate);
       rarities.add(weaponType);
     }

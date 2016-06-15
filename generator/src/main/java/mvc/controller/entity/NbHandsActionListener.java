@@ -1,11 +1,10 @@
 package mvc.controller.entity;
 
-import mvc.model.entity.enums.ENbkWeaponType;
+import mvc.model.entity.constraints.NbHandsConstraint;
 import mvc.view.entity.nbk.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.function.Predicate;
 
 /**
  * Created by Germain on 11/06/2016.
@@ -13,15 +12,15 @@ import java.util.function.Predicate;
 public class NbHandsActionListener implements ActionListener {
 
   private final NbkWeaponOptionRow entityOptionRow;
-  private final Predicate<ENbkWeaponType> predicate;
+  private final NbHandsConstraint nbHandsConstraint;
 
-  public NbHandsActionListener(NbkWeaponOptionRow entityOptionRow, Predicate<ENbkWeaponType> predicate) {
+  public NbHandsActionListener(NbkWeaponOptionRow entityOptionRow, NbHandsConstraint nbHandsConstraint) {
     this.entityOptionRow = entityOptionRow;
-    this.predicate = predicate;
+    this.nbHandsConstraint = nbHandsConstraint;
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    entityOptionRow.updateNbHandsConstraint(predicate);
+    entityOptionRow.updateNbHandsConstraint(nbHandsConstraint);
   }
 }

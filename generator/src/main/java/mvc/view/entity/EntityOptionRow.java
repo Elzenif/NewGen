@@ -1,8 +1,8 @@
 package mvc.view.entity;
 
 import mvc.controller.entity.ConstraintsItemListener;
-import mvc.model.entity.game.*;
-import mvc.model.entity.utils.Constraints;
+import mvc.model.entity.constraints.GlobalConstraints;
+import mvc.model.entity.game.Game;
 import mvc.view.commons.OptionRow;
 import utils.MathUtils;
 import utils.StringUtils;
@@ -31,7 +31,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   private final JPanel constraintsPanel;
   private final JCheckBox constraintsCheckBox;
   private final JLabel constraintsLabel;
-  protected final Constraints constraints;
+  protected final GlobalConstraints globalConstraints;
 
   protected EntityOptionRow(IAvailableItem availableItem, S game) {
     super();
@@ -45,8 +45,8 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     infoLabel = new JLabel(StringUtils.leftAlign(labelSize, itemName));
     add(infoLabel);
 
-    // constraints
-    constraintsLabel = new JLabel("Constraints");
+    // globalConstraints
+    constraintsLabel = new JLabel("GlobalConstraints");
     constraintsLabel.setAlignmentX(CENTER_ALIGNMENT);
     constraintsCheckBox = new JCheckBox();
     constraintsCheckBox.setAlignmentX(CENTER_ALIGNMENT);
@@ -55,7 +55,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     constraintsPanel.add(constraintsLabel);
     constraintsPanel.add(constraintsCheckBox);
     add(constraintsPanel);
-    constraints = new Constraints();
+    globalConstraints = new GlobalConstraints();
   }
 
   @Override
@@ -67,8 +67,8 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     return numberOfItemsModel.getNumber().intValue();
   }
 
-  public Constraints getConstraints() {
-    return constraints;
+  public GlobalConstraints getGlobalConstraints() {
+    return globalConstraints;
   }
 
   public boolean isConstraintsCheckBoxSelected() {
