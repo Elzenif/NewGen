@@ -1,9 +1,11 @@
 package mvc.model.entity.items;
 
 import mvc.model.entity.constraints.GlobalConstraints;
+import mvc.model.entity.enums.ENbkQuality;
 import mvc.model.entity.enums.ENbkWeaponType;
 import mvc.model.entity.game.NbkGame;
 import org.jetbrains.annotations.Contract;
+import utils.french.FrenchNoun;
 
 import java.util.function.Predicate;
 
@@ -13,6 +15,7 @@ import java.util.function.Predicate;
 public class NbkWeapon extends Item<NbkGame> {
   
   private final ENbkWeaponType weaponType;
+  private final ENbkQuality quality;
 
   @Contract("_ -> !null")
   public static NbkWeapon create(GlobalConstraints globalConstraints) {
@@ -23,25 +26,39 @@ public class NbkWeapon extends Item<NbkGame> {
     return weaponType;
   }
 
+  ENbkQuality getQuality() {
+    return quality;
+  }
+
   @Override
   public String toString() {
-    return weaponType.toString();
+    FrenchNoun noun = weaponType.getName();
+    noun.addString(quality.getName().getCorrectForm(noun.getGender()));
+    return noun.toString();
   }
 
   private NbkWeapon(NbkWeapon.WeaponBuilder builder) {
     this.weaponType = builder.weaponType;
+    this.quality = builder.quality;
     rarity = builder.computeRarity();
   }
 
   private static class WeaponBuilder extends ItemBuilder {
 
     private ENbkWeaponType weaponType;
+    private ENbkQuality quality;
 
     private WeaponBuilder(GlobalConstraints globalConstraints) {
-      setWeaponType(globalConstraints.getConstraint(ENbkWeaponType.class));
+      setWeaponType(globalConstraints.getPredicate(ENbkWeaponType.class));
+      setQuality(globalConstraints.getPredicate(ENbkQuality.class));
     }
 
-    private void setWeaponType(Predicate predicate) {
+    private void setQuality(Predicate<ENbkQuality> predicate) {
+      quality = selectRandomItemType(ENbkQuality.values(), predicate);
+      rarities.add(quality);
+    }
+
+    private void setWeaponType(Predicate<ENbkWeaponType> predicate) {
       weaponType = selectRandomItemType(ENbkWeaponType.values(), predicate);
       rarities.add(weaponType);
     }

@@ -2,6 +2,8 @@ package mvc.model.entity.results;
 
 import mvc.model.commons.Result;
 
+import static utils.StringUtils.capitalizeFirstLetter;
+
 /**
  * Created by Germain on 05/06/2016.
  */
@@ -11,7 +13,7 @@ public class ItemResult implements Result {
   private final EItemResultRarity itemResultRarity;
 
   public ItemResult(String result, EItemResultRarity itemResultRarity) {
-    this.result = result;
+    this.result = capitalizeFirstLetter(result);
     this.itemResultRarity = itemResultRarity;
   }
 

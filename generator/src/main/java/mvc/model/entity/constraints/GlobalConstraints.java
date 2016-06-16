@@ -30,14 +30,14 @@ public class GlobalConstraints {
 
   @SuppressWarnings("unchecked")
   public <T extends GenericConstraint<E>, E extends Enum<E> & ItemType> Predicate<E>
-  getConstraint(Class<E> itemTypeClass, Class<T> constraintClass) {
+  getPredicate(Class<E> itemTypeClass, Class<T> constraintClass) {
     return map.containsKey(itemTypeClass)
             ? (Predicate<E>) map.get(itemTypeClass).get(constraintClass).getPredicate()
             : p -> true;
   }
 
   @SuppressWarnings("unchecked")
-  public <E extends Enum<E> & ItemType> Predicate<E> getConstraint(Class<E> itemTypeClass) {
+  public <E extends Enum<E> & ItemType> Predicate<E> getPredicate(Class<E> itemTypeClass) {
     return map.containsKey(itemTypeClass)
             ? (Predicate<E>) map.get(itemTypeClass).values()
             .stream().map(GenericConstraint::getPredicate).reduce(Predicate::and).orElse(p -> true)

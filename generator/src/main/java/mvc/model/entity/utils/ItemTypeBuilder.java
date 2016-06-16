@@ -1,5 +1,7 @@
 package mvc.model.entity.utils;
 
+import utils.french.FrenchString;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,21 +11,21 @@ import java.util.List;
  */
 public abstract class ItemTypeBuilder {
 
-  private final List<String> names = new ArrayList<>();
-  private ERarity rarity = ERarity.UNCOMMON;
+  private final List<FrenchString> names = new ArrayList<>();
+  private ERarity rarity;
 
-  public List<String> getNames() {
-    return names;
+  public List<FrenchString> getNames() { return names; }
+
+  protected void addNames(FrenchString... frenchStrings) {
+    names.addAll(Arrays.asList(frenchStrings));
+  }
+
+  protected void addName(FrenchString frenchString) {
+    names.add(frenchString);
   }
 
   public ERarity getRarity() {
     return rarity;
-  }
-
-  protected ItemTypeBuilder setNames(String mainName, String... otherNames) {
-    this.names.add(mainName);
-    this.names.addAll(Arrays.asList(otherNames));
-    return this;
   }
 
   protected ItemTypeBuilder setRarity(ERarity rarity) {

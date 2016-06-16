@@ -22,7 +22,7 @@ public class MathUtils {
     return list.get(random(0, list.size() - 1));
   }
 
-  public static <E extends HasName> int maxLength(List<E> namedEnumValues) {
+  public static <E extends HasName<String>> int maxLength(List<E> namedEnumValues) {
     Optional<Integer> max = namedEnumValues.stream().map(e -> e.getName().length()).reduce(Integer::max);
     if (max.isPresent())
       return max.get();

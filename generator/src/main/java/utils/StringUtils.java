@@ -39,6 +39,10 @@ public class StringUtils {
     return sb.toString();
   }
 
+  public static String capitalizeFirstLetter(String string) {
+    return string.substring(0, 1).toUpperCase() + string.substring(1);
+  }
+
   private static final DecimalFormat format = setFormat();
 
   private static DecimalFormat setFormat() {

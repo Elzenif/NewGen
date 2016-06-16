@@ -1,7 +1,8 @@
 package mvc.view.entity.tes;
 
-import mvc.model.entity.game.*;
-import mvc.view.entity.*;
+import mvc.model.entity.game.TesGame;
+import mvc.view.entity.EntityOptionRow;
+import mvc.view.entity.IAvailableItem;
 
 /**
  * Created by Germain on 11/06/2016.

@@ -10,8 +10,8 @@ import javax.swing.JLabel;
  */
 public class EntityResultRow extends ResultRow<ItemResult> {
 
-  public EntityResultRow(IAvailableItem availableItem) {
-    super(availableItem.getName());
+  EntityResultRow(IAvailableItem availableItem) {
+    super((String) availableItem.getName());
   }
 
   @Override

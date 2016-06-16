@@ -5,7 +5,7 @@ import mvc.model.commons.HasName;
 /**
  * Created by Germain on 21/05/2016.
  */
-public enum EDiceNumber implements HasName {
+public enum EDiceNumber implements HasName<String> {
 
   D4(4),
   D6(6),

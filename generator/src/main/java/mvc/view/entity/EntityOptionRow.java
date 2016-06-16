@@ -36,7 +36,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   protected EntityOptionRow(IAvailableItem availableItem, S game) {
     super();
     labelSize = MathUtils.maxLength(IAvailableItem.getValues(game.getAvailableItems()));
-    this.itemName = availableItem.getName();
+    this.itemName = (String) availableItem.getName();
 
     numberOfItemsModel = new SpinnerNumberModel(1, 1, 9, 1);
     numberOfItemsSpinner = new JSpinner(numberOfItemsModel);
