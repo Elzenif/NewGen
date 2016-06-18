@@ -7,9 +7,9 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 15/06/2016.
  */
-public enum NbHandsConstraint implements GenericConstraint<ENbkWeaponType> {
+public enum NbkNbHandsConstraint implements GenericConstraint<ENbkWeaponType> {
 
-  NO_CONSTRAINT() {
+  NO_CONSTRAINT {
     @Override
     public Predicate<ENbkWeaponType> getPredicate() {
       return alwaysTruePredicate();

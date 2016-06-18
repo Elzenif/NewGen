@@ -1,8 +1,7 @@
 package mvc.model.entity.items;
 
 import mvc.model.entity.constraints.GlobalConstraints;
-import mvc.model.entity.constraints.GenericConstraint;
-import mvc.model.entity.constraints.NbHandsConstraint;
+import mvc.model.entity.constraints.NbkNbHandsConstraint;
 import mvc.model.entity.enums.ENbkQuality;
 import mvc.model.entity.enums.ENbkWeaponType;
 import org.junit.Before;
@@ -72,13 +71,13 @@ public class NbkWeaponTest {
   @Test
   public void testCreateWeaponWithHandsConstraint() {
     int nbHands = 1;
-    globalConstraints.put(ENbkWeaponType.class, NbHandsConstraint.class, NbHandsConstraint.ONE_HAND);
+    globalConstraints.put(ENbkWeaponType.class, NbkNbHandsConstraint.class, NbkNbHandsConstraint.ONE_HAND);
     weapon = NbkWeapon.create(globalConstraints);
     assertNotNull("The weapon should not be null");
     assertEquals("The weapon should be one hand", nbHands, weapon.getWeaponType().getNbHands());
 
     nbHands = 2;
-    globalConstraints.put(ENbkWeaponType.class, NbHandsConstraint.class, NbHandsConstraint.TWO_HANDS);
+    globalConstraints.put(ENbkWeaponType.class, NbkNbHandsConstraint.class, NbkNbHandsConstraint.TWO_HANDS);
     weapon = NbkWeapon.create(globalConstraints);
     assertNotNull("The weapon should not be null");
     assertEquals("The weapon should be one hand", nbHands, weapon.getWeaponType().getNbHands());

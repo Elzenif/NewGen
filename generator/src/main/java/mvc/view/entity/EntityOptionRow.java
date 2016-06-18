@@ -9,10 +9,13 @@ import utils.StringUtils;
 
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Germain on 05/06/2016.
@@ -31,6 +34,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   private final JPanel constraintsPanel;
   private final JCheckBox constraintsCheckBox;
   private final JLabel constraintsLabel;
+  protected final List<JComponent> constraintComponents;
   protected final GlobalConstraints globalConstraints;
 
   protected EntityOptionRow(IAvailableItem availableItem, S game) {
@@ -46,7 +50,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     add(infoLabel);
 
     // globalConstraints
-    constraintsLabel = new JLabel("GlobalConstraints");
+    constraintsLabel = new JLabel("constraints");
     constraintsLabel.setAlignmentX(CENTER_ALIGNMENT);
     constraintsCheckBox = new JCheckBox();
     constraintsCheckBox.setAlignmentX(CENTER_ALIGNMENT);
@@ -55,6 +59,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     constraintsPanel.add(constraintsLabel);
     constraintsPanel.add(constraintsCheckBox);
     add(constraintsPanel);
+    constraintComponents = new LinkedList<>();
     globalConstraints = new GlobalConstraints();
   }
 
@@ -75,6 +80,8 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     return constraintsCheckBox.isSelected();
   }
 
-  public abstract void updateConstraintsAbility(boolean checkBoxSelected);
+  public void updateConstraintsAbility(boolean checkBoxSelected) {
+    constraintComponents.stream().forEach(jc -> jc.setEnabled(checkBoxSelected));
+  }
 
 }

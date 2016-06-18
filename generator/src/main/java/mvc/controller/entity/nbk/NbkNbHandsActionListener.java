@@ -1,6 +1,6 @@
-package mvc.controller.entity;
+package mvc.controller.entity.nbk;
 
-import mvc.model.entity.constraints.NbHandsConstraint;
+import mvc.model.entity.constraints.NbkNbHandsConstraint;
 import mvc.view.entity.nbk.*;
 
 import java.awt.event.ActionEvent;
@@ -9,12 +9,12 @@ import java.awt.event.ActionListener;
 /**
  * Created by Germain on 11/06/2016.
  */
-public class NbHandsActionListener implements ActionListener {
+public class NbkNbHandsActionListener implements ActionListener {
 
   private final NbkWeaponOptionRow entityOptionRow;
-  private final NbHandsConstraint nbHandsConstraint;
+  private final NbkNbHandsConstraint nbHandsConstraint;
 
-  public NbHandsActionListener(NbkWeaponOptionRow entityOptionRow, NbHandsConstraint nbHandsConstraint) {
+  public NbkNbHandsActionListener(NbkWeaponOptionRow entityOptionRow, NbkNbHandsConstraint nbHandsConstraint) {
     this.entityOptionRow = entityOptionRow;
     this.nbHandsConstraint = nbHandsConstraint;
   }

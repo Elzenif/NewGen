@@ -12,8 +12,4 @@ public class TesEntityOptionRow extends EntityOptionRow<TesGame> {
     super(availableItem, TesGame.getInstance());
   }
 
-  @Override
-  public void updateConstraintsAbility(boolean checkBoxSelected) {
-
-  }
 }
