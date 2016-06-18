@@ -32,7 +32,7 @@ public abstract class Item<T extends Game> implements HasRarity {
     final List<HasRarity> rarities = new ArrayList<>();
 
     ERarity computeRarity() {
-      return ERarity.computeRarity(rarities);
+      return rarities.isEmpty() ? ERarity.COMMON : ERarity.computeRarity(rarities);
     }
 
     <E extends Enum<E> & ItemType> E selectRandomItemType(E[] values, Predicate<E> predicate) {

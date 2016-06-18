@@ -19,7 +19,22 @@ public enum ENbkQuality implements ItemType {
 
   MAUVAIS(new NbkQualityBuilder()
           .setGenderAdjective("grossier", "grossière")
-          .setRarity(ERarity.COMMON));
+          .setNeutralAdjective("perrave", "de base", "basique", "daubesque", "quelconque", "minable",
+                  "de basse qualité")
+          .setRarity(ERarity.COMMON)),
+  BASIQUE(new NbkQualityBuilder()
+          .setGenderAdjective("correct", "correcte")
+          .setNeutralAdjective("de qualité")
+          .setRarity(ERarity.UNCOMMON)),
+  BONNE_QUALITE(new NbkQualityBuilder()
+          .setNeutralAdjective("de bonne qualité", "de bonne facture")
+          .setRarity(ERarity.RARE)),
+  ARTISAN_RENOMME(new NbkQualityBuilder()
+          .setNeutralAdjective("d'artisan renommé")
+          .setRarity(ERarity.EPIC)),
+  DURANDIL(new NbkQualityBuilder()
+          .setNeutralAdjective("Durandil(TM)")
+          .setRarity(ERarity.LEGENDARY));
 
   private final List<FrenchString> names;
   private final ERarity rarity;

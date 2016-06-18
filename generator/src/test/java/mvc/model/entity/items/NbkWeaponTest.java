@@ -3,6 +3,7 @@ package mvc.model.entity.items;
 import mvc.model.entity.constraints.GlobalConstraints;
 import mvc.model.entity.constraints.GenericConstraint;
 import mvc.model.entity.constraints.NbHandsConstraint;
+import mvc.model.entity.enums.ENbkQuality;
 import mvc.model.entity.enums.ENbkWeaponType;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Germain on 04/06/2016.
@@ -43,8 +45,22 @@ public class NbkWeaponTest {
   public void testWeaponTypeIsValid() {
     weapon = NbkWeapon.create(globalConstraints);
     Set<ENbkWeaponType> weaponTypes = new HashSet<>(Arrays.asList(ENbkWeaponType.values()));
-    assertNotNull("The weapon type should be a ENbkWeaponType enum :" + weapon.getWeaponType().toString(),
+    assertTrue("The weapon type should be a ENbkWeaponType enum : " + weapon.getWeaponType().toString(),
             weaponTypes.contains(weapon.getWeaponType()));
+  }
+
+  @Test
+  public void testWeaponQualityIsNotNull() {
+    weapon = NbkWeapon.create(globalConstraints);
+    assertNotNull("The weapon quality should not be null", weapon.getQuality());
+  }
+
+  @Test
+  public void testWeaponQualityIsValid() {
+    weapon = NbkWeapon.create(globalConstraints);
+    Set<ENbkQuality> qualities = new HashSet<>(Arrays.asList(ENbkQuality.values()));
+    assertTrue("The weapon quality sould be a ENbkQuality enum : " + weapon.getQuality().toString(),
+            qualities.contains(weapon.getQuality()));
   }
 
   @Test

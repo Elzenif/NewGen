@@ -20,62 +20,64 @@ public enum ENbkWeaponType implements ItemType {
           .setMasculineNouns("poignard")
           .setFeminineNouns("dague")
           .setRarity(ERarity.COMMON)
-          .oneHand()),
+          .oneHand(false)),
   LAME_1MAIN(new NbKWeaponTypeBuilder()
           .setMasculineNouns("sabre")
           .setFeminineNouns("épée", "rapière")
           .setRarity(ERarity.COMMON)
-          .oneHand()),
+          .oneHand(true)),
   LAME_2MAINS(new NbKWeaponTypeBuilder()
           .setFeminineNouns("épée")
           .setRarity(ERarity.COMMON)
-          .twoHands()),
+          .twoHands(true)),
   HACHE_1MAIN(new NbKWeaponTypeBuilder()
           .setFeminineNouns("hache")
           .setRarity(ERarity.COMMON)
-          .oneHand()),
+          .oneHand(true)),
   HACHE_JET(new NbKWeaponTypeBuilder()
           .setFeminineNouns("hache de jet")
           .setRarity(ERarity.UNCOMMON)
-          .oneHand()),
+          .oneHand(false)),
   HACHE_2MAINS(new NbKWeaponTypeBuilder()
           .setFeminineNouns("hache")
           .setRarity(ERarity.UNCOMMON)
-          .twoHands()),
+          .twoHands(true)),
   MARTEAU_1MAIN(new NbKWeaponTypeBuilder()
           .setMasculineNouns("marteau")
           .setFeminineNouns("masse")
           .setRarity(ERarity.UNCOMMON)
-          .oneHand()),
+          .oneHand(true)),
   MARTEAU_2MAINS(new NbKWeaponTypeBuilder()
           .setMasculineNouns("marteau")
           .setRarity(ERarity.UNCOMMON)
-          .twoHands()),
+          .twoHands(true)),
   LANCE(new NbKWeaponTypeBuilder()
           .setFeminineNouns("lance", "pique")
           .setRarity(ERarity.UNCOMMON)
-          .twoHands()),
+          .twoHands(false)),
   JAVELOT(new NbKWeaponTypeBuilder()
           .setMasculineNouns("javelot")
           .setRarity(ERarity.UNCOMMON)
-          .oneHand()),
+          .oneHand(false)),
   ARC(new NbKWeaponTypeBuilder()
           .setMasculineNouns("arc court", "arc long")
           .setRarity(ERarity.COMMON)
-          .twoHands()),
+          .twoHands(false)),
   ARBALETE(new NbKWeaponTypeBuilder()
           .setFeminineNouns("arbalète")
           .setRarity(ERarity.UNCOMMON)
-          .twoHands());
+          .twoHands(false));
 
   private final List<FrenchString> names;
   private final ERarity rarity;
   private final int nbHands;
+  private final boolean printNbHands;
 
   ENbkWeaponType(NbKWeaponTypeBuilder builder) {
     this.names = builder.getNames();
     this.rarity = builder.getRarity();
     this.nbHands = builder.getNbHands();
+    this.printNbHands = builder.getPrintNbHands();
   }
 
   @Override
@@ -90,14 +92,17 @@ public enum ENbkWeaponType implements ItemType {
   @Override
   public FrenchNoun getName() {
     FrenchNoun noun = new FrenchNoun((FrenchNoun) MathUtils.chooseRandom(names));
-    String s = nbHands == 2 ? "s" : "";
-    noun.addString(" à " + nbHands + " main" + s + " ");
+    if (printNbHands) {
+      String s = nbHands == 2 ? "s" : "";
+      noun.addString("à " + nbHands + " main" + s);
+    }
     return noun;
   }
 
   private static class NbKWeaponTypeBuilder extends ItemTypeBuilder {
 
     private int nbHands = 0;
+    private boolean printNbHands = false;
 
     private NbKWeaponTypeBuilder setMasculineNouns(String... names) {
       for (String name : names) {
@@ -118,18 +123,24 @@ public enum ENbkWeaponType implements ItemType {
       return (NbKWeaponTypeBuilder) super.setRarity(rarity);
     }
 
-    NbKWeaponTypeBuilder oneHand() {
+    NbKWeaponTypeBuilder oneHand(boolean printNbHands) {
       this.nbHands = 1;
+      this.printNbHands = printNbHands;
       return this;
     }
 
-    NbKWeaponTypeBuilder twoHands() {
+    NbKWeaponTypeBuilder twoHands(boolean printNbHands) {
       this.nbHands = 2;
+      this.printNbHands = printNbHands;
       return this;
     }
 
     int getNbHands() {
       return nbHands;
+    }
+
+    public boolean getPrintNbHands() {
+      return printNbHands;
     }
   }
 }

@@ -13,7 +13,7 @@ import java.util.function.Predicate;
  * Created by Germain on 11/06/2016.
  */
 public class NbkWeapon extends Item<NbkGame> {
-  
+
   private final ENbkWeaponType weaponType;
   private final ENbkQuality quality;
 
@@ -33,7 +33,7 @@ public class NbkWeapon extends Item<NbkGame> {
   @Override
   public String toString() {
     FrenchNoun noun = weaponType.getName();
-    noun.addString(quality.getName().getCorrectForm(noun.getGender()));
+    noun.addAdjective(quality.getName());
     return noun.toString();
   }
 
@@ -60,7 +60,6 @@ public class NbkWeapon extends Item<NbkGame> {
 
     private void setWeaponType(Predicate<ENbkWeaponType> predicate) {
       weaponType = selectRandomItemType(ENbkWeaponType.values(), predicate);
-      rarities.add(weaponType);
     }
 
     @Contract(" -> !null")

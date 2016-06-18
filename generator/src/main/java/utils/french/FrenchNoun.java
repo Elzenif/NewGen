@@ -32,7 +32,11 @@ public class FrenchNoun implements FrenchString {
   }
 
   public void addString(String string) {
-    noun += string;
+    noun += " " + string;
+  }
+
+  public void addAdjective(FrenchAdjective adjective) {
+    addString(adjective.getCorrectForm(gender));
   }
 
 }
