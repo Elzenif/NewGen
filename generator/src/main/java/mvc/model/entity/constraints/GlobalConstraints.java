@@ -1,6 +1,6 @@
 package mvc.model.entity.constraints;
 
-import mvc.model.entity.utils.ItemType;
+import mvc.model.entity.utils.HasRarity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,33 +13,33 @@ public class GlobalConstraints {
 
   // This is not pretty, but since it is not possible for a wildcard to extends multiple interfaces/classes...
   private final Map<
-          Class<? extends ItemType>,
-          Map<Class<? extends GenericConstraint>, GenericConstraint<? extends ItemType>>> map;
+          Class<? extends HasRarity>,
+          Map<Class<? extends GenericConstraint>, GenericConstraint<? extends HasRarity>>> map;
 
   public GlobalConstraints() {
     map = new HashMap<>();
   }
 
-  public <T extends GenericConstraint<E>, E extends Enum<E> & ItemType> void put(Class<E> itemTypeClass,
+  public <T extends GenericConstraint<E>, E extends Enum<E> & HasRarity> void put(Class<E> hasRarityClass,
                                                                                  Class<T> constraintClass,
                                                                                  GenericConstraint<E> constraint) {
-    if (!map.containsKey(itemTypeClass))
-      map.put(itemTypeClass, new HashMap<>());
-    map.get(itemTypeClass).put(constraintClass, constraint);
+    if (!map.containsKey(hasRarityClass))
+      map.put(hasRarityClass, new HashMap<>());
+    map.get(hasRarityClass).put(constraintClass, constraint);
   }
 
   @SuppressWarnings("unchecked")
-  public <T extends GenericConstraint<E>, E extends Enum<E> & ItemType> Predicate<E>
-  getPredicate(Class<E> itemTypeClass, Class<T> constraintClass) {
-    return map.containsKey(itemTypeClass)
-            ? (Predicate<E>) map.get(itemTypeClass).get(constraintClass).getPredicate()
+  public <T extends GenericConstraint<E>, E extends Enum<E> & HasRarity> Predicate<E>
+  getPredicate(Class<E> hasRarityClass, Class<T> constraintClass) {
+    return map.containsKey(hasRarityClass)
+            ? (Predicate<E>) map.get(hasRarityClass).get(constraintClass).getPredicate()
             : p -> true;
   }
 
   @SuppressWarnings("unchecked")
-  public <E extends Enum<E> & ItemType> Predicate<E> getPredicate(Class<E> itemTypeClass) {
-    return map.containsKey(itemTypeClass)
-            ? (Predicate<E>) map.get(itemTypeClass).values()
+  public <E extends Enum<E> & HasRarity> Predicate<E> getPredicate(Class<E> hasRarityClass) {
+    return map.containsKey(hasRarityClass)
+            ? (Predicate<E>) map.get(hasRarityClass).values()
             .stream().map(GenericConstraint::getPredicate).reduce(Predicate::and).orElse(p -> true)
             : p -> true;
   }

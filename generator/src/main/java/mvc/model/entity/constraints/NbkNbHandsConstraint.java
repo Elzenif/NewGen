@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 15/06/2016.
  */
-public enum NbkNbHandsConstraint implements GenericConstraint<ENbkWeaponType> {
+public enum NbkNbHandsConstraint implements GenericItemConstraint<ENbkWeaponType> {
 
   NO_CONSTRAINT {
     @Override

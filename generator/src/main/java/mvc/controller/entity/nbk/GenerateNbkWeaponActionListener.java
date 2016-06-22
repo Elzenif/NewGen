@@ -5,6 +5,7 @@ import mvc.model.entity.constraints.GlobalConstraints;
 import mvc.model.entity.game.NbkGame;
 import mvc.model.entity.items.Item;
 import mvc.model.entity.items.NbkWeapon;
+import mvc.model.entity.utils.ERarity;
 import mvc.view.entity.EntityResultRow;
 import mvc.view.entity.nbk.NbkWeaponOptionRow;
 
@@ -18,7 +19,7 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
   }
 
   @Override
-  protected Item<NbkGame> generate(GlobalConstraints globalConstraints) {
-    return NbkWeapon.create(globalConstraints);
+  protected Item<NbkGame> generate(GlobalConstraints globalConstraints, ERarity rarity) {
+    return NbkWeapon.create(globalConstraints, rarity);
   }
 }

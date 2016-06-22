@@ -1,6 +1,7 @@
 package mvc.model.entity.utils;
 
-import java.util.List;
+import org.jetbrains.annotations.Contract;
+
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
 /**
  * Created by Germain on 06/06/2016.
  */
-public enum  ERarity {
+public enum  ERarity implements HasRarity {
 
   COMMON(0, 49),
   UNCOMMON(1, 30),
@@ -35,6 +36,12 @@ public enum  ERarity {
     return proba;
   }
 
+  @Contract(pure = true)
+  @Override
+  public ERarity getRarity() {
+    return this;
+  }
+
   private static final Map<Integer, ERarity> map = new TreeMap<>(
           Stream.of(ERarity.values()).collect(Collectors.toMap(ERarity::getRarityLevel, Function.identity()))
   );
@@ -43,9 +50,4 @@ public enum  ERarity {
     Optional<Integer> optional = map.keySet().stream().filter(e -> e >= rarityLevel).findFirst();
     return optional.isPresent() ? map.get(optional.get()) : LEGENDARY;
   }
-
-  public static ERarity computeRarity(List<HasRarity> rarities) {
-    return getRarity(rarities.stream().map(e -> e.getRarity().getRarityLevel()).mapToInt(Integer::intValue).sum());
-  }
-
 }

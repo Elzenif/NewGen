@@ -4,6 +4,8 @@ import mvc.model.entity.constraints.GlobalConstraints;
 import mvc.model.entity.enums.ENbkQuality;
 import mvc.model.entity.enums.ENbkWeaponType;
 import mvc.model.entity.game.NbkGame;
+import mvc.model.entity.utils.ERarity;
+import mvc.model.entity.utils.ItemUtils;
 import org.jetbrains.annotations.Contract;
 import utils.french.FrenchNoun;
 
@@ -17,9 +19,9 @@ public class NbkWeapon extends Item<NbkGame> {
   private final ENbkWeaponType weaponType;
   private final ENbkQuality quality;
 
-  @Contract("_ -> !null")
-  public static NbkWeapon create(GlobalConstraints globalConstraints) {
-    return new NbkWeapon.WeaponBuilder(globalConstraints).build();
+  @Contract("_, _ -> !null")
+  public static NbkWeapon create(GlobalConstraints globalConstraints, ERarity rarity) {
+    return new NbkWeapon.WeaponBuilder(globalConstraints, rarity).build();
   }
 
   ENbkWeaponType getWeaponType() {
@@ -38,9 +40,9 @@ public class NbkWeapon extends Item<NbkGame> {
   }
 
   private NbkWeapon(NbkWeapon.WeaponBuilder builder) {
+    super(builder.rarity);
     this.weaponType = builder.weaponType;
     this.quality = builder.quality;
-    rarity = builder.computeRarity();
   }
 
   private static class WeaponBuilder extends ItemBuilder {
@@ -48,18 +50,18 @@ public class NbkWeapon extends Item<NbkGame> {
     private ENbkWeaponType weaponType;
     private ENbkQuality quality;
 
-    private WeaponBuilder(GlobalConstraints globalConstraints) {
+    private WeaponBuilder(GlobalConstraints globalConstraints, ERarity rarity) {
+      super(rarity);
       setWeaponType(globalConstraints.getPredicate(ENbkWeaponType.class));
-      setQuality(globalConstraints.getPredicate(ENbkQuality.class));
+      setQuality(rarity);
     }
 
-    private void setQuality(Predicate<ENbkQuality> predicate) {
-      quality = selectRandomItemType(ENbkQuality.values(), predicate);
-      rarities.add(quality);
+    private void setQuality(ERarity rarity) {
+      quality = ENbkQuality.qualityMap.get(rarity);
     }
 
     private void setWeaponType(Predicate<ENbkWeaponType> predicate) {
-      weaponType = selectRandomItemType(ENbkWeaponType.values(), predicate);
+      weaponType = ItemUtils.selectRandomItemType(ENbkWeaponType.values(), predicate);
     }
 
     @Contract(" -> !null")

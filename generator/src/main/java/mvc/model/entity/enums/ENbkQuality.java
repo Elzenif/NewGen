@@ -9,7 +9,12 @@ import utils.french.FrenchGenderAdjective;
 import utils.french.FrenchNeutralAdjective;
 import utils.french.FrenchString;
 
+import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Germain on 16/06/2016.
@@ -54,6 +59,9 @@ public enum ENbkQuality implements ItemType {
     return (FrenchAdjective) MathUtils.chooseRandom(names);
   }
 
+  public static final EnumMap<ERarity, ENbkQuality> qualityMap = new EnumMap<>(
+          Stream.of(ENbkQuality.values()).collect(Collectors.toMap(ENbkQuality::getRarity, Function.identity()))
+  );
 
   private static class NbkQualityBuilder extends ItemTypeBuilder {
 

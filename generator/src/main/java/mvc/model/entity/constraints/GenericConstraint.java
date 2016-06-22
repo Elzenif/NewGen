@@ -1,5 +1,6 @@
 package mvc.model.entity.constraints;
 
+import mvc.model.entity.utils.HasRarity;
 import mvc.model.entity.utils.ItemType;
 
 import java.util.function.Predicate;
@@ -8,7 +9,7 @@ import java.util.function.Predicate;
  * Created by Germain on 11/06/2016.
  */
 @FunctionalInterface
-public interface GenericConstraint<E extends Enum<E> & ItemType> {
+public interface GenericConstraint<E extends Enum<E> & HasRarity> {
 
   Predicate<E> getPredicate();
 
