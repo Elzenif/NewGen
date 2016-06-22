@@ -12,6 +12,5 @@ abstract class PanelRow extends JPanel {
     FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP);
     flowLayout.setAlignOnBaseline(true);
     setLayout(flowLayout);
-//    setBorder(BorderFactory.createTitledBorder(""));
   }
 }

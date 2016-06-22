@@ -139,7 +139,7 @@ public enum ENbkWeaponType implements ItemType {
       return nbHands;
     }
 
-    public boolean getPrintNbHands() {
+    boolean getPrintNbHands() {
       return printNbHands;
     }
   }

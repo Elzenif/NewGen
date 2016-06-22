@@ -7,6 +7,7 @@ import mvc.model.entity.constraints.NbkNbHandsConstraint;
 import mvc.model.entity.constraints.NbkQualityConstraint;
 import mvc.model.entity.enums.ENbkQuality;
 import mvc.model.entity.enums.ENbkWeaponType;
+import mvc.view.commons.ConstraintPanel;
 import mvc.view.entity.EntityResultRow;
 
 import javax.swing.BoxLayout;
@@ -24,14 +25,14 @@ import static utils.TextFieldUtils.createTwoDigitsField;
  */
 public class NbkWeaponOptionRow extends NbkEntityOptionRow {
 
-  private final JPanel nbHandsPanel;
+  private final ConstraintPanel nbHandsPanel;
   private final ButtonGroup nbHandsButtonGroup;
   private final EnumMap<NbkNbHandsConstraint, JRadioButton> nbHandsButtons;
   private final JRadioButton noHandButton;
   private final JRadioButton oneHandButton;
   private final JRadioButton twoHandsButton;
 
-  private final JPanel qualityPanel;
+  private final ConstraintPanel qualityPanel;
   private final JFormattedTextField qualityTextField;
 
   private final JButton generateItemButton;
@@ -50,35 +51,31 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
     nbHandsButtons.put(NbkNbHandsConstraint.ONE_HAND, oneHandButton);
     nbHandsButtons.put(NbkNbHandsConstraint.TWO_HANDS, twoHandsButton);
     nbHandsButtonGroup = new ButtonGroup();
-    nbHandsPanel = new JPanel();
+    nbHandsPanel = new ConstraintPanel();
     nbHandsPanel.setLayout(new BoxLayout(nbHandsPanel, BoxLayout.Y_AXIS));
-    constraintComponents.add(nbHandsPanel);
     nbHandsButtons.values().stream().forEach(rb -> {
-      constraintComponents.add(rb);
       nbHandsButtonGroup.add(rb);
       nbHandsPanel.add(rb);
     });
-    add(nbHandsPanel);
+    constraintPanel.add(nbHandsPanel);
     globalConstraints.put(ENbkWeaponType.class, NbkNbHandsConstraint.class, NbkNbHandsConstraint.NO_CONSTRAINT);
 
     // quality constraints
     qualityTextField = createTwoDigitsField();
-    constraintComponents.add(qualityTextField);
     qualityTextField.setToolTipText("Put a D100 roll result. The lower the result, the better the weapon");
-    qualityPanel = new JPanel();
-    constraintComponents.add(qualityPanel);
+    qualityPanel = new ConstraintPanel();
     qualityPanel.setLayout(new BoxLayout(qualityPanel, BoxLayout.Y_AXIS));
     qualityPanel.add(qualityTextField);
-    add(qualityPanel);
+    constraintPanel.add(qualityPanel);
     globalConstraints.put(ENbkQuality.class, NbkQualityConstraint.class, NbkQualityConstraint.NO_CONSTRAINT);
+
+    add(constraintPanel);
 
     generateItemButton = new JButton("Generate");
     add(generateItemButton);
 
     updateConstraintsAbility(false);
   }
-
-  // TODO: 18/06/2016  create a constraint panel class to automatically add components to the list
 
   @Override
   public void setControllers(EntityResultRow entityResultRow) {
@@ -95,9 +92,5 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
 
   public void updateQualityConstraint(NbkQualityConstraint qualityConstraint) {
     globalConstraints.put(ENbkQuality.class, NbkQualityConstraint.class, qualityConstraint);
-  }
-
-  public JFormattedTextField getQualityTextField() {
-    return qualityTextField;
   }
 }

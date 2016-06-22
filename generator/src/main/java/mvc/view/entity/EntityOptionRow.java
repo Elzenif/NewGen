@@ -3,19 +3,19 @@ package mvc.view.entity;
 import mvc.controller.entity.ConstraintsItemListener;
 import mvc.model.entity.constraints.GlobalConstraints;
 import mvc.model.entity.game.Game;
+import mvc.view.commons.Constants;
+import mvc.view.commons.ConstraintPanel;
 import mvc.view.commons.OptionRow;
 import utils.MathUtils;
 import utils.StringUtils;
 
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
-import java.util.LinkedList;
-import java.util.List;
+import java.awt.FlowLayout;
 
 /**
  * Created by Germain on 05/06/2016.
@@ -31,10 +31,10 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
 
   private final JLabel infoLabel;
 
-  private final JPanel constraintsPanel;
+  private final JPanel constraintsCheckBoxPanel;
   private final JCheckBox constraintsCheckBox;
-  private final JLabel constraintsLabel;
-  protected final List<JComponent> constraintComponents;
+  private final JLabel constraintsCheckBoxLabel;
+  protected final ConstraintPanel constraintPanel;
   protected final GlobalConstraints globalConstraints;
 
   protected EntityOptionRow(IAvailableItem availableItem, S game) {
@@ -50,16 +50,17 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     add(infoLabel);
 
     // globalConstraints
-    constraintsLabel = new JLabel("constraints");
-    constraintsLabel.setAlignmentX(CENTER_ALIGNMENT);
+    constraintsCheckBoxLabel = new JLabel("constraints");
+    constraintsCheckBoxLabel.setAlignmentX(CENTER_ALIGNMENT);
     constraintsCheckBox = new JCheckBox();
     constraintsCheckBox.setAlignmentX(CENTER_ALIGNMENT);
-    constraintsPanel = new JPanel();
-    constraintsPanel.setLayout(new BoxLayout(constraintsPanel, BoxLayout.Y_AXIS));
-    constraintsPanel.add(constraintsLabel);
-    constraintsPanel.add(constraintsCheckBox);
-    add(constraintsPanel);
-    constraintComponents = new LinkedList<>();
+    constraintsCheckBoxPanel = new JPanel();
+    constraintsCheckBoxPanel.setLayout(new BoxLayout(constraintsCheckBoxPanel, BoxLayout.Y_AXIS));
+    constraintsCheckBoxPanel.add(constraintsCheckBoxLabel);
+    constraintsCheckBoxPanel.add(constraintsCheckBox);
+    add(constraintsCheckBoxPanel);
+    constraintPanel = new ConstraintPanel();
+    constraintPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
     globalConstraints = new GlobalConstraints();
   }
 
@@ -81,7 +82,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   }
 
   public void updateConstraintsAbility(boolean checkBoxSelected) {
-    constraintComponents.stream().forEach(jc -> jc.setEnabled(checkBoxSelected));
+    constraintPanel.setEnabled(checkBoxSelected);
   }
 
 }
