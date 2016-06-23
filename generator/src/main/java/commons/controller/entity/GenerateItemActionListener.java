@@ -8,6 +8,7 @@ import commons.model.entity.results.EItemResultRarity;
 import commons.model.entity.results.ItemResult;
 import commons.model.entity.utils.ERarity;
 import commons.model.entity.utils.ItemUtils;
+import commons.utils.exception.NoAvailableItemTypeException;
 import commons.utils.exception.WrongClassException;
 import commons.view.entity.EntityOptionRow;
 import commons.view.entity.EntityResultRow;
@@ -55,12 +56,18 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
   }
 
   private ItemResult generateResult(GlobalConstraints globalConstraints) {
-    ERarity rarity = ItemUtils.selectRandomItemType(ERarity.values(),
-            globalConstraints.getPredicate(ERarity.class, RarityConstraint.class));
-    Item<T> item = generate(globalConstraints, rarity);
+    ERarity rarity;
+    try {
+      rarity = ItemUtils.selectRandomRarity(ERarity.values(),
+              globalConstraints.getPredicate(ERarity.class, RarityConstraint.class));
+    } catch (NoAvailableItemTypeException e) {
+      e.printStackTrace();
+      rarity = ERarity.COMMON;
+    }
+    Item item = generate(globalConstraints, rarity);
     return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
   }
 
-  protected abstract Item<T> generate(GlobalConstraints globalConstraints, ERarity rarity);
+  protected abstract Item generate(GlobalConstraints globalConstraints, ERarity rarity);
 
 }

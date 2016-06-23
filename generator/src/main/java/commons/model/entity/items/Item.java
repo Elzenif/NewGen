@@ -20,6 +20,7 @@ public abstract class Item<T extends Game> implements HasRarity {
     return rarity;
   }
 
+
   protected abstract static class ItemBuilder {
 
     protected final ERarity rarity;
@@ -31,5 +32,7 @@ public abstract class Item<T extends Game> implements HasRarity {
     public ERarity getRarity() {
       return rarity;
     }
+
+    protected abstract Item build();
   }
 }

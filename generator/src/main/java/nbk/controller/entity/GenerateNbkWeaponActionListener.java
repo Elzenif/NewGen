@@ -4,9 +4,12 @@ import commons.controller.entity.GenerateItemActionListener;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.items.Item;
 import commons.model.entity.utils.ERarity;
+import commons.utils.MathUtils;
+import commons.utils.exception.NoAvailableItemTypeException;
 import commons.view.entity.EntityResultRow;
 import nbk.model.entity.game.NbkGame;
-import nbk.model.entity.items.NbkWeapon;
+import nbk.model.entity.items.NbkPredefinedWeapon;
+import nbk.model.entity.items.NbkRGWeapon;
 import nbk.view.entity.NbkWeaponOptionRow;
 
 /**
@@ -19,7 +22,34 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
   }
 
   @Override
-  protected Item<NbkGame> generate(GlobalConstraints globalConstraints, ERarity rarity) {
-    return NbkWeapon.create(globalConstraints, rarity);
+  protected Item generate(GlobalConstraints globalConstraints, ERarity rarity) {
+    if (MathUtils.random(1, 10) == 1) {
+      return generatePW(globalConstraints, rarity);
+    } else {
+      return generateRGW(globalConstraints, rarity);
+    }
+  }
+
+  private Item generatePW(GlobalConstraints globalConstraints, ERarity rarity) {
+    try {
+      return NbkPredefinedWeapon.create(globalConstraints, rarity);
+    } catch (NoAvailableItemTypeException e) {
+      // if no one fits the constraints, generate a random weapon anyway
+      return generateRGW(globalConstraints, rarity);
+    }
+  }
+
+  private Item generateRGW(GlobalConstraints globalConstraints, ERarity rarity) {
+    try {
+      return NbkRGWeapon.create(globalConstraints, rarity);
+    } catch (NoAvailableItemTypeException e) {
+      e.printStackTrace();
+      return new Item(ERarity.COMMON) {
+        @Override
+        public String toString() {
+          return "No weapon available with given conditions";
+        }
+      };
+    }
   }
 }

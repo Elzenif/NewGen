@@ -7,9 +7,9 @@ import commons.utils.MathUtils;
 import commons.utils.french.FrenchAdjective;
 import commons.utils.french.FrenchGenderAdjective;
 import commons.utils.french.FrenchNeutralAdjective;
-import commons.utils.french.FrenchString;
 
 import java.util.EnumMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  * Created by Germain on 16/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkQuality implements ItemType {
+public enum ENbkQuality implements ItemType<FrenchAdjective> {
 
   MAUVAIS(new NbkQualityBuilder()
           .setGenderAdjective("grossier", "grossière")
@@ -34,13 +34,13 @@ public enum ENbkQuality implements ItemType {
           .setNeutralAdjective("de bonne qualité", "de bonne facture")
           .setRarity(ERarity.RARE)),
   ARTISAN_RENOMME(new NbkQualityBuilder()
-          .setNeutralAdjective("d'artisan renommé")
+          .setNeutralAdjective("d'artisan renommé", "de luxe")
           .setRarity(ERarity.EPIC)),
   DURANDIL(new NbkQualityBuilder()
           .setNeutralAdjective("Durandil(TM)")
           .setRarity(ERarity.LEGENDARY));
 
-  private final List<FrenchString> names;
+  private final List<FrenchAdjective> names;
   private final ERarity rarity;
 
   ENbkQuality(NbkQualityBuilder builder) {
@@ -55,30 +55,48 @@ public enum ENbkQuality implements ItemType {
 
   @Override
   public FrenchAdjective getName() {
-    return (FrenchAdjective) MathUtils.chooseRandom(names);
+    return MathUtils.chooseRandom(names);
   }
 
-  public static final EnumMap<ERarity, ENbkQuality> qualityMap = new EnumMap<>(
+  public static final EnumMap<ERarity, ENbkQuality> QUALITY_MAP = new EnumMap<>(
           Stream.of(ENbkQuality.values()).collect(Collectors.toMap(ENbkQuality::getRarity, Function.identity()))
   );
 
-  private static class NbkQualityBuilder extends ItemTypeBuilder {
+  private static class NbkQualityBuilder implements ItemTypeBuilder {
 
-    private NbkQualityBuilder setNeutralAdjective(String... names) {
+    List<FrenchAdjective> names = new LinkedList<>();
+    ERarity rarity;
+
+    NbkQualityBuilder setNeutralAdjective(String... names) {
       for (String name : names) {
         addName(new FrenchNeutralAdjective(name));
       }
       return this;
     }
 
-    private NbkQualityBuilder setGenderAdjective(String masculineForm, String feminineForm) {
+    NbkQualityBuilder setGenderAdjective(String masculineForm, String feminineForm) {
       addName(new FrenchGenderAdjective(masculineForm, feminineForm));
       return this;
     }
 
+    void addName(FrenchAdjective name) {
+      names.add(name);
+    }
+
     @Override
-    protected NbkQualityBuilder setRarity(ERarity rarity) {
-      return (NbkQualityBuilder) super.setRarity(rarity);
+    public NbkQualityBuilder setRarity(ERarity rarity) {
+      this.rarity = rarity;
+      return this;
+    }
+
+    @Override
+    public List<FrenchAdjective> getNames() {
+      return names;
+    }
+
+    @Override
+    public ERarity getRarity() {
+      return rarity;
     }
   }
 }

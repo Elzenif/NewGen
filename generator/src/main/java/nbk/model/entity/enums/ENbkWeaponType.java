@@ -5,16 +5,16 @@ import commons.model.entity.utils.ItemType;
 import commons.model.entity.utils.ItemTypeBuilder;
 import commons.utils.MathUtils;
 import commons.utils.french.FrenchNoun;
-import commons.utils.french.FrenchString;
 import commons.utils.french.Gender;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by Germain on 04/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkWeaponType implements ItemType {
+public enum ENbkWeaponType implements ItemType<FrenchNoun> {
 
   LAME_COURTE(new NbKWeaponTypeBuilder()
           .setMasculineNouns("poignard")
@@ -68,7 +68,7 @@ public enum ENbkWeaponType implements ItemType {
           .setRarity(ERarity.UNCOMMON)
           .twoHands(false));
 
-  private final List<FrenchString> names;
+  private final List<FrenchNoun> names;
   private final ERarity rarity;
   private final int nbHands;
   private final boolean printNbHands;
@@ -91,7 +91,7 @@ public enum ENbkWeaponType implements ItemType {
 
   @Override
   public FrenchNoun getName() {
-    FrenchNoun noun = new FrenchNoun((FrenchNoun) MathUtils.chooseRandom(names));
+    FrenchNoun noun = new FrenchNoun(MathUtils.chooseRandom(names));
     if (printNbHands) {
       String s = nbHands == 2 ? "s" : "";
       noun.addString("à " + nbHands + " main" + s);
@@ -99,28 +99,35 @@ public enum ENbkWeaponType implements ItemType {
     return noun;
   }
 
-  private static class NbKWeaponTypeBuilder extends ItemTypeBuilder {
+  private static class NbKWeaponTypeBuilder implements ItemTypeBuilder {
 
-    private int nbHands = 0;
-    private boolean printNbHands = false;
+    final List<FrenchNoun> names = new LinkedList<>();
+    ERarity rarity;
+    int nbHands = 0;
+    boolean printNbHands = false;
 
-    private NbKWeaponTypeBuilder setMasculineNouns(String... names) {
+    NbKWeaponTypeBuilder setMasculineNouns(String... names) {
       for (String name : names) {
         addName(new FrenchNoun(Gender.MASCULINE, name));
       }
       return this;
     }
 
-    private NbKWeaponTypeBuilder setFeminineNouns(String... names) {
+    NbKWeaponTypeBuilder setFeminineNouns(String... names) {
       for (String name : names) {
         addName(new FrenchNoun(Gender.FEMININE, name));
       }
       return this;
     }
 
+    void addName(FrenchNoun name) {
+      names.add(name);
+    }
+
     @Override
-    protected NbKWeaponTypeBuilder setRarity(ERarity rarity) {
-      return (NbKWeaponTypeBuilder) super.setRarity(rarity);
+    public NbKWeaponTypeBuilder setRarity(ERarity rarity) {
+      this.rarity = rarity;
+      return this;
     }
 
     NbKWeaponTypeBuilder oneHand(boolean printNbHands) {
@@ -133,6 +140,16 @@ public enum ENbkWeaponType implements ItemType {
       this.nbHands = 2;
       this.printNbHands = printNbHands;
       return this;
+    }
+
+    @Override
+    public List<FrenchNoun> getNames() {
+      return names;
+    }
+
+    @Override
+    public ERarity getRarity() {
+      return rarity;
     }
 
     int getNbHands() {
