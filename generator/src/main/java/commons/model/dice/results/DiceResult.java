@@ -1,0 +1,36 @@
+package commons.model.dice.results;
+
+import commons.model.commons.Result;
+
+/**
+ * Created by Germain on 28/05/2016.
+ */
+public class DiceResult implements Result {
+
+  private final String result;
+  private final EDiceResultType eDiceResultType;
+  private final EDiceTestResult eDiceTestResult;
+
+  public DiceResult(String result, EDiceResultType eDiceResultType, EDiceTestResult eDiceTestResult) {
+    this.result = result;
+    this.eDiceResultType = eDiceResultType;
+    this.eDiceTestResult = eDiceTestResult;
+  }
+
+  public DiceResult(String result) {
+    this(result, EDiceResultType.NORMAL, EDiceTestResult.NO_TEST);
+  }
+
+  @Override
+  public String getRawResult() {
+    return result;
+  }
+
+  public EDiceResultType getEDiceResultType() {
+    return eDiceResultType;
+  }
+
+  public EDiceTestResult getEDiceTestResult() {
+    return eDiceTestResult;
+  }
+}
