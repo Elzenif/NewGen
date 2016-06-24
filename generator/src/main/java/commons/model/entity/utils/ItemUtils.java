@@ -4,6 +4,7 @@ import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -18,6 +19,15 @@ import static commons.utils.MathUtils.findFirstKeySuchAsIntegerIsLowerThanSumOfP
  */
 public class ItemUtils {
 
+  private static final Comparator<HasRarity> BY_RARITY = (i1, i2) -> i1.getRarity().compareTo(i2.getRarity());
+
+  public static <E extends Enum<E> & HasRarity> Stream<E> streamSortedByRarity(E[] values) {
+    return Stream.of(values).sorted(BY_RARITY);
+  }
+
+  public static <E extends Enum<E> & HasRarity> List<E> listSortedByRarity(E[] values) {
+    return Stream.of(values).sorted(BY_RARITY).collect(Collectors.toList());
+  }
 
   public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values, Predicate<E> predicate)
           throws NoAvailableItemTypeException {
@@ -36,21 +46,25 @@ public class ItemUtils {
 
   public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values)
           throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream(), p -> true));
+    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream()));
   }
 
   public static <E extends Enum<E> & HasRarity> E selectRandomRarity(List<E> values)
           throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(values.stream(), p -> true));
+    return selectRandomRarityFromMap(fillMap(values.stream()));
   }
 
   public static <E extends Enum<E> & HasRarity> E selectRandomRarity(Stream<E> values)
           throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(values, p -> true));
+    return selectRandomRarityFromMap(fillMap(values));
   }
 
   private static <E extends Enum<E> & HasRarity> Map<E, Integer> fillMap(Stream<E> values, Predicate<E> predicate) {
     return values.filter(predicate).collect(Collectors.toMap(Function.identity(), e -> e.getRarity().getProba()));
+  }
+
+  private static <E extends Enum<E> & HasRarity> Map<E, Integer> fillMap(Stream<E> values) {
+    return values.collect(Collectors.toMap(Function.identity(), e -> e.getRarity().getProba()));
   }
 
   private static <E extends Enum<E> & HasRarity> E selectRandomRarityFromMap(Map<E, Integer> itemTypes)

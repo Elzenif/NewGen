@@ -11,6 +11,7 @@ import nbk.model.entity.game.NbkGame;
 import nbk.model.entity.items.NbkPredefinedWeapon;
 import nbk.model.entity.items.NbkRGWeapon;
 import nbk.view.entity.NbkWeaponOptionRow;
+import org.jetbrains.annotations.Contract;
 
 /**
  * Created by Germain on 14/06/2016.
@@ -22,7 +23,7 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
   }
 
   @Override
-  protected Item generate(GlobalConstraints globalConstraints, ERarity rarity) {
+  protected Item generate(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
     if (MathUtils.random(1, 10) == 1) {
       return generatePW(globalConstraints, rarity);
     } else {
@@ -30,7 +31,7 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
     }
   }
 
-  private Item generatePW(GlobalConstraints globalConstraints, ERarity rarity) {
+  private Item generatePW(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
     try {
       return NbkPredefinedWeapon.create(globalConstraints, rarity);
     } catch (NoAvailableItemTypeException e) {
@@ -39,17 +40,8 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
     }
   }
 
-  private Item generateRGW(GlobalConstraints globalConstraints, ERarity rarity) {
-    try {
-      return NbkRGWeapon.create(globalConstraints, rarity);
-    } catch (NoAvailableItemTypeException e) {
-      e.printStackTrace();
-      return new Item(ERarity.COMMON) {
-        @Override
-        public String toString() {
-          return "No weapon available with given conditions";
-        }
-      };
-    }
+  @Contract("_, _ -> !null")
+  private Item generateRGW(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
+    return NbkRGWeapon.create(globalConstraints, rarity);
   }
 }

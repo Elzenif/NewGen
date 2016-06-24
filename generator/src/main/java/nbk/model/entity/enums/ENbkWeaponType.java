@@ -17,67 +17,79 @@ import java.util.List;
 public enum ENbkWeaponType implements ItemType<FrenchNoun> {
 
   LAME_COURTE(new NbKWeaponTypeBuilder()
-          .setMasculineNouns("poignard")
-          .setFeminineNouns("dague")
+          .setMasculineNouns("Poignard")
+          .setFeminineNouns("Dague")
           .setRarity(ERarity.COMMON)
           .oneHand(false)),
   LAME_1MAIN(new NbKWeaponTypeBuilder()
-          .setMasculineNouns("sabre")
-          .setFeminineNouns("épée", "rapière")
+          .setMasculineNouns("Sabre")
+          .setFeminineNouns("Epée", "Rapière")
           .setRarity(ERarity.COMMON)
           .oneHand(true)),
   LAME_2MAINS(new NbKWeaponTypeBuilder()
-          .setFeminineNouns("épée")
+          .setFeminineNouns("Epée")
           .setRarity(ERarity.COMMON)
           .twoHands(true)),
   HACHE_1MAIN(new NbKWeaponTypeBuilder()
-          .setFeminineNouns("hache")
+          .setFeminineNouns("Hache")
           .setRarity(ERarity.COMMON)
           .oneHand(true)),
   HACHE_JET(new NbKWeaponTypeBuilder()
-          .setFeminineNouns("hache de jet")
+          .setFeminineNouns("Hache de jet")
           .setRarity(ERarity.UNCOMMON)
           .oneHand(false)),
   HACHE_2MAINS(new NbKWeaponTypeBuilder()
-          .setFeminineNouns("hache")
+          .setFeminineNouns("Hache")
           .setRarity(ERarity.UNCOMMON)
           .twoHands(true)),
   MARTEAU_1MAIN(new NbKWeaponTypeBuilder()
-          .setMasculineNouns("marteau")
-          .setFeminineNouns("masse")
+          .setMasculineNouns("Marteau")
+          .setFeminineNouns("Masse")
           .setRarity(ERarity.UNCOMMON)
           .oneHand(true)),
   MARTEAU_2MAINS(new NbKWeaponTypeBuilder()
-          .setMasculineNouns("marteau")
+          .setMasculineNouns("Marteau")
           .setRarity(ERarity.UNCOMMON)
           .twoHands(true)),
   LANCE(new NbKWeaponTypeBuilder()
-          .setFeminineNouns("lance", "pique")
+          .setFeminineNouns("Lance", "Pique")
           .setRarity(ERarity.UNCOMMON)
           .twoHands(false)),
   JAVELOT(new NbKWeaponTypeBuilder()
-          .setMasculineNouns("javelot")
+          .setMasculineNouns("Javelot")
           .setRarity(ERarity.UNCOMMON)
           .oneHand(false)),
   ARC(new NbKWeaponTypeBuilder()
-          .setMasculineNouns("arc court", "arc long")
+          .setMasculineNouns("Arc court", "Arc long")
           .setRarity(ERarity.COMMON)
           .twoHands(false)),
-  ARBALETE(new NbKWeaponTypeBuilder()
-          .setFeminineNouns("arbalète")
+  FLECHE(new NbKWeaponTypeBuilder()
+          .setFeminineNouns("Flèche")
           .setRarity(ERarity.UNCOMMON)
-          .twoHands(false));
+          .oneHand(false)
+          .setQuantity(15)),
+  ARBALETE(new NbKWeaponTypeBuilder()
+          .setFeminineNouns("Arbalète")
+          .setRarity(ERarity.UNCOMMON)
+          .twoHands(false)),
+  CARREAU(new NbKWeaponTypeBuilder()
+          .setMasculineNouns("Carreau")
+          .setRarity(ERarity.RARE)
+          .oneHand(false)
+          .setQuantity(15));
 
   private final List<FrenchNoun> names;
   private final ERarity rarity;
   private final int nbHands;
   private final boolean printNbHands;
+  private final int quantity;
 
   ENbkWeaponType(NbKWeaponTypeBuilder builder) {
     this.names = builder.getNames();
     this.rarity = builder.getRarity();
     this.nbHands = builder.getNbHands();
     this.printNbHands = builder.getPrintNbHands();
+    this.quantity = builder.getQuantity();
   }
 
   @Override
@@ -99,12 +111,17 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
     return noun;
   }
 
+  public int getQuantity() {
+    return quantity;
+  }
+
   private static class NbKWeaponTypeBuilder implements ItemTypeBuilder {
 
     final List<FrenchNoun> names = new LinkedList<>();
     ERarity rarity;
     int nbHands = 0;
     boolean printNbHands = false;
+    int quantity = 1;
 
     NbKWeaponTypeBuilder setMasculineNouns(String... names) {
       for (String name : names) {
@@ -127,6 +144,11 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
     @Override
     public NbKWeaponTypeBuilder setRarity(ERarity rarity) {
       this.rarity = rarity;
+      return this;
+    }
+
+    NbKWeaponTypeBuilder setQuantity(int quantity) {
+      this.quantity = quantity;
       return this;
     }
 
@@ -158,6 +180,10 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
 
     boolean getPrintNbHands() {
       return printNbHands;
+    }
+
+    int getQuantity() {
+      return quantity;
     }
   }
 }

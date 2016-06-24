@@ -48,7 +48,8 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
             : new GlobalConstraints();
   }
 
-  private Collection<ItemResult> generateResults(int numberOfItems, GlobalConstraints globalConstraints) throws WrongClassException {
+  private Collection<ItemResult> generateResults(int numberOfItems, GlobalConstraints globalConstraints)
+          throws WrongClassException {
     List<ItemResult> results = new ArrayList<>(numberOfItems);
     IntStream.rangeClosed(1, entityOptionRow.getNumberOfItemsSelected())
             .forEach(i -> results.add(generateResult(globalConstraints)));
@@ -64,10 +65,15 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
       e.printStackTrace();
       rarity = ERarity.COMMON;
     }
-    Item item = generate(globalConstraints, rarity);
-    return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
+    try {
+      Item item = generate(globalConstraints, rarity);
+      return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
+    } catch (NoAvailableItemTypeException e) {
+      e.printStackTrace();
+      return new ItemResult("#####", EItemResultRarity.COM);
+    }
   }
 
-  protected abstract Item generate(GlobalConstraints globalConstraints, ERarity rarity);
+  protected abstract Item generate(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException;
 
 }

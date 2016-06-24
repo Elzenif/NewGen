@@ -13,7 +13,7 @@ abstract class NbkAbstractWeapon extends Item<Game> {
   final ENbkWeaponType weaponType;
 
   NbkAbstractWeapon(AbstractWeaponBuilder builder) {
-    super(builder.getRarity());
+    super(builder);
     this.weaponType = builder.weaponType;
   }
 
@@ -28,6 +28,11 @@ abstract class NbkAbstractWeapon extends Item<Game> {
 
     AbstractWeaponBuilder(ERarity rarity) {
       super(rarity);
+    }
+
+    @Override
+    public int getQuantity() {
+      return weaponType.getQuantity();
     }
   }
 }

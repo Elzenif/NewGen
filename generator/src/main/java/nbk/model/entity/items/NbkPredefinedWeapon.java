@@ -29,7 +29,7 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
 
   @Override
   public String toString() {
-    return predefinedWeapon.getName();
+    return printRandomQuantity() + predefinedWeapon.getName();
   }
 
   private static class PredefinedWeaponBuilder extends AbstractWeaponBuilder {

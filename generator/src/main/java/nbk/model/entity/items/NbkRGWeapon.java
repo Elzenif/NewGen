@@ -32,7 +32,7 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
   public String toString() {
     FrenchNoun noun = weaponType.getName();
     noun.addAdjective(quality.getName());
-    return noun.toString();
+    return printRandomQuantity() + noun.toString();
   }
 
   private NbkRGWeapon(RGWeaponBuilder builder) {
