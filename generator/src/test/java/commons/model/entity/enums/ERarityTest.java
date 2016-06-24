@@ -1,4 +1,4 @@
-package commons.model.entity.utils;
+package commons.model.entity.enums;
 
 import org.junit.Test;
 

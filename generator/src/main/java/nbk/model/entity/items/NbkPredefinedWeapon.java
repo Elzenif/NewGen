@@ -1,7 +1,8 @@
 package nbk.model.entity.items;
 
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.utils.ERarity;
+import commons.model.entity.enums.EMagic;
+import commons.model.entity.enums.ERarity;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 import nbk.model.entity.enums.ENbkPredefinedWeapon;
@@ -47,6 +48,11 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
               Stream.of(ENbkPredefinedWeapon.values())
                       .filter(weapon -> predicate.test(weapon.getWeaponType()))
                       .filter(weapon -> weapon.getRarity() == rarity));
+    }
+
+    @Override
+    public EMagic getMagic() {
+      return predefinedWeapon.getMagic();
     }
 
     @Override

@@ -1,7 +1,8 @@
 package nbk.model.entity.items;
 
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.utils.ERarity;
+import commons.model.entity.enums.EMagic;
+import commons.model.entity.enums.ERarity;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.utils.french.FrenchNoun;
@@ -57,6 +58,11 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
 
     void setQuality(ERarity rarity) {
       quality = ENbkQuality.QUALITY_MAP.get(rarity);
+    }
+
+    @Override
+    public EMagic getMagic() {
+      return EMagic.NOPE;
     }
 
     @Contract(" -> !null")

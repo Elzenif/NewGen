@@ -1,6 +1,6 @@
 package commons.model.entity.constraints;
 
-import commons.model.entity.utils.ERarity;
+import commons.model.entity.enums.ERarity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;

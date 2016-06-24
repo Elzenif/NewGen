@@ -1,6 +1,7 @@
 package nbk.model.entity.enums;
 
-import commons.model.entity.utils.ERarity;
+import commons.model.entity.enums.EMagic;
+import commons.model.entity.enums.ERarity;
 import commons.model.entity.utils.ItemType;
 import commons.model.entity.utils.ItemTypeBuilder;
 import commons.utils.MathUtils;
@@ -43,19 +44,23 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   POIGNARD_MIRFILU(new ENbkPredefinedWeaponBuilder()
           .setNames("Poignard d'Excellence de Mirfilu")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_COURTE)),
+          .setWeaponType(ENbkWeaponType.LAME_COURTE)
+          .isMagic()),
   POIGNARD_XELOSS(new ENbkPredefinedWeaponBuilder()
           .setNames("Poignard sacrificiel de Xeloss")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_COURTE)),
+          .setWeaponType(ENbkWeaponType.LAME_COURTE)
+          .isMagic()),
   DAGUE_TZINNTCH(new ENbkPredefinedWeaponBuilder()
           .setNames("Dague de Tzinntch")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_COURTE)),
+          .setWeaponType(ENbkWeaponType.LAME_COURTE)
+          .isMagic()),
   DAGUE_ELFIQUE(new ENbkPredefinedWeaponBuilder()
           .setNames("Dague elfique des temps anciens")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_COURTE)),
+          .setWeaponType(ENbkWeaponType.LAME_COURTE)
+          .isMagic()),
   // Lames 1 main
   RAPIERE_NOBLE(new ENbkPredefinedWeaponBuilder()
           .setNames("Rapière de noble pour frimer, poignée plaquée or")
@@ -64,11 +69,13 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   LAME_GLONZG(new ENbkPredefinedWeaponBuilder()
           .setNames("Lame d'excellence de Glonzg")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_1MAIN)),
+          .setWeaponType(ENbkWeaponType.LAME_1MAIN)
+          .isMagic()),
   SABRE_GUY(new ENbkPredefinedWeaponBuilder()
           .setNames("Sabre de Guy le Batailleur")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_1MAIN)),
+          .setWeaponType(ENbkWeaponType.LAME_1MAIN)
+          .isRelic()),
   SABRE_TRITHIL(new ENbkPredefinedWeaponBuilder()
           .setNames("Sabre en Trithil de Blaidh le Diurnambule")
           .setRarity(ERarity.LEGENDARY)
@@ -81,19 +88,23 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   EVENTREUSE(new ENbkPredefinedWeaponBuilder()
           .setNames("Eventreuse de Kjeulien-la-mule")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_2MAINS)),
+          .setWeaponType(ENbkWeaponType.LAME_2MAINS)
+          .isRelic()),
   EPEE_JUSTICE(new ENbkPredefinedWeaponBuilder()
           .setNames("Epée de justice Légendaire de Braav'")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_2MAINS)),
+          .setWeaponType(ENbkWeaponType.LAME_2MAINS)
+          .isMagic()),
   EPEE_VORPALE(new ENbkPredefinedWeaponBuilder()
           .setNames("Epée vorpale +3")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_2MAINS)),
+          .setWeaponType(ENbkWeaponType.LAME_2MAINS)
+          .isMagic()),
   EPEE_RUNIQUE(new ENbkPredefinedWeaponBuilder()
           .setNames("Epée runique +8 Souldrinker")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_2MAINS)),
+          .setWeaponType(ENbkWeaponType.LAME_2MAINS)
+          .isMagic()),
   // Haches 1 main
   HACHE_NAIN(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache 1 main artisan Nain")
@@ -102,23 +113,28 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   HACHE_DECAPITATION(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache de décapitation des Orcs")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)),
+          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)
+          .isMagic()),
   HACHE_NIOURGL(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache des Puruls de Niourgl")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)),
+          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)
+          .isMagic()),
   HACHE_GOLTOR(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache de Goltor")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)),
+          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)
+          .isRelic()),
   HACHE_KHORNETTOH(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache Démembreuse de Khornettoh")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)),
+          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)
+          .isMagic()),
   HACHE_BLIZZARD(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache Miraculeuse du Blizzard")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)),
+          .setWeaponType(ENbkWeaponType.HACHE_1MAIN)
+          .isMagic()),
   // Haches de jet
   HACHE_PIRATE(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache de jet des piates mauves")
@@ -127,7 +143,8 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   HACHE_FORGERON(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache de Jet du Grand Forgeron")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.HACHE_JET)),
+          .setWeaponType(ENbkWeaponType.HACHE_JET)
+          .isRelic()),
   // Haches 2 mains
   HACHE_CIMERIENNE(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache de combat cimérienne à double affûtage")
@@ -148,15 +165,18 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   HACHE_FEU(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache de Feu de Blizdand")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.HACHE_2MAINS)),
+          .setWeaponType(ENbkWeaponType.HACHE_2MAINS)
+          .isMagic()),
   HACHE_DEMON(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache Démoniaque de Makkedoh")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.HACHE_2MAINS)),
+          .setWeaponType(ENbkWeaponType.HACHE_2MAINS)
+          .isRelic()),
   HACHE_ANNIHILATION(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache d'Annihilation de Nyarlapalathep")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.HACHE_2MAINS)),
+          .setWeaponType(ENbkWeaponType.HACHE_2MAINS)
+          .isMagic()),
   // Marteaux 1 main
   MARTEAU_NAIN(new ENbkPredefinedWeaponBuilder()
           .setNames("Marteau d'artisan nain", "Masse d'artisan nain")
@@ -169,23 +189,28 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   MASSE_SLANOUSH(new ENbkPredefinedWeaponBuilder()
           .setNames("Masse du Destin de Slanoush")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
+          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)
+          .isMagic()),
   MARTEAU_SKELOSS(new ENbkPredefinedWeaponBuilder()
           .setNames("Marteau d'anesthésie de Skeloss")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
+          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)
+          .isMagic()),
   MARTEAU_PERES(new ENbkPredefinedWeaponBuilder()
           .setNames("Marteau des Pères Speteurs")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
+          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)
+          .isRelic()),
   MARTEAU_JAMBFER(new ENbkPredefinedWeaponBuilder()
           .setNames("Marteau Légendaire de Jambfer")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
+          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)
+          .isRelic()),
   MARTEAU_NIOURGL(new ENbkPredefinedWeaponBuilder()
           .setNames("Marteau Putréfiant de Niourgl")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
+          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)
+          .isMagic()),
   // Marteaux 2 mains
   MARTEAU_SYLDERIEN(new ENbkPredefinedWeaponBuilder()
           .setNames("Marteau de Guerre Syldérien")
@@ -198,7 +223,8 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   GURSTAKER(new ENbkPredefinedWeaponBuilder()
           .setNames("Gurstaker")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.MARTEAU_2MAINS)),
+          .setWeaponType(ENbkWeaponType.MARTEAU_2MAINS)
+          .isRelic()),
   // Lances
   LANCE_DROW(new ENbkPredefinedWeaponBuilder()
           .setNames("Lance de Bataille des Drows")
@@ -228,7 +254,8 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   JAVELOT_TANGO(new ENbkPredefinedWeaponBuilder()
           .setNames("Javelot du Tangorodrigue")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.JAVELOT)),
+          .setWeaponType(ENbkWeaponType.JAVELOT)
+          .isRelic()),
   // Arcs
   ARC_SYLVAIN(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc composite d'elfe sylvain (imitation)")
@@ -257,7 +284,8 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   ARC_YEMISOLD(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc long de Yemisold")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.ARC)),
+          .setWeaponType(ENbkWeaponType.ARC)
+          .isMagic()),
   ARC_SYLDERIEN(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc de puissance des Syldériens")
           .setRarity(ERarity.LEGENDARY)
@@ -286,26 +314,31 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   FLECHE_FEU(new ENbkPredefinedWeaponBuilder()
           .setNames("Flèche de Blazing Fire")
           .setRarity(ERarity.RARE)
-          .setWeaponType(ENbkWeaponType.FLECHE)),
+          .setWeaponType(ENbkWeaponType.FLECHE)
+          .isMagic()),
   FLECHE_DLUL(new ENbkPredefinedWeaponBuilder()
           .setNames("Flèche Hypodermique de Dlul")
           .setRarity(ERarity.EPIC)
-          .setWeaponType(ENbkWeaponType.FLECHE)),
+          .setWeaponType(ENbkWeaponType.FLECHE)
+          .isMagic()),
   FLECHE_SLANOUSH(new ENbkPredefinedWeaponBuilder()
           .setNames("Flèche Lubrique de Slanoush")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.FLECHE)),
+          .setWeaponType(ENbkWeaponType.FLECHE)
+          .isMagic()),
   FLECHE_THOLSADUM(new ENbkPredefinedWeaponBuilder()
           .setNames("Flèche Ophidienne de Tholsadüm")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.FLECHE)),
+          .setWeaponType(ENbkWeaponType.FLECHE)
+          .isMagic()),
   FLECHE_KHORNETTOH(new ENbkPredefinedWeaponBuilder()
           .setNames("Flèche Malveillante de Khornettoh")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.FLECHE)),
+          .setWeaponType(ENbkWeaponType.FLECHE)
+          .isMagic()),
   // Arbalète
   ARBALETE_GOBELIN(new ENbkPredefinedWeaponBuilder()
-          .setNames("Arbalète de goblin")
+          .setNames("Arbalète de gobelin")
           .setRarity(ERarity.UNCOMMON)
           .setWeaponType(ENbkWeaponType.ARBALETE)),
   ARBALETE_FRIMEUR(new ENbkPredefinedWeaponBuilder()
@@ -319,24 +352,29 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   ARBALETE_VONTORZ(new ENbkPredefinedWeaponBuilder()
           .setNames("Arbalète double de Vontorz")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.ARBALETE)),
+          .setWeaponType(ENbkWeaponType.ARBALETE)
+          .isRelic()),
   // Carreaux
   CARREAU_DLUL(new ENbkPredefinedWeaponBuilder()
           .setNames("Carreau de Dlul")
           .setRarity(ERarity.EPIC)
-          .setWeaponType(ENbkWeaponType.CARREAU)),
+          .setWeaponType(ENbkWeaponType.CARREAU)
+          .isMagic()),
   CARREAU_SLANOUSH(new ENbkPredefinedWeaponBuilder()
           .setNames("Carreau Vicelard de Slanoush")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.CARREAU)),
+          .setWeaponType(ENbkWeaponType.CARREAU)
+          .isMagic()),
   CARREAU_GZOR(new ENbkPredefinedWeaponBuilder()
           .setNames("Carreau Maudit des troupes de Gzor")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.CARREAU)),
+          .setWeaponType(ENbkWeaponType.CARREAU)
+          .isMagic()),
   CARREAU_KHORNETTOH(new ENbkPredefinedWeaponBuilder()
           .setNames("Carreau d'Assaut de Khornettoh")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.CARREAU)),
+          .setWeaponType(ENbkWeaponType.CARREAU)
+          .isMagic()),
   // Armes bizarres
   SARBACANE(new ENbkPredefinedWeaponBuilder()
           .setNames("Sarbacane")
@@ -353,7 +391,8 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   LANCE_PIERRE(new ENbkPredefinedWeaponBuilder()
           .setNames("Lance-pierre Mythique D'hyshoul")
           .setRarity(ERarity.EPIC)
-          .setWeaponType(ENbkWeaponType.ARC)),
+          .setWeaponType(ENbkWeaponType.ARC)
+          .isRelic()),
   FAUCILLE_NIOURLG(new ENbkPredefinedWeaponBuilder()
           .setNames("Faucille Démentielle de Niourgl")
           .setRarity(ERarity.LEGENDARY)
@@ -363,9 +402,10 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
           .setRarity(ERarity.LEGENDARY)
           .setWeaponType(ENbkWeaponType.HACHE_JET)),
   COUPERET(new ENbkPredefinedWeaponBuilder()
-          .setNames("Couperet du Bourreau D'Ukkuh")
+          .setNames("Couperet du Bourreau Velu D'Ukkuh")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_2MAINS)),
+          .setWeaponType(ENbkWeaponType.LAME_2MAINS)
+          .isRelic()),
   FLAGELLATEUR(new ENbkPredefinedWeaponBuilder()
           .setNames("Flagellateur d'Oboulos")
           .setRarity(ERarity.LEGENDARY)
@@ -377,20 +417,24 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
   DOUBLES_SERRES(new ENbkPredefinedWeaponBuilder()
           .setNames("Doubles Serres du Moine Tatoncouto")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_COURTE)),
+          .setWeaponType(ENbkWeaponType.LAME_COURTE)
+          .isRelic()),
   FAUX(new ENbkPredefinedWeaponBuilder()
           .setNames("Faux Léthale de Tormentor")
           .setRarity(ERarity.LEGENDARY)
-          .setWeaponType(ENbkWeaponType.LAME_2MAINS));
+          .setWeaponType(ENbkWeaponType.LAME_2MAINS)
+          .isRelic());
 
   private final List<String> names;
   private final ERarity rarity;
   private final ENbkWeaponType weaponType;
+  private final EMagic magic;
 
   ENbkPredefinedWeapon(ENbkPredefinedWeaponBuilder builder) {
     names = builder.getNames();
     rarity = builder.getRarity();
     weaponType = builder.getWeaponType();
+    magic = builder.getMagic();
   }
 
   @Override
@@ -407,11 +451,17 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
     return weaponType;
   }
 
+  public EMagic getMagic() {
+    return magic;
+  }
+
+
   private static class ENbkPredefinedWeaponBuilder implements ItemTypeBuilder {
 
     List<String> names = new LinkedList<>();
     ERarity rarity;
     ENbkWeaponType weaponType;
+    EMagic magic = EMagic.NOPE;
 
     ENbkPredefinedWeaponBuilder setNames(String... names) {
       Collections.addAll(this.names, names);
@@ -429,6 +479,16 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
       return this;
     }
 
+    ENbkPredefinedWeaponBuilder isMagic() {
+      magic = EMagic.MAGIC;
+      return this;
+    }
+
+    ENbkPredefinedWeaponBuilder isRelic() {
+      magic = EMagic.RELIC;
+      return this;
+    }
+
     @Override
     public List<String> getNames() {
       return names;
@@ -441,6 +501,10 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
 
     ENbkWeaponType getWeaponType() {
       return weaponType;
+    }
+
+    EMagic getMagic() {
+      return magic;
     }
   }
 }

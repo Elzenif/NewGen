@@ -2,11 +2,11 @@ package commons.controller.entity;
 
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.constraints.RarityConstraint;
+import commons.model.entity.enums.ERarity;
 import commons.model.entity.game.Game;
 import commons.model.entity.items.Item;
 import commons.model.entity.results.EItemResultRarity;
 import commons.model.entity.results.ItemResult;
-import commons.model.entity.utils.ERarity;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.utils.exception.WrongClassException;

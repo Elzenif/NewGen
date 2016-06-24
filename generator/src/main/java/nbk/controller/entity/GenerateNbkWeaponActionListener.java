@@ -2,8 +2,8 @@ package nbk.controller.entity;
 
 import commons.controller.entity.GenerateItemActionListener;
 import commons.model.entity.constraints.GlobalConstraints;
+import commons.model.entity.enums.ERarity;
 import commons.model.entity.items.Item;
-import commons.model.entity.utils.ERarity;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.view.entity.EntityResultRow;

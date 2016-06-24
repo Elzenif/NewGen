@@ -1,5 +1,7 @@
 package commons.model.entity.utils;
 
+import commons.model.entity.enums.ERarity;
+
 import java.util.List;
 
 /**

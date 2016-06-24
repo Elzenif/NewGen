@@ -1,6 +1,6 @@
 package nbk.model.entity.enums;
 
-import commons.model.entity.utils.ERarity;
+import commons.model.entity.enums.ERarity;
 import commons.model.entity.utils.ItemType;
 import commons.model.entity.utils.ItemTypeBuilder;
 import commons.utils.MathUtils;

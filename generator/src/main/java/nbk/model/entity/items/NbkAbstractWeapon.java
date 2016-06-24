@@ -1,8 +1,8 @@
 package nbk.model.entity.items;
 
+import commons.model.entity.enums.ERarity;
 import commons.model.entity.game.Game;
 import commons.model.entity.items.Item;
-import commons.model.entity.utils.ERarity;
 import nbk.model.entity.enums.ENbkWeaponType;
 
 /**

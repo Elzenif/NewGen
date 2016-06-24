@@ -1,7 +1,8 @@
 package nbk.model.entity.items;
 
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.utils.ERarity;
+import commons.model.entity.enums.EMagic;
+import commons.model.entity.enums.ERarity;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 import nbk.model.entity.constraints.NbkNbHandsConstraint;
@@ -66,6 +67,21 @@ public class NbkRGWeaponTest {
     assertTrue("The weapon quality sould be a ENbkQuality enum : " + weapon.getQuality().toString(),
             qualities.contains(weapon.getQuality()));
   }
+
+  @Test
+  public void testWeaponMagicIsNotNull() throws NoAvailableItemTypeException {
+    weapon = NbkRGWeapon.create(globalConstraints, rarity);
+    assertNotNull("The weapon magic should not be null", weapon.getMagic());
+  }
+
+  @Test
+  public void testWeaponMagicIsValid() throws NoAvailableItemTypeException {
+    weapon = NbkRGWeapon.create(globalConstraints, rarity);
+    Set<EMagic> qualities = new HashSet<>(Arrays.asList(EMagic.values()));
+    assertTrue("The weapon quality sould be a EMagic enum : " + weapon.getMagic().toString(),
+            qualities.contains(weapon.getMagic()));
+  }
+
 
   @Test
   public void testWeaponToStringIsNotNull() throws NoAvailableItemTypeException {

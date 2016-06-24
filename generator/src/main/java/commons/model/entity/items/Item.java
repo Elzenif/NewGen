@@ -1,7 +1,8 @@
 package commons.model.entity.items;
 
+import commons.model.entity.enums.EMagic;
+import commons.model.entity.enums.ERarity;
 import commons.model.entity.game.Game;
-import commons.model.entity.utils.ERarity;
 import commons.model.entity.utils.HasRarity;
 import commons.utils.MathUtils;
 
@@ -12,10 +13,12 @@ public abstract class Item<T extends Game> implements HasRarity {
 
   private final ERarity rarity;
   private final int quantity;
+  private final EMagic magic;
 
   protected Item(ItemBuilder builder) {
-    this.rarity = builder.getRarity();
-    this.quantity = builder.getQuantity();
+    rarity = builder.getRarity();
+    quantity = builder.getQuantity();
+    magic = builder.getMagic();
   }
 
   @Override
@@ -27,6 +30,9 @@ public abstract class Item<T extends Game> implements HasRarity {
     return (quantity == 1) ? "" : "(" + MathUtils.random(quantity / 2, quantity) + ") ";
   }
 
+  public EMagic getMagic() {
+    return magic;
+  }
 
   protected abstract static class ItemBuilder {
 
@@ -42,6 +48,9 @@ public abstract class Item<T extends Game> implements HasRarity {
 
     public abstract int getQuantity();
 
+    public abstract EMagic getMagic();
+
     protected abstract Item build();
+
   }
 }

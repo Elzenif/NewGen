@@ -19,6 +19,7 @@ public class ENbkPredefinedWeaponTest {
               assertNotNull(w.getName());
               assertNotNull(w.getRarity());
               assertNotNull(w.getWeaponType());
+              assertNotNull(w.getMagic());
             }
     );
   }
