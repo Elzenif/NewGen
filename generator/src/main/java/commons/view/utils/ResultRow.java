@@ -17,10 +17,10 @@ public abstract class ResultRow<T extends Result> extends PanelRow {
   private final List<JLabel> resultsToPrint;
 
   protected ResultRow(String labelText) {
-    super();
+    super(Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP);
 
     infoLabel = new JLabel(labelText + " : ");
-    infoLabel.setFont(new Font(null, Font.BOLD, 12));
+    infoLabel.setFont(new Font(Constants.FONT_NAME, Font.BOLD, Constants.FONT_SIZE));
     add(infoLabel);
 
     resultsToPrint = new LinkedList<>();
@@ -31,18 +31,25 @@ public abstract class ResultRow<T extends Result> extends PanelRow {
     resultsToPrint.clear();
   }
 
-  @SuppressWarnings("unchecked")
   public void setResultsToPrint(Collection<T> results) {
-    for (Result result: results) {
+    JLabel separatorLabel = new JLabel("|");
+    for (T result: results) {
       JLabel resultToPrint = new JLabel(result.getRawResult());
-      makePretty(resultToPrint, (T) result);
+      makePretty(resultToPrint, result);
       resultsToPrint.add(resultToPrint);
       add(resultToPrint);
+      separatorLabel = new JLabel("|");
+      resultsToPrint.add(separatorLabel);
+      add(separatorLabel);
     }
+    remove(separatorLabel);
     repaint();
     revalidate();
   }
 
-  protected abstract void makePretty(JLabel resultToPrint, T result);
+  private void makePretty(JLabel resultToPrint, T result) {
+    resultToPrint.setFont(result.getFont());
+    resultToPrint.setForeground(result.getColor());
+  }
 
 }

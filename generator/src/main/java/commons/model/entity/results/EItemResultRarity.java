@@ -7,14 +7,13 @@ import commons.utils.ColorUtils;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * Created by Germain on 08/06/2016.
  */
-public enum  EItemResultRarity implements HasRarity {
+enum  EItemResultRarity implements HasRarity {
 
   COM(ERarity.COMMON, ColorUtils.BLACK),
   UNC(ERarity.UNCOMMON, ColorUtils.GREEN),
@@ -40,12 +39,12 @@ public enum  EItemResultRarity implements HasRarity {
     return rarity;
   }
 
-  private static final Map<ERarity, EItemResultRarity> MAP = new HashMap<>(
+  private static final Map<ERarity, Color> MAP = new HashMap<>(
           Stream.of(EItemResultRarity.values()).
-                  collect(Collectors.toMap(EItemResultRarity::getRarity, Function.identity()))
+                  collect(Collectors.toMap(EItemResultRarity::getRarity, EItemResultRarity::getColor))
   );
 
-  public static EItemResultRarity getItemResultRarity(ERarity rarity) {
+  public static Color getItemResultColor(ERarity rarity) {
     return MAP.get(rarity);
   }
 

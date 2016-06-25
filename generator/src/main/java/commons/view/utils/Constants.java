@@ -10,4 +10,7 @@ public class Constants {
 
   public static final int JPANEL_HGAP = 15;
   public static final int JPANEL_VGAP = 15;
+
+  public static final int FONT_SIZE = 12;
+  public static final String FONT_NAME = "Source Code Pro";
 }

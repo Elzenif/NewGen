@@ -20,7 +20,8 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
           .setMasculineNouns("Poignard")
           .setFeminineNouns("Dague")
           .setRarity(ERarity.COMMON)
-          .oneHand(false)),
+          .oneHand(false)
+          .isDistance()),
   LAME_1MAIN(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Sabre")
           .setFeminineNouns("Epée", "Rapière")
@@ -37,7 +38,8 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
   HACHE_JET(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Hache de jet")
           .setRarity(ERarity.UNCOMMON)
-          .oneHand(false)),
+          .oneHand(false)
+          .isDistance()),
   HACHE_2MAINS(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Hache")
           .setRarity(ERarity.UNCOMMON)
@@ -58,47 +60,45 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
   JAVELOT(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Javelot")
           .setRarity(ERarity.UNCOMMON)
-          .oneHand(false)),
+          .oneHand(false)
+          .isDistance()),
   ARC(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Arc court", "Arc long")
           .setRarity(ERarity.COMMON)
-          .twoHands(false)),
+          .twoHands(false)
+          .isDistance()),
   FLECHE(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Flèche")
           .setRarity(ERarity.UNCOMMON)
           .oneHand(false)
-          .setQuantity(15)),
+          .setQuantity(15)
+          .isDistance()),
   ARBALETE(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Arbalète")
           .setRarity(ERarity.UNCOMMON)
-          .twoHands(false)),
+          .twoHands(false)
+          .isDistance()),
   CARREAU(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Carreau")
           .setRarity(ERarity.RARE)
           .oneHand(false)
-          .setQuantity(15));
+          .setQuantity(15)
+          .isDistance());
 
   private final List<FrenchNoun> names;
   private final ERarity rarity;
   private final int nbHands;
   private final boolean printNbHands;
   private final int quantity;
+  private final boolean distance;
 
   ENbkWeaponType(NbKWeaponTypeBuilder builder) {
-    this.names = builder.getNames();
-    this.rarity = builder.getRarity();
-    this.nbHands = builder.getNbHands();
-    this.printNbHands = builder.getPrintNbHands();
-    this.quantity = builder.getQuantity();
-  }
-
-  @Override
-  public ERarity getRarity() {
-    return rarity;
-  }
-
-  public int getNbHands() {
-    return nbHands;
+    names = builder.getNames();
+    rarity = builder.getRarity();
+    nbHands = builder.getNbHands();
+    printNbHands = builder.getPrintNbHands();
+    quantity = builder.getQuantity();
+    distance = builder.getDistance();
   }
 
   @Override
@@ -111,9 +111,23 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
     return noun;
   }
 
+  @Override
+  public ERarity getRarity() {
+    return rarity;
+  }
+
+  public int getNbHands() {
+    return nbHands;
+  }
+
   public int getQuantity() {
     return quantity;
   }
+
+  public boolean isDistance() {
+    return distance;
+  }
+
 
   private static class NbKWeaponTypeBuilder implements ItemTypeBuilder {
 
@@ -122,6 +136,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
     int nbHands = 0;
     boolean printNbHands = false;
     int quantity = 1;
+    private boolean distance = false;
 
     NbKWeaponTypeBuilder setMasculineNouns(String... names) {
       for (String name : names) {
@@ -147,11 +162,6 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
       return this;
     }
 
-    NbKWeaponTypeBuilder setQuantity(int quantity) {
-      this.quantity = quantity;
-      return this;
-    }
-
     NbKWeaponTypeBuilder oneHand(boolean printNbHands) {
       this.nbHands = 1;
       this.printNbHands = printNbHands;
@@ -161,6 +171,16 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
     NbKWeaponTypeBuilder twoHands(boolean printNbHands) {
       this.nbHands = 2;
       this.printNbHands = printNbHands;
+      return this;
+    }
+
+    NbKWeaponTypeBuilder setQuantity(int quantity) {
+      this.quantity = quantity;
+      return this;
+    }
+
+    NbKWeaponTypeBuilder isDistance() {
+      this.distance = true;
       return this;
     }
 
@@ -184,6 +204,10 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
 
     int getQuantity() {
       return quantity;
+    }
+
+    boolean getDistance() {
+      return distance;
     }
   }
 }

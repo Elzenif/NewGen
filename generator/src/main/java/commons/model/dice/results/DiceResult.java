@@ -1,36 +1,33 @@
 package commons.model.dice.results;
 
-import commons.model.commons.Result;
+import commons.model.dice.Dice;
+
+import java.awt.Color;
 
 /**
  * Created by Germain on 28/05/2016.
  */
-public class DiceResult implements Result {
+public class DiceResult implements AbstractDiceResult {
 
-  private final String result;
-  private final EDiceResultType eDiceResultType;
-  private final EDiceTestResult eDiceTestResult;
+  private final Dice dice;
 
-  public DiceResult(String result, EDiceResultType eDiceResultType, EDiceTestResult eDiceTestResult) {
-    this.result = result;
-    this.eDiceResultType = eDiceResultType;
-    this.eDiceTestResult = eDiceTestResult;
-  }
-
-  public DiceResult(String result) {
-    this(result, EDiceResultType.NORMAL, EDiceTestResult.NO_TEST);
+  public DiceResult(Dice dice) {
+    this.dice = dice;
   }
 
   @Override
   public String getRawResult() {
-    return result;
+    return String.valueOf(dice.getFinalScore());
   }
 
-  public EDiceResultType getEDiceResultType() {
-    return eDiceResultType;
+  @Override
+  public int getFontStyle() {
+    return dice.getDiceResultType().getFontStyle();
   }
 
-  public EDiceTestResult getEDiceTestResult() {
-    return eDiceTestResult;
+  @Override
+  public Color getColor() {
+    return dice.getDiceTestResult().getColor();
   }
+
 }

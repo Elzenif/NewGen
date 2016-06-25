@@ -8,8 +8,8 @@ import java.awt.FlowLayout;
  */
 abstract class PanelRow extends JPanel {
 
-  PanelRow() {
-    FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP);
+  PanelRow(int hGap, int vGap) {
+    FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, hGap, vGap);
     flowLayout.setAlignOnBaseline(true);
     setLayout(flowLayout);
   }

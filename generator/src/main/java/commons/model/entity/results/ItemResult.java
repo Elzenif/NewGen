@@ -1,6 +1,9 @@
 package commons.model.entity.results;
 
 import commons.model.commons.Result;
+import commons.model.entity.items.Item;
+
+import java.awt.Color;
 
 import static commons.utils.StringUtils.capitalizeFirstLetter;
 
@@ -9,20 +12,24 @@ import static commons.utils.StringUtils.capitalizeFirstLetter;
  */
 public class ItemResult implements Result {
 
-  private final String result;
-  private final EItemResultRarity itemResultRarity;
+  private final Item item;
 
-  public ItemResult(String result, EItemResultRarity itemResultRarity) {
-    this.result = capitalizeFirstLetter(result);
-    this.itemResultRarity = itemResultRarity;
+  public ItemResult(Item item) {
+    this.item = item;
   }
 
   @Override
   public String getRawResult() {
-    return result;
+    return capitalizeFirstLetter(item.toString());
   }
 
-  public EItemResultRarity getItemResultRarity() {
-    return itemResultRarity;
+  @Override
+  public int getFontStyle() {
+    return EItemResultMagic.getItemResultFontStyle(item.getMagic());
+  }
+
+  @Override
+  public Color getColor() {
+    return EItemResultRarity.getItemResultColor(item.getRarity());
   }
 }

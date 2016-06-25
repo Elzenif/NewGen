@@ -5,7 +5,6 @@ import commons.model.entity.constraints.RarityConstraint;
 import commons.model.entity.enums.ERarity;
 import commons.model.entity.game.Game;
 import commons.model.entity.items.Item;
-import commons.model.entity.results.EItemResultRarity;
 import commons.model.entity.results.ItemResult;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
@@ -67,10 +66,10 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
     }
     try {
       Item item = generate(globalConstraints, rarity);
-      return new ItemResult(item.toString(), EItemResultRarity.getItemResultRarity(item.getRarity()));
+      return new ItemResult(item);
     } catch (NoAvailableItemTypeException e) {
       e.printStackTrace();
-      return new ItemResult("#####", EItemResultRarity.COM);
+      return new ItemResult(Item.stubbedItem());
     }
   }
 

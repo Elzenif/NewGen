@@ -1,6 +1,7 @@
 package commons;
 
 import commons.view.MainFrame;
+import commons.view.utils.Constants;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -16,7 +17,7 @@ public class Main {
   public static void main(String[] args) {
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-      setUIFont(new FontUIResource("Source Code Pro", Font.PLAIN, 12));
+      setUIFont(new FontUIResource(Constants.FONT_NAME, Font.PLAIN, Constants.FONT_SIZE));
     } catch (ClassNotFoundException | UnsupportedLookAndFeelException | InstantiationException
             | IllegalAccessException e) {
       e.printStackTrace();
