@@ -44,12 +44,12 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
           .setWeaponType(ENbkWeaponType.LAME_COURTE)),
   POIGNARD_MIRFILU(new ENbkPredefinedWeaponBuilder()
           .setNames("Poignard d'Excellence de Mirfilu")
-          .setRarity(ERarity.LEGENDARY)
+          .setRarity(ERarity.EPIC)
           .setWeaponType(ENbkWeaponType.LAME_COURTE)
           .isMagic()),
   POIGNARD_XELOSS(new ENbkPredefinedWeaponBuilder()
           .setNames("Poignard sacrificiel de Xeloss")
-          .setRarity(ERarity.LEGENDARY)
+          .setRarity(ERarity.EPIC)
           .setWeaponType(ENbkWeaponType.LAME_COURTE)
           .isMagic()),
   DAGUE_TZINNTCH(new ENbkPredefinedWeaponBuilder()
@@ -113,7 +113,7 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
           .setWeaponType(ENbkWeaponType.HACHE_1MAIN)),
   HACHE_DECAPITATION(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache de décapitation des Orcs")
-          .setRarity(ERarity.LEGENDARY)
+          .setRarity(ERarity.EPIC)
           .setWeaponType(ENbkWeaponType.HACHE_1MAIN)
           .isMagic()),
   HACHE_NIOURGL(new ENbkPredefinedWeaponBuilder()
@@ -139,7 +139,7 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
   // Haches de jet
   HACHE_PIRATE(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache de jet des piates mauves")
-          .setRarity(ERarity.EPIC)
+          .setRarity(ERarity.RARE)
           .setWeaponType(ENbkWeaponType.HACHE_JET)),
   HACHE_FORGERON(new ENbkPredefinedWeaponBuilder()
           .setNames("Hache de Jet du Grand Forgeron")

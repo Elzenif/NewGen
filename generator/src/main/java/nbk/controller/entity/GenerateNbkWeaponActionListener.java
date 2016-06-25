@@ -24,7 +24,7 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
 
   @Override
   protected Item generate(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
-    if (((NbkWeaponOptionRow)entityOptionRow).isMagicOrRelicConstraint() || MathUtils.random(1, 10) == 1) {
+    if (MathUtils.random(1, 10) == 1) {
       return generatePW(globalConstraints, rarity);
     } else {
       return generateRGW(globalConstraints, rarity);

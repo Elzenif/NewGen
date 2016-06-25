@@ -29,7 +29,6 @@ import static commons.utils.TextFieldUtils.createTwoDigitsField;
 public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityResultRow> {
 
   private final int labelSize;
-
   private final String itemName;
 
   private final JSpinner numberOfItemsSpinner;
@@ -46,7 +45,6 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
 
   private final ConstraintPanel qualityPanel;
   private final JFormattedTextField qualityTextField;
-
 
   protected EntityOptionRow(IAvailableItem availableItem, S game) {
     super();
@@ -82,7 +80,6 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     qualityPanel.setLayout(new BoxLayout(qualityPanel, BoxLayout.Y_AXIS));
     qualityPanel.add(qualityTextField);
     constraintPanel.add(qualityPanel);
-    globalConstraints.put(ERarity.class, RarityConstraint.class, RarityConstraint.NO_CONSTRAINT);
   }
 
   @Override
