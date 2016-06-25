@@ -1,6 +1,6 @@
 package commons.model.entity.constraints;
 
-import commons.model.entity.utils.HasRarity;
+import commons.model.commons.HasRarity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,26 +20,26 @@ public class GlobalConstraints {
     map = new HashMap<>();
   }
 
-  public <T extends GenericConstraint<E>, E extends Enum<E> & HasRarity> void put(Class<E> hasRarityClass,
-                                                                                 Class<T> constraintClass,
-                                                                                 GenericConstraint<E> constraint) {
-    if (!map.containsKey(hasRarityClass))
-      map.put(hasRarityClass, new HashMap<>());
-    map.get(hasRarityClass).put(constraintClass, constraint);
+  public <T extends GenericConstraint<E>, E extends Enum<E> & HasRarity> void put(Class<E> enumClass,
+                                                                                  Class<T> constraintClass,
+                                                                                  GenericConstraint<E> constraint) {
+    if (!map.containsKey(enumClass))
+      map.put(enumClass, new HashMap<>());
+    map.get(enumClass).put(constraintClass, constraint);
   }
 
   @SuppressWarnings("unchecked")
   public <T extends GenericConstraint<E>, E extends Enum<E> & HasRarity> Predicate<E>
-  getPredicate(Class<E> hasRarityClass, Class<T> constraintClass) {
-    return map.containsKey(hasRarityClass)
-            ? (Predicate<E>) map.get(hasRarityClass).get(constraintClass).getPredicate()
+  getPredicate(Class<E> enumClass, Class<T> constraintClass) {
+    return map.containsKey(enumClass)
+            ? (Predicate<E>) map.get(enumClass).get(constraintClass).getPredicate()
             : p -> true;
   }
 
   @SuppressWarnings("unchecked")
-  public <E extends Enum<E> & HasRarity> Predicate<E> getPredicate(Class<E> hasRarityClass) {
-    return map.containsKey(hasRarityClass)
-            ? (Predicate<E>) map.get(hasRarityClass).values()
+  public <E extends Enum<E> & HasRarity> Predicate<E> getPredicate(Class<E> enumClass) {
+    return map.containsKey(enumClass)
+            ? (Predicate<E>) map.get(enumClass).values()
             .stream().map(GenericConstraint::getPredicate).reduce(Predicate::and).orElse(p -> true)
             : p -> true;
   }

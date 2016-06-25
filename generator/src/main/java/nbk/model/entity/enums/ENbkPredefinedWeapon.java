@@ -1,5 +1,6 @@
 package nbk.model.entity.enums;
 
+import commons.model.commons.HasMagic;
 import commons.model.entity.enums.EMagic;
 import commons.model.entity.enums.ERarity;
 import commons.model.entity.utils.ItemType;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by Germain on 23/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkPredefinedWeapon implements ItemType<String> {
+public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
   // Récupération
   GOURDIN(new ENbkPredefinedWeaponBuilder()
           .setNames("Bonne branche", "Gourdin", "Pied de chaise")
@@ -451,6 +452,7 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
     return weaponType;
   }
 
+  @Override
   public EMagic getMagic() {
     return magic;
   }
@@ -503,7 +505,7 @@ public enum ENbkPredefinedWeapon implements ItemType<String> {
       return weaponType;
     }
 
-    EMagic getMagic() {
+    public EMagic getMagic() {
       return magic;
     }
   }

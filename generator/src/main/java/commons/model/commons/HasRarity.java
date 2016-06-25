@@ -1,4 +1,4 @@
-package commons.model.entity.utils;
+package commons.model.commons;
 
 import commons.model.entity.enums.ERarity;
 

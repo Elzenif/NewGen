@@ -1,5 +1,6 @@
 package commons.model.entity.utils;
 
+import commons.model.commons.HasRarity;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 

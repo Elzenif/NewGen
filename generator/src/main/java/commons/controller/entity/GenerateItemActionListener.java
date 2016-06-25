@@ -24,8 +24,8 @@ import java.util.stream.IntStream;
  */
 public abstract class GenerateItemActionListener<T extends Game> implements ActionListener {
 
-  private final EntityOptionRow<T> entityOptionRow;
-  private final EntityResultRow entityResultRow;
+  protected final EntityOptionRow<T> entityOptionRow;
+  protected final EntityResultRow entityResultRow;
 
   protected GenerateItemActionListener(EntityOptionRow<T> entityOptionRow, EntityResultRow entityResultRow) {
     this.entityOptionRow = entityOptionRow;
@@ -56,6 +56,7 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
   }
 
   private ItemResult generateResult(GlobalConstraints globalConstraints) {
+    // TODO: if isMagicOrRelic, call an abstract method that calculates the rarity in function of subclass availability
     ERarity rarity;
     try {
       rarity = ItemUtils.selectRandomRarity(ERarity.values(),

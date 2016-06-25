@@ -1,16 +1,17 @@
 package commons.model.entity.items;
 
+import commons.model.commons.HasMagic;
+import commons.model.commons.HasRarity;
 import commons.model.entity.enums.EMagic;
 import commons.model.entity.enums.ERarity;
 import commons.model.entity.game.Game;
-import commons.model.entity.utils.HasRarity;
 import commons.utils.MathUtils;
 import org.jetbrains.annotations.Contract;
 
 /**
  * Created by Germain on 04/06/2016.
  */
-public abstract class Item<T extends Game> implements HasRarity {
+public abstract class Item<T extends Game> implements HasRarity, HasMagic {
 
   private final ERarity rarity;
   private final int quantity;
@@ -37,6 +38,7 @@ public abstract class Item<T extends Game> implements HasRarity {
     return (quantity == 1) ? "" : "(" + MathUtils.random(quantity / 2, quantity) + ") ";
   }
 
+  @Override
   public EMagic getMagic() {
     return magic;
   }
@@ -47,7 +49,7 @@ public abstract class Item<T extends Game> implements HasRarity {
   }
 
 
-  protected abstract static class ItemBuilder {
+  protected abstract static class ItemBuilder implements HasRarity, HasMagic{
 
     protected final ERarity rarity;
 
@@ -55,13 +57,12 @@ public abstract class Item<T extends Game> implements HasRarity {
       this.rarity = rarity;
     }
 
+    @Override
     public ERarity getRarity() {
       return rarity;
     }
 
     public abstract int getQuantity();
-
-    public abstract EMagic getMagic();
 
     protected abstract Item build();
 

@@ -1,6 +1,6 @@
 package commons.model.entity.enums;
 
-import commons.model.entity.utils.HasRarity;
+import commons.model.commons.HasRarity;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 /**
  * Created by Germain on 06/06/2016.
  */
-public enum  ERarity implements HasRarity {
+public enum ERarity implements HasRarity {
 
   COMMON(0, 49),
   UNCOMMON(1, 30),
