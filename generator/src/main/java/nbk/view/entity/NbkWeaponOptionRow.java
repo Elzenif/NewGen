@@ -9,7 +9,6 @@ import nbk.model.entity.enums.ENbkWeaponType;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import java.util.EnumMap;
 
@@ -24,8 +23,6 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
   private final JRadioButton noHandButton;
   private final JRadioButton oneHandButton;
   private final JRadioButton twoHandsButton;
-
-  private final JButton generateItemButton;
 
   NbkWeaponOptionRow() {
     super(ENbkAvailableItem.WEAPON);
@@ -50,12 +47,7 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
     });
     constraintPanel.add(nbHandsPanel);
 
-    add(constraintPanel);
-
-    generateItemButton = new JButton("Generate");
-    add(generateItemButton);
-
-    updateConstraintsAbility(false);
+    finalizeRowConstruction();
   }
 
   @Override

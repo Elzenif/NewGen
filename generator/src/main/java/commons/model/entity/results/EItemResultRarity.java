@@ -1,7 +1,7 @@
 package commons.model.entity.results;
 
-import commons.model.commons.HasRarity;
 import commons.model.entity.enums.ERarity;
+import commons.model.entity.utils.HasRarity;
 import commons.utils.ColorUtils;
 
 import java.awt.Color;

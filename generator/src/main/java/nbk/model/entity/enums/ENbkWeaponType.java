@@ -19,68 +19,63 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
   LAME_COURTE(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Poignard")
           .setFeminineNouns("Dague")
-          .setRarity(ERarity.COMMON)
           .oneHand(false)
           .isDistance()),
   LAME_1MAIN(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Sabre")
           .setFeminineNouns("Epée", "Rapière")
-          .setRarity(ERarity.COMMON)
           .oneHand(true)),
   LAME_2MAINS(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Epée")
-          .setRarity(ERarity.COMMON)
           .twoHands(true)),
   HACHE_1MAIN(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Hache")
-          .setRarity(ERarity.COMMON)
           .oneHand(true)),
   HACHE_JET(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Hache de jet")
-          .setRarity(ERarity.UNCOMMON)
+          .uncommon()
           .oneHand(false)
           .isDistance()),
   HACHE_2MAINS(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Hache")
-          .setRarity(ERarity.UNCOMMON)
+          .uncommon()
           .twoHands(true)),
   MARTEAU_1MAIN(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Marteau")
           .setFeminineNouns("Masse")
-          .setRarity(ERarity.UNCOMMON)
+          .uncommon()
           .oneHand(true)),
   MARTEAU_2MAINS(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Marteau")
-          .setRarity(ERarity.UNCOMMON)
+          .uncommon()
           .twoHands(true)),
   LANCE(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Lance", "Pique")
-          .setRarity(ERarity.UNCOMMON)
+          .uncommon()
           .twoHands(false)),
   JAVELOT(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Javelot")
-          .setRarity(ERarity.UNCOMMON)
+          .uncommon()
           .oneHand(false)
           .isDistance()),
   ARC(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Arc court", "Arc long")
-          .setRarity(ERarity.COMMON)
           .twoHands(false)
           .isDistance()),
   FLECHE(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Flèche")
-          .setRarity(ERarity.UNCOMMON)
+          .uncommon()
           .oneHand(false)
           .setQuantity(15)
           .isDistance()),
   ARBALETE(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Arbalète")
-          .setRarity(ERarity.UNCOMMON)
+          .uncommon()
           .twoHands(false)
           .isDistance()),
   CARREAU(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Carreau")
-          .setRarity(ERarity.RARE)
+          .rare()
           .oneHand(false)
           .setQuantity(15)
           .isDistance());
@@ -131,12 +126,12 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
 
   private static class NbKWeaponTypeBuilder implements ItemTypeBuilder {
 
-    final List<FrenchNoun> names = new LinkedList<>();
-    ERarity rarity;
+    List<FrenchNoun> names = new LinkedList<>();
+    ERarity rarity = ERarity.COMMON;
     int nbHands = 0;
     boolean printNbHands = false;
     int quantity = 1;
-    private boolean distance = false;
+    boolean distance = false;
 
     NbKWeaponTypeBuilder setMasculineNouns(String... names) {
       for (String name : names) {
@@ -157,8 +152,31 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun> {
     }
 
     @Override
-    public NbKWeaponTypeBuilder setRarity(ERarity rarity) {
-      this.rarity = rarity;
+    public ItemTypeBuilder setNames(Object first, Object... others) {
+      throw new UnsupportedOperationException("Use setMasculineNouns or setFeminineNouns instead");
+    }
+
+    @Override
+    public NbKWeaponTypeBuilder uncommon() {
+      rarity = ERarity.UNCOMMON;
+      return this;
+    }
+
+    @Override
+    public NbKWeaponTypeBuilder rare() {
+      rarity = ERarity.RARE;
+      return this;
+    }
+
+    @Override
+    public NbKWeaponTypeBuilder epic() {
+      rarity = ERarity.EPIC;
+      return this;
+    }
+
+    @Override
+    public NbKWeaponTypeBuilder legendary() {
+      rarity = ERarity.LEGENDARY;
       return this;
     }
 

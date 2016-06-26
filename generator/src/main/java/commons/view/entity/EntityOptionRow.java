@@ -13,6 +13,7 @@ import commons.view.utils.ConstraintPanel;
 import commons.view.utils.OptionRow;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -46,6 +47,9 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   private final ConstraintPanel qualityPanel;
   private final JFormattedTextField qualityTextField;
 
+  protected JButton generateItemButton;
+
+
   protected EntityOptionRow(IAvailableItem availableItem, S game) {
     super();
     labelSize = MathUtils.maxLength(IAvailableItem.getValues(game.getAvailableItems()));
@@ -53,6 +57,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
 
     numberOfItemsModel = new SpinnerNumberModel(1, 1, 9, 1);
     numberOfItemsSpinner = new JSpinner(numberOfItemsModel);
+    numberOfItemsSpinner.setToolTipText("The number of " + itemName + " to generate");
     add(numberOfItemsSpinner);
 
     infoLabel = new JLabel(StringUtils.leftAlign(labelSize, itemName));
@@ -80,6 +85,16 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     qualityPanel.setLayout(new BoxLayout(qualityPanel, BoxLayout.Y_AXIS));
     qualityPanel.add(qualityTextField);
     constraintPanel.add(qualityPanel);
+  }
+
+  protected void finalizeRowConstruction() {
+    add(constraintPanel);
+
+    generateItemButton = new JButton("Generate");
+    generateItemButton.setToolTipText("Generate a random " + itemName);
+    add(generateItemButton);
+
+    updateConstraintsAbility(false);
   }
 
   @Override

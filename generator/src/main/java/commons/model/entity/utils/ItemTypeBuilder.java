@@ -1,8 +1,5 @@
 package commons.model.entity.utils;
 
-import commons.model.commons.HasRarity;
-import commons.model.entity.enums.ERarity;
-
 import java.util.List;
 
 /**
@@ -10,7 +7,15 @@ import java.util.List;
  */
 public interface ItemTypeBuilder extends HasRarity {
 
-  ItemTypeBuilder setRarity(ERarity rarity);
+  ItemTypeBuilder setNames(Object first, Object... others);
+
+  ItemTypeBuilder uncommon();
+
+  ItemTypeBuilder rare();
+
+  ItemTypeBuilder epic();
+
+  ItemTypeBuilder legendary();
 
   List getNames();
 }

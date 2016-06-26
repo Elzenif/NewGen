@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -52,11 +53,16 @@ public class NbkPredefinedWeaponTest {
             weaponTypes.contains(weapon.getWeaponType()));
   }
 
-
   @Test
   public void testWeaponToStringIsNotNull() throws NoAvailableItemTypeException {
     weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
     assertNotNull("The weapon type should not be null", weapon.toString());
+  }
+
+  @Test
+  public void testWeaponToStringIsValid() throws NoAvailableItemTypeException {
+    weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
+    assertFalse("The weapon toString is not valid", weapon.toString().contains("@"));
   }
 
   @Test

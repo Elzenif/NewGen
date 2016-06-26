@@ -1,6 +1,6 @@
 package commons.model.entity.utils;
 
-import commons.model.commons.HasRarity;
+import commons.model.entity.enums.ERarity;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 
@@ -30,42 +30,41 @@ public class ItemUtils {
     return Stream.of(values).sorted(BY_RARITY).collect(Collectors.toList());
   }
 
-  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values, Predicate<E> predicate)
-          throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream(), predicate));
-  }
-
-  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(List<E> values, Predicate<E> predicate)
-          throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(values.stream(), predicate));
-  }
-
-  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(Stream<E> values, Predicate<E> predicate)
-          throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(values, predicate));
-  }
-
   public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values)
           throws NoAvailableItemTypeException {
     return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream()));
   }
 
-  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(List<E> values)
+  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values, Predicate<E> predicate)
           throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(values.stream()));
+    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream(), predicate));
   }
 
-  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(Stream<E> values)
+  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values, ERarity rarity)
           throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(values));
+    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream(), rarity));
   }
 
-  private static <E extends Enum<E> & HasRarity> Map<E, Integer> fillMap(Stream<E> values, Predicate<E> predicate) {
-    return values.filter(predicate).collect(Collectors.toMap(Function.identity(), e -> e.getRarity().getProba()));
+  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values, Predicate<E> predicate, ERarity rarity)
+          throws NoAvailableItemTypeException {
+    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream(), predicate, rarity));
   }
 
   private static <E extends Enum<E> & HasRarity> Map<E, Integer> fillMap(Stream<E> values) {
     return values.collect(Collectors.toMap(Function.identity(), e -> e.getRarity().getProba()));
+  }
+
+  private static <E extends Enum<E> & HasRarity> Map<E, Integer> fillMap(Stream<E> values, Predicate<E> predicate) {
+    return fillMap(values.filter(predicate));
+  }
+
+  private static <E extends Enum<E> & HasRarity> Map<E, Integer> fillMap(Stream<E> values, ERarity rarity) {
+    return fillMap(values.filter(e -> e.getRarity() == rarity));
+  }
+
+  private static <E extends Enum<E> & HasRarity> Map<E, Integer> fillMap(Stream<E> values, Predicate<E> predicate,
+                                                                         ERarity rarity) {
+    return fillMap(values.filter(predicate).filter(e -> e.getRarity() == rarity));
   }
 
   private static <E extends Enum<E> & HasRarity> E selectRandomRarityFromMap(Map<E, Integer> itemTypes)

@@ -1,6 +1,6 @@
 package commons.model.entity.enums;
 
-import commons.model.commons.HasMagic;
+import commons.model.entity.utils.HasMagic;
 import org.jetbrains.annotations.Contract;
 
 /**

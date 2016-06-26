@@ -24,21 +24,20 @@ public enum ENbkQuality implements ItemType<FrenchAdjective> {
   MAUVAIS(new NbkQualityBuilder()
           .setGenderAdjective("grossier", "grossière")
           .setNeutralAdjective("perrave", "de base", "basique", "daubesque", "quelconque", "minable",
-                  "de basse qualité")
-          .setRarity(ERarity.COMMON)),
+                  "de basse qualité")),
   BASIQUE(new NbkQualityBuilder()
           .setGenderAdjective("correct", "correcte")
           .setNeutralAdjective("de qualité")
-          .setRarity(ERarity.UNCOMMON)),
+          .uncommon()),
   BONNE_QUALITE(new NbkQualityBuilder()
           .setNeutralAdjective("de bonne qualité", "de bonne facture")
-          .setRarity(ERarity.RARE)),
+          .rare()),
   ARTISAN_RENOMME(new NbkQualityBuilder()
           .setNeutralAdjective("d'artisan renommé", "de luxe")
-          .setRarity(ERarity.EPIC)),
+          .epic()),
   DURANDIL(new NbkQualityBuilder()
           .setNeutralAdjective("Durandil(TM)")
-          .setRarity(ERarity.LEGENDARY));
+          .legendary());
 
   private final List<FrenchAdjective> names;
   private final ERarity rarity;
@@ -65,7 +64,7 @@ public enum ENbkQuality implements ItemType<FrenchAdjective> {
   private static class NbkQualityBuilder implements ItemTypeBuilder {
 
     List<FrenchAdjective> names = new LinkedList<>();
-    ERarity rarity;
+    ERarity rarity = ERarity.COMMON;
 
     NbkQualityBuilder setNeutralAdjective(String... names) {
       for (String name : names) {
@@ -84,8 +83,32 @@ public enum ENbkQuality implements ItemType<FrenchAdjective> {
     }
 
     @Override
-    public NbkQualityBuilder setRarity(ERarity rarity) {
-      this.rarity = rarity;
+    public ItemTypeBuilder setNames(Object first, Object... others) {
+      throw new UnsupportedOperationException("Use setNeutralAdjective or setGenderAdjective instead");
+    }
+
+
+    @Override
+    public NbkQualityBuilder uncommon() {
+      rarity = ERarity.UNCOMMON;
+      return this;
+    }
+
+    @Override
+    public NbkQualityBuilder rare() {
+      rarity = ERarity.RARE;
+      return this;
+    }
+
+    @Override
+    public NbkQualityBuilder epic() {
+      rarity = ERarity.EPIC;
+      return this;
+    }
+
+    @Override
+    public NbkQualityBuilder legendary() {
+      rarity = ERarity.LEGENDARY;
       return this;
     }
 

@@ -1,14 +1,14 @@
 package nbk.model.entity.items;
 
 import commons.model.entity.enums.ERarity;
-import commons.model.entity.game.Game;
 import commons.model.entity.items.Item;
 import nbk.model.entity.enums.ENbkWeaponType;
+import nbk.model.entity.game.NbkGame;
 
 /**
  * Created by Germain on 23/06/2016.
  */
-abstract class NbkAbstractWeapon extends Item<Game> {
+public abstract class NbkAbstractWeapon extends Item<NbkGame> {
 
   final ENbkWeaponType weaponType;
 

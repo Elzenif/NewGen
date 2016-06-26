@@ -9,7 +9,6 @@ import nbk.model.entity.enums.ENbkPredefinedWeapon;
 import nbk.model.entity.enums.ENbkWeaponType;
 
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /**
  * Created by Germain on 23/06/2016.
@@ -39,18 +38,14 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
 
     PredefinedWeaponBuilder(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
       super(rarity);
-      setPredefinedWeapon(globalConstraints.getPredicate(ENbkWeaponType.class), rarity,
-              globalConstraints.getPredicate(ENbkPredefinedWeapon.class));
+      setPredefinedWeapon(globalConstraints.getPredicate(ENbkWeaponType.class), rarity);
       weaponType = predefinedWeapon.getWeaponType();
     }
 
-    void setPredefinedWeapon(Predicate<ENbkWeaponType> wtPredicate, ERarity rarity,
-                             Predicate<ENbkPredefinedWeapon> morPredicate) throws NoAvailableItemTypeException {
-      predefinedWeapon = ItemUtils.selectRandomRarity(
-              Stream.of(ENbkPredefinedWeapon.values())
-                      .filter(weapon -> wtPredicate.test(weapon.getWeaponType()))
-                      .filter(weapon -> weapon.getRarity() == rarity),
-              morPredicate);
+    void setPredefinedWeapon(Predicate<ENbkWeaponType> wtPredicate, ERarity rarity)
+            throws NoAvailableItemTypeException {
+      predefinedWeapon = ItemUtils.selectRandomRarity(ENbkPredefinedWeapon.values(),
+              weapon -> wtPredicate.test(weapon.getWeaponType()), rarity);
     }
 
     @Override

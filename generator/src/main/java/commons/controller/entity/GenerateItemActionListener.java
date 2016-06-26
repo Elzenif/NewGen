@@ -56,7 +56,6 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
   }
 
   private ItemResult generateResult(GlobalConstraints globalConstraints) {
-    // TODO: if isMagicOrRelic, call an abstract method that calculates the rarity in function of subclass availability
     ERarity rarity;
     try {
       rarity = ItemUtils.selectRandomRarity(ERarity.values(),
@@ -66,7 +65,7 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
       rarity = ERarity.COMMON;
     }
     try {
-      Item item = generate(globalConstraints, rarity);
+      Item<T> item = generate(globalConstraints, rarity);
       return new ItemResult(item);
     } catch (NoAvailableItemTypeException e) {
       e.printStackTrace();
@@ -74,6 +73,6 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
     }
   }
 
-  protected abstract Item generate(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException;
+  protected abstract Item<T> generate(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException;
 
 }

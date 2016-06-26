@@ -1,6 +1,6 @@
 package commons.model.entity.constraints;
 
-import commons.model.commons.HasRarity;
+import commons.model.entity.utils.HasRarity;
 
 import java.util.HashMap;
 import java.util.Map;

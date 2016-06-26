@@ -1,6 +1,6 @@
 package commons.model.entity.constraints;
 
-import commons.model.commons.HasMagic;
+import commons.model.entity.utils.HasMagic;
 import commons.model.entity.utils.ItemType;
 
 import java.util.function.Predicate;

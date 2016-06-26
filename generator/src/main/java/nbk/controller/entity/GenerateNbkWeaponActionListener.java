@@ -3,11 +3,11 @@ package nbk.controller.entity;
 import commons.controller.entity.GenerateItemActionListener;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.enums.ERarity;
-import commons.model.entity.items.Item;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.view.entity.EntityResultRow;
 import nbk.model.entity.game.NbkGame;
+import nbk.model.entity.items.NbkAbstractWeapon;
 import nbk.model.entity.items.NbkPredefinedWeapon;
 import nbk.model.entity.items.NbkRGWeapon;
 import nbk.view.entity.NbkWeaponOptionRow;
@@ -22,8 +22,9 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
     super(entityOptionRow, entityResultRow);
   }
 
+  @Contract("_, _ -> !null")
   @Override
-  protected Item generate(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
+  protected NbkAbstractWeapon generate(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
     if (MathUtils.random(1, 10) == 1) {
       return generatePW(globalConstraints, rarity);
     } else {
@@ -31,7 +32,8 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
     }
   }
 
-  private Item generatePW(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
+  @Contract("_, _ -> !null")
+  private NbkAbstractWeapon generatePW(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
     try {
       return NbkPredefinedWeapon.create(globalConstraints, rarity);
     } catch (NoAvailableItemTypeException e) {
@@ -41,7 +43,7 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
   }
 
   @Contract("_, _ -> !null")
-  private Item generateRGW(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
+  private NbkRGWeapon generateRGW(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
     return NbkRGWeapon.create(globalConstraints, rarity);
   }
 }

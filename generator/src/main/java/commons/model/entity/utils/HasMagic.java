@@ -1,4 +1,4 @@
-package commons.model.commons;
+package commons.model.entity.utils;
 
 import commons.model.entity.enums.EMagic;
 

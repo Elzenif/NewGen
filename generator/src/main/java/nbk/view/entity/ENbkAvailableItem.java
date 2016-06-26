@@ -17,6 +17,14 @@ public enum ENbkAvailableItem implements IAvailableItem<NbkGame> {
         entityOptionRow = new NbkWeaponOptionRow();
       return entityOptionRow;
     }
+  }, ARMOR("Armor") {
+    NbkArmorOptionRow entityOptionRow = null;
+    @Override
+    public EntityOptionRow<NbkGame> getEntityOptionRow() {
+      if (entityOptionRow == null)
+        entityOptionRow = new NbkArmorOptionRow();
+      return entityOptionRow;
+    }
   };
 
   private final String name;
