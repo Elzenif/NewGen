@@ -1,6 +1,6 @@
 package commons.model.entity.constraints;
 
-import commons.model.entity.utils.ItemType;
+import commons.model.entity.utils.fields.ItemType;
 
 /**
  * Created by Germain on 22/06/2016.

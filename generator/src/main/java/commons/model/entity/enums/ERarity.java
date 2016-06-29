@@ -1,6 +1,6 @@
 package commons.model.entity.enums;
 
-import commons.model.entity.utils.HasRarity;
+import commons.model.entity.utils.fields.HasRarity;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Map;

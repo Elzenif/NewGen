@@ -1,6 +1,6 @@
 package nbk.model.entity.enums;
 
-import nbk.model.entity.utils.HasSize;
+import nbk.model.entity.utils.fields.HasSize;
 import org.jetbrains.annotations.Contract;
 
 /**

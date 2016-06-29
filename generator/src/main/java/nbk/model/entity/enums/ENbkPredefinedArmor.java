@@ -2,17 +2,17 @@ package nbk.model.entity.enums;
 
 import commons.model.entity.enums.EMagic;
 import commons.model.entity.enums.ERarity;
-import commons.model.entity.utils.HasMagic;
-import commons.model.entity.utils.ItemType;
-import commons.model.entity.utils.ItemTypeBuilder;
+import commons.model.entity.utils.builders.ItemTypeBuilder;
+import commons.model.entity.utils.builders.MagicBuilder;
+import commons.model.entity.utils.fields.HasMagic;
+import commons.model.entity.utils.fields.ItemType;
 import commons.utils.MathUtils;
-import nbk.model.entity.utils.BodyPartBuilder;
-import nbk.model.entity.utils.HasSize;
-import nbk.model.entity.utils.HasWeight;
-import nbk.model.entity.utils.IsBodyPart;
-import nbk.model.entity.utils.MagicBuilder;
-import nbk.model.entity.utils.SizeBuilder;
-import nbk.model.entity.utils.WeightBuilder;
+import nbk.model.entity.utils.builders.BodyPartBuilder;
+import nbk.model.entity.utils.builders.SizeBuilder;
+import nbk.model.entity.utils.builders.WeightBuilder;
+import nbk.model.entity.utils.fields.HasSize;
+import nbk.model.entity.utils.fields.HasWeight;
+import nbk.model.entity.utils.fields.IsBodyPart;
 
 import java.util.EnumSet;
 import java.util.LinkedList;
@@ -23,6 +23,7 @@ import java.util.List;
  */
 @SuppressWarnings("SpellCheckingInspection")
 public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight, IsBodyPart, HasSize {
+  // Vestes
   GAMBISON_BASE(new ENbkPredefinedArmorBuilder()
           .setNames("Gambison de base avec manches")
           .setBodyParts(EBodyPart.TORSO, EBodyPart.ARMS)),
@@ -35,7 +36,38 @@ public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight
   VESTE_VOLEUR(new ENbkPredefinedArmorBuilder()
           .setNames("Veste toile renforcée noire, pour voleur")
           .uncommon()
-          .setBodyParts(EBodyPart.TORSO, EBodyPart.ARMS));
+          .setBodyParts(EBodyPart.TORSO, EBodyPart.ARMS)),
+  // Plastron cuir
+  PLASTRON_CUIR_BASE(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron de cuir de base")
+          .setBodyParts(EBodyPart.TORSO)),
+  PLASTRON_CUIR_CORRECT(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron de cuir bouilli correct")
+          .setBodyParts(EBodyPart.TORSO)),
+  PLASTRON_CUIR_MOULE(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron de cuir moulé sur mesure")
+          .uncommon()
+          .setBodyParts(EBodyPart.TORSO)),
+  PLASTRON_CUIR_METAL(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron de cuir renforcé métal")
+          .uncommon()
+          .setBodyParts(EBodyPart.TORSO)
+          .heavyWeight()),
+  PLASTRON_CUIR_LUXE(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron de cuir luxe (renforcé métal et décoré)")
+          .rare()
+          .setBodyParts(EBodyPart.TORSO)
+          .heavyWeight()),
+  PLASTRON_CUIR_LUXE2(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron de cuir luxe +2 force (ench base 3)")
+          .epic()
+          .isMagic()
+          .setBodyParts(EBodyPart.TORSO)),
+  PLASTRON_CUIR_ELFE(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron de cuir luxe Haut-Elfe +4 (ench base 3)")
+          .legendary()
+          .isMagic()
+          .setBodyParts(EBodyPart.TORSO));
 
   private final List<String> names;
   private final ERarity rarity;
@@ -87,12 +119,11 @@ public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight
           BodyPartBuilder, SizeBuilder {
 
     List<String> names = new LinkedList<>();
-    ERarity rarity;
+    ERarity rarity = ERarity.COMMON;
     EMagic magic = EMagic.NOPE;
     EnumSet<EBodyPart> bodyParts;
     EWeight weight = EWeight.NORMAL;
     ESize size = ESize.NORMAL;
-
 
     @Override
     public ENbkPredefinedArmorBuilder setNames(Object first, Object... others) {

@@ -1,4 +1,6 @@
-package nbk.model.entity.utils;
+package nbk.model.entity.utils.builders;
+
+import nbk.model.entity.utils.fields.HasSize;
 
 /**
  * Created by Germain on 26/06/2016.

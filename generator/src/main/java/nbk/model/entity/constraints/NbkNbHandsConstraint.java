@@ -21,6 +21,6 @@ public enum NbkNbHandsConstraint implements GenericItemConstraint<ENbkWeaponType
 
   @Override
   public Predicate<ENbkWeaponType> getPredicate() {
-    return wt -> wt.getNbHands() == ordinal();
+    return wt -> wt.getNbHands().getNb() == ordinal();
   }
 }

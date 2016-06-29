@@ -1,4 +1,6 @@
-package commons.model.entity.utils;
+package commons.model.entity.utils.builders;
+
+import commons.model.entity.utils.fields.HasRarity;
 
 import java.util.List;
 

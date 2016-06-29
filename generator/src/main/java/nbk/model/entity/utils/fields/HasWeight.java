@@ -1,4 +1,4 @@
-package nbk.model.entity.utils;
+package nbk.model.entity.utils.fields;
 
 import nbk.model.entity.enums.EWeight;
 

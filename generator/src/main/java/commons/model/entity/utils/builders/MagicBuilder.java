@@ -1,6 +1,6 @@
-package nbk.model.entity.utils;
+package commons.model.entity.utils.builders;
 
-import commons.model.entity.utils.HasMagic;
+import commons.model.entity.utils.fields.HasMagic;
 
 /**
  * Created by Germain on 26/06/2016.

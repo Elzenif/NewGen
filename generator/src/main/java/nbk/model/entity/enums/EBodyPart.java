@@ -1,6 +1,6 @@
 package nbk.model.entity.enums;
 
-import nbk.model.entity.utils.IsBodyPart;
+import nbk.model.entity.utils.fields.IsBodyPart;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;

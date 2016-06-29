@@ -1,4 +1,4 @@
-package commons.model.entity.utils;
+package commons.model.entity.utils.fields;
 
 import commons.model.commons.HasName;
 

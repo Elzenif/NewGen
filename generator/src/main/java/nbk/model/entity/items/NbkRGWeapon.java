@@ -4,10 +4,15 @@ import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.enums.EMagic;
 import commons.model.entity.enums.ERarity;
 import commons.model.entity.utils.ItemUtils;
+import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.utils.french.FrenchNoun;
+import nbk.model.entity.enums.ENbHands;
 import nbk.model.entity.enums.ENbkQuality;
 import nbk.model.entity.enums.ENbkWeaponType;
+import nbk.model.entity.enums.ESize;
+import nbk.model.entity.utils.fields.HasQuality;
+import nbk.model.entity.utils.fields.HasWeaponType;
 import org.jetbrains.annotations.Contract;
 
 import java.util.function.Predicate;
@@ -15,8 +20,9 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 11/06/2016.
  */
-public class NbkRGWeapon extends NbkAbstractWeapon {
+public class NbkRGWeapon extends NbkAbstractWeapon implements HasWeaponType, HasQuality {
 
+  private final ENbkWeaponType weaponType;
   private final ENbkQuality quality;
 
   @Contract("_, _ -> !null")
@@ -25,8 +31,29 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
     return new RGWeaponBuilder(globalConstraints, rarity).build();
   }
 
-  ENbkQuality getQuality() {
+  @Override
+  public ENbkWeaponType getWeaponType() {
+    return weaponType;
+  }
+
+  @Override
+  public ENbkQuality getQuality() {
     return quality;
+  }
+
+  @Override
+  public boolean isLongDistance() {
+    return weaponType.isLongDistance();
+  }
+
+  @Override
+  public ENbHands getNbHands() {
+    return weaponType.getNbHands();
+  }
+
+  @Override
+  public ESize getSize() {
+    return weaponType.getSize();
   }
 
   @Override
@@ -38,12 +65,14 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
 
   private NbkRGWeapon(RGWeaponBuilder builder) {
     super(builder);
+    this.weaponType = builder.weaponType;
     this.quality = builder.quality;
   }
 
 
-  private static class RGWeaponBuilder extends AbstractWeaponBuilder {
+  private static class RGWeaponBuilder extends ItemBuilder {
 
+    ENbkWeaponType weaponType;
     ENbkQuality quality;
 
     RGWeaponBuilder(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
@@ -58,6 +87,11 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
 
     void setQuality(ERarity rarity) {
       quality = ENbkQuality.QUALITY_MAP.get(rarity);
+    }
+
+    @Override
+    public SPositive getQuantity() {
+      return weaponType.getQuantity();
     }
 
     @Override

@@ -1,6 +1,7 @@
-package nbk.model.entity.utils;
+package nbk.model.entity.utils.builders;
 
 import nbk.model.entity.enums.EBodyPart;
+import nbk.model.entity.utils.fields.IsBodyPart;
 
 /**
  * Created by Germain on 26/06/2016.

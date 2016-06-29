@@ -1,12 +1,14 @@
 package nbk.model.entity.enums;
 
 import commons.model.entity.enums.ERarity;
-import commons.model.entity.utils.ItemType;
-import commons.model.entity.utils.ItemTypeBuilder;
+import commons.model.entity.utils.builders.ItemTypeBuilder;
+import commons.model.entity.utils.fields.ItemType;
 import commons.utils.MathUtils;
 import commons.utils.french.FrenchAdjective;
 import commons.utils.french.FrenchGenderAdjective;
 import commons.utils.french.FrenchNeutralAdjective;
+import nbk.model.entity.utils.fields.HasQuality;
+import org.jetbrains.annotations.Contract;
 
 import java.util.EnumMap;
 import java.util.LinkedList;
@@ -19,7 +21,7 @@ import java.util.stream.Stream;
  * Created by Germain on 16/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkQuality implements ItemType<FrenchAdjective> {
+public enum ENbkQuality implements ItemType<FrenchAdjective>, HasQuality {
 
   MAUVAIS(new NbkQualityBuilder()
           .setGenderAdjective("grossier", "grossière")
@@ -57,9 +59,16 @@ public enum ENbkQuality implements ItemType<FrenchAdjective> {
     return MathUtils.chooseRandom(names);
   }
 
+  @Contract(pure = true)
+  @Override
+  public ENbkQuality getQuality() {
+    return this;
+  }
+
   public static final EnumMap<ERarity, ENbkQuality> QUALITY_MAP = new EnumMap<>(
           Stream.of(ENbkQuality.values()).collect(Collectors.toMap(ENbkQuality::getRarity, Function.identity()))
   );
+
 
   private static class NbkQualityBuilder implements ItemTypeBuilder {
 

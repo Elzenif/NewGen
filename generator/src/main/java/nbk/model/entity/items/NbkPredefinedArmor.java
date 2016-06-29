@@ -5,6 +5,7 @@ import commons.model.entity.enums.EMagic;
 import commons.model.entity.enums.ERarity;
 import commons.model.entity.items.Item;
 import commons.model.entity.utils.ItemUtils;
+import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableItemTypeException;
 import nbk.model.entity.enums.ENbkPredefinedArmor;
 import nbk.model.entity.game.NbkGame;
@@ -48,8 +49,8 @@ public class NbkPredefinedArmor extends Item<NbkGame> {
     }
 
     @Override
-    public int getQuantity() {
-      return 1;
+    public SPositive getQuantity() {
+      return SPositive.ONE;
     }
 
     @Override

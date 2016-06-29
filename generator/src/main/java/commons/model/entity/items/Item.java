@@ -3,9 +3,11 @@ package commons.model.entity.items;
 import commons.model.entity.enums.EMagic;
 import commons.model.entity.enums.ERarity;
 import commons.model.entity.game.Game;
-import commons.model.entity.utils.HasMagic;
-import commons.model.entity.utils.HasRarity;
+import commons.model.entity.utils.fields.HasMagic;
+import commons.model.entity.utils.fields.HasQuantity;
+import commons.model.entity.utils.fields.HasRarity;
 import commons.utils.MathUtils;
+import commons.utils.SPositive;
 import org.jetbrains.annotations.Contract;
 
 /**
@@ -14,7 +16,7 @@ import org.jetbrains.annotations.Contract;
 public abstract class Item<T extends Game> implements HasRarity, HasMagic {
 
   private final ERarity rarity;
-  private final int quantity;
+  private final SPositive quantity;
   private final EMagic magic;
 
   protected Item(ItemBuilder builder) {
@@ -25,7 +27,7 @@ public abstract class Item<T extends Game> implements HasRarity, HasMagic {
 
   private Item() {
     rarity = ERarity.COMMON;
-    quantity = 1;
+    quantity = SPositive.ONE;
     magic = EMagic.NOPE;
   }
 
@@ -35,7 +37,10 @@ public abstract class Item<T extends Game> implements HasRarity, HasMagic {
   }
 
   protected String printRandomQuantity() {
-    return (quantity == 1) ? "" : "(" + MathUtils.random(quantity / 2, quantity) + ") ";
+    int value = quantity.getValue();
+    return value == 1
+            ? ""
+            : "(" + MathUtils.random(value / 2, value) + ") ";
   }
 
   @Override
@@ -49,7 +54,7 @@ public abstract class Item<T extends Game> implements HasRarity, HasMagic {
   }
 
 
-  protected abstract static class ItemBuilder implements HasRarity, HasMagic{
+  protected abstract static class ItemBuilder implements HasRarity, HasMagic, HasQuantity {
 
     protected final ERarity rarity;
 
@@ -61,8 +66,6 @@ public abstract class Item<T extends Game> implements HasRarity, HasMagic {
     public ERarity getRarity() {
       return rarity;
     }
-
-    public abstract int getQuantity();
 
     protected abstract Item build();
 

@@ -1,6 +1,6 @@
 package nbk.model.entity.enums;
 
-import nbk.model.entity.utils.HasWeight;
+import nbk.model.entity.utils.fields.HasWeight;
 import org.jetbrains.annotations.Contract;
 
 /**

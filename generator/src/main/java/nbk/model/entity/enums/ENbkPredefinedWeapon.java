@@ -2,11 +2,12 @@ package nbk.model.entity.enums;
 
 import commons.model.entity.enums.EMagic;
 import commons.model.entity.enums.ERarity;
-import commons.model.entity.utils.HasMagic;
-import commons.model.entity.utils.ItemType;
-import commons.model.entity.utils.ItemTypeBuilder;
+import commons.model.entity.utils.builders.ItemTypeBuilder;
+import commons.model.entity.utils.builders.MagicBuilder;
+import commons.model.entity.utils.fields.HasMagic;
+import commons.model.entity.utils.fields.ItemType;
 import commons.utils.MathUtils;
-import nbk.model.entity.utils.MagicBuilder;
+import nbk.model.entity.utils.fields.HasWeaponType;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by Germain on 23/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
+public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic ,HasWeaponType {
   // Récupération
   GOURDIN(new ENbkPredefinedWeaponBuilder()
           .setNames("Bonne branche", "Gourdin", "Pied de chaise")
@@ -256,36 +257,36 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
   ARC_SYLVAIN(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc composite d'elfe sylvain (imitation)")
           .uncommon()
-          .setWeaponType(ENbkWeaponType.ARC)),
+          .setWeaponType(ENbkWeaponType.ARC_COURT)),
   ARC_DROW(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc long des Drows")
           .rare()
-          .setWeaponType(ENbkWeaponType.ARC)),
+          .setWeaponType(ENbkWeaponType.ARC_LONG)),
   ARC_LUNELBAR(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc Ouvragé des Lunelbar")
           .rare()
-          .setWeaponType(ENbkWeaponType.ARC)),
+          .setWeaponType(ENbkWeaponType.ARC_LONG)),
   ARC_MEULDOR(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc des Meuldors")
           .epic()
-          .setWeaponType(ENbkWeaponType.ARC)),
+          .setWeaponType(ENbkWeaponType.ARC_LONG)),
   ARC_SOLIDE(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc solide d'Unrienmörn")
           .epic()
-          .setWeaponType(ENbkWeaponType.ARC)),
+          .setWeaponType(ENbkWeaponType.ARC_COURT)),
   ARC_SYLVAIN_VERITABLE(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc composite d'elfe sylvain (véritable)")
           .legendary()
-          .setWeaponType(ENbkWeaponType.ARC)),
+          .setWeaponType(ENbkWeaponType.ARC_LONG)),
   ARC_YEMISOLD(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc long de Yemisold")
           .legendary()
-          .setWeaponType(ENbkWeaponType.ARC)
+          .setWeaponType(ENbkWeaponType.ARC_LONG)
           .isMagic()),
   ARC_SYLDERIEN(new ENbkPredefinedWeaponBuilder()
           .setNames("Arc de puissance des Syldériens")
           .legendary()
-          .setWeaponType(ENbkWeaponType.ARC)),
+          .setWeaponType(ENbkWeaponType.ARC_LONG)),
   // Flèches
   FLECHE_MAUVE(new ENbkPredefinedWeaponBuilder()
           .setNames("Flèche Mauve des pirates")
@@ -387,7 +388,7 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
   LANCE_PIERRE(new ENbkPredefinedWeaponBuilder()
           .setNames("Lance-pierre Mythique D'hyshoul")
           .epic()
-          .setWeaponType(ENbkWeaponType.ARC)
+          .setWeaponType(ENbkWeaponType.HACHE_JET)
           .isRelic()),
   FAUCILLE_NIOURLG(new ENbkPredefinedWeaponBuilder()
           .setNames("Faucille Démentielle de Niourgl")
@@ -443,6 +444,7 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
     return rarity;
   }
 
+  @Override
   public ENbkWeaponType getWeaponType() {
     return weaponType;
   }
