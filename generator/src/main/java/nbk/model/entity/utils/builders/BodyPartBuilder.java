@@ -1,6 +1,5 @@
 package nbk.model.entity.utils.builders;
 
-import nbk.model.entity.enums.EBodyPart;
 import nbk.model.entity.utils.fields.IsBodyPart;
 
 /**
@@ -8,5 +7,19 @@ import nbk.model.entity.utils.fields.IsBodyPart;
  */
 public interface BodyPartBuilder extends IsBodyPart {
 
-  BodyPartBuilder setBodyParts(EBodyPart first, EBodyPart... others);
+  BodyPartBuilder headPart();
+
+  BodyPartBuilder torsoPart();
+
+  BodyPartBuilder armsPart();
+
+  BodyPartBuilder legsPart();
+
+  BodyPartBuilder forearmsPart();
+
+  BodyPartBuilder handsPart();
+
+  BodyPartBuilder feetPart();
+
+  BodyPartBuilder shieldPart();
 }

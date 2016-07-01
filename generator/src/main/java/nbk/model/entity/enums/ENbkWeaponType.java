@@ -31,22 +31,27 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
   LAME_COURTE(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Poignard")
           .setFeminineNouns("Dague")
+          .common()
           .oneHand()
           .longDistance()
           .smallSize()),
   LAME_1MAIN(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Sabre")
           .setFeminineNouns("Epée", "Rapière")
+          .common()
           .oneHand()
           .printNbHands()),
   LAME_2MAINS(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Epée")
+          .common()
           .twoHands()
           .printNbHands()
           .largeSize()),
   HACHE_1MAIN(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Hache")
-          .oneHand().printNbHands()),
+          .common()
+          .oneHand()
+          .printNbHands()),
   HACHE_JET(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Hache de jet")
           .uncommon()
@@ -83,10 +88,12 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
           .longDistance()),
   ARC_COURT(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Arc court")
+          .common()
           .twoHands()
           .longDistance()),
   ARC_LONG(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Arc long")
+          .common()
           .twoHands()
           .longDistance()
           .largeSize()),
@@ -173,7 +180,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
           DistanceBuilder, SizeBuilder {
 
     List<FrenchNoun> names = new LinkedList<>();
-    ERarity rarity = ERarity.COMMON;
+    ERarity rarity;
     ENbHands nbHands;
     boolean printNbHands = false;
     SPositive quantity = SPositive.ONE;
@@ -201,6 +208,12 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
     @Override
     public ItemTypeBuilder setNames(Object first, Object... others) {
       throw new UnsupportedOperationException("Use setMasculineNouns or setFeminineNouns instead");
+    }
+
+    @Override
+    public NbKWeaponTypeBuilder common() {
+      rarity = ERarity.COMMON;
+      return this;
     }
 
     @Override

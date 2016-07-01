@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.stream.Stream;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -18,7 +17,10 @@ public class ENbkWeaponTypeTest {
             w -> {
               assertNotNull(w.getName());
               assertNotNull(w.getRarity());
-              assertNotEquals(0, w.getNbHands());
+              assertNotNull(w.getWeaponType());
+              assertNotNull(w.getQuantity());
+              assertNotNull(w.getNbHands());
+              assertNotNull(w.isLongDistance());
             }
     );
   }

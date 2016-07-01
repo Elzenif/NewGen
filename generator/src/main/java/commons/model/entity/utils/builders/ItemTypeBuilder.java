@@ -11,6 +11,8 @@ public interface ItemTypeBuilder extends HasRarity {
 
   ItemTypeBuilder setNames(Object first, Object... others);
 
+  ItemTypeBuilder common();
+
   ItemTypeBuilder uncommon();
 
   ItemTypeBuilder rare();

@@ -26,48 +26,103 @@ public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight
   // Vestes
   GAMBISON_BASE(new ENbkPredefinedArmorBuilder()
           .setNames("Gambison de base avec manches")
-          .setBodyParts(EBodyPart.TORSO, EBodyPart.ARMS)),
+          .common()
+          .torsoPart().armsPart()),
   VESTE_BASE(new ENbkPredefinedArmorBuilder()
           .setNames("Veste toile renforcée avec manches")
-          .setBodyParts(EBodyPart.TORSO, EBodyPart.ARMS)),
+          .common()
+          .torsoPart().armsPart()),
   GAMBISON_CORRECT(new ENbkPredefinedArmorBuilder()
           .setNames("Gambison correct avec manches")
-          .setBodyParts(EBodyPart.TORSO, EBodyPart.ARMS)),
+          .common()
+          .torsoPart().armsPart()),
   VESTE_VOLEUR(new ENbkPredefinedArmorBuilder()
           .setNames("Veste toile renforcée noire, pour voleur")
           .uncommon()
-          .setBodyParts(EBodyPart.TORSO, EBodyPart.ARMS)),
-  // Plastron cuir
+          .torsoPart().armsPart()),
+  // Plastrons cuir
   PLASTRON_CUIR_BASE(new ENbkPredefinedArmorBuilder()
           .setNames("Plastron de cuir de base")
-          .setBodyParts(EBodyPart.TORSO)),
+          .common()
+          .torsoPart()),
   PLASTRON_CUIR_CORRECT(new ENbkPredefinedArmorBuilder()
           .setNames("Plastron de cuir bouilli correct")
-          .setBodyParts(EBodyPart.TORSO)),
+          .common()
+          .torsoPart()),
   PLASTRON_CUIR_MOULE(new ENbkPredefinedArmorBuilder()
           .setNames("Plastron de cuir moulé sur mesure")
           .uncommon()
-          .setBodyParts(EBodyPart.TORSO)),
+          .torsoPart()),
   PLASTRON_CUIR_METAL(new ENbkPredefinedArmorBuilder()
           .setNames("Plastron de cuir renforcé métal")
           .uncommon()
-          .setBodyParts(EBodyPart.TORSO)
+          .torsoPart()
           .heavyWeight()),
   PLASTRON_CUIR_LUXE(new ENbkPredefinedArmorBuilder()
           .setNames("Plastron de cuir luxe (renforcé métal et décoré)")
           .rare()
-          .setBodyParts(EBodyPart.TORSO)
+          .torsoPart()
           .heavyWeight()),
   PLASTRON_CUIR_LUXE2(new ENbkPredefinedArmorBuilder()
           .setNames("Plastron de cuir luxe +2 force (ench base 3)")
           .epic()
           .isMagic()
-          .setBodyParts(EBodyPart.TORSO)),
+          .torsoPart()),
   PLASTRON_CUIR_ELFE(new ENbkPredefinedArmorBuilder()
           .setNames("Plastron de cuir luxe Haut-Elfe +4 (ench base 3)")
           .legendary()
           .isMagic()
-          .setBodyParts(EBodyPart.TORSO));
+          .torsoPart()),
+  // Plastrons métal
+  PLASTRON_METAL_LOURD(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron métal, lourd et grossier")
+          .uncommon()
+          .torsoPart()
+          .heavyWeight()),
+  PLASTRON_METAL_LEGER(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron métal léger")
+          .rare()
+          .torsoPart()
+          .heavyWeight()),
+  PLASTRON_METAL_LUXE(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron métal luxe (artisan nain)")
+          .epic()
+          .torsoPart()
+          .heavyWeight()),
+  PLASTRON_METAL_LUXE2(new ENbkPredefinedArmorBuilder()
+          .setNames("Plastron métal luxe +2 force (ench base 4)")
+          .legendary()
+          .isMagic()
+          .torsoPart()
+          .heavyWeight()),
+  // Accessoires métal
+  JAMBIERES_METAL_lOURDES(new ENbkPredefinedArmorBuilder()
+          .setNames("Jambières métal, lourdes et grossières")
+          .uncommon()
+          .legsPart()
+          .heavyWeight()),
+  JAMBIERES_METAL_LEGERES(new ENbkPredefinedArmorBuilder()
+          .setNames("Jambières métal légères")
+          .rare()
+          .legsPart()
+          .heavyWeight()),
+  JAMBIERES_METAL_LUXE(new ENbkPredefinedArmorBuilder()
+          .setNames("Jambières métal luxe (artisan nain)")
+          .epic()
+          .legsPart()
+          .heavyWeight()),
+  JAMBIERES_METAL_LUXE1(new ENbkPredefinedArmorBuilder()
+          .setNames("Jambières métal +1 dex")
+          .legendary()
+          .isMagic()
+          .legsPart()
+          .heavyWeight()),
+  JAMBIERES_METAL_PROTECTOR(new ENbkPredefinedArmorBuilder()
+          .setNames("Jambières métal luxe Protector(TM) (ench base 1)")
+          .legendary()
+          .isMagic()
+          .legsPart()
+          .heavyWeight());
 
   private final List<String> names;
   private final ERarity rarity;
@@ -119,9 +174,9 @@ public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight
           BodyPartBuilder, SizeBuilder {
 
     List<String> names = new LinkedList<>();
-    ERarity rarity = ERarity.COMMON;
+    ERarity rarity;
     EMagic magic = EMagic.NOPE;
-    EnumSet<EBodyPart> bodyParts;
+    EnumSet<EBodyPart> bodyParts = EnumSet.noneOf(EBodyPart.class);
     EWeight weight = EWeight.NORMAL;
     ESize size = ESize.NORMAL;
 
@@ -131,6 +186,12 @@ public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight
       for (Object name : others) {
         names.add((String) name);
       }
+      return this;
+    }
+
+    @Override
+    public ENbkPredefinedArmorBuilder common() {
+      rarity = ERarity.COMMON;
       return this;
     }
 
@@ -171,8 +232,50 @@ public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight
     }
 
     @Override
-    public ENbkPredefinedArmorBuilder setBodyParts(EBodyPart first, EBodyPart... others) {
-      bodyParts = EnumSet.of(first, others);
+    public ENbkPredefinedArmorBuilder headPart() {
+      bodyParts.add(EBodyPart.HEAD);
+      return this;
+    }
+
+    @Override
+    public ENbkPredefinedArmorBuilder torsoPart() {
+      bodyParts.add(EBodyPart.TORSO);
+      return this;
+    }
+
+    @Override
+    public ENbkPredefinedArmorBuilder armsPart() {
+      bodyParts.add(EBodyPart.ARMS);
+      return this;
+    }
+
+    @Override
+    public ENbkPredefinedArmorBuilder legsPart() {
+      bodyParts.add(EBodyPart.LEGS);
+      return this;
+    }
+
+    @Override
+    public ENbkPredefinedArmorBuilder forearmsPart() {
+      bodyParts.add(EBodyPart.FOREARMS);
+      return this;
+    }
+
+    @Override
+    public ENbkPredefinedArmorBuilder handsPart() {
+      bodyParts.add(EBodyPart.HANDS);
+      return this;
+    }
+
+    @Override
+    public ENbkPredefinedArmorBuilder feetPart() {
+      bodyParts.add(EBodyPart.FEET);
+      return this;
+    }
+
+    @Override
+    public ENbkPredefinedArmorBuilder shieldPart() {
+      bodyParts.add(EBodyPart.SHIELD);
       return this;
     }
 

@@ -17,6 +17,7 @@ public class ENbkQualityTest {
             q -> {
               assertNotNull(q.getName());
               assertNotNull(q.getRarity());
+              assertNotNull(q.getQuality());
             }
     );
   }

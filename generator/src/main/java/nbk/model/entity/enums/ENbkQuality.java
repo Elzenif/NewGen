@@ -26,7 +26,8 @@ public enum ENbkQuality implements ItemType<FrenchAdjective>, HasQuality {
   MAUVAIS(new NbkQualityBuilder()
           .setGenderAdjective("grossier", "grossière")
           .setNeutralAdjective("perrave", "de base", "basique", "daubesque", "quelconque", "minable",
-                  "de basse qualité")),
+                  "de basse qualité")
+          .common()),
   BASIQUE(new NbkQualityBuilder()
           .setGenderAdjective("correct", "correcte")
           .setNeutralAdjective("de qualité")
@@ -73,7 +74,7 @@ public enum ENbkQuality implements ItemType<FrenchAdjective>, HasQuality {
   private static class NbkQualityBuilder implements ItemTypeBuilder {
 
     List<FrenchAdjective> names = new LinkedList<>();
-    ERarity rarity = ERarity.COMMON;
+    ERarity rarity;
 
     NbkQualityBuilder setNeutralAdjective(String... names) {
       for (String name : names) {
@@ -96,6 +97,11 @@ public enum ENbkQuality implements ItemType<FrenchAdjective>, HasQuality {
       throw new UnsupportedOperationException("Use setNeutralAdjective or setGenderAdjective instead");
     }
 
+    @Override
+    public NbkQualityBuilder common() {
+      rarity = ERarity.COMMON;
+      return this;
+    }
 
     @Override
     public NbkQualityBuilder uncommon() {

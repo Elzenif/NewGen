@@ -16,16 +16,19 @@ import java.util.List;
  * Created by Germain on 23/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic ,HasWeaponType {
+public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic, HasWeaponType {
   // Récupération
   GOURDIN(new ENbkPredefinedWeaponBuilder()
           .setNames("Bonne branche", "Gourdin", "Pied de chaise")
+          .common()
           .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
   BRANCHE(new ENbkPredefinedWeaponBuilder()
           .setNames("Branche moisie", "Manche de pioche")
+          .common()
           .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
   CHAISE(new ENbkPredefinedWeaponBuilder()
           .setNames("Chaise", "Tabouret")
+          .common()
           .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
   CHANDELIER(new ENbkPredefinedWeaponBuilder()
           .setNames("Chandelier du Colonel Moutarde")
@@ -33,10 +36,12 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic ,HasWeapo
           .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
   TISONNIER(new ENbkPredefinedWeaponBuilder()
           .setNames("Tisonnier", "Tisonnier chauffé au rouge")
+          .common()
           .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
   // Lames courtes
   COUTEAU_DE_POCHE(new ENbkPredefinedWeaponBuilder()
           .setNames("Couteau de poche du grand-père", "Couteau de qualité")
+          .common()
           .setWeaponType(ENbkWeaponType.LAME_COURTE)),
   POIGNARD_MIRFILU(new ENbkPredefinedWeaponBuilder()
           .setNames("Poignard d'Excellence de Mirfilu")
@@ -458,7 +463,7 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic ,HasWeapo
   private static class ENbkPredefinedWeaponBuilder implements ItemTypeBuilder, MagicBuilder {
 
     List<String> names = new LinkedList<>();
-    ERarity rarity = ERarity.COMMON;
+    ERarity rarity;
     ENbkWeaponType weaponType;
     EMagic magic = EMagic.NOPE;
 
@@ -468,6 +473,12 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic ,HasWeapo
       for (Object name : others) {
         names.add((String) name);
       }
+      return this;
+    }
+
+    @Override
+    public ENbkPredefinedWeaponBuilder common() {
+      this.rarity = ERarity.COMMON;
       return this;
     }
 
