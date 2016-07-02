@@ -179,7 +179,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
   private static class NbKWeaponTypeBuilder implements ItemTypeBuilder, QuantityBuilder, NbHandsBuilder,
           DistanceBuilder, SizeBuilder {
 
-    List<FrenchNoun> names = new LinkedList<>();
+    final List<FrenchNoun> names = new LinkedList<>();
     ERarity rarity;
     ENbHands nbHands;
     boolean printNbHands = false;

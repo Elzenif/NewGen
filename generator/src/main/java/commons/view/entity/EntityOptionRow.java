@@ -123,7 +123,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   }
 
   public void updateRarityConstraint(GenericConstraint<ERarity> constraint) {
-    globalConstraints.put(ERarity.class, rarityConstraints, constraint);
+    globalConstraints.clear(ERarity.class, rarityConstraints);
+    globalConstraints.update(ERarity.class, rarityConstraints, constraint);
   }
-
 }

@@ -29,7 +29,7 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic, HasWeapo
   CHAISE(new ENbkPredefinedWeaponBuilder()
           .setNames("Chaise", "Tabouret")
           .common()
-          .setWeaponType(ENbkWeaponType.MARTEAU_1MAIN)),
+          .setWeaponType(ENbkWeaponType.MARTEAU_2MAINS)),
   CHANDELIER(new ENbkPredefinedWeaponBuilder()
           .setNames("Chandelier du Colonel Moutarde")
           .uncommon()
@@ -462,7 +462,7 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic, HasWeapo
 
   private static class ENbkPredefinedWeaponBuilder implements ItemTypeBuilder, MagicBuilder {
 
-    List<String> names = new LinkedList<>();
+    final List<String> names = new LinkedList<>();
     ERarity rarity;
     ENbkWeaponType weaponType;
     EMagic magic = EMagic.NOPE;

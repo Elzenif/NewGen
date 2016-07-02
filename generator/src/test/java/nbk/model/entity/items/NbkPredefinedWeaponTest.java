@@ -77,27 +77,22 @@ public class NbkPredefinedWeaponTest {
   }
 
   @Test
-  public void testCreateWeaponWithHandsConstraint() {
+  public void testCreateWeaponWithHandsConstraint() throws NoAvailableItemTypeException {
     NbHandsConstraints<ENbkWeaponType> nbHandsConstraints = new NbHandsConstraints<>(ENbkWeaponType.class);
     for (ERarity rarity : rarities) {
       ENbHands nbHands = ENbHands.ONE;
-      globalConstraints.put(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getOneHand());
-      try {
-        weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
-        assertNotNull("The weapon should not be null");
-        assertEquals("The weapon should be one hand", nbHands, weapon.getNbHands());
-      } catch (NoAvailableItemTypeException e) {
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getOneHand());
+      weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getOneHand());
+      assertNotNull("The weapon should not be null", weapon);
+      assertEquals("The weapon should be one hand", nbHands, weapon.getNbHands());
 
-      }
       nbHands = ENbHands.TWO;
-      globalConstraints.put(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getTwoHands());
-      try {
-        weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
-        assertNotNull("The weapon should not be null");
-        assertEquals("The weapon should be two hands", nbHands, weapon.getNbHands());
-      } catch (NoAvailableItemTypeException e) {
-
-      }
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getTwoHands());
+      weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getTwoHands());
+      assertNotNull("The weapon should not be null", weapon);
+      assertEquals("The weapon should be two hands", nbHands, weapon.getNbHands());
     }
   }
 }

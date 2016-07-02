@@ -73,7 +73,7 @@ public enum ENbkQuality implements ItemType<FrenchAdjective>, HasQuality {
 
   private static class NbkQualityBuilder implements ItemTypeBuilder {
 
-    List<FrenchAdjective> names = new LinkedList<>();
+    final List<FrenchAdjective> names = new LinkedList<>();
     ERarity rarity;
 
     NbkQualityBuilder setNeutralAdjective(String... names) {

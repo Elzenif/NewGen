@@ -173,10 +173,10 @@ public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight
   private static class ENbkPredefinedArmorBuilder implements ItemTypeBuilder, MagicBuilder, WeightBuilder,
           BodyPartBuilder, SizeBuilder {
 
-    List<String> names = new LinkedList<>();
+    final List<String> names = new LinkedList<>();
     ERarity rarity;
     EMagic magic = EMagic.NOPE;
-    EnumSet<EBodyPart> bodyParts = EnumSet.noneOf(EBodyPart.class);
+    final EnumSet<EBodyPart> bodyParts = EnumSet.noneOf(EBodyPart.class);
     EWeight weight = EWeight.NORMAL;
     ESize size = ESize.NORMAL;
 
