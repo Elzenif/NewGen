@@ -1,16 +1,18 @@
 package nbk.view.entity;
 
+import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
 import commons.view.utils.ConstraintPanel;
 import nbk.controller.entity.GenerateNbkWeaponActionListener;
-import nbk.controller.entity.NbkNbHandsActionListener;
-import nbk.model.entity.constraints.NbkNbHandsConstraint;
+import nbk.controller.entity.NbHandsActionListener;
+import nbk.model.entity.constraints.NbHandsConstraints;
 import nbk.model.entity.enums.ENbkWeaponType;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
-import java.util.EnumMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by Germain on 13/06/2016.
@@ -19,7 +21,8 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
 
   private final ConstraintPanel nbHandsPanel;
   private final ButtonGroup nbHandsButtonGroup;
-  private final EnumMap<NbkNbHandsConstraint, JRadioButton> nbHandsButtons;
+  private final NbHandsConstraints<ENbkWeaponType> nbHandsConstraints;
+  private final Map<GenericConstraint<ENbkWeaponType>, JRadioButton> nbHandsButtons;
   private final JRadioButton noHandButton;
   private final JRadioButton oneHandButton;
   private final JRadioButton twoHandsButton;
@@ -34,10 +37,11 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
     oneHandButton.setToolTipText("Will generate a one hand weapon");
     twoHandsButton = new JRadioButton("2h", false);
     twoHandsButton.setToolTipText("Will generate a two hands weapon");
-    nbHandsButtons = new EnumMap<>(NbkNbHandsConstraint.class);
-    nbHandsButtons.put(NbkNbHandsConstraint.NO_CONSTRAINT, noHandButton);
-    nbHandsButtons.put(NbkNbHandsConstraint.ONE_HAND, oneHandButton);
-    nbHandsButtons.put(NbkNbHandsConstraint.TWO_HANDS, twoHandsButton);
+    nbHandsButtons = new LinkedHashMap<>(3);
+    nbHandsConstraints = new NbHandsConstraints<>(ENbkWeaponType.class);
+    nbHandsButtons.put(nbHandsConstraints.getNoConstraint(), noHandButton);
+    nbHandsButtons.put(nbHandsConstraints.getOneHand(), oneHandButton);
+    nbHandsButtons.put(nbHandsConstraints.getTwoHands(), twoHandsButton);
     nbHandsButtonGroup = new ButtonGroup();
     nbHandsPanel = new ConstraintPanel();
     nbHandsPanel.setLayout(new BoxLayout(nbHandsPanel, BoxLayout.Y_AXIS));
@@ -55,10 +59,10 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
     super.setControllers(entityResultRow);
     generateItemButton.addActionListener(new GenerateNbkWeaponActionListener(this, entityResultRow));
     nbHandsButtons.keySet().forEach(nbhConstraint ->
-            nbHandsButtons.get(nbhConstraint).addActionListener(new NbkNbHandsActionListener(this, nbhConstraint)));
+            nbHandsButtons.get(nbhConstraint).addActionListener(new NbHandsActionListener(this, nbhConstraint)));
   }
 
-  public void updateNbHandsConstraint(NbkNbHandsConstraint nbHandsConstraint) {
-    globalConstraints.put(ENbkWeaponType.class, NbkNbHandsConstraint.class, nbHandsConstraint);
+  public void updateNbHandsConstraint(GenericConstraint<ENbkWeaponType> constraint) {
+    globalConstraints.put(ENbkWeaponType.class, nbHandsConstraints, constraint);
   }
 }

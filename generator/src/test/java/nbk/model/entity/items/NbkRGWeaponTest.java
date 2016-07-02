@@ -4,7 +4,7 @@ import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.enums.EMagic;
 import commons.model.entity.enums.ERarity;
 import commons.utils.exception.NoAvailableItemTypeException;
-import nbk.model.entity.constraints.NbkNbHandsConstraint;
+import nbk.model.entity.constraints.NbHandsConstraints;
 import nbk.model.entity.enums.ENbHands;
 import nbk.model.entity.enums.ENbkQuality;
 import nbk.model.entity.enums.ENbkWeaponType;
@@ -115,15 +115,16 @@ public class NbkRGWeaponTest {
 
   @Test
   public void testCreateWeaponWithHandsConstraint() throws NoAvailableItemTypeException {
+    NbHandsConstraints<ENbkWeaponType> nbHandsConstraints = new NbHandsConstraints<>(ENbkWeaponType.class);
     for (ERarity rarity : rarities) {
       ENbHands nbHands = ENbHands.ONE;
-      globalConstraints.put(ENbkWeaponType.class, NbkNbHandsConstraint.class, NbkNbHandsConstraint.ONE_HAND);
+      globalConstraints.put(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getOneHand());
       weapon = NbkRGWeapon.create(globalConstraints, rarity);
       assertNotNull("The weapon should not be null");
       assertEquals("The weapon should be one hand", nbHands, weapon.getWeaponType().getNbHands());
 
       nbHands = ENbHands.TWO;
-      globalConstraints.put(ENbkWeaponType.class, NbkNbHandsConstraint.class, NbkNbHandsConstraint.TWO_HANDS);
+      globalConstraints.put(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getTwoHands());
       weapon = NbkRGWeapon.create(globalConstraints, rarity);
       assertNotNull("The weapon should not be null");
       assertEquals("The weapon should be two hands", nbHands, weapon.getWeaponType().getNbHands());

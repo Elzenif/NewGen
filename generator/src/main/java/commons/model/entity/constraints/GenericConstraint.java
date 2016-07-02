@@ -11,8 +11,4 @@ import java.util.function.Predicate;
 public interface GenericConstraint<E extends Enum<E> & HasRarity> {
 
   Predicate<E> getPredicate();
-
-  default Predicate<E> alwaysTruePredicate() {
-    return p -> true;
-  }
 }
