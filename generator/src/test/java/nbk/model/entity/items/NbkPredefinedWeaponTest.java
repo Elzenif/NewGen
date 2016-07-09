@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -54,7 +54,7 @@ public class NbkPredefinedWeaponTest {
   public void testPredefinedWeaponIsValid() throws NoAvailableItemTypeException {
     for (ERarity rarity : rarities) {
       weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
-      Set<ENbkPredefinedWeapon> weaponTypes = new HashSet<>(Arrays.asList(ENbkPredefinedWeapon.values()));
+      Set<ENbkPredefinedWeapon> weaponTypes = EnumSet.allOf(ENbkPredefinedWeapon.class);
       assertTrue("The predefined weapon should be a ENbkPredefinedWeapon enum : " + weapon.getMagic().toString(),
               weaponTypes.contains(weapon.getPredefinedWeapon()));
     }
@@ -81,16 +81,16 @@ public class NbkPredefinedWeaponTest {
     NbHandsConstraints<ENbkWeaponType> nbHandsConstraints = new NbHandsConstraints<>(ENbkWeaponType.class);
     for (ERarity rarity : rarities) {
       ENbHands nbHands = ENbHands.ONE;
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getOneHand());
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
       weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getOneHand());
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
       assertNotNull("The weapon should not be null", weapon);
       assertEquals("The weapon should be one hand", nbHands, weapon.getNbHands());
 
       nbHands = ENbHands.TWO;
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getTwoHands());
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
       weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getTwoHands());
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
       assertNotNull("The weapon should not be null", weapon);
       assertEquals("The weapon should be two hands", nbHands, weapon.getNbHands());
     }

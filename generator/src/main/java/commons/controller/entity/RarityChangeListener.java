@@ -33,7 +33,7 @@ public class RarityChangeListener implements PropertyChangeListener {
       constraint = findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(
               rarityLevel, rarityConstraints.getConstraintMapView());
     } catch (NumberFormatException e) {
-      constraint = rarityConstraints.getNoConstraint();
+      constraint = rarityConstraints.NO_CONSTRAINT;
     }
     entityOptionRow.updateRarityConstraint(constraint);
   }

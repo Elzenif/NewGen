@@ -11,19 +11,12 @@ import nbk.model.entity.utils.fields.HasNbHands;
  */
 public class NbHandsConstraints<E extends Enum<E> & ItemType & HasNbHands> extends AbstractConstraints<E> {
 
-  private final GenericItemConstraint<E> oneHand = () -> e -> e.getNbHands() == ENbHands.ONE;
+  public final GenericItemConstraint<E> ONE_HAND = () -> e -> e.getNbHands() == ENbHands.ONE;
 
-  private final GenericItemConstraint<E> twoHands = () -> e -> e.getNbHands() == ENbHands.TWO;
+  public final GenericItemConstraint<E> TWO_HANDS = () -> e -> e.getNbHands() == ENbHands.TWO;
 
   public NbHandsConstraints(Class<E> clazz) {
     super(clazz);
   }
 
-  public GenericItemConstraint<E> getOneHand() {
-    return oneHand;
-  }
-
-  public GenericItemConstraint<E> getTwoHands() {
-    return twoHands;
-  }
 }

@@ -118,16 +118,16 @@ public class NbkRGWeaponTest {
     NbHandsConstraints<ENbkWeaponType> nbHandsConstraints = new NbHandsConstraints<>(ENbkWeaponType.class);
     for (ERarity rarity : rarities) {
       ENbHands nbHands = ENbHands.ONE;
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getOneHand());
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
       weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getOneHand());
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
       assertNotNull("The weapon should not be null", weapon);
       assertEquals("The weapon should be one hand", nbHands, weapon.getWeaponType().getNbHands());
 
       nbHands = ENbHands.TWO;
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getTwoHands());
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
       weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.getTwoHands());
+      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
       assertNotNull("The weapon should not be null", weapon);
       assertEquals("The weapon should be two hands", nbHands, weapon.getWeaponType().getNbHands());
     }

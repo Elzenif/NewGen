@@ -7,15 +7,22 @@ import commons.model.entity.items.Item;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableItemTypeException;
+import nbk.model.entity.enums.EBodyPart;
 import nbk.model.entity.enums.ENbkPredefinedArmor;
+import nbk.model.entity.enums.ESize;
+import nbk.model.entity.enums.EWeight;
 import nbk.model.entity.game.NbkGame;
+import nbk.model.entity.utils.fields.HasSize;
+import nbk.model.entity.utils.fields.HasWeight;
+import nbk.model.entity.utils.fields.IsBodyPart;
 
+import java.util.EnumSet;
 import java.util.function.Predicate;
 
 /**
  * Created by Germain on 26/06/2016.
  */
-public class NbkPredefinedArmor extends Item<NbkGame> {
+public class NbkPredefinedArmor extends Item<NbkGame> implements HasWeight, IsBodyPart, HasSize {
 
   private final ENbkPredefinedArmor predefinedArmor;
 
@@ -29,9 +36,26 @@ public class NbkPredefinedArmor extends Item<NbkGame> {
     predefinedArmor = builder.predefinedArmor;
   }
 
+  ENbkPredefinedArmor getPredefinedArmor() { return predefinedArmor; }
+
   @Override
   public String toString() {
     return predefinedArmor.getName();
+  }
+
+  @Override
+  public ESize getSize() {
+    return predefinedArmor.getSize();
+  }
+
+  @Override
+  public EWeight getWeight() {
+    return predefinedArmor.getWeight();
+  }
+
+  @Override
+  public EnumSet<EBodyPart> getBodyParts() {
+    return predefinedArmor.getBodyParts();
   }
 
   private static class NbkPredefinedArmorBuilder extends ItemBuilder {

@@ -34,8 +34,8 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
     twoHandsButton.setToolTipText("Includes two hands weapons");
     nbHandsButtons = new LinkedHashMap<>(2);
     nbHandsConstraints = new NbHandsConstraints<>(ENbkWeaponType.class);
-    nbHandsButtons.put(nbHandsConstraints.getOneHand(), oneHandButton);
-    nbHandsButtons.put(nbHandsConstraints.getTwoHands(), twoHandsButton);
+    nbHandsButtons.put(nbHandsConstraints.ONE_HAND, oneHandButton);
+    nbHandsButtons.put(nbHandsConstraints.TWO_HANDS, twoHandsButton);
     nbHandsPanel = new ConstraintPanel();
     nbHandsPanel.setLayout(new BoxLayout(nbHandsPanel, BoxLayout.Y_AXIS));
     nbHandsButtons.values().forEach(nbHandsPanel::add);

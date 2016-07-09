@@ -9,17 +9,13 @@ import java.util.Objects;
  */
 public abstract class AbstractConstraints<E extends Enum<E> & HasRarity> {
 
+  public final GenericConstraint<E> NO_CONSTRAINT = () -> e -> true;
+
   private final Class<E> clazz;
-  protected final GenericConstraint<E> noConstraint = () -> e -> true;
 
   protected AbstractConstraints(Class<E> clazz) {
     this.clazz = clazz;
   }
-
-  public GenericConstraint<E> getNoConstraint() {
-    return noConstraint;
-  }
-
 
   @Override
   public boolean equals(Object o) {
