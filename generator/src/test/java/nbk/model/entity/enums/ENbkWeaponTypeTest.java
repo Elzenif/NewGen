@@ -20,7 +20,7 @@ public class ENbkWeaponTypeTest {
               assertNotNull(w.getWeaponType());
               assertNotNull(w.getQuantity());
               assertNotNull(w.getNbHands());
-              assertNotNull(w.isLongDistance());
+              assertNotNull(w.isLongRange());
             }
     );
   }

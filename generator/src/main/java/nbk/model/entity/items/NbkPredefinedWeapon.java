@@ -35,8 +35,8 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
   }
 
   @Override
-  public boolean isLongDistance() {
-    return predefinedWeapon.getWeaponType().isLongDistance();
+  public boolean isLongRange() {
+    return predefinedWeapon.getWeaponType().isLongRange();
   }
 
   @Override

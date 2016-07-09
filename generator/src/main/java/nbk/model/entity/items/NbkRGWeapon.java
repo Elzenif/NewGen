@@ -42,8 +42,8 @@ public class NbkRGWeapon extends NbkAbstractWeapon implements HasWeaponType, Has
   }
 
   @Override
-  public boolean isLongDistance() {
-    return weaponType.isLongDistance();
+  public boolean isLongRange() {
+    return weaponType.isLongRange();
   }
 
   @Override

@@ -9,11 +9,11 @@ import commons.utils.MathUtils;
 import commons.utils.SPositive;
 import commons.utils.french.FrenchNoun;
 import commons.utils.french.Gender;
-import nbk.model.entity.utils.builders.DistanceBuilder;
 import nbk.model.entity.utils.builders.NbHandsBuilder;
+import nbk.model.entity.utils.builders.RangeBuilder;
 import nbk.model.entity.utils.builders.SizeBuilder;
-import nbk.model.entity.utils.fields.HasDistance;
 import nbk.model.entity.utils.fields.HasNbHands;
+import nbk.model.entity.utils.fields.HasRange;
 import nbk.model.entity.utils.fields.HasSize;
 import nbk.model.entity.utils.fields.HasWeaponType;
 import org.jetbrains.annotations.Contract;
@@ -25,7 +25,7 @@ import java.util.List;
  * Created by Germain on 04/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQuantity, HasNbHands, HasDistance,
+public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQuantity, HasNbHands, HasRange,
         HasSize {
 
   LAME_COURTE(new NbKWeaponTypeBuilder()
@@ -33,7 +33,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
           .setFeminineNouns("Dague")
           .common()
           .oneHand()
-          .longDistance()
+          .longRange()
           .smallSize()),
   LAME_1MAIN(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Sabre")
@@ -56,7 +56,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
           .setFeminineNouns("Hache de jet")
           .uncommon()
           .oneHand()
-          .longDistance()
+          .longRange()
           .smallSize()),
   HACHE_2MAINS(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Hache")
@@ -85,36 +85,36 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
           .setMasculineNouns("Javelot")
           .uncommon()
           .oneHand()
-          .longDistance()),
+          .longRange()),
   ARC_COURT(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Arc court")
           .common()
           .twoHands()
-          .longDistance()),
+          .longRange()),
   ARC_LONG(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Arc long")
           .common()
           .twoHands()
-          .longDistance()
+          .longRange()
           .largeSize()),
   FLECHE(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Flèche")
           .uncommon()
           .oneHand()
           .setQuantity(15)
-          .longDistance()
+          .longRange()
           .smallSize()),
   ARBALETE(new NbKWeaponTypeBuilder()
           .setFeminineNouns("Arbalète")
           .uncommon()
           .twoHands()
-          .longDistance()),
+          .longRange()),
   CARREAU(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Carreau")
           .rare()
           .oneHand()
           .setQuantity(15)
-          .longDistance()
+          .longRange()
           .smallSize());
 
   private final List<FrenchNoun> names;
@@ -122,7 +122,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
   private final ENbHands nbHands;
   private final boolean printNbHands;
   private final SPositive quantity;
-  private final boolean distance;
+  private final boolean range;
   private final ESize size;
 
   ENbkWeaponType(NbKWeaponTypeBuilder builder) {
@@ -132,7 +132,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
     printNbHands = builder.getPrintNbHands();
     quantity = builder.getQuantity();
     size = builder.getSize();
-    distance = builder.isLongDistance();
+    range = builder.isLongRange();
   }
 
   @Contract(pure = true)
@@ -166,8 +166,8 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
   }
 
   @Override
-  public boolean isLongDistance() {
-    return distance;
+  public boolean isLongRange() {
+    return range;
   }
 
   @Override
@@ -177,14 +177,14 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
 
 
   private static class NbKWeaponTypeBuilder implements ItemTypeBuilder, QuantityBuilder, NbHandsBuilder,
-          DistanceBuilder, SizeBuilder {
+          RangeBuilder, SizeBuilder {
 
     final List<FrenchNoun> names = new LinkedList<>();
     ERarity rarity;
     ENbHands nbHands;
     boolean printNbHands = false;
     SPositive quantity = SPositive.ONE;
-    boolean distance = false;
+    boolean range = false;
     ESize size = ESize.NORMAL;
 
     NbKWeaponTypeBuilder setMasculineNouns(String... names) {
@@ -264,8 +264,8 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
     }
 
     @Override
-    public NbKWeaponTypeBuilder longDistance() {
-      distance = true;
+    public NbKWeaponTypeBuilder longRange() {
+      range = true;
       return this;
     }
 
@@ -306,8 +306,8 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasWeaponType, HasQu
     }
 
     @Override
-    public boolean isLongDistance() {
-      return distance;
+    public boolean isLongRange() {
+      return range;
     }
 
     @Override
