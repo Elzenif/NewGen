@@ -8,6 +8,7 @@ import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.utils.french.FrenchNoun;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.characteristics.primary.enums.ERange;
 import nbk.model.entity.characteristics.primary.enums.ESize;
 import nbk.model.entity.characteristics.secondary.enums.ENbkQuality;
 import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
@@ -38,8 +39,8 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
   }
 
   @Override
-  public boolean isLongRange() {
-    return weaponType.isLongRange();
+  public ERange getRange() {
+    return weaponType.getRange();
   }
 
   @Override

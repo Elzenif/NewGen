@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Contract;
 /**
  * Created by Germain on 26/06/2016.
  */
-public enum ESize implements HasSize{
+public enum ESize implements HasSize {
   SMALL,
   NORMAL,
   LARGE;

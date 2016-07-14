@@ -13,6 +13,7 @@ import nbk.model.entity.characteristics.primary.builders.NbHandsBuilder;
 import nbk.model.entity.characteristics.primary.builders.RangeBuilder;
 import nbk.model.entity.characteristics.primary.builders.SizeBuilder;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.characteristics.primary.enums.ERange;
 import nbk.model.entity.characteristics.primary.enums.ESize;
 import nbk.model.entity.characteristics.primary.fields.HasNbHands;
 import nbk.model.entity.characteristics.primary.fields.HasRange;
@@ -122,7 +123,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHa
   private final ENbHands nbHands;
   private final boolean printNbHands;
   private final SPositive quantity;
-  private final boolean range;
+  private final ERange range;
   private final ESize size;
 
   ENbkWeaponType(NbKWeaponTypeBuilder builder) {
@@ -132,7 +133,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHa
     printNbHands = builder.getPrintNbHands();
     quantity = builder.getQuantity();
     size = builder.getSize();
-    range = builder.isLongRange();
+    range = builder.getRange();
   }
 
   @Override
@@ -160,7 +161,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHa
   }
 
   @Override
-  public boolean isLongRange() {
+  public ERange getRange() {
     return range;
   }
 
@@ -178,7 +179,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHa
     ENbHands nbHands;
     boolean printNbHands = false;
     SPositive quantity = SPositive.ONE;
-    boolean range = false;
+    ERange range = ERange.CLOSE;
     ESize size = ESize.NORMAL;
 
     NbKWeaponTypeBuilder setMasculineNouns(String... names) {
@@ -259,7 +260,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHa
 
     @Override
     public NbKWeaponTypeBuilder longRange() {
-      range = true;
+      range = ERange.LONG;
       return this;
     }
 
@@ -300,7 +301,7 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHa
     }
 
     @Override
-    public boolean isLongRange() {
+    public ERange getRange() {
       return range;
     }
 

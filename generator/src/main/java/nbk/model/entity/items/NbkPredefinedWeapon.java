@@ -7,6 +7,7 @@ import commons.model.entity.utils.ItemUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableItemTypeException;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.characteristics.primary.enums.ERange;
 import nbk.model.entity.characteristics.primary.enums.ESize;
 import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedWeapon;
 import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
@@ -35,8 +36,8 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
   }
 
   @Override
-  public boolean isLongRange() {
-    return predefinedWeapon.getWeaponType().isLongRange();
+  public ERange getRange() {
+    return predefinedWeapon.getWeaponType().getRange();
   }
 
   @Override

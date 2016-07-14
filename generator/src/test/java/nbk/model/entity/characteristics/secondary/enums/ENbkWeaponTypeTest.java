@@ -19,7 +19,7 @@ public class ENbkWeaponTypeTest {
               assertNotNull(w.getRarity());
               assertNotNull(w.getQuantity());
               assertNotNull(w.getNbHands());
-              assertNotNull(w.isLongRange());
+              assertNotNull(w.getRange());
             }
     );
   }
