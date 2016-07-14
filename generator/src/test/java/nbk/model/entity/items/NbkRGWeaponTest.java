@@ -12,8 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -27,7 +27,6 @@ import static org.junit.Assert.assertTrue;
 public class NbkRGWeaponTest {
 
   private GlobalConstraints globalConstraints;
-  private final List<ERarity> rarities = Arrays.asList(ERarity.values());
   private NbkRGWeapon weapon;
 
   @Before
@@ -37,99 +36,88 @@ public class NbkRGWeaponTest {
 
   @Test
   public void testWeaponNotNull() throws NoAvailableItemTypeException {
-    for (ERarity rarity : rarities) {
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      assertNotNull("The weapon should not be null", weapon);
-    }
+    weapon = NbkRGWeapon.create(globalConstraints);
+    assertNotNull("The weapon should not be null", weapon);
   }
 
   @Test
   public void testWeaponTypeNotNull() throws NoAvailableItemTypeException {
-    for (ERarity rarity : rarities) {
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      assertNotNull("The weapon type should not be null", weapon.getWeaponType());
-    }
+    weapon = NbkRGWeapon.create(globalConstraints);
+    assertNotNull("The weapon type should not be null", weapon.getWeaponType());
   }
 
   @Test
   public void testWeaponTypeIsValid() throws NoAvailableItemTypeException {
-    for (ERarity rarity : rarities) {
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      Set<ENbkWeaponType> weaponTypes = new HashSet<>(Arrays.asList(ENbkWeaponType.values()));
-      assertTrue("The weapon type should be a ENbkWeaponType enum : " + weapon.getWeaponType().toString(),
-              weaponTypes.contains(weapon.getWeaponType()));
-    }
+    weapon = NbkRGWeapon.create(globalConstraints);
+    Set<ENbkWeaponType> weaponTypes = new HashSet<>(Arrays.asList(ENbkWeaponType.values()));
+    assertTrue("The weapon type should be a ENbkWeaponType enum : " + weapon.getWeaponType().toString(),
+            weaponTypes.contains(weapon.getWeaponType()));
   }
 
   @Test
   public void testWeaponQualityIsNotNull() throws NoAvailableItemTypeException {
-    for (ERarity rarity : rarities) {
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      assertNotNull("The weapon quality should not be null", weapon.getQuality());
-    }
+    weapon = NbkRGWeapon.create(globalConstraints);
+    assertNotNull("The weapon quality should not be null", weapon.getQuality());
   }
 
   @Test
   public void testWeaponQualityIsValid() throws NoAvailableItemTypeException {
-    for (ERarity rarity : rarities) {
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      Set<ENbkQuality> qualities = new HashSet<>(Arrays.asList(ENbkQuality.values()));
-      assertTrue("The weapon quality sould be a ENbkQuality enum : " + weapon.getQuality().toString(),
-              qualities.contains(weapon.getQuality()));
-    }
+    weapon = NbkRGWeapon.create(globalConstraints);
+    Set<ENbkQuality> qualities = new HashSet<>(Arrays.asList(ENbkQuality.values()));
+    assertTrue("The weapon quality sould be a ENbkQuality enum : " + weapon.getQuality().toString(),
+            qualities.contains(weapon.getQuality()));
   }
 
   @Test
   public void testWeaponMagicIsNotNull() throws NoAvailableItemTypeException {
-    for (ERarity rarity : rarities) {
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      assertNotNull("The weapon magic should not be null", weapon.getMagic());
-    }
+    weapon = NbkRGWeapon.create(globalConstraints);
+    assertNotNull("The weapon magic should not be null", weapon.getMagic());
   }
 
   @Test
   public void testWeaponMagicIsValid() throws NoAvailableItemTypeException {
-    for (ERarity rarity : rarities) {
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      Set<EMagic> qualities = new HashSet<>(Arrays.asList(EMagic.values()));
-      assertTrue("The weapon quality should be a EMagic enum : " + weapon.getMagic().toString(),
-              qualities.contains(weapon.getMagic()));
-    }
+    weapon = NbkRGWeapon.create(globalConstraints);
+    Set<EMagic> qualities = new HashSet<>(Arrays.asList(EMagic.values()));
+    assertTrue("The weapon quality should be a EMagic enum : " + weapon.getMagic().toString(),
+            qualities.contains(weapon.getMagic()));
   }
 
   @Test
   public void testWeaponToStringIsNotNull() throws NoAvailableItemTypeException {
-    for (ERarity rarity : rarities) {
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      assertNotNull("The weapon toString should not be null", weapon.toString());
-    }
+    weapon = NbkRGWeapon.create(globalConstraints);
+    assertNotNull("The weapon toString should not be null", weapon.toString());
   }
 
   @Test
   public void testWeaponToStringIsValid() throws NoAvailableItemTypeException {
-    for (ERarity rarity : rarities) {
+    weapon = NbkRGWeapon.create(globalConstraints);
+    assertFalse("The weapon toString is not valid", weapon.toString().contains("@"));
+  }
+
+  @Test
+  public void testCreateWeaponWithRarityConstraint() throws NoAvailableItemTypeException {
+    for (ERarity rarity : EnumSet.allOf(ERarity.class)) {
       weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      assertFalse("The weapon toString is not valid", weapon.toString().contains("@"));
+      assertNotNull("The weapon should not be null", weapon);
+      assertEquals(rarity, weapon.getRarity());
     }
   }
 
   @Test
   public void testCreateWeaponWithHandsConstraint() throws NoAvailableItemTypeException {
     NbHandsConstraints<ENbkWeaponType> nbHandsConstraints = new NbHandsConstraints<>(ENbkWeaponType.class);
-    for (ERarity rarity : rarities) {
-      ENbHands nbHands = ENbHands.ONE;
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
-      assertNotNull("The weapon should not be null", weapon);
-      assertEquals("The weapon should be one hand", nbHands, weapon.getWeaponType().getNbHands());
+    ENbHands nbHands = ENbHands.ONE;
+    globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
+    weapon = NbkRGWeapon.create(globalConstraints);
+    globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
+    assertNotNull("The weapon should not be null", weapon);
+    assertEquals("The weapon should be one hand", nbHands, weapon.getWeaponType().getNbHands());
 
-      nbHands = ENbHands.TWO;
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
-      globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
-      assertNotNull("The weapon should not be null", weapon);
-      assertEquals("The weapon should be two hands", nbHands, weapon.getWeaponType().getNbHands());
-    }
+    nbHands = ENbHands.TWO;
+    globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
+    weapon = NbkRGWeapon.create(globalConstraints);
+    globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
+    assertNotNull("The weapon should not be null", weapon);
+    assertEquals("The weapon should be two hands", nbHands, weapon.getWeaponType().getNbHands());
   }
 }

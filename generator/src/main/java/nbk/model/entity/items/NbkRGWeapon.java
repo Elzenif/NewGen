@@ -24,6 +24,12 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
   private final ENbkWeaponType weaponType;
   private final ENbkQuality quality;
 
+  @Contract("_ -> !null")
+  public static NbkRGWeapon create(GlobalConstraints globalConstraints)
+          throws NoAvailableItemTypeException {
+    return new RGWeaponBuilder(globalConstraints).build();
+  }
+
   @Contract("_, _ -> !null")
   public static NbkRGWeapon create(GlobalConstraints globalConstraints, ERarity rarity)
           throws NoAvailableItemTypeException {
@@ -71,6 +77,12 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
 
     ENbkWeaponType weaponType;
     ENbkQuality quality;
+
+    RGWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+      setWeaponType(globalConstraints.getPredicate(ENbkWeaponType.class));
+      rarity = ItemUtils.selectRandomRarity(ERarity.values());
+      setQuality(rarity);
+    }
 
     RGWeaponBuilder(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
       super(rarity);

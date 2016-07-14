@@ -21,6 +21,11 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
 
   private final ENbkPredefinedWeapon predefinedWeapon;
 
+  public static NbkPredefinedWeapon create(GlobalConstraints globalConstraints)
+          throws NoAvailableItemTypeException {
+    return new PredefinedWeaponBuilder(globalConstraints).build();
+  }
+
   public static NbkPredefinedWeapon create(GlobalConstraints globalConstraints, ERarity rarity)
           throws NoAvailableItemTypeException {
     return new PredefinedWeaponBuilder(globalConstraints, rarity).build();
@@ -60,9 +65,19 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
 
     ENbkPredefinedWeapon predefinedWeapon;
 
+    PredefinedWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+      setPredefinedWeapon(globalConstraints.getPredicate(ENbkWeaponType.class));
+      rarity = predefinedWeapon.getRarity();
+    }
+
     PredefinedWeaponBuilder(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
       super(rarity);
       setPredefinedWeapon(globalConstraints.getPredicate(ENbkWeaponType.class), rarity);
+    }
+
+    void setPredefinedWeapon(Predicate<ENbkWeaponType> wtPredicate) throws NoAvailableItemTypeException {
+      predefinedWeapon = ItemUtils.selectRandomRarity(ENbkPredefinedWeapon.values(),
+              weapon -> wtPredicate.test(weapon.getWeaponType()));
     }
 
     void setPredefinedWeapon(Predicate<ENbkWeaponType> wtPredicate, ERarity rarity)
