@@ -26,8 +26,7 @@ import java.util.List;
  * Created by Germain on 04/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHands, HasRange,
-        HasSize {
+public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHands, HasRange, HasSize {
 
   LAME_COURTE(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Poignard")

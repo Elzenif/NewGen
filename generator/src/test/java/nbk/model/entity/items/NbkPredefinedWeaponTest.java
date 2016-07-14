@@ -4,9 +4,11 @@ import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.exception.NoAvailableItemTypeException;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.characteristics.primary.enums.ERange;
 import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedWeapon;
 import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
 import nbk.model.entity.constraints.NbHandsConstraints;
+import nbk.model.entity.constraints.RangeConstraint;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -93,6 +95,26 @@ public class NbkPredefinedWeaponTest {
       globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
       assertNotNull("The weapon should not be null", weapon);
       assertEquals("The weapon should be two hands", nbHands, weapon.getNbHands());
+    }
+  }
+
+  @Test
+  public void testCreateWeaponWithRangeConstraint() throws NoAvailableItemTypeException {
+    RangeConstraint<ENbkWeaponType> rangeConstraint = new RangeConstraint<>(ENbkWeaponType.class);
+    for (ERarity rarity : rarities) {
+      ERange range = ERange.CLOSE;
+      globalConstraints.update(ENbkWeaponType.class, rangeConstraint, rangeConstraint.CLOSE_RANGE);
+      weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
+      globalConstraints.update(ENbkWeaponType.class, rangeConstraint, rangeConstraint.CLOSE_RANGE);
+      assertNotNull("The weapon should not be null", weapon);
+      assertEquals("The weapon should be close range", range, weapon.getRange());
+
+      range = ERange.LONG;
+      globalConstraints.update(ENbkWeaponType.class, rangeConstraint, rangeConstraint.LONG_RANGE);
+      weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
+      globalConstraints.update(ENbkWeaponType.class, rangeConstraint, rangeConstraint.LONG_RANGE);
+      assertNotNull("The weapon should not be null", weapon);
+      assertEquals("The weapon should be close range", range, weapon.getRange());
     }
   }
 }
