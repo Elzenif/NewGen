@@ -1,8 +1,8 @@
 package commons.controller.entity;
 
+import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.model.entity.constraints.RarityConstraints;
-import commons.model.entity.enums.ERarity;
 import commons.view.entity.EntityOptionRow;
 
 import javax.swing.JFormattedTextField;

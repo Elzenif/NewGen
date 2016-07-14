@@ -1,7 +1,7 @@
 package commons.model.entity.utils;
 
-import commons.model.entity.enums.ERarity;
-import commons.model.entity.utils.fields.HasRarity;
+import commons.model.entity.characteristics.primary.enums.ERarity;
+import commons.model.entity.characteristics.primary.fields.HasRarity;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 

@@ -1,7 +1,7 @@
 package commons.model.entity.constraints;
 
-import commons.model.entity.enums.ERarity;
-import commons.model.entity.utils.fields.HasRarity;
+import commons.model.entity.characteristics.primary.enums.ERarity;
+import commons.model.entity.characteristics.primary.fields.HasRarity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;

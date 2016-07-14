@@ -1,7 +1,7 @@
 package nbk.controller.entity;
 
 import commons.model.entity.constraints.GenericConstraint;
-import nbk.model.entity.enums.ENbkWeaponType;
+import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
 import nbk.view.entity.NbkWeaponOptionRow;
 
 import java.awt.event.ActionEvent;

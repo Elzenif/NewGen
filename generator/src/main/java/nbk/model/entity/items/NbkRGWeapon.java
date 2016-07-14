@@ -1,18 +1,16 @@
 package nbk.model.entity.items;
 
+import commons.model.entity.characteristics.primary.enums.EMagic;
+import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.enums.EMagic;
-import commons.model.entity.enums.ERarity;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.utils.french.FrenchNoun;
-import nbk.model.entity.enums.ENbHands;
-import nbk.model.entity.enums.ENbkQuality;
-import nbk.model.entity.enums.ENbkWeaponType;
-import nbk.model.entity.enums.ESize;
-import nbk.model.entity.utils.fields.HasQuality;
-import nbk.model.entity.utils.fields.HasWeaponType;
+import nbk.model.entity.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.characteristics.primary.enums.ESize;
+import nbk.model.entity.characteristics.secondary.enums.ENbkQuality;
+import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
 import org.jetbrains.annotations.Contract;
 
 import java.util.function.Predicate;
@@ -20,7 +18,7 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 11/06/2016.
  */
-public class NbkRGWeapon extends NbkAbstractWeapon implements HasWeaponType, HasQuality {
+public class NbkRGWeapon extends NbkAbstractWeapon {
 
   private final ENbkWeaponType weaponType;
   private final ENbkQuality quality;
@@ -31,12 +29,10 @@ public class NbkRGWeapon extends NbkAbstractWeapon implements HasWeaponType, Has
     return new RGWeaponBuilder(globalConstraints, rarity).build();
   }
 
-  @Override
   public ENbkWeaponType getWeaponType() {
     return weaponType;
   }
 
-  @Override
   public ENbkQuality getQuality() {
     return quality;
   }

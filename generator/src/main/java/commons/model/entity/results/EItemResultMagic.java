@@ -1,6 +1,6 @@
 package commons.model.entity.results;
 
-import commons.model.entity.enums.EMagic;
+import commons.model.entity.characteristics.primary.enums.EMagic;
 
 import java.awt.Font;
 import java.util.HashMap;

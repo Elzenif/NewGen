@@ -1,15 +1,15 @@
 package nbk.model.entity.items;
 
+import commons.model.entity.characteristics.primary.enums.EMagic;
+import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.enums.EMagic;
-import commons.model.entity.enums.ERarity;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableItemTypeException;
-import nbk.model.entity.enums.ENbHands;
-import nbk.model.entity.enums.ENbkPredefinedWeapon;
-import nbk.model.entity.enums.ENbkWeaponType;
-import nbk.model.entity.enums.ESize;
+import nbk.model.entity.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.characteristics.primary.enums.ESize;
+import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedWeapon;
+import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
 
 import java.util.function.Predicate;
 

@@ -1,20 +1,20 @@
 package nbk.model.entity.items;
 
+import commons.model.entity.characteristics.primary.enums.EMagic;
+import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.enums.EMagic;
-import commons.model.entity.enums.ERarity;
 import commons.model.entity.items.Item;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableItemTypeException;
-import nbk.model.entity.enums.EBodyPart;
-import nbk.model.entity.enums.ENbkPredefinedArmor;
-import nbk.model.entity.enums.ESize;
-import nbk.model.entity.enums.EWeight;
+import nbk.model.entity.characteristics.primary.enums.EBodyPart;
+import nbk.model.entity.characteristics.primary.enums.ESize;
+import nbk.model.entity.characteristics.primary.enums.EWeight;
+import nbk.model.entity.characteristics.primary.fields.HasSize;
+import nbk.model.entity.characteristics.primary.fields.HasWeight;
+import nbk.model.entity.characteristics.primary.fields.IsBodyPart;
+import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedArmor;
 import nbk.model.entity.game.NbkGame;
-import nbk.model.entity.utils.fields.HasSize;
-import nbk.model.entity.utils.fields.HasWeight;
-import nbk.model.entity.utils.fields.IsBodyPart;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;

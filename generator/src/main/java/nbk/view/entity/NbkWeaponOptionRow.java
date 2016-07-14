@@ -5,8 +5,8 @@ import commons.view.entity.EntityResultRow;
 import commons.view.utils.ConstraintPanel;
 import nbk.controller.entity.GenerateNbkWeaponActionListener;
 import nbk.controller.entity.NbHandsActionListener;
+import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
 import nbk.model.entity.constraints.NbHandsConstraints;
-import nbk.model.entity.enums.ENbkWeaponType;
 
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;

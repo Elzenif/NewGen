@@ -1,6 +1,6 @@
 package commons.model.entity.constraints;
 
-import commons.model.entity.utils.fields.HasRarity;
+import commons.model.entity.characteristics.primary.fields.HasRarity;
 
 import java.util.Objects;
 

@@ -1,10 +1,10 @@
 package nbk.model.entity.constraints;
 
+import commons.model.entity.characteristics.primary.fields.ItemType;
 import commons.model.entity.constraints.AbstractConstraints;
 import commons.model.entity.constraints.GenericItemConstraint;
-import commons.model.entity.utils.fields.ItemType;
-import nbk.model.entity.enums.ENbHands;
-import nbk.model.entity.utils.fields.HasNbHands;
+import nbk.model.entity.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.characteristics.primary.fields.HasNbHands;
 
 /**
  * Created by Germain on 15/06/2016.

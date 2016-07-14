@@ -1,13 +1,13 @@
 package nbk.model.entity.items;
 
+import commons.model.entity.characteristics.primary.enums.EMagic;
+import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.enums.EMagic;
-import commons.model.entity.enums.ERarity;
 import commons.utils.exception.NoAvailableItemTypeException;
+import nbk.model.entity.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.characteristics.secondary.enums.ENbkQuality;
+import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
 import nbk.model.entity.constraints.NbHandsConstraints;
-import nbk.model.entity.enums.ENbHands;
-import nbk.model.entity.enums.ENbkQuality;
-import nbk.model.entity.enums.ENbkWeaponType;
 import org.junit.Before;
 import org.junit.Test;
 

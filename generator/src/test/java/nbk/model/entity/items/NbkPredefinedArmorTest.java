@@ -1,12 +1,12 @@
 package nbk.model.entity.items;
 
+import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.enums.ERarity;
 import commons.utils.exception.NoAvailableItemTypeException;
-import nbk.model.entity.enums.EBodyPart;
-import nbk.model.entity.enums.ENbkPredefinedArmor;
-import nbk.model.entity.enums.ESize;
-import nbk.model.entity.enums.EWeight;
+import nbk.model.entity.characteristics.primary.enums.EBodyPart;
+import nbk.model.entity.characteristics.primary.enums.ESize;
+import nbk.model.entity.characteristics.primary.enums.EWeight;
+import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedArmor;
 import org.junit.Before;
 import org.junit.Test;
 
