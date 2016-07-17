@@ -10,7 +10,6 @@ import nbk.model.entity.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.characteristics.primary.enums.ERange;
 import nbk.model.entity.characteristics.primary.enums.ESize;
 import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedWeapon;
-import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
 
 import java.util.function.Predicate;
 
@@ -66,24 +65,26 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
     ENbkPredefinedWeapon predefinedWeapon;
 
     PredefinedWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
-      setPredefinedWeapon(globalConstraints.getPredicate(ENbkWeaponType.getConstraints()));
+      setPredefinedWeapon(getPredicate(globalConstraints));
       rarity = predefinedWeapon.getRarity();
     }
 
     PredefinedWeaponBuilder(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
       super(rarity);
-      setPredefinedWeapon(globalConstraints.getPredicate(ENbkWeaponType.getConstraints()), rarity);
+      setPredefinedWeapon(getPredicate(globalConstraints), rarity);
     }
 
-    void setPredefinedWeapon(Predicate<ENbkWeaponType> wtPredicate) throws NoAvailableItemTypeException {
-      predefinedWeapon = ItemUtils.selectRandomRarity(ENbkPredefinedWeapon.values(),
-              weapon -> wtPredicate.test(weapon.getWeaponType()));
+    Predicate<ENbkPredefinedWeapon> getPredicate(GlobalConstraints globalConstraints) {
+      return ENbkPredefinedWeapon.getPredicate(globalConstraints);
     }
 
-    void setPredefinedWeapon(Predicate<ENbkWeaponType> wtPredicate, ERarity rarity)
+    void setPredefinedWeapon(Predicate<ENbkPredefinedWeapon> weaponPredicate) throws NoAvailableItemTypeException {
+      predefinedWeapon = ItemUtils.selectRandomRarity(ENbkPredefinedWeapon.values(), weaponPredicate);
+    }
+
+    void setPredefinedWeapon(Predicate<ENbkPredefinedWeapon> weaponPredicate, ERarity rarity)
             throws NoAvailableItemTypeException {
-      predefinedWeapon = ItemUtils.selectRandomRarity(ENbkPredefinedWeapon.values(),
-              weapon -> wtPredicate.test(weapon.getWeaponType()), rarity);
+      predefinedWeapon = ItemUtils.selectRandomRarity(ENbkPredefinedWeapon.values(), weaponPredicate, rarity);
     }
 
     @Override

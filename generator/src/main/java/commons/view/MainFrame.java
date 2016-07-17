@@ -70,6 +70,6 @@ public class MainFrame extends JFrame {
   }
 
   private void setControllers() {
-    controllers.stream().forEach(controller -> controller.setControllers(this));
+    controllers.forEach(controller -> controller.setControllers(this));
   }
 }

@@ -76,10 +76,11 @@ public enum ERarity implements Primary, Secondary, HasRarity, GenericConstraint<
     return Collections.unmodifiableMap(constraintMap);
   }
 
-  private static final Map<GenericConstraint<ERarity>, Integer> constraintMap = new LinkedHashMap<>(
-          Lists.reverse(Arrays.asList(ERarity.values())).stream().
-                  collect(Collectors.toMap(Function.identity(), ERarity::getProba))
-  );
+  private static final Map<GenericConstraint<ERarity>, Integer> constraintMap = new LinkedHashMap<>(5);
+
+  static {
+    Lists.reverse(Arrays.asList(ERarity.values())).forEach(rarity ->  constraintMap.put(rarity, rarity.getProba()));
+  }
 
   public static ERarity getRarity(int rarityLevel) {
     Optional<Integer> optional = map.keySet().stream().filter(e -> e >= rarityLevel).findFirst();

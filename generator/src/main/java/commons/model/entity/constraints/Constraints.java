@@ -47,7 +47,7 @@ public class Constraints<E extends Enum<E> & Secondary> {
   public static class ConstraintsBuilder<E extends Enum<E> & Secondary> {
 
     private Class<? extends Secondary> secondaryClass;
-    private Set<Class> primaryClasses = new HashSet<>();
+    private final Set<Class> primaryClasses = new HashSet<>();
 
     @Contract(" -> !null")
     public static <F extends Enum<F> & Secondary> ConstraintsBuilder<F> start() {

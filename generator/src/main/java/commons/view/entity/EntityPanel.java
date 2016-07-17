@@ -23,7 +23,7 @@ public class EntityPanel extends JPanel implements Controller {
     setLayout(cardLayout);
     gamePanels = setMaxSize(new ArrayList<>(), EGame.NB_GAMES);
 
-    Arrays.asList(EGame.values()).stream().forEach(eGame -> {
+    Arrays.stream(EGame.values()).forEach(eGame -> {
       EntityPanelEmbedded panelEmbedded = eGame.getEntityPanelEmbedded();
       gamePanels.add(panelEmbedded);
       add(eGame.getGame().getName(), panelEmbedded);
@@ -34,7 +34,7 @@ public class EntityPanel extends JPanel implements Controller {
 
   @Override
   public void setControllers(MainFrame view) {
-    gamePanels.stream().forEach(panelEmbedded -> panelEmbedded.setControllers(view));
+    gamePanels.forEach(panelEmbedded -> panelEmbedded.setControllers(view));
   }
 
 

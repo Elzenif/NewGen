@@ -53,7 +53,10 @@ public enum EGame {
   public static final int NB_GAMES = EGame.values().length;
 
   public static Game getDefault() {
-    return Arrays.asList(EGame.values()).stream()
-            .filter(EGame::isDefault).findFirst().map(EGame::getGame).orElse(NBK.getGame());
+    return Arrays.stream(EGame.values())
+            .filter(EGame::isDefault)
+            .findFirst()
+            .map(EGame::getGame)
+            .orElse(NBK.getGame());
   }
 }

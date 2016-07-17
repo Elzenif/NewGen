@@ -79,14 +79,14 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
     ENbkQuality quality;
 
     RGWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
-      setWeaponType(globalConstraints.getPredicate(ENbkWeaponType.getConstraints()));
+      setWeaponType(ENbkWeaponType.getPredicate(globalConstraints));
       rarity = ItemUtils.selectRandomRarity(ERarity.values());
       setQuality(rarity);
     }
 
     RGWeaponBuilder(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
       super(rarity);
-      setWeaponType(globalConstraints.getPredicate(ENbkWeaponType.getConstraints()));
+      setWeaponType(ENbkWeaponType.getPredicate(globalConstraints));
       setQuality(rarity);
     }
 

@@ -8,6 +8,7 @@ import commons.model.entity.characteristics.primary.fields.HasMagic;
 import commons.model.entity.characteristics.primary.fields.ItemType;
 import commons.model.entity.characteristics.secondary.Secondary;
 import commons.model.entity.constraints.Constraints;
+import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import nbk.model.entity.characteristics.primary.builders.BodyPartBuilder;
 import nbk.model.entity.characteristics.primary.builders.SizeBuilder;
@@ -18,10 +19,12 @@ import nbk.model.entity.characteristics.primary.enums.EWeight;
 import nbk.model.entity.characteristics.primary.fields.HasSize;
 import nbk.model.entity.characteristics.primary.fields.HasWeight;
 import nbk.model.entity.characteristics.primary.fields.IsBodyPart;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by Germain on 26/06/2016.
@@ -179,11 +182,21 @@ public enum ENbkPredefinedArmor implements Secondary, ItemType<String>, HasMagic
     return CONSTRAINTS;
   }
 
-  private static Constraints<ENbkPredefinedArmor> CONSTRAINTS = Constraints.ConstraintsBuilder
+  private static final Constraints<ENbkPredefinedArmor> CONSTRAINTS = Constraints.ConstraintsBuilder
           .<ENbkPredefinedArmor>start()
           .setSecondaryClass(ENbkPredefinedArmor.class)
           .setPrimaryClasses(EBodyPart.class, EWeight.class, ESize.class)
           .build();
+
+  @NotNull
+  public static Predicate<ENbkPredefinedArmor> getPredicate(GlobalConstraints globalConstraints) {
+    Predicate<EBodyPart> bodyPartPredicate = globalConstraints.getPredicate(CONSTRAINTS, EBodyPart.class);
+    Predicate<EWeight> weightPredicate = globalConstraints.getPredicate(CONSTRAINTS, EWeight.class);
+    Predicate<ESize> sizePredicate = globalConstraints.getPredicate(CONSTRAINTS, ESize.class);
+    return armor -> armor.getBodyParts().stream().filter(bodyPartPredicate).findAny().isPresent()
+            && weightPredicate.test(armor.getWeight())
+            && sizePredicate.test(armor.getSize());
+  }
 
 
   private static class ENbkPredefinedArmorBuilder implements ItemTypeBuilder, MagicBuilder, WeightBuilder,

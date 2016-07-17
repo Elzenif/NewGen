@@ -6,10 +6,13 @@ import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.characteristics.primary.fields.HasMagic;
 import commons.model.entity.characteristics.primary.fields.ItemType;
+import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by Germain on 23/06/2016.
@@ -455,6 +458,11 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
   @Override
   public EMagic getMagic() {
     return magic;
+  }
+
+  @NotNull
+  public static Predicate<ENbkPredefinedWeapon> getPredicate(GlobalConstraints globalConstraints) {
+    return weapon -> ENbkWeaponType.getPredicate(globalConstraints).test(weapon.getWeaponType());
   }
 
 

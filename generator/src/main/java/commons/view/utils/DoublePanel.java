@@ -41,6 +41,6 @@ public abstract class DoublePanel<O extends OptionRow<R>, R extends ResultRow> e
   }
 
   protected void setControllers(List<Pair<O, R>> rowPairs) {
-    rowPairs.stream().forEach(rowPair -> rowPair.getLeft().setControllers(rowPair.getRight()));
+    rowPairs.forEach(rowPair -> rowPair.getLeft().setControllers(rowPair.getRight()));
   }
 }

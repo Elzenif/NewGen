@@ -56,7 +56,7 @@ public class ConstraintPanel extends JPanel {
 
   @Override
   public void setEnabled(boolean enabled) {
-    components.stream().forEach(c -> c.setEnabled(enabled));
+    components.forEach(c -> c.setEnabled(enabled));
     super.setEnabled(enabled);
   }
 }

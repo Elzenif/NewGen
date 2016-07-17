@@ -33,22 +33,22 @@ public class ItemUtils {
 
   public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values)
           throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream()));
+    return selectRandomRarityFromMap(fillMap(Arrays.stream(values)));
   }
 
   public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values, Predicate<E> predicate)
           throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream(), predicate));
+    return selectRandomRarityFromMap(fillMap(Arrays.stream(values), predicate));
   }
 
   public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values, ERarity rarity)
           throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream(), rarity));
+    return selectRandomRarityFromMap(fillMap(Arrays.stream(values), rarity));
   }
 
   public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values, Predicate<E> predicate, ERarity rarity)
           throws NoAvailableItemTypeException {
-    return selectRandomRarityFromMap(fillMap(Arrays.asList(values).stream(), predicate, rarity));
+    return selectRandomRarityFromMap(fillMap(Arrays.stream(values), predicate, rarity));
   }
 
   private static <E extends Enum<E> & HasRarity> Map<E, Integer> fillMap(Stream<E> values) {

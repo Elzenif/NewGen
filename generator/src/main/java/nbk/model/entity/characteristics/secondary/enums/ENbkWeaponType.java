@@ -7,6 +7,7 @@ import commons.model.entity.characteristics.primary.fields.HasQuantity;
 import commons.model.entity.characteristics.primary.fields.ItemType;
 import commons.model.entity.characteristics.secondary.Secondary;
 import commons.model.entity.constraints.Constraints;
+import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import commons.utils.SPositive;
 import commons.utils.french.FrenchNoun;
@@ -20,9 +21,11 @@ import nbk.model.entity.characteristics.primary.enums.ESize;
 import nbk.model.entity.characteristics.primary.fields.HasNbHands;
 import nbk.model.entity.characteristics.primary.fields.HasRange;
 import nbk.model.entity.characteristics.primary.fields.HasSize;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by Germain on 04/06/2016.
@@ -175,11 +178,21 @@ public enum ENbkWeaponType implements Secondary, ItemType<FrenchNoun>, HasQuanti
     return CONSTRAINTS;
   }
 
-  private static Constraints<ENbkWeaponType> CONSTRAINTS = Constraints.ConstraintsBuilder
+  private static final Constraints<ENbkWeaponType> CONSTRAINTS = Constraints.ConstraintsBuilder
           .<ENbkWeaponType>start()
           .setSecondaryClass(ENbkWeaponType.class)
           .setPrimaryClasses(ENbHands.class, ERange.class, ESize.class)
           .build();
+
+  @NotNull
+  public static Predicate<ENbkWeaponType> getPredicate(GlobalConstraints globalConstraints) {
+    Predicate<ENbHands> nbHandsPredicate = globalConstraints.getPredicate(CONSTRAINTS, ENbHands.class);
+    Predicate<ERange> rangePredicate = globalConstraints.getPredicate(CONSTRAINTS, ERange.class);
+    Predicate<ESize> sizePredicate = globalConstraints.getPredicate(CONSTRAINTS, ESize.class);
+    return weaponType -> nbHandsPredicate.test(weaponType.getNbHands())
+            && rangePredicate.test(weaponType.getRange())
+            && sizePredicate.test(weaponType.getSize());
+  }
 
   private static class NbKWeaponTypeBuilder implements ItemTypeBuilder, QuantityBuilder, NbHandsBuilder,
           RangeBuilder, SizeBuilder {

@@ -62,7 +62,7 @@ public class NbkRGWeaponTest {
   public void testWeaponQualityIsValid() throws NoAvailableItemTypeException {
     weapon = NbkRGWeapon.create(globalConstraints);
     Set<ENbkQuality> qualities = new HashSet<>(Arrays.asList(ENbkQuality.values()));
-    assertTrue("The weapon quality sould be a ENbkQuality enum : " + weapon.getQuality().toString(),
+    assertTrue("The weapon quality should be a ENbkQuality enum : " + weapon.getQuality().toString(),
             qualities.contains(weapon.getQuality()));
   }
 

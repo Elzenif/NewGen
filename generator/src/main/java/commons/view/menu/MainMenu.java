@@ -29,7 +29,7 @@ public class MainMenu extends JMenuBar implements Controller {
 
     gameButtons = setMaxSize(new ArrayList<>(), EGame.NB_GAMES);
 
-    Arrays.asList(EGame.values()).stream().forEach(eGame -> {
+    Arrays.stream(EGame.values()).forEach(eGame -> {
       JRadioButtonMenuItem rb = new JRadioButtonMenuItem(eGame.getGame().getName(), eGame.isDefault());
       gameButtons.add(rb);
       buttonGroup.add(rb);
@@ -41,6 +41,6 @@ public class MainMenu extends JMenuBar implements Controller {
 
   @Override
   public void setControllers(MainFrame view) {
-    gameButtons.stream().forEach(rb -> rb.addActionListener(new GameMenuActionListener(view, rb.getText())));
+    gameButtons.forEach(rb -> rb.addActionListener(new GameMenuActionListener(view, rb.getText())));
   }
 }

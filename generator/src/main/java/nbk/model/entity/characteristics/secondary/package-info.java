@@ -3,8 +3,8 @@
  */
 package nbk.model.entity.characteristics.secondary;
 
-/**
- * Members of this packages are characteristics that are considered secondary.
- * They define a characteristic of an entity with a name and a rarity,
- * and can contain one or several primary characteristics
+/*
+  Members of this packages are characteristics that are considered secondary.
+  They define a characteristic of an entity with a name and a rarity,
+  and can contain one or several primary characteristics
  */
