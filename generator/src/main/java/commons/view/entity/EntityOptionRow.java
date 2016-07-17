@@ -5,7 +5,6 @@ import commons.controller.entity.RarityChangeListener;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.constraints.RarityConstraints;
 import commons.model.entity.game.Game;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
@@ -41,7 +40,6 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   private final JPanel constraintsCheckBoxPanel;
   private final JCheckBox constraintsCheckBox;
   private final JLabel constraintsCheckBoxLabel;
-  private final RarityConstraints<ERarity> rarityConstraints;
 
   protected final GlobalConstraints globalConstraints;
   protected final ConstraintPanel constraintPanel;
@@ -75,7 +73,6 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
     constraintsCheckBoxPanel.add(constraintsCheckBoxLabel);
     constraintsCheckBoxPanel.add(constraintsCheckBox);
     add(constraintsCheckBoxPanel);
-    rarityConstraints = new RarityConstraints<>(ERarity.class);
 
     globalConstraints = new GlobalConstraints();
     constraintPanel = new ConstraintPanel();
@@ -123,7 +120,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   }
 
   public void updateRarityConstraint(GenericConstraint<ERarity> constraint) {
-    globalConstraints.clear(ERarity.class, rarityConstraints);
-    globalConstraints.update(ERarity.class, rarityConstraints, constraint);
+    globalConstraints.clear(ERarity.getConstraints());
+    globalConstraints.update(ERarity.getConstraints(), ERarity.class, constraint);
   }
 }

@@ -1,12 +1,16 @@
 package nbk.model.entity.characteristics.primary.enums;
 
+import commons.model.entity.characteristics.primary.Primary;
+import commons.model.entity.constraints.GenericConstraint;
 import nbk.model.entity.characteristics.primary.fields.HasNbHands;
 import org.jetbrains.annotations.Contract;
+
+import java.util.function.Predicate;
 
 /**
  * Created by Germain on 28/06/2016.
  */
-public enum ENbHands implements HasNbHands {
+public enum ENbHands implements Primary, HasNbHands, GenericConstraint<ENbHands> {
 
   ONE(1) {
     @Override
@@ -38,4 +42,9 @@ public enum ENbHands implements HasNbHands {
   }
 
   public abstract String getPlural();
+
+  @Override
+  public Predicate<ENbHands> getPredicate() {
+    return e -> e.getNbHands() == this;
+  }
 }

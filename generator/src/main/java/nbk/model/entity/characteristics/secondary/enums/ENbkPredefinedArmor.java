@@ -6,6 +6,8 @@ import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.characteristics.primary.fields.HasMagic;
 import commons.model.entity.characteristics.primary.fields.ItemType;
+import commons.model.entity.characteristics.secondary.Secondary;
+import commons.model.entity.constraints.Constraints;
 import commons.utils.MathUtils;
 import nbk.model.entity.characteristics.primary.builders.BodyPartBuilder;
 import nbk.model.entity.characteristics.primary.builders.SizeBuilder;
@@ -25,7 +27,7 @@ import java.util.List;
  * Created by Germain on 26/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight, IsBodyPart, HasSize {
+public enum ENbkPredefinedArmor implements Secondary, ItemType<String>, HasMagic, HasWeight, IsBodyPart, HasSize {
   // Vestes
   GAMBISON_BASE(new ENbkPredefinedArmorBuilder()
           .setNames("Gambison de base avec manches")
@@ -172,6 +174,17 @@ public enum ENbkPredefinedArmor implements ItemType<String>, HasMagic, HasWeight
   public ESize getSize() {
     return size;
   }
+
+  public static Constraints<ENbkPredefinedArmor> getConstraints() {
+    return CONSTRAINTS;
+  }
+
+  private static Constraints<ENbkPredefinedArmor> CONSTRAINTS = Constraints.ConstraintsBuilder
+          .<ENbkPredefinedArmor>start()
+          .setSecondaryClass(ENbkPredefinedArmor.class)
+          .setPrimaryClasses(EBodyPart.class, EWeight.class, ESize.class)
+          .build();
+
 
   private static class ENbkPredefinedArmorBuilder implements ItemTypeBuilder, MagicBuilder, WeightBuilder,
           BodyPartBuilder, SizeBuilder {

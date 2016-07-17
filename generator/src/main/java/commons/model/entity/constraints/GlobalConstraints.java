@@ -1,100 +1,124 @@
 package commons.model.entity.constraints;
 
-import commons.model.entity.characteristics.primary.fields.HasRarity;
+import commons.model.entity.characteristics.primary.Primary;
+import commons.model.entity.characteristics.secondary.Secondary;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Created by Germain on 11/06/2016.
  */
 public class GlobalConstraints {
 
-  private final Map<Class<? extends HasRarity>, ConstraintMap> map = new HashMap<>();
+  final Map<Constraints, ConstraintMap> map = new HashMap<>();
 
-  @SuppressWarnings("unchecked")
-  public <E extends Enum<E> & HasRarity> void update(Class<E> enumClass, AbstractConstraints<E> constraintsClass,
-                                                     GenericConstraint<E> constraint) {
-    if (!add(enumClass, constraintsClass, constraint))
-      remove(enumClass, constraintsClass, constraint);
+  public <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  void update(Constraints<E> constraintsClass, Class<F> primaryClass, GenericConstraint<F> constraint) {
+    if (!constraintsClass.getPrimaryClasses().contains(primaryClass))
+      throw new IllegalArgumentException(primaryClass + " is not compatible with " + constraintsClass);
+    if (!add(constraintsClass, primaryClass, constraint))
+      remove(constraintsClass, primaryClass, constraint);
   }
 
   @SuppressWarnings("unchecked")
-  public <E extends Enum<E> & HasRarity> Predicate<E> getPredicate(Class<E> enumClass,
-                                                                   AbstractConstraints<E> constraintsClass) {
-    return map.containsKey(enumClass)
-            ? (Predicate<E>) map.get(enumClass).getPredicate(constraintsClass)
+  public <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  Predicate<E> getPredicate(Constraints<E> constraintsClass, Class<F> primaryClass) {
+    if (!constraintsClass.getPrimaryClasses().contains(primaryClass))
+      throw new IllegalArgumentException(primaryClass + " is not compatible with " + constraintsClass);
+    return map.containsKey(constraintsClass)
+            ? p -> map.get(constraintsClass).getPredicate(primaryClass).test((F) p)
             : p -> true;
   }
 
   @SuppressWarnings("unchecked")
-  public <E extends Enum<E> & HasRarity> Predicate<E> getPredicate(Class<E> enumClass) {
-    return map.containsKey(enumClass)
-            ? (Predicate<E>) map.get(enumClass).getPredicate()
-            : p -> true;
+  public <E extends Enum<E> & Secondary> Predicate<E> getPredicate(Constraints<E> constraintsClass) {
+    if (map.containsKey(constraintsClass)) {
+      List<Predicate> predicates = map.get(constraintsClass).getPredicates(constraintsClass.getPrimaryClasses());
+      return (Predicate<E>) predicates.stream().reduce(Predicate::and).orElse(p -> true);
+    } else return p -> true;
   }
 
   @SuppressWarnings("unchecked")
-  public <E extends Enum<E> & HasRarity> void clear(Class<E> enumClass, AbstractConstraints<E> constraintsClass) {
-    if (map.containsKey(enumClass))
-      map.get(enumClass).clear(constraintsClass);
+  public <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  void clear(Constraints<E> constraintsClass, Class<F> primaryClass) {
+    if (!constraintsClass.getPrimaryClasses().contains(primaryClass))
+      throw new IllegalArgumentException(primaryClass + " is not compatible with " + constraintsClass);
+    if (map.containsKey(constraintsClass))
+      map.get(constraintsClass).clear(primaryClass);
   }
 
   @SuppressWarnings("unchecked")
-  private  <E extends Enum<E> & HasRarity> boolean add(Class<E> enumClass, AbstractConstraints<E> constraintsClass,
-                                                       GenericConstraint<E> constraint) {
-    if (!map.containsKey(enumClass))
-      map.put(enumClass, new ConstraintMap<E>());
-    return map.get(enumClass).add(constraintsClass, constraint);
+  public <E extends Enum<E> & Secondary> void clear(Constraints<E> constraintsClass) {
+    if (map.containsKey(constraintsClass)) {
+      constraintsClass.getPrimaryClasses().stream().forEach(primaryClass ->
+              map.get(constraintsClass).clear(primaryClass)
+      );
+    }
   }
 
+  @SuppressWarnings("unchecked")
+  private <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  boolean add(Constraints<E> constraintsClass, Class<F> primaryClass, GenericConstraint<F> constraint) {
+    if (!map.containsKey(constraintsClass))
+      map.put(constraintsClass, new ConstraintMap());
+    return map.get(constraintsClass).add(primaryClass, constraint);
+  }
 
   @SuppressWarnings("unchecked")
-  private <E extends Enum<E> & HasRarity> boolean remove(Class<E> enumClass, AbstractConstraints<E> constraintsClass,
-                                                         GenericConstraint<E> constraint) {
-    return map.containsKey(enumClass) && map.get(enumClass).remove(constraintsClass, constraint);
+  private <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  boolean remove(Constraints<E> constraintsClass, Class<F> primaryClass, GenericConstraint<F> constraint) {
+    return map.containsKey(constraintsClass) && map.get(constraintsClass).remove(primaryClass, constraint);
   }
 }
 
-class ConstraintMap<E extends Enum<E> & HasRarity> {
 
-  private final Map<AbstractConstraints<E>, ConstraintSet<E>> constraintsMap = new HashMap<>();
+class ConstraintMap {
 
-  Predicate<E> getPredicate(AbstractConstraints<E> constraintsClass) {
-    return constraintsMap.get(constraintsClass).getPredicate();
+  final Map<Class<? extends Primary>, ConstraintSet> constraintsMap = new HashMap<>();
+
+  @SuppressWarnings("unchecked")
+  <F extends Enum<F> & Primary> Predicate<F> getPredicate(Class<F> primaryClass) {
+    return constraintsMap.containsKey(primaryClass)
+            ? (Predicate<F>) constraintsMap.get(primaryClass).getPredicate()
+            : p -> true;
   }
 
-  Predicate<E> getPredicate() {
-    return constraintsMap.values().stream()
+  List<Predicate> getPredicates(Set<Class<? extends Primary>> primaryClasses) {
+    return primaryClasses.stream()
+            .map(constraintsMap::get)
             .map(ConstraintSet::getPredicate)
-            .reduce(Predicate::and)
-            .orElse(p -> true);
+            .collect(Collectors.toList());
   }
 
-  void clear(AbstractConstraints<E> constraintsClass) {
-    constraintsMap.get(constraintsClass).clear();
+  void clear(Class<? extends Primary> primaryClass) {
+    constraintsMap.get(primaryClass).clear();
   }
 
-  boolean add(AbstractConstraints<E> constraintsClass, GenericConstraint<E> constraint) {
-    if (!constraintsMap.containsKey(constraintsClass))
-      constraintsMap.put(constraintsClass, new ConstraintSet<>());
-    return constraintsMap.get(constraintsClass).add(constraint);
+  @SuppressWarnings("unchecked")
+  <F extends Enum<F> & Primary> boolean add(Class<F> primaryClass, GenericConstraint<F> constraint) {
+    if (!constraintsMap.containsKey(primaryClass))
+      constraintsMap.put(primaryClass, new ConstraintSet<>());
+    return constraintsMap.get(primaryClass).add(constraint);
   }
 
-
-  boolean remove(AbstractConstraints<E> constraintsClass, GenericConstraint<E> constraint) {
-    return constraintsMap.get(constraintsClass).remove(constraint);
+  @SuppressWarnings("unchecked")
+  <F extends Enum<F> & Primary> boolean remove(Class<? extends F> primaryClass, GenericConstraint constraint) {
+    return constraintsMap.get(primaryClass).remove(constraint);
   }
 }
 
-class ConstraintSet<E extends Enum<E> & HasRarity> {
 
-  private final Set<GenericConstraint<E>> constraintSet = new HashSet<>();
+class ConstraintSet<F extends Enum<F> & Primary> {
 
-  Predicate<E> getPredicate() {
+  final Set<GenericConstraint<F>> constraintSet = new HashSet<>();
+
+  Predicate<F> getPredicate() {
     return constraintSet.stream()
             .map(GenericConstraint::getPredicate)
             .reduce(Predicate::or)
@@ -105,11 +129,11 @@ class ConstraintSet<E extends Enum<E> & HasRarity> {
     constraintSet.clear();
   }
 
-  boolean add(GenericConstraint<E> constraint) {
+  boolean add(GenericConstraint<F> constraint) {
     return constraintSet.add(constraint);
   }
 
-  boolean remove(GenericConstraint<E> constraint) {
+  boolean remove(GenericConstraint<F> constraint) {
     return constraintSet.remove(constraint);
   }
 }

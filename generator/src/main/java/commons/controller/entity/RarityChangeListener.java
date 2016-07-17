@@ -2,7 +2,6 @@ package commons.controller.entity;
 
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GenericConstraint;
-import commons.model.entity.constraints.RarityConstraints;
 import commons.view.entity.EntityOptionRow;
 
 import javax.swing.JFormattedTextField;
@@ -26,14 +25,13 @@ public class RarityChangeListener implements PropertyChangeListener {
 
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    RarityConstraints<ERarity> rarityConstraints = new RarityConstraints<>(ERarity.class);
     GenericConstraint<ERarity> constraint;
     try {
       int rarityLevel = Integer.parseInt(qualityTextField.getText()) + 1; // so that the result belongs to [1;100]
       constraint = findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(
-              rarityLevel, rarityConstraints.getConstraintMapView());
+              rarityLevel, ERarity.getConstraintMapView());
     } catch (NumberFormatException e) {
-      constraint = rarityConstraints.NO_CONSTRAINT;
+      constraint = () -> p -> true;
     }
     entityOptionRow.updateRarityConstraint(constraint);
   }

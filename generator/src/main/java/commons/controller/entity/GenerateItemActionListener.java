@@ -2,7 +2,6 @@ package commons.controller.entity;
 
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.constraints.RarityConstraints;
 import commons.model.entity.game.Game;
 import commons.model.entity.items.Item;
 import commons.model.entity.results.ItemResult;
@@ -59,7 +58,7 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
     ERarity rarity;
     try {
       rarity = ItemUtils.selectRandomRarity(ERarity.values(),
-              globalConstraints.getPredicate(ERarity.class, new RarityConstraints<>(ERarity.class)));
+              globalConstraints.getPredicate(ERarity.getConstraints(), ERarity.class));
     } catch (NoAvailableItemTypeException e) {
       e.printStackTrace();
       rarity = ERarity.COMMON;

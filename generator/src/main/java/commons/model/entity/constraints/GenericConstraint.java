@@ -1,6 +1,6 @@
 package commons.model.entity.constraints;
 
-import commons.model.entity.characteristics.primary.fields.HasRarity;
+import commons.model.entity.characteristics.primary.Primary;
 
 import java.util.function.Predicate;
 
@@ -8,7 +8,7 @@ import java.util.function.Predicate;
  * Created by Germain on 11/06/2016.
  */
 @FunctionalInterface
-public interface GenericConstraint<E extends Enum<E> & HasRarity> {
+public interface GenericConstraint<E extends Enum<E> & Primary> {
 
   Predicate<E> getPredicate();
 }

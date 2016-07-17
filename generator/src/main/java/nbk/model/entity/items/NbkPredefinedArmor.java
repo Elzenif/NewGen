@@ -70,13 +70,13 @@ public class NbkPredefinedArmor extends Item<NbkGame> implements HasWeight, IsBo
     ENbkPredefinedArmor predefinedArmor;
 
     NbkPredefinedArmorBuilder(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
-      setPredefinedArmor(globalConstraints.getPredicate(ENbkPredefinedArmor.class));
+      setPredefinedArmor(globalConstraints.getPredicate(ENbkPredefinedArmor.getConstraints()));
       rarity = predefinedArmor.getRarity();
     }
 
     NbkPredefinedArmorBuilder(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
       super(rarity);
-      setPredefinedArmor(globalConstraints.getPredicate(ENbkPredefinedArmor.class), rarity);
+      setPredefinedArmor(globalConstraints.getPredicate(ENbkPredefinedArmor.getConstraints()), rarity);
     }
 
     void setPredefinedArmor(Predicate<ENbkPredefinedArmor> armorPredicate) throws NoAvailableItemTypeException {

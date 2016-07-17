@@ -8,9 +8,6 @@ import nbk.model.entity.characteristics.primary.enums.ERange;
 import nbk.model.entity.characteristics.primary.enums.ESize;
 import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedWeapon;
 import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
-import nbk.model.entity.constraints.NbHandsConstraints;
-import nbk.model.entity.constraints.RangeConstraint;
-import nbk.model.entity.constraints.SizeConstraint;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -69,7 +66,7 @@ public class NbkPredefinedWeaponTest {
 
   @Test
   public void testCreateWeaponWithRarityConstraint() throws NoAvailableItemTypeException {
-    for (ERarity rarity : EnumSet.allOf(ERarity.class)) {
+    for (ERarity rarity : ERarity.values()) {
       weapon = NbkPredefinedWeapon.create(globalConstraints, rarity);
       assertNotNull("The weapon should not be null", weapon);
       assertEquals(rarity, weapon.getRarity());
@@ -78,65 +75,34 @@ public class NbkPredefinedWeaponTest {
 
   @Test
   public void testCreateWeaponWithHandsConstraint() throws NoAvailableItemTypeException {
-    NbHandsConstraints<ENbkWeaponType> nbHandsConstraints = new NbHandsConstraints<>(ENbkWeaponType.class);
-
-    ENbHands nbHands = ENbHands.ONE;
-    globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
-    globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.ONE_HAND);
-    assertNotNull("The weapon should not be null", weapon);
-    assertEquals("The weapon should be one hand", nbHands, weapon.getNbHands());
-
-    nbHands = ENbHands.TWO;
-    globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
-    globalConstraints.update(ENbkWeaponType.class, nbHandsConstraints, nbHandsConstraints.TWO_HANDS);
-    assertNotNull("The weapon should not be null", weapon);
-    assertEquals("The weapon should be two hands", nbHands, weapon.getNbHands());
+    for (ENbHands nbHands : ENbHands.values()) {
+      globalConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, nbHands);
+      weapon = NbkPredefinedWeapon.create(globalConstraints);
+      assertNotNull("The weapon should not be null", weapon);
+      assertEquals(nbHands, weapon.getNbHands());
+      globalConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, nbHands);
+    }
   }
 
   @Test
   public void testCreateWeaponWithRangeConstraint() throws NoAvailableItemTypeException {
-    RangeConstraint<ENbkWeaponType> rangeConstraint = new RangeConstraint<>(ENbkWeaponType.class);
-
-    ERange range = ERange.CLOSE;
-    globalConstraints.update(ENbkWeaponType.class, rangeConstraint, rangeConstraint.CLOSE_RANGE);
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
-    globalConstraints.update(ENbkWeaponType.class, rangeConstraint, rangeConstraint.CLOSE_RANGE);
-    assertNotNull("The weapon should not be null", weapon);
-    assertEquals("The weapon should be close range", range, weapon.getRange());
-
-    range = ERange.LONG;
-    globalConstraints.update(ENbkWeaponType.class, rangeConstraint, rangeConstraint.LONG_RANGE);
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
-    globalConstraints.update(ENbkWeaponType.class, rangeConstraint, rangeConstraint.LONG_RANGE);
-    assertNotNull("The weapon should not be null", weapon);
-    assertEquals("The weapon should be long range", range, weapon.getRange());
+    for (ERange range : ERange.values()) {
+      globalConstraints.update(ENbkWeaponType.getConstraints(), ERange.class, range);
+      weapon = NbkPredefinedWeapon.create(globalConstraints);
+      assertNotNull("The weapon should not be null", weapon);
+      assertEquals(range, weapon.getRange());
+      globalConstraints.update(ENbkWeaponType.getConstraints(), ERange.class, range);
+    }
   }
 
   @Test
   public void testCreateWeaponWithSizeConstraint() throws NoAvailableItemTypeException {
-    SizeConstraint<ENbkWeaponType> sizeConstraint = new SizeConstraint<>(ENbkWeaponType.class);
-
-    ESize size = ESize.SMALL;
-    globalConstraints.update(ENbkWeaponType.class, sizeConstraint, sizeConstraint.SMALL_SIZE);
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
-    assertNotNull("The weapon should not be null", weapon);
-    assertEquals("The weapon should be small size", size, weapon.getSize());
-    globalConstraints.update(ENbkWeaponType.class, sizeConstraint, sizeConstraint.SMALL_SIZE);
-
-    size = ESize.NORMAL;
-    globalConstraints.update(ENbkWeaponType.class, sizeConstraint, sizeConstraint.NORMAL_SIZE);
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
-    assertNotNull("The weapon should not be null", weapon);
-    assertEquals("The weapon should be normal size", size, weapon.getSize());
-    globalConstraints.update(ENbkWeaponType.class, sizeConstraint, sizeConstraint.NORMAL_SIZE);
-
-    size = ESize.LARGE;
-    globalConstraints.update(ENbkWeaponType.class, sizeConstraint, sizeConstraint.LARGE_SIZE);
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
-    assertNotNull("The weapon should not be null", weapon);
-    assertEquals("The weapon should be large size", size, weapon.getSize());
-    globalConstraints.update(ENbkWeaponType.class, sizeConstraint, sizeConstraint.LARGE_SIZE);
+    for (ESize size : ESize.values()) {
+      globalConstraints.update(ENbkWeaponType.getConstraints(), ESize.class, size);
+      weapon = NbkPredefinedWeapon.create(globalConstraints);
+      assertNotNull("The weapon should not be null", weapon);
+      assertEquals(size, weapon.getSize());
+      globalConstraints.update(ENbkWeaponType.getConstraints(), ESize.class, size);
+    }
   }
 }

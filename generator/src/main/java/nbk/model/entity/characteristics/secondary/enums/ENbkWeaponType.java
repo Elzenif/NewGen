@@ -5,6 +5,8 @@ import commons.model.entity.characteristics.primary.builders.QuantityBuilder;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.characteristics.primary.fields.HasQuantity;
 import commons.model.entity.characteristics.primary.fields.ItemType;
+import commons.model.entity.characteristics.secondary.Secondary;
+import commons.model.entity.constraints.Constraints;
 import commons.utils.MathUtils;
 import commons.utils.SPositive;
 import commons.utils.french.FrenchNoun;
@@ -26,7 +28,7 @@ import java.util.List;
  * Created by Germain on 04/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHands, HasRange, HasSize {
+public enum ENbkWeaponType implements Secondary, ItemType<FrenchNoun>, HasQuantity, HasNbHands, HasRange, HasSize {
 
   LAME_COURTE(new NbKWeaponTypeBuilder()
           .setMasculineNouns("Poignard")
@@ -169,6 +171,15 @@ public enum ENbkWeaponType implements ItemType<FrenchNoun>, HasQuantity, HasNbHa
     return size;
   }
 
+  public static Constraints<ENbkWeaponType> getConstraints() {
+    return CONSTRAINTS;
+  }
+
+  private static Constraints<ENbkWeaponType> CONSTRAINTS = Constraints.ConstraintsBuilder
+          .<ENbkWeaponType>start()
+          .setSecondaryClass(ENbkWeaponType.class)
+          .setPrimaryClasses(ENbHands.class, ERange.class, ESize.class)
+          .build();
 
   private static class NbKWeaponTypeBuilder implements ItemTypeBuilder, QuantityBuilder, NbHandsBuilder,
           RangeBuilder, SizeBuilder {

@@ -81,7 +81,7 @@ public class NbkPredefinedArmorTest {
 
   @Test
   public void testCreateArmorWithRarityConstraint() throws NoAvailableItemTypeException {
-    for (ERarity rarity : EnumSet.allOf(ERarity.class)) {
+    for (ERarity rarity : ERarity.values()) {
       armor = NbkPredefinedArmor.create(globalConstraints, rarity);
       assertNotNull("The armor should not be null", armor);
       assertEquals(rarity, armor.getRarity());
