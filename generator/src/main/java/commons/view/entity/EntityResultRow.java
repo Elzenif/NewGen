@@ -9,7 +9,7 @@ import commons.view.utils.ResultRow;
  */
 public class EntityResultRow extends ResultRow<ItemResult> {
 
-  EntityResultRow(IAvailableItem availableItem) {
+  EntityResultRow(IAvailableEntityOptionRow availableItem) {
     super((String) availableItem.getName());
   }
 

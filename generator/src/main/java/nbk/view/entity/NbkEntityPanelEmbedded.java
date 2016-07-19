@@ -6,9 +6,9 @@ import nbk.model.commons.NbkGame;
 /**
  * Created by Germain on 12/06/2016.
  */
-public class NbkEntityPanelEmbedded extends EntityPanelEmbedded<NbkGame, ENbkAvailableItem> {
+public class NbkEntityPanelEmbedded extends EntityPanelEmbedded<NbkGame, ENbkAvailableEntityOptionRow> {
 
   public NbkEntityPanelEmbedded() {
-    super(NbkGame.getInstance(), ENbkAvailableItem.values());
+    super(ENbkAvailableEntityOptionRow.values());
   }
 }

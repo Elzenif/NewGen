@@ -6,9 +6,9 @@ import tes.model.commons.TesGame;
 /**
  * Created by Germain on 12/06/2016.
  */
-public class TesEntityPanelEmbedded extends EntityPanelEmbedded<TesGame, ETesAvailableItem> {
+public class TesEntityPanelEmbedded extends EntityPanelEmbedded<TesGame, ETesAvailableEntityOptionRow> {
 
   public TesEntityPanelEmbedded() {
-    super(TesGame.getInstance(), ETesAvailableItem.values());
+    super(ETesAvailableEntityOptionRow.values());
   }
 }

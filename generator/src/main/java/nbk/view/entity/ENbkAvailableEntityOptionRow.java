@@ -1,15 +1,17 @@
 package nbk.view.entity;
 
+import commons.model.entity.items.IAvailableItem;
 import commons.view.entity.EntityOptionRow;
-import commons.view.entity.IAvailableItem;
+import commons.view.entity.IAvailableEntityOptionRow;
 import nbk.model.commons.NbkGame;
+import nbk.model.entity.items.ENbkAvailableItem;
 
 /**
  * Created by Germain on 11/06/2016.
  */
-public enum ENbkAvailableItem implements IAvailableItem<NbkGame> {
+public enum ENbkAvailableEntityOptionRow implements IAvailableEntityOptionRow<NbkGame> {
 
-  WEAPON("Weapon") {
+  WEAPON_ROW(ENbkAvailableItem.WEAPON) {
     NbkWeaponOptionRow entityOptionRow = null;
     @Override
     public EntityOptionRow<NbkGame> getEntityOptionRow() {
@@ -17,7 +19,7 @@ public enum ENbkAvailableItem implements IAvailableItem<NbkGame> {
         entityOptionRow = new NbkWeaponOptionRow();
       return entityOptionRow;
     }
-  }, ARMOR("Armor") {
+  }, ARMOR_ROW(ENbkAvailableItem.ARMOR) {
     NbkArmorOptionRow entityOptionRow = null;
     @Override
     public EntityOptionRow<NbkGame> getEntityOptionRow() {
@@ -27,15 +29,15 @@ public enum ENbkAvailableItem implements IAvailableItem<NbkGame> {
     }
   };
 
-  private final String name;
+  private final IAvailableItem<NbkGame> item;
 
-  ENbkAvailableItem(String name) {
-    this.name = name;
+  ENbkAvailableEntityOptionRow(IAvailableItem<NbkGame> item) {
+    this.item = item;
   }
 
   @Override
   public String getName() {
-    return name;
+    return item.toString();
   }
 
 }

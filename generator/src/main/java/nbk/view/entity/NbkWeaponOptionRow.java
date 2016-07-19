@@ -7,6 +7,7 @@ import nbk.controller.entity.GenerateNbkWeaponActionListener;
 import nbk.controller.entity.NbHandsActionListener;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
+import nbk.model.entity.items.ENbkAvailableItem;
 
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;

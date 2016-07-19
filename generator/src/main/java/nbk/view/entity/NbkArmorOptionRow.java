@@ -2,6 +2,7 @@ package nbk.view.entity;
 
 import commons.view.entity.EntityResultRow;
 import nbk.controller.entity.GenerateNbkArmorActionListener;
+import nbk.model.entity.items.ENbkAvailableItem;
 
 /**
  * Created by Germain on 26/06/2016.

@@ -13,19 +13,19 @@ import static commons.utils.CollectionUtils.setMaxSize;
 /**
  * Created by Germain on 09/06/2016.
  */
-public abstract class EntityPanelEmbedded<T extends Game, S extends IAvailableItem<T>>
+public abstract class EntityPanelEmbedded<T extends Game, S extends IAvailableEntityOptionRow<T>>
         extends DoublePanel<EntityOptionRow<T>, EntityResultRow> {
 
   private final List<Pair<EntityOptionRow<T>, EntityResultRow>> rowPairs;
 
-  protected EntityPanelEmbedded(T game, S[] availableItems) {
-    super(setPanel("Options", IAvailableItem.getValues(game.getAvailableItems()).size()),
-            setPanel("Results", IAvailableItem.getValues(game.getAvailableItems()).size()));
+  protected EntityPanelEmbedded(S[] availableEntityOptionRows) {
+    super(setPanel("Options", availableEntityOptionRows.length),
+            setPanel("Results", availableEntityOptionRows.length));
 
-    rowPairs = setMaxSize(new ArrayList<>(), IAvailableItem.getValues(game.getAvailableItems()).size());
-    for (IAvailableItem<T> availableItem : availableItems) {
-      EntityOptionRow<T> entityOptionRow = availableItem.getEntityOptionRow();
-      EntityResultRow entityResultRow = new EntityResultRow(availableItem);
+    rowPairs = setMaxSize(new ArrayList<>(), availableEntityOptionRows.length);
+    for (IAvailableEntityOptionRow<T> availableEntityOptionRow : availableEntityOptionRows) {
+      EntityOptionRow<T> entityOptionRow = availableEntityOptionRow.getEntityOptionRow();
+      EntityResultRow entityResultRow = new EntityResultRow(availableEntityOptionRow);
       rowPairs.add(new Pair<>(entityOptionRow, entityResultRow));
       leftPanel.add(entityOptionRow);
       rightPanel.add(entityResultRow);
