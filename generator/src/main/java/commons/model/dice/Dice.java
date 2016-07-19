@@ -1,8 +1,6 @@
 package commons.model.dice;
 
 import commons.utils.MathUtils;
-import commons.view.dice.results.EDiceResultType;
-import commons.view.dice.results.EDiceTestResult;
 
 /**
  * Created by Germain on 25/06/2016.
@@ -27,7 +25,7 @@ public class Dice {
     this.score = copy.getScore();
   }
 
-  private EDiceNumber getDiceMax() {
+  public EDiceNumber getDiceMax() {
     return diceMax;
   }
 
@@ -39,7 +37,7 @@ public class Dice {
     return diceTestInfo;
   }
 
-  private int getScore() {
+  public int getScore() {
     return score;
   }
 
@@ -51,25 +49,11 @@ public class Dice {
     score = MathUtils.random(1, diceMax.getDiceNumber());
   }
 
-  public EDiceResultType getDiceResultType() {
-    if (score == 1) {
-      return EDiceResultType.CRITIC;
-    } else if (score == diceMax.getDiceNumber()) {
-      return EDiceResultType.FUMBLE;
-    } else {
-      return EDiceResultType.NORMAL;
-    }
+  public boolean isTest() {
+    return diceTestInfo.isTest();
   }
 
-  public EDiceTestResult getDiceTestResult() {
-    if (diceTestInfo.isTest()) {
-      if (diceTestInfo.getOperator().apply(getFinalScore(), diceTestInfo.getValueToTest())) {
-        return EDiceTestResult.VALID;
-      } else {
-        return EDiceTestResult.INVALID;
-      }
-    } else {
-      return EDiceTestResult.NO_TEST;
-    }
+  public boolean isTestValid() {
+    return diceTestInfo.getOperator().apply(getFinalScore(), diceTestInfo.getValueToTest());
   }
 }
