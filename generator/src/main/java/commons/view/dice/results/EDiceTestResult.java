@@ -1,4 +1,4 @@
-package commons.model.dice.results;
+package commons.view.dice.results;
 
 import commons.utils.ColorUtils;
 

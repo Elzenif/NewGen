@@ -1,9 +1,8 @@
 package commons.model.dice;
 
-import commons.model.dice.results.DiceTestInfo;
-import commons.model.dice.results.EDiceResultType;
-import commons.model.dice.results.EDiceTestResult;
 import commons.utils.MathUtils;
+import commons.view.dice.results.EDiceResultType;
+import commons.view.dice.results.EDiceTestResult;
 
 /**
  * Created by Germain on 25/06/2016.

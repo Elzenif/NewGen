@@ -1,6 +1,6 @@
 package commons.view.entity;
 
-import commons.model.entity.results.ItemResult;
+import commons.view.entity.results.ItemResult;
 import commons.view.utils.ResultRow;
 
 

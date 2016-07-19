@@ -1,7 +1,7 @@
-package commons.model.entity.results;
+package commons.view.entity.results;
 
-import commons.model.commons.Result;
 import commons.model.entity.items.Item;
+import commons.view.commons.Result;
 
 import java.awt.Color;
 

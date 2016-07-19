@@ -1,14 +1,14 @@
 package commons.controller.dice;
 
 import commons.model.dice.Dice;
+import commons.model.dice.DiceTestInfo;
 import commons.model.dice.EDiceNumber;
-import commons.model.dice.results.AbstractDiceResult;
-import commons.model.dice.results.AdditionalDiceResult;
-import commons.model.dice.results.DiceResult;
-import commons.model.dice.results.DiceTestInfo;
 import commons.utils.StringUtils;
 import commons.view.dice.DiceOptionRow;
 import commons.view.dice.DiceResultRow;
+import commons.view.dice.results.AbstractDiceResult;
+import commons.view.dice.results.AdditionalDiceResult;
+import commons.view.dice.results.DiceResult;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

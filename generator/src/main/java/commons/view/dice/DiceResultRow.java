@@ -1,7 +1,7 @@
 package commons.view.dice;
 
 import commons.model.dice.EDiceNumber;
-import commons.model.dice.results.AbstractDiceResult;
+import commons.view.dice.results.AbstractDiceResult;
 import commons.view.utils.ResultRow;
 
 

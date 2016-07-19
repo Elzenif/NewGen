@@ -4,12 +4,12 @@ import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.game.Game;
 import commons.model.entity.items.Item;
-import commons.model.entity.results.ItemResult;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.utils.exception.WrongClassException;
 import commons.view.entity.EntityOptionRow;
 import commons.view.entity.EntityResultRow;
+import commons.view.entity.results.ItemResult;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

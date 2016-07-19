@@ -1,4 +1,4 @@
-package commons.model.commons;
+package commons.view.commons;
 
 import commons.view.utils.Constants;
 

@@ -1,4 +1,4 @@
-package commons.model.dice.results;
+package commons.model.dice;
 
 import commons.utils.EOperator;
 

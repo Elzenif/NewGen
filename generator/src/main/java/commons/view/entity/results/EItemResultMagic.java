@@ -1,4 +1,4 @@
-package commons.model.entity.results;
+package commons.view.entity.results;
 
 import commons.model.entity.characteristics.primary.enums.EMagic;
 

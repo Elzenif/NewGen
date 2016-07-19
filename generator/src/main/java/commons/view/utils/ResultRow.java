@@ -1,6 +1,6 @@
 package commons.view.utils;
 
-import commons.model.commons.Result;
+import commons.view.commons.Result;
 
 import javax.swing.JLabel;
 import java.awt.Font;

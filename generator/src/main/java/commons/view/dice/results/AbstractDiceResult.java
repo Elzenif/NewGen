@@ -1,6 +1,6 @@
-package commons.model.dice.results;
+package commons.view.dice.results;
 
-import commons.model.commons.Result;
+import commons.view.commons.Result;
 
 /**
  * Created by Germain on 25/06/2016.
