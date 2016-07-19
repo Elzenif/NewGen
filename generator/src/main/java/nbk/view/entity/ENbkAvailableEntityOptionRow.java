@@ -37,7 +37,7 @@ public enum ENbkAvailableEntityOptionRow implements IAvailableEntityOptionRow<Nb
 
   @Override
   public String getName() {
-    return item.toString();
+    return item.getName();
   }
 
 }

@@ -9,8 +9,8 @@ import commons.view.utils.ResultRow;
  */
 public class EntityResultRow extends ResultRow<ItemResult> {
 
-  EntityResultRow(IAvailableEntityOptionRow availableItem) {
-    super((String) availableItem.getName());
+  EntityResultRow(IAvailableEntityOptionRow availableEntityOptionRow) {
+    super((String) availableEntityOptionRow.getName());
   }
 
 }
