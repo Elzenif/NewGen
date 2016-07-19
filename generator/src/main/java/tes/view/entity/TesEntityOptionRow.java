@@ -1,7 +1,7 @@
 package tes.view.entity;
 
 import commons.view.entity.EntityOptionRow;
-import tes.model.entity.game.TesGame;
+import tes.model.commons.TesGame;
 
 /**
  * Created by Germain on 09/06/2016.

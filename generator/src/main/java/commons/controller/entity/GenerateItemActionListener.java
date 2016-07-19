@@ -1,8 +1,8 @@
 package commons.controller.entity;
 
+import commons.model.commons.Game;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.game.Game;
 import commons.model.entity.items.Item;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.exception.NoAvailableItemTypeException;

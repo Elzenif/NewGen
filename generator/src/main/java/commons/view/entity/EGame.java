@@ -1,9 +1,9 @@
 package commons.view.entity;
 
-import commons.model.entity.game.Game;
-import nbk.model.entity.game.NbkGame;
+import commons.model.commons.Game;
+import nbk.model.commons.NbkGame;
 import nbk.view.entity.NbkEntityPanelEmbedded;
-import tes.model.entity.game.TesGame;
+import tes.model.commons.TesGame;
 import tes.view.entity.TesEntityPanelEmbedded;
 
 import java.util.Arrays;

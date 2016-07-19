@@ -6,7 +6,7 @@ import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.view.entity.EntityResultRow;
-import nbk.model.entity.game.NbkGame;
+import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.NbkAbstractWeapon;
 import nbk.model.entity.items.NbkPredefinedWeapon;
 import nbk.model.entity.items.NbkRGWeapon;

@@ -1,6 +1,6 @@
 package commons.view.entity;
 
-import commons.model.entity.game.Game;
+import commons.model.commons.Game;
 import commons.utils.Pair;
 import commons.view.MainFrame;
 import commons.view.utils.DoublePanel;

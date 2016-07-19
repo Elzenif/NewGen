@@ -1,6 +1,6 @@
-package tes.model.entity.game;
+package tes.model.commons;
 
-import commons.model.entity.game.Game;
+import commons.model.commons.Game;
 import tes.view.entity.ETesAvailableItem;
 
 /**

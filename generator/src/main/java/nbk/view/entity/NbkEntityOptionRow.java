@@ -1,7 +1,7 @@
 package nbk.view.entity;
 
 import commons.view.entity.EntityOptionRow;
-import nbk.model.entity.game.NbkGame;
+import nbk.model.commons.NbkGame;
 
 /**
  * Created by Germain on 08/06/2016.

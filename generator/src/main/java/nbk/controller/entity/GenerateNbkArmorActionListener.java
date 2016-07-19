@@ -5,7 +5,7 @@ import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.view.entity.EntityResultRow;
-import nbk.model.entity.game.NbkGame;
+import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.NbkPredefinedArmor;
 import nbk.view.entity.NbkArmorOptionRow;
 import org.jetbrains.annotations.Contract;

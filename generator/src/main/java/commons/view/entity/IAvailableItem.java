@@ -1,7 +1,7 @@
 package commons.view.entity;
 
+import commons.model.commons.Game;
 import commons.model.commons.HasName;
-import commons.model.entity.game.Game;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;

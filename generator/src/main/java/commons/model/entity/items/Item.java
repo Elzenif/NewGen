@@ -1,11 +1,11 @@
 package commons.model.entity.items;
 
+import commons.model.commons.Game;
 import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.characteristics.primary.fields.HasMagic;
 import commons.model.entity.characteristics.primary.fields.HasQuantity;
 import commons.model.entity.characteristics.primary.fields.HasRarity;
-import commons.model.entity.game.Game;
 import commons.utils.MathUtils;
 import commons.utils.SPositive;
 import org.jetbrains.annotations.Contract;

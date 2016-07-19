@@ -1,7 +1,7 @@
 package nbk.view.entity;
 
 import commons.view.entity.EntityPanelEmbedded;
-import nbk.model.entity.game.NbkGame;
+import nbk.model.commons.NbkGame;
 
 /**
  * Created by Germain on 12/06/2016.

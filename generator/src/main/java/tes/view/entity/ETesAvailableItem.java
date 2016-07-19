@@ -2,7 +2,7 @@ package tes.view.entity;
 
 import commons.view.entity.EntityOptionRow;
 import commons.view.entity.IAvailableItem;
-import tes.model.entity.game.TesGame;
+import tes.model.commons.TesGame;
 
 /**
  * Created by Germain on 11/06/2016.

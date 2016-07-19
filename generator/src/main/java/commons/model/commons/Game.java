@@ -1,4 +1,4 @@
-package commons.model.entity.game;
+package commons.model.commons;
 
 import commons.view.entity.IAvailableItem;
 

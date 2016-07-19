@@ -2,10 +2,10 @@ package commons.view.entity;
 
 import commons.controller.entity.ConstraintsItemListener;
 import commons.controller.entity.RarityChangeListener;
+import commons.model.commons.Game;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.game.Game;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
 import commons.view.utils.Constants;

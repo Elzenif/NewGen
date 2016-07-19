@@ -1,6 +1,6 @@
-package nbk.model.entity.game;
+package nbk.model.commons;
 
-import commons.model.entity.game.Game;
+import commons.model.commons.Game;
 import nbk.view.entity.ENbkAvailableItem;
 
 /**

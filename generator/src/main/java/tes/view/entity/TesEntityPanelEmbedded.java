@@ -1,7 +1,7 @@
 package tes.view.entity;
 
 import commons.view.entity.EntityPanelEmbedded;
-import tes.model.entity.game.TesGame;
+import tes.model.commons.TesGame;
 
 /**
  * Created by Germain on 12/06/2016.

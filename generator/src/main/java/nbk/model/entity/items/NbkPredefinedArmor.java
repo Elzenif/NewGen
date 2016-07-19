@@ -7,6 +7,7 @@ import commons.model.entity.items.Item;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableItemTypeException;
+import nbk.model.commons.NbkGame;
 import nbk.model.entity.characteristics.primary.enums.EBodyPart;
 import nbk.model.entity.characteristics.primary.enums.ESize;
 import nbk.model.entity.characteristics.primary.enums.EWeight;
@@ -14,7 +15,6 @@ import nbk.model.entity.characteristics.primary.fields.HasSize;
 import nbk.model.entity.characteristics.primary.fields.HasWeight;
 import nbk.model.entity.characteristics.primary.fields.IsBodyPart;
 import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedArmor;
-import nbk.model.entity.game.NbkGame;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
