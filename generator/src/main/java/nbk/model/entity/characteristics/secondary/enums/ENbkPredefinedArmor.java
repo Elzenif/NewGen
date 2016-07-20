@@ -207,7 +207,7 @@ public enum ENbkPredefinedArmor implements Secondary, ItemType<String>, HasMagic
     EMagic magic = EMagic.NOPE;
     final EnumSet<EBodyPart> bodyParts = EnumSet.noneOf(EBodyPart.class);
     EWeight weight = EWeight.NORMAL;
-    ESize size = ESize.NORMAL;
+    ESize size = ESize.MEDIUM;
 
     @Override
     public ENbkPredefinedArmorBuilder setNames(Object first, Object... others) {

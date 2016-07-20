@@ -203,7 +203,7 @@ public enum ENbkWeaponType implements Secondary, ItemType<FrenchNoun>, HasQuanti
     boolean printNbHands = false;
     SPositive quantity = SPositive.ONE;
     ERange range = ERange.CLOSE;
-    ESize size = ESize.NORMAL;
+    ESize size = ESize.MEDIUM;
 
     NbKWeaponTypeBuilder setMasculineNouns(String... names) {
       for (String name : names) {

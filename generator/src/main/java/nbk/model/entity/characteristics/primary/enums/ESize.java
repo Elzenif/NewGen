@@ -13,7 +13,7 @@ import java.util.function.Predicate;
  */
 public enum ESize implements Primary, HasSize, GenericConstraint<ESize> {
   SMALL,
-  NORMAL,
+  MEDIUM,
   LARGE;
 
   @Contract(pure = true)
