@@ -3,7 +3,10 @@ package commons.view.entity;
 import commons.controller.entity.ConstraintsItemListener;
 import commons.controller.entity.RarityChangeListener;
 import commons.model.commons.Game;
+import commons.model.entity.characteristics.primary.Primary;
 import commons.model.entity.characteristics.primary.enums.ERarity;
+import commons.model.entity.characteristics.secondary.Secondary;
+import commons.model.entity.constraints.Constraints;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.items.IAvailableItem;
@@ -28,7 +31,7 @@ import static commons.utils.TextFieldUtils.createTwoDigitsField;
 /**
  * Created by Germain on 05/06/2016.
  */
-public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityResultRow> {
+public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityResultRow> {
 
   private final int labelSize;
   private final String itemName;
@@ -51,7 +54,7 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   protected JButton generateItemButton;
 
 
-  protected EntityOptionRow(IAvailableItem<S> availableItem, S game) {
+  protected EntityOptionRow(IAvailableItem<T> availableItem, T game) {
     super();
     labelSize = MathUtils.maxLength(game.getAvailableItems());
     itemName = availableItem.getName();
@@ -123,5 +126,10 @@ public abstract class EntityOptionRow<S extends Game> extends OptionRow<EntityRe
   public void updateRarityConstraint(GenericConstraint<ERarity> constraint) {
     globalConstraints.clear(ERarity.getConstraints());
     globalConstraints.update(ERarity.getConstraints(), ERarity.class, constraint);
+  }
+
+  protected <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  void updateConstraint(Constraints<E> constraintsClass, Class<F> primaryClass, GenericConstraint<F> constraint) {
+    globalConstraints.update(constraintsClass, primaryClass, constraint);
   }
 }

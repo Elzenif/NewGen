@@ -2,6 +2,7 @@ package nbk.model.entity.characteristics.primary.enums;
 
 import commons.model.entity.characteristics.primary.Primary;
 import commons.model.entity.constraints.GenericConstraint;
+import commons.utils.StringUtils;
 import nbk.model.entity.characteristics.primary.fields.IsBodyPart;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,5 +34,11 @@ public enum EBodyPart implements Primary, IsBodyPart, GenericConstraint<EBodyPar
   @Override
   public Predicate<EBodyPart> getPredicate() {
     return e -> e.getBodyParts().contains(this);
+  }
+
+
+  @Override
+  public String toString() {
+    return StringUtils.capitalizeFirstLetter(name());
   }
 }

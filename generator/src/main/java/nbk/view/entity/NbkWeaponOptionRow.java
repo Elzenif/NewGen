@@ -52,6 +52,6 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
   }
 
   public void updateNbHandsConstraint(GenericConstraint<ENbHands> constraint) {
-    globalConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, constraint);
+    updateConstraint(ENbkWeaponType.getConstraints(), ENbHands.class, constraint);
   }
 }
