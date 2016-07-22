@@ -6,24 +6,23 @@ package commons.utils;
 public enum EOperator {
 
   LT("<") {
-    @Override
-    public boolean apply(int a, int b) {
-      return a < b;
+    public <T> boolean apply(Comparable<T> a, T b) {
+      return a.compareTo(b) < 0;
     }
   },
   GT(">") {
-    public boolean apply(int a, int b) {
-      return a > b;
+    public <T> boolean apply(Comparable<T> a, T b) {
+      return a.compareTo(b) > 0;
     }
   },
   LTE("<=") {
-    public boolean apply(int a, int b) {
-      return a <= b;
+    public <T> boolean apply(Comparable<T> a, T b) {
+      return a.compareTo(b) <= 0;
     }
   },
   GTE(">=") {
-    public boolean apply(int a, int b) {
-      return a >= b;
+    public <T> boolean apply(Comparable<T> a, T b) {
+      return a.compareTo(b) >= 0;
     }
   };
 
@@ -33,7 +32,7 @@ public enum EOperator {
     this.text = text;
   }
 
-  public abstract boolean apply(int a, int b);
+  public abstract <T> boolean apply(Comparable<T> a, T b);
 
   @Override
   public String toString() {
