@@ -5,6 +5,6 @@ package commons.utils.exception;
  */
 public class IncompatiblePrimaryClass extends RuntimeException {
   public IncompatiblePrimaryClass(String primaryClassName, String otherClassName) {
-    System.out.println("Primary class " + primaryClassName + " is not compatible with " + otherClassName);
+    System.out.println("Primary " + primaryClassName + " is not compatible with " + otherClassName);
   }
 }

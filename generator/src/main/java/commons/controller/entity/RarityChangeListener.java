@@ -28,8 +28,7 @@ public class RarityChangeListener implements PropertyChangeListener {
     GenericConstraint<ERarity> constraint;
     try {
       int rarityLevel = Integer.parseInt(qualityTextField.getText()) + 1; // so that the result belongs to [1;100]
-      constraint = findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(
-              rarityLevel, ERarity.getConstraintMapView());
+      constraint = findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(rarityLevel, ERarity.getConstraintMapView());
     } catch (NumberFormatException e) {
       constraint = () -> p -> true;
     }

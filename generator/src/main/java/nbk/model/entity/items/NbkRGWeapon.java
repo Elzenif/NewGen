@@ -1,7 +1,6 @@
 package nbk.model.entity.items;
 
 import commons.model.entity.characteristics.primary.enums.EMagic;
-import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.utils.ItemUtils;
 import commons.utils.SPositive;
@@ -28,12 +27,6 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
   public static NbkRGWeapon create(GlobalConstraints globalConstraints)
           throws NoAvailableItemTypeException {
     return new RGWeaponBuilder(globalConstraints).build();
-  }
-
-  @Contract("_, _ -> !null")
-  public static NbkRGWeapon create(GlobalConstraints globalConstraints, ERarity rarity)
-          throws NoAvailableItemTypeException {
-    return new RGWeaponBuilder(globalConstraints, rarity).build();
   }
 
   public ENbkWeaponType getWeaponType() {
@@ -80,22 +73,16 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
 
     RGWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
       setWeaponType(ENbkWeaponType.getPredicate(globalConstraints));
-      rarity = ItemUtils.selectRandomRarity(ERarity.values());
-      setQuality(rarity);
-    }
-
-    RGWeaponBuilder(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
-      super(rarity);
-      setWeaponType(ENbkWeaponType.getPredicate(globalConstraints));
-      setQuality(rarity);
+      setQuality(ENbkQuality.getPredicate(globalConstraints));
+      rarity = quality.getRarity();
     }
 
     void setWeaponType(Predicate<ENbkWeaponType> predicate) throws NoAvailableItemTypeException {
       weaponType = ItemUtils.selectRandomRarity(ENbkWeaponType.values(), predicate);
     }
 
-    void setQuality(ERarity rarity) {
-      quality = ENbkQuality.QUALITY_MAP.get(rarity);
+    void setQuality(Predicate<ENbkQuality> predicate) throws NoAvailableItemTypeException {
+      quality = ItemUtils.selectRandomRarity(ENbkQuality.values(), predicate);
     }
 
     @Override

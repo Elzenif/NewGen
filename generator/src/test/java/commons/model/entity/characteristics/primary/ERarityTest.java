@@ -1,11 +1,10 @@
 package commons.model.entity.characteristics.primary;
 
 import commons.model.entity.characteristics.primary.enums.ERarity;
+import commons.utils.EOperator;
 import org.junit.Test;
 
-import java.util.stream.Stream;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -14,8 +13,10 @@ import static org.junit.Assert.assertEquals;
 public class ERarityTest {
 
   @Test
-  public void testGetRarity() {
-    assertEquals(ERarity.COMMON, ERarity.getRarity(0));
-    Stream.of(ERarity.values()).forEach(eRarity -> assertEquals(eRarity, ERarity.getRarity(eRarity.getRarityLevel())));
+  public void testOrderRarity() {
+    assertTrue(EOperator.LT.apply(ERarity.COMMON, ERarity.UNCOMMON));
+    assertTrue(EOperator.LT.apply(ERarity.UNCOMMON, ERarity.RARE));
+    assertTrue(EOperator.LT.apply(ERarity.RARE, ERarity.EPIC));
+    assertTrue(EOperator.LT.apply(ERarity.EPIC, ERarity.LEGENDARY));
   }
 }

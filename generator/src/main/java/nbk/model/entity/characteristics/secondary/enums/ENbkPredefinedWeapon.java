@@ -6,8 +6,16 @@ import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.characteristics.primary.fields.HasMagic;
 import commons.model.entity.characteristics.primary.fields.ItemType;
+import commons.model.entity.characteristics.secondary.Secondary;
+import commons.model.entity.constraints.Constraints;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
+import nbk.model.entity.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.characteristics.primary.enums.ERange;
+import nbk.model.entity.characteristics.primary.enums.ESize;
+import nbk.model.entity.characteristics.primary.fields.HasNbHands;
+import nbk.model.entity.characteristics.primary.fields.HasRange;
+import nbk.model.entity.characteristics.primary.fields.HasSize;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
@@ -18,7 +26,7 @@ import java.util.function.Predicate;
  * Created by Germain on 23/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
+public enum ENbkPredefinedWeapon implements Secondary, ItemType<String>, HasMagic, HasRange, HasNbHands, HasSize {
   // Récupération
   GOURDIN(new ENbkPredefinedWeaponBuilder()
           .setNames("Bonne branche", "Gourdin", "Pied de chaise")
@@ -460,9 +468,31 @@ public enum ENbkPredefinedWeapon implements ItemType<String>, HasMagic {
     return magic;
   }
 
+  @Override
+  public ERange getRange() { return weaponType.getRange(); }
+
+  @Override
+  public ENbHands getNbHands() { return weaponType.getNbHands(); }
+
+  @Override
+  public ESize getSize() { return weaponType.getSize(); }
+
+  public static Constraints<ENbkPredefinedWeapon> getConstraints() {
+    return CONSTRAINTS;
+  }
+
+  private static final Constraints<ENbkPredefinedWeapon> CONSTRAINTS = Constraints.ConstraintsBuilder
+          .<ENbkPredefinedWeapon>start()
+          .setSecondaryClass(ENbkPredefinedWeapon.class)
+          .setPrimaryClasses(ERarity.class)
+          .build();
+
   @NotNull
   public static Predicate<ENbkPredefinedWeapon> getPredicate(GlobalConstraints globalConstraints) {
-    return weapon -> ENbkWeaponType.getPredicate(globalConstraints).test(weapon.getWeaponType());
+    Predicate<ERarity> rarityPredicate = globalConstraints.getPredicate(CONSTRAINTS, ERarity.class);
+    Predicate<ENbkWeaponType> weaponTypePredicate = ENbkWeaponType.getPredicate(globalConstraints);
+    return weapon -> rarityPredicate.test(weapon.getRarity())
+            && weaponTypePredicate.test(weapon.getWeaponType());
   }
 
 

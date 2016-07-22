@@ -1,7 +1,6 @@
 package nbk.controller.entity;
 
 import commons.controller.entity.GenerateItemActionListener;
-import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.view.entity.EntityResultRow;
@@ -19,9 +18,9 @@ public class GenerateNbkArmorActionListener extends GenerateItemActionListener<N
     super(entityOptionRow, entityResultRow);
   }
 
-  @Contract("_, _ -> !null")
+  @Contract("_ -> !null")
   @Override
-  protected NbkPredefinedArmor generate(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
-    return NbkPredefinedArmor.create(globalConstraints, rarity);
+  protected NbkPredefinedArmor generate(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+    return NbkPredefinedArmor.create(globalConstraints);
   }
 }

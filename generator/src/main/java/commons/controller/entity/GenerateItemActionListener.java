@@ -1,10 +1,8 @@
 package commons.controller.entity;
 
 import commons.model.commons.Game;
-import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.items.Item;
-import commons.model.entity.utils.ItemUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.utils.exception.WrongClassException;
 import commons.view.entity.EntityOptionRow;
@@ -55,16 +53,8 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
   }
 
   private ItemResult generateResult(GlobalConstraints globalConstraints) {
-    ERarity rarity;
     try {
-      rarity = ItemUtils.selectRandomRarity(ERarity.values(),
-              globalConstraints.getPredicate(ERarity.getConstraints(), ERarity.class));
-    } catch (NoAvailableItemTypeException e) {
-      e.printStackTrace();
-      rarity = ERarity.COMMON;
-    }
-    try {
-      Item<T> item = generate(globalConstraints, rarity);
+      Item<T> item = generate(globalConstraints);
       return new ItemResult(item);
     } catch (NoAvailableItemTypeException e) {
       e.printStackTrace();
@@ -72,7 +62,7 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
     }
   }
 
-  protected abstract Item<T> generate(GlobalConstraints globalConstraints, ERarity rarity)
+  protected abstract Item<T> generate(GlobalConstraints globalConstraints)
           throws NoAvailableItemTypeException;
 
 }

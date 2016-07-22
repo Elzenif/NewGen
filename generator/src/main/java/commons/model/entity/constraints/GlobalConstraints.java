@@ -20,7 +20,7 @@ public class GlobalConstraints {
   public <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
   void update(Constraints<E> constraintsClass, Class<F> primaryClass, GenericConstraint<F> constraint) {
     if (!constraintsClass.getPrimaryClasses().contains(primaryClass))
-      throw new IncompatiblePrimaryClass(primaryClass.toString(), constraintsClass.toString());
+      throw new IncompatiblePrimaryClass(primaryClass.toString(), constraintsClass.getSecondaryClass().toString());
     if (!add(constraintsClass, primaryClass, constraint))
       remove(constraintsClass, primaryClass, constraint);
   }
@@ -28,7 +28,7 @@ public class GlobalConstraints {
   public <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
   Predicate<F> getPredicate(Constraints<E> constraintsClass, Class<F> primaryClass) {
     if (!constraintsClass.getPrimaryClasses().contains(primaryClass))
-      throw new IncompatiblePrimaryClass(primaryClass.toString(), constraintsClass.toString());
+      throw new IncompatiblePrimaryClass(primaryClass.toString(), constraintsClass.getSecondaryClass().toString());
     return globalConstraintsMap.containsKey(constraintsClass)
             ? globalConstraintsMap.get(constraintsClass).getPredicate(primaryClass)
             : p -> true;
@@ -51,7 +51,7 @@ public class GlobalConstraints {
   public <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
   void clear(Constraints<E> constraintsClass, Class<F> primaryClass) {
     if (!constraintsClass.getPrimaryClasses().contains(primaryClass))
-      throw new IncompatiblePrimaryClass(primaryClass.toString(), constraintsClass.toString());
+      throw new IncompatiblePrimaryClass(primaryClass.toString(), constraintsClass.getSecondaryClass().toString());
     if (globalConstraintsMap.containsKey(constraintsClass))
       globalConstraintsMap.get(constraintsClass).clear(primaryClass);
   }

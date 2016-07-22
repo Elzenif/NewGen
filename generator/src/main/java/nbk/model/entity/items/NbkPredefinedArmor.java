@@ -1,7 +1,6 @@
 package nbk.model.entity.items;
 
 import commons.model.entity.characteristics.primary.enums.EMagic;
-import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.items.Item;
 import commons.model.entity.utils.ItemUtils;
@@ -29,11 +28,6 @@ public class NbkPredefinedArmor extends Item<NbkGame> implements HasWeight, IsBo
   public static NbkPredefinedArmor create(GlobalConstraints globalConstraints)
           throws NoAvailableItemTypeException {
     return new NbkPredefinedArmorBuilder(globalConstraints).build();
-  }
-
-  public static NbkPredefinedArmor create(GlobalConstraints globalConstraints, ERarity rarity)
-          throws NoAvailableItemTypeException {
-    return new NbkPredefinedArmorBuilder(globalConstraints, rarity).build();
   }
 
   private NbkPredefinedArmor(NbkPredefinedArmorBuilder builder) {
@@ -74,22 +68,12 @@ public class NbkPredefinedArmor extends Item<NbkGame> implements HasWeight, IsBo
       rarity = predefinedArmor.getRarity();
     }
 
-    NbkPredefinedArmorBuilder(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
-      super(rarity);
-      setPredefinedArmor(getPredicate(globalConstraints), rarity);
-    }
-
     Predicate<ENbkPredefinedArmor> getPredicate(GlobalConstraints globalConstraints) {
       return ENbkPredefinedArmor.getPredicate(globalConstraints);
     }
 
     void setPredefinedArmor(Predicate<ENbkPredefinedArmor> armorPredicate) throws NoAvailableItemTypeException {
       predefinedArmor = ItemUtils.selectRandomRarity(ENbkPredefinedArmor.values(), armorPredicate);
-    }
-
-    void setPredefinedArmor(Predicate<ENbkPredefinedArmor> armorPredicate, ERarity rarity)
-            throws NoAvailableItemTypeException {
-      predefinedArmor = ItemUtils.selectRandomRarity(ENbkPredefinedArmor.values(), armorPredicate, rarity);
     }
 
     @Override

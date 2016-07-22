@@ -1,11 +1,10 @@
 package commons.view.entity.results;
 
 import commons.model.entity.items.Item;
+import commons.utils.StringUtils;
 import commons.view.commons.Result;
 
 import java.awt.Color;
-
-import static commons.utils.StringUtils.capitalizeFirstLetter;
 
 /**
  * Created by Germain on 05/06/2016.
@@ -20,7 +19,7 @@ public class ItemResult implements Result {
 
   @Override
   public String getRawResult() {
-    return capitalizeFirstLetter(item.toString());
+    return StringUtils.capitalizeFirstLetter(item.toString(), false);
   }
 
   @Override

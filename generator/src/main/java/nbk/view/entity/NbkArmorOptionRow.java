@@ -1,5 +1,6 @@
 package nbk.view.entity;
 
+import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
 import commons.view.utils.ConstraintPanel;
@@ -50,6 +51,12 @@ public class NbkArmorOptionRow extends NbkEntityOptionRow {
     generateItemButton.addActionListener(new GenerateNbkArmorActionListener(this, entityResultRow));
     bodyPartCheckBoxes.keySet().forEach(bpConstraint ->
     bodyPartCheckBoxes.get(bpConstraint).addActionListener(new BodyPartActionListener(this, bpConstraint)));
+  }
+
+  @Override
+  public void updateRarityConstraint(GenericConstraint<ERarity> constraint) {
+    globalConstraints.clear(ENbkPredefinedArmor.getConstraints(), ERarity.class);
+    globalConstraints.update(ENbkPredefinedArmor.getConstraints(), ERarity.class, constraint);
   }
 
   public void updateBodyPartConstraint(GenericConstraint<EBodyPart> bpConstraint) {

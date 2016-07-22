@@ -3,6 +3,9 @@ package nbk.model.entity.characteristics.secondary.enums;
 import commons.model.entity.characteristics.primary.builders.ItemTypeBuilder;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.characteristics.primary.fields.ItemType;
+import commons.model.entity.characteristics.secondary.Secondary;
+import commons.model.entity.constraints.Constraints;
+import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import commons.utils.french.FrenchAdjective;
 import commons.utils.french.FrenchGenderAdjective;
@@ -12,6 +15,7 @@ import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,7 +23,7 @@ import java.util.stream.Stream;
  * Created by Germain on 16/06/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkQuality implements ItemType<FrenchAdjective> {
+public enum ENbkQuality implements Secondary, ItemType<FrenchAdjective> {
 
   MAUVAIS(new NbkQualityBuilder()
           .setGenderAdjective("grossier", "grossière")
@@ -61,6 +65,21 @@ public enum ENbkQuality implements ItemType<FrenchAdjective> {
   public static final EnumMap<ERarity, ENbkQuality> QUALITY_MAP = new EnumMap<>(
           Stream.of(ENbkQuality.values()).collect(Collectors.toMap(ENbkQuality::getRarity, Function.identity()))
   );
+
+  public static Constraints<ENbkQuality> getConstraints() {
+    return CONSTRAINTS;
+  }
+
+  private static final Constraints<ENbkQuality> CONSTRAINTS = Constraints.ConstraintsBuilder
+          .<ENbkQuality>start()
+          .setSecondaryClass(ENbkQuality.class)
+          .setPrimaryClasses(ERarity.class)
+          .build();
+
+  public static Predicate<ENbkQuality> getPredicate(GlobalConstraints globalConstraints) {
+    Predicate<ERarity> rarityPredicate = globalConstraints.getPredicate(ENbkQuality.getConstraints(), ERarity.class);
+    return quality -> rarityPredicate.test(quality.getRarity());
+  }
 
 
   private static class NbkQualityBuilder implements ItemTypeBuilder {

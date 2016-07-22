@@ -3,6 +3,7 @@ package nbk.model.entity.items;
 import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
+import commons.utils.EOperator;
 import commons.utils.exception.NoAvailableItemTypeException;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.characteristics.secondary.enums.ENbkQuality;
@@ -95,9 +96,12 @@ public class NbkRGWeaponTest {
   @Test
   public void testCreateWeaponWithRarityConstraint() throws NoAvailableItemTypeException {
     for (ERarity rarity : ERarity.values()) {
-      weapon = NbkRGWeapon.create(globalConstraints, rarity);
+      globalConstraints.update(ENbkQuality.getConstraints(), ERarity.class, rarity);
+      weapon = NbkRGWeapon.create(globalConstraints);
       assertNotNull("The weapon should not be null", weapon);
-      assertEquals(rarity, weapon.getRarity());
+      assertTrue(weapon.getRarity() + " (weapon rarity) should be greater than " + rarity,
+              EOperator.GTE.apply(weapon.getRarity(), rarity));
+      globalConstraints.update(ENbkQuality.getConstraints(), ERarity.class, rarity);
     }
   }
 

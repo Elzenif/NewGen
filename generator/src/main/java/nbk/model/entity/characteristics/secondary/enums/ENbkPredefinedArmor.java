@@ -185,15 +185,17 @@ public enum ENbkPredefinedArmor implements Secondary, ItemType<String>, HasMagic
   private static final Constraints<ENbkPredefinedArmor> CONSTRAINTS = Constraints.ConstraintsBuilder
           .<ENbkPredefinedArmor>start()
           .setSecondaryClass(ENbkPredefinedArmor.class)
-          .setPrimaryClasses(EBodyPart.class, EWeight.class, ESize.class)
+          .setPrimaryClasses(ERarity.class, EBodyPart.class, EWeight.class, ESize.class)
           .build();
 
   @NotNull
   public static Predicate<ENbkPredefinedArmor> getPredicate(GlobalConstraints globalConstraints) {
+    Predicate<ERarity> rarityPredicate = globalConstraints.getPredicate(CONSTRAINTS, ERarity.class);
     Predicate<EBodyPart> bodyPartPredicate = globalConstraints.getPredicate(CONSTRAINTS, EBodyPart.class);
     Predicate<EWeight> weightPredicate = globalConstraints.getPredicate(CONSTRAINTS, EWeight.class);
     Predicate<ESize> sizePredicate = globalConstraints.getPredicate(CONSTRAINTS, ESize.class);
-    return armor -> armor.getBodyParts().stream().filter(bodyPartPredicate).findAny().isPresent()
+    return armor -> rarityPredicate.test(armor.getRarity())
+            && armor.getBodyParts().stream().filter(bodyPartPredicate).findAny().isPresent()
             && weightPredicate.test(armor.getWeight())
             && sizePredicate.test(armor.getSize());
   }

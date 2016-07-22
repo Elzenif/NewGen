@@ -2,6 +2,7 @@ package nbk.model.entity.items;
 
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
+import commons.utils.EOperator;
 import commons.utils.exception.NoAvailableItemTypeException;
 import nbk.model.entity.characteristics.primary.enums.EBodyPart;
 import nbk.model.entity.characteristics.primary.enums.ESize;
@@ -13,7 +14,6 @@ import org.junit.Test;
 import java.util.EnumSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -82,9 +82,12 @@ public class NbkPredefinedArmorTest {
   @Test
   public void testCreateArmorWithRarityConstraint() throws NoAvailableItemTypeException {
     for (ERarity rarity : ERarity.values()) {
-      armor = NbkPredefinedArmor.create(globalConstraints, rarity);
+      globalConstraints.update(ENbkPredefinedArmor.getConstraints(), ERarity.class, rarity);
+      armor = NbkPredefinedArmor.create(globalConstraints);
       assertNotNull("The armor should not be null", armor);
-      assertEquals(rarity, armor.getRarity());
+      assertTrue(armor.getRarity() + " (armor rarity) should be greater than " + rarity,
+              EOperator.GTE.apply(armor.getRarity(), rarity));
+      globalConstraints.update(ENbkPredefinedArmor.getConstraints(), ERarity.class, rarity);
     }
   }
 }

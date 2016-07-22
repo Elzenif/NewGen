@@ -1,7 +1,6 @@
 package nbk.controller.entity;
 
 import commons.controller.entity.GenerateItemActionListener;
-import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableItemTypeException;
@@ -22,28 +21,28 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
     super(entityOptionRow, entityResultRow);
   }
 
-  @Contract("_, _ -> !null")
+  @Contract("_ -> !null")
   @Override
-  protected NbkAbstractWeapon generate(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
+  protected NbkAbstractWeapon generate(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
     if (MathUtils.random(1, 10) == 1) {
-      return generatePW(globalConstraints, rarity);
+      return generatePW(globalConstraints);
     } else {
-      return generateRGW(globalConstraints, rarity);
+      return generateRGW(globalConstraints);
     }
   }
 
-  @Contract("_, _ -> !null")
-  private NbkAbstractWeapon generatePW(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
+  @Contract("_ -> !null")
+  private NbkAbstractWeapon generatePW(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
     try {
-      return NbkPredefinedWeapon.create(globalConstraints, rarity);
+      return NbkPredefinedWeapon.create(globalConstraints);
     } catch (NoAvailableItemTypeException e) {
       // if no one fits the constraints, generate a random weapon anyway
-      return generateRGW(globalConstraints, rarity);
+      return generateRGW(globalConstraints);
     }
   }
 
-  @Contract("_, _ -> !null")
-  private NbkRGWeapon generateRGW(GlobalConstraints globalConstraints, ERarity rarity) throws NoAvailableItemTypeException {
-    return NbkRGWeapon.create(globalConstraints, rarity);
+  @Contract("_ -> !null")
+  private NbkRGWeapon generateRGW(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+    return NbkRGWeapon.create(globalConstraints);
   }
 }

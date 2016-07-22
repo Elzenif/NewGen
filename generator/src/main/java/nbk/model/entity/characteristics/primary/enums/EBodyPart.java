@@ -39,6 +39,6 @@ public enum EBodyPart implements Primary, IsBodyPart, GenericConstraint<EBodyPar
 
   @Override
   public String toString() {
-    return StringUtils.capitalizeFirstLetter(name());
+    return StringUtils.capitalizeFirstLetter(name(), true);
   }
 }

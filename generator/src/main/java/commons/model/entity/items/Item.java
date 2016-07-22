@@ -60,10 +60,6 @@ public abstract class Item<T extends Game> implements HasRarity, HasMagic {
 
     protected ItemBuilder() {}
 
-    protected ItemBuilder(ERarity rarity) {
-      this.rarity = rarity;
-    }
-
     @Override
     public ERarity getRarity() {
       return rarity;

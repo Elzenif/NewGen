@@ -123,10 +123,7 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
     constraintPanel.setEnabled(checkBoxSelected);
   }
 
-  public void updateRarityConstraint(GenericConstraint<ERarity> constraint) {
-    globalConstraints.clear(ERarity.getConstraints());
-    globalConstraints.update(ERarity.getConstraints(), ERarity.class, constraint);
-  }
+  public abstract void updateRarityConstraint(GenericConstraint<ERarity> constraint);
 
   protected <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
   void updateConstraint(Constraints<E> constraintsClass, Class<F> primaryClass, GenericConstraint<F> constraint) {
