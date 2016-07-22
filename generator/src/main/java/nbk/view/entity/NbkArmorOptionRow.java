@@ -60,6 +60,6 @@ public class NbkArmorOptionRow extends NbkEntityOptionRow {
   }
 
   public void updateBodyPartConstraint(GenericConstraint<EBodyPart> bpConstraint) {
-    updateConstraint(ENbkPredefinedArmor.getConstraints(), EBodyPart.class, bpConstraint);
+    globalConstraints.update(ENbkPredefinedArmor.getConstraints(), EBodyPart.class, bpConstraint);
   }
 }
