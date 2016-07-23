@@ -19,12 +19,10 @@ public class ENbkPredefinedWeaponTest {
               assertNotNull(w.getRarity());
               assertNotNull(w.getWeaponType());
               assertNotNull(w.getMagic());
+              assertNotNull(w.getRange());
+              assertNotNull(w.getNbHands());
+              assertNotNull(w.getSize());
             }
     );
   }
-
-//  @Test
-//  public void testPrintByRarity() {
-//    streamSortedByRarity(ENbkPredefinedWeapon.values()).forEach(w -> System.out.println(w.getName()));
-//  }
 }
