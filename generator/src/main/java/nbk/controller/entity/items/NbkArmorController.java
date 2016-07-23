@@ -18,7 +18,7 @@ import java.util.EnumMap;
  */
 public class NbkArmorController extends ItemController<NbkGame> {
 
-  private EnumMap<EBodyPart, ActionListener> bodyPartActionListenerMap = new EnumMap<>(EBodyPart.class);
+  private final EnumMap<EBodyPart, ActionListener> bodyPartActionListenerMap = new EnumMap<>(EBodyPart.class);
 
   public NbkArmorController(NbkArmorOptionRow entityOptionRow, EntityResultRow entityResultRow) {
     super(entityOptionRow);

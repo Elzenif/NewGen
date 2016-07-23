@@ -20,7 +20,7 @@ import java.util.EnumMap;
  */
 public class NbkWeaponController extends ItemController<NbkGame> {
 
-  private EnumMap<ENbHands, ActionListener> nbHandsActionListenerEnumMap = new EnumMap<>(ENbHands.class);
+  private final EnumMap<ENbHands, ActionListener> nbHandsActionListenerEnumMap = new EnumMap<>(ENbHands.class);
 
   public NbkWeaponController(NbkWeaponOptionRow nbkWeaponOptionRow, EntityResultRow entityResultRow) {
     super(nbkWeaponOptionRow);

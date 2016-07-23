@@ -92,7 +92,7 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
     updateConstraintsAbility(false);
   }
 
-  public void setControllers(ItemController<T> itemController) {
+  protected void setControllers(ItemController<T> itemController) {
     this.itemController = itemController;
     constraintsCheckBox.addItemListener(itemController.getConstraintsItemListener());
     qualityTextField.addPropertyChangeListener(itemController.getRarityChangeListener());
