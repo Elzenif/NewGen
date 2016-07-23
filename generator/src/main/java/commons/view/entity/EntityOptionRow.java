@@ -1,6 +1,6 @@
 package commons.view.entity;
 
-import commons.controller.entity.ItemController;
+import commons.controller.entity.items.ItemController;
 import commons.model.commons.Game;
 import commons.model.entity.items.IAvailableItem;
 import commons.utils.MathUtils;

@@ -1,4 +1,4 @@
-package nbk.view.entity;
+package nbk.view.entity.items;
 
 import commons.view.entity.EntityPanelEmbedded;
 import nbk.model.commons.NbkGame;

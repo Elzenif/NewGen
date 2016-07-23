@@ -1,13 +1,13 @@
-package nbk.controller.entity;
+package nbk.controller.entity.items;
 
-import commons.controller.entity.ItemController;
+import commons.controller.entity.items.ItemController;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.characteristics.primary.enums.EBodyPart;
 import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedArmor;
-import nbk.view.entity.NbkArmorOptionRow;
+import nbk.view.entity.items.NbkArmorOptionRow;
 
 import java.awt.event.ActionListener;
 import java.util.Arrays;

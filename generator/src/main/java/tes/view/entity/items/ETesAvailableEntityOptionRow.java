@@ -1,4 +1,4 @@
-package tes.view.entity;
+package tes.view.entity.items;
 
 import commons.view.entity.EntityOptionRow;
 import commons.view.entity.IAvailableEntityOptionRow;

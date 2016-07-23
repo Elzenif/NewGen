@@ -1,4 +1,4 @@
-package commons.controller.entity;
+package commons.controller.entity.items;
 
 import commons.model.commons.Game;
 import commons.model.entity.constraints.GlobalConstraints;

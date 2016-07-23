@@ -1,7 +1,7 @@
-package nbk.controller.entity;
+package nbk.controller.entity.items;
 
-import commons.controller.entity.AbstractConstraintActionListener;
-import commons.controller.entity.ItemController;
+import commons.controller.entity.items.AbstractConstraintActionListener;
+import commons.controller.entity.items.ItemController;
 import commons.model.entity.constraints.GenericConstraint;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;

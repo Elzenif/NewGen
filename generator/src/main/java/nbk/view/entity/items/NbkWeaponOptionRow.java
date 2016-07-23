@@ -1,8 +1,8 @@
-package nbk.view.entity;
+package nbk.view.entity.items;
 
 import commons.view.entity.EntityResultRow;
 import commons.view.utils.ConstraintPanel;
-import nbk.controller.entity.NbkWeaponController;
+import nbk.controller.entity.items.NbkWeaponController;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.items.ENbkAvailableItem;
 

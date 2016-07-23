@@ -1,4 +1,4 @@
-package nbk.view.entity;
+package nbk.view.entity.items;
 
 import commons.model.entity.items.IAvailableItem;
 import commons.view.entity.EntityOptionRow;

@@ -1,6 +1,6 @@
-package nbk.controller.entity;
+package nbk.controller.entity.items;
 
-import commons.controller.entity.ItemController;
+import commons.controller.entity.items.ItemController;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
@@ -9,7 +9,7 @@ import nbk.model.entity.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedWeapon;
 import nbk.model.entity.characteristics.secondary.enums.ENbkQuality;
 import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
-import nbk.view.entity.NbkWeaponOptionRow;
+import nbk.view.entity.items.NbkWeaponOptionRow;
 
 import java.awt.event.ActionListener;
 import java.util.Arrays;

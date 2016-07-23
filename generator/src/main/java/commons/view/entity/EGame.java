@@ -2,9 +2,9 @@ package commons.view.entity;
 
 import commons.model.commons.Game;
 import nbk.model.commons.NbkGame;
-import nbk.view.entity.NbkEntityPanelEmbedded;
+import nbk.view.entity.items.NbkEntityPanelEmbedded;
 import tes.model.commons.TesGame;
-import tes.view.entity.TesEntityPanelEmbedded;
+import tes.view.entity.items.TesEntityPanelEmbedded;
 
 import java.util.Arrays;
 

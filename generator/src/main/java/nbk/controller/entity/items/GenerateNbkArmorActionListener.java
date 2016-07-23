@@ -1,13 +1,13 @@
-package nbk.controller.entity;
+package nbk.controller.entity.items;
 
-import commons.controller.entity.GenerateItemActionListener;
-import commons.controller.entity.ItemController;
+import commons.controller.entity.items.GenerateItemActionListener;
+import commons.controller.entity.items.ItemController;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.view.entity.EntityResultRow;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.NbkPredefinedArmor;
-import nbk.view.entity.NbkArmorOptionRow;
+import nbk.view.entity.items.NbkArmorOptionRow;
 import org.jetbrains.annotations.Contract;
 
 /**
