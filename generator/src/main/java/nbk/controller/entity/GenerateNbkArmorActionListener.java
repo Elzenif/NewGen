@@ -1,6 +1,7 @@
 package nbk.controller.entity;
 
 import commons.controller.entity.GenerateItemActionListener;
+import commons.controller.entity.ItemController;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.exception.NoAvailableItemTypeException;
 import commons.view.entity.EntityResultRow;
@@ -14,8 +15,9 @@ import org.jetbrains.annotations.Contract;
  */
 public class GenerateNbkArmorActionListener extends GenerateItemActionListener<NbkGame> {
 
-  public GenerateNbkArmorActionListener(NbkArmorOptionRow entityOptionRow, EntityResultRow entityResultRow) {
-    super(entityOptionRow, entityResultRow);
+  public GenerateNbkArmorActionListener(ItemController<NbkGame> itemController, NbkArmorOptionRow entityOptionRow,
+                                        EntityResultRow entityResultRow) {
+    super(itemController, entityOptionRow, entityResultRow);
   }
 
   @Contract("_ -> !null")

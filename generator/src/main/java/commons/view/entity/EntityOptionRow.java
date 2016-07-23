@@ -2,9 +2,6 @@ package commons.view.entity;
 
 import commons.controller.entity.ItemController;
 import commons.model.commons.Game;
-import commons.model.entity.characteristics.primary.enums.ERarity;
-import commons.model.entity.constraints.GenericConstraint;
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.items.IAvailableItem;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
@@ -40,7 +37,6 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
   private final JCheckBox constraintsCheckBox;
   private final JLabel constraintsCheckBoxLabel;
 
-  protected final GlobalConstraints globalConstraints;
   protected final ConstraintPanel constraintPanel;
 
   private final ConstraintPanel qualityPanel;
@@ -74,7 +70,6 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
     constraintsCheckBoxPanel.add(constraintsCheckBox);
     add(constraintsCheckBoxPanel);
 
-    globalConstraints = new GlobalConstraints();
     constraintPanel = new ConstraintPanel();
     constraintPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
 
@@ -108,10 +103,6 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
     return numberOfItemsModel.getNumber().intValue();
   }
 
-  public GlobalConstraints getGlobalConstraints() {
-    return globalConstraints;
-  }
-
   public boolean isConstraintsCheckBoxSelected() {
     return constraintsCheckBox.isSelected();
   }
@@ -119,8 +110,6 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
   public void updateConstraintsAbility(boolean checkBoxSelected) {
     constraintPanel.setEnabled(checkBoxSelected);
   }
-
-  public abstract void updateRarityConstraint(GenericConstraint<ERarity> constraint);
 
   public JFormattedTextField getQualityTextField() {
     return qualityTextField;

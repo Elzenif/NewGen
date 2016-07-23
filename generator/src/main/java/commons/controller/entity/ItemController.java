@@ -1,6 +1,8 @@
 package commons.controller.entity;
 
 import commons.model.commons.Game;
+import commons.model.entity.characteristics.primary.enums.ERarity;
+import commons.model.entity.constraints.GenericConstraint;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.view.entity.EntityOptionRow;
 
@@ -13,15 +15,17 @@ public abstract class ItemController<T extends Game> {
   protected final GlobalConstraints globalConstraints;
   private final ConstraintsItemListener<T> constraintsItemListener;
   private final RarityChangeListener<T> rarityChangeListener;
-  private final GenerateItemActionListener<T> generateItemActionListener;
+  protected GenerateItemActionListener<T> generateItemActionListener;
 
-  protected ItemController(EntityOptionRow<T> entityOptionRow,
-                           GenerateItemActionListener<T> generateItemActionListener) {
+  protected ItemController(EntityOptionRow<T> entityOptionRow) {
     this.entityOptionRow = entityOptionRow;
     this.globalConstraints = new GlobalConstraints();
     this.constraintsItemListener = new ConstraintsItemListener<>(entityOptionRow);
-    this.rarityChangeListener = new RarityChangeListener<>(entityOptionRow);
-    this.generateItemActionListener = generateItemActionListener;
+    this.rarityChangeListener = new RarityChangeListener<>(this, entityOptionRow);
+  }
+
+  public GlobalConstraints getGlobalConstraints() {
+    return globalConstraints;
   }
 
   public ConstraintsItemListener<T> getConstraintsItemListener() {
@@ -35,4 +39,7 @@ public abstract class ItemController<T extends Game> {
   public GenerateItemActionListener<T> getGenerateItemActionListener() {
     return generateItemActionListener;
   }
+
+  public abstract void updateRarityConstraint(GenericConstraint<ERarity> constraint);
+
 }

@@ -1,14 +1,9 @@
 package nbk.view.entity;
 
-import commons.model.entity.characteristics.primary.enums.ERarity;
-import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
 import commons.view.utils.ConstraintPanel;
 import nbk.controller.entity.NbkWeaponController;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
-import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedWeapon;
-import nbk.model.entity.characteristics.secondary.enums.ENbkQuality;
-import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
 import nbk.model.entity.items.ENbkAvailableItem;
 
 import javax.swing.BoxLayout;
@@ -50,18 +45,5 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
     super.setControllers(new NbkWeaponController(this, entityResultRow));
     nbHandsButtons.forEach((nbHands, jCheckBox) ->
             jCheckBox.addActionListener(((NbkWeaponController) itemController).getNbHandsActionListener(nbHands)));
-  }
-
-  @Override
-  public void updateRarityConstraint(GenericConstraint<ERarity> constraint) {
-    // different for randomly generated and predefined weapons
-    globalConstraints.clear(ENbkQuality.getConstraints(), ERarity.class);
-    globalConstraints.update(ENbkQuality.getConstraints(), ERarity.class, constraint);
-    globalConstraints.clear(ENbkPredefinedWeapon.getConstraints(), ERarity.class);
-    globalConstraints.update(ENbkPredefinedWeapon.getConstraints(), ERarity.class, constraint);
-  }
-
-  public void updateNbHandsConstraint(GenericConstraint<ENbHands> constraint) {
-    globalConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, constraint);
   }
 }

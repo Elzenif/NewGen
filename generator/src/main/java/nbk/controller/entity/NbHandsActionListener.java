@@ -1,28 +1,25 @@
 package nbk.controller.entity;
 
+import commons.controller.entity.AbstractConstraintActionListener;
+import commons.controller.entity.ItemController;
 import commons.model.entity.constraints.GenericConstraint;
+import nbk.model.commons.NbkGame;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
-import nbk.view.entity.NbkWeaponOptionRow;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Germain on 11/06/2016.
  */
-public class NbHandsActionListener implements ActionListener {
+public class NbHandsActionListener extends AbstractConstraintActionListener<NbkGame, ENbHands> {
 
-  private final NbkWeaponOptionRow entityOptionRow;
-  private final GenericConstraint<ENbHands> nbHandsConstraint;
-
-  public NbHandsActionListener(NbkWeaponOptionRow entityOptionRow,
+  public NbHandsActionListener(ItemController<NbkGame> itemController,
                                GenericConstraint<ENbHands> nbHandsConstraint) {
-    this.entityOptionRow = entityOptionRow;
-    this.nbHandsConstraint = nbHandsConstraint;
+    super(itemController, nbHandsConstraint);
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    entityOptionRow.updateNbHandsConstraint(nbHandsConstraint);
+    ((NbkWeaponController) itemController).updateNbHandsConstraint(constraint);
   }
 }

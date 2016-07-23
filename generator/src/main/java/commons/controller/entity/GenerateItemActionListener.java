@@ -21,10 +21,13 @@ import java.util.stream.IntStream;
  */
 public abstract class GenerateItemActionListener<T extends Game> implements ActionListener {
 
+  private final ItemController<T> itemController;
   private final EntityOptionRow<T> entityOptionRow;
   private final EntityResultRow entityResultRow;
 
-  protected GenerateItemActionListener(EntityOptionRow<T> entityOptionRow, EntityResultRow entityResultRow) {
+  protected GenerateItemActionListener(ItemController<T> itemController, EntityOptionRow<T> entityOptionRow,
+                                       EntityResultRow entityResultRow) {
+    this.itemController = itemController;
     this.entityOptionRow = entityOptionRow;
     this.entityResultRow = entityResultRow;
   }
@@ -40,7 +43,7 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
 
   private GlobalConstraints getConstraints() {
     return entityOptionRow.isConstraintsCheckBoxSelected()
-            ? entityOptionRow.getGlobalConstraints()
+            ? itemController.getGlobalConstraints()
             : new GlobalConstraints();
   }
 

@@ -1,12 +1,9 @@
 package nbk.view.entity;
 
-import commons.model.entity.characteristics.primary.enums.ERarity;
-import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
 import commons.view.utils.ConstraintPanel;
 import nbk.controller.entity.NbkArmorController;
 import nbk.model.entity.characteristics.primary.enums.EBodyPart;
-import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedArmor;
 import nbk.model.entity.items.ENbkAvailableItem;
 
 import javax.swing.JCheckBox;
@@ -49,15 +46,5 @@ public class NbkArmorOptionRow extends NbkEntityOptionRow {
     super.setControllers(new NbkArmorController(this, entityResultRow));
     bodyPartCheckBoxes.forEach((bodyPart, jCheckBox) ->
             jCheckBox.addActionListener(((NbkArmorController) itemController).getBodyPartActionListener(bodyPart)));
-  }
-
-  @Override
-  public void updateRarityConstraint(GenericConstraint<ERarity> constraint) {
-    globalConstraints.clear(ENbkPredefinedArmor.getConstraints(), ERarity.class);
-    globalConstraints.update(ENbkPredefinedArmor.getConstraints(), ERarity.class, constraint);
-  }
-
-  public void updateBodyPartConstraint(GenericConstraint<EBodyPart> bpConstraint) {
-    globalConstraints.update(ENbkPredefinedArmor.getConstraints(), EBodyPart.class, bpConstraint);
   }
 }

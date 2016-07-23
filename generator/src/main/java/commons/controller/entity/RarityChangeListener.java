@@ -15,9 +15,11 @@ import static commons.utils.MathUtils.findFirstKeySuchAsIntegerIsLowerThanSumOfP
  */
 public class RarityChangeListener<T extends Game> implements PropertyChangeListener {
 
+  private final ItemController<T> itemController;
   private final EntityOptionRow<T> entityOptionRow;
 
-  public RarityChangeListener(EntityOptionRow<T> entityOptionRow) {
+  public RarityChangeListener(ItemController<T> itemController, EntityOptionRow<T> entityOptionRow) {
+    this.itemController = itemController;
     this.entityOptionRow = entityOptionRow;
   }
 
@@ -30,6 +32,6 @@ public class RarityChangeListener<T extends Game> implements PropertyChangeListe
     } catch (NumberFormatException e) {
       constraint = () -> p -> true;
     }
-    entityOptionRow.updateRarityConstraint(constraint);
+    itemController.updateRarityConstraint(constraint);
   }
 }
