@@ -4,8 +4,7 @@ import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
 import commons.view.utils.ConstraintPanel;
-import nbk.controller.entity.GenerateNbkWeaponActionListener;
-import nbk.controller.entity.NbHandsActionListener;
+import nbk.controller.entity.NbkWeaponController;
 import nbk.model.entity.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedWeapon;
 import nbk.model.entity.characteristics.secondary.enums.ENbkQuality;
@@ -23,7 +22,7 @@ import java.util.Map;
 public class NbkWeaponOptionRow extends NbkEntityOptionRow {
 
   private final ConstraintPanel nbHandsPanel;
-  private final Map<GenericConstraint<ENbHands>, JCheckBox> nbHandsButtons;
+  private final Map<ENbHands, JCheckBox> nbHandsButtons;
   private final JCheckBox oneHandButton;
   private final JCheckBox twoHandsButton;
 
@@ -48,10 +47,9 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
 
   @Override
   public void setControllers(EntityResultRow entityResultRow) {
-    super.setControllers(entityResultRow);
-    generateItemButton.addActionListener(new GenerateNbkWeaponActionListener(this, entityResultRow));
-    nbHandsButtons.keySet().forEach(nbhConstraint ->
-            nbHandsButtons.get(nbhConstraint).addActionListener(new NbHandsActionListener(this, nbhConstraint)));
+    super.setControllers(new NbkWeaponController(this, entityResultRow));
+    nbHandsButtons.forEach((nbHands, jCheckBox) ->
+            jCheckBox.addActionListener(((NbkWeaponController) itemController).getNbHandsActionListener(nbHands)));
   }
 
   @Override

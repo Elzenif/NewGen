@@ -1,7 +1,6 @@
 package commons.view.entity;
 
-import commons.controller.entity.ConstraintsItemListener;
-import commons.controller.entity.RarityChangeListener;
+import commons.controller.entity.ItemController;
 import commons.model.commons.Game;
 import commons.model.entity.characteristics.primary.enums.ERarity;
 import commons.model.entity.constraints.GenericConstraint;
@@ -9,6 +8,7 @@ import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.items.IAvailableItem;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
+import commons.utils.TextFieldUtils;
 import commons.view.utils.Constants;
 import commons.view.utils.ConstraintPanel;
 import commons.view.utils.OptionRow;
@@ -22,8 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.FlowLayout;
-
-import static commons.utils.TextFieldUtils.createTwoDigitsField;
 
 /**
  * Created by Germain on 05/06/2016.
@@ -48,8 +46,9 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
   private final ConstraintPanel qualityPanel;
   private final JFormattedTextField qualityTextField;
 
-  protected JButton generateItemButton;
+  private JButton generateItemButton;
 
+  protected ItemController<T> itemController;
 
   protected EntityOptionRow(IAvailableItem<T> availableItem, T game) {
     super();
@@ -80,7 +79,7 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
     constraintPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
 
     // quality constraints
-    qualityTextField = createTwoDigitsField();
+    qualityTextField = TextFieldUtils.createTwoDigitsField();
     qualityTextField.setToolTipText("Put a D100 roll result. The lower the result, the better the " + itemName);
     qualityPanel = new ConstraintPanel();
     qualityPanel.setLayout(new BoxLayout(qualityPanel, BoxLayout.Y_AXIS));
@@ -98,10 +97,11 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
     updateConstraintsAbility(false);
   }
 
-  @Override
-  public void setControllers(EntityResultRow entityResultRow) {
-    constraintsCheckBox.addItemListener(new ConstraintsItemListener(this));
-    qualityTextField.addPropertyChangeListener(new RarityChangeListener(this, qualityTextField));
+  public void setControllers(ItemController<T> itemController) {
+    this.itemController = itemController;
+    constraintsCheckBox.addItemListener(itemController.getConstraintsItemListener());
+    qualityTextField.addPropertyChangeListener(itemController.getRarityChangeListener());
+    generateItemButton.addActionListener(itemController.getGenerateItemActionListener());
   }
 
   public int getNumberOfItemsSelected() {
@@ -121,4 +121,8 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
   }
 
   public abstract void updateRarityConstraint(GenericConstraint<ERarity> constraint);
+
+  public JFormattedTextField getQualityTextField() {
+    return qualityTextField;
+  }
 }
