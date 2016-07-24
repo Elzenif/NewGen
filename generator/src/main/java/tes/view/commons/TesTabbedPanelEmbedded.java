@@ -2,7 +2,7 @@ package tes.view.commons;
 
 import commons.view.commons.GameTabbedPanelEmbedded;
 import commons.view.dice.DicePanel;
-import commons.view.hidden.HiddenPanelEmbedded;
+import commons.view.hidden.HiddenPanel;
 import tes.model.commons.TesGame;
 
 /**
@@ -10,11 +10,11 @@ import tes.model.commons.TesGame;
  */
 public class TesTabbedPanelEmbedded extends GameTabbedPanelEmbedded<TesGame> {
 
-  private final HiddenPanelEmbedded<TesGame> hiddenPanel;
+  private final HiddenPanel<TesGame> hiddenPanel;
   private final DicePanel dicePanel;
 
   public TesTabbedPanelEmbedded() {
-    hiddenPanel = new HiddenPanelEmbedded<>(TesGame.getInstance());
+    hiddenPanel = new HiddenPanel<>(TesGame.getInstance());
     panelMap.put("Hidden", hiddenPanel);
 
     dicePanel = new DicePanel();

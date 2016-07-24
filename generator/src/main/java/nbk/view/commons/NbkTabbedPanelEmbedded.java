@@ -2,29 +2,29 @@ package nbk.view.commons;
 
 import commons.view.commons.GameTabbedPanelEmbedded;
 import commons.view.dice.DicePanel;
-import commons.view.entity.EntityPanelEmbedded;
-import commons.view.hidden.HiddenPanelEmbedded;
+import commons.view.entity.EntityPanel;
+import commons.view.hidden.HiddenPanel;
 import nbk.model.commons.NbkGame;
-import nbk.view.entity.items.NbkEntityPanelEmbedded;
+import nbk.view.entity.items.NbkEntityPanel;
 
 /**
  * Created by Germain on 24/07/2016.
  */
 public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
 
-  private final HiddenPanelEmbedded<NbkGame> hiddenPanel;
+  private final HiddenPanel<NbkGame> hiddenPanel;
   private final DicePanel dicePanel;
-  private final EntityPanelEmbedded entityPanel;
+  private final EntityPanel entityPanel;
 
   public NbkTabbedPanelEmbedded() {
-    hiddenPanel = new HiddenPanelEmbedded<>(NbkGame.getInstance());
+    hiddenPanel = new HiddenPanel<>(NbkGame.getInstance());
     panelMap.put("Hidden", hiddenPanel);
     
     dicePanel = new DicePanel();
     controllers.add(dicePanel);
     panelMap.put("Dice", dicePanel);
 
-    entityPanel = new NbkEntityPanelEmbedded();
+    entityPanel = new NbkEntityPanel();
     controllers.add(entityPanel);
     panelMap.put("Entity", entityPanel);
 

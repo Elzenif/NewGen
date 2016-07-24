@@ -12,12 +12,12 @@ import java.util.Set;
 /**
  * Created by Germain on 09/06/2016.
  */
-public abstract class EntityPanelEmbedded<T extends Game, S extends IAvailableEntityOptionRow<T>>
+public abstract class EntityPanel<T extends Game, S extends IAvailableEntityOptionRow<T>>
         extends DoublePanel<EntityOptionRow<T>, EntityResultRow> {
 
   private final Set<Pair<EntityOptionRow<T>, EntityResultRow>> rowPairs;
 
-  protected EntityPanelEmbedded(S[] availableEntityOptionRows) {
+  protected EntityPanel(S[] availableEntityOptionRows) {
     super(setPanel("Options", availableEntityOptionRows.length),
             setPanel("Results", availableEntityOptionRows.length));
 

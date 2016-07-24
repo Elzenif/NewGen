@@ -9,11 +9,11 @@ import javax.swing.JPanel;
 /**
  * Created by Germain on 24/07/2016.
  */
-public class HiddenPanelEmbedded<T extends Game> extends JPanel {
+public class HiddenPanel<T extends Game> extends JPanel {
 
   private final JLabel iconLabel;
 
-  public HiddenPanelEmbedded(T game) {
+  public HiddenPanel(T game) {
     iconLabel = new JLabel();
     iconLabel.setIcon(new ImageIcon(getClass().getResource("/images/" + game.getName() + ".png")));
     add(iconLabel);
