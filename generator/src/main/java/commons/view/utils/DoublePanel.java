@@ -6,7 +6,7 @@ import commons.utils.Pair;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by Germain on 04/06/2016.
@@ -40,7 +40,7 @@ public abstract class DoublePanel<O extends OptionRow<R>, R extends ResultRow> e
     return jPanel;
   }
 
-  protected void setControllers(List<Pair<O, R>> rowPairs) {
+  protected void setControllers(Collection<Pair<O, R>> rowPairs) {
     rowPairs.forEach(rowPair -> rowPair.getLeft().setControllers(rowPair.getRight()));
   }
 }

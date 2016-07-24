@@ -1,11 +1,11 @@
 package commons.utils;
 
-import com.google.common.collect.ForwardingList;
+import com.google.common.collect.ForwardingSet;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Germain on 12/06/2016.
@@ -13,23 +13,12 @@ import java.util.List;
 public class CollectionUtils {
 
   @Contract(value = "_, _ -> !null", pure = true)
-  public static <T> List<T> setMaxSize(final List<T> input, final int maxSize) {
-    return new ForwardingList<T>() {
+  public static <T> Set<T> setMaxSizeSet(final Set<T> input, final int maxSize) {
+    return new ForwardingSet<T>() {
 
       private void checkSize() {
         if (size() >= maxSize)
           throw new UnsupportedOperationException("Maximum size " + maxSize + " reached");
-      }
-
-      @Override
-      public void add(int index, T element) {
-        checkSize();
-        delegate().add(index, element);
-      }
-
-      @Override
-      public boolean addAll(int index, Collection<? extends T> elements) {
-        return standardAddAll(index, elements);
       }
 
       @Override
@@ -45,7 +34,7 @@ public class CollectionUtils {
 
       @Contract(pure = true)
       @Override
-      protected List<T> delegate() {
+      protected Set<T> delegate() {
         return input;
       }
     };

@@ -3,6 +3,7 @@ package commons.view;
 import commons.controller.intf.Controller;
 import commons.view.dice.DicePanel;
 import commons.view.entity.EntityPanel;
+import commons.view.hidden.HiddenPanel;
 import commons.view.menu.MainMenu;
 import commons.view.utils.Constants;
 
@@ -21,6 +22,7 @@ import java.util.List;
 public class MainFrame extends JFrame {
 
   private MainMenu mainMenu;
+  private HiddenPanel hiddenPanel;
   private DicePanel dicePanel;
   private EntityPanel entityPanel;
 
@@ -41,6 +43,10 @@ public class MainFrame extends JFrame {
     return mainMenu;
   }
 
+  public JPanel getHiddenPanel() {
+    return hiddenPanel;
+  }
+
   public DicePanel getDicePanel() {
     return dicePanel;
   }
@@ -56,7 +62,9 @@ public class MainFrame extends JFrame {
     controllers.add(mainMenu);
 
     JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
-    tabbedPane.addTab("Hidden", new JPanel());
+
+    hiddenPanel = new HiddenPanel();
+    tabbedPane.addTab("Hidden", hiddenPanel);
 
     dicePanel = new DicePanel();
     controllers.add(dicePanel);

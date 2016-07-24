@@ -1,15 +1,14 @@
 package commons.view.entity;
 
 import commons.controller.intf.Controller;
+import commons.utils.CollectionUtils;
 import commons.view.MainFrame;
 
 import javax.swing.JPanel;
 import java.awt.CardLayout;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
-import static commons.utils.CollectionUtils.setMaxSize;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Germain on 04/06/2016.
@@ -17,11 +16,11 @@ import static commons.utils.CollectionUtils.setMaxSize;
 public class EntityPanel extends JPanel implements Controller {
 
   private final CardLayout cardLayout;
-  private final List<EntityPanelEmbedded> gamePanels;
+  private final Set<EntityPanelEmbedded> gamePanels;
   public EntityPanel() {
     cardLayout = new CardLayout();
     setLayout(cardLayout);
-    gamePanels = setMaxSize(new ArrayList<>(), EGame.NB_GAMES);
+    gamePanels = CollectionUtils.setMaxSizeSet(new HashSet<>(), EGame.NB_GAMES);
 
     Arrays.stream(EGame.values()).forEach(eGame -> {
       EntityPanelEmbedded panelEmbedded = eGame.getEntityPanelEmbedded();

@@ -2,11 +2,11 @@ package commons.utils;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import static commons.utils.CollectionUtils.setMaxSize;
+import static commons.utils.CollectionUtils.setMaxSizeSet;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -15,43 +15,43 @@ import static org.junit.Assert.assertTrue;
  */
 public class CollectionUtilsTest {
 
-  private List<Integer> list;
+  private Set<Integer> set;
 
   @Test
   public void testAddAllValid() {
-    list = setMaxSize(new ArrayList<>(), 3);
-    list.addAll(Arrays.asList(1, 2, 3));
-    assertEquals(3, list.size());
-    assertTrue(list.contains(1));
-    assertTrue(list.contains(2));
-    assertTrue(list.contains(3));
+    set = setMaxSizeSet(new HashSet<>(), 3);
+    set.addAll(Arrays.asList(1, 2, 3));
+    assertEquals(3, set.size());
+    assertTrue(set.contains(1));
+    assertTrue(set.contains(2));
+    assertTrue(set.contains(3));
   }
 
   @Test(expected = UnsupportedOperationException.class)
   public void testAddAllInvalid() {
-    list = setMaxSize(new ArrayList<>(), 3);
-    list.addAll(Arrays.asList(1, 2, 3, 4));
+    set = setMaxSizeSet(new HashSet<>(), 3);
+    set.addAll(Arrays.asList(1, 2, 3, 4));
   }
 
   @Test
   public void testAddValid() {
-    list = setMaxSize(new ArrayList<>(), 3);
-    list.add(1);
-    list.add(2);
-    list.add(3);
-    assertEquals(3, list.size());
-    assertTrue(list.contains(1));
-    assertTrue(list.contains(2));
-    assertTrue(list.contains(3));
+    set = setMaxSizeSet(new HashSet<>(), 3);
+    set.add(1);
+    set.add(2);
+    set.add(3);
+    assertEquals(3, set.size());
+    assertTrue(set.contains(1));
+    assertTrue(set.contains(2));
+    assertTrue(set.contains(3));
   }
 
   @Test(expected = UnsupportedOperationException.class)
   public void testAddInvalid() {
-    list = setMaxSize(new ArrayList<>(), 3);
-    list.add(1);
-    list.add(1);
-    list.add(1);
-    list.add(1);
+    set = setMaxSizeSet(new HashSet<>(), 3);
+    set.add(1);
+    set.add(2);
+    set.add(3);
+    set.add(4);
   }
 }
 
