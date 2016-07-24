@@ -1,16 +1,11 @@
 package commons.view;
 
 import commons.controller.intf.Controller;
-import commons.view.dice.DicePanel;
-import commons.view.entity.EntityPanel;
-import commons.view.hidden.HiddenPanel;
+import commons.view.commons.GameTabbedPanel;
 import commons.view.menu.MainMenu;
 import commons.view.utils.Constants;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
 import java.awt.Container;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
@@ -22,9 +17,7 @@ import java.util.List;
 public class MainFrame extends JFrame {
 
   private MainMenu mainMenu;
-  private HiddenPanel hiddenPanel;
-  private DicePanel dicePanel;
-  private EntityPanel entityPanel;
+  private GameTabbedPanel tabbedPane;
 
   private final List<Controller> controllers = new ArrayList<>();
 
@@ -39,45 +32,24 @@ public class MainFrame extends JFrame {
     setVisible(true);
   }
 
-  public MainMenu getMainMenu() {
-    return mainMenu;
-  }
-
-  public JPanel getHiddenPanel() {
-    return hiddenPanel;
-  }
-
-  public DicePanel getDicePanel() {
-    return dicePanel;
-  }
-
-  public EntityPanel getEntityPanel() {
-    return entityPanel;
-  }
-
   private void setUpUIComponents() {
     Container container = getContentPane();
+
     mainMenu = new MainMenu();
     setJMenuBar(mainMenu);
     controllers.add(mainMenu);
 
-    JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
-
-    hiddenPanel = new HiddenPanel();
-    tabbedPane.addTab("Hidden", hiddenPanel);
-
-    dicePanel = new DicePanel();
-    controllers.add(dicePanel);
-    tabbedPane.addTab("Dice", dicePanel);
-
-    entityPanel = new EntityPanel();
-    controllers.add(entityPanel);
-    tabbedPane.addTab("Entity", entityPanel);
+    tabbedPane = new GameTabbedPanel();
+    controllers.addAll(tabbedPane.getControllers());
 
     container.add(tabbedPane);
   }
 
   private void setControllers() {
     controllers.forEach(controller -> controller.setControllers(this));
+  }
+
+  public GameTabbedPanel getGameTabbedPanel() {
+    return tabbedPane;
   }
 }

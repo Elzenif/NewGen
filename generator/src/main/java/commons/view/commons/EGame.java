@@ -1,11 +1,10 @@
 package commons.view.commons;
 
 import commons.model.commons.Game;
-import commons.view.entity.EntityPanelEmbedded;
 import nbk.model.commons.NbkGame;
-import nbk.view.entity.items.NbkEntityPanelEmbedded;
+import nbk.view.commons.NbkTabbedPanelEmbedded;
 import tes.model.commons.TesGame;
-import tes.view.entity.items.TesEntityPanelEmbedded;
+import tes.view.commons.TesTabbedPanelEmbedded;
 
 import java.util.Arrays;
 
@@ -15,21 +14,21 @@ import java.util.Arrays;
 public enum EGame {
 
   NBK(NbkGame.getInstance(), true) {
-    NbkEntityPanelEmbedded entityPanelEmbedded = null;
+    GameTabbedPanelEmbedded gameTabbedPanelEmbedded = null;
     @Override
-    public EntityPanelEmbedded getEntityPanelEmbedded() {
-      if (entityPanelEmbedded == null)
-        entityPanelEmbedded = new NbkEntityPanelEmbedded();
-      return entityPanelEmbedded;
+    public GameTabbedPanelEmbedded getGameTabbedPanelEmbedded() {
+      if (gameTabbedPanelEmbedded == null)
+        gameTabbedPanelEmbedded = new NbkTabbedPanelEmbedded();
+      return gameTabbedPanelEmbedded;
     }
   },
   TES(TesGame.getInstance(), false) {
-    TesEntityPanelEmbedded entityPanelEmbedded = null;
+    GameTabbedPanelEmbedded gameTabbedPanelEmbedded = null;
     @Override
-    public EntityPanelEmbedded getEntityPanelEmbedded() {
-      if (entityPanelEmbedded == null)
-        entityPanelEmbedded = new TesEntityPanelEmbedded();
-      return entityPanelEmbedded;
+    public GameTabbedPanelEmbedded getGameTabbedPanelEmbedded() {
+      if (gameTabbedPanelEmbedded == null)
+        gameTabbedPanelEmbedded = new TesTabbedPanelEmbedded();
+      return gameTabbedPanelEmbedded;
     }
   };
 
@@ -49,8 +48,6 @@ public enum EGame {
     return isDefault;
   }
 
-  public abstract EntityPanelEmbedded getEntityPanelEmbedded();
-
   public static final int NB_GAMES = EGame.values().length;
 
   public static Game getDefault() {
@@ -60,4 +57,6 @@ public enum EGame {
             .map(EGame::getGame)
             .orElse(NBK.getGame());
   }
+
+  public abstract GameTabbedPanelEmbedded getGameTabbedPanelEmbedded();
 }
