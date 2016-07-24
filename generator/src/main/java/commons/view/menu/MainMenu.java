@@ -4,7 +4,7 @@ import commons.controller.intf.Controller;
 import commons.controller.menu.GameMenuActionListener;
 import commons.utils.CollectionUtils;
 import commons.view.MainFrame;
-import commons.view.entity.EGame;
+import commons.view.commons.EGame;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;

@@ -3,6 +3,7 @@ package commons.view.entity;
 import commons.controller.intf.Controller;
 import commons.utils.CollectionUtils;
 import commons.view.MainFrame;
+import commons.view.commons.EGame;
 
 import javax.swing.JPanel;
 import java.awt.CardLayout;

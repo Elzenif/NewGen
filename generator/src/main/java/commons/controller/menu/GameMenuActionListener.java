@@ -2,7 +2,7 @@ package commons.controller.menu;
 
 import commons.utils.CollectionUtils;
 import commons.view.MainFrame;
-import commons.view.entity.EGame;
+import commons.view.commons.EGame;
 
 import javax.swing.JPanel;
 import java.awt.CardLayout;

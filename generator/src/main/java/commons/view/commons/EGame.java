@@ -1,6 +1,7 @@
-package commons.view.entity;
+package commons.view.commons;
 
 import commons.model.commons.Game;
+import commons.view.entity.EntityPanelEmbedded;
 import nbk.model.commons.NbkGame;
 import nbk.view.entity.items.NbkEntityPanelEmbedded;
 import tes.model.commons.TesGame;
