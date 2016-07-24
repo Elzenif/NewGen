@@ -5,7 +5,7 @@ import commons.view.dice.DicePanel;
 import commons.view.entity.EntityPanel;
 import commons.view.hidden.HiddenPanel;
 import nbk.model.commons.NbkGame;
-import nbk.view.entity.items.NbkEntityPanel;
+import nbk.view.entity.items.ENbkAvailableEntityOptionRow;
 
 /**
  * Created by Germain on 24/07/2016.
@@ -14,7 +14,7 @@ public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
 
   private final HiddenPanel<NbkGame> hiddenPanel;
   private final DicePanel dicePanel;
-  private final EntityPanel entityPanel;
+  private final EntityPanel<NbkGame, ENbkAvailableEntityOptionRow> entityPanel;
 
   public NbkTabbedPanelEmbedded() {
     hiddenPanel = new HiddenPanel<>(NbkGame.getInstance());
@@ -24,7 +24,7 @@ public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
     controllers.add(dicePanel);
     panelMap.put("Dice", dicePanel);
 
-    entityPanel = new NbkEntityPanel();
+    entityPanel = new EntityPanel<>(ENbkAvailableEntityOptionRow.values());
     controllers.add(entityPanel);
     panelMap.put("Entity", entityPanel);
 
