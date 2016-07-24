@@ -53,7 +53,7 @@ public class DiceOptionRow extends OptionRow<DiceResultRow> {
 
   private final JButton rollDiceButton;
 
-  DiceOptionRow(EDiceNumber diceNumber) {
+  public DiceOptionRow(EDiceNumber diceNumber) {
     super();
     this.diceNumber = diceNumber;
 

@@ -10,7 +10,7 @@ import commons.view.utils.ResultRow;
  */
 public class DiceResultRow extends ResultRow<AbstractDiceResult> {
 
-  DiceResultRow(EDiceNumber diceNumber) {
+  public DiceResultRow(EDiceNumber diceNumber) {
     super(diceNumber.getName());
   }
 

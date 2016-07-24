@@ -1,11 +1,15 @@
 package commons.model.dice;
 
 import commons.model.commons.HasName;
+import commons.view.dice.DiceOptionRow;
+import commons.view.dice.DiceResultRow;
+import commons.view.dice.IAvailableDiceRow;
+import org.jetbrains.annotations.Contract;
 
 /**
  * Created by Germain on 21/05/2016.
  */
-public enum EDiceNumber implements HasName<String> {
+public enum EDiceNumber implements HasName<String>, IAvailableDiceRow {
 
   D4(4),
   D6(6),
@@ -30,5 +34,18 @@ public enum EDiceNumber implements HasName<String> {
   @Override
   public String getName() {
     return name;
+  }
+
+
+  @Contract(" -> !null")
+  @Override
+  public DiceOptionRow getOptionRow() {
+    return new DiceOptionRow(this);
+  }
+
+  @Contract(" -> !null")
+  @Override
+  public DiceResultRow getResultRow() {
+    return new DiceResultRow(this);
   }
 }

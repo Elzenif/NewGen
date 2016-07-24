@@ -2,19 +2,20 @@ package nbk.view.entity.items;
 
 import commons.model.entity.items.IAvailableItem;
 import commons.view.entity.EntityOptionRow;
-import commons.view.entity.IAvailableEntityOptionRow;
+import commons.view.entity.EntityResultRow;
+import commons.view.entity.IAvailableEntityRow;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.ENbkAvailableItem;
 
 /**
  * Created by Germain on 11/06/2016.
  */
-public enum ENbkAvailableEntityOptionRow implements IAvailableEntityOptionRow<NbkGame> {
+public enum ENbkAvailableEntityRow implements IAvailableEntityRow<NbkGame> {
 
   WEAPON_ROW(ENbkAvailableItem.WEAPON) {
     NbkWeaponOptionRow entityOptionRow = null;
     @Override
-    public EntityOptionRow<NbkGame> getEntityOptionRow() {
+    public EntityOptionRow<NbkGame> getOptionRow() {
       if (entityOptionRow == null)
         entityOptionRow = new NbkWeaponOptionRow();
       return entityOptionRow;
@@ -22,7 +23,7 @@ public enum ENbkAvailableEntityOptionRow implements IAvailableEntityOptionRow<Nb
   }, ARMOR_ROW(ENbkAvailableItem.ARMOR) {
     NbkArmorOptionRow entityOptionRow = null;
     @Override
-    public EntityOptionRow<NbkGame> getEntityOptionRow() {
+    public EntityOptionRow<NbkGame> getOptionRow() {
       if (entityOptionRow == null)
         entityOptionRow = new NbkArmorOptionRow();
       return entityOptionRow;
@@ -30,8 +31,9 @@ public enum ENbkAvailableEntityOptionRow implements IAvailableEntityOptionRow<Nb
   };
 
   private final IAvailableItem<NbkGame> item;
+  private EntityResultRow entityResultRow;
 
-  ENbkAvailableEntityOptionRow(IAvailableItem<NbkGame> item) {
+  ENbkAvailableEntityRow(IAvailableItem<NbkGame> item) {
     this.item = item;
   }
 
@@ -40,4 +42,11 @@ public enum ENbkAvailableEntityOptionRow implements IAvailableEntityOptionRow<Nb
     return item.getName();
   }
 
+
+  @Override
+  public EntityResultRow getResultRow() {
+    if (entityResultRow == null)
+      entityResultRow = new EntityResultRow(this);
+    return entityResultRow;
+  }
 }
