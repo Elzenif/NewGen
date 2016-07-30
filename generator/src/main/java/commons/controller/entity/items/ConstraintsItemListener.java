@@ -1,7 +1,6 @@
 package commons.controller.entity.items;
 
-import commons.model.commons.Game;
-import commons.view.entity.EntityOptionRow;
+import commons.view.utils.HasConstraintPanel;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -9,11 +8,11 @@ import java.awt.event.ItemListener;
 /**
  * Created by Germain on 11/06/2016.
  */
-public class ConstraintsItemListener<T extends Game> implements ItemListener {
+public class ConstraintsItemListener implements ItemListener {
 
-  private final EntityOptionRow<T> entityOptionRow;
+  private final HasConstraintPanel entityOptionRow;
 
-  public ConstraintsItemListener(EntityOptionRow<T> entityOptionRow) {
+  public ConstraintsItemListener(HasConstraintPanel entityOptionRow) {
     this.entityOptionRow = entityOptionRow;
   }
 

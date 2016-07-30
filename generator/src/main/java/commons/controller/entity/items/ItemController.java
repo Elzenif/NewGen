@@ -12,13 +12,13 @@ import commons.view.entity.EntityOptionRow;
 public abstract class ItemController<T extends Game> {
 
   protected final GlobalConstraints globalConstraints;
-  private final ConstraintsItemListener<T> constraintsItemListener;
+  private final ConstraintsItemListener constraintsItemListener;
   private final RarityChangeListener<T> rarityChangeListener;
   protected GenerateItemActionListener<T> generateItemActionListener;
 
   protected ItemController(EntityOptionRow<T> entityOptionRow) {
     this.globalConstraints = new GlobalConstraints();
-    this.constraintsItemListener = new ConstraintsItemListener<>(entityOptionRow);
+    this.constraintsItemListener = new ConstraintsItemListener(entityOptionRow);
     this.rarityChangeListener = new RarityChangeListener<>(this, entityOptionRow);
   }
 
@@ -26,7 +26,7 @@ public abstract class ItemController<T extends Game> {
     return globalConstraints;
   }
 
-  public ConstraintsItemListener<T> getConstraintsItemListener() {
+  public ConstraintsItemListener getConstraintsItemListener() {
     return constraintsItemListener;
   }
 

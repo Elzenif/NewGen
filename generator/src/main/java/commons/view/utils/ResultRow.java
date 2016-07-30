@@ -32,13 +32,24 @@ public abstract class ResultRow<T extends Result> extends PanelRow {
   }
 
   public void setResultsToPrint(Collection<T> results) {
-    JLabel separatorLabel = new JLabel("|");
     for (T result: results) {
       JLabel resultToPrint = new JLabel(result.getRawResult());
       makePretty(resultToPrint, result);
       resultsToPrint.add(resultToPrint);
       add(resultToPrint);
-      separatorLabel = new JLabel("|");
+    }
+    repaint();
+    revalidate();
+  }
+
+  public void setResultsToPrint(Collection<T> results, String separator) {
+    JLabel separatorLabel = new JLabel(separator);
+    for (T result: results) {
+      JLabel resultToPrint = new JLabel(result.getRawResult());
+      makePretty(resultToPrint, result);
+      resultsToPrint.add(resultToPrint);
+      add(resultToPrint);
+      separatorLabel = new JLabel(separator);
       resultsToPrint.add(separatorLabel);
       add(separatorLabel);
     }

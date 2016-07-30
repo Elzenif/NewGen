@@ -35,7 +35,7 @@ public abstract class GenerateItemActionListener<T extends Game> implements Acti
   public void actionPerformed(ActionEvent e) {
     entityResultRow.clearResults();
     try {
-      entityResultRow.setResultsToPrint(generateResults(entityOptionRow.getNumberOfItemsSelected(), getConstraints()));
+      entityResultRow.setResultsToPrint(generateResults(entityOptionRow.getNumberOfItemsSelected(), getConstraints()), "|");
     } catch (WrongClassException e1) {
       e1.printStackTrace();
     }

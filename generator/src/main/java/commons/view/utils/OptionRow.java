@@ -6,7 +6,7 @@ package commons.view.utils;
 public abstract class OptionRow<T extends ResultRow> extends PanelRow {
 
   protected OptionRow() {
-    super(Constants.JPANEL_HGAP, Constants.JPANEL_VGAP);
+    super(Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP);
   }
 
   public abstract void setControllers(T resultRow);

@@ -50,7 +50,7 @@ public class RollDiceActionListener implements ActionListener {
       double mean = (double) sum / diceOptionRow.getNumberOfDiceSelected();
       results.add(new AdditionalDiceResult("mean = " + StringUtils.format(mean)));
     }
-    diceResultRow.setResultsToPrint(results);
+    diceResultRow.setResultsToPrint(results, "|");
   }
 
 }

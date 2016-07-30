@@ -8,6 +8,7 @@ import commons.utils.StringUtils;
 import commons.utils.TextFieldUtils;
 import commons.view.utils.Constants;
 import commons.view.utils.ConstraintPanel;
+import commons.view.utils.HasConstraintPanel;
 import commons.view.utils.OptionRow;
 
 import javax.swing.BoxLayout;
@@ -23,7 +24,7 @@ import java.awt.FlowLayout;
 /**
  * Created by Germain on 05/06/2016.
  */
-public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityResultRow> {
+public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityResultRow> implements HasConstraintPanel {
 
   private final int labelSize;
   private final String itemName;
@@ -60,7 +61,7 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
     add(infoLabel);
 
     // globalConstraints
-    constraintsCheckBoxLabel = new JLabel("constraints");
+    constraintsCheckBoxLabel = new JLabel("Constraints");
     constraintsCheckBoxLabel.setAlignmentX(CENTER_ALIGNMENT);
     constraintsCheckBox = new JCheckBox();
     constraintsCheckBox.setAlignmentX(CENTER_ALIGNMENT);
@@ -71,7 +72,7 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
     add(constraintsCheckBoxPanel);
 
     constraintPanel = new ConstraintPanel();
-    constraintPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+    constraintPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP));
 
     // quality constraints
     qualityTextField = TextFieldUtils.createTwoDigitsField();
@@ -103,10 +104,12 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
     return numberOfItemsModel.getNumber().intValue();
   }
 
+  @Override
   public boolean isConstraintsCheckBoxSelected() {
     return constraintsCheckBox.isSelected();
   }
 
+  @Override
   public void updateConstraintsAbility(boolean checkBoxSelected) {
     constraintPanel.setEnabled(checkBoxSelected);
   }
