@@ -5,21 +5,11 @@ package nbk.model.utility.love;
  */
 public enum ELoveDraw {
 
-  ACTION(ELoveAction.class),
-  TARGET(ELoveTarget.class),
-  TOOL(ELoveTool.class),
-  POSITION(ELovePosition.class)
+  ACTION(),
+  TARGET(),
+  TOOL(),
+  POSITION()
   ;
-
-  private final Class<? extends ILoveDraw> loveDrawClass;
-
-  ELoveDraw(Class<? extends ILoveDraw> loveDrawClass) {
-    this.loveDrawClass = loveDrawClass;
-  }
-
-  public Class<? extends ILoveDraw> getLoveDrawClass() {
-    return loveDrawClass;
-  }
 
   public static final String LOVE_DRAW_NAME = "LD";
 }
