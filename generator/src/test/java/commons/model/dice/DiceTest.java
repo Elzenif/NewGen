@@ -2,8 +2,7 @@ package commons.model.dice;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Germain on 23/07/2016.
@@ -22,7 +21,7 @@ public class DiceTest {
       int finalScore = dice.getFinalScore();
       int score = dice.getScore();
 
-      assertEquals(score, finalScore);
+      assertThat(finalScore).isEqualTo(score);
     }
   }
 
@@ -34,7 +33,7 @@ public class DiceTest {
       dice.roll();
       int result = dice.getFinalScore();
 
-      assertTrue(1 <= result && result <= diceNumber.getDiceNumber());
+      assertThat(1 <= result && result <= diceNumber.getDiceNumber()).isTrue();
     }
   }
 }

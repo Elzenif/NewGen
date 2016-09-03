@@ -4,7 +4,7 @@ import commons.model.entity.characteristics.primary.enums.EItemRarity;
 import commons.utils.EOperator;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 /**
@@ -14,9 +14,9 @@ public class EItemRarityTest {
 
   @Test
   public void testOrderRarity() {
-    assertTrue(EOperator.LT.apply(EItemRarity.COMMON, EItemRarity.UNCOMMON));
-    assertTrue(EOperator.LT.apply(EItemRarity.UNCOMMON, EItemRarity.RARE));
-    assertTrue(EOperator.LT.apply(EItemRarity.RARE, EItemRarity.EPIC));
-    assertTrue(EOperator.LT.apply(EItemRarity.EPIC, EItemRarity.LEGENDARY));
+    assertThat(EOperator.LT.apply(EItemRarity.COMMON, EItemRarity.UNCOMMON)).isTrue();
+    assertThat(EOperator.LT.apply(EItemRarity.UNCOMMON, EItemRarity.RARE)).isTrue();
+    assertThat(EOperator.LT.apply(EItemRarity.RARE, EItemRarity.EPIC)).isTrue();
+    assertThat(EOperator.LT.apply(EItemRarity.EPIC, EItemRarity.LEGENDARY)).isTrue();
   }
 }

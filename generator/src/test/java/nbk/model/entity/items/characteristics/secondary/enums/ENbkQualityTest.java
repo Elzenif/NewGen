@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.stream.Stream;
 
-import static org.junit.Assert.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Germain on 24/06/2016.
@@ -15,8 +15,8 @@ public class ENbkQualityTest {
   public void testAllAreValid() {
     Stream.of(ENbkQuality.values()).forEach(
             q -> {
-              assertNotNull(q.getName());
-              assertNotNull(q.getRarity());
+              assertThat(q.getName()).isNotNull();
+              assertThat(q.getRarity()).isNotNull();
             }
     );
   }

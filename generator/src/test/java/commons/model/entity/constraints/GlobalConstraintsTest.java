@@ -8,9 +8,7 @@ import org.junit.Test;
 
 import java.util.function.Predicate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Germain on 05/07/1006.
@@ -126,20 +124,16 @@ public class GlobalConstraintsTest {
   @Test
   public void testConstraintSetAdd() {
     ConstraintSet<Primary0> constraintSet = new ConstraintSet<>();
-    assertTrue(constraintSet.constraintSet.isEmpty());
+    assertThat(constraintSet.constraintSet.isEmpty()).isTrue();
 
-    assertTrue(constraintSet.add(Primary0.P0));
-    assertEquals(1, constraintSet.constraintSet.size());
-    assertTrue(constraintSet.constraintSet.contains(Primary0.P0));
+    assertThat(constraintSet.add(Primary0.P0)).isTrue();
+    assertThat(constraintSet.constraintSet).containsOnly(Primary0.P0);
 
-    assertFalse(constraintSet.add(Primary0.P0));
-    assertEquals(1, constraintSet.constraintSet.size());
-    assertTrue(constraintSet.constraintSet.contains(Primary0.P0));
+    assertThat(constraintSet.add(Primary0.P0)).isFalse();
+    assertThat(constraintSet.constraintSet).containsOnly(Primary0.P0);
 
-    assertTrue(constraintSet.add(Primary0.P1));
-    assertEquals(2, constraintSet.constraintSet.size());
-    assertTrue(constraintSet.constraintSet.contains(Primary0.P0));
-    assertTrue(constraintSet.constraintSet.contains(Primary0.P1));
+    assertThat(constraintSet.add(Primary0.P1)).isTrue();
+    assertThat(constraintSet.constraintSet).containsOnly(Primary0.P0, Primary0.P1);
   }
 
   @Test
@@ -148,17 +142,17 @@ public class GlobalConstraintsTest {
     constraintSet.add(Primary0.P0);
     constraintSet.add(Primary0.P1);
 
-    assertTrue(constraintSet.remove(Primary0.P0));
-    assertEquals(1, constraintSet.constraintSet.size());
-    assertFalse(constraintSet.constraintSet.contains(Primary0.P0));
+    assertThat(constraintSet.remove(Primary0.P0)).isTrue();
+    assertThat(constraintSet.constraintSet).hasSize(1);
+    assertThat(constraintSet.constraintSet.contains(Primary0.P0)).isFalse();
 
-    assertFalse(constraintSet.remove(Primary0.P0));
-    assertEquals(1, constraintSet.constraintSet.size());
-    assertFalse(constraintSet.constraintSet.contains(Primary0.P0));
+    assertThat(constraintSet.remove(Primary0.P0)).isFalse();
+    assertThat(constraintSet.constraintSet).hasSize(1);
+    assertThat(constraintSet.constraintSet.contains(Primary0.P0)).isFalse();
 
-    assertTrue(constraintSet.remove(Primary0.P1));
-    assertEquals(0, constraintSet.constraintSet.size());
-    assertFalse(constraintSet.constraintSet.contains(Primary0.P1));
+    assertThat(constraintSet.remove(Primary0.P1)).isTrue();
+    assertThat(constraintSet.constraintSet).isEmpty();
+    assertThat(constraintSet.constraintSet.contains(Primary0.P1)).isFalse();
   }
 
   @Test
@@ -168,7 +162,7 @@ public class GlobalConstraintsTest {
     constraintSet.add(Primary0.P1);
 
     constraintSet.clear();
-    assertTrue(constraintSet.constraintSet.isEmpty());
+    assertThat(constraintSet.constraintSet.isEmpty()).isTrue();
   }
 
   @Test
@@ -177,54 +171,51 @@ public class GlobalConstraintsTest {
     Predicate<Primary0> predicate0;
 
     predicate0 = constraintSet.getPredicate();
-    assertTrue(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isTrue();
 
     constraintSet.add(Primary0.P0);
     predicate0 = constraintSet.getPredicate();
-    assertTrue(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertFalse(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertFalse(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isFalse();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isFalse();
 
     constraintSet.add(Primary0.P1);
     predicate0 = constraintSet.getPredicate();
-    assertTrue(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isTrue();
 
     constraintSet.remove(Primary0.P0);
     predicate0 = constraintSet.getPredicate();
-    assertFalse(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertFalse(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isFalse();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isFalse();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isTrue();
   }
 
   // Tests of ConstraintMap
+  @SuppressWarnings("unchecked")
   @Test
   public void testConstraintMapAdd() {
     ConstraintMap constraintMap = new ConstraintMap();
-    assertTrue(constraintMap.constraintsMap.isEmpty());
+    assertThat(constraintMap.constraintsMap.isEmpty()).isTrue();
 
-    assertTrue(constraintMap.add(Primary0.class, Primary0.P0));
-    assertEquals(1, constraintMap.constraintsMap.size());
-    assertTrue(constraintMap.constraintsMap.containsKey(Primary0.class));
+    assertThat(constraintMap.add(Primary0.class, Primary0.P0)).isTrue();
+    assertThat(constraintMap.constraintsMap.keySet()).containsOnly(Primary0.class);
 
-    assertFalse(constraintMap.add(Primary0.class, Primary0.P0));
-    assertEquals(1, constraintMap.constraintsMap.size());
-    assertTrue(constraintMap.constraintsMap.containsKey(Primary0.class));
+    assertThat(constraintMap.add(Primary0.class, Primary0.P0)).isFalse();
+    assertThat(constraintMap.constraintsMap.keySet()).containsOnly(Primary0.class);
 
-    assertTrue(constraintMap.add(Primary0.class, Primary0.P1));
-    assertEquals(1, constraintMap.constraintsMap.size());
-    assertTrue(constraintMap.constraintsMap.containsKey(Primary0.class));
+    assertThat(constraintMap.add(Primary0.class, Primary0.P1)).isTrue();
+    assertThat(constraintMap.constraintsMap.keySet()).containsOnly(Primary0.class);
 
-    assertTrue(constraintMap.add(Primary1.class, Primary1.Q0));
-    assertEquals(2, constraintMap.constraintsMap.size());
-    assertTrue(constraintMap.constraintsMap.containsKey(Primary1.class));
+    assertThat(constraintMap.add(Primary1.class, Primary1.Q0)).isTrue();
+    assertThat(constraintMap.constraintsMap.keySet()).containsOnly(Primary0.class, Primary1.class);
   }
 
   @SuppressWarnings("SuspiciousMethodCalls")
@@ -233,9 +224,9 @@ public class GlobalConstraintsTest {
     ConstraintMap constraintMap = new ConstraintMap();
     constraintMap.add(Primary0.class, Primary0.P0);
 
-    assertTrue(constraintMap.remove(Primary0.class, Primary0.P0));
-    assertFalse(constraintMap.constraintsMap.get(Primary0.class).constraintSet.contains(Primary0.P0));
-    assertFalse(constraintMap.remove(Primary0.class, Primary0.P0));
+    assertThat(constraintMap.remove(Primary0.class, Primary0.P0)).isTrue();
+    assertThat(constraintMap.constraintsMap.get(Primary0.class).constraintSet.contains(Primary0.P0)).isFalse();
+    assertThat(constraintMap.remove(Primary0.class, Primary0.P0)).isFalse();
   }
 
   @Test
@@ -245,7 +236,7 @@ public class GlobalConstraintsTest {
     constraintMap.add(Primary0.class, Primary0.P1);
 
     constraintMap.clear(Primary0.class);
-    assertTrue(constraintMap.constraintsMap.get(Primary0.class).constraintSet.isEmpty());
+    assertThat(constraintMap.constraintsMap.get(Primary0.class).constraintSet.isEmpty()).isTrue();
   }
 
   @Test
@@ -254,58 +245,54 @@ public class GlobalConstraintsTest {
     Predicate<Primary0> predicate0;
 
     predicate0 = constraintMap.getPredicate(Primary0.class);
-    assertTrue(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isTrue();
 
     constraintMap.add(Primary0.class, Primary0.P0);
     predicate0 = constraintMap.getPredicate(Primary0.class);
-    assertTrue(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertFalse(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertFalse(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isFalse();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isFalse();
 
     constraintMap.add(Primary0.class, Primary0.P1);
     predicate0 = constraintMap.getPredicate(Primary0.class);
-    assertTrue(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isTrue();
 
     constraintMap.remove(Primary0.class, Primary0.P0);
     predicate0 = constraintMap.getPredicate(Primary0.class);
-    assertFalse(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertFalse(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isFalse();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isFalse();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isTrue();
   }
 
   // Tests of GlobalConstraint
   @Test
   public void testGlobalConstraintAdd() {
     GlobalConstraints globalConstraints = new GlobalConstraints();
-    assertTrue(globalConstraints.globalConstraintsMap.isEmpty());
+    assertThat(globalConstraints.globalConstraintsMap.isEmpty()).isTrue();
 
-    assertTrue(globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P0));
-    assertEquals(1, globalConstraints.globalConstraintsMap.size());
-    assertTrue(globalConstraints.globalConstraintsMap.containsKey(Secondary0.getConstraints()));
+    assertThat(globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P0)).isTrue();
+    assertThat(globalConstraints.globalConstraintsMap.keySet()).containsOnly(Secondary0.getConstraints());
 
-    assertFalse(globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P0));
-    assertEquals(1, globalConstraints.globalConstraintsMap.size());
-    assertTrue(globalConstraints.globalConstraintsMap.containsKey(Secondary0.getConstraints()));
+    assertThat(globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P0)).isFalse();
+    assertThat(globalConstraints.globalConstraintsMap.keySet()).containsOnly(Secondary0.getConstraints());
 
-    assertTrue(globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P1));
-    assertEquals(1, globalConstraints.globalConstraintsMap.size());
-    assertTrue(globalConstraints.globalConstraintsMap.containsKey(Secondary0.getConstraints()));
+    assertThat(globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P1)).isTrue();
+    assertThat(globalConstraints.globalConstraintsMap.keySet()).containsOnly(Secondary0.getConstraints());
 
-    assertTrue(globalConstraints.add(Secondary0.getConstraints(), Primary1.class, Primary1.Q0));
-    assertEquals(1, globalConstraints.globalConstraintsMap.size());
-    assertTrue(globalConstraints.globalConstraintsMap.containsKey(Secondary0.getConstraints()));
+    assertThat(globalConstraints.add(Secondary0.getConstraints(), Primary1.class, Primary1.Q0)).isTrue();
+    assertThat(globalConstraints.globalConstraintsMap.keySet()).containsOnly(Secondary0.getConstraints());
 
-    assertTrue(globalConstraints.add(Secondary1.getConstraints(), Primary1.class, Primary1.Q1));
-    assertEquals(2, globalConstraints.globalConstraintsMap.size());
-    assertTrue(globalConstraints.globalConstraintsMap.containsKey(Secondary1.getConstraints()));
+    assertThat(globalConstraints.add(Secondary1.getConstraints(), Primary1.class, Primary1.Q1)).isTrue();
+    assertThat(globalConstraints.globalConstraintsMap.keySet())
+            .containsOnly(Secondary0.getConstraints(), Secondary1.getConstraints());
   }
 
   @Test
@@ -313,12 +300,12 @@ public class GlobalConstraintsTest {
     GlobalConstraints globalConstraints = new GlobalConstraints();
     globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P0);
 
-    assertTrue(globalConstraints.remove(Secondary0.getConstraints(), Primary0.class, Primary0.P0));
-    assertFalse(globalConstraints
+    assertThat(globalConstraints.remove(Secondary0.getConstraints(), Primary0.class, Primary0.P0)).isTrue();
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary0.class)
-            .constraintSet.contains(Primary0.P0));
-    assertFalse(globalConstraints.remove(Secondary0.getConstraints(), Primary0.class, Primary0.P0));
+            .constraintSet.contains(Primary0.P0)).isFalse();
+    assertThat(globalConstraints.remove(Secondary0.getConstraints(), Primary0.class, Primary0.P0)).isFalse();
   }
 
   @Test
@@ -329,18 +316,18 @@ public class GlobalConstraintsTest {
     globalConstraints.add(Secondary1.getConstraints(), Primary1.class, Primary1.Q0);
 
     globalConstraints.clear();
-    assertTrue(globalConstraints
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary0.class)
-            .constraintSet.isEmpty());
-    assertTrue(globalConstraints
+            .constraintSet.isEmpty()).isTrue();
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary1.class)
-            .constraintSet.isEmpty());
-    assertTrue(globalConstraints
+            .constraintSet.isEmpty()).isTrue();
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary1.getConstraints())
             .constraintsMap.get(Primary1.class)
-            .constraintSet.isEmpty());
+            .constraintSet.isEmpty()).isTrue();
 
   }
 
@@ -352,18 +339,18 @@ public class GlobalConstraintsTest {
     globalConstraints.add(Secondary1.getConstraints(), Primary1.class, Primary1.Q0);
 
     globalConstraints.clear(Secondary0.getConstraints());
-    assertTrue(globalConstraints
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary0.class)
-            .constraintSet.isEmpty());
-    assertTrue(globalConstraints
+            .constraintSet.isEmpty()).isTrue();
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary1.class)
-            .constraintSet.isEmpty());
-    assertFalse(globalConstraints
+            .constraintSet.isEmpty()).isTrue();
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary1.getConstraints())
             .constraintsMap.get(Primary1.class)
-            .constraintSet.isEmpty());
+            .constraintSet.isEmpty()).isFalse();
   }
 
   @Test
@@ -374,18 +361,18 @@ public class GlobalConstraintsTest {
     globalConstraints.add(Secondary1.getConstraints(), Primary1.class, Primary1.Q0);
 
     globalConstraints.clear(Secondary0.getConstraints(), Primary1.class);
-    assertFalse(globalConstraints
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary0.class)
-            .constraintSet.isEmpty());
-    assertTrue(globalConstraints
+            .constraintSet.isEmpty()).isFalse();
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary1.class)
-            .constraintSet.isEmpty());
-    assertFalse(globalConstraints
+            .constraintSet.isEmpty()).isTrue();
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary1.getConstraints())
             .constraintsMap.get(Primary1.class)
-            .constraintSet.isEmpty());
+            .constraintSet.isEmpty()).isFalse();
 
   }
 
@@ -396,60 +383,60 @@ public class GlobalConstraintsTest {
     Predicate<Primary1> predicate1;
 
     predicate0 = globalConstraints.getPredicate(Secondary0.getConstraints(), Primary0.class);
-    assertTrue(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isTrue();
 
     globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P0);
     predicate0 = globalConstraints.getPredicate(Secondary0.getConstraints(), Primary0.class);
-    assertTrue(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertFalse(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertFalse(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isFalse();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isFalse();
 
     globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P1);
     predicate0 = globalConstraints.getPredicate(Secondary0.getConstraints(), Primary0.class);
-    assertTrue(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isTrue();
 
     globalConstraints.remove(Secondary0.getConstraints(), Primary0.class, Primary0.P0);
     predicate0 = globalConstraints.getPredicate(Secondary0.getConstraints(), Primary0.class);
-    assertFalse(predicate0.test(Secondary0.S00.getPrimary0()));
-    assertFalse(predicate0.test(Secondary0.S01.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S10.getPrimary0()));
-    assertTrue(predicate0.test(Secondary0.S11.getPrimary0()));
+    assertThat(predicate0.test(Secondary0.S00.getPrimary0())).isFalse();
+    assertThat(predicate0.test(Secondary0.S01.getPrimary0())).isFalse();
+    assertThat(predicate0.test(Secondary0.S10.getPrimary0())).isTrue();
+    assertThat(predicate0.test(Secondary0.S11.getPrimary0())).isTrue();
 
     globalConstraints.add(Secondary0.getConstraints(), Primary1.class, Primary1.Q0);
     predicate1 = globalConstraints.getPredicate(Secondary0.getConstraints(), Primary1.class);
-    assertTrue(predicate1.test(Secondary0.S00.getPrimary1()));
-    assertFalse(predicate1.test(Secondary0.S01.getPrimary1()));
-    assertTrue(predicate1.test(Secondary0.S10.getPrimary1()));
-    assertFalse(predicate1.test(Secondary0.S11.getPrimary1()));
+    assertThat(predicate1.test(Secondary0.S00.getPrimary1())).isTrue();
+    assertThat(predicate1.test(Secondary0.S01.getPrimary1())).isFalse();
+    assertThat(predicate1.test(Secondary0.S10.getPrimary1())).isTrue();
+    assertThat(predicate1.test(Secondary0.S11.getPrimary1())).isFalse();
   }
 
   @Test
   public void testGlobalConstraintUpdate() {
     GlobalConstraints globalConstraints = new GlobalConstraints();
     globalConstraints.update(Secondary0.getConstraints(), Primary0.class, Primary0.P0);
-    assertTrue(globalConstraints
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary0.class)
-            .constraintSet.contains(Primary0.P0));
+            .constraintSet.contains(Primary0.P0)).isTrue();
 
     globalConstraints.update(Secondary0.getConstraints(), Primary0.class, Primary0.P0);
-    assertFalse(globalConstraints
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary0.class)
-            .constraintSet.contains(Primary0.P0));
+            .constraintSet.contains(Primary0.P0)).isFalse();
 
     globalConstraints.update(Secondary0.getConstraints(), Primary0.class, Primary0.P0);
-    assertTrue(globalConstraints
+    assertThat(globalConstraints
             .globalConstraintsMap.get(Secondary0.getConstraints())
             .constraintsMap.get(Primary0.class)
-            .constraintSet.contains(Primary0.P0));
+            .constraintSet.contains(Primary0.P0)).isTrue();
 
   }
 }

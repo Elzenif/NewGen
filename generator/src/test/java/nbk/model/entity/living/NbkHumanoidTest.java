@@ -11,9 +11,7 @@ import org.junit.Test;
 
 import java.util.EnumSet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 /**
@@ -32,27 +30,27 @@ public class NbkHumanoidTest {
   @Test
   public void newHumanoidShouldNotBeNull() throws NoAvailableEntityTypeException {
     humanoid = NbkHumanoid.create(globalConstraints);
-    assertNotNull(humanoid);
+    assertThat(humanoid).isNotNull();
   }
 
   @Test
   public void originShouldBeValid() throws NoAvailableEntityTypeException {
     humanoid = NbkHumanoid.create(globalConstraints);
     EnumSet<ENbkOrigin> origins = EnumSet.allOf(ENbkOrigin.class);
-    assertTrue(origins.contains(humanoid.getOrigin()));
+    assertThat(origins).contains(humanoid.getOrigin());
   }
 
   @Test
   public void nbkLivingShouldHave5BaseStats() throws NoAvailableEntityTypeException {
     humanoid = NbkHumanoid.create(globalConstraints);
-    assertEquals(5, humanoid.getStats().size());
+    assertThat(humanoid.getStats()).hasSize(5);
   }
 
   @Test
   public void baseStatsShouldBeBetween8And13() throws NoAvailableEntityTypeException {
     humanoid = NbkHumanoid.create(globalConstraints);
     humanoid.getStats().values().forEach(
-            value -> assertTrue(value >= 8 && value <= 13)
+            value -> assertThat(value >= 8 && value <= 13).isTrue()
     );
   }
 
@@ -72,11 +70,11 @@ public class NbkHumanoidTest {
 
     humanoid = NbkHumanoid.create(globalConstraints, stats);
 
-    assertEquals(courage, humanoid.getCourage());
-    assertEquals(intelligence, humanoid.getIntelligence());
-    assertEquals(charisma, humanoid.getCharisma());
-    assertEquals(agility, humanoid.getAgility());
-    assertEquals(strength, humanoid.getStrength());
+    assertThat(humanoid.getCourage()).isEqualTo(courage);
+    assertThat(humanoid.getIntelligence()).isEqualTo(intelligence);
+    assertThat(humanoid.getCharisma()).isEqualTo(charisma);
+    assertThat(humanoid.getAgility()).isEqualTo(agility);
+    assertThat(humanoid.getStrength()).isEqualTo(strength);
   }
 
   @Test
