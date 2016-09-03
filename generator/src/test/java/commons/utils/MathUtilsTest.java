@@ -28,7 +28,7 @@ public class MathUtilsTest {
   @Test
   public void testChooseRandom() {
     List<String> list = new LinkedList<>(Arrays.asList("1a", "2b", "3c"));
-    assertThat(list.contains(chooseRandom(list))).isTrue();
+    assertThat(list).contains(chooseRandom(list));
   }
 
   @Test

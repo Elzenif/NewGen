@@ -45,7 +45,7 @@ public class NbkPredefinedArmorTest {
   public void testPredefinedArmorIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<ENbkPredefinedArmor> armorTypes = EnumSet.allOf(ENbkPredefinedArmor.class);
-    assertThat(armorTypes.contains(armor.getPredefinedArmor())).isTrue();
+    assertThat(armorTypes).contains(armor.getPredefinedArmor());
   }
 
   @Test
@@ -58,14 +58,14 @@ public class NbkPredefinedArmorTest {
   public void testSizeIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<ESize> sizeSet = EnumSet.allOf(ESize.class);
-    assertThat(sizeSet.contains(armor.getSize())).isTrue();
+    assertThat(sizeSet).contains(armor.getSize());
   }
 
   @Test
   public void testWeightIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<EWeight> weightSet = EnumSet.allOf(EWeight.class);
-    assertThat(weightSet.contains(armor.getWeight())).isTrue();
+    assertThat(weightSet).contains(armor.getWeight());
   }
 
   @Test
@@ -73,7 +73,7 @@ public class NbkPredefinedArmorTest {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<EBodyPart> bodyPartSet = EnumSet.allOf(EBodyPart.class);
     for (EBodyPart bodyPart : armor.getBodyParts())
-      assertThat(bodyPartSet.contains(bodyPart)).isTrue();
+      assertThat(bodyPartSet).contains(bodyPart);
   }
 
   @Test

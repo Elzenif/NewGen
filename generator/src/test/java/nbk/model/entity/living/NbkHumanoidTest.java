@@ -37,7 +37,7 @@ public class NbkHumanoidTest {
   public void originShouldBeValid() throws NoAvailableEntityTypeException {
     humanoid = NbkHumanoid.create(globalConstraints);
     EnumSet<ENbkOrigin> origins = EnumSet.allOf(ENbkOrigin.class);
-    assertThat(origins.contains(humanoid.getOrigin())).isTrue();
+    assertThat(origins).contains(humanoid.getOrigin());
   }
 
   @Test

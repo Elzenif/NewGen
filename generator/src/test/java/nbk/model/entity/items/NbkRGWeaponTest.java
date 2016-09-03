@@ -46,7 +46,7 @@ public class NbkRGWeaponTest {
   public void testWeaponTypeIsValid() throws NoAvailableEntityTypeException {
     weapon = NbkRGWeapon.create(globalConstraints);
     Set<ENbkWeaponType> weaponTypes = new HashSet<>(Arrays.asList(ENbkWeaponType.values()));
-    assertThat(weaponTypes.contains(weapon.getWeaponType())).isTrue();
+    assertThat(weaponTypes).contains(weapon.getWeaponType());
   }
 
   @Test
@@ -59,7 +59,7 @@ public class NbkRGWeaponTest {
   public void testWeaponQualityIsValid() throws NoAvailableEntityTypeException {
     weapon = NbkRGWeapon.create(globalConstraints);
     Set<ENbkQuality> qualities = new HashSet<>(Arrays.asList(ENbkQuality.values()));
-    assertThat(qualities.contains(weapon.getQuality())).isTrue();
+    assertThat(qualities).contains(weapon.getQuality());
   }
 
   @Test
@@ -72,7 +72,7 @@ public class NbkRGWeaponTest {
   public void testWeaponMagicIsValid() throws NoAvailableEntityTypeException {
     weapon = NbkRGWeapon.create(globalConstraints);
     Set<EMagic> qualities = new HashSet<>(Arrays.asList(EMagic.values()));
-    assertThat(qualities.contains(weapon.getMagic())).isTrue();
+    assertThat(qualities).contains(weapon.getMagic());
   }
 
   @Test

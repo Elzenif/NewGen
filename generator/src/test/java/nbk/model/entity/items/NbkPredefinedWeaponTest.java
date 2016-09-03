@@ -46,7 +46,7 @@ public class NbkPredefinedWeaponTest {
   public void testPredefinedWeaponIsValid() throws NoAvailableEntityTypeException {
     weapon = NbkPredefinedWeapon.create(globalConstraints);
     Set<ENbkPredefinedWeapon> weaponTypes = EnumSet.allOf(ENbkPredefinedWeapon.class);
-    assertThat(weaponTypes.contains(weapon.getPredefinedWeapon())).isTrue();
+    assertThat(weaponTypes).contains(weapon.getPredefinedWeapon());
   }
 
   @Test
