@@ -7,7 +7,7 @@ import commons.model.entity.constraints.GenericConstraint;
 /**
  * Created by Germain on 29/08/2016.
  */
-public interface IRarity<E extends Enum<E> & IRarity<E>>
+public interface IRarity<E extends IRarity<E>>
         extends Primary, HasRarity, GenericConstraint<E>, Comparable<E> {
 
   int getProba();

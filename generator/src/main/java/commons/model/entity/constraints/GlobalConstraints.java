@@ -17,7 +17,7 @@ public class GlobalConstraints {
 
   final Map<Constraints, ConstraintMap> globalConstraintsMap = new HashMap<>();
 
-  public <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  public <E extends Secondary, F extends Primary>
   void update(Constraints<E> constraintsClass, Class<F> primaryClass, GenericConstraint<F> constraint) {
     if (!constraintsClass.getPrimaryClasses().contains(primaryClass))
       throw new IncompatiblePrimaryClass(primaryClass.toString(), constraintsClass.getSecondaryClass().toString());
@@ -25,7 +25,7 @@ public class GlobalConstraints {
       remove(constraintsClass, primaryClass, constraint);
   }
 
-  public <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  public <E extends Secondary, F extends Primary>
   Predicate<F> getPredicate(Constraints<E> constraintsClass, Class<F> primaryClass) {
     if (!constraintsClass.getPrimaryClasses().contains(primaryClass))
       throw new IncompatiblePrimaryClass(primaryClass.toString(), constraintsClass.getSecondaryClass().toString());
@@ -39,7 +39,7 @@ public class GlobalConstraints {
   }
 
   @SuppressWarnings("unchecked")
-  public <E extends Enum<E> & Secondary> void clear(Constraints<E> constraintsClass) {
+  public <E extends Secondary> void clear(Constraints<E> constraintsClass) {
     if (globalConstraintsMap.containsKey(constraintsClass)) {
       constraintsClass.getPrimaryClasses().forEach(primaryClass ->
               globalConstraintsMap.get(constraintsClass).clear(primaryClass)
@@ -48,7 +48,7 @@ public class GlobalConstraints {
   }
 
   @SuppressWarnings("unchecked")
-  public <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  public <E extends Secondary, F extends Primary>
   void clear(Constraints<E> constraintsClass, Class<F> primaryClass) {
     if (!constraintsClass.getPrimaryClasses().contains(primaryClass))
       throw new IncompatiblePrimaryClass(primaryClass.toString(), constraintsClass.getSecondaryClass().toString());
@@ -57,7 +57,7 @@ public class GlobalConstraints {
   }
 
   @SuppressWarnings("unchecked")
-  <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  <E extends Secondary, F extends Primary>
   boolean add(Constraints<E> constraintsClass, Class<F> primaryClass, GenericConstraint<F> constraint) {
     if (!globalConstraintsMap.containsKey(constraintsClass))
       globalConstraintsMap.put(constraintsClass, new ConstraintMap());
@@ -65,7 +65,7 @@ public class GlobalConstraints {
   }
 
   @SuppressWarnings("unchecked")
-  <E extends Enum<E> & Secondary, F extends Enum<F> & Primary>
+  <E extends Secondary, F extends Primary>
   boolean remove(Constraints<E> constraintsClass, Class<F> primaryClass, GenericConstraint<F> constraint) {
     return globalConstraintsMap.containsKey(constraintsClass) && globalConstraintsMap.get(constraintsClass).remove(primaryClass, constraint);
   }
@@ -77,7 +77,7 @@ class ConstraintMap {
   final Map<Class<? extends Primary>, ConstraintSet> constraintsMap = new HashMap<>();
 
   @SuppressWarnings("unchecked")
-  <F extends Enum<F> & Primary> Predicate<F> getPredicate(Class<F> primaryClass) {
+  <F extends Primary> Predicate<F> getPredicate(Class<F> primaryClass) {
     return constraintsMap.containsKey(primaryClass)
             ? (Predicate<F>) constraintsMap.get(primaryClass).getPredicate()
             : p -> true;
@@ -88,20 +88,20 @@ class ConstraintMap {
   }
 
   @SuppressWarnings("unchecked")
-  <F extends Enum<F> & Primary> boolean add(Class<F> primaryClass, GenericConstraint<F> constraint) {
+  <F extends Primary> boolean add(Class<F> primaryClass, GenericConstraint<F> constraint) {
     if (!constraintsMap.containsKey(primaryClass))
       constraintsMap.put(primaryClass, new ConstraintSet<>());
     return constraintsMap.get(primaryClass).add(constraint);
   }
 
   @SuppressWarnings("unchecked")
-  <F extends Enum<F> & Primary> boolean remove(Class<? extends F> primaryClass, GenericConstraint constraint) {
+  <F extends Primary> boolean remove(Class<? extends F> primaryClass, GenericConstraint constraint) {
     return constraintsMap.get(primaryClass).remove(constraint);
   }
 }
 
 
-class ConstraintSet<F extends Enum<F> & Primary> {
+class ConstraintSet<F extends Primary> {
 
   final Set<GenericConstraint<F>> constraintSet = new HashSet<>();
 

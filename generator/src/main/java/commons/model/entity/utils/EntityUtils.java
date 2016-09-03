@@ -17,21 +17,21 @@ import java.util.stream.Stream;
  */
 public class EntityUtils {
 
-  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(E[] values, Predicate<E> predicate)
+  public static <E extends HasRarity> E selectRandomRarity(E[] values, Predicate<E> predicate)
           throws NoAvailableEntityTypeException {
     return selectRandomRarityFromMap(fillMap(Arrays.stream(values), predicate));
   }
 
-  public static <E extends Enum<E> & HasRarity> E selectRandomRarity(Set<E> values, Predicate<E> predicate)
+  public static <E extends HasRarity> E selectRandomRarity(Set<E> values, Predicate<E> predicate)
           throws NoAvailableEntityTypeException {
     return selectRandomRarityFromMap(fillMap(values.stream(), predicate));
   }
 
-  private static <E extends Enum<E> & HasRarity> Map<E, Integer> fillMap(Stream<E> values, Predicate<E> predicate) {
+  private static <E extends HasRarity> Map<E, Integer> fillMap(Stream<E> values, Predicate<E> predicate) {
     return values.filter(predicate).collect(Collectors.toMap(Function.identity(), e -> e.getRarity().getProba()));
   }
 
-  private static <E extends Enum<E> & HasRarity> E selectRandomRarityFromMap(Map<E, Integer> itemTypes)
+  private static <E extends HasRarity> E selectRandomRarityFromMap(Map<E, Integer> itemTypes)
           throws NoAvailableEntityTypeException {
     if (itemTypes.isEmpty()) {
       throw new NoAvailableEntityTypeException();

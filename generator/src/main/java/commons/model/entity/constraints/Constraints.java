@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Created by Germain on 02/07/2016.
  */
-public class Constraints<E extends Enum<E> & Secondary> {
+public class Constraints<E extends Secondary> {
 
   private final Class<E> secondaryClass;
   private final Set<Class<? extends Primary>> primaryClasses;
@@ -44,13 +44,13 @@ public class Constraints<E extends Enum<E> & Secondary> {
     return Objects.hash(secondaryClass);
   }
 
-  public static class ConstraintsBuilder<E extends Enum<E> & Secondary> {
+  public static class ConstraintsBuilder<E extends Secondary> {
 
     private Class<? extends Secondary> secondaryClass;
     private final Set<Class> primaryClasses = new HashSet<>();
 
     @Contract(" -> !null")
-    public static <F extends Enum<F> & Secondary> ConstraintsBuilder<F> start() {
+    public static <F extends Secondary> ConstraintsBuilder<F> start() {
       return new ConstraintsBuilder<>();
     }
 

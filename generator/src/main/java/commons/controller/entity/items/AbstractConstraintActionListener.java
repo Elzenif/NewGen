@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Germain on 23/07/2016.
  */
-public abstract class AbstractConstraintActionListener<T extends Game, E extends Enum<E> & Primary>
+public abstract class AbstractConstraintActionListener<T extends Game, E extends Primary>
         implements ActionListener {
 
   protected final EntityController<T> entityController;
