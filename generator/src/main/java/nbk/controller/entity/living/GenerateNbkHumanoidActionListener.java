@@ -21,6 +21,6 @@ public class GenerateNbkHumanoidActionListener extends GenerateNbkLivingActionLi
 
   @Override
   protected NbkHumanoid generate(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
-    return NbkHumanoid.create(globalConstraints);
+    return NbkHumanoid.create();
   }
 }

@@ -6,7 +6,6 @@ import commons.utils.exception.NoAvailableEntityTypeException;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -20,11 +19,6 @@ public class EntityUtils {
   public static <E extends HasRarity> E selectRandomRarity(E[] values, Predicate<E> predicate)
           throws NoAvailableEntityTypeException {
     return selectRandomRarityFromMap(fillMap(Arrays.stream(values), predicate));
-  }
-
-  public static <E extends HasRarity> E selectRandomRarity(Set<E> values, Predicate<E> predicate)
-          throws NoAvailableEntityTypeException {
-    return selectRandomRarityFromMap(fillMap(values.stream(), predicate));
   }
 
   private static <E extends HasRarity> Map<E, Integer> fillMap(Stream<E> values, Predicate<E> predicate) {

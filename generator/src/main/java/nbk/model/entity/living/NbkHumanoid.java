@@ -1,6 +1,5 @@
 package nbk.model.entity.living;
 
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.utils.EntityUtils;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableEntityTypeException;
@@ -23,37 +22,41 @@ public class NbkHumanoid extends NbkLiving {
     origin = builder.origin;
   }
 
+  @Contract(" -> !null")
+  public static NbkHumanoid create() throws NoAvailableEntityTypeException {
+    return new HumanoidBuilder().build();
+  }
+
   @Contract("_ -> !null")
-  public static NbkHumanoid create(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
-    return new HumanoidBuilder(globalConstraints).build();
-  }
-
-  @Contract("_, _ -> !null")
-  public static NbkHumanoid create(GlobalConstraints globalConstraints, Stats stats)
+  public static NbkHumanoid create(Stats stats)
           throws NoAvailableEntityTypeException {
-    return new HumanoidBuilder(globalConstraints, stats).build();
+    return new HumanoidBuilder(stats).build();
   }
 
-  public ENbkOrigin getOrigin() {
+  @Override
+  public String toString() {
+    return origin.getName().toString();
+  }
+
+  ENbkOrigin getOrigin() {
     return origin;
   }
 
+
   private static class HumanoidBuilder extends NbkLivingBuilder {
 
-    private final GlobalConstraints globalConstraints;
     ENbkOrigin origin;
 
-    public HumanoidBuilder(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
-      this(globalConstraints, new Stats());
+    HumanoidBuilder() throws NoAvailableEntityTypeException {
+      this(new Stats());
     }
 
-    public HumanoidBuilder(GlobalConstraints globalConstraints, Stats stats) throws NoAvailableEntityTypeException {
+    HumanoidBuilder(Stats stats) throws NoAvailableEntityTypeException {
       super(stats);
-      this.globalConstraints = globalConstraints;
     }
 
     void setOrigin(Predicate<ENbkOrigin> predicate) throws NoAvailableEntityTypeException {
-      origin = EntityUtils.selectRandomRarity(NbkLivingUtils.listAvailableOrigins(), predicate);
+      origin = EntityUtils.selectRandomRarity(ENbkOrigin.values(), predicate);
     }
 
     @Contract(" -> !null")
@@ -63,7 +66,7 @@ public class NbkHumanoid extends NbkLiving {
           stats.put(stat, MathUtils.random(8, 13));
         }
       }
-      setOrigin(ENbkOrigin.getPredicate(globalConstraints));
+      setOrigin(ENbkOrigin.getPredicate(stats));
       return new NbkHumanoid(this);
     }
   }

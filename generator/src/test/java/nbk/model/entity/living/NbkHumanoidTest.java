@@ -29,26 +29,26 @@ public class NbkHumanoidTest {
 
   @Test
   public void newHumanoidShouldNotBeNull() throws NoAvailableEntityTypeException {
-    humanoid = NbkHumanoid.create(globalConstraints);
+    humanoid = NbkHumanoid.create();
     assertThat(humanoid).isNotNull();
   }
 
   @Test
   public void originShouldBeValid() throws NoAvailableEntityTypeException {
-    humanoid = NbkHumanoid.create(globalConstraints);
+    humanoid = NbkHumanoid.create();
     EnumSet<ENbkOrigin> origins = EnumSet.allOf(ENbkOrigin.class);
     assertThat(origins).contains(humanoid.getOrigin());
   }
 
   @Test
   public void nbkLivingShouldHave5BaseStats() throws NoAvailableEntityTypeException {
-    humanoid = NbkHumanoid.create(globalConstraints);
+    humanoid = NbkHumanoid.create();
     assertThat(humanoid.getStats()).hasSize(5);
   }
 
   @Test
   public void baseStatsShouldBeBetween8And13() throws NoAvailableEntityTypeException {
-    humanoid = NbkHumanoid.create(globalConstraints);
+    humanoid = NbkHumanoid.create();
     humanoid.getStats().values().forEach(
             value -> assertThat(value >= 8 && value <= 13).isTrue()
     );
@@ -68,7 +68,7 @@ public class NbkHumanoidTest {
     stats.setAgility(agility);
     stats.setStrength(strength);
 
-    humanoid = NbkHumanoid.create(globalConstraints, stats);
+    humanoid = NbkHumanoid.create(stats);
 
     assertThat(humanoid.getCourage()).isEqualTo(courage);
     assertThat(humanoid.getIntelligence()).isEqualTo(intelligence);
@@ -91,31 +91,31 @@ public class NbkHumanoidTest {
     try {
       Stats stats = new Stats();
       stats.setCourage(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(globalConstraints, stats);
+      humanoid = NbkHumanoid.create(stats);
       fail();
     } catch (StatNotInRangeException e) {}
     try {
       Stats stats = new Stats();
       stats.setIntelligence(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(globalConstraints, stats);
+      humanoid = NbkHumanoid.create(stats);
       fail();
     } catch (StatNotInRangeException e) {}
     try {
       Stats stats = new Stats();
       stats.setCharisma(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(globalConstraints, stats);
+      humanoid = NbkHumanoid.create(stats);
       fail();
     } catch (StatNotInRangeException e) {}
     try {
       Stats stats = new Stats();
       stats.setAgility(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(globalConstraints, stats);
+      humanoid = NbkHumanoid.create(stats);
       fail();
     } catch (StatNotInRangeException e) {}
     try {
       Stats stats = new Stats();
       stats.setStrength(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(globalConstraints, stats);
+      humanoid = NbkHumanoid.create(stats);
       fail();
     } catch (StatNotInRangeException e) {}
   }
