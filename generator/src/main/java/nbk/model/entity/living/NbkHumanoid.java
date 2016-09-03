@@ -53,7 +53,7 @@ public class NbkHumanoid extends NbkLiving {
     }
 
     void setOrigin(Predicate<ENbkOrigin> predicate) throws NoAvailableEntityTypeException {
-      origin = EntityUtils.selectRandomRarity(NbkLivingUtils.listAvailbleOrigins(), predicate);
+      origin = EntityUtils.selectRandomRarity(NbkLivingUtils.listAvailableOrigins(), predicate);
     }
 
     @Contract(" -> !null")

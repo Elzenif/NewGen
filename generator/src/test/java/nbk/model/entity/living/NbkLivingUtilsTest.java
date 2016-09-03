@@ -12,7 +12,7 @@ public class NbkLivingUtilsTest {
 
   @Test
   public void humanShouldAlwaysBeAnAvailableOrigin() {
-    assertTrue(NbkLivingUtils.listAvailbleOrigins().contains(ENbkOrigin.HUMAN));
+    assertTrue(NbkLivingUtils.listAvailableOrigins().contains(ENbkOrigin.HUMAN));
   }
 
 }

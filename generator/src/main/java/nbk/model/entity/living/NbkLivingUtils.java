@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class NbkLivingUtils {
 
-  public static Set<ENbkOrigin> listAvailbleOrigins() {
+  public static Set<ENbkOrigin> listAvailableOrigins() {
     return EnumSet.allOf(ENbkOrigin.class);
   }
 }

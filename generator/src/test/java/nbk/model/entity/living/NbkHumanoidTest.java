@@ -121,9 +121,4 @@ public class NbkHumanoidTest {
       fail();
     } catch (StatNotInRangeException e) {}
   }
-
-  @Test
-  public void humanoidOrigin() {
-    
-  }
 }
