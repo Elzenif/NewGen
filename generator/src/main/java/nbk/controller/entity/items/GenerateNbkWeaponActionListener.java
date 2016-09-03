@@ -1,10 +1,9 @@
 package nbk.controller.entity.items;
 
-import commons.controller.entity.items.GenerateItemActionListener;
-import commons.controller.entity.items.ItemController;
+import commons.controller.entity.EntityController;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
-import commons.utils.exception.NoAvailableItemTypeException;
+import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.view.entity.EntityResultRow;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.NbkAbstractWeapon;
@@ -16,16 +15,16 @@ import org.jetbrains.annotations.Contract;
 /**
  * Created by Germain on 14/06/2016.
  */
-public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<NbkGame> {
+public class GenerateNbkWeaponActionListener extends GenerateNbkItemActionListener {
 
-  public GenerateNbkWeaponActionListener(ItemController<NbkGame> itemController, NbkWeaponOptionRow entityOptionRow,
+  public GenerateNbkWeaponActionListener(EntityController<NbkGame> entityController, NbkWeaponOptionRow entityOptionRow,
                                          EntityResultRow entityResultRow) {
-    super(itemController, entityOptionRow, entityResultRow);
+    super(entityController, entityOptionRow, entityResultRow);
   }
 
   @Contract("_ -> !null")
   @Override
-  protected NbkAbstractWeapon generate(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+  protected NbkAbstractWeapon generate(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
     if (MathUtils.random(1, 10) == 1) {
       return generatePW(globalConstraints);
     } else {
@@ -34,17 +33,17 @@ public class GenerateNbkWeaponActionListener extends GenerateItemActionListener<
   }
 
   @Contract("_ -> !null")
-  private NbkAbstractWeapon generatePW(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+  private NbkAbstractWeapon generatePW(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
     try {
       return NbkPredefinedWeapon.create(globalConstraints);
-    } catch (NoAvailableItemTypeException e) {
+    } catch (NoAvailableEntityTypeException e) {
       // if no one fits the constraints, generate a random weapon anyway
       return generateRGW(globalConstraints);
     }
   }
 
   @Contract("_ -> !null")
-  private NbkRGWeapon generateRGW(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+  private NbkRGWeapon generateRGW(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
     return NbkRGWeapon.create(globalConstraints);
   }
 }

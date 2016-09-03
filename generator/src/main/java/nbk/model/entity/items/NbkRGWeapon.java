@@ -2,15 +2,15 @@ package nbk.model.entity.items;
 
 import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.utils.ItemUtils;
+import commons.model.entity.utils.EntityUtils;
 import commons.utils.SPositive;
-import commons.utils.exception.NoAvailableItemTypeException;
+import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.utils.french.FrenchNoun;
-import nbk.model.entity.characteristics.primary.enums.ENbHands;
-import nbk.model.entity.characteristics.primary.enums.ERange;
-import nbk.model.entity.characteristics.primary.enums.ESize;
-import nbk.model.entity.characteristics.secondary.enums.ENbkQuality;
-import nbk.model.entity.characteristics.secondary.enums.ENbkWeaponType;
+import nbk.model.entity.items.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.items.characteristics.primary.enums.ERange;
+import nbk.model.entity.items.characteristics.primary.enums.ESize;
+import nbk.model.entity.items.characteristics.secondary.enums.ENbkQuality;
+import nbk.model.entity.items.characteristics.secondary.enums.ENbkWeaponType;
 import org.jetbrains.annotations.Contract;
 
 import java.util.function.Predicate;
@@ -25,7 +25,7 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
 
   @Contract("_ -> !null")
   public static NbkRGWeapon create(GlobalConstraints globalConstraints)
-          throws NoAvailableItemTypeException {
+          throws NoAvailableEntityTypeException {
     return new RGWeaponBuilder(globalConstraints).build();
   }
 
@@ -71,18 +71,18 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
     ENbkWeaponType weaponType;
     ENbkQuality quality;
 
-    RGWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+    RGWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
       setWeaponType(ENbkWeaponType.getPredicate(globalConstraints));
       setQuality(ENbkQuality.getPredicate(globalConstraints));
       rarity = quality.getRarity();
     }
 
-    void setWeaponType(Predicate<ENbkWeaponType> predicate) throws NoAvailableItemTypeException {
-      weaponType = ItemUtils.selectRandomRarity(ENbkWeaponType.values(), predicate);
+    void setWeaponType(Predicate<ENbkWeaponType> predicate) throws NoAvailableEntityTypeException {
+      weaponType = EntityUtils.selectRandomRarity(ENbkWeaponType.values(), predicate);
     }
 
-    void setQuality(Predicate<ENbkQuality> predicate) throws NoAvailableItemTypeException {
-      quality = ItemUtils.selectRandomRarity(ENbkQuality.values(), predicate);
+    void setQuality(Predicate<ENbkQuality> predicate) throws NoAvailableEntityTypeException {
+      quality = EntityUtils.selectRandomRarity(ENbkQuality.values(), predicate);
     }
 
     @Override

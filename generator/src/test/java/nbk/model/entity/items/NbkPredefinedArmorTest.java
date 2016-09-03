@@ -1,13 +1,13 @@
 package nbk.model.entity.items;
 
-import commons.model.entity.characteristics.primary.enums.ERarity;
+import commons.model.entity.characteristics.primary.enums.EItemRarity;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.EOperator;
-import commons.utils.exception.NoAvailableItemTypeException;
-import nbk.model.entity.characteristics.primary.enums.EBodyPart;
-import nbk.model.entity.characteristics.primary.enums.ESize;
-import nbk.model.entity.characteristics.primary.enums.EWeight;
-import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedArmor;
+import commons.utils.exception.NoAvailableEntityTypeException;
+import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
+import nbk.model.entity.items.characteristics.primary.enums.ESize;
+import nbk.model.entity.items.characteristics.primary.enums.EWeight;
+import nbk.model.entity.items.characteristics.secondary.enums.ENbkPredefinedArmor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,24 +27,24 @@ public class NbkPredefinedArmorTest {
   private NbkPredefinedArmor armor;
 
   @Before
-  public void init() throws NoAvailableItemTypeException {
+  public void init() {
     globalConstraints = new GlobalConstraints();
   }
 
   @Test
-  public void testArmorIsNotNull() throws NoAvailableItemTypeException {
+  public void testArmorIsNotNull() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     assertNotNull("The armor should not be null", armor);
   }
 
   @Test
-  public void testPredefinedArmorIsNotNull() throws NoAvailableItemTypeException {
+  public void testPredefinedArmorIsNotNull() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     assertNotNull("The predefined armor should not be null", armor.getPredefinedArmor());
   }
 
   @Test
-  public void testPredefinedArmorIsValid() throws NoAvailableItemTypeException {
+  public void testPredefinedArmorIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<ENbkPredefinedArmor> armorTypes = EnumSet.allOf(ENbkPredefinedArmor.class);
     assertTrue("The predefined armor should be a ENbkPredefinedArmor enum",
@@ -52,27 +52,27 @@ public class NbkPredefinedArmorTest {
   }
 
   @Test
-  public void testToStringIsValid() throws NoAvailableItemTypeException {
+  public void testToStringIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     assertFalse("The armor toString is not valid", armor.toString().contains("@"));
   }
 
   @Test
-  public void testSizeIsValid() throws NoAvailableItemTypeException {
+  public void testSizeIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<ESize> sizeSet = EnumSet.allOf(ESize.class);
     assertTrue(sizeSet.contains(armor.getSize()));
   }
 
   @Test
-  public void testWeightIsValid() throws NoAvailableItemTypeException {
+  public void testWeightIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<EWeight> weightSet = EnumSet.allOf(EWeight.class);
     assertTrue(weightSet.contains(armor.getWeight()));
   }
 
   @Test
-  public void testBodyPartIsValid() throws NoAvailableItemTypeException {
+  public void testBodyPartIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<EBodyPart> bodyPartSet = EnumSet.allOf(EBodyPart.class);
     for (EBodyPart bodyPart : armor.getBodyParts())
@@ -80,14 +80,14 @@ public class NbkPredefinedArmorTest {
   }
 
   @Test
-  public void testCreateArmorWithRarityConstraint() throws NoAvailableItemTypeException {
-    for (ERarity rarity : ERarity.values()) {
-      globalConstraints.update(ENbkPredefinedArmor.getConstraints(), ERarity.class, rarity);
+  public void testCreateArmorWithRarityConstraint() throws NoAvailableEntityTypeException {
+    for (EItemRarity rarity : EItemRarity.values()) {
+      globalConstraints.update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class, rarity);
       armor = NbkPredefinedArmor.create(globalConstraints);
       assertNotNull("The armor should not be null", armor);
       assertTrue(armor.getRarity() + " (armor rarity) should be greater than " + rarity,
               EOperator.GTE.apply(armor.getRarity(), rarity));
-      globalConstraints.update(ENbkPredefinedArmor.getConstraints(), ERarity.class, rarity);
+      globalConstraints.update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class, rarity);
     }
   }
 }

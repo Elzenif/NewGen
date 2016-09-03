@@ -3,8 +3,6 @@ package commons.view.commons;
 import commons.model.commons.Game;
 import nbk.model.commons.NbkGame;
 import nbk.view.commons.NbkTabbedPanelEmbedded;
-import tes.model.commons.TesGame;
-import tes.view.commons.TesTabbedPanelEmbedded;
 
 import java.util.Arrays;
 
@@ -19,15 +17,6 @@ public enum EGame {
     public GameTabbedPanelEmbedded getGameTabbedPanelEmbedded() {
       if (gameTabbedPanelEmbedded == null)
         gameTabbedPanelEmbedded = new NbkTabbedPanelEmbedded();
-      return gameTabbedPanelEmbedded;
-    }
-  },
-  TES(TesGame.getInstance(), false) {
-    GameTabbedPanelEmbedded gameTabbedPanelEmbedded = null;
-    @Override
-    public GameTabbedPanelEmbedded getGameTabbedPanelEmbedded() {
-      if (gameTabbedPanelEmbedded == null)
-        gameTabbedPanelEmbedded = new TesTabbedPanelEmbedded();
       return gameTabbedPanelEmbedded;
     }
   };

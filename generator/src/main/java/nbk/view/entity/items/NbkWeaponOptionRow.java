@@ -3,8 +3,8 @@ package nbk.view.entity.items;
 import commons.view.entity.EntityResultRow;
 import commons.view.utils.ConstraintPanel;
 import nbk.controller.entity.items.NbkWeaponController;
-import nbk.model.entity.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.items.ENbkAvailableItem;
+import nbk.model.entity.items.characteristics.primary.enums.ENbHands;
 
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by Germain on 13/06/2016.
  */
-public class NbkWeaponOptionRow extends NbkEntityOptionRow {
+public class NbkWeaponOptionRow extends NbkItemOptionRow {
 
   private final ConstraintPanel nbHandsPanel;
   private final Map<ENbHands, JCheckBox> nbHandsButtons;
@@ -44,6 +44,6 @@ public class NbkWeaponOptionRow extends NbkEntityOptionRow {
   public void setControllers(EntityResultRow entityResultRow) {
     super.setControllers(new NbkWeaponController(this, entityResultRow));
     nbHandsButtons.forEach((nbHands, jCheckBox) ->
-            jCheckBox.addActionListener(((NbkWeaponController) itemController).getNbHandsActionListener(nbHands)));
+            jCheckBox.addActionListener(((NbkWeaponController) entityController).getNbHandsActionListener(nbHands)));
   }
 }

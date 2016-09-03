@@ -1,10 +1,10 @@
 package nbk.controller.entity.items;
 
+import commons.controller.entity.EntityController;
 import commons.controller.entity.items.AbstractConstraintActionListener;
-import commons.controller.entity.items.ItemController;
 import commons.model.entity.constraints.GenericConstraint;
 import nbk.model.commons.NbkGame;
-import nbk.model.entity.characteristics.primary.enums.EBodyPart;
+import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
 
 import java.awt.event.ActionEvent;
 
@@ -13,12 +13,12 @@ import java.awt.event.ActionEvent;
  */
 public class BodyPartActionListener extends AbstractConstraintActionListener<NbkGame, EBodyPart> {
 
-  public BodyPartActionListener(ItemController<NbkGame> itemController, GenericConstraint<EBodyPart> constraint) {
-    super(itemController, constraint);
+  public BodyPartActionListener(EntityController<NbkGame> entityController, GenericConstraint<EBodyPart> constraint) {
+    super(entityController, constraint);
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    ((NbkArmorController) itemController).updateBodyPartConstraint(constraint);
+    ((NbkArmorController) entityController).updateBodyPartConstraint(constraint);
   }
 }

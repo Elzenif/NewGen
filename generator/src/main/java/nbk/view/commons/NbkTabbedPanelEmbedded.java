@@ -6,7 +6,8 @@ import commons.view.entity.EntityPanel;
 import commons.view.hidden.HiddenPanel;
 import commons.view.utility.UtilityPanel;
 import nbk.model.commons.NbkGame;
-import nbk.view.entity.items.ENbkAvailableEntityRow;
+import nbk.view.entity.items.ENbkAvailableItemsRow;
+import nbk.view.entity.living.ENbkAvailableLivingsRow;
 import nbk.view.utility.ENbkAvailableUtilityRow;
 
 /**
@@ -16,8 +17,9 @@ public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
 
   private final HiddenPanel<NbkGame> hiddenPanel;
   private final DicePanel dicePanel;
-  private final EntityPanel<NbkGame, ENbkAvailableEntityRow> entityPanel;
+  private final EntityPanel<NbkGame, ENbkAvailableItemsRow> itemsPanel;
   private final UtilityPanel<NbkGame, ENbkAvailableUtilityRow> utilityPanel;
+  private final EntityPanel<NbkGame, ENbkAvailableLivingsRow> livingsPanel;
 
   public NbkTabbedPanelEmbedded() {
     hiddenPanel = new HiddenPanel<>(NbkGame.getInstance());
@@ -27,9 +29,13 @@ public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
     controllers.add(dicePanel);
     panelMap.put("Dice", dicePanel);
 
-    entityPanel = new EntityPanel<>(ENbkAvailableEntityRow.values());
-    controllers.add(entityPanel);
-    panelMap.put("Entity", entityPanel);
+    itemsPanel = new EntityPanel<>(ENbkAvailableItemsRow.values());
+    controllers.add(itemsPanel);
+    panelMap.put("Item", itemsPanel);
+
+    livingsPanel = new EntityPanel<>(ENbkAvailableLivingsRow.values());
+    controllers.add(livingsPanel);
+    panelMap.put("Living", livingsPanel);
 
     utilityPanel = new UtilityPanel<>(ENbkAvailableUtilityRow.values());
     controllers.add(utilityPanel);

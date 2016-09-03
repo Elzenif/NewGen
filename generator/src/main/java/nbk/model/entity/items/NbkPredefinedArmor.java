@@ -3,17 +3,17 @@ package nbk.model.entity.items;
 import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.items.Item;
-import commons.model.entity.utils.ItemUtils;
+import commons.model.entity.utils.EntityUtils;
 import commons.utils.SPositive;
-import commons.utils.exception.NoAvailableItemTypeException;
+import commons.utils.exception.NoAvailableEntityTypeException;
 import nbk.model.commons.NbkGame;
-import nbk.model.entity.characteristics.primary.enums.EBodyPart;
-import nbk.model.entity.characteristics.primary.enums.ESize;
-import nbk.model.entity.characteristics.primary.enums.EWeight;
-import nbk.model.entity.characteristics.primary.fields.HasSize;
-import nbk.model.entity.characteristics.primary.fields.HasWeight;
-import nbk.model.entity.characteristics.primary.fields.IsBodyPart;
-import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedArmor;
+import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
+import nbk.model.entity.items.characteristics.primary.enums.ESize;
+import nbk.model.entity.items.characteristics.primary.enums.EWeight;
+import nbk.model.entity.items.characteristics.primary.fields.HasSize;
+import nbk.model.entity.items.characteristics.primary.fields.HasWeight;
+import nbk.model.entity.items.characteristics.primary.fields.IsBodyPart;
+import nbk.model.entity.items.characteristics.secondary.enums.ENbkPredefinedArmor;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
@@ -26,7 +26,7 @@ public class NbkPredefinedArmor extends Item<NbkGame> implements HasWeight, IsBo
   private final ENbkPredefinedArmor predefinedArmor;
 
   public static NbkPredefinedArmor create(GlobalConstraints globalConstraints)
-          throws NoAvailableItemTypeException {
+          throws NoAvailableEntityTypeException {
     return new NbkPredefinedArmorBuilder(globalConstraints).build();
   }
 
@@ -63,7 +63,7 @@ public class NbkPredefinedArmor extends Item<NbkGame> implements HasWeight, IsBo
 
     ENbkPredefinedArmor predefinedArmor;
 
-    NbkPredefinedArmorBuilder(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+    NbkPredefinedArmorBuilder(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
       setPredefinedArmor(getPredicate(globalConstraints));
       rarity = predefinedArmor.getRarity();
     }
@@ -72,8 +72,8 @@ public class NbkPredefinedArmor extends Item<NbkGame> implements HasWeight, IsBo
       return ENbkPredefinedArmor.getPredicate(globalConstraints);
     }
 
-    void setPredefinedArmor(Predicate<ENbkPredefinedArmor> armorPredicate) throws NoAvailableItemTypeException {
-      predefinedArmor = ItemUtils.selectRandomRarity(ENbkPredefinedArmor.values(), armorPredicate);
+    void setPredefinedArmor(Predicate<ENbkPredefinedArmor> armorPredicate) throws NoAvailableEntityTypeException {
+      predefinedArmor = EntityUtils.selectRandomRarity(ENbkPredefinedArmor.values(), armorPredicate);
     }
 
     @Override

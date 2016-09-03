@@ -2,13 +2,13 @@ package nbk.model.entity.items;
 
 import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.entity.utils.ItemUtils;
+import commons.model.entity.utils.EntityUtils;
 import commons.utils.SPositive;
-import commons.utils.exception.NoAvailableItemTypeException;
-import nbk.model.entity.characteristics.primary.enums.ENbHands;
-import nbk.model.entity.characteristics.primary.enums.ERange;
-import nbk.model.entity.characteristics.primary.enums.ESize;
-import nbk.model.entity.characteristics.secondary.enums.ENbkPredefinedWeapon;
+import commons.utils.exception.NoAvailableEntityTypeException;
+import nbk.model.entity.items.characteristics.primary.enums.ENbHands;
+import nbk.model.entity.items.characteristics.primary.enums.ERange;
+import nbk.model.entity.items.characteristics.primary.enums.ESize;
+import nbk.model.entity.items.characteristics.secondary.enums.ENbkPredefinedWeapon;
 
 import java.util.function.Predicate;
 
@@ -20,7 +20,7 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
   private final ENbkPredefinedWeapon predefinedWeapon;
 
   public static NbkPredefinedWeapon create(GlobalConstraints globalConstraints)
-          throws NoAvailableItemTypeException {
+          throws NoAvailableEntityTypeException {
     return new PredefinedWeaponBuilder(globalConstraints).build();
   }
 
@@ -58,7 +58,7 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
 
     ENbkPredefinedWeapon predefinedWeapon;
 
-    PredefinedWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableItemTypeException {
+    PredefinedWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
       setPredefinedWeapon(getPredicate(globalConstraints));
       rarity = predefinedWeapon.getRarity();
     }
@@ -67,8 +67,8 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
       return ENbkPredefinedWeapon.getPredicate(globalConstraints);
     }
 
-    void setPredefinedWeapon(Predicate<ENbkPredefinedWeapon> weaponPredicate) throws NoAvailableItemTypeException {
-      predefinedWeapon = ItemUtils.selectRandomRarity(ENbkPredefinedWeapon.values(), weaponPredicate);
+    void setPredefinedWeapon(Predicate<ENbkPredefinedWeapon> weaponPredicate) throws NoAvailableEntityTypeException {
+      predefinedWeapon = EntityUtils.selectRandomRarity(ENbkPredefinedWeapon.values(), weaponPredicate);
     }
 
     @Override

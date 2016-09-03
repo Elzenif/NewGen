@@ -1,7 +1,8 @@
 package commons.controller.entity.items;
 
+import commons.controller.entity.EntityController;
 import commons.model.commons.Game;
-import commons.model.entity.characteristics.primary.enums.ERarity;
+import commons.model.entity.characteristics.primary.enums.EItemRarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityOptionRow;
 
@@ -15,23 +16,23 @@ import static commons.utils.MathUtils.findFirstKeySuchAsIntegerIsLowerThanSumOfP
  */
 public class RarityChangeListener<T extends Game> implements PropertyChangeListener {
 
-  private final ItemController<T> itemController;
+  private final EntityController<T> entityController;
   private final EntityOptionRow<T> entityOptionRow;
 
-  public RarityChangeListener(ItemController<T> itemController, EntityOptionRow<T> entityOptionRow) {
-    this.itemController = itemController;
+  public RarityChangeListener(EntityController<T> entityController, EntityOptionRow<T> entityOptionRow) {
+    this.entityController = entityController;
     this.entityOptionRow = entityOptionRow;
   }
 
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    GenericConstraint<ERarity> constraint;
+    GenericConstraint<EItemRarity> constraint;
     try {
       int rarityLevel = Integer.parseInt(entityOptionRow.getQualityTextField().getText()) + 1; // so that the result belongs to [1;100]
-      constraint = findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(rarityLevel, ERarity.getConstraintMapView());
+      constraint = findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(rarityLevel, EItemRarity.getConstraintMapView());
     } catch (NumberFormatException e) {
       constraint = () -> p -> true;
     }
-    itemController.updateRarityConstraint(constraint);
+    entityController.updateRarityConstraint(constraint);
   }
 }

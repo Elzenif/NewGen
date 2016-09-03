@@ -1,9 +1,8 @@
 package commons.view.entity;
 
-import commons.controller.entity.items.ItemController;
+import commons.controller.entity.EntityController;
 import commons.model.commons.Game;
-import commons.model.entity.items.IAvailableItem;
-import commons.utils.MathUtils;
+import commons.model.entity.IAvailableEntity;
 import commons.utils.StringUtils;
 import commons.utils.TextFieldUtils;
 import commons.view.utils.Constants;
@@ -27,10 +26,10 @@ import java.awt.FlowLayout;
 public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityResultRow> implements HasConstraintPanel {
 
   private final int labelSize;
-  private final String itemName;
+  private final String entityName;
 
-  private final JSpinner numberOfItemsSpinner;
-  private final SpinnerNumberModel numberOfItemsModel;
+  private final JSpinner numberOfEntitiesSpinner;
+  private final SpinnerNumberModel numberOfEntitiesModel;
 
   private final JLabel infoLabel;
 
@@ -43,21 +42,21 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
   private final ConstraintPanel qualityPanel;
   private final JFormattedTextField qualityTextField;
 
-  private JButton generateItemButton;
+  private JButton generateEntityButton;
 
-  protected ItemController<T> itemController;
+  protected EntityController<T> entityController;
 
-  protected EntityOptionRow(IAvailableItem<T> availableItem, T game) {
+  protected EntityOptionRow(IAvailableEntity<T> availableEntity, int labelSize) {
     super();
-    labelSize = MathUtils.maxLength(game.getAvailableItems());
-    itemName = availableItem.getName();
+    this.labelSize = labelSize;
+    entityName = availableEntity.getName();
 
-    numberOfItemsModel = new SpinnerNumberModel(1, 1, 9, 1);
-    numberOfItemsSpinner = new JSpinner(numberOfItemsModel);
-    numberOfItemsSpinner.setToolTipText("The number of " + itemName + " to generate");
-    add(numberOfItemsSpinner);
+    numberOfEntitiesModel = new SpinnerNumberModel(1, 1, 9, 1);
+    numberOfEntitiesSpinner = new JSpinner(numberOfEntitiesModel);
+    numberOfEntitiesSpinner.setToolTipText("The number of " + entityName + " to generate");
+    add(numberOfEntitiesSpinner);
 
-    infoLabel = new JLabel(StringUtils.leftAlign(labelSize, itemName));
+    infoLabel = new JLabel(StringUtils.leftAlign(labelSize, entityName));
     add(infoLabel);
 
     // globalConstraints
@@ -76,7 +75,7 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
 
     // quality constraints
     qualityTextField = TextFieldUtils.createTwoDigitsField();
-    qualityTextField.setToolTipText("Put a D100 roll result. The lower the result, the better the " + itemName);
+    qualityTextField.setToolTipText("Put a D100 roll result. The lower the result, the better the " + entityName);
     qualityPanel = new ConstraintPanel();
     qualityPanel.setLayout(new BoxLayout(qualityPanel, BoxLayout.Y_AXIS));
     qualityPanel.add(qualityTextField);
@@ -86,22 +85,22 @@ public abstract class EntityOptionRow<T extends Game> extends OptionRow<EntityRe
   protected void finalizeRowConstruction() {
     add(constraintPanel);
 
-    generateItemButton = new JButton("Generate");
-    generateItemButton.setToolTipText("Generate a random " + itemName);
-    add(generateItemButton);
+    generateEntityButton = new JButton("Generate");
+    generateEntityButton.setToolTipText("Generate a random " + entityName);
+    add(generateEntityButton);
 
     updateConstraintsAbility(false);
   }
 
-  protected void setControllers(ItemController<T> itemController) {
-    this.itemController = itemController;
-    constraintsCheckBox.addItemListener(itemController.getConstraintsItemListener());
-    qualityTextField.addPropertyChangeListener(itemController.getRarityChangeListener());
-    generateItemButton.addActionListener(itemController.getGenerateItemActionListener());
+  protected void setControllers(EntityController<T> entityController) {
+    this.entityController = entityController;
+    constraintsCheckBox.addItemListener(entityController.getConstraintsItemListener());
+    qualityTextField.addPropertyChangeListener(entityController.getRarityChangeListener());
+    generateEntityButton.addActionListener(entityController.getGenerateEntityActionListener());
   }
 
-  public int getNumberOfItemsSelected() {
-    return numberOfItemsModel.getNumber().intValue();
+  public int getNumberOfEntitiesSelected() {
+    return numberOfEntitiesModel.getNumber().intValue();
   }
 
   @Override

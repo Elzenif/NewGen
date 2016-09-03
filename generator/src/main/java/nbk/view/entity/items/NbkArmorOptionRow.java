@@ -3,8 +3,8 @@ package nbk.view.entity.items;
 import commons.view.entity.EntityResultRow;
 import commons.view.utils.ConstraintPanel;
 import nbk.controller.entity.items.NbkArmorController;
-import nbk.model.entity.characteristics.primary.enums.EBodyPart;
 import nbk.model.entity.items.ENbkAvailableItem;
+import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
 
 import javax.swing.JCheckBox;
 import java.awt.GridLayout;
@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by Germain on 26/06/2016.
  */
-public class NbkArmorOptionRow extends NbkEntityOptionRow {
+public class NbkArmorOptionRow extends NbkItemOptionRow {
 
   private final ConstraintPanel bodyPartPanel;
   private final Map<EBodyPart, JCheckBox> bodyPartCheckBoxes;
@@ -45,6 +45,6 @@ public class NbkArmorOptionRow extends NbkEntityOptionRow {
   public void setControllers(EntityResultRow entityResultRow) {
     super.setControllers(new NbkArmorController(this, entityResultRow));
     bodyPartCheckBoxes.forEach((bodyPart, jCheckBox) ->
-            jCheckBox.addActionListener(((NbkArmorController) itemController).getBodyPartActionListener(bodyPart)));
+            jCheckBox.addActionListener(((NbkArmorController) entityController).getBodyPartActionListener(bodyPart)));
   }
 }
