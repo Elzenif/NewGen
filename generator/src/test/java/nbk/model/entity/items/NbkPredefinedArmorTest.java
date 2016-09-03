@@ -14,9 +14,7 @@ import org.junit.Test;
 import java.util.EnumSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Germain on 28/06/2016.
@@ -34,41 +32,40 @@ public class NbkPredefinedArmorTest {
   @Test
   public void testArmorIsNotNull() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
-    assertNotNull("The armor should not be null", armor);
+    assertThat(armor).isNotNull();
   }
 
   @Test
   public void testPredefinedArmorIsNotNull() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
-    assertNotNull("The predefined armor should not be null", armor.getPredefinedArmor());
+    assertThat(armor.getPredefinedArmor()).isNotNull();
   }
 
   @Test
   public void testPredefinedArmorIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<ENbkPredefinedArmor> armorTypes = EnumSet.allOf(ENbkPredefinedArmor.class);
-    assertTrue("The predefined armor should be a ENbkPredefinedArmor enum",
-            armorTypes.contains(armor.getPredefinedArmor()));
+    assertThat(armorTypes.contains(armor.getPredefinedArmor())).isTrue();
   }
 
   @Test
   public void testToStringIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
-    assertFalse("The armor toString is not valid", armor.toString().contains("@"));
+    assertThat(armor.toString().contains("@")).isFalse();
   }
 
   @Test
   public void testSizeIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<ESize> sizeSet = EnumSet.allOf(ESize.class);
-    assertTrue(sizeSet.contains(armor.getSize()));
+    assertThat(sizeSet.contains(armor.getSize())).isTrue();
   }
 
   @Test
   public void testWeightIsValid() throws NoAvailableEntityTypeException {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<EWeight> weightSet = EnumSet.allOf(EWeight.class);
-    assertTrue(weightSet.contains(armor.getWeight()));
+    assertThat(weightSet.contains(armor.getWeight())).isTrue();
   }
 
   @Test
@@ -76,7 +73,7 @@ public class NbkPredefinedArmorTest {
     armor = NbkPredefinedArmor.create(globalConstraints);
     Set<EBodyPart> bodyPartSet = EnumSet.allOf(EBodyPart.class);
     for (EBodyPart bodyPart : armor.getBodyParts())
-      assertTrue(bodyPartSet.contains(bodyPart));
+      assertThat(bodyPartSet.contains(bodyPart)).isTrue();
   }
 
   @Test
@@ -84,9 +81,8 @@ public class NbkPredefinedArmorTest {
     for (EItemRarity rarity : EItemRarity.values()) {
       globalConstraints.update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class, rarity);
       armor = NbkPredefinedArmor.create(globalConstraints);
-      assertNotNull("The armor should not be null", armor);
-      assertTrue(armor.getRarity() + " (armor rarity) should be greater than " + rarity,
-              EOperator.GTE.apply(armor.getRarity(), rarity));
+      assertThat(armor).isNotNull();
+      assertThat(EOperator.GTE.apply(armor.getRarity(), rarity)).isTrue();
       globalConstraints.update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class, rarity);
     }
   }

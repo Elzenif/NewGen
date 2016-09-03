@@ -15,10 +15,7 @@ import org.junit.Test;
 import java.util.EnumSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Germain on 23/06/2016.
@@ -36,33 +33,32 @@ public class NbkPredefinedWeaponTest {
   @Test
   public void testWeaponIsNotNull() throws NoAvailableEntityTypeException {
     weapon = NbkPredefinedWeapon.create(globalConstraints);
-    assertNotNull("The weapon should not be null", weapon);
+    assertThat(weapon).isNotNull();
   }
 
   @Test
   public void testPredefinedWeaponNotNull() throws NoAvailableEntityTypeException {
     weapon = NbkPredefinedWeapon.create(globalConstraints);
-    assertNotNull("The predefined weapon should not be null", weapon.getPredefinedWeapon());
+    assertThat(weapon.getPredefinedWeapon()).isNotNull();
   }
 
   @Test
   public void testPredefinedWeaponIsValid() throws NoAvailableEntityTypeException {
     weapon = NbkPredefinedWeapon.create(globalConstraints);
     Set<ENbkPredefinedWeapon> weaponTypes = EnumSet.allOf(ENbkPredefinedWeapon.class);
-    assertTrue("The predefined weapon should be a ENbkPredefinedWeapon enum : " + weapon.getMagic().toString(),
-            weaponTypes.contains(weapon.getPredefinedWeapon()));
+    assertThat(weaponTypes.contains(weapon.getPredefinedWeapon())).isTrue();
   }
 
   @Test
   public void testWeaponToStringIsNotNull() throws NoAvailableEntityTypeException {
     weapon = NbkPredefinedWeapon.create(globalConstraints);
-    assertNotNull("The weapon toString should not be null", weapon.toString());
+    assertThat(weapon.toString()).isNotNull();
   }
 
   @Test
   public void testWeaponToStringIsValid() throws NoAvailableEntityTypeException {
     weapon = NbkPredefinedWeapon.create(globalConstraints);
-    assertFalse("The weapon toString is not valid", weapon.toString().contains("@"));
+    assertThat(weapon.toString().contains("@")).isFalse();
   }
 
   @Test
@@ -70,9 +66,8 @@ public class NbkPredefinedWeaponTest {
     for (EItemRarity rarity : EItemRarity.values()) {
       globalConstraints.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, rarity);
       weapon = NbkPredefinedWeapon.create(globalConstraints);
-      assertNotNull("The weapon should not be null", weapon);
-      assertTrue(weapon.getRarity() + " (weapon rarity) should be greater than " + rarity,
-              EOperator.GTE.apply(weapon.getRarity(), rarity));
+      assertThat(weapon).isNotNull();
+      assertThat(EOperator.GTE.apply(weapon.getRarity(), rarity)).isTrue();
       globalConstraints.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, rarity);
     }
   }
@@ -82,8 +77,8 @@ public class NbkPredefinedWeaponTest {
     for (ENbHands nbHands : ENbHands.values()) {
       globalConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, nbHands);
       weapon = NbkPredefinedWeapon.create(globalConstraints);
-      assertNotNull("The weapon should not be null", weapon);
-      assertEquals(nbHands, weapon.getNbHands());
+      assertThat(weapon).isNotNull();
+      assertThat(weapon.getNbHands()).isEqualTo(nbHands);
       globalConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, nbHands);
     }
   }
@@ -93,8 +88,8 @@ public class NbkPredefinedWeaponTest {
     for (ERange range : ERange.values()) {
       globalConstraints.update(ENbkWeaponType.getConstraints(), ERange.class, range);
       weapon = NbkPredefinedWeapon.create(globalConstraints);
-      assertNotNull("The weapon should not be null", weapon);
-      assertEquals(range, weapon.getRange());
+      assertThat(weapon).isNotNull();
+      assertThat(weapon.getRange()).isEqualTo(range);
       globalConstraints.update(ENbkWeaponType.getConstraints(), ERange.class, range);
     }
   }
@@ -104,8 +99,8 @@ public class NbkPredefinedWeaponTest {
     for (ESize size : ESize.values()) {
       globalConstraints.update(ENbkWeaponType.getConstraints(), ESize.class, size);
       weapon = NbkPredefinedWeapon.create(globalConstraints);
-      assertNotNull("The weapon should not be null", weapon);
-      assertEquals(size, weapon.getSize());
+      assertThat(weapon).isNotNull();
+      assertThat(weapon.getSize()).isEqualTo(size);
       globalConstraints.update(ENbkWeaponType.getConstraints(), ESize.class, size);
     }
   }
