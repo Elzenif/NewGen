@@ -15,9 +15,9 @@ public class Dungeon {
 
   public Dungeon() {
     plan = new SimpleGraph<>(DefaultEdge.class);
-    Room room1 = new Room("room1", true);
+    Room room1 = new Room("room1", true, 12, 10);
     plan.addVertex(room1);
-    Room room2 = new Room("room2", false);
+    Room room2 = new Room("room2", false, 12, 10);
     plan.addVertex(room2);
     plan.addEdge(room1, room2);
 

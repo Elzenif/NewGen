@@ -1,5 +1,7 @@
 package commons.utils;
 
+import commons.utils.exception.ForbiddenValueException;
+
 /**
  * Created by Germain on 28/06/2016.
  */
@@ -11,7 +13,7 @@ public class SPositive {
 
   public SPositive(int value) {
     if (value <= 0) {
-      throw new IllegalArgumentException("The value should be strictly positive");
+      throw new ForbiddenValueException();
     }
     this.value = value;
   }
