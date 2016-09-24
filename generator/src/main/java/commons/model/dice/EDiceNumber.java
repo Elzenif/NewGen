@@ -1,6 +1,5 @@
 package commons.model.dice;
 
-import commons.model.commons.HasName;
 import commons.view.dice.DiceOptionRow;
 import commons.view.dice.DiceResultRow;
 import commons.view.dice.IAvailableDiceRow;
@@ -9,7 +8,7 @@ import org.jetbrains.annotations.Contract;
 /**
  * Created by Germain on 21/05/2016.
  */
-public enum EDiceNumber implements HasName<String>, IAvailableDiceRow {
+public enum EDiceNumber implements IAvailableDiceRow {
 
   D4(4),
   D6(6),

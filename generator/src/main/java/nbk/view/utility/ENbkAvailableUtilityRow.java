@@ -28,9 +28,13 @@ public enum ENbkAvailableUtilityRow implements IAvailableUtilityRow<NbkGame> {
     this.utility = utility;
   }
 
-
   @Override
   public UtilityResultRow getResultRow() {
     return new UtilityResultRow(utility.getName());
+  }
+
+  @Override
+  public String getName() {
+    return utility.getName();
   }
 }
