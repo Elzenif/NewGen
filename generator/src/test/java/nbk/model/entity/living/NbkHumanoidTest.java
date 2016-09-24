@@ -41,6 +41,13 @@ public class NbkHumanoidTest {
   }
 
   @Test
+  public void professionShouldBeValid() throws NoAvailableEntityTypeException {
+    humanoid = NbkHumanoid.create();
+//    EnumSet<ENbkProfession> professions = EnumSet.allOf(ENbkProfession.class);
+//    assertThat(professions).contains(humanoid.getProfession());
+  }
+
+  @Test
   public void nbkLivingShouldHave5BaseStats() throws NoAvailableEntityTypeException {
     humanoid = NbkHumanoid.create();
     assertThat(humanoid.getStats()).hasSize(5);
@@ -93,30 +100,35 @@ public class NbkHumanoidTest {
       stats.setCourage(StatUtils.randomStat() + offset);
       humanoid = NbkHumanoid.create(stats);
       fail();
-    } catch (StatNotInRangeException e) {}
+    } catch (StatNotInRangeException e) {
+    }
     try {
       Stats stats = new Stats();
       stats.setIntelligence(StatUtils.randomStat() + offset);
       humanoid = NbkHumanoid.create(stats);
       fail();
-    } catch (StatNotInRangeException e) {}
+    } catch (StatNotInRangeException e) {
+    }
     try {
       Stats stats = new Stats();
       stats.setCharisma(StatUtils.randomStat() + offset);
       humanoid = NbkHumanoid.create(stats);
       fail();
-    } catch (StatNotInRangeException e) {}
+    } catch (StatNotInRangeException e) {
+    }
     try {
       Stats stats = new Stats();
       stats.setAgility(StatUtils.randomStat() + offset);
       humanoid = NbkHumanoid.create(stats);
       fail();
-    } catch (StatNotInRangeException e) {}
+    } catch (StatNotInRangeException e) {
+    }
     try {
       Stats stats = new Stats();
       stats.setStrength(StatUtils.randomStat() + offset);
       humanoid = NbkHumanoid.create(stats);
       fail();
-    } catch (StatNotInRangeException e) {}
+    } catch (StatNotInRangeException e) {
+    }
   }
 }

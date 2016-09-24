@@ -18,6 +18,8 @@ public class ENbkOriginTest {
               assertThat(o.getName()).isNotNull();
               assertThat(o.getRarity()).isNotNull();
               assertThat(o.getEV()).isNotNull();
+              assertThat(o.getMinStats()).isNotNull();
+              assertThat(o.getMaxStats()).isNotNull();
             }
     );
   }
