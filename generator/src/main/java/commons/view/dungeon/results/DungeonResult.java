@@ -1,16 +1,18 @@
 package commons.view.dungeon.results;
 
 import commons.model.dungeon.Dungeon;
-import commons.utils.ColorUtils;
+import commons.model.dungeon.Room;
 import commons.view.commons.Result;
 
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by Germain on 24/09/2016.
  */
-public class DungeonResult implements Result {
+public class DungeonResult implements Result<Image> {
 
   private final Dungeon dungeon;
 
@@ -19,17 +21,14 @@ public class DungeonResult implements Result {
   }
 
   @Override
-  public String getRawResult() {
-    return dungeon.toString();
-  }
+  public Image getRawResult() {
+    BufferedImage bufferedImage = new BufferedImage(dungeon.getWidth(), dungeon.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+    Graphics2D graphics = bufferedImage.createGraphics();
+    graphics.setColor(Color.RED);
+    for (Room room : dungeon.getRooms()) {
+      graphics.drawRect(room.getX(), room.getY(), room.getWidth(), room.getHeight());
+    }
+    return bufferedImage;
 
-  @Override
-  public int getFontStyle() {
-    return Font.PLAIN;
-  }
-
-  @Override
-  public Color getColor() {
-    return ColorUtils.BLACK;
   }
 }

@@ -5,7 +5,7 @@ package commons.utils.exception;
  */
 public class ForbiddenValueException extends RuntimeException {
 
-  public ForbiddenValueException() {
-    super("The value should be strictly positive");
+  public ForbiddenValueException(String message) {
+    super(message);
   }
 }

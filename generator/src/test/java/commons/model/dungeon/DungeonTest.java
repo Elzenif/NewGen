@@ -40,4 +40,10 @@ public class DungeonTest {
     Set<Room> rooms = dungeon.getRooms();
     assertThat(rooms).areAtLeastOne(new Condition<>(Room::isEntry, "entry"));
   }
+
+  @Test
+  public void dungeonWidthShouldBeStrictlyPositive() {
+    assertThat(dungeon.getWidth()).isGreaterThan(0);
+    assertThat(dungeon.getHeight()).isGreaterThan(0);
+  }
 }

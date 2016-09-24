@@ -36,7 +36,7 @@ public enum EAvailableDungeonRow implements IAvailableRow<DungeonOptionRow, Dung
   @Override
   public DungeonResultRow getResultRow() {
     if (dungeonResultRow == null) {
-      dungeonResultRow = new DungeonResultRow(this);
+      dungeonResultRow = new DungeonResultRow();
     }
     return dungeonResultRow;
   }

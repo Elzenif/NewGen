@@ -7,7 +7,7 @@ import java.awt.Color;
 /**
  * Created by Germain on 28/05/2016.
  */
-public class DiceResult implements AbstractDiceResult {
+public class DiceResult extends AbstractDiceResult {
 
   private final Dice dice;
   private EDiceResultType diceResultType;

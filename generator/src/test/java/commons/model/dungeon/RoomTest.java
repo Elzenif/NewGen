@@ -10,11 +10,33 @@ public class RoomTest {
 
   @Test(expected = ForbiddenValueException.class)
   public void roomWidthShouldBeStrictlyPositive() {
-    Room room = new Room("", false, -1, 10);
+    new Room("", false, 0, 0, -1, 10);
   }
 
   @Test(expected = ForbiddenValueException.class)
   public void roomHeightShouldBeStrictlyPositive() {
-    Room room = new Room("", false, 12, -1);
+    new Room("", false, 0, 0, 12, -1);
+  }
+
+  @Test(expected = ForbiddenValueException.class)
+  public void roomAbscissaShouldBePositive() {
+    new Room("", false, -1, 0, 12, 10);
+  }
+
+  @Test(expected = ForbiddenValueException.class)
+  public void roomOrdinateShouldBePositive() {
+    new Room("", false, 0, -1, 12, 10);
+  }
+
+  @Test(expected = ForbiddenValueException.class)
+  public void roomAbscissaShouldBePositive2() {
+    Room room = new Room("", false, 5, 5, 5, 5);
+    room.reduceXBy(6);
+  }
+
+  @Test(expected = ForbiddenValueException.class)
+  public void roomOrdinateShouldBePositive2() {
+    Room room = new Room("", false, 5, 5, 5, 5);
+    room.reduceYBy(6);
   }
 }

@@ -1,5 +1,6 @@
 package commons.model.dungeon;
 
+import commons.utils.Positive;
 import commons.utils.SPositive;
 
 /**
@@ -9,26 +10,49 @@ public class Room {
 
   private final String name;
   private final boolean entry;
-  private final SPositive width;
-  private final SPositive height;
+  private final int width;
+  private final int height;
+  private int x;
+  private int y;
 
-  public Room(String name, boolean entry, int width, int height) {
+  public Room(String name, boolean entry, int x, int y, int width, int height) {
     this.name = name;
     this.entry = entry;
-    this.width = new SPositive(width);
-    this.height = new SPositive(height);
+    this.x = new Positive(x).getValue();
+    this.y = new Positive(y).getValue();
+    this.width = new SPositive(width).getValue();
+    this.height = new SPositive(height).getValue();
+  }
+
+  public String getName() {
+    return name;
   }
 
   public boolean isEntry() {
     return entry;
   }
 
-  @Override
-  public String toString() {
-    return "Room{" +
-            "name='" + name + '\'' +
-            ", entry=" + entry +
-            '}';
+  public int getX() {
+    return x;
   }
 
+  public int getY() {
+    return y;
+  }
+
+  public int getWidth() {
+    return width;
+  }
+
+  public int getHeight() {
+    return height;
+  }
+
+  public void reduceXBy(int diff) {
+    x = new Positive(x - diff).getValue();
+  }
+
+  public void reduceYBy(int diff) {
+    y = new Positive(y - diff).getValue();
+  }
 }

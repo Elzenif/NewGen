@@ -9,7 +9,7 @@ import java.awt.Font;
 /**
  * Created by Germain on 25/06/2016.
  */
-public class AdditionalDiceResult implements AbstractDiceResult {
+public class AdditionalDiceResult extends AbstractDiceResult {
 
   private final String result;
 

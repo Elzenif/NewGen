@@ -7,7 +7,6 @@ import commons.view.dungeon.results.DungeonResult;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collections;
 
 /**
  * Created by Germain on 24/09/2016.
@@ -27,6 +26,6 @@ public class GenerateDungeonActionListener implements ActionListener {
     dungeonResultRow.clearResults();
     Dungeon dungeon = new Dungeon();
     DungeonResult dungeonResult = new DungeonResult(dungeon);
-    dungeonResultRow.setResultsToPrint(Collections.singletonList(dungeonResult));
+    dungeonResultRow.printGraph(dungeonResult);
   }
 }
