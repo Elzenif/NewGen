@@ -24,6 +24,10 @@ public class MathUtils {
     return list.get(random(0, list.size() - 1));
   }
 
+  public static int nextPositiveGaussian(int deviation, int mean) {
+    return Math.abs((int) seed.nextGaussian() * deviation + mean);
+  }
+
   public static <E extends HasName<String>> int maxLength(Collection<E> namedEnumValues) {
     Optional<Integer> max = namedEnumValues.stream().map(e -> e.getName().length()).reduce(Integer::max);
     if (max.isPresent())
@@ -53,5 +57,22 @@ public class MathUtils {
       }
     }
     throw new IllegalArgumentException("ref " + ref + " is greater than the sum of map values");
+  }
+
+  public static int roundM(int n, int m) {
+    return (int) (Math.floor((n + m - 1) / m) * m);
+  }
+
+  public static Pair<Integer, Integer> getRandomPointInCircle(int radius, int tileSize) {
+    double t = 2 * Math.PI * Math.random();
+    double u = Math.random() + Math.random();
+    double r = (u > 1) ? 2 - u : u;
+    return new Pair<>(
+            roundM((int) (radius * r * Math.cos(t)), tileSize),
+            roundM((int) (radius * r * Math.sin(t)), tileSize));
+  }
+
+  public static int mean(int x, int y) {
+    return (int) Math.sqrt(x * x + y * y);
   }
 }

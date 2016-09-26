@@ -51,4 +51,13 @@ public class MathUtilsTest {
     map.put("d", 4);
     findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(11, map);
   }
+
+  @Test
+  public void testRoundM() {
+    assertThat(MathUtils.roundM(0, 5)).isEqualTo(0);
+    assertThat(MathUtils.roundM(1, 5)).isEqualTo(5);
+    assertThat(MathUtils.roundM(2, 5)).isEqualTo(5);
+    assertThat(MathUtils.roundM(3, 5)).isEqualTo(5);
+    assertThat(MathUtils.roundM(4, 5)).isEqualTo(5);
+  }
 }

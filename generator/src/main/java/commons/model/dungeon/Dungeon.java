@@ -1,9 +1,13 @@
 package commons.model.dungeon;
 
+import commons.utils.MathUtils;
+import commons.utils.Pair;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -11,19 +15,75 @@ import java.util.Set;
  */
 public class Dungeon {
 
+  private static final int TILE_SIZE = 5;
+  private static final double RATIO = 1.25;
+
+  private static final int DEVIATION = 30;
+  private static final int MEAN = 50;
+  private static final int RADIUS = 100;
+
   private final UndirectedGraph<Room, DefaultEdge> plan;
   private int width;
   private int height;
 
-  public Dungeon() {
+  public Dungeon(int nbRoomsDesired, int maxAttempts) {
     plan = new SimpleGraph<>(DefaultEdge.class);
-    Room room1 = new Room("room1", true, 5, 10, 12, 10);
-    plan.addVertex(room1);
-    Room room2 = new Room("room2", false, 40, 30, 8, 20);
-    plan.addVertex(room2);
-    plan.addEdge(room1, room2);
+
+    Queue<Room> tmpRooms = createRooms(nbRoomsDesired, maxAttempts);
+    Queue<Room> separatedRooms = separateRooms(tmpRooms);
+    separatedRooms.forEach(plan::addVertex);
 
     computeWidthAndHeightAndThenAdjustPlacement();
+  }
+
+  private Queue<Room> separateRooms(Queue<Room> rooms) {
+    Queue<Room> separatedRooms = null;
+    boolean overlapping = true;
+    while (overlapping) {
+      overlapping = false;
+      Queue<Room> tmpRooms = new PriorityQueue<>(rooms);
+      separatedRooms = new PriorityQueue<>(tmpRooms.size());
+      while (!tmpRooms.isEmpty()) {
+        Room mostCenteredRoom = tmpRooms.poll();
+        separatedRooms.add(mostCenteredRoom);
+        Queue<Room> toBeSeparatedRooms = new PriorityQueue<>();
+        for (Room tmpRoom : tmpRooms) {
+          if (mostCenteredRoom.doesOverlap(tmpRoom)) {
+            overlapping = true;
+            tmpRoom.moveFrom(mostCenteredRoom);
+          }
+          toBeSeparatedRooms.add(tmpRoom);
+        }
+        tmpRooms.clear();
+        tmpRooms.addAll(toBeSeparatedRooms);
+      }
+    }
+    return separatedRooms;
+  }
+
+  private Queue<Room> createRooms(int nbRoomsDesired, int maxAttempts) {
+    Queue<Room> rooms = new PriorityQueue<>();
+
+    int nbRoomsAccepted = 0;
+    int nbAttempts = 0;
+    while (nbRoomsAccepted < nbRoomsDesired && nbAttempts < maxAttempts) {
+      for (int i = 0; i < nbRoomsDesired; i++) {
+        Pair<Integer, Integer> pointInCircle = MathUtils.getRandomPointInCircle(RADIUS, TILE_SIZE);
+        int width = MathUtils.nextPositiveGaussian(DEVIATION, MEAN);
+        if (width <= TILE_SIZE)
+          continue;
+        int height = MathUtils.nextPositiveGaussian(DEVIATION, MEAN);
+        if (height <= TILE_SIZE)
+          continue;
+        Room room = new Room(pointInCircle.getLeft(), pointInCircle.getRight(), width, height);
+        if (width >= RATIO * MEAN && height >= RATIO * MEAN) {
+          nbRoomsAccepted++;
+        }
+        rooms.add(room);
+      }
+      nbAttempts++;
+    }
+    return rooms;
   }
 
   private void computeWidthAndHeightAndThenAdjustPlacement() {
@@ -31,11 +91,11 @@ public class Dungeon {
     for (Room room : getRooms()) {
       minX = Math.min(minX, room.getX());
       minY = Math.min(minY, room.getY());
-      maxX = Math.max(maxX, room.getX() + room.getWidth());
-      maxY = Math.max(maxY, room.getY() + room.getHeight());
+      maxX = Math.max(maxX, room.getXPlusWidth());
+      maxY = Math.max(maxY, room.getYPlusHeight());
     }
-    width = maxX - minX + 2;
-    height = maxY - minY + 2;
+    width = maxX - minX + 3;
+    height = maxY - minY + 3;
 
     // we want to translate all the rooms so that there is a one pixel margin on each side
     int diffX = minX - 1;
