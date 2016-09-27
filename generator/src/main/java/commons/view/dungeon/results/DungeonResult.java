@@ -22,7 +22,7 @@ public class DungeonResult implements Result<Image> {
   }
 
   @Override
-  public Image getRawResult() {
+  public BufferedImage getRawResult() {
     BufferedImage bufferedImage = new BufferedImage(dungeon.getWidth(), dungeon.getHeight(), BufferedImage.TYPE_INT_ARGB);
     Graphics2D graphics = bufferedImage.createGraphics();
     graphics.setComposite(AlphaComposite.Clear);

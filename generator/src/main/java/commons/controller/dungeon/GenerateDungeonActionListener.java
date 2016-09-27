@@ -15,17 +15,24 @@ public class GenerateDungeonActionListener implements ActionListener {
 
   private final DungeonOptionRow dungeonOptionRow;
   private final DungeonResultRow dungeonResultRow;
+  private DungeonResult dungeonResult;
 
   public GenerateDungeonActionListener(DungeonOptionRow dungeonOptionRow, DungeonResultRow dungeonResultRow) {
     this.dungeonOptionRow = dungeonOptionRow;
     this.dungeonResultRow = dungeonResultRow;
+    this.dungeonResult = null;
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
     dungeonResultRow.clearResults();
     Dungeon dungeon = new Dungeon(10, 2);
-    DungeonResult dungeonResult = new DungeonResult(dungeon);
+    dungeonResult = new DungeonResult(dungeon);
     dungeonResultRow.printGraph(dungeonResult);
+    dungeonOptionRow.setEnabledSaveButton(true);
+  }
+
+  public DungeonResult getDungeonResult() {
+    return dungeonResult;
   }
 }
