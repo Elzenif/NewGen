@@ -1,28 +1,33 @@
 package commons.controller.dungeon;
 
+import commons.controller.entity.items.ConstraintsItemListener;
 import commons.view.dungeon.DungeonOptionRow;
 import commons.view.dungeon.DungeonResultRow;
-
-import java.awt.event.ActionListener;
 
 /**
  * Created by Germain on 26/09/2016.
  */
 public class DungeonController {
 
+  private ConstraintsItemListener constraintsItemListener;
   private GenerateDungeonActionListener generateDungeonActionListener;
-  private ActionListener saveDungeonActionListener;
+  private SaveDungeonActionListener saveDungeonActionListener;
 
   public DungeonController(DungeonOptionRow dungeonOptionRow, DungeonResultRow dungeonResultRow) {
+    constraintsItemListener = new ConstraintsItemListener(dungeonOptionRow);
     generateDungeonActionListener = new GenerateDungeonActionListener(dungeonOptionRow, dungeonResultRow);
     saveDungeonActionListener = new SaveDungeonActionListener(this, dungeonOptionRow);
+  }
+
+  public ConstraintsItemListener getConstraintsItemListener() {
+    return constraintsItemListener;
   }
 
   public GenerateDungeonActionListener getGenerateDungeonActionListener() {
     return generateDungeonActionListener;
   }
 
-  public ActionListener getSaveDungeonActionListener() {
+  public SaveDungeonActionListener getSaveDungeonActionListener() {
     return saveDungeonActionListener;
   }
 }

@@ -19,20 +19,26 @@ import java.util.stream.Collectors;
  */
 public class Dungeon {
 
-  private static final int TILE_SIZE = 5;
-  private static final double RATIO = 1.2;
-
-  private static final int DEVIATION = 30;
-  private static final int MEAN = 50;
-  private static final int RADIUS = 100;
-
   private final UndirectedGraph<Room, DefaultEdge> plan;
+
+  private final int nbRoomsDesired;
+  private final int tileSize;
+  private final int deviation;
+  private final int mean;
+  private final int radius;
+  private final int factor;
   private int width;
   private int height;
-  private int factor = 4;
 
-  public Dungeon(int nbRoomsDesired) {
+  private Dungeon(DungeonBuilder builder) {
     plan = new SimpleGraph<>(DefaultEdge.class);
+
+    nbRoomsDesired = builder.nbRoomsDesired;
+    tileSize = builder.tileSize;
+    deviation = builder.deviation;
+    mean = builder.mean;
+    radius = builder.radius;
+    factor = builder.factor;
 
     Queue<Room> overlappingRooms = createRooms(nbRoomsDesired);
     Queue<Room> separatedRooms = separateRooms(overlappingRooms);
@@ -107,9 +113,9 @@ public class Dungeon {
     Queue<Room> overlappingRooms = new PriorityQueue<>();
 
     for (int i = 0; i < nbRoomsDesired * factor; i++) {
-      Pair<Integer, Integer> pointInCircle = MathUtils.getRandomPointInCircle(RADIUS, TILE_SIZE);
-      int width = MathUtils.nextPositiveGaussian(DEVIATION, MEAN);
-      int height = MathUtils.nextPositiveGaussian(DEVIATION, MEAN);
+      Pair<Integer, Integer> pointInCircle = MathUtils.getRandomPointInCircle(radius, tileSize);
+      int width = MathUtils.nextPositiveGaussian(deviation, mean);
+      int height = MathUtils.nextPositiveGaussian(deviation, mean);
       Room room = new Room(pointInCircle.getLeft(), pointInCircle.getRight(), width, height);
       overlappingRooms.add(room);
     }
@@ -155,5 +161,49 @@ public class Dungeon {
 
   public int getHeight() {
     return height;
+  }
+
+  public static class DungeonBuilder {
+
+    private int nbRoomsDesired = 5;
+    private int tileSize = 5;
+    private int deviation = 30;
+    private int mean = 50;
+    private int radius = 100;
+    private int factor = 4;
+
+    public Dungeon build() {
+      return new Dungeon(this);
+    }
+
+    public DungeonBuilder setNbRoomsDesired(int nbRoomsDesired) {
+      this.nbRoomsDesired = nbRoomsDesired;
+      return this;
+    }
+
+    public DungeonBuilder setTileSize(int tileSize) {
+      this.tileSize = tileSize;
+      return this;
+    }
+
+    public DungeonBuilder setDeviation(int deviation) {
+      this.deviation = deviation;
+      return this;
+    }
+
+    public DungeonBuilder setMean(int mean) {
+      this.mean = mean;
+      return this;
+    }
+
+    public DungeonBuilder setRadius(int radius) {
+      this.radius = radius;
+      return this;
+    }
+
+    public DungeonBuilder setFactor(int factor) {
+      this.factor = factor;
+      return this;
+    }
   }
 }

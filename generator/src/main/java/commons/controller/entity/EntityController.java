@@ -10,6 +10,7 @@ import commons.view.entity.EntityOptionRow;
 
 /**
  * Created by Germain on 23/07/2016.
+ * TODO refactor with DungeonController (constraintsItemListener)
  */
 public abstract class EntityController<T extends Game> {
 

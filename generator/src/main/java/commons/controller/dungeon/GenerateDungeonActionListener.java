@@ -1,6 +1,6 @@
 package commons.controller.dungeon;
 
-import commons.model.dungeon.Dungeon;
+import commons.model.dungeon.Dungeon.DungeonBuilder;
 import commons.view.dungeon.DungeonOptionRow;
 import commons.view.dungeon.DungeonResultRow;
 import commons.view.dungeon.results.DungeonResult;
@@ -26,8 +26,11 @@ public class GenerateDungeonActionListener implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     dungeonResultRow.clearResults();
-    Dungeon dungeon = new Dungeon(10);
-    dungeonResult = new DungeonResult(dungeon);
+    DungeonBuilder dungeon = new DungeonBuilder();
+    if (dungeonOptionRow.isConstraintsCheckBoxSelected()) {
+      dungeon.setNbRoomsDesired(dungeonOptionRow.getNbRoomsDesired());
+    }
+    dungeonResult = new DungeonResult(dungeon.build());
     dungeonResultRow.printGraph(dungeonResult);
     dungeonOptionRow.setEnabledSaveButton(true);
   }
