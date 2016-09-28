@@ -3,6 +3,7 @@ package commons.view.dungeon.results;
 import commons.model.dungeon.Dungeon;
 import commons.model.dungeon.Room;
 import commons.view.commons.Result;
+import org.jgrapht.graph.DefaultEdge;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -39,12 +40,21 @@ public class DungeonResult implements Result<Image> {
       graphics.drawLine(0, j, dungeon.getWidth(), j);
     }
 
-    // create rooms
+    // print rooms
     graphics.setComposite(AlphaComposite.Src);
     graphics.setColor(Color.RED);
     for (Room room : dungeon.getRooms()) {
       graphics.drawRect(room.getX(), room.getY(), room.getWidth(), room.getHeight());
     }
+
+    // print edges
+    graphics.setColor(Color.BLUE);
+    for (DefaultEdge edge : dungeon.getEdges()) {
+      Room source = dungeon.getPlan().getEdgeSource(edge);
+      Room target = dungeon.getPlan().getEdgeTarget(edge);
+      graphics.drawLine(source.getCenterX(), source.getCenterY(), target.getCenterX(), target.getCenterY());
+    }
+
     return bufferedImage;
 
   }

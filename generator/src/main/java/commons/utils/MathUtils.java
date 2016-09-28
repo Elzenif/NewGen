@@ -72,7 +72,7 @@ public class MathUtils {
             roundM((int) (radius * r * Math.sin(t)), tileSize));
   }
 
-  public static int mean(int x, int y) {
-    return (int) Math.sqrt(x * x + y * y);
+  public static double mean(int x, int y) {
+    return Math.sqrt(x * x + y * y);
   }
 }

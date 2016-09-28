@@ -26,7 +26,7 @@ public class GenerateDungeonActionListener implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     dungeonResultRow.clearResults();
-    Dungeon dungeon = new Dungeon(10, 2);
+    Dungeon dungeon = new Dungeon(10);
     dungeonResult = new DungeonResult(dungeon);
     dungeonResultRow.printGraph(dungeonResult);
     dungeonOptionRow.setEnabledSaveButton(true);

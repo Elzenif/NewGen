@@ -108,14 +108,30 @@ public class Room implements Comparable<Room> {
   }
 
   @Override
+  public String toString() {
+    return "Room{" +
+        "name='" + name + '\'' +
+        ", entry=" + entry +
+        ", x=" + x +
+        ", y=" + y +
+        ", width=" + width +
+        ", height=" + height +
+        '}';
+  }
+
+  @Override
   public int compareTo(@NotNull Room o) {
     if (this.equals(o))
       return 0;
-    int thisCenter = MathUtils.mean(this.getCenterX(), this.getCenterY());
-    int oCenter = MathUtils.mean(o.getCenterX(), o.getCenterY());
+    double thisCenter = MathUtils.mean(this.getCenterX(), this.getCenterY());
+    double oCenter = MathUtils.mean(o.getCenterX(), o.getCenterY());
     if (thisCenter > oCenter)
       return 1;
     return -1;
+  }
+
+  public double distanceFrom(Room other) {
+    return MathUtils.mean(other.getCenterX() - this.getCenterX(), other.getCenterY() - this.getCenterY());
   }
 
   public void moveFrom(Room immobileRoom) {

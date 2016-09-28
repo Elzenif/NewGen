@@ -20,19 +20,19 @@ public class DungeonTest {
 
   @Before
   public void setUp() throws Exception {
-    dungeon = new Dungeon(10, 2);
   }
 
   @Test
   public void dungeonShouldHaveAtLeastTwoRooms() {
+    dungeon = new Dungeon(10);
     Set<Room> rooms = dungeon.getRooms();
     assertThat(rooms).isNotNull();
-    assertThat(rooms.size()).isGreaterThanOrEqualTo(2);
+    assertThat(rooms.size()).isGreaterThanOrEqualTo(2).isEqualTo(10);
   }
 
-  @Ignore
   @Test
   public void dungeonRoomsShouldBeConnected() {
+    dungeon = new Dungeon(10);
     ConnectivityInspector<Room, DefaultEdge> connectivityInspector = new ConnectivityInspector<>(dungeon.getPlan());
     assertThat(connectivityInspector.isGraphConnected()).isTrue();
   }
@@ -40,13 +40,26 @@ public class DungeonTest {
   @Ignore
   @Test
   public void dungeonShouldHaveAtLeastOneEntry() {
+    dungeon = new Dungeon(10);
     Set<Room> rooms = dungeon.getRooms();
     assertThat(rooms).areAtLeastOne(new Condition<>(Room::isEntry, "entry"));
   }
 
   @Test
   public void dungeonWidthShouldBeStrictlyPositive() {
-    assertThat(dungeon.getWidth()).isGreaterThan(0);
+    dungeon = new Dungeon(10);
     assertThat(dungeon.getHeight()).isGreaterThan(0);
+  }
+
+  @Test
+  public void dungeonHeightShouldBeStrictlyPositive() {
+    dungeon = new Dungeon(10);
+    assertThat(dungeon.getHeight()).isGreaterThan(0);
+  }
+
+  @Test
+  public void dungeonRoomsCoordinatesShouldBeStrictlyPositive() {
+    dungeon = new Dungeon(10);
+    assertThat(dungeon.getRooms()).allMatch(room -> room.getX() > 0 && room.getY() > 0);
   }
 }
