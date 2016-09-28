@@ -28,6 +28,10 @@ public class MathUtils {
     return Math.abs((int) seed.nextGaussian() * deviation + mean);
   }
 
+  public static boolean nextBoolean() {
+    return seed.nextBoolean();
+  }
+
   public static <E extends HasName<String>> int maxLength(Collection<E> namedEnumValues) {
     Optional<Integer> max = namedEnumValues.stream().map(e -> e.getName().length()).reduce(Integer::max);
     if (max.isPresent())

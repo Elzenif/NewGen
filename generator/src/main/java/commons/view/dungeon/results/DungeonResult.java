@@ -3,12 +3,12 @@ package commons.view.dungeon.results;
 import commons.model.dungeon.Dungeon;
 import commons.model.dungeon.Room;
 import commons.view.commons.Result;
-import org.jgrapht.graph.DefaultEdge;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Shape;
 import java.awt.image.BufferedImage;
 
 /**
@@ -40,20 +40,30 @@ public class DungeonResult implements Result<Image> {
       graphics.drawLine(0, j, dungeon.getWidth(), j);
     }
 
-    // print rooms
     graphics.setComposite(AlphaComposite.Src);
-    graphics.setColor(Color.RED);
+    // print corridors
+//    dungeon.getCorridors().forEach(graphics::draw);
+    for (Shape shape : dungeon.getCorridors()) {
+      graphics.setColor(Color.WHITE);
+      graphics.fill(shape);
+      graphics.setColor(Color.BLACK);
+      graphics.draw(shape);
+
+    }
+    // print rooms
     for (Room room : dungeon.getRooms()) {
+      graphics.setColor(Color.WHITE);
+      graphics.fillRect(room.getX(), room.getY(), room.getWidth(), room.getHeight());
+      graphics.setColor(Color.BLACK);
       graphics.drawRect(room.getX(), room.getY(), room.getWidth(), room.getHeight());
     }
 
     // print edges
-    graphics.setColor(Color.BLUE);
-    for (DefaultEdge edge : dungeon.getEdges()) {
-      Room source = dungeon.getPlan().getEdgeSource(edge);
-      Room target = dungeon.getPlan().getEdgeTarget(edge);
-      graphics.drawLine(source.getCenterX(), source.getCenterY(), target.getCenterX(), target.getCenterY());
-    }
+//    for (DefaultEdge edge : dungeon.getEdges()) {
+//      Room source = dungeon.getPlan().getEdgeSource(edge);
+//      Room target = dungeon.getPlan().getEdgeTarget(edge);
+//      graphics.drawLine(source.getCenterX(), source.getCenterY(), target.getCenterX(), target.getCenterY());
+//    }
 
     return bufferedImage;
 

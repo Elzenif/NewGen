@@ -6,7 +6,10 @@ import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
+import java.awt.Polygon;
+import java.awt.Shape;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 public class Dungeon {
 
   private final UndirectedGraph<Room, DefaultEdge> plan;
+  private final Set<Shape> corridors;
 
   private final int nbRoomsDesired;
   private final int tileSize;
@@ -27,11 +31,13 @@ public class Dungeon {
   private final int mean;
   private final int radius;
   private final int factor;
+  private final int corridorWidth;
   private int width;
   private int height;
 
   private Dungeon(DungeonBuilder builder) {
     plan = new SimpleGraph<>(DefaultEdge.class);
+    corridors = new HashSet<>();
 
     nbRoomsDesired = builder.nbRoomsDesired;
     tileSize = builder.tileSize;
@@ -39,6 +45,7 @@ public class Dungeon {
     mean = builder.mean;
     radius = builder.radius;
     factor = builder.factor;
+    corridorWidth = builder.corridorWidth;
 
     Queue<Room> overlappingRooms = createRooms(nbRoomsDesired);
     Queue<Room> separatedRooms = separateRooms(overlappingRooms);
@@ -46,10 +53,73 @@ public class Dungeon {
     Set<Room> mainRooms = extractBiggerRooms(separatedRooms, nbRoomsDesired);
 
     mainRooms.forEach(plan::addVertex);
-    bindRooms();
+    bindRoomsWithRelativeNeighborhoodGraph();
+    buildCorridors();
   }
 
-  private void bindRooms() {
+  private void buildCorridors() {
+    for (DefaultEdge edge : getEdges()) {
+      Room source = plan.getEdgeSource(edge);
+      Room target = plan.getEdgeTarget(edge);
+      Room a, b;
+      // a must be to the left of b
+      if (source.getCenterX() < target.getCenterX()) {
+        a = source;
+        b = target;
+      } else {
+        a = target;
+        b = source;
+      }
+      // the starting points
+      int x = a.getCenterX();
+      int y = a.getCenterY();
+      // the deltas to get from a to b
+      int dx = b.getCenterX() - x;
+      int dy = b.getCenterY() - y;
+      int[] xPoints = new int[6];
+      int[] yPoints = new int[6];
+      if (MathUtils.nextBoolean()) {
+        xPoints[0] = MathUtils.roundM(x, tileSize);
+        xPoints[1] = MathUtils.roundM(x + dx + corridorWidth * tileSize / 2, tileSize);
+        xPoints[2] = xPoints[1];
+        xPoints[3] = MathUtils.roundM(x + dx - corridorWidth * tileSize / 2, tileSize);
+        xPoints[4] = xPoints[3];
+        xPoints[5] = xPoints[0];
+        if (dy > 0) {
+          yPoints[0] = MathUtils.roundM(y - corridorWidth * tileSize / 2, tileSize);
+          yPoints[4] = MathUtils.roundM(y + corridorWidth * tileSize / 2, tileSize);
+        } else {
+          yPoints[0] = MathUtils.roundM(y + corridorWidth * tileSize / 2, tileSize);
+          yPoints[4] = MathUtils.roundM(y - corridorWidth * tileSize / 2, tileSize);
+        }
+        yPoints[1] = yPoints[0];
+        yPoints[2] = MathUtils.roundM(y + dy, tileSize);
+        yPoints[3] = yPoints[2];
+        yPoints[5] = yPoints[4];
+      } else {
+        xPoints[0] = MathUtils.roundM(x - corridorWidth * tileSize / 2, tileSize);
+        xPoints[1] = xPoints[0];
+        xPoints[2] = MathUtils.roundM(x + dx, tileSize);
+        xPoints[3] = xPoints[2];
+        xPoints[4] = MathUtils.roundM(x + corridorWidth * tileSize / 2, tileSize);
+        xPoints[5] = xPoints[4];
+        if (dy > 0) {
+          yPoints[1] = MathUtils.roundM(y + dy + corridorWidth * tileSize / 2, tileSize);
+          yPoints[3] = MathUtils.roundM(y + dy - corridorWidth * tileSize / 2, tileSize);
+        } else {
+          yPoints[1] = MathUtils.roundM(y + dy - corridorWidth * tileSize / 2, tileSize);
+          yPoints[3] = MathUtils.roundM(y + dy + corridorWidth * tileSize / 2, tileSize);
+        }
+        yPoints[0] = MathUtils.roundM(y, tileSize);
+        yPoints[2] = yPoints[1];
+        yPoints[4] = yPoints[3];
+        yPoints[5] = yPoints[0];
+      }
+      corridors.add(new Polygon(xPoints, yPoints, 6));
+    }
+  }
+
+  private void bindRoomsWithRelativeNeighborhoodGraph() {
     List<Room> mainRooms = new ArrayList<>(plan.vertexSet());
     boolean skip;
     for (int i = 0; i < mainRooms.size(); i++) {
@@ -147,6 +217,10 @@ public class Dungeon {
     return plan.vertexSet();
   }
 
+  public Set<Shape> getCorridors() {
+    return corridors;
+  }
+
   public Set<DefaultEdge> getEdges() {
     return plan.edgeSet();
   }
@@ -171,6 +245,7 @@ public class Dungeon {
     private int mean = 50;
     private int radius = 100;
     private int factor = 4;
+    private int corridorWidth = 1;
 
     public Dungeon build() {
       return new Dungeon(this);
@@ -203,6 +278,11 @@ public class Dungeon {
 
     public DungeonBuilder setFactor(int factor) {
       this.factor = factor;
+      return this;
+    }
+
+    public DungeonBuilder setCorridorWidth(int corridorWidth) {
+      this.corridorWidth = corridorWidth;
       return this;
     }
   }

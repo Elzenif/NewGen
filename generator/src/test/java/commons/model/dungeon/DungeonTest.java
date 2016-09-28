@@ -72,4 +72,10 @@ public class DungeonTest {
     dungeon = dungeonBuilder.build();
     assertThat(dungeon.getRooms()).allMatch(room -> room.getX() > 0 && room.getY() > 0);
   }
+
+  @Test
+  public void dungeonShouldHaveAsMuchCorridorsAsGraphEdges() {
+    dungeon = dungeonBuilder.build();
+    assertThat(dungeon.getCorridors()).hasSameSizeAs(dungeon.getEdges());
+  }
 }
