@@ -2,6 +2,7 @@ package commons.controller.entity;
 
 import commons.controller.entity.items.ConstraintsItemListener;
 import commons.controller.entity.items.RarityChangeListener;
+import commons.controller.intf.ConstraintOptionRowController;
 import commons.model.commons.Game;
 import commons.model.entity.characteristics.primary.enums.EItemRarity;
 import commons.model.entity.constraints.GenericConstraint;
@@ -10,9 +11,8 @@ import commons.view.entity.EntityOptionRow;
 
 /**
  * Created by Germain on 23/07/2016.
- * TODO refactor with DungeonController (constraintsItemListener)
  */
-public abstract class EntityController<T extends Game> {
+public abstract class EntityController<T extends Game> implements ConstraintOptionRowController {
 
   protected final GlobalConstraints globalConstraints;
   private final ConstraintsItemListener constraintsItemListener;
@@ -29,6 +29,7 @@ public abstract class EntityController<T extends Game> {
     return globalConstraints;
   }
 
+  @Override
   public ConstraintsItemListener getConstraintsItemListener() {
     return constraintsItemListener;
   }

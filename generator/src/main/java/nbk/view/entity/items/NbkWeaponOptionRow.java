@@ -44,6 +44,6 @@ public class NbkWeaponOptionRow extends NbkItemOptionRow {
   public void setControllers(EntityResultRow entityResultRow) {
     super.setControllers(new NbkWeaponController(this, entityResultRow));
     nbHandsButtons.forEach((nbHands, jCheckBox) ->
-            jCheckBox.addActionListener(((NbkWeaponController) entityController).getNbHandsActionListener(nbHands)));
+        jCheckBox.addActionListener(((NbkWeaponController) controller).getNbHandsActionListener(nbHands)));
   }
 }

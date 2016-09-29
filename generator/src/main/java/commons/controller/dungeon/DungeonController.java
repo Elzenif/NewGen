@@ -1,13 +1,14 @@
 package commons.controller.dungeon;
 
 import commons.controller.entity.items.ConstraintsItemListener;
+import commons.controller.intf.ConstraintOptionRowController;
 import commons.view.dungeon.DungeonOptionRow;
 import commons.view.dungeon.DungeonResultRow;
 
 /**
  * Created by Germain on 26/09/2016.
  */
-public class DungeonController {
+public class DungeonController implements ConstraintOptionRowController {
 
   private ConstraintsItemListener constraintsItemListener;
   private GenerateDungeonActionListener generateDungeonActionListener;
@@ -19,6 +20,7 @@ public class DungeonController {
     saveDungeonActionListener = new SaveDungeonActionListener(this, dungeonOptionRow);
   }
 
+  @Override
   public ConstraintsItemListener getConstraintsItemListener() {
     return constraintsItemListener;
   }

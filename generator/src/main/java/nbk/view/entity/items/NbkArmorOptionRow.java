@@ -45,6 +45,6 @@ public class NbkArmorOptionRow extends NbkItemOptionRow {
   public void setControllers(EntityResultRow entityResultRow) {
     super.setControllers(new NbkArmorController(this, entityResultRow));
     bodyPartCheckBoxes.forEach((bodyPart, jCheckBox) ->
-            jCheckBox.addActionListener(((NbkArmorController) entityController).getBodyPartActionListener(bodyPart)));
+        jCheckBox.addActionListener(((NbkArmorController) controller).getBodyPartActionListener(bodyPart)));
   }
 }
