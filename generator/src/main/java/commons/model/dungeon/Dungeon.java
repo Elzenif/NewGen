@@ -6,8 +6,7 @@ import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
-import java.awt.Polygon;
-import java.awt.Shape;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,8 +22,7 @@ import java.util.stream.Collectors;
 public class Dungeon {
 
   private final UndirectedGraph<Room, DefaultEdge> plan;
-  private final Set<Shape> corridors;
-
+  private final Set<Rectangle> corridors;
   private final int nbRoomsDesired;
   private final int tileSize;
   private final int deviation;
@@ -32,6 +30,7 @@ public class Dungeon {
   private final int radius;
   private final int factor;
   private final int corridorWidth;
+  private Grid grid;
   private int width;
   private int height;
 
@@ -51,10 +50,29 @@ public class Dungeon {
     Queue<Room> separatedRooms = separateRooms(overlappingRooms);
     computeWidthAndHeightAndThenAdjustPlacement(separatedRooms);
     Set<Room> mainRooms = extractBiggerRooms(separatedRooms, nbRoomsDesired);
-
     mainRooms.forEach(plan::addVertex);
     bindRoomsWithRelativeNeighborhoodGraph();
     buildCorridors();
+    buildGrid();
+  }
+
+  private void buildGrid() {
+    grid = new Grid(width, height, tileSize);
+    for (Room room : getRooms()) {
+      linkToCells(room.getX(), room.getY(), room.getWidth(), room.getHeight());
+    }
+    for (Rectangle rectangle : getCorridors()) {
+      linkToCells((int) rectangle.getX(), (int) rectangle.getY(), (int) rectangle.getWidth(),
+          (int) rectangle.getHeight());
+    }
+  }
+
+  private void linkToCells(int x, int y, int width, int height) {
+    for (int i = x; i < x + width; i += tileSize) {
+      for (int j = y; j < y + height; j++) {
+        grid.getCell(i, j).setDungeonPart(EDungeonPart.SPACE);
+      }
+    }
   }
 
   private void buildCorridors() {
@@ -76,46 +94,31 @@ public class Dungeon {
       // the deltas to get from a to b
       int dx = b.getCenterX() - x;
       int dy = b.getCenterY() - y;
-      int[] xPoints = new int[6];
-      int[] yPoints = new int[6];
+      Rectangle horizontalRectangle = new Rectangle();
+      Rectangle verticalRectangle = new Rectangle();
       if (MathUtils.nextBoolean()) {
-        xPoints[0] = MathUtils.roundM(x, tileSize);
-        xPoints[1] = MathUtils.roundM(x + dx + corridorWidth * tileSize / 2, tileSize);
-        xPoints[2] = xPoints[1];
-        xPoints[3] = MathUtils.roundM(x + dx - corridorWidth * tileSize / 2, tileSize);
-        xPoints[4] = xPoints[3];
-        xPoints[5] = xPoints[0];
+        horizontalRectangle.setBounds(MathUtils.roundM(x, tileSize),
+            MathUtils.roundM(y - corridorWidth * tileSize / 2, tileSize), dx, corridorWidth * tileSize);
         if (dy > 0) {
-          yPoints[0] = MathUtils.roundM(y - corridorWidth * tileSize / 2, tileSize);
-          yPoints[4] = MathUtils.roundM(y + corridorWidth * tileSize / 2, tileSize);
+          verticalRectangle.setBounds(MathUtils.roundM(x + dx - corridorWidth * tileSize / 2, tileSize),
+              MathUtils.roundM(y - corridorWidth * tileSize / 2, tileSize), corridorWidth * tileSize, dy);
         } else {
-          yPoints[0] = MathUtils.roundM(y + corridorWidth * tileSize / 2, tileSize);
-          yPoints[4] = MathUtils.roundM(y - corridorWidth * tileSize / 2, tileSize);
+          verticalRectangle.setBounds(MathUtils.roundM(x + dx - corridorWidth * tileSize / 2, tileSize),
+              MathUtils.roundM(y + dy - corridorWidth * tileSize / 2, tileSize), corridorWidth * tileSize, -dy);
         }
-        yPoints[1] = yPoints[0];
-        yPoints[2] = MathUtils.roundM(y + dy, tileSize);
-        yPoints[3] = yPoints[2];
-        yPoints[5] = yPoints[4];
       } else {
-        xPoints[0] = MathUtils.roundM(x - corridorWidth * tileSize / 2, tileSize);
-        xPoints[1] = xPoints[0];
-        xPoints[2] = MathUtils.roundM(x + dx, tileSize);
-        xPoints[3] = xPoints[2];
-        xPoints[4] = MathUtils.roundM(x + corridorWidth * tileSize / 2, tileSize);
-        xPoints[5] = xPoints[4];
+        horizontalRectangle.setBounds(MathUtils.roundM(x - corridorWidth * tileSize / 2, tileSize),
+            MathUtils.roundM(y + dy - corridorWidth * tileSize / 2, tileSize), dx, corridorWidth * tileSize);
         if (dy > 0) {
-          yPoints[1] = MathUtils.roundM(y + dy + corridorWidth * tileSize / 2, tileSize);
-          yPoints[3] = MathUtils.roundM(y + dy - corridorWidth * tileSize / 2, tileSize);
+          verticalRectangle.setBounds(MathUtils.roundM(x - corridorWidth * tileSize / 2, tileSize),
+              MathUtils.roundM(y, tileSize), corridorWidth * tileSize, dy);
         } else {
-          yPoints[1] = MathUtils.roundM(y + dy - corridorWidth * tileSize / 2, tileSize);
-          yPoints[3] = MathUtils.roundM(y + dy + corridorWidth * tileSize / 2, tileSize);
+          verticalRectangle.setBounds(MathUtils.roundM(x - corridorWidth * tileSize / 2, tileSize),
+              MathUtils.roundM(y + dy - corridorWidth * tileSize / 2, tileSize), corridorWidth * tileSize, -dy);
         }
-        yPoints[0] = MathUtils.roundM(y, tileSize);
-        yPoints[2] = yPoints[1];
-        yPoints[4] = yPoints[3];
-        yPoints[5] = yPoints[0];
       }
-      corridors.add(new Polygon(xPoints, yPoints, 6));
+      corridors.add(horizontalRectangle);
+      corridors.add(verticalRectangle);
     }
   }
 
@@ -217,7 +220,7 @@ public class Dungeon {
     return plan.vertexSet();
   }
 
-  public Set<Shape> getCorridors() {
+  public Set<Rectangle> getCorridors() {
     return corridors;
   }
 
@@ -235,6 +238,10 @@ public class Dungeon {
 
   public int getHeight() {
     return height;
+  }
+
+  public Grid getGrid() {
+    return grid;
   }
 
   public static class DungeonBuilder {

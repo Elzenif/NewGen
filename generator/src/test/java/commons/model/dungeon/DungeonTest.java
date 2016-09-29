@@ -74,8 +74,8 @@ public class DungeonTest {
   }
 
   @Test
-  public void dungeonShouldHaveAsMuchCorridorsAsGraphEdges() {
+  public void dungeonShouldHaveAtLeastOneCorridor() {
     dungeon = dungeonBuilder.build();
-    assertThat(dungeon.getCorridors()).hasSameSizeAs(dungeon.getEdges());
+    assertThat(dungeon.getCorridors().size()).isGreaterThanOrEqualTo(1);
   }
 }
