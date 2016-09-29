@@ -1,14 +1,14 @@
 package commons.view.dungeon.results;
 
+import commons.model.dungeon.Cell;
 import commons.model.dungeon.Dungeon;
-import commons.model.dungeon.Room;
+import commons.model.dungeon.EDungeonPart;
 import commons.view.commons.Result;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Shape;
 import java.awt.image.BufferedImage;
 
 /**
@@ -29,43 +29,18 @@ public class DungeonResult implements Result<Image> {
     graphics.setComposite(AlphaComposite.Clear);
     graphics.fillRect(0, 0, dungeon.getWidth(), dungeon.getHeight());
 
-    // create Grid
-    graphics.setComposite(AlphaComposite.Src.derive(0.1f));
-    graphics.setColor(Color.BLACK);
-    graphics.drawRect(0, 0, dungeon.getWidth() - 1, dungeon.getHeight() - 1);
-    for (int i = 0; i < dungeon.getWidth(); i += 10) {
-      graphics.drawLine(i, 0, i, dungeon.getHeight());
+    graphics.setComposite(AlphaComposite.Src.derive(0.2f));
+    for (Cell[] cells : dungeon.getGrid().getCells()) {
+      for (Cell cell : cells) {
+        graphics.setColor(getColor(cell));
+        graphics.fill(cell);
+      }
     }
-    for (int j = 0; j < dungeon.getHeight(); j += 10) {
-      graphics.drawLine(0, j, dungeon.getWidth(), j);
-    }
-
-    graphics.setComposite(AlphaComposite.Src);
-    // print corridors
-//    dungeon.getCorridors().forEach(graphics::draw);
-    for (Shape shape : dungeon.getCorridors()) {
-      graphics.setColor(Color.WHITE);
-      graphics.fill(shape);
-      graphics.setColor(Color.BLACK);
-      graphics.draw(shape);
-
-    }
-    // print rooms
-    for (Room room : dungeon.getRooms()) {
-      graphics.setColor(Color.WHITE);
-      graphics.fillRect(room.getX(), room.getY(), room.getWidth(), room.getHeight());
-      graphics.setColor(Color.BLACK);
-      graphics.drawRect(room.getX(), room.getY(), room.getWidth(), room.getHeight());
-    }
-
-    // print edges
-//    for (DefaultEdge edge : dungeon.getEdges()) {
-//      Room source = dungeon.getPlan().getEdgeSource(edge);
-//      Room target = dungeon.getPlan().getEdgeTarget(edge);
-//      graphics.drawLine(source.getCenterX(), source.getCenterY(), target.getCenterX(), target.getCenterY());
-//    }
-
     return bufferedImage;
 
+  }
+
+  private Color getColor(Cell cell) {
+    return (cell.getDungeonPart() == EDungeonPart.WALL) ? Color.BLACK : Color.WHITE;
   }
 }

@@ -3,6 +3,7 @@ package commons;
 import commons.view.MainFrame;
 import commons.view.utils.Constants;
 
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.FontUIResource;
@@ -22,8 +23,7 @@ public class Main {
             | IllegalAccessException e) {
       e.printStackTrace();
     }
-
-    new MainFrame();
+    SwingUtilities.invokeLater(MainFrame::new);
   }
 
   private static void setUIFont(FontUIResource font) {
