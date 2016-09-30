@@ -38,7 +38,7 @@ public class NbkArmorOptionRow extends NbkItemOptionRow {
     });
     constraintPanel.add(bodyPartPanel);
 
-    finalizeRowConstruction();
+    finalizeRowConstruction("Generate a random " + name);
   }
 
   @Override

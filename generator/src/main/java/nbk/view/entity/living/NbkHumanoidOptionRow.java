@@ -13,7 +13,7 @@ public class NbkHumanoidOptionRow extends NbkLivingOptionRow {
   NbkHumanoidOptionRow() {
     super(ENbkAvailableLivings.HUMANOID);
 
-    finalizeRowConstruction();
+    finalizeRowConstruction("Generate a random " + name);
   }
 
   @Override

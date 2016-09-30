@@ -19,9 +19,11 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow
   protected final String name;
 
   protected final JPanel constraintsCheckBoxPanel;
+
   protected final ConstraintPanel constraintPanel;
   private final JCheckBox constraintsCheckBox;
   private final JLabel constraintsCheckBoxLabel;
+
   protected JButton generateButton;
 
   protected ConstraintOptionRowController controller;
@@ -29,6 +31,7 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow
   public ConstraintOptionRow(int labelSize, String name) {
     this.labelSize = labelSize;
     this.name = name;
+
     constraintsCheckBoxLabel = new JLabel("Options");
     constraintsCheckBoxLabel.setAlignmentX(CENTER_ALIGNMENT);
     constraintsCheckBox = new JCheckBox();
@@ -43,11 +46,11 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow
 
   }
 
-  protected void finalizeRowConstruction() {
+  protected void finalizeRowConstruction(String toolTipText) {
     add(constraintPanel);
 
     generateButton = new JButton("Generate");
-    generateButton.setToolTipText("Generate a random " + name);
+    generateButton.setToolTipText(toolTipText);
     add(generateButton);
 
     updateConstraintsAbility(false);

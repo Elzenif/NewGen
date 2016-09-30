@@ -62,7 +62,7 @@ public class DungeonOptionRow extends ConstraintOptionRow<DungeonResultRow> {
 
     constraintPanel.add(basicOptionsPanel);
 
-    finalizeRowConstruction();
+    finalizeRowConstruction("Generate a random " + name);
 
     // TODO : move to result row?
     saveDungeonButton = new JButton("Save");

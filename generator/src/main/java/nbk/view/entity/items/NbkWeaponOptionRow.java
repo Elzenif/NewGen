@@ -37,7 +37,7 @@ public class NbkWeaponOptionRow extends NbkItemOptionRow {
     nbHandsButtons.values().forEach(nbHandsPanel::add);
     constraintPanel.add(nbHandsPanel);
 
-    finalizeRowConstruction();
+    finalizeRowConstruction("Generate a random " + name);
   }
 
   @Override
