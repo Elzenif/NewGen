@@ -7,6 +7,7 @@ import commons.view.utility.UtilityResultRow;
 import nbk.model.commons.NbkGame;
 import nbk.model.utility.ENbkAvailableUtility;
 import nbk.view.utility.love.LoveOptionRow;
+import nbk.view.utility.scenario.ScenarioOptionRow;
 
 /**
  * Created by Germain on 24/07/2016.
@@ -19,8 +20,15 @@ public enum ENbkAvailableUtilityRow implements IAvailableUtilityRow<NbkGame> {
     public UtilityOptionRow<NbkGame> getOptionRow() {
       return utilityOptionRow;
     }
-  }
-  ;
+  },
+  SCENARIO_ROW(ENbkAvailableUtility.SCENARIO) {
+    UtilityOptionRow<NbkGame> utilityOptionRow = new ScenarioOptionRow();
+
+    @Override
+    public UtilityOptionRow<NbkGame> getOptionRow() {
+      return utilityOptionRow;
+    }
+  };
 
   private final IAvailableUtility<NbkGame> utility;
 

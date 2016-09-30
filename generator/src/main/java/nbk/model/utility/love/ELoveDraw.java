@@ -5,10 +5,10 @@ package nbk.model.utility.love;
  */
 public enum ELoveDraw {
 
-  ACTION(),
-  TARGET(),
-  TOOL(),
-  POSITION()
+  ACTION,
+  TARGET,
+  TOOL,
+  POSITION
   ;
 
   public static final String LOVE_DRAW_NAME = "LD";

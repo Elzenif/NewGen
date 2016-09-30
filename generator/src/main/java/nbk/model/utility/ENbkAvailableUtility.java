@@ -13,7 +13,7 @@ public enum ENbkAvailableUtility implements IAvailableUtility<NbkGame> {
     public String getName() {
       return "Love";
     }
-  };
+  }, SCENARIO;
 
 
   @Override

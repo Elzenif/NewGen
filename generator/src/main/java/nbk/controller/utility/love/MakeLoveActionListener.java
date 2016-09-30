@@ -63,6 +63,4 @@ public class MakeLoveActionListener implements ActionListener {
     loveResultRow.setResultsToPrint(loveResult.getResults());
 
   }
-
-
 }
