@@ -4,6 +4,7 @@ import commons.view.commons.Result;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import java.awt.Image;
 
 /**
@@ -11,6 +12,7 @@ import java.awt.Image;
  */
 public class GraphResultRow<T extends Result<Image>> extends ResultRow<T, Image> {
 
+  private JScrollPane scrollPane;
   private JLabel resultToPrint;
 
   protected GraphResultRow() {
@@ -19,14 +21,15 @@ public class GraphResultRow<T extends Result<Image>> extends ResultRow<T, Image>
 
   @Override
   public void clearResults() {
-    if (resultToPrint != null) {
-      remove(resultToPrint);
+    if (scrollPane != null) {
+      remove(scrollPane);
     }
   }
 
   public void printGraph(T graphToPrint) {
     resultToPrint = new JLabel(new ImageIcon(graphToPrint.getRawResult()));
-    add(resultToPrint);
+    scrollPane = new JScrollPane(resultToPrint);
+    add(scrollPane);
     repaint();
     revalidate();
   }
