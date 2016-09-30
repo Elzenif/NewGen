@@ -13,7 +13,7 @@ public class GraphResultRow<T extends Result<Image>> extends ResultRow<T, Image>
 
   private JLabel resultToPrint;
 
-  public GraphResultRow() {
+  protected GraphResultRow() {
     super();
   }
 

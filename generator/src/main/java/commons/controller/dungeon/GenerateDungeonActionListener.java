@@ -32,7 +32,7 @@ public class GenerateDungeonActionListener implements ActionListener {
     }
     dungeonResult = new DungeonResult(dungeon.build());
     dungeonResultRow.printGraph(dungeonResult);
-    dungeonOptionRow.setEnabledSaveButton(true);
+    dungeonResultRow.setEnabledSaveButton(true);
   }
 
   public DungeonResult getDungeonResult() {

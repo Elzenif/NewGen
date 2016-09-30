@@ -10,7 +10,6 @@ import commons.view.utils.ConstraintOptionRow;
 import commons.view.utils.ConstraintPanel;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -32,8 +31,6 @@ public class DungeonOptionRow extends ConstraintOptionRow<DungeonResultRow> {
   private final JSpinner nbRoomsDesiredSpinner;
   private final SpinnerNumberModel nbRoomsDesiredModel;
   private final JLabel nbRoomsDesiredLabel;
-
-  private final JButton saveDungeonButton;
 
   public DungeonOptionRow(IAvailableDungeon availableDungeon) {
     super(MathUtils.maxLength(Arrays.asList(EDungeonType.values())), availableDungeon.getName());
@@ -63,23 +60,14 @@ public class DungeonOptionRow extends ConstraintOptionRow<DungeonResultRow> {
     constraintPanel.add(basicOptionsPanel);
 
     finalizeRowConstruction("Generate a random " + name);
-
-    // TODO : move to result row?
-    saveDungeonButton = new JButton("Save");
-    saveDungeonButton.setToolTipText("Save the dungeon as an image");
-    saveDungeonButton.setEnabled(false);
-    add(saveDungeonButton);
   }
 
   @Override
   public void setControllers(DungeonResultRow dungeonResultRow) {
     super.setControllers(new DungeonController(this, dungeonResultRow));
-    generateButton.addActionListener(((DungeonController) controller).getGenerateDungeonActionListener());
-    saveDungeonButton.addActionListener(((DungeonController) controller).getSaveDungeonActionListener());
-  }
-
-  public void setEnabledSaveButton(boolean b) {
-    saveDungeonButton.setEnabled(b);
+    DungeonController dungeonController = (DungeonController) this.controller;
+    generateButton.addActionListener(dungeonController.getGenerateDungeonActionListener());
+    dungeonResultRow.setController(dungeonController);
   }
 
   public int getNbRoomsDesired() {
