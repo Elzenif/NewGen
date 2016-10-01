@@ -1,29 +1,24 @@
 package nbk.controller.utility.love;
 
-import commons.controller.entity.items.ConstraintsItemListener;
-import commons.controller.intf.ConstraintOptionRowController;
+import commons.controller.utility.UtilityController;
 import commons.view.utility.UtilityResultRow;
+import nbk.model.commons.NbkGame;
+import nbk.model.utility.love.ELoveDraw;
 import nbk.view.utility.love.LoveOptionRow;
 
 /**
  * Created by Germain on 24/07/2016.
  */
-public class LoveController implements ConstraintOptionRowController {
+public class LoveController extends UtilityController<NbkGame, ELoveDraw> {
 
-  private final ConstraintsItemListener constraintsItemListener;
-  private final MakeLoveActionListener makeLoveActionListener;
 
   public LoveController(LoveOptionRow loveOptionRow, UtilityResultRow loveResultRow) {
-    constraintsItemListener = new ConstraintsItemListener(loveOptionRow);
-    makeLoveActionListener = new MakeLoveActionListener(loveOptionRow, loveResultRow);
+    super(loveOptionRow);
+    generateUtilityActionListener = new GenerateLoveActionListener(loveOptionRow, loveResultRow, this);
   }
 
   @Override
-  public ConstraintsItemListener getConstraintsItemListener() {
-    return constraintsItemListener;
-  }
-
-  public MakeLoveActionListener getMakeLoveActionListener() {
-    return makeLoveActionListener;
+  public void updateDrawKeyValue(ELoveDraw drawKey) {
+    utilityConstraint.put(drawKey, ((LoveOptionRow) utilityOptionRow).getDrawValue(drawKey));
   }
 }

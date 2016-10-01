@@ -10,7 +10,6 @@ import nbk.model.commons.NbkGame;
 import nbk.model.utility.scenario.EScenarioDraw;
 import nbk.model.utility.scenario.Scenario;
 import nbk.view.utility.scenario.result.ScenarioResult;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -19,13 +18,13 @@ import java.util.Collection;
  */
 public class GenerateScenarioActionListener extends GenerateNbkUtilityActionListener<EScenarioDraw> {
 
-  protected GenerateScenarioActionListener(UtilityOptionRow utilityOptionRow,
-                                           UtilityResultRow utilityResultRow,
-                                           UtilityController<NbkGame, EScenarioDraw> utilityController) {
+  public GenerateScenarioActionListener(UtilityOptionRow utilityOptionRow,
+                                        UtilityResultRow utilityResultRow,
+                                        UtilityController<NbkGame, EScenarioDraw> utilityController) {
     super(utilityOptionRow, utilityResultRow, utilityController);
   }
 
-  @NotNull
+  @Override
   protected Collection<UtilityResult> generateResult(UtilityConstraint utilityConstraint) {
     Scenario scenario = new Scenario(utilityConstraint);
     return new ScenarioResult(scenario).getResults();

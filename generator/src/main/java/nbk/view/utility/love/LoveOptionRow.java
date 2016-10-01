@@ -36,11 +36,7 @@ public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
   @Override
   public void setControllers(UtilityResultRow resultRow) {
     super.setControllers(new LoveController(this, resultRow));
-    generateButton.addActionListener(((LoveController) controller).getMakeLoveActionListener());
-  }
-
-  public int getLoveDrawDiceScore(ELoveDraw loveDraw) {
-    return loveDrawMap.get(loveDraw).getNumber().intValue();
+    generateButton.addActionListener(((LoveController) controller).getGenerateUtilityActionListener());
   }
 
   @Override

@@ -13,6 +13,7 @@ public class ScenarioTest {
 
   @Rule
   public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
+
   private UtilityConstraint utilityConstraint;
   private Scenario scenario;
 

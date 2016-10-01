@@ -1,7 +1,7 @@
 package nbk.view.utility.love.result;
 
 import commons.view.utility.result.UtilityResult;
-import nbk.model.utility.love.LoveModel;
+import nbk.model.utility.love.Love;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -15,16 +15,16 @@ public class LoveResult {
   private final List<UtilityResult> results;
 
   @SuppressWarnings("SpellCheckingInspection")
-  public LoveResult(LoveModel loveModel) {
+  public LoveResult(Love love) {
     results = new LinkedList<>();
-    results.add(new LovePartResult("Le personnage "));
-    results.add(new LovePartResult(loveModel.getActionSentence() + " "));
-    results.add(new LovePartResult(loveModel.getTargetSentence()));
-    results.add(new LovePartResult(" du partenaire avec "));
-    results.add(new LovePartResult(loveModel.getToolSentence()));
-    results.add(new LovePartResult(" dans la position "));
-    results.add(new LovePartResult(loveModel.getPositionSentence()));
-    results.add(new LovePartResult("(" + loveModel.getLoveScore() + ")"));
+    results.add(new LovePartResult("Le personnage"));
+    results.add(new LovePartResult(love.getActionSentence()));
+    results.add(new LovePartResult(love.getTargetSentence()));
+    results.add(new LovePartResult("du partenaire avec"));
+    results.add(new LovePartResult(love.getToolSentence()));
+    results.add(new LovePartResult("dans la position"));
+    results.add(new LovePartResult(love.getPositionSentence()));
+    results.add(new LovePartResult("(" + love.getLoveScore() + ")"));
   }
 
   public Collection<UtilityResult> getResults() {
