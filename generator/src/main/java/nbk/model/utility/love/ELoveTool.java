@@ -10,7 +10,7 @@ import static nbk.model.utility.love.ELoveScore.NEUTRAL;
  * Created by Germain on 24/07/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ELoveTool implements ILoveDraw {
+public enum ELoveTool implements ILoveDrawResult {
   LD1("son sexe", GREAT),
   LD2("deux doigts", GREAT),
   LD3("un doigt", GOOD),

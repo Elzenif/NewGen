@@ -10,20 +10,20 @@ import org.jetbrains.annotations.Contract;
  */
 public abstract class Living<T extends Game> extends Entity<T> {
 
-  public Living(EntityBuilder builder) {
+  protected Living(EntityBuilder builder) {
     super(builder);
   }
 
   private Living() {}
 
-  @Override
-  public IRarity getRarity() {
-    return rarity;
-  }
-
   @Contract(" -> !null")
   public static Living stubbedLiving() {
     return new StubbedLiving();
+  }
+
+  @Override
+  public IRarity getRarity() {
+    return rarity;
   }
 
   protected abstract static class LivingBuilder extends EntityBuilder {

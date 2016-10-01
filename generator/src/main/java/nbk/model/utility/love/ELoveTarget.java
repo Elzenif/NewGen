@@ -10,7 +10,7 @@ import static nbk.model.utility.love.ELoveScore.NEUTRAL;
  * Created by Germain on 24/07/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ELoveTarget implements ILoveDraw {
+public enum ELoveTarget implements ILoveDrawResult {
   LD1("la poitrine", GREAT),
   LD2("les parties intimes", GREAT),
   LD3("la bouche", GREAT),

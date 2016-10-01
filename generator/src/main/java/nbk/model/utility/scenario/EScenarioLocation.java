@@ -4,28 +4,28 @@ package nbk.model.utility.scenario;
  * Created by Germain on 01/10/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum EScenarioLocation implements IScenarioDraw {
+public enum EScenarioLocation implements IScenarioDrawResult {
 
   SD1("une grotte à proximité"),
-  SD2("une grotte à proximité"),
-  SD3("une grotte à proximité"),
-  SD4("une grotte à proximité"),
-  SD5("une grotte à proximité"),
-  SD6("une grotte à proximité"),
-  SD7("une grotte à proximité"),
-  SD8("une grotte à proximité"),
-  SD9("une grotte à proximité"),
-  SD10("une grotte à proximité"),
-  SD11("une grotte à proximité"),
-  SD12("une grotte à proximité"),
-  SD13("une grotte à proximité"),
-  SD14("une grotte à proximité"),
-  SD15("une grotte à proximité"),
-  SD16("une grotte à proximité"),
-  SD17("une grotte à proximité"),
-  SD18("une grotte à proximité"),
-  SD19("une grotte à proximité"),
-  SD20("une grotte à proximité"),;
+  SD2("un village à l'abandon, déserté par ses habitants"),
+  SD3("un campement de fortune dans une forêt proche"),
+  SD4("un campement de fortune dans une vallée proche"),
+  SD5("une maison dans le village"),
+  SD6("une cabane d'ermite à quelques kilomètres"),
+  SD7("les égouts de la ville"),
+  SD8("les alentours de la ville"),
+  SD9("les ruines d'une ancienne demeure"),
+  SD10("une caverne située dans des montagnes ou collines proches"),
+  SD11("un port proche"),
+  SD12("la demeure d'un noble"),
+  SD13("une taverne insalubre"),
+  SD14("une ruelle sombre"),
+  SD15("une tour de guet abandonnée"),
+  SD16("un vieux souterrain"),
+  SD17("un donjon à quelques kilomètres"),
+  SD18("un temple à proximité"),
+  SD19("une maison close close"),
+  SD20("un manoir abandonné");
 
   private final String sentence;
 

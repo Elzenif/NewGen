@@ -48,7 +48,7 @@ public abstract class NbkLiving extends Living<NbkGame> implements HasStats {
 
   protected static abstract class NbkLivingBuilder extends LivingBuilder implements StatsBuilder {
 
-    protected Stats stats;
+    protected final Stats stats;
 
     public NbkLivingBuilder(Stats stats) {
       this.stats = stats;

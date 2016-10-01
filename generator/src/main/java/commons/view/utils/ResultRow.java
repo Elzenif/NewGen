@@ -2,6 +2,8 @@ package commons.view.utils;
 
 import commons.view.commons.Result;
 
+import java.util.Collection;
+
 /**
  * Created by Germain on 24/09/2016.
  */
@@ -12,4 +14,6 @@ public abstract class ResultRow<T extends Result<S>, S> extends PanelRow {
   }
 
   public abstract void clearResults();
+
+  public abstract void setResultsToPrint(Collection<T> results);
 }

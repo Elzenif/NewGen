@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class Stats extends ForwardingMap<EStat, Integer> implements StatsBuilder {
 
-  private EnumMap<EStat, Integer> statsMap = new EnumMap<>(EStat.class);
+  private final EnumMap<EStat, Integer> statsMap = new EnumMap<>(EStat.class);
 
   @Override
   protected Map<EStat, Integer> delegate() {

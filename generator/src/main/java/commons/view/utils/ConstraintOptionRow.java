@@ -28,7 +28,7 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow
 
   protected ConstraintOptionRowController controller;
 
-  public ConstraintOptionRow(int labelSize, String name) {
+  protected ConstraintOptionRow(int labelSize, String name) {
     this.labelSize = labelSize;
     this.name = name;
 

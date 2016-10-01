@@ -13,9 +13,8 @@ import nbk.model.entity.living.NbkHumanoid;
  */
 public class GenerateNbkHumanoidActionListener extends GenerateNbkLivingActionListener {
 
-  protected GenerateNbkHumanoidActionListener(EntityController<NbkGame> entityController,
-                                              EntityOptionRow<NbkGame> entityOptionRow,
-                                              EntityResultRow entityResultRow) {
+  protected GenerateNbkHumanoidActionListener(EntityOptionRow<NbkGame> entityOptionRow, EntityResultRow entityResultRow,
+                                              EntityController<NbkGame> entityController) {
     super(entityController, entityOptionRow, entityResultRow);
   }
 

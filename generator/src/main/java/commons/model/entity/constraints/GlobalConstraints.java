@@ -1,5 +1,6 @@
 package commons.model.entity.constraints;
 
+import commons.model.commons.GenerationConstraint;
 import commons.model.entity.characteristics.primary.Primary;
 import commons.model.entity.characteristics.secondary.Secondary;
 import commons.utils.exception.IncompatiblePrimaryClass;
@@ -13,7 +14,7 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 11/06/2016.
  */
-public class GlobalConstraints {
+public class GlobalConstraints implements GenerationConstraint {
 
   final Map<Constraints, ConstraintMap> globalConstraintsMap = new HashMap<>();
 

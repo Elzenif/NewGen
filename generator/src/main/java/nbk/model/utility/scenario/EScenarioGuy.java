@@ -4,27 +4,27 @@ package nbk.model.utility.scenario;
  * Created by Germain on 01/10/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum EScenarioGuy implements IScenarioDraw {
+public enum EScenarioGuy implements IScenarioDrawResult {
   SD1("un garde du village"),
-  SD2("un garde du village"),
-  SD3("un garde du village"),
-  SD4("un garde du village"),
-  SD5("un garde du village"),
-  SD6("un garde du village"),
-  SD7("un garde du village"),
-  SD8("un garde du village"),
-  SD9("un garde du village"),
-  SD10("un garde du village"),
-  SD11("un garde du village"),
-  SD12("un garde du village"),
-  SD13("un garde du village"),
-  SD14("un garde du village"),
-  SD15("un garde du village"),
-  SD16("un garde du village"),
-  SD17("un garde du village"),
-  SD18("un garde du village"),
-  SD19("un garde du village"),
-  SD20("un garde du village"),;
+  SD2("une grand-mère"),
+  SD3("une jeune demoiselle"),
+  SD4("un noble"),
+  SD5("un mercenaire blessé"),
+  SD6("un jeune enfant"),
+  SD7("un tavernier"),
+  SD8("un aubergiste"),
+  SD9("un marchand"),
+  SD10("un explorateur"),
+  SD11("un magicien"),
+  SD12("un alchimiste"),
+  SD13("un forgeron"),
+  SD14("un viellard"),
+  SD15("un fou"),
+  SD16("un prédicateur"),
+  SD17("un fermier"),
+  SD18("un pêcheur"),
+  SD19("un jeune aventurier"),
+  SD20("un devin"),;
 
   private final String sentence;
 

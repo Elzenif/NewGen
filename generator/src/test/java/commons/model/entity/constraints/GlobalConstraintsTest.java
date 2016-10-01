@@ -15,111 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class GlobalConstraintsTest {
 
-  @SuppressWarnings("unused")
-  private interface HasPrimary0 {
-    Primary0 getPrimary0();
-  }
-
-  @SuppressWarnings("unused")
-  private interface HasPrimary1 {
-    Primary1 getPrimary1();
-  }
-
-  private enum Primary0 implements Primary, HasPrimary0, GenericConstraint<Primary0> {
-    P0, P1;
-
-    @Contract(pure = true)
-    @Override
-    public Primary0 getPrimary0() {
-      return this;
-    }
-
-    @NotNull
-    @Contract(pure = true)
-    @Override
-    public Predicate<Primary0> getPredicate() {
-      return e -> e.getPrimary0() == this;
-    }
-  }
-
-  private enum Primary1 implements Primary, HasPrimary1, GenericConstraint<Primary1> {
-    Q0, Q1;
-
-    @Contract(pure = true)
-    @Override
-    public Primary1 getPrimary1() {
-      return this;
-    }
-
-    @NotNull
-    @Contract(pure = true)
-    @Override
-    public Predicate<Primary1> getPredicate() {
-      return e -> e.getPrimary1() == this;
-    }
-  }
-
-  private enum Secondary0 implements Secondary, HasPrimary0, HasPrimary1 {
-    S00(Primary0.P0, Primary1.Q0),
-    S01(Primary0.P0, Primary1.Q1),
-    S10(Primary0.P1, Primary1.Q0),
-    S11(Primary0.P1, Primary1.Q1);
-
-    private final Primary0 primary0;
-    private final Primary1 primary1;
-
-    Secondary0(Primary0 primary0, Primary1 primary1) {
-      this.primary0 = primary0;
-      this.primary1 = primary1;
-    }
-
-    @Override
-    public Primary0 getPrimary0() {
-      return primary0;
-    }
-
-    @Override
-    public Primary1 getPrimary1() {
-      return primary1;
-    }
-
-    public static Constraints<Secondary0> getConstraints() {
-      return CONSTRAINTS;
-    }
-
-    private static final Constraints<Secondary0> CONSTRAINTS = Constraints.ConstraintsBuilder
-            .<Secondary0>start()
-            .setSecondaryClass(Secondary0.class)
-            .setPrimaryClasses(Primary0.class, Primary1.class)
-            .build();
-  }
-
-  private enum Secondary1 implements Secondary, HasPrimary1 {
-    T0(Primary1.Q0),
-    T1(Primary1.Q1);
-
-    private final Primary1 primary1;
-
-    Secondary1(Primary1 primary1) {
-      this.primary1 = primary1;
-    }
-
-    @Override
-    public Primary1 getPrimary1() {
-      return primary1;
-    }
-
-    public static Constraints<Secondary1> getConstraints() {
-      return CONSTRAINTS;
-    }
-
-    private static final Constraints<Secondary1> CONSTRAINTS = Constraints.ConstraintsBuilder
-            .<Secondary1>start()
-            .setSecondaryClass(Secondary1.class)
-            .setPrimaryClasses(Primary1.class)
-            .build();
-  }
-
   // Tests of ConstraintSet
   @Test
   public void testConstraintSetAdd() {
@@ -276,7 +171,7 @@ public class GlobalConstraintsTest {
   @Test
   public void testGlobalConstraintAdd() {
     GlobalConstraints globalConstraints = new GlobalConstraints();
-    assertThat(globalConstraints.globalConstraintsMap.isEmpty()).isTrue();
+    assertThat(globalConstraints.globalConstraintsMap).isEmpty();
 
     assertThat(globalConstraints.add(Secondary0.getConstraints(), Primary0.class, Primary0.P0)).isTrue();
     assertThat(globalConstraints.globalConstraintsMap.keySet()).containsOnly(Secondary0.getConstraints());
@@ -438,5 +333,110 @@ public class GlobalConstraintsTest {
             .constraintsMap.get(Primary0.class)
             .constraintSet.contains(Primary0.P0)).isTrue();
 
+  }
+
+  private enum Primary0 implements Primary, HasPrimary0, GenericConstraint<Primary0> {
+    P0, P1;
+
+    @Contract(pure = true)
+    @Override
+    public Primary0 getPrimary0() {
+      return this;
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public Predicate<Primary0> getPredicate() {
+      return e -> e.getPrimary0() == this;
+    }
+  }
+
+  private enum Primary1 implements Primary, HasPrimary1, GenericConstraint<Primary1> {
+    Q0, Q1;
+
+    @Contract(pure = true)
+    @Override
+    public Primary1 getPrimary1() {
+      return this;
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public Predicate<Primary1> getPredicate() {
+      return e -> e.getPrimary1() == this;
+    }
+  }
+
+  private enum Secondary0 implements Secondary, HasPrimary0, HasPrimary1 {
+    S00(Primary0.P0, Primary1.Q0),
+    S01(Primary0.P0, Primary1.Q1),
+    S10(Primary0.P1, Primary1.Q0),
+    S11(Primary0.P1, Primary1.Q1);
+
+    private static final Constraints<Secondary0> CONSTRAINTS = Constraints.ConstraintsBuilder
+        .<Secondary0>start()
+        .setSecondaryClass(Secondary0.class)
+        .setPrimaryClasses(Primary0.class, Primary1.class)
+        .build();
+    private final Primary0 primary0;
+    private final Primary1 primary1;
+
+    Secondary0(Primary0 primary0, Primary1 primary1) {
+      this.primary0 = primary0;
+      this.primary1 = primary1;
+    }
+
+    public static Constraints<Secondary0> getConstraints() {
+      return CONSTRAINTS;
+    }
+
+    @Override
+    public Primary0 getPrimary0() {
+      return primary0;
+    }
+
+    @Override
+    public Primary1 getPrimary1() {
+      return primary1;
+    }
+  }
+
+  private enum Secondary1 implements Secondary, HasPrimary1 {
+    T0(Primary1.Q0),
+    T1(Primary1.Q1);
+
+    private static final Constraints<Secondary1> CONSTRAINTS = Constraints.ConstraintsBuilder
+        .<Secondary1>start()
+        .setSecondaryClass(Secondary1.class)
+        .setPrimaryClasses(Primary1.class)
+        .build();
+    private final Primary1 primary1;
+
+    Secondary1(Primary1 primary1) {
+      this.primary1 = primary1;
+    }
+
+    public static Constraints<Secondary1> getConstraints() {
+      return CONSTRAINTS;
+    }
+
+    @Override
+    public Primary1 getPrimary1() {
+      return primary1;
+    }
+  }
+
+  @SuppressWarnings("unused")
+  private interface HasPrimary0 {
+
+    Primary0 getPrimary0();
+  }
+
+  @SuppressWarnings("unused")
+  private interface HasPrimary1 {
+
+    Primary1 getPrimary1();
   }
 }

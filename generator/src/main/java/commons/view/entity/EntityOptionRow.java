@@ -5,7 +5,6 @@ import commons.model.commons.Game;
 import commons.model.entity.IAvailableEntity;
 import commons.utils.StringUtils;
 import commons.utils.TextFieldUtils;
-import commons.view.utils.Constants;
 import commons.view.utils.ConstraintOptionRow;
 import commons.view.utils.ConstraintPanel;
 
@@ -14,21 +13,19 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
-import java.awt.FlowLayout;
 
 /**
  * Created by Germain on 05/06/2016.
  */
-public abstract class EntityOptionRow<T extends Game> extends ConstraintOptionRow<EntityResultRow> {
+public abstract class EntityOptionRow<G extends Game> extends ConstraintOptionRow<EntityResultRow> {
 
-  protected final ConstraintPanel constraintPanel;
   private final JSpinner numberOfEntitiesSpinner;
   private final SpinnerNumberModel numberOfEntitiesModel;
   private final JLabel infoLabel;
   private final ConstraintPanel qualityPanel;
   private final JFormattedTextField qualityTextField;
 
-  protected EntityOptionRow(IAvailableEntity<T> availableEntity, int labelSize) {
+  protected EntityOptionRow(IAvailableEntity<G> availableEntity, int labelSize) {
     super(labelSize, availableEntity.getName());
 
     numberOfEntitiesModel = new SpinnerNumberModel(1, 1, 9, 1);
@@ -41,9 +38,6 @@ public abstract class EntityOptionRow<T extends Game> extends ConstraintOptionRo
 
     add(constraintsCheckBoxPanel);
 
-    constraintPanel = new ConstraintPanel();
-    constraintPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP));
-
     // quality constraints
     qualityTextField = TextFieldUtils.createTwoDigitsField();
     qualityTextField.setToolTipText("Put a D100 roll result. The lower the result, the better the " + name);
@@ -53,7 +47,7 @@ public abstract class EntityOptionRow<T extends Game> extends ConstraintOptionRo
     constraintPanel.add(qualityPanel);
   }
 
-  protected void setControllers(EntityController<T> entityController) {
+  protected void setControllers(EntityController<G> entityController) {
     super.setControllers(entityController);
     qualityTextField.addPropertyChangeListener(((EntityController) controller).getRarityChangeListener());
     generateButton.addActionListener(((EntityController) controller).getGenerateEntityActionListener());

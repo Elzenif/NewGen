@@ -17,11 +17,11 @@ public abstract class GenerateNbkLivingActionListener extends GenerateEntityActi
 
   protected GenerateNbkLivingActionListener(EntityController<NbkGame> entityController,
                                             EntityOptionRow<NbkGame> entityOptionRow, EntityResultRow entityResultRow) {
-    super(entityController, entityOptionRow, entityResultRow);
+    super(entityOptionRow, entityResultRow, entityController);
   }
 
   @Override
-  protected LivingResult generateResult(GlobalConstraints globalConstraints) {
+  protected LivingResult generateOneResult(GlobalConstraints globalConstraints) {
     try {
       Living living = generate(globalConstraints);
       return new LivingResult(living);

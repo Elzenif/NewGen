@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by Germain on 24/07/2016.
  */
-public class LoveOptionRow extends NbkUtilityOptionRow {
+public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
 
   private final Map<ELoveDraw, SpinnerNumberModel> loveDrawMap;
 
@@ -41,5 +41,10 @@ public class LoveOptionRow extends NbkUtilityOptionRow {
 
   public int getLoveDrawDiceScore(ELoveDraw loveDraw) {
     return loveDrawMap.get(loveDraw).getNumber().intValue();
+  }
+
+  @Override
+  public int getDrawValue(ELoveDraw drawKey) {
+    return 0;
   }
 }

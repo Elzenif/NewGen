@@ -10,7 +10,7 @@ import static nbk.model.utility.love.ELoveScore.NEUTRAL;
  * Created by Germain on 24/07/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ELovePosition implements ILoveDraw {
+public enum ELovePosition implements ILoveDrawResult {
   LD1("efficace du molosse hardi", GREAT),
   LD2("de la tourlousine siamoise", GREAT),
   LD3("connue des musardins", GOOD),

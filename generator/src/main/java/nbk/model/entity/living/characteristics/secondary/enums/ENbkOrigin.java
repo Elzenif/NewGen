@@ -133,6 +133,17 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
     maxStats = builder.getMaxStats();
   }
 
+  @NotNull
+  @Contract(pure = true)
+  public static Predicate<ENbkOrigin> getPredicate(Stats stats) {
+    return origin -> origin.getMinStats().entrySet().stream()
+        .map(entry -> entry.getValue() <= stats.get(entry.getKey()))
+        .reduce(Boolean::logicalAnd).orElse(true)
+        && origin.getMaxStats().entrySet().stream()
+        .map(entry -> entry.getValue() >= stats.get(entry.getKey()))
+        .reduce(Boolean::logicalAnd).orElse(true);
+  }
+
   @Contract(" -> !null")
   @Override
   public FrenchNoun getName() {
@@ -149,17 +160,6 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
     return ev;
   }
 
-  @NotNull
-  @Contract(pure = true)
-  public static Predicate<ENbkOrigin> getPredicate(Stats stats) {
-    return origin -> origin.getMinStats().entrySet().stream()
-            .map(entry -> entry.getValue() <= stats.get(entry.getKey()))
-            .reduce(Boolean::logicalAnd).orElse(true)
-            && origin.getMaxStats().entrySet().stream()
-            .map(entry -> entry.getValue() >= stats.get(entry.getKey()))
-            .reduce(Boolean::logicalAnd).orElse(true);
-  }
-
   public Stats getMinStats() {
     return minStats;
   }
@@ -171,7 +171,7 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
   private static class ENbkOriginBuilder implements EntityTypeBuilder, EVBuilder, FrenchNounBuilder,
           StatsInRangeBuilder {
 
-    private List<FrenchNoun> names = new LinkedList<>();
+    private final List<FrenchNoun> names = new LinkedList<>();
     private EGeneralRarity rarity;
     private SPositive ev;
     private Stats minStats;
@@ -218,12 +218,6 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
     @Override
     public ENbkOriginBuilder rare() {
       rarity = EGeneralRarity.RARE;
-      return this;
-    }
-
-    @Override
-    public ENbkOriginBuilder setEV(int ev) {
-      this.ev = new SPositive(ev);
       return this;
     }
 
@@ -361,6 +355,12 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
     @Override
     public SPositive getEV() {
       return ev;
+    }
+
+    @Override
+    public ENbkOriginBuilder setEV(int ev) {
+      this.ev = new SPositive(ev);
+      return this;
     }
 
     @Override

@@ -4,28 +4,18 @@ package nbk.model.utility.scenario;
  * Created by Germain on 01/10/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum EScenarioLoot implements IScenarioDraw {
+public enum EScenarioLoot implements IScenarioDrawResult {
 
-  SD1("1D100PO par aventurier et par niveau"),
-  SD2("1D100PO par aventurier et par niveau"),
-  SD3("1D100PO par aventurier et par niveau"),
-  SD4("1D100PO par aventurier et par niveau"),
-  SD5("1D100PO par aventurier et par niveau"),
-  SD6("1D100PO par aventurier et par niveau"),
-  SD7("1D100PO par aventurier et par niveau"),
-  SD8("1D100PO par aventurier et par niveau"),
-  SD9("1D100PO par aventurier et par niveau"),
-  SD10("1D100PO par aventurier et par niveau"),
-  SD11("1D100PO par aventurier et par niveau"),
-  SD12("1D100PO par aventurier et par niveau"),
-  SD13("1D100PO par aventurier et par niveau"),
-  SD14("1D100PO par aventurier et par niveau"),
-  SD15("1D100PO par aventurier et par niveau"),
-  SD16("1D100PO par aventurier et par niveau"),
-  SD17("1D100PO par aventurier et par niveau"),
-  SD18("1D100PO par aventurier et par niveau"),
-  SD19("1D100PO par aventurier et par niveau"),
-  SD20("1D100PO par aventurier et par niveau"),;
+  SD1("1D100 PO par aventurier et par niveau"),
+  SD2("25 PO par aventurier et par niveau"),
+  SD3("un lingot de Béryllium"),
+  SD4("un équipement de grande valeur"),
+  SD5("une arme ou armure par aventurier"),
+  SD6("50 PO par aventurier"),
+  SD7("200 PO pour la compagnie"),
+  SD8("500 PO pour la compagnie"),
+  SD9("une potion pour chaque aventurier"),
+  SD10("un objet par aventurier");
 
   private final String sentence;
 

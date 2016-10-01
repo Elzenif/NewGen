@@ -11,7 +11,7 @@ import commons.utils.exception.NoAvailableEntityTypeException;
  */
 public abstract class Entity<T extends Game> implements HasRarity {
 
-  protected EItemRarity rarity;
+  protected final EItemRarity rarity;
 
   protected Entity(EntityBuilder builder) {
     rarity = builder.rarity;

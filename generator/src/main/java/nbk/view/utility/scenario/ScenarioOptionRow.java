@@ -1,5 +1,6 @@
 package nbk.view.utility.scenario;
 
+import commons.utils.Pair;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.scenario.ScenarioController;
 import nbk.model.utility.ENbkAvailableUtility;
@@ -14,9 +15,9 @@ import java.util.Map;
 /**
  * Created by Germain on 30/09/2016.
  */
-public class ScenarioOptionRow extends NbkUtilityOptionRow {
+public class ScenarioOptionRow extends NbkUtilityOptionRow<EScenarioDraw> {
 
-  private final Map<EScenarioDraw, SpinnerNumberModel> scenarioDrawMap;
+  private final Map<EScenarioDraw, Pair<JSpinner, SpinnerNumberModel>> scenarioDrawMap;
 
   public ScenarioOptionRow() {
     super(ENbkAvailableUtility.SCENARIO.getName());
@@ -26,7 +27,7 @@ public class ScenarioOptionRow extends NbkUtilityOptionRow {
       SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(1, 1, 20, 1);
       JSpinner jSpinner = new JSpinner(spinnerNumberModel);
       jSpinner.setAlignmentX(LEFT_ALIGNMENT);
-      scenarioDrawMap.put(scenarioDraw, spinnerNumberModel);
+      scenarioDrawMap.put(scenarioDraw, new Pair<>(jSpinner, spinnerNumberModel));
       constraintPanel.add(jSpinner);
     }
 
@@ -36,10 +37,12 @@ public class ScenarioOptionRow extends NbkUtilityOptionRow {
   @Override
   public void setControllers(UtilityResultRow resultRow) {
     super.setControllers(new ScenarioController(this, resultRow));
-    generateButton.addActionListener(((ScenarioController) controller).getGenerateScenarioActionListener());
+    scenarioDrawMap.forEach((scenarioDraw, pair) ->
+        pair.getLeft().addChangeListener(((ScenarioController) controller).getDrawChangeListener(scenarioDraw)));
   }
 
-  public int getScenarioDrawDiceScore(EScenarioDraw scenarioDraw) {
-    return scenarioDrawMap.get(scenarioDraw).getNumber().intValue();
+  @Override
+  public int getDrawValue(EScenarioDraw drawKey) {
+    return scenarioDrawMap.get(drawKey).getRight().getNumber().intValue();
   }
 }

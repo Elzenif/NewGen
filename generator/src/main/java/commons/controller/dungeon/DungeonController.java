@@ -10,9 +10,9 @@ import commons.view.dungeon.DungeonResultRow;
  */
 public class DungeonController implements ConstraintOptionRowController {
 
-  private ConstraintsItemListener constraintsItemListener;
-  private GenerateDungeonActionListener generateDungeonActionListener;
-  private SaveDungeonActionListener saveDungeonActionListener;
+  private final ConstraintsItemListener constraintsItemListener;
+  private final GenerateDungeonActionListener generateDungeonActionListener;
+  private final SaveDungeonActionListener saveDungeonActionListener;
 
   public DungeonController(DungeonOptionRow dungeonOptionRow, DungeonResultRow dungeonResultRow) {
     constraintsItemListener = new ConstraintsItemListener(dungeonOptionRow);

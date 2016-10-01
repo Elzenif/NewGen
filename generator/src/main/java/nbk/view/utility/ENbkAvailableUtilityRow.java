@@ -15,17 +15,18 @@ import nbk.view.utility.scenario.ScenarioOptionRow;
 public enum ENbkAvailableUtilityRow implements IAvailableUtilityRow<NbkGame> {
 
   LOVE_ROW(ENbkAvailableUtility.LOVE_ROLEPLAY) {
-    UtilityOptionRow<NbkGame> utilityOptionRow = new LoveOptionRow();
+    final UtilityOptionRow utilityOptionRow = new LoveOptionRow();
+
     @Override
-    public UtilityOptionRow<NbkGame> getOptionRow() {
+    public UtilityOptionRow getOptionRow() {
       return utilityOptionRow;
     }
   },
   SCENARIO_ROW(ENbkAvailableUtility.SCENARIO) {
-    UtilityOptionRow<NbkGame> utilityOptionRow = new ScenarioOptionRow();
+    final UtilityOptionRow utilityOptionRow = new ScenarioOptionRow();
 
     @Override
-    public UtilityOptionRow<NbkGame> getOptionRow() {
+    public UtilityOptionRow getOptionRow() {
       return utilityOptionRow;
     }
   };

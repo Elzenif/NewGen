@@ -8,19 +8,19 @@ import java.util.Map;
  */
 public class LoveModel {
 
-  private final Map<ELoveDraw, ILoveDraw> loveDrawStringMap;
+  private final Map<ELoveDraw, ILoveDrawResult> loveDrawStringMap;
 
   public LoveModel() {
     loveDrawStringMap = new LinkedHashMap<>();
   }
 
-  public void addSentence(ELoveDraw eLoveDraw, ILoveDraw iLoveDraw) {
+  public void addSentence(ELoveDraw eLoveDraw, ILoveDrawResult iLoveDraw) {
     loveDrawStringMap.put(eLoveDraw, iLoveDraw);
   }
 
   public int getLoveScore() {
     return loveDrawStringMap.values().stream()
-            .map(ILoveDraw::getLoveScore)
+        .map(ILoveDrawResult::getLoveScore)
             .map(ELoveScore::getScore)
             .reduce(0, Integer::sum);
   }

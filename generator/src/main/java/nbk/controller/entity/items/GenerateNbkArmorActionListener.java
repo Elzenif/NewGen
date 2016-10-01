@@ -14,9 +14,9 @@ import org.jetbrains.annotations.Contract;
  */
 public class GenerateNbkArmorActionListener extends GenerateNbkItemActionListener {
 
-  public GenerateNbkArmorActionListener(EntityController<NbkGame> entityController, NbkArmorOptionRow entityOptionRow,
-                                        EntityResultRow entityResultRow) {
-    super(entityController, entityOptionRow, entityResultRow);
+  public GenerateNbkArmorActionListener(NbkArmorOptionRow entityOptionRow, EntityResultRow entityResultRow,
+                                        EntityController<NbkGame> entityController) {
+    super(entityOptionRow, entityResultRow, entityController);
   }
 
   @Contract("_ -> !null")

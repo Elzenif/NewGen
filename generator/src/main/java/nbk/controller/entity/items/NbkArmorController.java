@@ -22,7 +22,7 @@ public class NbkArmorController extends EntityController<NbkGame> {
 
   public NbkArmorController(NbkArmorOptionRow entityOptionRow, EntityResultRow entityResultRow) {
     super(entityOptionRow);
-    generateEntityActionListener = new GenerateNbkArmorActionListener(this, entityOptionRow, entityResultRow);
+    generateEntityActionListener = new GenerateNbkArmorActionListener(entityOptionRow, entityResultRow, this);
     Arrays.stream(EBodyPart.values()).forEach(bodyPart ->
             bodyPartActionListenerMap.put(bodyPart, new BodyPartActionListener(this, bodyPart)));
   }

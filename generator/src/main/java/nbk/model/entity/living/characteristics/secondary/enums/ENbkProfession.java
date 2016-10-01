@@ -50,6 +50,16 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     maxStats = builder.getMaxStats();
   }
 
+  @NotNull
+  @Contract(pure = true)
+  public static Predicate<ENbkProfession> getPredicate(Stats stats) {
+    return origin -> origin.getMinStats().entrySet().stream()
+        .map(entry -> entry.getValue() <= stats.get(entry.getKey()))
+        .reduce(Boolean::logicalAnd).orElse(true)
+        && origin.getMaxStats().entrySet().stream()
+        .map(entry -> entry.getValue() >= stats.get(entry.getKey()))
+        .reduce(Boolean::logicalAnd).orElse(true);
+  }
 
   @Contract(" -> !null")
   @Override
@@ -77,22 +87,10 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     return ev;
   }
 
-  @NotNull
-  @Contract(pure = true)
-  public static Predicate<ENbkProfession> getPredicate(Stats stats) {
-    return origin -> origin.getMinStats().entrySet().stream()
-            .map(entry -> entry.getValue() <= stats.get(entry.getKey()))
-            .reduce(Boolean::logicalAnd).orElse(true)
-            && origin.getMaxStats().entrySet().stream()
-            .map(entry -> entry.getValue() >= stats.get(entry.getKey()))
-            .reduce(Boolean::logicalAnd).orElse(true);
-  }
-
-
   private static class ENbkProfessionBuilder implements EntityTypeBuilder, EVBuilder, FrenchNounBuilder,
           StatsInRangeBuilder {
 
-    private List<FrenchNoun> names = new LinkedList<>();
+    private final List<FrenchNoun> names = new LinkedList<>();
     private EGeneralRarity rarity;
     private SPositive ev;
     private Stats minStats;
@@ -139,12 +137,6 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     @Override
     public ENbkProfessionBuilder rare() {
       rarity = EGeneralRarity.RARE;
-      return this;
-    }
-
-    @Override
-    public ENbkProfessionBuilder setEV(int ev) {
-      this.ev = new SPositive(ev);
       return this;
     }
 
@@ -282,6 +274,12 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     @Override
     public SPositive getEV() {
       return ev;
+    }
+
+    @Override
+    public ENbkProfessionBuilder setEV(int ev) {
+      this.ev = new SPositive(ev);
+      return this;
     }
 
     @Override

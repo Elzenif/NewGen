@@ -15,13 +15,13 @@ import nbk.model.commons.NbkGame;
  */
 public abstract class GenerateNbkItemActionListener extends GenerateEntityActionListener<NbkGame> {
 
-  protected GenerateNbkItemActionListener(EntityController<NbkGame> entityController,
-                                          EntityOptionRow<NbkGame> entityOptionRow, EntityResultRow entityResultRow) {
-    super(entityController, entityOptionRow, entityResultRow);
+  protected GenerateNbkItemActionListener(EntityOptionRow<NbkGame> entityOptionRow, EntityResultRow entityResultRow,
+                                          EntityController<NbkGame> entityController) {
+    super(entityOptionRow, entityResultRow, entityController);
   }
 
   @Override
-  protected ItemResult generateResult(GlobalConstraints globalConstraints) {
+  protected ItemResult generateOneResult(GlobalConstraints globalConstraints) {
     try {
       Item item = generate(globalConstraints);
       return new ItemResult(item);

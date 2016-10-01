@@ -10,7 +10,7 @@ import static nbk.model.utility.love.ELoveScore.NEUTRAL;
  * Created by Germain on 24/07/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ELoveAction implements ILoveDraw {
+public enum ELoveAction implements ILoveDrawResult {
   LD1("caresse habilement", GREAT),
   LD2("titille avec adresse", GREAT),
   LD3("tripote doucement", GOOD),

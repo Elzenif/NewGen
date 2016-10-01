@@ -79,4 +79,8 @@ public class MathUtils {
   public static double mean(int x, int y) {
     return Math.sqrt(x * x + y * y);
   }
+
+  public static int floor(double x) {
+    return (int) Math.floor(x);
+  }
 }

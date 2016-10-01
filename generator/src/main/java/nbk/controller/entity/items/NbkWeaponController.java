@@ -24,7 +24,7 @@ public class NbkWeaponController extends EntityController<NbkGame> {
 
   public NbkWeaponController(NbkWeaponOptionRow nbkWeaponOptionRow, EntityResultRow entityResultRow) {
     super(nbkWeaponOptionRow);
-    generateEntityActionListener = new GenerateNbkWeaponActionListener(this, nbkWeaponOptionRow, entityResultRow);
+    generateEntityActionListener = new GenerateNbkWeaponActionListener(nbkWeaponOptionRow, entityResultRow, this);
     Arrays.stream(ENbHands.values()).forEach(nbHands ->
             nbHandsActionListenerEnumMap.put(nbHands, new NbHandsActionListener(this, nbHands)));
   }

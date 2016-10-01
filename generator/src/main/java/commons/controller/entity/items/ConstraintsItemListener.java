@@ -10,14 +10,14 @@ import java.awt.event.ItemListener;
  */
 public class ConstraintsItemListener implements ItemListener {
 
-  private final HasConstraintPanel entityOptionRow;
+  private final HasConstraintPanel optionRow;
 
-  public ConstraintsItemListener(HasConstraintPanel entityOptionRow) {
-    this.entityOptionRow = entityOptionRow;
+  public ConstraintsItemListener(HasConstraintPanel optionRow) {
+    this.optionRow = optionRow;
   }
 
   @Override
   public void itemStateChanged(ItemEvent e) {
-    entityOptionRow.updateConstraintsAbility(entityOptionRow.isConstraintsCheckBoxSelected());
+    optionRow.updateConstraintsAbility(optionRow.isConstraintsCheckBoxSelected());
   }
 }
