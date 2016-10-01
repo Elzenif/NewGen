@@ -14,7 +14,7 @@ public enum EScenarioQuest implements IScenarioDrawResult {
   SD6("récupérer un objet magique de grande valeur (bien protégé)"),
   SD7("trouver le nécromancien responsable de l'apparition de zombies dans la région et de mettre fin à ses agissements"),
   SD8("trouver le coupable des nombreux vols commis dans le village ces derniers jours et de le rendre à la justice"),
-  SD9("d'assassiner un personne bien gardée"),
+  SD9("liquider une personne bien gardée"),
   SD10("trouver le véritable coupable d'un crime dont une personne est accusée à tort");
 
   private final String sentence;

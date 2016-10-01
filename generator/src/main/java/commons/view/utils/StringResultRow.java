@@ -1,5 +1,6 @@
 package commons.view.utils;
 
+import commons.utils.StringUtils;
 import commons.view.commons.StringResult;
 
 import javax.swing.JLabel;
@@ -35,30 +36,17 @@ public abstract class StringResultRow<T extends StringResult> extends ResultRow<
   @Override
   public void setResultsToPrint(Collection<T> results) {
     for (T result : results) {
-      JLabel resultToPrint = new JLabel(result.getRawResult());
-      makePretty(resultToPrint, result);
-      resultsToPrint.add(resultToPrint);
-      add(resultToPrint);
+      Iterable<String> split = StringUtils.split(result.getRawResult());
+      for (String s : split) {
+        JLabel resultToPrint = new JLabel(s);
+        makePretty(resultToPrint, result);
+        resultsToPrint.add(resultToPrint);
+        add(resultToPrint);
+      }
     }
     repaint();
     revalidate();
   }
-
-//  public void setResultsToPrint(Collection<T> results, String separator) {
-//    JLabel separatorLabel = new JLabel(separator);
-//    for (T result : results) {
-//      JLabel resultToPrint = new JLabel(result.getRawResult());
-//      makePretty(resultToPrint, result);
-//      resultsToPrint.add(resultToPrint);
-//      add(resultToPrint);
-//      separatorLabel = new JLabel(separator);
-//      resultsToPrint.add(separatorLabel);
-//      add(separatorLabel);
-//    }
-//    remove(separatorLabel);
-//    repaint();
-//    revalidate();
-//  }
 
   private void makePretty(JLabel resultToPrint, T result) {
     resultToPrint.setFont(result.getFont());

@@ -25,7 +25,6 @@ public class ScenarioController extends UtilityController<NbkGame, EScenarioDraw
       drawChangeListenerMap.put(scenarioDraw, new DrawChangeListener<>(this, scenarioDraw));
       utilityConstraint.put(scenarioDraw, 1);
     });
-
   }
 
   public DrawChangeListener getDrawChangeListener(EScenarioDraw scenarioDraw) {

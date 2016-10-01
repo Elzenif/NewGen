@@ -1,5 +1,6 @@
 package commons.utils;
 
+import com.google.common.base.Splitter;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.RoundingMode;
@@ -11,6 +12,8 @@ import java.util.Locale;
  * Created by Germain on 22/05/2016.
  */
 public class StringUtils {
+
+  private static final DecimalFormat format = setFormat();
 
   public static String fixedLengthString(int length, String string) {
     return String.format("%1$" + length + "s", string);
@@ -46,8 +49,6 @@ public class StringUtils {
 
   }
 
-  private static final DecimalFormat format = setFormat();
-
   private static DecimalFormat setFormat() {
     DecimalFormat format = new DecimalFormat("#.###", DecimalFormatSymbols.getInstance(Locale.FRANCE));
     format.setRoundingMode(RoundingMode.DOWN);
@@ -56,5 +57,10 @@ public class StringUtils {
 
   public static String format(double nb) {
     return format.format(nb);
+  }
+
+  @NotNull
+  public static Iterable<String> split(String string) {
+    return Splitter.on(" ").split(string);
   }
 }
