@@ -1,7 +1,7 @@
 package commons.view.utility;
 
 import commons.model.commons.Game;
-import commons.model.utility.IUtilityDrawKey;
+import commons.model.utility.constraints.IUtilityDrawKey;
 import commons.view.utils.DoublePanel;
 
 /**

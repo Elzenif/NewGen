@@ -1,15 +1,22 @@
 package nbk.model.utility.love;
 
-import commons.model.utility.UtilityConstraint;
+import commons.model.utility.constraints.UtilityConstraint;
+import nbk.model.utility.love.constraints.ELoveAction;
+import nbk.model.utility.love.constraints.ELoveDraw;
+import nbk.model.utility.love.constraints.ELovePosition;
+import nbk.model.utility.love.constraints.ELoveScore;
+import nbk.model.utility.love.constraints.ELoveTarget;
+import nbk.model.utility.love.constraints.ELoveTool;
+import nbk.model.utility.love.constraints.ILoveDrawResult;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static nbk.model.utility.love.ELoveDraw.ACTION;
-import static nbk.model.utility.love.ELoveDraw.LOVE_DRAW_NAME;
-import static nbk.model.utility.love.ELoveDraw.POSITION;
-import static nbk.model.utility.love.ELoveDraw.TARGET;
-import static nbk.model.utility.love.ELoveDraw.TOOL;
+import static nbk.model.utility.love.constraints.ELoveDraw.ACTION;
+import static nbk.model.utility.love.constraints.ELoveDraw.LOVE_DRAW_NAME;
+import static nbk.model.utility.love.constraints.ELoveDraw.POSITION;
+import static nbk.model.utility.love.constraints.ELoveDraw.TARGET;
+import static nbk.model.utility.love.constraints.ELoveDraw.TOOL;
 
 /**
  * Created by Germain on 24/07/2016.

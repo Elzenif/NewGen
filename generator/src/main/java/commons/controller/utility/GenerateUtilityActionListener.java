@@ -1,8 +1,8 @@
 package commons.controller.utility;
 
 import commons.controller.GenerateActionListener;
-import commons.model.utility.IUtilityDrawKey;
-import commons.model.utility.UtilityConstraint;
+import commons.model.utility.constraints.IUtilityDrawKey;
+import commons.model.utility.constraints.UtilityConstraint;
 import commons.view.utility.UtilityOptionRow;
 import commons.view.utility.UtilityResultRow;
 import commons.view.utility.result.UtilityResult;

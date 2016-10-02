@@ -1,17 +1,24 @@
 package nbk.model.utility.scenario;
 
-import commons.model.utility.UtilityConstraint;
+import commons.model.utility.constraints.UtilityConstraint;
 import commons.utils.MathUtils;
+import nbk.model.utility.scenario.constraints.EScenarioBeginning;
+import nbk.model.utility.scenario.constraints.EScenarioDraw;
+import nbk.model.utility.scenario.constraints.EScenarioGuy;
+import nbk.model.utility.scenario.constraints.EScenarioLocation;
+import nbk.model.utility.scenario.constraints.EScenarioLoot;
+import nbk.model.utility.scenario.constraints.EScenarioQuest;
+import nbk.model.utility.scenario.constraints.IScenarioDrawResult;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static nbk.model.utility.scenario.EScenarioDraw.BEGINNING;
-import static nbk.model.utility.scenario.EScenarioDraw.GUY;
-import static nbk.model.utility.scenario.EScenarioDraw.LOCATION;
-import static nbk.model.utility.scenario.EScenarioDraw.LOOT;
-import static nbk.model.utility.scenario.EScenarioDraw.QUEST;
-import static nbk.model.utility.scenario.EScenarioDraw.SCENARIO_DRAW_NAME;
+import static nbk.model.utility.scenario.constraints.EScenarioDraw.BEGINNING;
+import static nbk.model.utility.scenario.constraints.EScenarioDraw.GUY;
+import static nbk.model.utility.scenario.constraints.EScenarioDraw.LOCATION;
+import static nbk.model.utility.scenario.constraints.EScenarioDraw.LOOT;
+import static nbk.model.utility.scenario.constraints.EScenarioDraw.QUEST;
+import static nbk.model.utility.scenario.constraints.EScenarioDraw.SCENARIO_DRAW_NAME;
 
 /**
  * Created by Germain on 30/09/2016.

@@ -1,6 +1,6 @@
 package commons.view.utils;
 
-import nbk.model.commons.IDrawKey;
+import commons.model.commons.IDrawKey;
 
 /**
  * Created by Germain on 02/10/2016.

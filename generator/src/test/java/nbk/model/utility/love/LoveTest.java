@@ -1,6 +1,6 @@
 package nbk.model.utility.love;
 
-import commons.model.utility.UtilityConstraint;
+import commons.model.utility.constraints.UtilityConstraint;
 import org.assertj.core.api.JUnitSoftAssertions;
 import org.junit.Before;
 import org.junit.Rule;

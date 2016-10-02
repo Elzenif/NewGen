@@ -2,7 +2,7 @@ package nbk.controller.utility;
 
 import commons.controller.utility.GenerateUtilityActionListener;
 import commons.controller.utility.UtilityController;
-import commons.model.utility.IUtilityDrawKey;
+import commons.model.utility.constraints.IUtilityDrawKey;
 import commons.view.utility.UtilityOptionRow;
 import commons.view.utility.UtilityResultRow;
 

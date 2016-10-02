@@ -1,5 +1,7 @@
 package commons.model.utility;
 
+import commons.model.utility.constraints.IUtilityDrawKey;
+import commons.model.utility.constraints.UtilityConstraint;
 import commons.utils.exception.ForbiddenValueException;
 import org.junit.Before;
 import org.junit.Test;

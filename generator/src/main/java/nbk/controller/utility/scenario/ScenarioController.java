@@ -3,7 +3,7 @@ package nbk.controller.utility.scenario;
 import commons.controller.utility.UtilityController;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.DrawChangeListener;
-import nbk.model.utility.scenario.EScenarioDraw;
+import nbk.model.utility.scenario.constraints.EScenarioDraw;
 import nbk.view.utility.scenario.ScenarioOptionRow;
 
 import java.util.Arrays;

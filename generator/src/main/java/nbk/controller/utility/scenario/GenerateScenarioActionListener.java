@@ -1,13 +1,13 @@
 package nbk.controller.utility.scenario;
 
 import commons.controller.utility.UtilityController;
-import commons.model.utility.UtilityConstraint;
+import commons.model.utility.constraints.UtilityConstraint;
 import commons.view.utility.UtilityOptionRow;
 import commons.view.utility.UtilityResultRow;
 import commons.view.utility.result.UtilityResult;
 import nbk.controller.utility.GenerateNbkUtilityActionListener;
-import nbk.model.utility.scenario.EScenarioDraw;
 import nbk.model.utility.scenario.Scenario;
+import nbk.model.utility.scenario.constraints.EScenarioDraw;
 import nbk.view.utility.scenario.result.ScenarioResult;
 
 import java.util.Collection;

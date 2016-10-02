@@ -1,6 +1,6 @@
 package nbk.view.utility;
 
-import commons.model.utility.IUtilityDrawKey;
+import commons.model.utility.constraints.IUtilityDrawKey;
 import commons.utils.MathUtils;
 import commons.view.utility.UtilityOptionRow;
 import nbk.model.utility.ENbkAvailableUtility;

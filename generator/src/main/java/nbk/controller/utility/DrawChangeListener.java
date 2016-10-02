@@ -1,7 +1,7 @@
 package nbk.controller.utility;
 
 import commons.controller.intf.HasDrawKeysController;
-import nbk.model.commons.IDrawKey;
+import commons.model.commons.IDrawKey;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;

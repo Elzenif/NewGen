@@ -4,7 +4,7 @@ import commons.utils.Pair;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.scenario.ScenarioController;
 import nbk.model.utility.ENbkAvailableUtility;
-import nbk.model.utility.scenario.EScenarioDraw;
+import nbk.model.utility.scenario.constraints.EScenarioDraw;
 import nbk.view.utility.NbkUtilityOptionRow;
 
 import javax.swing.JSpinner;

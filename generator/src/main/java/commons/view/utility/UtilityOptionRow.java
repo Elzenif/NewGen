@@ -1,11 +1,11 @@
 package commons.view.utility;
 
 import commons.controller.utility.UtilityController;
+import commons.model.commons.IDrawKey;
 import commons.utils.StringUtils;
 import commons.view.utils.Constants;
 import commons.view.utils.ConstraintOptionRow;
 import commons.view.utils.HasDrawKeysOptionRow;
-import nbk.model.commons.IDrawKey;
 
 import javax.swing.JLabel;
 import java.awt.Font;

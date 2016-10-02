@@ -1,12 +1,12 @@
 package nbk.controller.utility.love;
 
 import commons.controller.utility.UtilityController;
-import commons.model.utility.UtilityConstraint;
+import commons.model.utility.constraints.UtilityConstraint;
 import commons.view.utility.UtilityResultRow;
 import commons.view.utility.result.UtilityResult;
 import nbk.controller.utility.GenerateNbkUtilityActionListener;
-import nbk.model.utility.love.ELoveDraw;
 import nbk.model.utility.love.Love;
+import nbk.model.utility.love.constraints.ELoveDraw;
 import nbk.view.utility.love.LoveOptionRow;
 import nbk.view.utility.love.result.LoveResult;
 

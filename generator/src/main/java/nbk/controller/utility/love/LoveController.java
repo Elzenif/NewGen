@@ -3,7 +3,7 @@ package nbk.controller.utility.love;
 import commons.controller.utility.UtilityController;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.DrawChangeListener;
-import nbk.model.utility.love.ELoveDraw;
+import nbk.model.utility.love.constraints.ELoveDraw;
 import nbk.view.utility.love.LoveOptionRow;
 
 import java.util.Arrays;

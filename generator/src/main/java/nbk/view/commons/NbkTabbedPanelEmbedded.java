@@ -2,9 +2,9 @@ package nbk.view.commons;
 
 import commons.view.commons.GameTabbedPanelEmbedded;
 import commons.view.dice.DicePanel;
-import commons.view.dungeon.DungeonPanel;
 import commons.view.entity.EntityPanel;
 import commons.view.hidden.HiddenPanel;
+import commons.view.map.DungeonPanel;
 import commons.view.utility.UtilityPanel;
 import nbk.model.commons.NbkGame;
 import nbk.view.entity.items.ENbkAvailableItemsRow;

@@ -4,7 +4,7 @@ import commons.utils.Pair;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.love.LoveController;
 import nbk.model.utility.ENbkAvailableUtility;
-import nbk.model.utility.love.ELoveDraw;
+import nbk.model.utility.love.constraints.ELoveDraw;
 import nbk.view.utility.NbkUtilityOptionRow;
 
 import javax.swing.JSpinner;
