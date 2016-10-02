@@ -1,9 +1,12 @@
-package commons.model.map;
+package nbk.model.map.dungeon;
 
-import commons.model.map.constraints.EDungeonDraw;
+import commons.model.map.EMapPart;
+import commons.model.map.Grid;
+import commons.model.map.Room;
 import commons.model.map.constraints.MapConstraint;
 import commons.utils.MathUtils;
 import commons.utils.Pair;
+import nbk.model.map.dungeon.constraints.EDungeonDraw;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
@@ -76,7 +79,7 @@ public class NbkDungeon {
   private void linkToCells(int x, int y, int width, int height) {
     for (int i = x; i < x + width; i += tileSize) {
       for (int j = y; j < y + height; j++) {
-        grid.getCell(i, j).setDungeonPart(EDungeonPart.SPACE);
+        grid.getCell(i, j).setMapPart(EMapPart.SPACE);
       }
     }
   }

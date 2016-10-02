@@ -7,17 +7,17 @@ import java.awt.Rectangle;
  */
 public class Cell extends Rectangle {
 
-  private EDungeonPart dungeonPart = EDungeonPart.WALL;
+  private EMapPart mapPart = EMapPart.WALL;
 
   public Cell(int x, int y, int width, int height) {
     super(x, y, width, height);
   }
 
-  public EDungeonPart getDungeonPart() {
-    return dungeonPart;
+  public EMapPart getMapPart() {
+    return mapPart;
   }
 
-  public void setDungeonPart(EDungeonPart dungeonPart) {
-    this.dungeonPart = dungeonPart;
+  public void setMapPart(EMapPart mapPart) {
+    this.mapPart = mapPart;
   }
 }

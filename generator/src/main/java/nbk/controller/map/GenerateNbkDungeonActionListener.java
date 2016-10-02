@@ -1,12 +1,12 @@
-package commons.controller.map;
+package nbk.controller.map;
 
 import commons.controller.GenerateActionListener;
-import commons.model.map.NbkDungeon;
-import commons.model.map.constraints.EDungeonDraw;
 import commons.model.map.constraints.MapConstraint;
 import commons.view.map.MapResultRow;
-import commons.view.map.NbkDungeonOptionRow;
-import commons.view.map.results.DungeonResult;
+import nbk.model.map.dungeon.NbkDungeon;
+import nbk.model.map.dungeon.constraints.EDungeonDraw;
+import nbk.view.map.NbkDungeonOptionRow;
+import nbk.view.map.results.DungeonResult;
 
 import java.awt.Image;
 import java.util.Collection;

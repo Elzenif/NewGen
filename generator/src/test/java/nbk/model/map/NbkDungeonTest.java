@@ -1,7 +1,9 @@
-package commons.model.map;
+package nbk.model.map;
 
-import commons.model.map.constraints.EDungeonDraw;
+import commons.model.map.Room;
 import commons.model.map.constraints.MapConstraint;
+import nbk.model.map.dungeon.NbkDungeon;
+import nbk.model.map.dungeon.constraints.EDungeonDraw;
 import org.assertj.core.api.Condition;
 import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
@@ -11,7 +13,7 @@ import org.junit.Test;
 
 import java.util.Set;
 
-import static commons.model.map.constraints.EDungeonDraw.NB_ROOMS;
+import static nbk.model.map.dungeon.constraints.EDungeonDraw.NB_ROOMS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

@@ -1,6 +1,8 @@
 package commons.controller.map;
 
-import commons.view.map.NbkDungeonOptionRow;
+import nbk.controller.map.GenerateNbkDungeonActionListener;
+import nbk.controller.map.NbkDungeonController;
+import nbk.view.map.NbkDungeonOptionRow;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;

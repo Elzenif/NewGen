@@ -1,4 +1,6 @@
-package commons.model.map.constraints;
+package nbk.model.map.dungeon.constraints;
+
+import commons.model.map.constraints.IMapDrawKey;
 
 /**
  * Created by Germain on 02/10/2016.

@@ -2,6 +2,7 @@ package commons.view.map;
 
 import commons.model.map.EMapType;
 import commons.view.utils.IAvailableRow;
+import nbk.view.map.NbkDungeonOptionRow;
 
 /**
  * Created by Germain on 24/09/2016.

@@ -1,9 +1,9 @@
-package commons.view.map.results;
+package nbk.view.map.results;
 
 import commons.model.map.Cell;
-import commons.model.map.EDungeonPart;
-import commons.model.map.NbkDungeon;
+import commons.model.map.EMapPart;
 import commons.view.commons.Result;
+import nbk.model.map.dungeon.NbkDungeon;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -41,6 +41,6 @@ public class DungeonResult implements Result<Image> {
   }
 
   private Color getColor(Cell cell) {
-    return (cell.getDungeonPart() == EDungeonPart.WALL) ? Color.BLACK : Color.WHITE;
+    return (cell.getMapPart() == EMapPart.WALL) ? Color.BLACK : Color.WHITE;
   }
 }

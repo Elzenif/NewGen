@@ -1,13 +1,14 @@
-package commons.controller.map;
+package nbk.controller.map;
 
 import commons.controller.AbstractOptionRowController;
 import commons.controller.entity.items.ConstraintsItemListener;
 import commons.controller.intf.HasDrawKeysController;
-import commons.model.map.constraints.EDungeonDraw;
+import commons.controller.map.SaveMapActionListener;
 import commons.model.map.constraints.MapConstraint;
 import commons.view.map.MapResultRow;
-import commons.view.map.NbkDungeonOptionRow;
 import nbk.controller.utility.DrawChangeListener;
+import nbk.model.map.dungeon.constraints.EDungeonDraw;
+import nbk.view.map.NbkDungeonOptionRow;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -18,7 +19,7 @@ import java.util.EnumMap;
 public class NbkDungeonController extends AbstractOptionRowController<MapConstraint<EDungeonDraw>>
     implements HasDrawKeysController<EDungeonDraw> {
 
-  private final SaveMapActionListener saveDungeonActionListener;
+  private final SaveMapActionListener saveMapActionListener;
   private final NbkDungeonOptionRow dungeonOptionRow;
 
   private final EnumMap<EDungeonDraw, DrawChangeListener<EDungeonDraw>> drawChangeListenerMap
@@ -28,15 +29,15 @@ public class NbkDungeonController extends AbstractOptionRowController<MapConstra
     super(new ConstraintsItemListener(dungeonOptionRow), new MapConstraint<>());
     this.dungeonOptionRow = dungeonOptionRow;
     generateActionListener = new GenerateNbkDungeonActionListener(dungeonOptionRow, dungeonResultRow, this);
-    saveDungeonActionListener = new SaveMapActionListener(this, dungeonOptionRow);
+    saveMapActionListener = new SaveMapActionListener(this, dungeonOptionRow);
     Arrays.stream(EDungeonDraw.values()).forEach(dungeonDraw -> {
       drawChangeListenerMap.put(dungeonDraw, new DrawChangeListener<>(this, dungeonDraw));
       generationConstraint.put(dungeonDraw, dungeonDraw.getDefaultValue());
     });
   }
 
-  public SaveMapActionListener getSaveDungeonActionListener() {
-    return saveDungeonActionListener;
+  public SaveMapActionListener getSaveMapActionListener() {
+    return saveMapActionListener;
   }
 
   public DrawChangeListener<EDungeonDraw> getDrawChangeListener(EDungeonDraw dungeonDraw) {

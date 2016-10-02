@@ -1,16 +1,17 @@
-package commons.view.map;
+package nbk.view.map;
 
-import commons.controller.map.NbkDungeonController;
 import commons.model.map.EMapType;
 import commons.model.map.IAvailableMap;
-import commons.model.map.constraints.EDungeonDraw;
 import commons.utils.MathUtils;
 import commons.utils.Pair;
 import commons.utils.StringUtils;
+import commons.view.map.MapResultRow;
 import commons.view.utils.Constants;
 import commons.view.utils.ConstraintOptionRow;
 import commons.view.utils.ConstraintPanel;
 import commons.view.utils.HasDrawKeysOptionRow;
+import nbk.controller.map.NbkDungeonController;
+import nbk.model.map.dungeon.constraints.EDungeonDraw;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
