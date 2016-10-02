@@ -9,12 +9,12 @@ import java.util.Map;
 /**
  * Created by Germain on 02/10/2016.
  */
-public class MapConstraint<K extends IMapDrawKey> extends ForwardingMap<K, Integer> implements GenerationConstraint {
+public class MapConstraint<K extends IMapDrawKey> extends ForwardingMap<K, Object> implements GenerationConstraint {
 
-  private final Map<K, Integer> map = new HashMap<>();
+  private final Map<K, Object> map = new HashMap<>();
 
   @Override
-  protected Map<K, Integer> delegate() {
+  protected Map<K, Object> delegate() {
     return map;
   }
 }

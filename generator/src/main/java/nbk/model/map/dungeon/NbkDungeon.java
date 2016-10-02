@@ -7,6 +7,7 @@ import commons.model.map.constraints.MapConstraint;
 import commons.utils.MathUtils;
 import commons.utils.Pair;
 import nbk.model.map.dungeon.constraints.EDungeonDraw;
+import nbk.model.map.dungeon.constraints.EDungeonRadius;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
@@ -20,6 +21,10 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+
+import static nbk.model.map.dungeon.constraints.EDungeonDraw.NB_ROOMS;
+import static nbk.model.map.dungeon.constraints.EDungeonDraw.RADIUS;
+import static nbk.model.map.dungeon.constraints.EDungeonDraw.TILE_SIZE;
 
 /**
  * Created by Germain on 24/09/2016.
@@ -43,13 +48,13 @@ public class NbkDungeon {
     plan = new SimpleGraph<>(DefaultEdge.class);
     corridors = new HashSet<>();
 
-    nbRoomsDesired = builder.nbRoomsDesired;
-    tileSize = builder.tileSize;
-    deviation = builder.deviation;
-    mean = builder.mean;
-    radius = builder.radius;
-    factor = builder.factor;
-    corridorWidth = builder.corridorWidth;
+    nbRoomsDesired = builder.getNbRoomsDesired();
+    tileSize = builder.getTileSize();
+    deviation = builder.getDeviation();
+    mean = builder.getMean();
+    radius = builder.getRadius();
+    factor = builder.getFactor();
+    corridorWidth = builder.getCorridorWidth();
 
     Queue<Room> overlappingRooms = createRooms(nbRoomsDesired);
     Queue<Room> separatedRooms = separateRooms(overlappingRooms);
@@ -233,7 +238,7 @@ public class NbkDungeon {
     return corridors;
   }
 
-  public Set<DefaultEdge> getEdges() {
+  private Set<DefaultEdge> getEdges() {
     return plan.edgeSet();
   }
 
@@ -253,13 +258,14 @@ public class NbkDungeon {
     return grid;
   }
 
-  private static class DungeonBuilder {
 
-    private int nbRoomsDesired = 5;
-    private int tileSize = 5;
+  static class DungeonBuilder {
+
+    private int nbRoomsDesired = (int) NB_ROOMS.getDefaultValue();
+    private int tileSize = (int) TILE_SIZE.getDefaultValue();
     private int deviation = 30;
     private int mean = 50;
-    private int radius = 100;
+    private EDungeonRadius radius = (EDungeonRadius) RADIUS.getDefaultValue();
     private int factor = 4;
     private int corridorWidth = 1;
 
@@ -267,7 +273,14 @@ public class NbkDungeon {
       for (EDungeonDraw dungeonDrawKey : mapConstraint.keySet()) {
         switch (dungeonDrawKey) {
           case NB_ROOMS:
-            setNbRoomsDesired(mapConstraint.get(dungeonDrawKey));
+            setNbRoomsDesired((Integer) mapConstraint.get(dungeonDrawKey));
+            break;
+          case TILE_SIZE:
+            setTileSize((Integer) mapConstraint.get(dungeonDrawKey));
+            break;
+          case RADIUS:
+            setRadius((EDungeonRadius) mapConstraint.get(dungeonDrawKey));
+            break;
         }
       }
     }
@@ -276,28 +289,56 @@ public class NbkDungeon {
       return new NbkDungeon(this);
     }
 
+    int getNbRoomsDesired() {
+      return nbRoomsDesired;
+    }
+
     private void setNbRoomsDesired(int nbRoomsDesired) {
       this.nbRoomsDesired = nbRoomsDesired;
+    }
+
+    int getTileSize() {
+      return tileSize;
     }
 
     private void setTileSize(int tileSize) {
       this.tileSize = tileSize;
     }
 
+    int getDeviation() {
+      return deviation;
+    }
+
     private void setDeviation(int deviation) {
       this.deviation = deviation;
+    }
+
+    int getMean() {
+      return mean;
     }
 
     private void setMean(int mean) {
       this.mean = mean;
     }
 
-    private void setRadius(int radius) {
+    int getRadius() {
+      return radius.getValue();
+    }
+
+    private void setRadius(EDungeonRadius radius) {
       this.radius = radius;
+    }
+
+    int getFactor() {
+      return factor;
     }
 
     private void setFactor(int factor) {
       this.factor = factor;
+    }
+
+    int getCorridorWidth() {
+      return corridorWidth;
     }
 
     private void setCorridorWidth(int corridorWidth) {

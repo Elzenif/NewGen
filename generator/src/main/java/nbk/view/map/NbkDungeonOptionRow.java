@@ -3,7 +3,6 @@ package nbk.view.map;
 import commons.model.map.EMapType;
 import commons.model.map.IAvailableMap;
 import commons.utils.MathUtils;
-import commons.utils.Pair;
 import commons.utils.StringUtils;
 import commons.view.map.MapResultRow;
 import commons.view.utils.Constants;
@@ -14,10 +13,9 @@ import nbk.controller.map.NbkDungeonController;
 import nbk.model.map.dungeon.constraints.EDungeonDraw;
 
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.Arrays;
@@ -33,7 +31,7 @@ public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
 
   private final ConstraintPanel basicOptionsPanel;
 
-  private final EnumMap<EDungeonDraw, Pair<JSpinner, SpinnerNumberModel>> dungeonDrawMap;
+  private final EnumMap<EDungeonDraw, JComboBox<Object>> dungeonDrawMap;
 
   public NbkDungeonOptionRow(IAvailableMap availableDungeon) {
     super(MathUtils.maxLength(Arrays.asList(EMapType.values())), availableDungeon.getName());
@@ -51,16 +49,14 @@ public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
     dungeonDrawMap = new EnumMap<>(EDungeonDraw.class);
     for (EDungeonDraw dungeonDraw : EDungeonDraw.values()) {
       JPanel jPanel = new ConstraintPanel();
-      jPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP));
-      // TODO change spinner
-      SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(5, 2, 20, 1);
-      JSpinner jSpinner = new JSpinner(spinnerNumberModel);
-      jSpinner.setToolTipText(dungeonDraw.getToolTipText());
-      jPanel.add(jSpinner);
+      jPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP / 2));
+      JComboBox<Object> jComboBox = new JComboBox<>(dungeonDraw.getDrawValues());
+      jComboBox.setSelectedItem(dungeonDraw.getDefaultValue());
+      jComboBox.setToolTipText(dungeonDraw.getToolTipText());
+      jPanel.add(jComboBox);
+      dungeonDrawMap.put(dungeonDraw, jComboBox);
       JLabel jLabel = new JLabel(dungeonDraw.toString());
       jPanel.add(jLabel);
-
-      dungeonDrawMap.put(dungeonDraw, new Pair<>(jSpinner, spinnerNumberModel));
       basicOptionsPanel.add(jPanel);
     }
 
@@ -75,12 +71,12 @@ public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
     NbkDungeonController dungeonController = (NbkDungeonController) this.controller;
     generateButton.addActionListener(dungeonController.getGenerateActionListener());
     dungeonResultRow.setController(dungeonController);
-    dungeonDrawMap.forEach((dungeonDraw, pair) ->
-        pair.getLeft().addChangeListener(dungeonController.getDrawChangeListener(dungeonDraw)));
+    dungeonDrawMap.forEach((dungeonDraw, comboBox) ->
+        comboBox.addActionListener(dungeonController.getDrawChangeListener(dungeonDraw)));
   }
 
   @Override
-  public int getDrawValue(EDungeonDraw drawKey) {
-    return dungeonDrawMap.get(drawKey).getRight().getNumber().intValue();
+  public Object getDrawValue(EDungeonDraw drawKey) {
+    return dungeonDrawMap.get(drawKey).getSelectedItem();
   }
 }

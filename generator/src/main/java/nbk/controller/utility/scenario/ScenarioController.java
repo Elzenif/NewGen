@@ -32,6 +32,6 @@ public class ScenarioController extends UtilityController<EScenarioDraw> {
 
   @Override
   public void updateDrawKeyValue(EScenarioDraw drawKey) {
-    generationConstraint.put(drawKey, ((ScenarioOptionRow) utilityOptionRow).getDrawValue(drawKey));
+    generationConstraint.put(drawKey, (Integer) utilityOptionRow.getDrawValue(drawKey));
   }
 }

@@ -13,9 +13,9 @@ import commons.view.utility.UtilityOptionRow;
 public abstract class UtilityController<K extends IUtilityDrawKey>
     extends AbstractOptionRowController<UtilityConstraint> implements HasDrawKeysController<K> {
 
-  protected final UtilityOptionRow utilityOptionRow;
+  protected final UtilityOptionRow<K> utilityOptionRow;
 
-  protected UtilityController(UtilityOptionRow utilityOptionRow) {
+  protected UtilityController(UtilityOptionRow<K> utilityOptionRow) {
     super(new ConstraintsItemListener(utilityOptionRow), new UtilityConstraint());
     this.utilityOptionRow = utilityOptionRow;
   }

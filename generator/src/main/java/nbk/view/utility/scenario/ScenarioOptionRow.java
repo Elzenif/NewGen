@@ -42,7 +42,7 @@ public class ScenarioOptionRow extends NbkUtilityOptionRow<EScenarioDraw> {
   }
 
   @Override
-  public int getDrawValue(EScenarioDraw drawKey) {
+  public Object getDrawValue(EScenarioDraw drawKey) {
     return scenarioDrawMap.get(drawKey).getRight().getNumber().intValue();
   }
 }

@@ -7,6 +7,6 @@ import commons.model.commons.IDrawKey;
  */
 public interface HasDrawKeysOptionRow<K extends IDrawKey> {
 
-  int getDrawValue(K drawKey);
+  Object getDrawValue(K drawKey);
 
 }

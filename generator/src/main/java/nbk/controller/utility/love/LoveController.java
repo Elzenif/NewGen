@@ -28,7 +28,7 @@ public class LoveController extends UtilityController<ELoveDraw> {
 
   @Override
   public void updateDrawKeyValue(ELoveDraw drawKey) {
-    generationConstraint.put(drawKey, ((LoveOptionRow) utilityOptionRow).getDrawValue(drawKey));
+    generationConstraint.put(drawKey, (Integer) utilityOptionRow.getDrawValue(drawKey));
   }
 
   public DrawChangeListener getDrawChangeListener(ELoveDraw loveDraw) {

@@ -37,7 +37,6 @@ public class DungeonResult implements Result<Image> {
       }
     }
     return bufferedImage;
-
   }
 
   private Color getColor(Cell cell) {

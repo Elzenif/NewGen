@@ -42,7 +42,7 @@ public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
   }
 
   @Override
-  public int getDrawValue(ELoveDraw drawKey) {
+  public Object getDrawValue(ELoveDraw drawKey) {
     return loveDrawMap.get(drawKey).getRight().getNumber().intValue();
   }
 }

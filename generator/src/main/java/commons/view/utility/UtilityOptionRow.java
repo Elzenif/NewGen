@@ -21,7 +21,7 @@ public abstract class UtilityOptionRow<K extends IDrawKey>
   protected UtilityOptionRow(int labelSize, String name) {
     super(labelSize, name);
 
-    infoLabel = new JLabel(StringUtils.leftAlign(labelSize, name) + " : ");
+    infoLabel = new JLabel(StringUtils.leftAlign(labelSize + 3, name + " : "));
     infoLabel.setFont(new Font(Constants.FONT_NAME, Font.BOLD, Constants.FONT_SIZE));
     add(infoLabel);
 
