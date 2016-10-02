@@ -1,7 +1,7 @@
 package commons.model.map;
 
-import commons.model.map.constraints.DungeonConstraint;
 import commons.model.map.constraints.EDungeonDraw;
+import commons.model.map.constraints.MapConstraint;
 import commons.utils.MathUtils;
 import commons.utils.Pair;
 import org.jgrapht.UndirectedGraph;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Germain on 24/09/2016.
  */
-public class Dungeon {
+public class NbkDungeon {
 
   private final UndirectedGraph<Room, DefaultEdge> plan;
   private final Set<Rectangle> corridors;
@@ -36,7 +36,7 @@ public class Dungeon {
   private int width;
   private int height;
 
-  private Dungeon(DungeonBuilder builder) {
+  private NbkDungeon(DungeonBuilder builder) {
     plan = new SimpleGraph<>(DefaultEdge.class);
     corridors = new HashSet<>();
 
@@ -58,8 +58,8 @@ public class Dungeon {
     buildGrid();
   }
 
-  public static Dungeon create(DungeonConstraint<EDungeonDraw> dungeonConstraint) {
-    return new DungeonBuilder(dungeonConstraint).build();
+  public static NbkDungeon create(MapConstraint<EDungeonDraw> mapConstraint) {
+    return new DungeonBuilder(mapConstraint).build();
   }
 
   private void buildGrid() {
@@ -260,17 +260,17 @@ public class Dungeon {
     private int factor = 4;
     private int corridorWidth = 1;
 
-    public DungeonBuilder(DungeonConstraint<EDungeonDraw> dungeonConstraint) {
-      for (EDungeonDraw dungeonDrawKey : dungeonConstraint.keySet()) {
+    public DungeonBuilder(MapConstraint<EDungeonDraw> mapConstraint) {
+      for (EDungeonDraw dungeonDrawKey : mapConstraint.keySet()) {
         switch (dungeonDrawKey) {
           case NB_ROOMS:
-            setNbRoomsDesired(dungeonConstraint.get(dungeonDrawKey));
+            setNbRoomsDesired(mapConstraint.get(dungeonDrawKey));
         }
       }
     }
 
-    public Dungeon build() {
-      return new Dungeon(this);
+    public NbkDungeon build() {
+      return new NbkDungeon(this);
     }
 
     private void setNbRoomsDesired(int nbRoomsDesired) {

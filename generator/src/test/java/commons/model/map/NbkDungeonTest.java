@@ -1,7 +1,7 @@
 package commons.model.map;
 
-import commons.model.map.constraints.DungeonConstraint;
 import commons.model.map.constraints.EDungeonDraw;
+import commons.model.map.constraints.MapConstraint;
 import org.assertj.core.api.Condition;
 import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
@@ -17,19 +17,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by Germain on 24/09/2016.
  */
-public class DungeonTest {
+public class NbkDungeonTest {
 
-  private Dungeon dungeon;
-  private DungeonConstraint<EDungeonDraw> dungeonConstraint;
+  private NbkDungeon dungeon;
+  private MapConstraint<EDungeonDraw> mapConstraint;
 
   @Before
   public void setUp() throws Exception {
-    dungeonConstraint = new DungeonConstraint<>();
+    mapConstraint = new MapConstraint<>();
   }
 
   @Test
   public void dungeonShouldHaveAtLeastTwoRooms() {
-    dungeon = Dungeon.create(dungeonConstraint);
+    dungeon = NbkDungeon.create(mapConstraint);
     Set<Room> rooms = dungeon.getRooms();
     assertThat(rooms).isNotNull();
     assertThat(rooms.size()).isGreaterThanOrEqualTo(2);
@@ -37,15 +37,15 @@ public class DungeonTest {
 
   @Test
   public void dungeonShouldHaveNbRoomsDesired() {
-    dungeonConstraint.put(NB_ROOMS, 10);
-    dungeon = Dungeon.create(dungeonConstraint);
+    mapConstraint.put(NB_ROOMS, 10);
+    dungeon = NbkDungeon.create(mapConstraint);
     Set<Room> rooms = dungeon.getRooms();
     assertThat(rooms.size()).isEqualTo(10);
   }
 
   @Test
   public void dungeonRoomsShouldBeConnected() {
-    dungeon = Dungeon.create(dungeonConstraint);
+    dungeon = NbkDungeon.create(mapConstraint);
     ConnectivityInspector<Room, DefaultEdge> connectivityInspector = new ConnectivityInspector<>(dungeon.getPlan());
     assertThat(connectivityInspector.isGraphConnected()).isTrue();
   }
@@ -53,32 +53,32 @@ public class DungeonTest {
   @Ignore
   @Test
   public void dungeonShouldHaveAtLeastOneEntry() {
-    dungeon = Dungeon.create(dungeonConstraint);
+    dungeon = NbkDungeon.create(mapConstraint);
     Set<Room> rooms = dungeon.getRooms();
     assertThat(rooms).areAtLeastOne(new Condition<>(Room::isEntry, "entry"));
   }
 
   @Test
   public void dungeonWidthShouldBeStrictlyPositive() {
-    dungeon = Dungeon.create(dungeonConstraint);
+    dungeon = NbkDungeon.create(mapConstraint);
     assertThat(dungeon.getHeight()).isGreaterThan(0);
   }
 
   @Test
   public void dungeonHeightShouldBeStrictlyPositive() {
-    dungeon = Dungeon.create(dungeonConstraint);
+    dungeon = NbkDungeon.create(mapConstraint);
     assertThat(dungeon.getHeight()).isGreaterThan(0);
   }
 
   @Test
   public void dungeonRoomsCoordinatesShouldBeStrictlyPositive() {
-    dungeon = Dungeon.create(dungeonConstraint);
+    dungeon = NbkDungeon.create(mapConstraint);
     assertThat(dungeon.getRooms()).allMatch(room -> room.getX() > 0 && room.getY() > 0);
   }
 
   @Test
   public void dungeonShouldHaveAtLeastOneCorridor() {
-    dungeon = Dungeon.create(dungeonConstraint);
+    dungeon = NbkDungeon.create(mapConstraint);
     assertThat(dungeon.getCorridors().size()).isGreaterThanOrEqualTo(1);
   }
 }

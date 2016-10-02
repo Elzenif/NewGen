@@ -1,8 +1,8 @@
 package commons.view.map.results;
 
 import commons.model.map.Cell;
-import commons.model.map.Dungeon;
 import commons.model.map.EDungeonPart;
+import commons.model.map.NbkDungeon;
 import commons.view.commons.Result;
 
 import java.awt.AlphaComposite;
@@ -16,9 +16,9 @@ import java.awt.image.BufferedImage;
  */
 public class DungeonResult implements Result<Image> {
 
-  private final Dungeon dungeon;
+  private final NbkDungeon dungeon;
 
-  public DungeonResult(Dungeon dungeon) {
+  public DungeonResult(NbkDungeon dungeon) {
     this.dungeon = dungeon;
   }
 

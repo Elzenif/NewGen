@@ -3,10 +3,10 @@ package commons.controller.map;
 import commons.controller.AbstractOptionRowController;
 import commons.controller.entity.items.ConstraintsItemListener;
 import commons.controller.intf.HasDrawKeysController;
-import commons.model.map.constraints.DungeonConstraint;
 import commons.model.map.constraints.EDungeonDraw;
-import commons.view.map.DungeonOptionRow;
-import commons.view.map.DungeonResultRow;
+import commons.model.map.constraints.MapConstraint;
+import commons.view.map.MapResultRow;
+import commons.view.map.NbkDungeonOptionRow;
 import nbk.controller.utility.DrawChangeListener;
 
 import java.util.Arrays;
@@ -15,27 +15,27 @@ import java.util.EnumMap;
 /**
  * Created by Germain on 26/09/2016.
  */
-public class DungeonController extends AbstractOptionRowController<DungeonConstraint<EDungeonDraw>>
+public class NbkDungeonController extends AbstractOptionRowController<MapConstraint<EDungeonDraw>>
     implements HasDrawKeysController<EDungeonDraw> {
 
-  private final SaveDungeonActionListener saveDungeonActionListener;
-  private final DungeonOptionRow dungeonOptionRow;
+  private final SaveMapActionListener saveDungeonActionListener;
+  private final NbkDungeonOptionRow dungeonOptionRow;
 
   private final EnumMap<EDungeonDraw, DrawChangeListener<EDungeonDraw>> drawChangeListenerMap
       = new EnumMap<>(EDungeonDraw.class);
 
-  public DungeonController(DungeonOptionRow dungeonOptionRow, DungeonResultRow dungeonResultRow) {
-    super(new ConstraintsItemListener(dungeonOptionRow), new DungeonConstraint<>());
+  public NbkDungeonController(NbkDungeonOptionRow dungeonOptionRow, MapResultRow dungeonResultRow) {
+    super(new ConstraintsItemListener(dungeonOptionRow), new MapConstraint<>());
     this.dungeonOptionRow = dungeonOptionRow;
-    generateActionListener = new GenerateDungeonActionListener(dungeonOptionRow, dungeonResultRow, this);
-    saveDungeonActionListener = new SaveDungeonActionListener(this, dungeonOptionRow);
+    generateActionListener = new GenerateNbkDungeonActionListener(dungeonOptionRow, dungeonResultRow, this);
+    saveDungeonActionListener = new SaveMapActionListener(this, dungeonOptionRow);
     Arrays.stream(EDungeonDraw.values()).forEach(dungeonDraw -> {
       drawChangeListenerMap.put(dungeonDraw, new DrawChangeListener<>(this, dungeonDraw));
       generationConstraint.put(dungeonDraw, dungeonDraw.getDefaultValue());
     });
   }
 
-  public SaveDungeonActionListener getSaveDungeonActionListener() {
+  public SaveMapActionListener getSaveDungeonActionListener() {
     return saveDungeonActionListener;
   }
 

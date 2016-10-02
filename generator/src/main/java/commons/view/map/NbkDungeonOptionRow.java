@@ -1,8 +1,8 @@
 package commons.view.map;
 
-import commons.controller.map.DungeonController;
-import commons.model.map.EDungeonType;
-import commons.model.map.IAvailableDungeon;
+import commons.controller.map.NbkDungeonController;
+import commons.model.map.EMapType;
+import commons.model.map.IAvailableMap;
 import commons.model.map.constraints.EDungeonDraw;
 import commons.utils.MathUtils;
 import commons.utils.Pair;
@@ -25,7 +25,7 @@ import java.util.EnumMap;
 /**
  * Created by Germain on 24/09/2016.
  */
-public class DungeonOptionRow extends ConstraintOptionRow<DungeonResultRow>
+public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
     implements HasDrawKeysOptionRow<EDungeonDraw> {
 
   private final JLabel infoLabel;
@@ -34,8 +34,8 @@ public class DungeonOptionRow extends ConstraintOptionRow<DungeonResultRow>
 
   private final EnumMap<EDungeonDraw, Pair<JSpinner, SpinnerNumberModel>> dungeonDrawMap;
 
-  public DungeonOptionRow(IAvailableDungeon availableDungeon) {
-    super(MathUtils.maxLength(Arrays.asList(EDungeonType.values())), availableDungeon.getName());
+  public NbkDungeonOptionRow(IAvailableMap availableDungeon) {
+    super(MathUtils.maxLength(Arrays.asList(EMapType.values())), availableDungeon.getName());
 
     infoLabel = new JLabel(StringUtils.leftAlign(labelSize, name) + " : ");
     infoLabel.setFont(new Font(Constants.FONT_NAME, Font.BOLD, Constants.FONT_SIZE));
@@ -69,9 +69,9 @@ public class DungeonOptionRow extends ConstraintOptionRow<DungeonResultRow>
   }
 
   @Override
-  public void setControllers(DungeonResultRow dungeonResultRow) {
-    super.setControllers(new DungeonController(this, dungeonResultRow));
-    DungeonController dungeonController = (DungeonController) this.controller;
+  public void setControllers(MapResultRow dungeonResultRow) {
+    super.setControllers(new NbkDungeonController(this, dungeonResultRow));
+    NbkDungeonController dungeonController = (NbkDungeonController) this.controller;
     generateButton.addActionListener(dungeonController.getGenerateActionListener());
     dungeonResultRow.setController(dungeonController);
     dungeonDrawMap.forEach((dungeonDraw, pair) ->

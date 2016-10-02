@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by Germain on 02/10/2016.
  */
-public class DungeonConstraint<K extends IDungeonDrawKey> extends ForwardingMap<K, Integer> implements GenerationConstraint {
+public class MapConstraint<K extends IMapDrawKey> extends ForwardingMap<K, Integer> implements GenerationConstraint {
 
   private final Map<K, Integer> map = new HashMap<>();
 

@@ -4,7 +4,7 @@ import commons.view.commons.GameTabbedPanelEmbedded;
 import commons.view.dice.DicePanel;
 import commons.view.entity.EntityPanel;
 import commons.view.hidden.HiddenPanel;
-import commons.view.map.DungeonPanel;
+import commons.view.map.MapPanel;
 import commons.view.utility.UtilityPanel;
 import nbk.model.commons.NbkGame;
 import nbk.view.entity.items.ENbkAvailableItemsRow;
@@ -21,7 +21,7 @@ public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
   private final EntityPanel<NbkGame, ENbkAvailableItemsRow> itemsPanel;
   private final UtilityPanel<NbkGame, ENbkAvailableUtilityRow> utilityPanel;
   private final EntityPanel<NbkGame, ENbkAvailableLivingsRow> livingsPanel;
-  private final DungeonPanel dungeonPanel;
+  private final MapPanel mapPanel;
 
   public NbkTabbedPanelEmbedded() {
     hiddenPanel = new HiddenPanel<>(NbkGame.getInstance());
@@ -43,9 +43,9 @@ public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
     controllers.add(utilityPanel);
     panelMap.put("Utility", utilityPanel);
 
-    dungeonPanel = new DungeonPanel();
-    controllers.add(dungeonPanel);
-    panelMap.put("Dungeon", dungeonPanel);
+    mapPanel = new MapPanel();
+    controllers.add(mapPanel);
+    panelMap.put("Map", mapPanel);
 
     addPanels();
   }

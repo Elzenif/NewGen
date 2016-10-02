@@ -5,7 +5,7 @@ import commons.utils.StringUtils;
 /**
  * Created by Germain on 24/09/2016.
  */
-public enum EDungeonType implements IAvailableDungeon {
+public enum EMapType implements IAvailableMap {
 
   SIMPLE_DUNGEON;
 

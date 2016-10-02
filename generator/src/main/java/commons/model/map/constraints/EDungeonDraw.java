@@ -3,7 +3,7 @@ package commons.model.map.constraints;
 /**
  * Created by Germain on 02/10/2016.
  */
-public enum EDungeonDraw implements IDungeonDrawKey {
+public enum EDungeonDraw implements IMapDrawKey {
   NB_ROOMS(5, "Number of rooms the map will contain");
 
   private final String toolTipText;
