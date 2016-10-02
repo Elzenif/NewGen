@@ -20,19 +20,14 @@ import java.util.stream.IntStream;
 public abstract class GenerateEntityActionListener<G extends Game>
     extends GenerateActionListener<EntityOptionRow<G>, EntityResultRow, EntityResult, String, GlobalConstraints> {
 
-  private final EntityController<G> entityController;
-
   protected GenerateEntityActionListener(EntityOptionRow<G> entityOptionRow, EntityResultRow entityResultRow,
                                          EntityController<G> entityController) {
-    super(entityOptionRow, entityResultRow);
-    this.entityController = entityController;
+    super(entityOptionRow, entityResultRow, entityController);
   }
 
   @Override
-  protected GlobalConstraints getConstraints() {
-    return optionRow.isConstraintsCheckBoxSelected()
-            ? entityController.getGlobalConstraints()
-            : new GlobalConstraints();
+  protected GlobalConstraints newConstraint() {
+    return new GlobalConstraints();
   }
 
   @Override
@@ -46,6 +41,6 @@ public abstract class GenerateEntityActionListener<G extends Game>
   protected abstract EntityResult generateOneResult(GlobalConstraints globalConstraints);
 
   protected abstract Entity<G> generate(GlobalConstraints globalConstraints)
-          throws NoAvailableEntityTypeException;
+      throws NoAvailableEntityTypeException;
 
 }

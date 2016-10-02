@@ -24,7 +24,7 @@ public class NbkWeaponController extends EntityController<NbkGame> {
 
   public NbkWeaponController(NbkWeaponOptionRow nbkWeaponOptionRow, EntityResultRow entityResultRow) {
     super(nbkWeaponOptionRow);
-    generateEntityActionListener = new GenerateNbkWeaponActionListener(nbkWeaponOptionRow, entityResultRow, this);
+    generateActionListener = new GenerateNbkWeaponActionListener(nbkWeaponOptionRow, entityResultRow, this);
     Arrays.stream(ENbHands.values()).forEach(nbHands ->
             nbHandsActionListenerEnumMap.put(nbHands, new NbHandsActionListener(this, nbHands)));
   }
@@ -36,15 +36,15 @@ public class NbkWeaponController extends EntityController<NbkGame> {
   @Override
   public void updateRarityConstraint(GenericConstraint<EItemRarity> constraint) {
     // different for randomly generated and predefined weapons
-    globalConstraints.clear(ENbkQuality.getConstraints(), EItemRarity.class);
-    globalConstraints.update(ENbkQuality.getConstraints(), EItemRarity.class, constraint);
-    globalConstraints.clear(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class);
-    globalConstraints.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, constraint);
+    generationConstraint.clear(ENbkQuality.getConstraints(), EItemRarity.class);
+    generationConstraint.update(ENbkQuality.getConstraints(), EItemRarity.class, constraint);
+    generationConstraint.clear(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class);
+    generationConstraint.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, constraint);
 
   }
 
   public void updateNbHandsConstraint(GenericConstraint<ENbHands> constraint) {
-    globalConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, constraint);
+    generationConstraint.update(ENbkWeaponType.getConstraints(), ENbHands.class, constraint);
   }
 
 }

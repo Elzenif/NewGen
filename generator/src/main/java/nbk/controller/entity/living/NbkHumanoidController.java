@@ -14,7 +14,7 @@ public class NbkHumanoidController extends EntityController<NbkGame> {
 
   public NbkHumanoidController(NbkHumanoidOptionRow nbkHumanoidOptionRow, EntityResultRow resultRow) {
     super(nbkHumanoidOptionRow);
-    generateEntityActionListener = new GenerateNbkHumanoidActionListener(nbkHumanoidOptionRow, resultRow, this);
+    generateActionListener = new GenerateNbkHumanoidActionListener(nbkHumanoidOptionRow, resultRow, this);
   }
 
   @Override

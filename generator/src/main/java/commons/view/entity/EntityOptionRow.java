@@ -50,7 +50,7 @@ public abstract class EntityOptionRow<G extends Game> extends ConstraintOptionRo
   protected void setControllers(EntityController<G> entityController) {
     super.setControllers(entityController);
     qualityTextField.addPropertyChangeListener(((EntityController) controller).getRarityChangeListener());
-    generateButton.addActionListener(((EntityController) controller).getGenerateEntityActionListener());
+    generateButton.addActionListener(controller.getGenerateActionListener());
   }
 
   public int getNumberOfEntitiesSelected() {

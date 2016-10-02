@@ -5,17 +5,16 @@ import commons.controller.utility.UtilityController;
 import commons.model.utility.IUtilityDrawKey;
 import commons.view.utility.UtilityOptionRow;
 import commons.view.utility.UtilityResultRow;
-import nbk.model.commons.NbkGame;
 
 /**
  * Created by Germain on 01/10/2016.
  */
 public abstract class GenerateNbkUtilityActionListener<K extends IUtilityDrawKey>
-    extends GenerateUtilityActionListener<NbkGame, K> {
+    extends GenerateUtilityActionListener<K> {
 
-  protected GenerateNbkUtilityActionListener(UtilityOptionRow utilityOptionRow,
+  protected GenerateNbkUtilityActionListener(UtilityOptionRow<K> utilityOptionRow,
                                              UtilityResultRow utilityResultRow,
-                                             UtilityController<NbkGame, K> utilityController) {
+                                             UtilityController<K> utilityController) {
     super(utilityOptionRow, utilityResultRow, utilityController);
   }
 }

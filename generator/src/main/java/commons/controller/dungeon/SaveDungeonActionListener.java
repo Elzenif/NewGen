@@ -30,8 +30,8 @@ public class SaveDungeonActionListener implements ActionListener {
     if (returnValue == JFileChooser.APPROVE_OPTION) {
       File selectedFile = fileChooser.getSelectedFile();
       try {
-        ImageIO.write(dungeonController.getGenerateDungeonActionListener().getDungeonResult().getRawResult(),
-            "png", selectedFile);
+        ImageIO.write(((GenerateDungeonActionListener) dungeonController.getGenerateActionListener())
+            .getDungeonResult().getRawResult(), "png", selectedFile);
       } catch (IOException e1) {
         e1.printStackTrace();
       }

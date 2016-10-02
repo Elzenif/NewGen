@@ -4,6 +4,8 @@ import commons.controller.utility.UtilityController;
 import commons.utils.StringUtils;
 import commons.view.utils.Constants;
 import commons.view.utils.ConstraintOptionRow;
+import commons.view.utils.HasDrawKeysOptionRow;
+import nbk.model.commons.IDrawKey;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -11,8 +13,8 @@ import java.awt.Font;
 /**
  * Created by Germain on 24/07/2016.
  */
-public abstract class UtilityOptionRow
-    extends ConstraintOptionRow<UtilityResultRow> {
+public abstract class UtilityOptionRow<K extends IDrawKey>
+    extends ConstraintOptionRow<UtilityResultRow> implements HasDrawKeysOptionRow<K> {
 
   private final JLabel infoLabel;
 
@@ -28,6 +30,6 @@ public abstract class UtilityOptionRow
 
   protected void setControllers(UtilityController utilityController) {
     super.setControllers(utilityController);
-    generateButton.addActionListener(((UtilityController) controller).getGenerateUtilityActionListener());
+    generateButton.addActionListener(controller.getGenerateActionListener());
   }
 }

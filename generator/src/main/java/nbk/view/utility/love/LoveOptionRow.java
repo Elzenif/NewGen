@@ -1,5 +1,6 @@
 package nbk.view.utility.love;
 
+import commons.utils.Pair;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.love.LoveController;
 import nbk.model.utility.ENbkAvailableUtility;
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
 
-  private final Map<ELoveDraw, SpinnerNumberModel> loveDrawMap;
+  private final Map<ELoveDraw, Pair<JSpinner, SpinnerNumberModel>> loveDrawMap;
 
   public LoveOptionRow() {
     super(ENbkAvailableUtility.LOVE_ROLEPLAY.getName());
@@ -26,7 +27,7 @@ public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
       SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(1, 1, 20, 1);
       JSpinner jSpinner = new JSpinner(spinnerNumberModel);
       jSpinner.setAlignmentX(LEFT_ALIGNMENT);
-      loveDrawMap.put(loveDraw, spinnerNumberModel);
+      loveDrawMap.put(loveDraw, new Pair<>(jSpinner, spinnerNumberModel));
       constraintPanel.add(jSpinner);
     }
 
@@ -36,11 +37,12 @@ public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
   @Override
   public void setControllers(UtilityResultRow resultRow) {
     super.setControllers(new LoveController(this, resultRow));
-    generateButton.addActionListener(((LoveController) controller).getGenerateUtilityActionListener());
+    loveDrawMap.forEach((loveDraw, pair) ->
+        pair.getLeft().addChangeListener(((LoveController) controller).getDrawChangeListener(loveDraw)));
   }
 
   @Override
   public int getDrawValue(ELoveDraw drawKey) {
-    return 0;
+    return loveDrawMap.get(drawKey).getRight().getNumber().intValue();
   }
 }

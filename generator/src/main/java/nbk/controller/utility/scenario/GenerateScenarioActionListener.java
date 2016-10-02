@@ -6,7 +6,6 @@ import commons.view.utility.UtilityOptionRow;
 import commons.view.utility.UtilityResultRow;
 import commons.view.utility.result.UtilityResult;
 import nbk.controller.utility.GenerateNbkUtilityActionListener;
-import nbk.model.commons.NbkGame;
 import nbk.model.utility.scenario.EScenarioDraw;
 import nbk.model.utility.scenario.Scenario;
 import nbk.view.utility.scenario.result.ScenarioResult;
@@ -18,9 +17,9 @@ import java.util.Collection;
  */
 public class GenerateScenarioActionListener extends GenerateNbkUtilityActionListener<EScenarioDraw> {
 
-  public GenerateScenarioActionListener(UtilityOptionRow utilityOptionRow,
+  public GenerateScenarioActionListener(UtilityOptionRow<EScenarioDraw> utilityOptionRow,
                                         UtilityResultRow utilityResultRow,
-                                        UtilityController<NbkGame, EScenarioDraw> utilityController) {
+                                        UtilityController<EScenarioDraw> utilityController) {
     super(utilityOptionRow, utilityResultRow, utilityController);
   }
 

@@ -1,5 +1,7 @@
 package commons.model.dungeon;
 
+import commons.model.dungeon.constraints.DungeonConstraint;
+import commons.model.dungeon.constraints.EDungeonDraw;
 import commons.utils.MathUtils;
 import commons.utils.Pair;
 import org.jgrapht.UndirectedGraph;
@@ -54,6 +56,10 @@ public class Dungeon {
     bindRoomsWithRelativeNeighborhoodGraph();
     buildCorridors();
     buildGrid();
+  }
+
+  public static Dungeon create(DungeonConstraint<EDungeonDraw> dungeonConstraint) {
+    return new DungeonBuilder(dungeonConstraint).build();
   }
 
   private void buildGrid() {
@@ -244,7 +250,7 @@ public class Dungeon {
     return grid;
   }
 
-  public static class DungeonBuilder {
+  private static class DungeonBuilder {
 
     private int nbRoomsDesired = 5;
     private int tileSize = 5;
@@ -254,43 +260,45 @@ public class Dungeon {
     private int factor = 4;
     private int corridorWidth = 1;
 
+    public DungeonBuilder(DungeonConstraint<EDungeonDraw> dungeonConstraint) {
+      for (EDungeonDraw dungeonDrawKey : dungeonConstraint.keySet()) {
+        switch (dungeonDrawKey) {
+          case NB_ROOMS:
+            setNbRoomsDesired(dungeonConstraint.get(dungeonDrawKey));
+        }
+      }
+    }
+
     public Dungeon build() {
       return new Dungeon(this);
     }
 
-    public DungeonBuilder setNbRoomsDesired(int nbRoomsDesired) {
+    private void setNbRoomsDesired(int nbRoomsDesired) {
       this.nbRoomsDesired = nbRoomsDesired;
-      return this;
     }
 
-    public DungeonBuilder setTileSize(int tileSize) {
+    private void setTileSize(int tileSize) {
       this.tileSize = tileSize;
-      return this;
     }
 
-    public DungeonBuilder setDeviation(int deviation) {
+    private void setDeviation(int deviation) {
       this.deviation = deviation;
-      return this;
     }
 
-    public DungeonBuilder setMean(int mean) {
+    private void setMean(int mean) {
       this.mean = mean;
-      return this;
     }
 
-    public DungeonBuilder setRadius(int radius) {
+    private void setRadius(int radius) {
       this.radius = radius;
-      return this;
     }
 
-    public DungeonBuilder setFactor(int factor) {
+    private void setFactor(int factor) {
       this.factor = factor;
-      return this;
     }
 
-    public DungeonBuilder setCorridorWidth(int corridorWidth) {
+    private void setCorridorWidth(int corridorWidth) {
       this.corridorWidth = corridorWidth;
-      return this;
     }
   }
 }

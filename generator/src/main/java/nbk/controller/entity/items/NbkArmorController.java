@@ -22,7 +22,7 @@ public class NbkArmorController extends EntityController<NbkGame> {
 
   public NbkArmorController(NbkArmorOptionRow entityOptionRow, EntityResultRow entityResultRow) {
     super(entityOptionRow);
-    generateEntityActionListener = new GenerateNbkArmorActionListener(entityOptionRow, entityResultRow, this);
+    generateActionListener = new GenerateNbkArmorActionListener(entityOptionRow, entityResultRow, this);
     Arrays.stream(EBodyPart.values()).forEach(bodyPart ->
             bodyPartActionListenerMap.put(bodyPart, new BodyPartActionListener(this, bodyPart)));
   }
@@ -33,12 +33,12 @@ public class NbkArmorController extends EntityController<NbkGame> {
 
   @Override
   public void updateRarityConstraint(GenericConstraint<EItemRarity> constraint) {
-    globalConstraints.clear(ENbkPredefinedArmor.getConstraints(), EItemRarity.class);
-    globalConstraints.update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class, constraint);
+    generationConstraint.clear(ENbkPredefinedArmor.getConstraints(), EItemRarity.class);
+    generationConstraint.update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class, constraint);
   }
 
   public void updateBodyPartConstraint(GenericConstraint<EBodyPart> constraint) {
-    globalConstraints.update(ENbkPredefinedArmor.getConstraints(), EBodyPart.class, constraint);
+    generationConstraint.update(ENbkPredefinedArmor.getConstraints(), EBodyPart.class, constraint);
   }
 
 }

@@ -12,10 +12,10 @@ import nbk.view.utility.scenario.ScenarioOptionRow;
 /**
  * Created by Germain on 24/07/2016.
  */
-public enum ENbkAvailableUtilityRow implements IAvailableUtilityRow<NbkGame> {
+public enum ENbkAvailableUtilityRow implements IAvailableUtilityRow {
 
   LOVE_ROW(ENbkAvailableUtility.LOVE_ROLEPLAY) {
-    final UtilityOptionRow utilityOptionRow = new LoveOptionRow();
+    final LoveOptionRow utilityOptionRow = new LoveOptionRow();
 
     @Override
     public UtilityOptionRow getOptionRow() {
@@ -23,7 +23,7 @@ public enum ENbkAvailableUtilityRow implements IAvailableUtilityRow<NbkGame> {
     }
   },
   SCENARIO_ROW(ENbkAvailableUtility.SCENARIO) {
-    final UtilityOptionRow utilityOptionRow = new ScenarioOptionRow();
+    final ScenarioOptionRow utilityOptionRow = new ScenarioOptionRow();
 
     @Override
     public UtilityOptionRow getOptionRow() {
