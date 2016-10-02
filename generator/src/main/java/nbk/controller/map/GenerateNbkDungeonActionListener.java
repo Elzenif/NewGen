@@ -34,8 +34,9 @@ public class GenerateNbkDungeonActionListener extends GenerateActionListener<Nbk
   @Override
   protected Collection<DungeonResult> generateResult(MapConstraint<EDungeonDraw> mapConstraint) {
     NbkDungeon dungeon = NbkDungeon.create(mapConstraint);
-    resultRow.setEnabledSaveButton(true);
-    return Collections.singleton(new DungeonResult(dungeon));
+    dungeonResult = new DungeonResult(dungeon, resultRow.isShowGridCheckBoxSelected());
+    resultRow.setEnabledRowButtons(true);
+    return Collections.singleton(dungeonResult);
   }
 
   public DungeonResult getDungeonResult() {

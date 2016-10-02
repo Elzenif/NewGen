@@ -4,6 +4,7 @@ import commons.controller.AbstractOptionRowController;
 import commons.controller.entity.items.ConstraintsItemListener;
 import commons.controller.intf.HasDrawKeysController;
 import commons.controller.map.SaveMapActionListener;
+import commons.controller.map.ShowGridItemListener;
 import commons.model.map.constraints.MapConstraint;
 import commons.view.map.MapResultRow;
 import nbk.controller.utility.DrawChangeListener;
@@ -20,6 +21,7 @@ public class NbkDungeonController extends AbstractOptionRowController<MapConstra
     implements HasDrawKeysController<EDungeonDraw> {
 
   private final SaveMapActionListener saveMapActionListener;
+  private final ShowGridItemListener showGridItemListener;
   private final NbkDungeonOptionRow dungeonOptionRow;
 
   private final EnumMap<EDungeonDraw, DrawChangeListener<EDungeonDraw>> drawChangeListenerMap
@@ -27,9 +29,12 @@ public class NbkDungeonController extends AbstractOptionRowController<MapConstra
 
   public NbkDungeonController(NbkDungeonOptionRow dungeonOptionRow, MapResultRow dungeonResultRow) {
     super(new ConstraintsItemListener(dungeonOptionRow), new MapConstraint<>());
+
     this.dungeonOptionRow = dungeonOptionRow;
     generateActionListener = new GenerateNbkDungeonActionListener(dungeonOptionRow, dungeonResultRow, this);
     saveMapActionListener = new SaveMapActionListener(this, dungeonOptionRow);
+    showGridItemListener = new ShowGridItemListener(this, dungeonResultRow);
+
     Arrays.stream(EDungeonDraw.values()).forEach(dungeonDraw -> {
       drawChangeListenerMap.put(dungeonDraw, new DrawChangeListener<>(this, dungeonDraw));
       generationConstraint.put(dungeonDraw, dungeonDraw.getDefaultValue());
@@ -47,5 +52,9 @@ public class NbkDungeonController extends AbstractOptionRowController<MapConstra
   @Override
   public void updateDrawKeyValue(EDungeonDraw drawKey) {
     generationConstraint.put(drawKey, dungeonOptionRow.getDrawValue(drawKey));
+  }
+
+  public ShowGridItemListener getShowGridItemListener() {
+    return showGridItemListener;
   }
 }

@@ -17,23 +17,35 @@ import java.awt.image.BufferedImage;
 public class DungeonResult implements Result<Image> {
 
   private final NbkDungeon dungeon;
+  private boolean showGrid;
 
-  public DungeonResult(NbkDungeon dungeon) {
+  public DungeonResult(NbkDungeon dungeon, boolean showGrid) {
     this.dungeon = dungeon;
+    this.showGrid = showGrid;
   }
 
   @Override
   public BufferedImage getRawResult() {
-    BufferedImage bufferedImage = new BufferedImage(dungeon.getWidth(), dungeon.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    BufferedImage bufferedImage = new BufferedImage(dungeon.getWidth(), dungeon.getHeight(),
+        BufferedImage.TYPE_INT_ARGB);
     Graphics2D graphics = bufferedImage.createGraphics();
     graphics.setComposite(AlphaComposite.Clear);
     graphics.fillRect(0, 0, dungeon.getWidth(), dungeon.getHeight());
 
-    graphics.setComposite(AlphaComposite.Src.derive(0.2f));
+    graphics.setComposite(AlphaComposite.Src.derive(0.4f));
     for (Cell[] cells : dungeon.getGrid().getCells()) {
       for (Cell cell : cells) {
         graphics.setColor(getColor(cell));
         graphics.fill(cell);
+      }
+    }
+    if (showGrid) {
+      graphics.setComposite(AlphaComposite.Src.derive(0.1f));
+      graphics.setColor(Color.BLACK);
+      for (Cell[] cells : dungeon.getGrid().getCells()) {
+        for (Cell cell : cells) {
+          graphics.draw(cell);
+        }
       }
     }
     return bufferedImage;
@@ -41,5 +53,9 @@ public class DungeonResult implements Result<Image> {
 
   private Color getColor(Cell cell) {
     return (cell.getMapPart() == EMapPart.WALL) ? Color.BLACK : Color.WHITE;
+  }
+
+  public void setShowGrid(boolean showGrid) {
+    this.showGrid = showGrid;
   }
 }
