@@ -15,5 +15,10 @@ public abstract class ResultRow<T extends Result<S>, S> extends PanelRow {
 
   public abstract void clearResults();
 
+  /**
+   * Display results content in the row
+   *
+   * @param results the results to display
+   */
   public abstract void setResultsToPrint(Collection<T> results);
 }

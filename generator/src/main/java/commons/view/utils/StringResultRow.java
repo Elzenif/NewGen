@@ -3,8 +3,8 @@ package commons.view.utils;
 import commons.utils.StringUtils;
 import commons.view.commons.StringResult;
 
+import javax.swing.JComponent;
 import javax.swing.JLabel;
-import java.awt.Font;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,16 +15,19 @@ import java.util.List;
 public abstract class StringResultRow<T extends StringResult> extends ResultRow<T, String> {
 
   private final JLabel infoLabel;
-  private final List<JLabel> resultsToPrint;
+  private final List<JComponent> resultsToPrint;
+  private final boolean separateResultsWithComa;
 
-  protected StringResultRow(String labelText) {
+  protected StringResultRow(String labelText, boolean separateResultsWithComa) {
     super();
 
     infoLabel = new JLabel(labelText + " : ");
-    infoLabel.setFont(new Font(Constants.FONT_NAME, Font.BOLD, Constants.FONT_SIZE));
+    infoLabel.setFont(Constants.BENGUIAB_FONT);
     add(infoLabel);
 
     resultsToPrint = new LinkedList<>();
+
+    this.separateResultsWithComa = separateResultsWithComa;
   }
 
   @Override
@@ -35,6 +38,8 @@ public abstract class StringResultRow<T extends StringResult> extends ResultRow<
 
   @Override
   public void setResultsToPrint(Collection<T> results) {
+    int i = 1;
+    int size = results.size();
     for (T result : results) {
       Iterable<String> split = StringUtils.split(result.getRawResult());
       for (String s : split) {
@@ -42,6 +47,13 @@ public abstract class StringResultRow<T extends StringResult> extends ResultRow<
         makePretty(resultToPrint, result);
         resultsToPrint.add(resultToPrint);
         add(resultToPrint);
+      }
+      if (separateResultsWithComa && i != size) {
+        i++;
+        JLabel comaLabel = new JLabel(", ");
+        makePretty(comaLabel, result);
+        resultsToPrint.add(comaLabel);
+        add(comaLabel);
       }
     }
     repaint();

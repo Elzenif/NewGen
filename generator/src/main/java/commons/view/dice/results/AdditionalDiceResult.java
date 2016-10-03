@@ -2,6 +2,7 @@ package commons.view.dice.results;
 
 
 import commons.utils.ColorUtils;
+import commons.view.utils.Constants;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,6 +21,11 @@ public class AdditionalDiceResult extends AbstractDiceResult {
   @Override
   public String getRawResult() {
     return result;
+  }
+
+  @Override
+  public Font getFont() {
+    return Constants.BENGUIAB_FONT;
   }
 
   @Override

@@ -11,9 +11,10 @@ import java.awt.Font;
 public interface StringResult extends Result<String> {
 
   default Font getFont() {
-    return new Font(Constants.FONT_NAME, getFontStyle(), Constants.FONT_SIZE);
+    return Constants.DAUPHINN_FONT;
   }
 
+  // TODO change the font instead of the style
   int getFontStyle();
 
   Color getColor();

@@ -15,9 +15,6 @@ import java.awt.FlowLayout;
 public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow<T>
     implements HasConstraintPanel {
 
-  protected final int labelSize;
-  protected final String name;
-
   protected final JPanel constraintsCheckBoxPanel;
 
   protected final ConstraintPanel constraintPanel;
@@ -29,8 +26,7 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow
   protected ConstraintOptionRowController controller;
 
   protected ConstraintOptionRow(int labelSize, String name) {
-    this.labelSize = labelSize;
-    this.name = name;
+    super(labelSize, name);
 
     constraintsCheckBoxLabel = new JLabel("Options");
     constraintsCheckBoxLabel.setAlignmentX(CENTER_ALIGNMENT);
@@ -46,11 +42,12 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow
 
   }
 
-  protected void finalizeRowConstruction(String toolTipText) {
+  protected void finalizeRowConstruction(String toolTipTextButton) {
     add(constraintPanel);
 
     generateButton = new JButton("Generate");
-    generateButton.setToolTipText(toolTipText);
+    generateButton.setFont(Constants.DAUPHINN_FONT);
+    generateButton.setToolTipText(toolTipTextButton);
     add(generateButton);
 
     updateConstraintsAbility(false);

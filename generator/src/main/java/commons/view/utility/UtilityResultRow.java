@@ -9,6 +9,6 @@ import commons.view.utils.StringResultRow;
 public class UtilityResultRow extends StringResultRow<UtilityResult> {
 
   public UtilityResultRow(String labelText) {
-    super(labelText);
+    super(labelText, false);
   }
 }

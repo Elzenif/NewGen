@@ -3,7 +3,6 @@ package nbk.view.map;
 import commons.model.map.EMapType;
 import commons.model.map.IAvailableMap;
 import commons.utils.MathUtils;
-import commons.utils.StringUtils;
 import commons.view.map.MapResultRow;
 import commons.view.utils.Constants;
 import commons.view.utils.ConstraintOptionRow;
@@ -17,7 +16,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.util.Arrays;
 import java.util.EnumMap;
 
@@ -27,8 +25,6 @@ import java.util.EnumMap;
 public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
     implements HasDrawKeysOptionRow<EDungeonDraw> {
 
-  private final JLabel infoLabel;
-
   private final ConstraintPanel basicOptionsPanel;
 
   private final EnumMap<EDungeonDraw, JComboBox<Object>> dungeonDrawMap;
@@ -36,8 +32,6 @@ public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
   public NbkDungeonOptionRow(IAvailableMap availableDungeon) {
     super(MathUtils.maxLength(Arrays.asList(EMapType.values())), availableDungeon.getName());
 
-    infoLabel = new JLabel(StringUtils.leftAlign(labelSize, name) + " : ");
-    infoLabel.setFont(new Font(Constants.FONT_NAME, Font.BOLD, Constants.FONT_SIZE));
     add(infoLabel);
 
     add(constraintsCheckBoxPanel);

@@ -11,7 +11,7 @@ import commons.view.utils.StringResultRow;
 public class DiceResultRow extends StringResultRow<AbstractDiceResult> {
 
   public DiceResultRow(EDiceNumber diceNumber) {
-    super(diceNumber.getName());
+    super(diceNumber.getName(), false);
   }
 
 }

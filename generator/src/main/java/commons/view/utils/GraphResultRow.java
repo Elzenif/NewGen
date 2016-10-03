@@ -11,7 +11,7 @@ import java.util.Collection;
 /**
  * Created by Germain on 24/09/2016.
  */
-public class GraphResultRow<T extends Result<Image>> extends ResultRow<T, Image> {
+public abstract class GraphResultRow<T extends Result<Image>> extends ResultRow<T, Image> {
 
   private JScrollPane scrollPane;
   private JLabel resultToPrint;

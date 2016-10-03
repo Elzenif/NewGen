@@ -16,7 +16,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -28,15 +27,12 @@ import java.util.Arrays;
  */
 public class DiceOptionRow extends OptionRow<DiceResultRow> {
 
-  private static final int JLABEL_SIZE = MathUtils.maxLength(Arrays.asList(EDiceNumber.values()));
   private final int JBUTTON_SIZE = "Roll 99D100+99".length();
 
   private final EDiceNumber diceNumber;
 
   private final JSpinner numberOfDiceSpinner;
   private final SpinnerNumberModel numberOfDiceModel;
-
-  private final JLabel infoLabel;
 
   private final JCheckBox addScoreCheckBox;
   private final JSpinner addScoreSpinner;
@@ -54,14 +50,13 @@ public class DiceOptionRow extends OptionRow<DiceResultRow> {
   private final JButton rollDiceButton;
 
   public DiceOptionRow(EDiceNumber diceNumber) {
-    super();
+    super(MathUtils.maxLength(Arrays.asList(EDiceNumber.values())), diceNumber.getName());
     this.diceNumber = diceNumber;
 
     numberOfDiceModel = new SpinnerNumberModel(1, 0, 20, 1);
     numberOfDiceSpinner = new JSpinner(numberOfDiceModel);
     add(numberOfDiceSpinner);
 
-    infoLabel = new JLabel(StringUtils.leftAlign(JLABEL_SIZE, diceNumber.getName()));
     add(infoLabel);
 
     JPanel jPanel1 = new JPanel();

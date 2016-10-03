@@ -7,6 +7,7 @@ import commons.view.MainFrame;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 import java.awt.GridLayout;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +42,8 @@ public abstract class DoublePanel<O extends OptionRow<R>, R extends ResultRow> e
 
   private static JPanel setPanel(String title, int nb_rows) {
     JPanel jPanel = new JPanel(new GridLayout(nb_rows, 1, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
-    jPanel.setBorder(BorderFactory.createTitledBorder(title));
+    jPanel.setBorder(BorderFactory.createTitledBorder(null, title, TitledBorder.DEFAULT_JUSTIFICATION,
+        TitledBorder.DEFAULT_POSITION, Constants.BENGUIAB_FONT));
     return jPanel;
   }
 

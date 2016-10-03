@@ -3,14 +3,12 @@ package commons.view.entity;
 import commons.controller.entity.EntityController;
 import commons.model.commons.Game;
 import commons.model.entity.IAvailableEntity;
-import commons.utils.StringUtils;
 import commons.utils.TextFieldUtils;
 import commons.view.utils.ConstraintOptionRow;
 import commons.view.utils.ConstraintPanel;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
@@ -21,7 +19,7 @@ public abstract class EntityOptionRow<G extends Game> extends ConstraintOptionRo
 
   private final JSpinner numberOfEntitiesSpinner;
   private final SpinnerNumberModel numberOfEntitiesModel;
-  private final JLabel infoLabel;
+
   private final ConstraintPanel qualityPanel;
   private final JFormattedTextField qualityTextField;
 
@@ -33,7 +31,6 @@ public abstract class EntityOptionRow<G extends Game> extends ConstraintOptionRo
     numberOfEntitiesSpinner.setToolTipText("The number of " + name + " to generate");
     add(numberOfEntitiesSpinner);
 
-    infoLabel = new JLabel(StringUtils.leftAlign(labelSize, name));
     add(infoLabel);
 
     add(constraintsCheckBoxPanel);
