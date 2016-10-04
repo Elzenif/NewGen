@@ -3,6 +3,7 @@ package commons.view.dice.results;
 import commons.model.dice.Dice;
 
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  * Created by Germain on 28/05/2016.
@@ -25,8 +26,8 @@ public class DiceResult extends AbstractDiceResult {
   }
 
   @Override
-  public int getFontStyle() {
-    return diceResultType.getFontStyle();
+  public Font getFont() {
+    return diceResultType.getFont();
   }
 
   @Override

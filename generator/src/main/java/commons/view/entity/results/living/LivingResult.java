@@ -6,7 +6,6 @@ import commons.utils.StringUtils;
 import commons.view.entity.results.EntityResult;
 
 import java.awt.Color;
-import java.awt.Font;
 
 /**
  * Created by Germain on 28/08/2016.
@@ -22,11 +21,6 @@ public class LivingResult extends EntityResult {
   @Override
   public String getRawResult() {
     return StringUtils.capitalizeFirstLetter(living.toString(), false);
-  }
-
-  @Override
-  public int getFontStyle() {
-    return Font.PLAIN;
   }
 
   @Override

@@ -4,7 +4,6 @@ import commons.utils.ColorUtils;
 import commons.view.utility.result.UtilityResult;
 
 import java.awt.Color;
-import java.awt.Font;
 
 /**
  * Created by Germain on 30/09/2016.
@@ -20,11 +19,6 @@ public class ScenarioPartResult extends UtilityResult {
   @Override
   public String getRawResult() {
     return sentence;
-  }
-
-  @Override
-  public int getFontStyle() {
-    return Font.PLAIN;
   }
 
   @Override

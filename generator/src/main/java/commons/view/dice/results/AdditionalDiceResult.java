@@ -29,11 +29,6 @@ public class AdditionalDiceResult extends AbstractDiceResult {
   }
 
   @Override
-  public int getFontStyle() {
-    return Font.BOLD;
-  }
-
-  @Override
   public Color getColor() {
     return ColorUtils.BLACK;
   }

@@ -1,5 +1,7 @@
 package commons.view.dice.results;
 
+import commons.view.utils.Constants;
+
 import java.awt.Font;
 
 /**
@@ -7,17 +9,17 @@ import java.awt.Font;
  */
 public enum EDiceResultType {
 
-  NORMAL(Font.PLAIN),
-  CRITIC(Font.BOLD),
-  FUMBLE(Font.BOLD);
+  NORMAL(Constants.LITHOGRL_FONT),
+  CRITIC(Constants.LITHOGRB_FONT),
+  FUMBLE(Constants.LITHOGRB_FONT);
 
-  private final int fontStyle;
+  private final Font font;
 
-  EDiceResultType(int fontStyle) {
-    this.fontStyle = fontStyle;
+  EDiceResultType(Font font) {
+    this.font = font;
   }
 
-  public int getFontStyle() {
-    return fontStyle;
+  public Font getFont() {
+    return font;
   }
 }

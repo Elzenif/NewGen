@@ -14,8 +14,5 @@ public interface StringResult extends Result<String> {
     return Constants.DAUPHINN_FONT;
   }
 
-  // TODO change the font instead of the style
-  int getFontStyle();
-
   Color getColor();
 }

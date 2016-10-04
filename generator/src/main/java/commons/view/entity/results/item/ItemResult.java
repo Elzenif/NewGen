@@ -23,11 +23,6 @@ public class ItemResult extends EntityResult {
   }
 
   @Override
-  public int getFontStyle() {
-    return EItemResultMagic.getItemResultFontStyle(item.getMagic());
-  }
-
-  @Override
   public Color getColor() {
     return EItemResultRarity.getItemResultColor(item.getRarity());
   }

@@ -4,7 +4,6 @@ import commons.utils.ColorUtils;
 import commons.view.utility.result.UtilityResult;
 
 import java.awt.Color;
-import java.awt.Font;
 
 /**
  * Created by Germain on 30/07/2016.
@@ -20,11 +19,6 @@ public class LovePartResult extends UtilityResult {
   @Override
   public String getRawResult() {
     return sentence;
-  }
-
-  @Override
-  public int getFontStyle() {
-    return Font.PLAIN;
   }
 
   @Override

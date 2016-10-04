@@ -17,6 +17,7 @@ import java.util.Enumeration;
 import static commons.view.utils.Constants.BENGUIAB_FONT;
 import static commons.view.utils.Constants.DAUPHINN_FONT;
 import static commons.view.utils.Constants.FONT_SIZE_FLOAT;
+import static commons.view.utils.Constants.LITHOGRB_FONT;
 import static commons.view.utils.Constants.LITHOGRL_FONT;
 
 /**
@@ -41,6 +42,7 @@ public class Main {
     DAUPHINN_FONT = initFont("DAUPHINN", 4f);
     BENGUIAB_FONT = initFont("BENGUIAB", 0f);
     LITHOGRL_FONT = initFont("LITHOGRL", 0f);
+    LITHOGRB_FONT = initFont("LITHOGRB", 0f);
   }
 
   private static Font initFont(String name, float sizeInc) throws IOException, FontFormatException {
