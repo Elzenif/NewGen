@@ -9,7 +9,6 @@ import commons.model.dice.EDiceNumber;
 import commons.utils.EOperator;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
-import commons.view.utils.Constants;
 import commons.view.utils.OptionRow;
 
 import javax.swing.BoxLayout;
@@ -20,14 +19,19 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.FlowLayout;
+import java.text.MessageFormat;
 import java.util.Arrays;
+
+import static commons.view.utils.Constants.JPANEL_HGAP;
+import static commons.view.utils.Constants.resourceBundle;
 
 /**
  * Created by Germain on 21/05/2016.
  */
 public class DiceOptionRow extends OptionRow<DiceResultRow> {
 
-  private final int JBUTTON_SIZE = "Roll 99D100+99".length();
+  @SuppressWarnings("SpellCheckingInspection")
+  private final int JBUTTON_SIZE = resourceBundle.getString("row.dice.buttonTextMax").length();
 
   private final EDiceNumber diceNumber;
 
@@ -61,7 +65,7 @@ public class DiceOptionRow extends OptionRow<DiceResultRow> {
 
     JPanel jPanel1 = new JPanel();
     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-    addScoreCheckBox = new JCheckBox("Add");
+    addScoreCheckBox = new JCheckBox(resourceBundle.getString("row.dice.add"));
     addScoreCheckBox.setAlignmentX(LEFT_ALIGNMENT);
     addScoreModel = new SpinnerNumberModel(1, 1, 99, 1);
     addScoreSpinner = new JSpinner(addScoreModel);
@@ -73,10 +77,10 @@ public class DiceOptionRow extends OptionRow<DiceResultRow> {
 
     JPanel jPanel2 = new JPanel();
     jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.Y_AXIS));
-    testCheckBox = new JCheckBox("Test");
+    testCheckBox = new JCheckBox(resourceBundle.getString("row.dice.test"));
     testCheckBox.setAlignmentX(CENTER_ALIGNMENT);
     JPanel jPanel21 = new JPanel();
-    jPanel21.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, 0));
+    jPanel21.setLayout(new FlowLayout(FlowLayout.LEFT, JPANEL_HGAP / 2, 0));
     testComboBox = new JComboBox<>(EOperator.values());
     testComboBox.setEnabled(false);
     testModel = new SpinnerNumberModel(diceNumber.getDiceNumber() / 2, 1, 99, 1);
@@ -90,9 +94,9 @@ public class DiceOptionRow extends OptionRow<DiceResultRow> {
 
     JPanel jPanel3 = new JPanel();
     jPanel3.setLayout(new BoxLayout(jPanel3, BoxLayout.Y_AXIS));
-    sumCheckBox = new JCheckBox("Sum");
+    sumCheckBox = new JCheckBox(resourceBundle.getString("row.dice.sum"));
     jPanel3.add(sumCheckBox);
-    meanCheckBox = new JCheckBox("Mean");
+    meanCheckBox = new JCheckBox(resourceBundle.getString("row.dice.mean"));
     jPanel3.add(meanCheckBox);
     add(jPanel3);
 
@@ -115,7 +119,7 @@ public class DiceOptionRow extends OptionRow<DiceResultRow> {
   }
 
   public void updateTextButton() {
-    String s = "Roll " + getNumberOfDiceSelected() + diceNumber.getName();
+    String s = MessageFormat.format(resourceBundle.getString("row.dice.roll"), getNumberOfDiceSelected(), diceNumber.getName());
     if (isAddScoreCheckBoxSelected()) {
       s += "+" + getAddScore();
     }

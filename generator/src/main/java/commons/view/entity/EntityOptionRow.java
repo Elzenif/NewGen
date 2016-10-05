@@ -11,6 +11,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.text.MessageFormat;
+
+import static commons.view.utils.Constants.resourceBundle;
 
 /**
  * Created by Germain on 05/06/2016.
@@ -28,7 +31,7 @@ public abstract class EntityOptionRow<G extends Game> extends ConstraintOptionRo
 
     numberOfEntitiesModel = new SpinnerNumberModel(1, 1, 9, 1);
     numberOfEntitiesSpinner = new JSpinner(numberOfEntitiesModel);
-    numberOfEntitiesSpinner.setToolTipText("The number of " + name + " to generate");
+    numberOfEntitiesSpinner.setToolTipText(resourceBundle.getString("tooltip.entity.numberToGenerate"));
     add(numberOfEntitiesSpinner);
 
     add(infoLabel);
@@ -37,7 +40,7 @@ public abstract class EntityOptionRow<G extends Game> extends ConstraintOptionRo
 
     // quality constraints
     qualityTextField = TextFieldUtils.createTwoDigitsField();
-    qualityTextField.setToolTipText("Put a D100 roll result. The lower the result, the better the " + name);
+    qualityTextField.setToolTipText(MessageFormat.format(resourceBundle.getString("tooltip.entity.qualityTextField"), name));
     qualityPanel = new ConstraintPanel();
     qualityPanel.setLayout(new BoxLayout(qualityPanel, BoxLayout.Y_AXIS));
     qualityPanel.add(qualityTextField);

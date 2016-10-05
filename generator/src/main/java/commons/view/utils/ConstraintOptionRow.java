@@ -9,6 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 
+import static commons.view.utils.Constants.DAUPHINN_FONT;
+import static commons.view.utils.Constants.JPANEL_HGAP;
+import static commons.view.utils.Constants.JPANEL_VGAP;
+import static commons.view.utils.Constants.resourceBundle;
+
 /**
  * Created by Germain on 29/09/2016.
  */
@@ -28,7 +33,7 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow
   protected ConstraintOptionRow(int labelSize, String name) {
     super(labelSize, name);
 
-    constraintsCheckBoxLabel = new JLabel("Options");
+    constraintsCheckBoxLabel = new JLabel(resourceBundle.getString("row.options"));
     constraintsCheckBoxLabel.setAlignmentX(CENTER_ALIGNMENT);
     constraintsCheckBox = new JCheckBox();
     constraintsCheckBox.setAlignmentX(CENTER_ALIGNMENT);
@@ -38,15 +43,15 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow
     constraintsCheckBoxPanel.add(constraintsCheckBox);
 
     constraintPanel = new ConstraintPanel();
-    constraintPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP));
+    constraintPanel.setLayout(new FlowLayout(FlowLayout.LEFT, JPANEL_HGAP / 2, JPANEL_VGAP));
 
   }
 
   protected void finalizeRowConstruction(String toolTipTextButton) {
     add(constraintPanel);
 
-    generateButton = new JButton("Generate");
-    generateButton.setFont(Constants.DAUPHINN_FONT);
+    generateButton = new JButton(resourceBundle.getString("row.generate"));
+    generateButton.setFont(DAUPHINN_FONT);
     generateButton.setToolTipText(toolTipTextButton);
     add(generateButton);
 

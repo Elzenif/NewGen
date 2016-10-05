@@ -8,9 +8,12 @@ import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
 
 import javax.swing.JCheckBox;
 import java.awt.GridLayout;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static commons.view.utils.Constants.resourceBundle;
 
 /**
  * Created by Germain on 26/06/2016.
@@ -32,13 +35,15 @@ public class NbkArmorOptionRow extends NbkItemOptionRow {
 
     Arrays.stream(EBodyPart.values()).forEach(bodyPart -> {
       JCheckBox checkBox = new JCheckBox(bodyPart.toString(), false);
-      checkBox.setToolTipText("Includes " + bodyPart.toString() + " armors");
+      String toolTipText = MessageFormat.format(resourceBundle.getString("tooltip.armor.bodyPartCheckBox"),
+          bodyPart.toString());
+      checkBox.setToolTipText(toolTipText);
       bodyPartCheckBoxes.put(bodyPart, checkBox);
       bodyPartPanel.add(checkBox);
     });
     constraintPanel.add(bodyPartPanel);
 
-    finalizeRowConstruction("Generate a random " + name);
+    finalizeRowConstruction(MessageFormat.format(resourceBundle.getString("tooltip.entity.generate"), name));
   }
 
   @Override

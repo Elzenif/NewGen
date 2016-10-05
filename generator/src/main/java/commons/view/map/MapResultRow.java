@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
+import static commons.view.utils.Constants.resourceBundle;
+
 /**
  * Created by Germain on 24/09/2016.
  */
@@ -21,8 +23,8 @@ public class MapResultRow extends GraphResultRow<DungeonResult> {
   public MapResultRow() {
     super();
 
-    saveMapButton = new JButton("Save");
-    saveMapButton.setToolTipText("Save the map as an image");
+    saveMapButton = new JButton(resourceBundle.getString("row.dungeon.save"));
+    saveMapButton.setToolTipText(resourceBundle.getString("tooltip.dungeon.save"));
     saveMapButton.setEnabled(false);
     add(saveMapButton);
 
@@ -31,7 +33,7 @@ public class MapResultRow extends GraphResultRow<DungeonResult> {
     showGridCheckBox.setEnabled(false);
     add(showGridCheckBox);
 
-    showGridLabel = new JLabel("Show grid");
+    showGridLabel = new JLabel(resourceBundle.getString("row.dungeon.showGrid"));
     showGridLabel.setEnabled(false);
     add(showGridLabel);
   }

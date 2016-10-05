@@ -1,14 +1,14 @@
 package commons.view.utility;
 
 import commons.controller.utility.UtilityController;
-import commons.model.commons.IDrawKey;
+import commons.model.utility.constraints.IUtilityDrawKey;
 import commons.view.utils.ConstraintOptionRow;
 import commons.view.utils.HasDrawKeysOptionRow;
 
 /**
  * Created by Germain on 24/07/2016.
  */
-public abstract class UtilityOptionRow<K extends IDrawKey>
+public abstract class UtilityOptionRow<K extends IUtilityDrawKey>
     extends ConstraintOptionRow<UtilityResultRow> implements HasDrawKeysOptionRow<K> {
 
   protected UtilityOptionRow(int labelSize, String name) {

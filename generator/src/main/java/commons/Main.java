@@ -37,7 +37,7 @@ public class Main {
     SwingUtilities.invokeLater(MainFrame::new);
   }
 
-  @SuppressWarnings("SpellCheckingInspection")
+  @SuppressWarnings({"SpellCheckingInspection", "HardCodedStringLiteral"})
   private static void initFonts() throws IOException, FontFormatException {
     DAUPHINN_FONT = initFont("DAUPHINN", 4f);
     BENGUIAB_FONT = initFont("BENGUIAB", 0f);

@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 
+import static commons.view.utils.Constants.resourceBundle;
+
 /**
  * Created by Germain on 07/05/2016.
  */
@@ -44,11 +46,11 @@ public class RollDiceActionListener implements ActionListener {
       results.add(new DiceResult(new Dice(dice)));
     }
     if (diceOptionRow.sumCheckBoxIsSelected()) {
-      results.add(new AdditionalDiceResult("sum = " + sum));
+      results.add(new AdditionalDiceResult(resourceBundle.getString("row.dice.sum") + " = " + sum));
     }
     if (diceOptionRow.meanCheckBoxIsSelected()) {
       double mean = (double) sum / diceOptionRow.getNumberOfDiceSelected();
-      results.add(new AdditionalDiceResult("mean = " + StringUtils.format(mean)));
+      results.add(new AdditionalDiceResult(resourceBundle.getString("row.dice.mean") + " = " + StringUtils.format(mean)));
     }
     diceResultRow.setResultsToPrint(results);
   }

@@ -6,8 +6,8 @@ import commons.view.utils.DoublePanel;
 /**
  * Created by Germain on 09/06/2016.
  */
-public class EntityPanel<T extends Game, S extends IAvailableEntityRow<T>>
-        extends DoublePanel<EntityOptionRow<T>, EntityResultRow> {
+public class EntityPanel<G extends Game, S extends IAvailableEntityRow<G>>
+    extends DoublePanel<EntityOptionRow<G>, EntityResultRow> {
 
   public EntityPanel(S[] availableEntityOptionRows) {
     super(availableEntityOptionRows);

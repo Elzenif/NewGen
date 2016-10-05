@@ -1,6 +1,7 @@
 package commons.view.hidden;
 
 import commons.model.commons.Game;
+import org.jetbrains.annotations.NonNls;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -15,7 +16,8 @@ public class HiddenPanel<T extends Game> extends JPanel {
 
   public HiddenPanel(T game) {
     iconLabel = new JLabel();
-    iconLabel.setIcon(new ImageIcon(getClass().getResource("/images/" + game.getName() + ".png")));
+    @NonNls String name = "/images/" + game.getName() + ".png";
+    iconLabel.setIcon(new ImageIcon(getClass().getResource(name)));
     add(iconLabel);
   }
 }

@@ -14,7 +14,7 @@ public class ScenarioResult {
 
   private final List<UtilityResult> results;
 
-  @SuppressWarnings("SpellCheckingInspection")
+  @SuppressWarnings({"SpellCheckingInspection", "HardCodedStringLiteral"})
   public ScenarioResult(Scenario scenario) {
     results = new LinkedList<>();
     results.add(new ScenarioPartResult(scenario.getBeginningSentence()));

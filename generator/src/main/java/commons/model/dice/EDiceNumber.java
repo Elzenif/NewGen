@@ -4,6 +4,7 @@ import commons.view.dice.DiceOptionRow;
 import commons.view.dice.DiceResultRow;
 import commons.view.dice.IAvailableDiceRow;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 
 /**
  * Created by Germain on 21/05/2016.
@@ -19,6 +20,7 @@ public enum EDiceNumber implements IAvailableDiceRow {
   D100(100);
 
   private final int diceNumber;
+  @NonNls
   private final String name;
 
   EDiceNumber(int diceNumber) {

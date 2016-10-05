@@ -1,6 +1,7 @@
 package commons.controller;
 
 import commons.view.MainFrame;
+import org.jetbrains.annotations.NonNls;
 
 import java.awt.Frame;
 import java.awt.Rectangle;
@@ -42,12 +43,14 @@ public class MainFrameWindowListener extends WindowAdapter {
 
     try {
       BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-      properties.store(bufferedWriter, "Properties of the user frame");
+      @NonNls String comments = "Properties of the user frame";
+      properties.store(bufferedWriter, comments);
     } catch (IOException e1) {
       e1.printStackTrace();
     }
 
-    System.out.println("Storing preferences " + x + ", " + y + ", " + width + ", " + height);
+    @NonNls String message = "Storing preferences " + x + ", " + y + ", " + width + ", " + height;
+    System.out.println(message);
     System.exit(0);
   }
 }

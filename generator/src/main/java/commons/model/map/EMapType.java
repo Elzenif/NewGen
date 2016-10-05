@@ -1,17 +1,22 @@
 package commons.model.map;
 
-import commons.utils.StringUtils;
+import static commons.view.utils.Constants.resourceBundle;
 
 /**
  * Created by Germain on 24/09/2016.
  */
 public enum EMapType implements IAvailableMap {
 
-  SIMPLE_DUNGEON;
+  SIMPLE_DUNGEON(resourceBundle.getString("row.map.dungeon"));
 
+  private final String name;
+
+  EMapType(String name) {
+    this.name = name;
+  }
 
   @Override
   public String getName() {
-    return StringUtils.capitalizeFirstLetter(name(), true);
+    return name;
   }
 }

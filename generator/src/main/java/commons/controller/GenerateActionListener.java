@@ -18,7 +18,7 @@ public abstract class GenerateActionListener<OR extends ConstraintOptionRow<RR>,
 
   protected final OR optionRow;
   protected final RR resultRow;
-  protected final AbstractOptionRowController<GC> controller;
+  private final AbstractOptionRowController<GC> controller;
 
   protected GenerateActionListener(OR optionRow, RR resultRow, AbstractOptionRowController<GC> controller) {
     this.optionRow = optionRow;
@@ -32,7 +32,7 @@ public abstract class GenerateActionListener<OR extends ConstraintOptionRow<RR>,
     resultRow.setResultsToPrint(generateResult(getConstraints()));
   }
 
-  protected final GC getConstraints() {
+  private GC getConstraints() {
     return (optionRow.isConstraintsCheckBoxSelected())
         ? controller.getGenerationConstraint()
         : newConstraint();

@@ -1,8 +1,9 @@
 package nbk.model.entity.items;
 
 import commons.model.entity.items.IAvailableItem;
-import commons.utils.StringUtils;
 import nbk.model.commons.NbkGame;
+
+import static commons.view.utils.Constants.resourceBundle;
 
 
 /**
@@ -10,10 +11,17 @@ import nbk.model.commons.NbkGame;
  */
 public enum ENbkAvailableItem implements IAvailableItem<NbkGame> {
 
-  WEAPON, ARMOR;
+  WEAPON(resourceBundle.getString("row.item.weapon")),
+  ARMOR(resourceBundle.getString("row.item.armor"));
+
+  private final String name;
+
+  ENbkAvailableItem(String name) {
+    this.name = name;
+  }
 
   @Override
   public String getName() {
-    return StringUtils.capitalizeFirstLetter(toString(), true);
+    return name;
   }
 }

@@ -1,6 +1,9 @@
 package commons.view.utils;
 
+import org.jetbrains.annotations.NonNls;
+
 import java.awt.Font;
+import java.util.ResourceBundle;
 
 /**
  * Created by Germain on 08/05/2016.
@@ -17,6 +20,10 @@ public class Constants {
   public static final int FONT_SIZE_INT = 12;
   public static final float FONT_SIZE_FLOAT = 12f;
 
+  @NonNls
+  public static final ResourceBundle resourceBundle = ResourceBundle.getBundle("locale/user-interface");
+
+  @NonNls
   public static final String SOURCE_CODE_PRO = "Source Code Pro";
 
   public static Font BENGUIAB_FONT;

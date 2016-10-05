@@ -14,7 +14,7 @@ import java.util.EnumMap;
  */
 public class LoveController extends UtilityController<ELoveDraw> {
 
-  private EnumMap<ELoveDraw, DrawChangeListener<ELoveDraw>> drawChangeListenerMap
+  private final EnumMap<ELoveDraw, DrawChangeListener<ELoveDraw>> drawChangeListenerMap
       = new EnumMap<>(ELoveDraw.class);
 
   public LoveController(LoveOptionRow loveOptionRow, UtilityResultRow loveResultRow) {

@@ -3,6 +3,7 @@ package commons.controller.map;
 import nbk.controller.map.GenerateNbkDungeonActionListener;
 import nbk.controller.map.NbkDungeonController;
 import nbk.view.map.NbkDungeonOptionRow;
+import org.jetbrains.annotations.NonNls;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -32,8 +33,9 @@ public class SaveMapActionListener implements ActionListener {
     if (returnValue == JFileChooser.APPROVE_OPTION) {
       File selectedFile = fileChooser.getSelectedFile();
       try {
+        @NonNls String formatName = "png";
         ImageIO.write(((GenerateNbkDungeonActionListener) dungeonController.getGenerateActionListener())
-            .getDungeonResult().getRawResult(), "png", selectedFile);
+            .getDungeonResult().getRawResult(), formatName, selectedFile);
       } catch (IOException e1) {
         e1.printStackTrace();
       }

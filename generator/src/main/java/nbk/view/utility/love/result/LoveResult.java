@@ -14,7 +14,7 @@ public class LoveResult {
 
   private final List<UtilityResult> results;
 
-  @SuppressWarnings("SpellCheckingInspection")
+  @SuppressWarnings({"SpellCheckingInspection", "HardCodedStringLiteral"})
   public LoveResult(Love love) {
     results = new LinkedList<>();
     results.add(new LovePartResult("Le personnage"));

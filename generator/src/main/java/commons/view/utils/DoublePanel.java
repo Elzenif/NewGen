@@ -12,6 +12,8 @@ import java.awt.GridLayout;
 import java.util.HashSet;
 import java.util.Set;
 
+import static commons.view.utils.Constants.resourceBundle;
+
 /**
  * Created by Germain on 04/06/2016.
  */
@@ -24,8 +26,8 @@ public abstract class DoublePanel<O extends OptionRow<R>, R extends ResultRow> e
   protected DoublePanel(IAvailableRow<O, R>[] availableRows) {
     setLayout(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
 
-    leftPanel = setPanel("Options", availableRows.length);
-    rightPanel = setPanel("Results", availableRows.length);
+    leftPanel = setPanel(resourceBundle.getString("panel.options"), availableRows.length);
+    rightPanel = setPanel(resourceBundle.getString("panel.results"), availableRows.length);
 
     rowPairs = CollectionUtils.setMaxSizeSet(new HashSet<>(), availableRows.length);
 

@@ -11,6 +11,8 @@ import nbk.view.entity.items.ENbkAvailableItemsRow;
 import nbk.view.entity.living.ENbkAvailableLivingsRow;
 import nbk.view.utility.ENbkAvailableUtilityRow;
 
+import static commons.view.utils.Constants.resourceBundle;
+
 /**
  * Created by Germain on 24/07/2016.
  */
@@ -19,33 +21,33 @@ public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
   private final HiddenPanel<NbkGame> hiddenPanel;
   private final DicePanel dicePanel;
   private final EntityPanel<NbkGame, ENbkAvailableItemsRow> itemsPanel;
-  private final UtilityPanel<NbkGame, ENbkAvailableUtilityRow> utilityPanel;
+  private final UtilityPanel<ENbkAvailableUtilityRow> utilityPanel;
   private final EntityPanel<NbkGame, ENbkAvailableLivingsRow> livingsPanel;
   private final MapPanel mapPanel;
 
   public NbkTabbedPanelEmbedded() {
     hiddenPanel = new HiddenPanel<>(NbkGame.getInstance());
-    panelMap.put("Hidden", hiddenPanel);
-    
+    panelMap.put(resourceBundle.getString("panel.hidden"), hiddenPanel);
+
     dicePanel = new DicePanel();
     controllers.add(dicePanel);
-    panelMap.put("Dice", dicePanel);
+    panelMap.put(resourceBundle.getString("panel.dice"), dicePanel);
 
     itemsPanel = new EntityPanel<>(ENbkAvailableItemsRow.values());
     controllers.add(itemsPanel);
-    panelMap.put("Item", itemsPanel);
+    panelMap.put(resourceBundle.getString("panel.item"), itemsPanel);
 
     livingsPanel = new EntityPanel<>(ENbkAvailableLivingsRow.values());
     controllers.add(livingsPanel);
-    panelMap.put("Living", livingsPanel);
+    panelMap.put(resourceBundle.getString("panel.living"), livingsPanel);
 
     utilityPanel = new UtilityPanel<>(ENbkAvailableUtilityRow.values());
     controllers.add(utilityPanel);
-    panelMap.put("Utility", utilityPanel);
+    panelMap.put(resourceBundle.getString("panel.utility"), utilityPanel);
 
     mapPanel = new MapPanel();
     controllers.add(mapPanel);
-    panelMap.put("Map", mapPanel);
+    panelMap.put(resourceBundle.getString("panel.map"), mapPanel);
 
     addPanels();
   }

@@ -12,6 +12,8 @@ import javax.swing.SpinnerNumberModel;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static commons.view.utils.Constants.resourceBundle;
+
 /**
  * Created by Germain on 30/09/2016.
  */
@@ -31,7 +33,7 @@ public class ScenarioOptionRow extends NbkUtilityOptionRow<EScenarioDraw> {
       constraintPanel.add(jSpinner);
     }
 
-    finalizeRowConstruction("Generate a quick scenario");
+    finalizeRowConstruction(resourceBundle.getString("tooltip.scenario.generate"));
   }
 
   @Override

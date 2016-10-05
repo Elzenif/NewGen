@@ -4,6 +4,7 @@ import commons.model.entity.characteristics.primary.Primary;
 import commons.model.entity.constraints.GenericConstraint;
 import nbk.model.entity.items.characteristics.primary.fields.HasNbHands;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 
 import java.util.function.Predicate;
 
@@ -21,10 +22,12 @@ public enum ENbHands implements Primary, HasNbHands, GenericConstraint<ENbHands>
   TWO(2) {
     @Override
     public String getPlural() {
-      return "s";
+      return S;
     }
   };
 
+  @NonNls
+  private static final String S = "s";
   private final int nb;
 
   ENbHands(int nb) {

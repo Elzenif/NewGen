@@ -108,18 +108,6 @@ public class Room implements Comparable<Room> {
   }
 
   @Override
-  public String toString() {
-    return "Room{" +
-        "name='" + name + '\'' +
-        ", entry=" + entry +
-        ", x=" + x +
-        ", y=" + y +
-        ", width=" + width +
-        ", height=" + height +
-        '}';
-  }
-
-  @Override
   public int compareTo(@NotNull Room o) {
     if (this.equals(o))
       return 0;

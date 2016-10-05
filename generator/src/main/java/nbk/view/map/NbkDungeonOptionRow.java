@@ -16,8 +16,11 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.EnumMap;
+
+import static commons.view.utils.Constants.resourceBundle;
 
 /**
  * Created by Germain on 24/09/2016.
@@ -56,7 +59,7 @@ public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
 
     constraintPanel.add(basicOptionsPanel);
 
-    finalizeRowConstruction("Generate a random " + name);
+    finalizeRowConstruction(MessageFormat.format(resourceBundle.getString("tooltip.dungeon.generate"), name));
   }
 
   @Override

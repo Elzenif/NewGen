@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static commons.view.utils.Constants.resourceBundle;
+
 /**
  * Created by Germain on 05/05/2016.
  */
@@ -24,7 +26,7 @@ public class MainMenu extends JMenuBar implements Controller {
   private final Set<JRadioButtonMenuItem> gameButtons;
 
   public MainMenu() {
-    gameMenu = new JMenu("Game");
+    gameMenu = new JMenu(resourceBundle.getString("menu.game"));
 
     gameButtons = CollectionUtils.setMaxSizeSet(new HashSet<>(), EGame.NB_GAMES);
 

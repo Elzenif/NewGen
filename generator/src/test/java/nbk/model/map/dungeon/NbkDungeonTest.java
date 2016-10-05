@@ -57,7 +57,7 @@ public class NbkDungeonTest {
   public void dungeonShouldHaveAtLeastOneEntry() {
     dungeon = NbkDungeon.create(mapConstraint);
     Set<Room> rooms = dungeon.getRooms();
-    assertThat(rooms).areAtLeastOne(new Condition<>(Room::isEntry, "entry"));
+    assertThat(rooms).areAtLeastOne(new Condition<>(Room::isEntry, "entry")); //NON-NLS
   }
 
   @Test

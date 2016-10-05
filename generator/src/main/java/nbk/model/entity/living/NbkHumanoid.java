@@ -51,7 +51,7 @@ public class NbkHumanoid extends NbkLiving {
       this(new Stats());
     }
 
-    HumanoidBuilder(Stats stats) throws NoAvailableEntityTypeException {
+    HumanoidBuilder(Stats stats) {
       super(stats);
     }
 

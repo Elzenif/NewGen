@@ -1,24 +1,31 @@
 package nbk.model.map.dungeon.constraints;
 
 import commons.model.map.constraints.IMapDrawKey;
+import org.jetbrains.annotations.Contract;
+
+import static commons.view.utils.Constants.resourceBundle;
 
 /**
  * Created by Germain on 02/10/2016.
  */
 public enum EDungeonDraw implements IMapDrawKey {
-  NB_ROOMS(EDungeonNbRooms.values(), 5, "Number of rooms the map will contain"),
-  TILE_SIZE(EDungeonTileSizes.values(), 5, "Size of the tiles"),
-  RADIUS(EDungeonRadius.values(), EDungeonRadius.NORMAL,
-      "The global radius of the dungeon: on SMALL, rooms tend to be closer to each other; on BIG, they are farther");
+  NB_ROOMS(EDungeonNbRooms.values(), 5, resourceBundle.getString("row.dungeon.nbRooms"),
+      resourceBundle.getString("tooltip.dungeon.nbRooms")),
+  TILE_SIZE(EDungeonTileSizes.values(), 5, resourceBundle.getString("row.dungeon.tileSize"),
+      resourceBundle.getString("tooltip.dungeon.tileSize")),
+  RADIUS(EDungeonRadius.values(), EDungeonRadius.NORMAL, resourceBundle.getString("row.dungeon.radius"),
+      resourceBundle.getString("tooltip.dungeon.radius"));
 
   private final Object[] drawValues;
   private final Object defaultValue;
+  private final String name;
   private final String toolTipText;
 
 
-  EDungeonDraw(Object[] drawValues, Object defaultValue, String toolTipText) {
+  EDungeonDraw(Object[] drawValues, Object defaultValue, String name, String toolTipText) {
     this.drawValues = drawValues;
     this.defaultValue = defaultValue;
+    this.name = name;
     this.toolTipText = toolTipText;
   }
 
@@ -32,5 +39,12 @@ public enum EDungeonDraw implements IMapDrawKey {
 
   public String getToolTipText() {
     return toolTipText;
+  }
+
+
+  @Contract(pure = true)
+  @Override
+  public String toString() {
+    return name;
   }
 }

@@ -15,10 +15,6 @@ public class StringUtils {
 
   private static final DecimalFormat format = setFormat();
 
-  public static String fixedLengthString(int length, String string) {
-    return String.format("%1$" + length + "s", string);
-  }
-
   @NotNull
   public static String center(int length, String string) {
     StringBuilder sb = new StringBuilder(length);

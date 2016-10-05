@@ -12,6 +12,8 @@ import javax.swing.SpinnerNumberModel;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static commons.view.utils.Constants.resourceBundle;
+
 /**
  * Created by Germain on 24/07/2016.
  */
@@ -31,7 +33,7 @@ public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
       constraintPanel.add(jSpinner);
     }
 
-    finalizeRowConstruction("Attempt to make love");
+    finalizeRowConstruction(resourceBundle.getString("tooltip.love.generate"));
   }
 
   @Override
