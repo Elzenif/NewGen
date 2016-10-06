@@ -8,9 +8,11 @@ import commons.view.utils.Constants;
 import commons.view.utils.ScreenCheck;
 import org.jetbrains.annotations.NonNls;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,6 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static commons.view.utils.Constants.resourceBundle;
 
@@ -83,6 +87,13 @@ public class MainFrame extends JFrame {
 
   private void setUpUIComponents() {
     Container container = getContentPane();
+
+    List<Image> imageIcons = IntStream.of(16, 32, 64, 128).boxed()
+        .map(size -> "/images/Logo-" + size + ".png")
+        .map(name -> new ImageIcon(getClass().getResource(name)))
+        .map(ImageIcon::getImage)
+        .collect(Collectors.toList());
+    setIconImages(imageIcons);
 
     mainMenu = new MainMenu();
     setJMenuBar(mainMenu);
