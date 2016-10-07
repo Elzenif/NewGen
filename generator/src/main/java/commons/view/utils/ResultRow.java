@@ -9,8 +9,8 @@ import java.util.Collection;
  */
 public abstract class ResultRow<T extends Result<S>, S> extends PanelRow {
 
-  protected ResultRow() {
-    super(Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP);
+  protected ResultRow(int hGap, int vGap) {
+    super(hGap, vGap);
   }
 
   public abstract void clearResults();

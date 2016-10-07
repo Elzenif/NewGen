@@ -18,8 +18,8 @@ public abstract class StringResultRow<T extends StringResult> extends ResultRow<
   private final List<JComponent> resultsToPrint;
   private final boolean separateResultsWithComa;
 
-  protected StringResultRow(String labelText, boolean separateResultsWithComa) {
-    super();
+  protected StringResultRow(String labelText, boolean separateResultsWithComa, int hGap, int vGap) {
+    super(hGap, vGap);
 
     infoLabel = new JLabel(labelText + " : ");
     infoLabel.setFont(Constants.BENGUIAB_FONT);

@@ -17,7 +17,7 @@ public abstract class GraphResultRow<T extends Result<Image>> extends ResultRow<
   private JLabel resultToPrint;
 
   protected GraphResultRow() {
-    super();
+    super(Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP);
   }
 
   @Override

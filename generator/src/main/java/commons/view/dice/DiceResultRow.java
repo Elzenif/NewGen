@@ -2,6 +2,7 @@ package commons.view.dice;
 
 import commons.model.dice.EDiceNumber;
 import commons.view.dice.results.AbstractDiceResult;
+import commons.view.utils.Constants;
 import commons.view.utils.StringResultRow;
 
 
@@ -11,7 +12,7 @@ import commons.view.utils.StringResultRow;
 public class DiceResultRow extends StringResultRow<AbstractDiceResult> {
 
   public DiceResultRow(EDiceNumber diceNumber) {
-    super(diceNumber.getName(), false);
+    super(diceNumber.getName(), false, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP);
   }
 
 }
