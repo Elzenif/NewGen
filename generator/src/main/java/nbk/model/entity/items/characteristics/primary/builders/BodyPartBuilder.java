@@ -21,5 +21,7 @@ public interface BodyPartBuilder extends IsBodyPart {
 
   BodyPartBuilder feetPart();
 
+  BodyPartBuilder fullBody();
+
   BodyPartBuilder shieldPart();
 }
