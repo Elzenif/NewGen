@@ -8,5 +8,5 @@ import commons.view.MainFrame;
 @FunctionalInterface
 public interface Controller {
 
-  void setControllers(MainFrame view);
+  void setControllers(MainFrame mainFrame);
 }

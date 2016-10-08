@@ -37,7 +37,7 @@ public class GameMenu extends Menu {
   }
 
   @Override
-  public void setControllers(MainFrame view) {
-    gameButtons.forEach(rb -> rb.addActionListener(new GameMenuActionListener(view, rb.getText())));
+  public void setControllers(MainFrame mainFrame) {
+    gameButtons.forEach(rb -> rb.addActionListener(new GameMenuActionListener(mainFrame, rb.getText())));
   }
 }

@@ -5,7 +5,8 @@ package commons.view.menu;
  */
 public enum EAvailableMenu implements IAvailableMenu {
 
-  GAME_MENU(new GameMenu());
+  GAME_MENU(new GameMenu()),
+  HELP_MENU(new HelpMenu());
 
 
   private final Menu menu;

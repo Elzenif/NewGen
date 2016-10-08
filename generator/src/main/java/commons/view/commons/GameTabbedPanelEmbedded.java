@@ -25,8 +25,8 @@ public abstract class GameTabbedPanelEmbedded<T extends Game> extends JTabbedPan
     super(SwingConstants.TOP);
   }
   @Override
-  public void setControllers(MainFrame view) {
-    controllers.forEach(controller -> controller.setControllers(view));
+  public void setControllers(MainFrame mainFrame) {
+    controllers.forEach(controller -> controller.setControllers(mainFrame));
   }
 
   protected void addPanels() {

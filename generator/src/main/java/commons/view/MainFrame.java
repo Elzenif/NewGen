@@ -3,7 +3,7 @@ package commons.view;
 import commons.controller.MainFrameWindowListener;
 import commons.controller.intf.Controller;
 import commons.view.commons.GameTabbedPanel;
-import commons.view.menu.MainMenu;
+import commons.view.menu.MenuBar;
 import commons.view.utils.Constants;
 import commons.view.utils.ScreenCheck;
 import org.jetbrains.annotations.NonNls;
@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
   @NonNls
   public static final String GUI_PROP_FILE = "gui.properties";
   private final List<Controller> controllers = new ArrayList<>();
-  private MainMenu mainMenu;
+  private MenuBar menuBar;
   private GameTabbedPanel tabbedPane;
 
   public MainFrame() throws HeadlessException {
@@ -95,9 +95,9 @@ public class MainFrame extends JFrame {
         .collect(Collectors.toList());
     setIconImages(imageIcons);
 
-    mainMenu = new MainMenu();
-    setJMenuBar(mainMenu);
-    controllers.add(mainMenu);
+    menuBar = new MenuBar();
+    setJMenuBar(menuBar);
+    controllers.add(menuBar);
 
     tabbedPane = new GameTabbedPanel();
     controllers.addAll(tabbedPane.getControllers());

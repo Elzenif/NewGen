@@ -50,7 +50,7 @@ public abstract class DoublePanel<O extends OptionRow<R>, R extends ResultRow> e
   }
 
   @Override
-  public void setControllers(MainFrame view) {
+  public void setControllers(MainFrame mainFrame) {
     rowPairs.forEach(rowPair -> rowPair.getLeft().setControllers(rowPair.getRight()));
   }
 }
