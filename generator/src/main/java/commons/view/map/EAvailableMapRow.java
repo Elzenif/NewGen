@@ -9,24 +9,15 @@ import nbk.view.map.NbkDungeonOptionRow;
  */
 public enum EAvailableMapRow implements IAvailableRow<NbkDungeonOptionRow, MapResultRow> {
 
-  SIMPLE_DUNGEON(EMapType.SIMPLE_DUNGEON) {
-    NbkDungeonOptionRow dungeonOptionRow = null;
+  SIMPLE_DUNGEON(EMapType.SIMPLE_DUNGEON, new NbkDungeonOptionRow(EMapType.SIMPLE_DUNGEON));
 
-    @Override
-    public NbkDungeonOptionRow getOptionRow() {
-      if (dungeonOptionRow == null) {
-        dungeonOptionRow = new NbkDungeonOptionRow(EMapType.SIMPLE_DUNGEON);
-      }
-      return dungeonOptionRow;
-    }
-  };
-
-
+  private static MapResultRow dungeonResultRow = new MapResultRow();
   private final EMapType dungeonType;
-  private MapResultRow dungeonResultRow;
+  private final NbkDungeonOptionRow dungeonOptionRow;
 
-  EAvailableMapRow(EMapType dungeonType) {
+  EAvailableMapRow(EMapType dungeonType, NbkDungeonOptionRow dungeonOptionRow) {
     this.dungeonType = dungeonType;
+    this.dungeonOptionRow = dungeonOptionRow;
   }
 
   @Override
@@ -35,11 +26,12 @@ public enum EAvailableMapRow implements IAvailableRow<NbkDungeonOptionRow, MapRe
   }
 
   @Override
-  public MapResultRow getResultRow() {
-    if (dungeonResultRow == null) {
-      dungeonResultRow = new MapResultRow();
-    }
-    return dungeonResultRow;
+  public NbkDungeonOptionRow getOptionRow() {
+    return dungeonOptionRow;
   }
 
+  @Override
+  public MapResultRow getResultRow() {
+    return dungeonResultRow;
+  }
 }

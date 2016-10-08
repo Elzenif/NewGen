@@ -12,21 +12,16 @@ import nbk.model.entity.living.ENbkAvailableLivings;
  */
 public enum ENbkAvailableLivingsRow implements IAvailableEntityRow<NbkGame> {
 
-  HUMANOID_ROW(ENbkAvailableLivings.HUMANOID) {
-    NbkHumanoidOptionRow nbkHumanoidOptionRow = null;
-    @Override
-    public EntityOptionRow<NbkGame> getOptionRow() {
-      if (nbkHumanoidOptionRow == null)
-        nbkHumanoidOptionRow = new NbkHumanoidOptionRow();
-      return nbkHumanoidOptionRow;
-    }
-  };
+  HUMANOID_ROW(ENbkAvailableLivings.HUMANOID, new NbkHumanoidOptionRow());
 
   private final IAvailableLiving<NbkGame> living;
-  private EntityResultRow entityResultRow;
+  private final EntityOptionRow<NbkGame> entityOptionRow;
+  private final EntityResultRow entityResultRow;
 
-  ENbkAvailableLivingsRow(IAvailableLiving<NbkGame> living) {
+  ENbkAvailableLivingsRow(IAvailableLiving<NbkGame> living, EntityOptionRow<NbkGame> entityOptionRow) {
     this.living = living;
+    this.entityOptionRow = entityOptionRow;
+    this.entityResultRow = new EntityResultRow(this);
   }
 
   @Override
@@ -35,9 +30,12 @@ public enum ENbkAvailableLivingsRow implements IAvailableEntityRow<NbkGame> {
   }
 
   @Override
+  public EntityOptionRow<NbkGame> getOptionRow() {
+    return entityOptionRow;
+  }
+
+  @Override
   public EntityResultRow getResultRow() {
-    if (entityResultRow == null)
-      entityResultRow = new EntityResultRow(this);
     return entityResultRow;
   }
 }

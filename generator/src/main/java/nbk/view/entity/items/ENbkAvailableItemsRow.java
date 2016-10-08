@@ -12,29 +12,17 @@ import nbk.model.entity.items.ENbkAvailableItem;
  */
 public enum ENbkAvailableItemsRow implements IAvailableEntityRow<NbkGame> {
 
-  WEAPON_ROW(ENbkAvailableItem.WEAPON) {
-    NbkWeaponOptionRow entityOptionRow = null;
-    @Override
-    public EntityOptionRow<NbkGame> getOptionRow() {
-      if (entityOptionRow == null)
-        entityOptionRow = new NbkWeaponOptionRow();
-      return entityOptionRow;
-    }
-  }, ARMOR_ROW(ENbkAvailableItem.ARMOR) {
-    NbkArmorOptionRow entityOptionRow = null;
-    @Override
-    public EntityOptionRow<NbkGame> getOptionRow() {
-      if (entityOptionRow == null)
-        entityOptionRow = new NbkArmorOptionRow();
-      return entityOptionRow;
-    }
-  };
+  WEAPON_ROW(ENbkAvailableItem.WEAPON, new NbkWeaponOptionRow()),
+  ARMOR_ROW(ENbkAvailableItem.ARMOR, new NbkArmorOptionRow());
 
   private final IAvailableItem<NbkGame> item;
-  private EntityResultRow entityResultRow;
+  private final EntityOptionRow<NbkGame> entityOptionRow;
+  private final EntityResultRow entityResultRow;
 
-  ENbkAvailableItemsRow(IAvailableItem<NbkGame> item) {
+  ENbkAvailableItemsRow(IAvailableItem<NbkGame> item, EntityOptionRow<NbkGame> entityOptionRow) {
     this.item = item;
+    this.entityOptionRow = entityOptionRow;
+    this.entityResultRow = new EntityResultRow(this);
   }
 
   @Override
@@ -42,11 +30,13 @@ public enum ENbkAvailableItemsRow implements IAvailableEntityRow<NbkGame> {
     return item.getName();
   }
 
+  @Override
+  public EntityOptionRow<NbkGame> getOptionRow() {
+    return entityOptionRow;
+  }
 
   @Override
   public EntityResultRow getResultRow() {
-    if (entityResultRow == null)
-      entityResultRow = new EntityResultRow(this);
     return entityResultRow;
   }
 }

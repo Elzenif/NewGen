@@ -14,32 +14,27 @@ import nbk.view.utility.scenario.ScenarioOptionRow;
  */
 public enum ENbkAvailableUtilityRow implements IAvailableUtilityRow {
 
-  LOVE_ROW(ENbkAvailableUtility.LOVE_ROLEPLAY) {
-    final LoveOptionRow utilityOptionRow = new LoveOptionRow();
-
-    @Override
-    public UtilityOptionRow getOptionRow() {
-      return utilityOptionRow;
-    }
-  },
-  SCENARIO_ROW(ENbkAvailableUtility.SCENARIO) {
-    final ScenarioOptionRow utilityOptionRow = new ScenarioOptionRow();
-
-    @Override
-    public UtilityOptionRow getOptionRow() {
-      return utilityOptionRow;
-    }
-  };
+  LOVE_ROW(ENbkAvailableUtility.LOVE_ROLEPLAY, new LoveOptionRow()),
+  SCENARIO_ROW(ENbkAvailableUtility.SCENARIO, new ScenarioOptionRow());
 
   private final IAvailableUtility<NbkGame> utility;
+  private final UtilityOptionRow utilityOptionRow;
+  private final UtilityResultRow utilityResultRow;
 
-  ENbkAvailableUtilityRow(IAvailableUtility<NbkGame> utility) {
+  ENbkAvailableUtilityRow(IAvailableUtility<NbkGame> utility, UtilityOptionRow utilityOptionRow) {
     this.utility = utility;
+    this.utilityOptionRow = utilityOptionRow;
+    this.utilityResultRow = new UtilityResultRow(utility.getName());
+  }
+
+  @Override
+  public UtilityOptionRow getOptionRow() {
+    return utilityOptionRow;
   }
 
   @Override
   public UtilityResultRow getResultRow() {
-    return new UtilityResultRow(utility.getName());
+    return utilityResultRow;
   }
 
   @Override

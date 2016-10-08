@@ -25,16 +25,16 @@ public class GameTabbedPanel extends JPanel {
 
     cardLayout = new CardLayout();
     setLayout(cardLayout);
-    tabbedPanels = CollectionUtils.setMaxSizeSet(new HashSet<>(), EGame.NB_GAMES);
+    tabbedPanels = CollectionUtils.setMaxSizeSet(new HashSet<>(), EAvailableGame.NB_GAMES);
 
-    Arrays.stream(EGame.values()).forEach(eGame -> {
-      GameTabbedPanelEmbedded gameTabbedPanelEmbedded = eGame.getGameTabbedPanelEmbedded();
+    Arrays.stream(EAvailableGame.values()).forEach(game -> {
+      GameTabbedPanelEmbedded gameTabbedPanelEmbedded = game.getGameTabbedPanelEmbedded();
       tabbedPanels.add(gameTabbedPanelEmbedded);
       controllers.add(gameTabbedPanelEmbedded);
-      add(eGame.getGame().getName(), gameTabbedPanelEmbedded);
+      add(game.getGame().getName(), gameTabbedPanelEmbedded);
     });
 
-    cardLayout.show(this, EGame.getDefault().getName());
+    cardLayout.show(this, EAvailableGame.getDefault().getName());
   }
 
   public List<Controller> getControllers() {

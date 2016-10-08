@@ -6,6 +6,6 @@ import commons.model.entity.IAvailableEntity;
 /**
  * Created by Germain on 19/07/2016.
  */
-public interface IAvailableItem<T extends Game> extends IAvailableEntity<T> {
+public interface IAvailableItem<G extends Game> extends IAvailableEntity<G> {
 
 }
