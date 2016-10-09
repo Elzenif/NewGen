@@ -1,24 +1,18 @@
 package commons.view.commons.results;
 
-import commons.view.commons.PanelRow;
-
 import java.util.Collection;
 
 /**
- * Created by Germain on 24/09/2016.
+ * Created by Germain on 09/10/2016.
  */
-public abstract class ResultRow<T extends Result<S>, S> extends PanelRow {
+public interface ResultRow<T extends Result<S>, S> {
 
-  protected ResultRow(int hGap, int vGap) {
-    super(hGap, vGap);
-  }
-
-  public abstract void clearResults();
+  void clearResults();
 
   /**
    * Display results content in the row
    *
    * @param results the results to display
    */
-  public abstract void setResultsToPrint(Collection<T> results);
+  void setResultsToPrint(Collection<T> results);
 }

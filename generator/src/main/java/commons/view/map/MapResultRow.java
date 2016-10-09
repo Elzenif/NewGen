@@ -26,16 +26,16 @@ public class MapResultRow extends GraphResultRow<DungeonResult> {
     saveMapButton = new JButton(resourceBundle.getString("row.dungeon.save"));
     saveMapButton.setToolTipText(resourceBundle.getString("tooltip.dungeon.save"));
     saveMapButton.setEnabled(false);
-    add(saveMapButton);
+    optionRow.add(saveMapButton);
 
     showGridCheckBox = new JCheckBox();
     showGridCheckBox.setSelected(false);
     showGridCheckBox.setEnabled(false);
-    add(showGridCheckBox);
+    optionRow.add(showGridCheckBox);
 
     showGridLabel = new JLabel(resourceBundle.getString("row.dungeon.showGrid"));
     showGridLabel.setEnabled(false);
-    add(showGridLabel);
+    optionRow.add(showGridLabel);
   }
 
   public void setController(NbkDungeonController dungeonController) {

@@ -20,7 +20,8 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 04/06/2016.
  */
-public abstract class DoublePanel<O extends OptionRow<R>, R extends ResultRow> extends JPanel implements Controller {
+public abstract class DoublePanel<O extends JPanel & OptionRow<R>, R extends JPanel & ResultRow>
+    extends JPanel implements Controller {
 
   private final Set<Pair<O, R>> rowPairs;
   private final JPanel leftPanel;

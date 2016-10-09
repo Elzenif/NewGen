@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Germain on 05/06/2016.
  */
-public abstract class StringResultRow<T extends StringResult> extends ResultRow<T, String> {
+public abstract class StringResultRow<T extends StringResult> extends FlowLayoutResultRow<T, String> {
 
   private final JLabel infoLabel;
   private final List<JComponent> resultsToPrint;

@@ -20,7 +20,7 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 29/09/2016.
  */
-public abstract class ConstraintOptionRow<T extends ResultRow> extends OptionRow<T>
+public abstract class ConstraintOptionRow<T extends ResultRow> extends FlowLayoutOptionRow<T>
     implements HasConstraintPanel {
 
   protected final JPanel constraintsCheckBoxPanel;

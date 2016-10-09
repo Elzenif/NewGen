@@ -9,7 +9,7 @@ import commons.model.dice.EDiceNumber;
 import commons.utils.EOperator;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
-import commons.view.commons.options.OptionRow;
+import commons.view.commons.options.FlowLayoutOptionRow;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -28,7 +28,7 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 21/05/2016.
  */
-public class DiceOptionRow extends OptionRow<DiceResultRow> {
+public class DiceOptionRow extends FlowLayoutOptionRow<DiceResultRow> {
 
   @SuppressWarnings("SpellCheckingInspection")
   private final int JBUTTON_SIZE = resourceBundle.getString("row.dice.buttonTextMax").length();
