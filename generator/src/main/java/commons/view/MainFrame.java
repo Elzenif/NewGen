@@ -2,7 +2,7 @@ package commons.view;
 
 import commons.controller.MainFrameWindowListener;
 import commons.controller.intf.Controller;
-import commons.view.commons.GameTabbedPanel;
+import commons.view.commons.game.GameTabbedPanel;
 import commons.view.menu.MenuBar;
 import commons.view.utils.Constants;
 import commons.view.utils.ScreenCheck;

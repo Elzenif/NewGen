@@ -1,4 +1,4 @@
-package commons.view.commons;
+package commons.view.commons.game;
 
 import commons.model.commons.Game;
 

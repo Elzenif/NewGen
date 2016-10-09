@@ -1,7 +1,7 @@
 package commons.controller.menu;
 
 import commons.view.MainFrame;
-import commons.view.commons.GameTabbedPanel;
+import commons.view.commons.game.GameTabbedPanel;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;

@@ -1,4 +1,4 @@
-package commons.view.commons;
+package commons.view.commons.game;
 
 import commons.model.commons.Game;
 import nbk.model.commons.NbkGame;
@@ -11,28 +11,21 @@ import java.util.Arrays;
  */
 public enum EAvailableGame implements IAvailableGame {
 
-  NBK(NbkGame.getInstance(), true) {
-    GameTabbedPanelEmbedded gameTabbedPanelEmbedded = null;
-    @Override
-    public GameTabbedPanelEmbedded getGameTabbedPanelEmbedded() {
-      if (gameTabbedPanelEmbedded == null)
-        gameTabbedPanelEmbedded = new NbkTabbedPanelEmbedded();
-      return gameTabbedPanelEmbedded;
-    }
-  };
+  NBK(NbkGame.getInstance(), true, new NbkTabbedPanelEmbedded());
 
   public static final int NB_GAMES = EAvailableGame.values().length;
   private final Game game;
-  private final boolean isDefault;
+  private final boolean def;
+  private final GameTabbedPanelEmbedded gameTabbedPanelEmbedded;
 
-  EAvailableGame(Game game, boolean isDefault) {
+  EAvailableGame(Game game, boolean def, GameTabbedPanelEmbedded gameTabbedPanelEmbedded) {
     this.game = game;
-    this.isDefault = isDefault;
+    this.def = def;
+    this.gameTabbedPanelEmbedded = gameTabbedPanelEmbedded;
   }
 
   public static Game getDefault() {
     return Arrays.stream(EAvailableGame.values())
-        .filter(EAvailableGame::isDefault)
         .findFirst()
         .map(EAvailableGame::getGame)
         .orElse(NBK.getGame());
@@ -45,7 +38,12 @@ public enum EAvailableGame implements IAvailableGame {
 
   @Override
   public boolean isDefault() {
-    return isDefault;
+    return def;
+  }
+
+  @Override
+  public GameTabbedPanelEmbedded getGameTabbedPanelEmbedded() {
+    return gameTabbedPanelEmbedded;
   }
 
 }

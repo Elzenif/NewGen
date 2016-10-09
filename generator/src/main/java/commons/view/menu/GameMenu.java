@@ -3,7 +3,7 @@ package commons.view.menu;
 import commons.controller.menu.GameMenuActionListener;
 import commons.utils.CollectionUtils;
 import commons.view.MainFrame;
-import commons.view.commons.EAvailableGame;
+import commons.view.commons.game.EAvailableGame;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButtonMenuItem;

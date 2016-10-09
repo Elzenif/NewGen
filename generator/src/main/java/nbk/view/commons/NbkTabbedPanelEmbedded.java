@@ -1,6 +1,6 @@
 package nbk.view.commons;
 
-import commons.view.commons.GameTabbedPanelEmbedded;
+import commons.view.commons.game.GameTabbedPanelEmbedded;
 import commons.view.dice.DicePanel;
 import commons.view.entity.EntityPanel;
 import commons.view.hidden.HiddenPanel;
