@@ -7,6 +7,8 @@ import commons.view.menu.MenuBar;
 import commons.view.utils.Constants;
 import commons.view.utils.ScreenCheck;
 import org.jetbrains.annotations.NonNls;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -33,6 +35,7 @@ public class MainFrame extends JFrame {
 
   @NonNls
   public static final String GUI_PROP_FILE = "gui.properties";
+  private static final Logger LOGGER = LoggerFactory.getLogger(MainFrame.class);
   private final List<Controller> controllers = new ArrayList<>();
   private MenuBar menuBar;
   private GameTabbedPanel tabbedPane;
@@ -60,7 +63,7 @@ public class MainFrame extends JFrame {
   }
 
   private void setDefaultBounds(@NonNls String message) {
-    System.out.println(message);
+    LOGGER.info(message);
     setLocationByPlatform(true);
     setSize(Constants.JFRAME_WIDTH, Constants.JFRAME_HEIGHT);
   }
@@ -79,7 +82,7 @@ public class MainFrame extends JFrame {
     if (ScreenCheck.getVirtualBounds().contains(bounds)) {
       setBounds(bounds);
       @NonNls String message = "set bounds stored in pref";
-      System.out.println(message);
+      LOGGER.info(message);
     } else {
       setDefaultBounds("out of bounds -> back to default properties");
     }

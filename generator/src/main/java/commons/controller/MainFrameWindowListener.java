@@ -2,6 +2,8 @@ package commons.controller;
 
 import commons.view.MainFrame;
 import org.jetbrains.annotations.NonNls;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.Frame;
 import java.awt.Rectangle;
@@ -17,6 +19,8 @@ import java.util.Properties;
  * Created by Germain on 04/10/2016.
  */
 public class MainFrameWindowListener extends WindowAdapter {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(MainFrameWindowListener.class);
 
   private final Frame frame;
 
@@ -50,7 +54,7 @@ public class MainFrameWindowListener extends WindowAdapter {
     }
 
     @NonNls String message = "Storing preferences " + x + ", " + y + ", " + width + ", " + height;
-    System.out.println(message);
+    LOGGER.info(message);
     System.exit(0);
   }
 }
