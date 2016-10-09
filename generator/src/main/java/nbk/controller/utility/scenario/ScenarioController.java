@@ -4,7 +4,7 @@ import commons.controller.utility.UtilityController;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.DrawChangeListener;
 import nbk.model.utility.scenario.constraints.EScenarioDraw;
-import nbk.view.utility.scenario.ScenarioOptionRow;
+import nbk.view.utility.scenario.options.ScenarioOptionRow;
 
 import java.util.Arrays;
 import java.util.EnumMap;

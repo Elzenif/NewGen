@@ -2,7 +2,7 @@ package commons.controller.map;
 
 import nbk.controller.map.GenerateNbkDungeonActionListener;
 import nbk.controller.map.NbkDungeonController;
-import nbk.view.map.NbkDungeonOptionRow;
+import nbk.view.map.options.NbkDungeonOptionRow;
 import org.jetbrains.annotations.NonNls;
 
 import javax.imageio.ImageIO;

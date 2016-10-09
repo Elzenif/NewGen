@@ -1,8 +1,8 @@
 package commons.view.utility;
 
+import commons.view.commons.results.StringResultRow;
 import commons.view.utility.result.UtilityResult;
 import commons.view.utils.Constants;
-import commons.view.utils.StringResultRow;
 
 /**
  * Created by Germain on 24/07/2016.

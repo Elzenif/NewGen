@@ -7,8 +7,8 @@ import commons.view.utility.result.UtilityResult;
 import nbk.controller.utility.GenerateNbkUtilityActionListener;
 import nbk.model.utility.love.Love;
 import nbk.model.utility.love.constraints.ELoveDraw;
-import nbk.view.utility.love.LoveOptionRow;
-import nbk.view.utility.love.result.LoveResult;
+import nbk.view.utility.love.options.LoveOptionRow;
+import nbk.view.utility.love.results.LoveResult;
 
 import java.util.Collection;
 

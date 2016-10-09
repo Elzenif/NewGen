@@ -5,7 +5,7 @@ import commons.model.map.constraints.MapConstraint;
 import commons.view.map.MapResultRow;
 import nbk.model.map.dungeon.NbkDungeon;
 import nbk.model.map.dungeon.constraints.EDungeonDraw;
-import nbk.view.map.NbkDungeonOptionRow;
+import nbk.view.map.options.NbkDungeonOptionRow;
 import nbk.view.map.results.DungeonResult;
 
 import java.awt.Image;

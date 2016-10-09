@@ -9,7 +9,7 @@ import commons.model.map.constraints.MapConstraint;
 import commons.view.map.MapResultRow;
 import nbk.controller.utility.DrawChangeListener;
 import nbk.model.map.dungeon.constraints.EDungeonDraw;
-import nbk.view.map.NbkDungeonOptionRow;
+import nbk.view.map.options.NbkDungeonOptionRow;
 
 import java.util.Arrays;
 import java.util.EnumMap;

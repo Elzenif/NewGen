@@ -1,8 +1,8 @@
 package commons.view.entity;
 
+import commons.view.commons.results.StringResultRow;
 import commons.view.entity.results.EntityResult;
 import commons.view.utils.Constants;
-import commons.view.utils.StringResultRow;
 
 
 /**

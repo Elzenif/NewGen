@@ -1,9 +1,9 @@
 package commons.view.dice;
 
 import commons.model.dice.EDiceNumber;
+import commons.view.commons.results.StringResultRow;
 import commons.view.dice.results.AbstractDiceResult;
 import commons.view.utils.Constants;
-import commons.view.utils.StringResultRow;
 
 
 /**

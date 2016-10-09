@@ -5,7 +5,7 @@ import commons.model.entity.characteristics.primary.enums.EItemRarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
 import nbk.model.commons.NbkGame;
-import nbk.view.entity.living.NbkHumanoidOptionRow;
+import nbk.view.entity.living.options.NbkHumanoidOptionRow;
 
 /**
  * Created by Germain on 28/08/2016.

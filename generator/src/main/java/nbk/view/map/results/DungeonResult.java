@@ -2,7 +2,7 @@ package nbk.view.map.results;
 
 import commons.model.map.Cell;
 import commons.model.map.EMapPart;
-import commons.view.commons.Result;
+import commons.view.commons.results.Result;
 import nbk.model.map.dungeon.NbkDungeon;
 
 import java.awt.AlphaComposite;

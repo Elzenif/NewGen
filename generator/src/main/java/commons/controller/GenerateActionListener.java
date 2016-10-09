@@ -1,9 +1,9 @@
 package commons.controller;
 
 import commons.model.commons.GenerationConstraint;
-import commons.view.commons.Result;
-import commons.view.utils.ConstraintOptionRow;
-import commons.view.utils.ResultRow;
+import commons.view.commons.options.ConstraintOptionRow;
+import commons.view.commons.results.Result;
+import commons.view.commons.results.ResultRow;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

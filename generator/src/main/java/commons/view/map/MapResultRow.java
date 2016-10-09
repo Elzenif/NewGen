@@ -1,6 +1,6 @@
 package commons.view.map;
 
-import commons.view.utils.GraphResultRow;
+import commons.view.commons.results.GraphResultRow;
 import nbk.controller.map.NbkDungeonController;
 import nbk.view.map.results.DungeonResult;
 

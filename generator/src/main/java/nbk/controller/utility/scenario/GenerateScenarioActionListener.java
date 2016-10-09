@@ -8,7 +8,7 @@ import commons.view.utility.result.UtilityResult;
 import nbk.controller.utility.GenerateNbkUtilityActionListener;
 import nbk.model.utility.scenario.Scenario;
 import nbk.model.utility.scenario.constraints.EScenarioDraw;
-import nbk.view.utility.scenario.result.ScenarioResult;
+import nbk.view.utility.scenario.results.ScenarioResult;
 
 import java.util.Collection;
 

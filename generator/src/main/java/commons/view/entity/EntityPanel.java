@@ -1,7 +1,7 @@
 package commons.view.entity;
 
 import commons.model.commons.Game;
-import commons.view.utils.DoublePanel;
+import commons.view.commons.DoublePanel;
 
 /**
  * Created by Germain on 09/06/2016.

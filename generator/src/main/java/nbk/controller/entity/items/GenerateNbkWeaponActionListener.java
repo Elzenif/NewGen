@@ -9,7 +9,7 @@ import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.NbkAbstractWeapon;
 import nbk.model.entity.items.NbkPredefinedWeapon;
 import nbk.model.entity.items.NbkRGWeapon;
-import nbk.view.entity.items.NbkWeaponOptionRow;
+import nbk.view.entity.items.options.NbkWeaponOptionRow;
 import org.jetbrains.annotations.Contract;
 
 /**

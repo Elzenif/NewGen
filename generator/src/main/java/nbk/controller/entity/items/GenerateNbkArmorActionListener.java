@@ -6,7 +6,7 @@ import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.view.entity.EntityResultRow;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.NbkPredefinedArmor;
-import nbk.view.entity.items.NbkArmorOptionRow;
+import nbk.view.entity.items.options.NbkArmorOptionRow;
 import org.jetbrains.annotations.Contract;
 
 /**

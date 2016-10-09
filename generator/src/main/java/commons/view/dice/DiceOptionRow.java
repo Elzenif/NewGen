@@ -9,7 +9,7 @@ import commons.model.dice.EDiceNumber;
 import commons.utils.EOperator;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
-import commons.view.utils.OptionRow;
+import commons.view.commons.options.OptionRow;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;

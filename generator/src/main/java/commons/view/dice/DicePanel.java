@@ -1,7 +1,7 @@
 package commons.view.dice;
 
 import commons.model.dice.EDiceNumber;
-import commons.view.utils.DoublePanel;
+import commons.view.commons.DoublePanel;
 
 /**
  * Created by Germain on 07/05/2016.

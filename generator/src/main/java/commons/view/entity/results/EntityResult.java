@@ -1,6 +1,6 @@
 package commons.view.entity.results;
 
-import commons.view.commons.StringResult;
+import commons.view.commons.results.StringResult;
 
 /**
  * Created by Germain on 28/08/2016.

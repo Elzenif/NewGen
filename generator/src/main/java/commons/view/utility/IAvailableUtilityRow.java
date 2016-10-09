@@ -1,7 +1,7 @@
 package commons.view.utility;
 
 import commons.model.utility.constraints.IUtilityDrawKey;
-import commons.view.utils.IAvailableRow;
+import commons.view.commons.IAvailableRow;
 
 /**
  * Created by Germain on 24/07/2016.

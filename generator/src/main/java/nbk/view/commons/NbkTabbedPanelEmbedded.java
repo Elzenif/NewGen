@@ -7,9 +7,9 @@ import commons.view.hidden.HiddenPanel;
 import commons.view.map.MapPanel;
 import commons.view.utility.UtilityPanel;
 import nbk.model.commons.NbkGame;
-import nbk.view.entity.items.ENbkAvailableItemsRow;
-import nbk.view.entity.living.ENbkAvailableLivingsRow;
-import nbk.view.utility.ENbkAvailableUtilityRow;
+import nbk.view.entity.items.options.ENbkAvailableItemsRow;
+import nbk.view.entity.living.options.ENbkAvailableLivingsRow;
+import nbk.view.utility.options.ENbkAvailableUtilityRow;
 
 import static commons.view.utils.Constants.resourceBundle;
 

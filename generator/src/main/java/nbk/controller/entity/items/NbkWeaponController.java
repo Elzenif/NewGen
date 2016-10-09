@@ -9,7 +9,7 @@ import nbk.model.entity.items.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkPredefinedWeapon;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkQuality;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkWeaponType;
-import nbk.view.entity.items.NbkWeaponOptionRow;
+import nbk.view.entity.items.options.NbkWeaponOptionRow;
 
 import java.awt.event.ActionListener;
 import java.util.Arrays;

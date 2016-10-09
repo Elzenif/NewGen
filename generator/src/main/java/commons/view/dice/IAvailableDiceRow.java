@@ -1,6 +1,6 @@
 package commons.view.dice;
 
-import commons.view.utils.IAvailableRow;
+import commons.view.commons.IAvailableRow;
 
 /**
  * Created by Germain on 24/07/2016.

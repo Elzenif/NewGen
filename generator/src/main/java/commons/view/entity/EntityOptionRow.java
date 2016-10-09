@@ -4,7 +4,7 @@ import commons.controller.entity.EntityController;
 import commons.model.commons.Game;
 import commons.model.entity.IAvailableEntity;
 import commons.utils.TextFieldUtils;
-import commons.view.utils.ConstraintOptionRow;
+import commons.view.commons.options.ConstraintOptionRow;
 import commons.view.utils.ConstraintPanel;
 
 import javax.swing.BoxLayout;

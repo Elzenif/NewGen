@@ -1,7 +1,7 @@
 package commons.view.utility;
 
 import commons.model.utility.constraints.IUtilityDrawKey;
-import commons.view.utils.DoublePanel;
+import commons.view.commons.DoublePanel;
 
 /**
  * Created by Germain on 24/07/2016.

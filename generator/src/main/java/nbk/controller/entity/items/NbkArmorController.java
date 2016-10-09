@@ -7,7 +7,7 @@ import commons.view.entity.EntityResultRow;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkPredefinedArmor;
-import nbk.view.entity.items.NbkArmorOptionRow;
+import nbk.view.entity.items.options.NbkArmorOptionRow;
 
 import java.awt.event.ActionListener;
 import java.util.Arrays;
