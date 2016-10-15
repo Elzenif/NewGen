@@ -1,4 +1,4 @@
-package commons.controller;
+package commons.controller.commons;
 
 import commons.model.commons.GenerationConstraint;
 import commons.view.commons.options.ConstraintOptionRow;

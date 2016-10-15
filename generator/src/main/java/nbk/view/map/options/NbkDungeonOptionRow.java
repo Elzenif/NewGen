@@ -67,7 +67,7 @@ public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
     super.setControllers(new NbkDungeonController(this, dungeonResultRow));
     NbkDungeonController dungeonController = (NbkDungeonController) this.controller;
     generateButton.addActionListener(dungeonController.getGenerateActionListener());
-    dungeonResultRow.setController(dungeonController);
+    dungeonResultRow.setControllers(dungeonController);
     dungeonDrawMap.forEach((dungeonDraw, comboBox) ->
         comboBox.addActionListener(dungeonController.getDrawChangeListener(dungeonDraw)));
   }

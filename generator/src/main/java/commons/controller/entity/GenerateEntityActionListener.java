@@ -1,6 +1,6 @@
 package commons.controller.entity;
 
-import commons.controller.GenerateActionListener;
+import commons.controller.commons.GenerateActionListener;
 import commons.model.commons.Game;
 import commons.model.entity.Entity;
 import commons.model.entity.constraints.GlobalConstraints;

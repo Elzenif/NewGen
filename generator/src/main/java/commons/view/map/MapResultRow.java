@@ -7,6 +7,7 @@ import nbk.view.map.results.DungeonResult;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import java.util.Collection;
 
 import static commons.view.utils.Constants.resourceBundle;
 
@@ -38,7 +39,8 @@ public class MapResultRow extends GraphResultRow<DungeonResult> {
     optionRow.add(showGridLabel);
   }
 
-  public void setController(NbkDungeonController dungeonController) {
+  public void setControllers(NbkDungeonController dungeonController) {
+    super.setControllers();
     saveMapButton.addActionListener(dungeonController.getSaveMapActionListener());
     showGridCheckBox.addItemListener(dungeonController.getShowGridItemListener());
   }
@@ -51,5 +53,13 @@ public class MapResultRow extends GraphResultRow<DungeonResult> {
 
   public boolean isShowGridCheckBoxSelected() {
     return showGridCheckBox.isSelected();
+  }
+
+  @Override
+  public void setResultsToPrint(Collection<DungeonResult> results) {
+    for (DungeonResult result : results) {
+      resultToPrint.setMaxUnitIncrement(result.getTileSize());
+      super.setResultsToPrint(result);
+    }
   }
 }

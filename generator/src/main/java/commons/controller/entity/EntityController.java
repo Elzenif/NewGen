@@ -1,6 +1,6 @@
 package commons.controller.entity;
 
-import commons.controller.AbstractOptionRowController;
+import commons.controller.commons.AbstractOptionRowController;
 import commons.controller.entity.items.ConstraintsItemListener;
 import commons.controller.entity.items.RarityChangeListener;
 import commons.model.commons.Game;

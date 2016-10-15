@@ -1,6 +1,6 @@
 package nbk.controller.map;
 
-import commons.controller.GenerateActionListener;
+import commons.controller.commons.GenerateActionListener;
 import commons.model.map.constraints.MapConstraint;
 import commons.view.map.MapResultRow;
 import nbk.model.map.dungeon.NbkDungeon;

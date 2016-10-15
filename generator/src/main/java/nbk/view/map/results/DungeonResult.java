@@ -2,19 +2,18 @@ package nbk.view.map.results;
 
 import commons.model.map.Cell;
 import commons.model.map.EMapPart;
-import commons.view.commons.results.Result;
+import commons.view.map.results.MapResult;
 import nbk.model.map.dungeon.NbkDungeon;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 /**
  * Created by Germain on 24/09/2016.
  */
-public class DungeonResult implements Result<Image> {
+public class DungeonResult implements MapResult {
 
   private final NbkDungeon dungeon;
   private boolean showGrid;
@@ -57,5 +56,10 @@ public class DungeonResult implements Result<Image> {
 
   public void setShowGrid(boolean showGrid) {
     this.showGrid = showGrid;
+  }
+
+  @Override
+  public int getTileSize() {
+    return dungeon.getTileSize();
   }
 }

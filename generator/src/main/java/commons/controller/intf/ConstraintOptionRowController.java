@@ -1,6 +1,6 @@
 package commons.controller.intf;
 
-import commons.controller.GenerateActionListener;
+import commons.controller.commons.GenerateActionListener;
 import commons.controller.entity.items.ConstraintsItemListener;
 import commons.model.commons.GenerationConstraint;
 

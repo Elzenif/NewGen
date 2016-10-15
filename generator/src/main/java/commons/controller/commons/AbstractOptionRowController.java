@@ -1,4 +1,4 @@
-package commons.controller;
+package commons.controller.commons;
 
 import commons.controller.entity.items.ConstraintsItemListener;
 import commons.controller.intf.ConstraintOptionRowController;

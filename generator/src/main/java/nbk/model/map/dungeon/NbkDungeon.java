@@ -258,6 +258,10 @@ public class NbkDungeon {
     return grid;
   }
 
+  public int getTileSize() {
+    return tileSize;
+  }
+
 
   static class DungeonBuilder {
 
