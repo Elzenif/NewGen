@@ -9,7 +9,7 @@ import commons.model.dice.EDiceNumber;
 import commons.utils.EOperator;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
-import commons.view.commons.options.FlowLayoutOptionRow;
+import commons.view.commons.options.BorderLayoutOptionRow;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -28,7 +28,7 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 21/05/2016.
  */
-public class DiceOptionRow extends FlowLayoutOptionRow<DiceResultRow> {
+public class DiceOptionRow extends BorderLayoutOptionRow<DiceResultRow> {
 
   @SuppressWarnings("SpellCheckingInspection")
   private final int JBUTTON_SIZE = resourceBundle.getString("row.dice.buttonTextMax").length();
@@ -59,9 +59,9 @@ public class DiceOptionRow extends FlowLayoutOptionRow<DiceResultRow> {
 
     numberOfDiceModel = new SpinnerNumberModel(1, 0, 20, 1);
     numberOfDiceSpinner = new JSpinner(numberOfDiceModel);
-    add(numberOfDiceSpinner);
+    leftPanel.add(numberOfDiceSpinner);
 
-    add(infoLabel);
+    leftPanel.add(infoLabel);
 
     JPanel jPanel1 = new JPanel();
     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
@@ -73,7 +73,7 @@ public class DiceOptionRow extends FlowLayoutOptionRow<DiceResultRow> {
     addScoreSpinner.setAlignmentX(LEFT_ALIGNMENT);
     jPanel1.add(addScoreCheckBox);
     jPanel1.add(addScoreSpinner);
-    add(jPanel1);
+    centerPanel.add(jPanel1);
 
     JPanel jPanel2 = new JPanel();
     jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.Y_AXIS));
@@ -90,7 +90,7 @@ public class DiceOptionRow extends FlowLayoutOptionRow<DiceResultRow> {
     jPanel21.add(testSpinner);
     jPanel2.add(testCheckBox);
     jPanel2.add(jPanel21);
-    add(jPanel2);
+    centerPanel.add(jPanel2);
 
     JPanel jPanel3 = new JPanel();
     jPanel3.setLayout(new BoxLayout(jPanel3, BoxLayout.Y_AXIS));
@@ -98,11 +98,11 @@ public class DiceOptionRow extends FlowLayoutOptionRow<DiceResultRow> {
     jPanel3.add(sumCheckBox);
     meanCheckBox = new JCheckBox(resourceBundle.getString("row.dice.mean"));
     jPanel3.add(meanCheckBox);
-    add(jPanel3);
+    centerPanel.add(jPanel3);
 
     rollDiceButton = new JButton();
     updateTextButton();
-    add(rollDiceButton);
+    rightPanel.add(rollDiceButton);
   }
 
   @Override

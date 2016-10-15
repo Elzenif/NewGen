@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Germain on 05/06/2016.
  */
-public abstract class StringResultRow<T extends StringResult> extends FlowLayoutResultRow<T, String> {
+public abstract class StringResultRow<T extends StringResult> extends BorderLayoutResultRow<T, String> {
 
   private final JLabel infoLabel;
   private final List<JComponent> resultsToPrint;
@@ -23,7 +23,7 @@ public abstract class StringResultRow<T extends StringResult> extends FlowLayout
 
     infoLabel = new JLabel(labelText + " : ");
     infoLabel.setFont(Constants.BENGUIAB_FONT);
-    add(infoLabel);
+    leftPanel.add(infoLabel);
 
     resultsToPrint = new LinkedList<>();
 
@@ -32,7 +32,7 @@ public abstract class StringResultRow<T extends StringResult> extends FlowLayout
 
   @Override
   public void clearResults() {
-    resultsToPrint.forEach(this::remove);
+    resultsToPrint.forEach(centerPanel::remove);
     resultsToPrint.clear();
   }
 
@@ -46,14 +46,14 @@ public abstract class StringResultRow<T extends StringResult> extends FlowLayout
         JLabel resultToPrint = new JLabel(s);
         makePretty(resultToPrint, result);
         resultsToPrint.add(resultToPrint);
-        add(resultToPrint);
+        centerPanel.add(resultToPrint);
       }
       if (separateResultsWithComa && i != size) {
         i++;
         JLabel comaLabel = new JLabel(", ");
         makePretty(comaLabel, result);
         resultsToPrint.add(comaLabel);
-        add(comaLabel);
+        centerPanel.add(comaLabel);
       }
     }
     repaint();

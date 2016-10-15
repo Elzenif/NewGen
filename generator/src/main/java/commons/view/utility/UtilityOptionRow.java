@@ -14,9 +14,9 @@ public abstract class UtilityOptionRow<K extends IUtilityDrawKey>
   protected UtilityOptionRow(int labelSize, String name) {
     super(labelSize + 3, name + " : ");
 
-    add(infoLabel);
+    leftPanel.add(infoLabel);
 
-    add(constraintsCheckBoxPanel);
+    centerPanel.add(constraintsCheckBoxPanel);
   }
 
   protected void setControllers(UtilityController utilityController) {

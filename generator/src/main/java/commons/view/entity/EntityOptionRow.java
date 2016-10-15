@@ -32,11 +32,11 @@ public abstract class EntityOptionRow<G extends Game> extends ConstraintOptionRo
     numberOfEntitiesModel = new SpinnerNumberModel(1, 1, 9, 1);
     numberOfEntitiesSpinner = new JSpinner(numberOfEntitiesModel);
     numberOfEntitiesSpinner.setToolTipText(resourceBundle.getString("tooltip.entity.numberToGenerate"));
-    add(numberOfEntitiesSpinner);
+    leftPanel.add(numberOfEntitiesSpinner);
 
-    add(infoLabel);
+    leftPanel.add(infoLabel);
 
-    add(constraintsCheckBoxPanel);
+    centerPanel.add(constraintsCheckBoxPanel);
 
     // quality constraints
     qualityTextField = TextFieldUtils.createTwoDigitsField();

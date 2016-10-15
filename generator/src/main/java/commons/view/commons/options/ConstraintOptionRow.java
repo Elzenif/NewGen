@@ -20,7 +20,7 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 29/09/2016.
  */
-public abstract class ConstraintOptionRow<T extends ResultRow> extends FlowLayoutOptionRow<T>
+public abstract class ConstraintOptionRow<T extends ResultRow> extends BorderLayoutOptionRow<T>
     implements HasConstraintPanel {
 
   protected final JPanel constraintsCheckBoxPanel;
@@ -51,12 +51,12 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends FlowLayou
   }
 
   protected void finalizeRowConstruction(String toolTipTextButton) {
-    add(constraintPanel);
+    centerPanel.add(constraintPanel);
 
     generateButton = new JButton(resourceBundle.getString("row.generate"));
     generateButton.setFont(DAUPHINN_FONT);
     generateButton.setToolTipText(toolTipTextButton);
-    add(generateButton);
+    rightPanel.add(generateButton);
 
     updateConstraintsAbility(false);
   }

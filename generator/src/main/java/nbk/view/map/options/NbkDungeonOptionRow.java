@@ -35,9 +35,9 @@ public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
   public NbkDungeonOptionRow(IAvailableMap availableDungeon) {
     super(MathUtils.maxLength(Arrays.asList(EMapType.values())), availableDungeon.getName());
 
-    add(infoLabel);
+    leftPanel.add(infoLabel);
 
-    add(constraintsCheckBoxPanel);
+    centerPanel.add(constraintsCheckBoxPanel);
 
     // basic options
     basicOptionsPanel = new ConstraintPanel();
