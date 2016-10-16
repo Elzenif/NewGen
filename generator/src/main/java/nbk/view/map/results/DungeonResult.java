@@ -31,7 +31,7 @@ public class DungeonResult implements MapResult {
     graphics.setComposite(AlphaComposite.Clear);
     graphics.fillRect(0, 0, dungeon.getWidth(), dungeon.getHeight());
 
-    graphics.setComposite(AlphaComposite.Src.derive(0.4f));
+    graphics.setComposite(AlphaComposite.Src.derive(0.7f));
     for (Cell[] cells : dungeon.getGrid().getCells()) {
       for (Cell cell : cells) {
         graphics.setColor(getColor(cell));

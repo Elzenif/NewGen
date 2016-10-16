@@ -8,6 +8,6 @@ import java.util.stream.IntStream;
 public class EDungeonTileSizes {
 
   public static Object[] values() {
-    return IntStream.rangeClosed(2, 10).boxed().toArray();
+    return IntStream.rangeClosed(5, 15).boxed().toArray();
   }
 }

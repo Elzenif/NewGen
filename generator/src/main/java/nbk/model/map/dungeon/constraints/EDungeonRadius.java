@@ -8,9 +8,9 @@ import static commons.view.utils.Constants.resourceBundle;
  * Created by Germain on 02/10/2016.
  */
 public enum EDungeonRadius {
-  SMALL(25, resourceBundle.getString("dungeon.radius.small")),
-  NORMAL(100, resourceBundle.getString("dungeon.radius.normal")),
-  BIG(500, resourceBundle.getString("dungeon.radius.big"));
+  SMALL(100, resourceBundle.getString("dungeon.radius.small")),
+  NORMAL(300, resourceBundle.getString("dungeon.radius.normal")),
+  BIG(600, resourceBundle.getString("dungeon.radius.big"));
 
   private final int value;
   private final String name;
