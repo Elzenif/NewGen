@@ -1,7 +1,6 @@
 package commons.view.commons.results;
 
 import commons.utils.StringUtils;
-import commons.view.utils.Constants;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -14,15 +13,12 @@ import java.util.List;
  */
 public abstract class StringResultRow<T extends StringResult> extends BorderLayoutResultRow<T, String> {
 
-  private final JLabel infoLabel;
   private final List<JComponent> resultsToPrint;
   private final boolean separateResultsWithComa;
 
   protected StringResultRow(String labelText, boolean separateResultsWithComa, int hGap, int vGap) {
-    super(hGap, vGap);
+    super(hGap, vGap, new JLabel(labelText + " : "));
 
-    infoLabel = new JLabel(labelText + " : ");
-    infoLabel.setFont(Constants.BENGUIAB_FONT);
     leftPanel.add(infoLabel);
 
     resultsToPrint = new LinkedList<>();

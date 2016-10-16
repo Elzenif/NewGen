@@ -12,14 +12,10 @@ import javax.swing.JLabel;
  */
 public abstract class BorderLayoutOptionRow<T extends ResultRow> extends BorderLayoutPanelRow implements OptionRow<T> {
 
-  protected final JLabel infoLabel;
   protected final String name;
 
   protected BorderLayoutOptionRow(int labelSize, String name) {
-    super(Constants.JPANEL_HGAP, Constants.JPANEL_VGAP);
+    super(Constants.JPANEL_HGAP, Constants.JPANEL_VGAP, new JLabel(StringUtils.leftAlign(labelSize, name)));
     this.name = name;
-
-    infoLabel = new JLabel(StringUtils.leftAlign(labelSize, name));
-    infoLabel.setFont(Constants.BENGUIAB_FONT);
   }
 }

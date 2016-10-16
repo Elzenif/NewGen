@@ -10,6 +10,7 @@ import commons.utils.EOperator;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
 import commons.view.commons.options.BorderLayoutOptionRow;
+import commons.view.utils.Constants;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -101,6 +102,7 @@ public class DiceOptionRow extends BorderLayoutOptionRow<DiceResultRow> {
     centerPanel.add(jPanel3);
 
     rollDiceButton = new JButton();
+    rollDiceButton.setFont(Constants.DAUPHINN_FONT);
     updateTextButton();
     rightPanel.add(rollDiceButton);
   }

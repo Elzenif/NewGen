@@ -1,7 +1,9 @@
 package commons.view.commons;
 
+import commons.view.utils.Constants;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -14,8 +16,9 @@ public abstract class BorderLayoutPanelRow extends JPanel {
   protected final FlowLayoutPanelRow leftPanel;
   protected final FlowLayoutPanelRow centerPanel;
   protected final FlowLayoutPanelRow rightPanel;
+  protected final JLabel infoLabel;
 
-  protected BorderLayoutPanelRow(int hGap, int vGap) {
+  protected BorderLayoutPanelRow(int hGap, int vGap, JLabel infoLabel) {
     leftPanel = new FlowLayoutPanelRow(hGap / 2, vGap, true);
     centerPanel = new FlowLayoutPanelRow(hGap / 2, vGap, false);
     rightPanel = new FlowLayoutPanelRow(hGap / 2, vGap, true);
@@ -25,6 +28,9 @@ public abstract class BorderLayoutPanelRow extends JPanel {
     super.add(leftPanel, BorderLayout.WEST);
     super.add(centerPanel, BorderLayout.CENTER);
     super.add(rightPanel, BorderLayout.EAST);
+
+    this.infoLabel = infoLabel;
+    this.infoLabel.setFont(Constants.BENGUIAB_FONT);
   }
 
   @Override
