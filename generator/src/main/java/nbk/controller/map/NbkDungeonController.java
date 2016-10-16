@@ -5,6 +5,7 @@ import commons.controller.entity.items.ConstraintsItemListener;
 import commons.controller.intf.HasDrawKeysController;
 import commons.controller.map.SaveMapActionListener;
 import commons.controller.map.ShowGridItemListener;
+import commons.controller.map.ZoomChangeListener;
 import commons.model.map.constraints.MapConstraint;
 import commons.view.map.MapResultRow;
 import nbk.controller.utility.DrawChangeListener;
@@ -20,20 +21,22 @@ import java.util.EnumMap;
 public class NbkDungeonController extends AbstractOptionRowController<MapConstraint<EDungeonDraw>>
     implements HasDrawKeysController<EDungeonDraw> {
 
+  private final NbkDungeonOptionRow dungeonOptionRow;
   private final SaveMapActionListener saveMapActionListener;
   private final ShowGridItemListener showGridItemListener;
-  private final NbkDungeonOptionRow dungeonOptionRow;
+  private final ZoomChangeListener zoomChangeListener;
 
   private final EnumMap<EDungeonDraw, DrawChangeListener<EDungeonDraw>> drawChangeListenerMap
       = new EnumMap<>(EDungeonDraw.class);
 
-  public NbkDungeonController(NbkDungeonOptionRow dungeonOptionRow, MapResultRow dungeonResultRow) {
+  public NbkDungeonController(NbkDungeonOptionRow dungeonOptionRow, MapResultRow mapResultRow) {
     super(new ConstraintsItemListener(dungeonOptionRow), new MapConstraint<>());
 
     this.dungeonOptionRow = dungeonOptionRow;
-    generateActionListener = new GenerateNbkDungeonActionListener(dungeonOptionRow, dungeonResultRow, this);
-    saveMapActionListener = new SaveMapActionListener(this, dungeonOptionRow);
-    showGridItemListener = new ShowGridItemListener(this, dungeonResultRow);
+    generateActionListener = new GenerateNbkDungeonActionListener(dungeonOptionRow, mapResultRow, this);
+    saveMapActionListener = new SaveMapActionListener(dungeonOptionRow, mapResultRow);
+    showGridItemListener = new ShowGridItemListener(mapResultRow);
+    zoomChangeListener = new ZoomChangeListener(mapResultRow);
 
     Arrays.stream(EDungeonDraw.values()).forEach(dungeonDraw -> {
       drawChangeListenerMap.put(dungeonDraw, new DrawChangeListener<>(this, dungeonDraw));
@@ -56,5 +59,9 @@ public class NbkDungeonController extends AbstractOptionRowController<MapConstra
 
   public ShowGridItemListener getShowGridItemListener() {
     return showGridItemListener;
+  }
+
+  public ZoomChangeListener getZoomChangeListener() {
+    return zoomChangeListener;
   }
 }

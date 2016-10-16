@@ -17,17 +17,22 @@ public class DungeonResult implements MapResult {
 
   private final NbkDungeon dungeon;
   private boolean showGrid;
+  private double scale;
 
-  public DungeonResult(NbkDungeon dungeon, boolean showGrid) {
+  public DungeonResult(NbkDungeon dungeon, boolean showGrid, double scale) {
     this.dungeon = dungeon;
     this.showGrid = showGrid;
+    this.scale = scale;
   }
 
   @Override
   public BufferedImage getRawResult() {
-    BufferedImage bufferedImage = new BufferedImage(dungeon.getWidth(), dungeon.getHeight(),
-        BufferedImage.TYPE_INT_ARGB);
+    BufferedImage bufferedImage = new BufferedImage((int) (dungeon.getWidth() * scale),
+        (int) (dungeon.getHeight() * scale), BufferedImage.TYPE_INT_ARGB);
     Graphics2D graphics = bufferedImage.createGraphics();
+
+    graphics.scale(scale, scale);
+
     graphics.setComposite(AlphaComposite.Clear);
     graphics.fillRect(0, 0, dungeon.getWidth(), dungeon.getHeight());
 
@@ -61,5 +66,9 @@ public class DungeonResult implements MapResult {
   @Override
   public int getTileSize() {
     return dungeon.getTileSize();
+  }
+
+  public void setScale(double scale) {
+    this.scale = scale;
   }
 }

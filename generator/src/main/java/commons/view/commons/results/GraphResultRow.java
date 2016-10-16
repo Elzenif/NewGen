@@ -1,6 +1,7 @@
 package commons.view.commons.results;
 
 import commons.view.utils.Constants;
+import commons.view.utils.ConstraintPanel;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -14,14 +15,16 @@ import java.awt.Image;
  */
 public abstract class GraphResultRow<T extends Result<Image>> extends JPanel implements ResultRow<T, Image> {
 
-  protected final JPanel optionRow;
+  protected final ConstraintPanel optionRow;
   protected final ScrollableLabel resultToPrint;
   private final JScrollPane scrollPane;
+  private T result;
 
   protected GraphResultRow() {
     setLayout(new BorderLayout(Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
 
-    optionRow = new JPanel(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP));
+    optionRow = new ConstraintPanel();
+    optionRow.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP));
     add(optionRow, BorderLayout.NORTH);
 
     scrollPane = new JScrollPane();
@@ -38,6 +41,7 @@ public abstract class GraphResultRow<T extends Result<Image>> extends JPanel imp
   }
 
   protected void setResultsToPrint(T result) {
+    this.result = result;
     resultToPrint.setIcon(new ImageIcon(result.getRawResult()));
     scrollPane.setViewportView(resultToPrint);
     add(scrollPane);
@@ -47,5 +51,9 @@ public abstract class GraphResultRow<T extends Result<Image>> extends JPanel imp
 
   protected void setControllers() {
     resultToPrint.setControllers();
+  }
+
+  public T getResult() {
+    return result;
   }
 }

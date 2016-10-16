@@ -57,8 +57,6 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends BorderLay
     generateButton.setFont(DAUPHINN_FONT);
     generateButton.setToolTipText(toolTipTextButton);
     rightPanel.add(generateButton);
-
-    updateConstraintsAbility(false);
   }
 
 

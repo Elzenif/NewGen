@@ -18,12 +18,9 @@ import java.util.Collections;
 public class GenerateNbkDungeonActionListener extends GenerateActionListener<NbkDungeonOptionRow, MapResultRow,
     DungeonResult, Image, MapConstraint<EDungeonDraw>> {
 
-  private DungeonResult dungeonResult;
-
-  public GenerateNbkDungeonActionListener(NbkDungeonOptionRow dungeonOptionRow, MapResultRow dungeonResultRow,
+  public GenerateNbkDungeonActionListener(NbkDungeonOptionRow dungeonOptionRow, MapResultRow mapResultRow,
                                           NbkDungeonController dungeonController) {
-    super(dungeonOptionRow, dungeonResultRow, dungeonController);
-    this.dungeonResult = null;
+    super(dungeonOptionRow, mapResultRow, dungeonController);
   }
 
   @Override
@@ -34,12 +31,9 @@ public class GenerateNbkDungeonActionListener extends GenerateActionListener<Nbk
   @Override
   protected Collection<DungeonResult> generateResult(MapConstraint<EDungeonDraw> mapConstraint) {
     NbkDungeon dungeon = NbkDungeon.create(mapConstraint);
-    dungeonResult = new DungeonResult(dungeon, resultRow.isShowGridCheckBoxSelected());
+    DungeonResult dungeonResult = new DungeonResult(dungeon, resultRow.isShowGridCheckBoxSelected(), 1);
     resultRow.setEnabledRowButtons(true);
+    resultRow.resetZoomValue();
     return Collections.singleton(dungeonResult);
-  }
-
-  public DungeonResult getDungeonResult() {
-    return dungeonResult;
   }
 }

@@ -1,7 +1,6 @@
 package commons.controller.map;
 
-import nbk.controller.map.GenerateNbkDungeonActionListener;
-import nbk.controller.map.NbkDungeonController;
+import commons.view.map.MapResultRow;
 import nbk.view.map.options.NbkDungeonOptionRow;
 import org.jetbrains.annotations.NonNls;
 
@@ -17,13 +16,13 @@ import java.io.IOException;
  */
 public class SaveMapActionListener implements ActionListener {
 
-  private final NbkDungeonController dungeonController;
   private final NbkDungeonOptionRow dungeonOptionRow;
+  private final MapResultRow mapResultRow;
   private final JFileChooser fileChooser;
 
-  public SaveMapActionListener(NbkDungeonController dungeonController, NbkDungeonOptionRow dungeonOptionRow) {
-    this.dungeonController = dungeonController;
+  public SaveMapActionListener(NbkDungeonOptionRow dungeonOptionRow, MapResultRow mapResultRow) {
     this.dungeonOptionRow = dungeonOptionRow;
+    this.mapResultRow = mapResultRow;
     this.fileChooser = new JFileChooser();
   }
 
@@ -34,8 +33,7 @@ public class SaveMapActionListener implements ActionListener {
       File selectedFile = fileChooser.getSelectedFile();
       try {
         @NonNls String formatName = "png";
-        ImageIO.write(((GenerateNbkDungeonActionListener) dungeonController.getGenerateActionListener())
-            .getDungeonResult().getRawResult(), formatName, selectedFile);
+        ImageIO.write(mapResultRow.getResult().getRawResult(), formatName, selectedFile);
       } catch (IOException e1) {
         e1.printStackTrace();
       }
