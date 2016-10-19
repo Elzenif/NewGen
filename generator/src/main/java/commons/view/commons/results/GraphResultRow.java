@@ -49,10 +49,6 @@ public abstract class GraphResultRow<T extends Result<Image>> extends JPanel imp
     revalidate();
   }
 
-  protected void setControllers() {
-    resultToPrint.setControllers();
-  }
-
   public T getResult() {
     return result;
   }

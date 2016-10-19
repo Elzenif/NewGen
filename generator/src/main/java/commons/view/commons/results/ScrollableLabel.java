@@ -1,6 +1,5 @@
 package commons.view.commons.results;
 
-import commons.controller.commons.results.ScrollableLabelMouseMotionListener;
 import org.intellij.lang.annotations.MagicConstant;
 
 import javax.swing.JLabel;
@@ -57,9 +56,5 @@ public class ScrollableLabel extends JLabel implements Scrollable {
 
   public void setMaxUnitIncrement(int maxUnitIncrement) {
     this.maxUnitIncrement = maxUnitIncrement;
-  }
-
-  public void setControllers() {
-    addMouseMotionListener(new ScrollableLabelMouseMotionListener(this));
   }
 }

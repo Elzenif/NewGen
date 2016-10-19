@@ -72,7 +72,6 @@ public class MapResultRow extends GraphResultRow<DungeonResult> {
   }
 
   public void setControllers(NbkDungeonController dungeonController) {
-    super.setControllers();
     saveMapButton.addActionListener(dungeonController.getSaveMapActionListener());
     showGridCheckBox.addItemListener(dungeonController.getShowGridItemListener());
     zoomSlider.addChangeListener(dungeonController.getZoomChangeListener());
