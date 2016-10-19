@@ -32,7 +32,7 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
           .common()
           .setEV(30)),
   BARBARIAN(new ENbkOriginBuilder()
-          .setMasculineNouns("Barbare")
+      .setNeutralNouns("Barbare")
           .common()
           .setEV(35)
           .setMinCourage(12)
@@ -45,7 +45,7 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
           .setMinCourage(11)
           .setMinStrength(12)),
   HIGH_ELF(new ENbkOriginBuilder()
-          .setMasculineNouns("Haut Elfe")
+      .setNeutralNouns("Haut Elfe")
           .uncommon()
           .setEV(25)
           .setMinIntelligence(11)
@@ -53,40 +53,40 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
           .setMinAgility(12)
           .setMaxStrength(12)),
   HALF_ELF(new ENbkOriginBuilder()
-          .setMasculineNouns("Demi-Elfe")
+      .setNeutralNouns("Demi-Elfe")
           .uncommon()
           .setEV(28)
           .setMinCharisma(10)
           .setMinAgility(11)),
   SYLVAN_ELF(new ENbkOriginBuilder()
-          .setMasculineNouns("Elfe Sylvain")
+      .setNeutralNouns("Elfe Sylvain")
           .common()
           .setEV(25)
           .setMinCharisma(12)
           .setMinAgility(10)
           .setMaxStrength(11)),
   DARK_ELF(new ENbkOriginBuilder()
-          .setMasculineNouns("Elfe noir")
+      .setNeutralNouns("Elfe noir")
           .uncommon()
           .setEV(25)
           .setMinIntelligence(12)
           .setMinAgility(13)),
   ORC(new ENbkOriginBuilder()
-          .setMasculineNouns("Orque")
+      .setNeutralNouns("Orque")
           .uncommon()
           .setEV(35)
           .setMaxIntelligence(8)
           .setMaxCharisma(10)
           .setMinStrength(12)),
   HALF_ORC(new ENbkOriginBuilder()
-          .setMasculineNouns("Demi-Orque")
+      .setNeutralNouns("Demi-Orque")
           .uncommon()
           .setEV(35)
           .setMaxIntelligence(10)
           .setMaxAgility(11)
           .setMinStrength(12)),
   GOBLIN(new ENbkOriginBuilder()
-          .setMasculineNouns("Gobelin")
+      .setNeutralNouns("Gobelin")
           .uncommon()
           .setEV(20)
           .setMaxCourage(10)
@@ -103,14 +103,14 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
           .setMaxAgility(11)
           .setMinStrength(13)),
   HOBBIT(new ENbkOriginBuilder()
-          .setMasculineNouns("Hobbit")
+      .setNeutralNouns("Hobbit")
           .uncommon()
           .setEV(25)
           .setMinCourage(12)
           .setMinIntelligence(10)
           .setMaxStrength(10)),
   GNOME(new ENbkOriginBuilder()
-          .setMasculineNouns("Gnome")
+      .setNeutralNouns("Gnome")
           .uncommon()
           .setEV(15)
           .setMinIntelligence(10)
@@ -195,13 +195,21 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
       return this;
     }
 
+    @Override
+    public ENbkOriginBuilder setNeutralNouns(String... names) {
+      for (String name : names) {
+        addName(new FrenchNoun(Gender.NEUTRAL, name));
+      }
+      return this;
+    }
+
     void addName(FrenchNoun name) {
       names.add(name);
     }
 
     @Override
     public ENbkOriginBuilder setNames(Object first, Object... others) {
-      throw new UnsupportedOperationException("Use setMasculineNouns or setFeminineNouns instead");
+      throw new UnsupportedOperationException("Use setMasculineNouns, setFeminineNouns or setNeutralNouns instead");
     }
 
     @Override

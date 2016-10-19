@@ -3,6 +3,7 @@ package nbk.model.entity.living;
 import commons.model.entity.utils.EntityUtils;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableEntityTypeException;
+import commons.utils.french.FrenchNoun;
 import nbk.model.entity.living.characteristics.primary.EStat;
 import nbk.model.entity.living.characteristics.primary.Stats;
 import nbk.model.entity.living.characteristics.primary.fields.HasStatsInRange;
@@ -39,7 +40,9 @@ public class NbkHumanoid extends NbkLiving {
 
   @Override
   public String toString() {
-    return origin.getName().toString();
+    FrenchNoun originName = origin.getName();
+    FrenchNoun professionName = profession.getName(originName.getGender());
+    return originName.toString() + " " + professionName.toString();
   }
 
   ENbkOrigin getOrigin() {

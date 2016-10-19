@@ -123,6 +123,11 @@ public enum ENbkWeaponType implements Secondary, EntityType<FrenchNoun>, HasQuan
           .longRange()
           .smallSize());
 
+  private static final Constraints<ENbkWeaponType> CONSTRAINTS = Constraints.ConstraintsBuilder
+      .<ENbkWeaponType>start()
+      .setSecondaryClass(ENbkWeaponType.class)
+      .setPrimaryClasses(ENbHands.class, ERange.class, ESize.class)
+      .build();
   private final List<FrenchNoun> names;
   private final EItemRarity rarity;
   private final ENbHands nbHands;
@@ -139,6 +144,20 @@ public enum ENbkWeaponType implements Secondary, EntityType<FrenchNoun>, HasQuan
     quantity = builder.getQuantity();
     size = builder.getSize();
     range = builder.getRange();
+  }
+
+  public static Constraints<ENbkWeaponType> getConstraints() {
+    return CONSTRAINTS;
+  }
+
+  @NotNull
+  public static Predicate<ENbkWeaponType> getPredicate(GlobalConstraints globalConstraints) {
+    Predicate<ENbHands> nbHandsPredicate = globalConstraints.getPredicate(CONSTRAINTS, ENbHands.class);
+    Predicate<ERange> rangePredicate = globalConstraints.getPredicate(CONSTRAINTS, ERange.class);
+    Predicate<ESize> sizePredicate = globalConstraints.getPredicate(CONSTRAINTS, ESize.class);
+    return weaponType -> nbHandsPredicate.test(weaponType.getNbHands())
+        && rangePredicate.test(weaponType.getRange())
+        && sizePredicate.test(weaponType.getSize());
   }
 
   @Override
@@ -175,26 +194,6 @@ public enum ENbkWeaponType implements Secondary, EntityType<FrenchNoun>, HasQuan
     return size;
   }
 
-  public static Constraints<ENbkWeaponType> getConstraints() {
-    return CONSTRAINTS;
-  }
-
-  private static final Constraints<ENbkWeaponType> CONSTRAINTS = Constraints.ConstraintsBuilder
-          .<ENbkWeaponType>start()
-          .setSecondaryClass(ENbkWeaponType.class)
-          .setPrimaryClasses(ENbHands.class, ERange.class, ESize.class)
-          .build();
-
-  @NotNull
-  public static Predicate<ENbkWeaponType> getPredicate(GlobalConstraints globalConstraints) {
-    Predicate<ENbHands> nbHandsPredicate = globalConstraints.getPredicate(CONSTRAINTS, ENbHands.class);
-    Predicate<ERange> rangePredicate = globalConstraints.getPredicate(CONSTRAINTS, ERange.class);
-    Predicate<ESize> sizePredicate = globalConstraints.getPredicate(CONSTRAINTS, ESize.class);
-    return weaponType -> nbHandsPredicate.test(weaponType.getNbHands())
-            && rangePredicate.test(weaponType.getRange())
-            && sizePredicate.test(weaponType.getSize());
-  }
-
   private static class NbKWeaponTypeBuilder implements ItemTypeBuilder, QuantityBuilder, NbHandsBuilder,
           RangeBuilder, SizeBuilder, FrenchNounBuilder {
 
@@ -220,6 +219,11 @@ public enum ENbkWeaponType implements Secondary, EntityType<FrenchNoun>, HasQuan
         addName(new FrenchNoun(Gender.FEMININE, name));
       }
       return this;
+    }
+
+    @Override
+    public NbKWeaponTypeBuilder setNeutralNouns(String... names) {
+      throw new UnsupportedOperationException("Use setMasculineNouns or setFeminineNouns instead");
     }
 
     void addName(FrenchNoun name) {
@@ -279,12 +283,6 @@ public enum ENbkWeaponType implements Secondary, EntityType<FrenchNoun>, HasQuan
     }
 
     @Override
-    public NbKWeaponTypeBuilder setQuantity(int quantity) {
-      this.quantity = new SPositive(quantity);
-      return this;
-    }
-
-    @Override
     public NbKWeaponTypeBuilder longRange() {
       range = ERange.LONG;
       return this;
@@ -324,6 +322,12 @@ public enum ENbkWeaponType implements Secondary, EntityType<FrenchNoun>, HasQuan
     @Override
     public SPositive getQuantity() {
       return quantity;
+    }
+
+    @Override
+    public NbKWeaponTypeBuilder setQuantity(int quantity) {
+      this.quantity = new SPositive(quantity);
+      return this;
     }
 
     @Override

@@ -6,5 +6,6 @@ package commons.utils.french;
 public enum Gender {
 
   MASCULINE,
-  FEMININE
+  FEMININE,
+  NEUTRAL
 }

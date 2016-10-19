@@ -9,4 +9,6 @@ public interface FrenchNounBuilder {
 
   FrenchNounBuilder setFeminineNouns(String... names);
 
+  FrenchNounBuilder setNeutralNouns(String... names);
+
 }

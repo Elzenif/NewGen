@@ -10,8 +10,10 @@ import commons.utils.exception.StatNotInRangeException;
 import commons.utils.french.FrenchNoun;
 import commons.utils.french.Gender;
 import nbk.model.entity.living.characteristics.primary.Stats;
+import nbk.model.entity.living.characteristics.primary.builders.EABuilder;
 import nbk.model.entity.living.characteristics.primary.builders.EVBuilder;
 import nbk.model.entity.living.characteristics.primary.builders.StatsInRangeBuilder;
+import nbk.model.entity.living.characteristics.primary.fields.HasEA;
 import nbk.model.entity.living.characteristics.primary.fields.HasEV;
 import nbk.model.entity.living.characteristics.primary.fields.HasStatsInRange;
 import org.jetbrains.annotations.Contract;
@@ -20,29 +22,85 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Created by Germain on 08/09/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, HasStatsInRange {
+public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, HasEA, HasStatsInRange {
 
   WARRIOR(new ENbkProfessionBuilder()
       .setMasculineNouns("Guerrier", "Gladiateur")
       .setFeminineNouns("Guerrière", "Gladiateur")
-      .common()
       .setEV(5)
       .setMinCourage(12)
-      .setMinStrength(12)
-  ),
+      .setMinStrength(12)),
   NINJA(new ENbkProfessionBuilder()
-      .setMasculineNouns("Ninja", "Assassin")
+      .setNeutralNouns("Ninja", "Assassin")
       .uncommon()
-      .setEV(0)
-      .setMinAgility(13)),;
+      .setMinAgility(13)),
+  THIEF(new ENbkProfessionBuilder()
+      .setMasculineNouns("Voleur")
+      .setFeminineNouns("Voleuse")
+      .setMinAgility(12)),
+  PRIEST(new ENbkProfessionBuilder()
+      .setMasculineNouns("Prêtre")
+      .setFeminineNouns("Prêtresse")
+      .uncommon()
+      .setEA(20)
+      .setMinCharisma(12)),
+  MAGE(new ENbkProfessionBuilder()
+      .setMasculineNouns("Mage", "Sorcier")
+      .setFeminineNouns("Sorcière")
+      .uncommon()
+      .setEV(-30)
+      .setEA(30)
+      .setMinIntelligence(12)),
+  PALADIN(new ENbkProfessionBuilder()
+      .setMasculineNouns("Paladin")
+      .setFeminineNouns("Paladine")
+      .uncommon()
+      .setEV(2)
+      .setEA(10)
+      .setMinCharisma(11)
+      .setMinCourage(12)
+      .setMinStrength(9)
+      .setMinIntelligence(10)),
+  RANGER(new ENbkProfessionBuilder()
+      .setNeutralNouns("Ranger")
+      .setMinAgility(10)
+      .setMinCharisma(10)),
+  BARD(new ENbkProfessionBuilder()
+      .setNeutralNouns("Ménestrel")
+      .uncommon()
+      .setMinAgility(11)
+      .setMinCharisma(12)),
+  PIRATE(new ENbkProfessionBuilder()
+      .setNeutralNouns("Pirate")
+      .uncommon()
+      .setMinAgility(11)
+      .setMinCourage(11)),
+  SELLER(new ENbkProfessionBuilder()
+      .setMasculineNouns("Marchand")
+      .setFeminineNouns("Marchande")
+      .rare()
+      .setMinIntelligence(12)
+      .setMinCharisma(11)),
+  ENGINEER(new ENbkProfessionBuilder()
+      .setNeutralNouns("Ingénieur")
+      .rare()
+      .setMinAgility(11)),
+  NOBLE(new ENbkProfessionBuilder()
+      .setMasculineNouns("Bourgeois", "Noble")
+      .setFeminineNouns("Bourgeoise", "Noble")
+      .rare()
+      .setMinIntelligence(10)
+      .setMinCharisma(11)),;
 
-  private final List<FrenchNoun> names;
+  final List<FrenchNoun> names;
   private final int ev;
+  private final int ea;
   private final EGeneralRarity rarity;
   private final Stats minStats;
   private final Stats maxStats;
@@ -51,6 +109,7 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     names = builder.getNames();
     rarity = builder.getRarity();
     ev = builder.getEV();
+    ea = builder.getEA();
     minStats = builder.getMinStats();
     maxStats = builder.getMaxStats();
   }
@@ -74,6 +133,16 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     return new FrenchNoun(MathUtils.chooseRandom(names));
   }
 
+  public FrenchNoun getName(Gender gender) {
+    if (gender == Gender.NEUTRAL) {
+      return getName();
+    }
+    List<FrenchNoun> frenchNouns = names.stream()
+        .filter(name -> name.getGender() == gender || name.getGender() == Gender.NEUTRAL)
+        .collect(Collectors.toList());
+    return new FrenchNoun(MathUtils.chooseRandom(frenchNouns));
+  }
+
   @Override
   public Stats getMinStats() {
     return minStats;
@@ -94,12 +163,19 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     return ev;
   }
 
-  private static class ENbkProfessionBuilder implements EntityTypeBuilder, EVBuilder, FrenchNounBuilder,
+  @Override
+  public int getEA() {
+    return ea;
+  }
+
+
+  private static class ENbkProfessionBuilder implements EntityTypeBuilder, EVBuilder, EABuilder, FrenchNounBuilder,
       StatsInRangeBuilder {
 
     private final List<FrenchNoun> names = new LinkedList<>();
-    private EGeneralRarity rarity;
-    private int ev;
+    private EGeneralRarity rarity = EGeneralRarity.COMMON;
+    private int ev = 0;
+    private int ea = 0;
     private Stats minStats;
     private Stats maxStats;
 
@@ -116,6 +192,14 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     public ENbkProfessionBuilder setFeminineNouns(String... names) {
       for (String name : names) {
         addName(new FrenchNoun(Gender.FEMININE, name));
+      }
+      return this;
+    }
+
+    @Override
+    public ENbkProfessionBuilder setNeutralNouns(String... names) {
+      for (String name : names) {
+        addName(new FrenchNoun(Gender.NEUTRAL, name));
       }
       return this;
     }
@@ -286,6 +370,17 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     @Override
     public ENbkProfessionBuilder setEV(int ev) {
       this.ev = ev;
+      return this;
+    }
+
+    @Override
+    public int getEA() {
+      return ea;
+    }
+
+    @Override
+    public ENbkProfessionBuilder setEA(int ea) {
+      this.ea = ea;
       return this;
     }
 

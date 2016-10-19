@@ -15,8 +15,8 @@ public class FrenchGenderAdjective implements FrenchAdjective {
 
   @Override
   public String getCorrectForm(Gender gender) {
-    return gender == Gender.MASCULINE
-            ? masculineForm
-            : feminineForm;
+    return gender == Gender.MASCULINE || gender == Gender.NEUTRAL
+        ? masculineForm
+        : feminineForm;
   }
 }
