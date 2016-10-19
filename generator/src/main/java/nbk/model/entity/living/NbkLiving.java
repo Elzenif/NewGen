@@ -46,6 +46,14 @@ public abstract class NbkLiving extends Living<NbkGame> implements HasStats {
     return stats.get(EStat.STRENGTH);
   }
 
+  public int getAttack() {
+    return stats.get(EStat.ATTACK);
+  }
+
+  public int getParry() {
+    return stats.get(EStat.PARRY);
+  }
+
   protected static abstract class NbkLivingBuilder extends LivingBuilder implements StatsBuilder {
 
     protected final Stats stats;
@@ -82,6 +90,18 @@ public abstract class NbkLiving extends Living<NbkGame> implements HasStats {
     @Override
     public NbkLivingBuilder setStrength(int strength) throws StatNotInRangeException {
       StatUtils.setStat(stats.getStatsMap(), EStat.STRENGTH, strength);
+      return this;
+    }
+
+    @Override
+    public NbkLivingBuilder setAttack(int attack) throws StatNotInRangeException {
+      StatUtils.setStat(stats.getStatsMap(), EStat.ATTACK, attack);
+      return this;
+    }
+
+    @Override
+    public NbkLivingBuilder setParry(int parry) throws StatNotInRangeException {
+      StatUtils.setStat(stats.getStatsMap(), EStat.PARRY, parry);
       return this;
     }
 

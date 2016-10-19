@@ -6,7 +6,6 @@ import commons.model.entity.characteristics.primary.enums.EGeneralRarity;
 import commons.model.entity.characteristics.primary.fields.EntityType;
 import commons.model.entity.characteristics.secondary.Secondary;
 import commons.utils.MathUtils;
-import commons.utils.SPositive;
 import commons.utils.exception.StatNotInRangeException;
 import commons.utils.french.FrenchNoun;
 import commons.utils.french.Gender;
@@ -120,7 +119,7 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
 
 
   private final List<FrenchNoun> names;
-  private final SPositive ev;
+  private final int ev;
   private final EGeneralRarity rarity;
   private final Stats minStats;
   private final Stats maxStats;
@@ -137,9 +136,11 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
   @Contract(pure = true)
   public static Predicate<ENbkOrigin> getPredicate(Stats stats) {
     return origin -> origin.getMinStats().entrySet().stream()
+        .filter(entry -> stats.containsKey(entry.getKey()))
         .map(entry -> entry.getValue() <= stats.get(entry.getKey()))
         .reduce(Boolean::logicalAnd).orElse(true)
         && origin.getMaxStats().entrySet().stream()
+        .filter(entry -> stats.containsKey(entry.getKey()))
         .map(entry -> entry.getValue() >= stats.get(entry.getKey()))
         .reduce(Boolean::logicalAnd).orElse(true);
   }
@@ -156,7 +157,7 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
   }
 
   @Override
-  public SPositive getEV() {
+  public int getEV() {
     return ev;
   }
 
@@ -173,7 +174,7 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
 
     private final List<FrenchNoun> names = new LinkedList<>();
     private EGeneralRarity rarity;
-    private SPositive ev;
+    private int ev;
     private Stats minStats;
     private Stats maxStats;
 
@@ -353,13 +354,13 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
     }
 
     @Override
-    public SPositive getEV() {
+    public int getEV() {
       return ev;
     }
 
     @Override
     public ENbkOriginBuilder setEV(int ev) {
-      this.ev = new SPositive(ev);
+      this.ev = ev;
       return this;
     }
 

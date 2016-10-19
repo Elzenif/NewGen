@@ -8,5 +8,7 @@ public enum EStat {
   INTELLIGENCE,
   CHARISMA,
   AGILITY,
-  STRENGTH
+  STRENGTH,
+  ATTACK,
+  PARRY
 }

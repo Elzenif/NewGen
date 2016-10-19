@@ -50,6 +50,18 @@ public class Stats extends ForwardingMap<EStat, Integer> implements StatsBuilder
   }
 
   @Override
+  public Stats setAttack(int attack) throws StatNotInRangeException {
+    StatUtils.setStat(statsMap, EStat.ATTACK, attack);
+    return this;
+  }
+
+  @Override
+  public Stats setParry(int parry) throws StatNotInRangeException {
+    StatUtils.setStat(statsMap, EStat.PARRY, parry);
+    return this;
+  }
+
+  @Override
   public Stats getStats() {
     return this;
   }

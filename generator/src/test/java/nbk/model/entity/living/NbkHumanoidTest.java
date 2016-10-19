@@ -1,12 +1,11 @@
 package nbk.model.entity.living;
 
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.utils.exception.StatNotInRangeException;
 import nbk.model.entity.living.characteristics.primary.StatUtils;
 import nbk.model.entity.living.characteristics.primary.Stats;
 import nbk.model.entity.living.characteristics.secondary.enums.ENbkOrigin;
-import org.junit.Before;
+import nbk.model.entity.living.characteristics.secondary.enums.ENbkProfession;
 import org.junit.Test;
 
 import java.util.EnumSet;
@@ -19,13 +18,7 @@ import static org.junit.Assert.fail;
  */
 public class NbkHumanoidTest {
 
-  private GlobalConstraints globalConstraints;
   private NbkHumanoid humanoid;
-
-  @Before
-  public void init() {
-    globalConstraints = new GlobalConstraints();
-  }
 
   @Test
   public void newHumanoidShouldNotBeNull() throws NoAvailableEntityTypeException {
@@ -41,23 +34,26 @@ public class NbkHumanoidTest {
   }
 
   @Test
-  public void professionShouldBeValid() throws NoAvailableEntityTypeException {
+  public void professionShouldBeValidOrNull() throws NoAvailableEntityTypeException {
     humanoid = NbkHumanoid.create();
-//    EnumSet<ENbkProfession> professions = EnumSet.allOf(ENbkProfession.class);
-//    assertThat(professions).contains(humanoid.getProfession());
+    EnumSet<ENbkProfession> professions = EnumSet.allOf(ENbkProfession.class);
+    ENbkProfession profession = humanoid.getProfession();
+    if (profession != null) {
+      assertThat(professions).contains(profession);
+    }
   }
 
   @Test
-  public void nbkLivingShouldHave5BaseStats() throws NoAvailableEntityTypeException {
+  public void nbkLivingShouldHave7BaseStats() throws NoAvailableEntityTypeException {
     humanoid = NbkHumanoid.create();
-    assertThat(humanoid.getStats()).hasSize(5);
+    assertThat(humanoid.getStats()).hasSize(7);
   }
 
   @Test
   public void baseStatsShouldBeBetween8And13() throws NoAvailableEntityTypeException {
     humanoid = NbkHumanoid.create();
     humanoid.getStats().values().forEach(
-            value -> assertThat(value >= 8 && value <= 13).isTrue()
+        value -> assertThat(value >= 8 && value <= 13).isTrue()
     );
   }
 

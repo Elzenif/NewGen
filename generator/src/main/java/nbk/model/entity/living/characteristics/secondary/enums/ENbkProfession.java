@@ -6,7 +6,6 @@ import commons.model.entity.characteristics.primary.enums.EGeneralRarity;
 import commons.model.entity.characteristics.primary.fields.EntityType;
 import commons.model.entity.characteristics.secondary.Secondary;
 import commons.utils.MathUtils;
-import commons.utils.SPositive;
 import commons.utils.exception.StatNotInRangeException;
 import commons.utils.french.FrenchNoun;
 import commons.utils.french.Gender;
@@ -27,17 +26,23 @@ import java.util.function.Predicate;
  */
 @SuppressWarnings("SpellCheckingInspection")
 public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, HasStatsInRange {
+
   WARRIOR(new ENbkProfessionBuilder()
-          .setMasculineNouns("Guerrier", "Gladiateur")
-          .setFeminineNouns("Guerrière", "Gladiateur")
-          .common()
-          .setEV(30)
-          .setMinCourage(12)
-          .setMinStrength(12)
-  );
+      .setMasculineNouns("Guerrier", "Gladiateur")
+      .setFeminineNouns("Guerrière", "Gladiateur")
+      .common()
+      .setEV(5)
+      .setMinCourage(12)
+      .setMinStrength(12)
+  ),
+  NINJA(new ENbkProfessionBuilder()
+      .setMasculineNouns("Ninja", "Assassin")
+      .uncommon()
+      .setEV(0)
+      .setMinAgility(13)),;
 
   private final List<FrenchNoun> names;
-  private final SPositive ev;
+  private final int ev;
   private final EGeneralRarity rarity;
   private final Stats minStats;
   private final Stats maxStats;
@@ -53,10 +58,12 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
   @NotNull
   @Contract(pure = true)
   public static Predicate<ENbkProfession> getPredicate(Stats stats) {
-    return origin -> origin.getMinStats().entrySet().stream()
+    return profession -> profession.getMinStats().entrySet().stream()
+        .filter(entry -> stats.containsKey(entry.getKey()))
         .map(entry -> entry.getValue() <= stats.get(entry.getKey()))
         .reduce(Boolean::logicalAnd).orElse(true)
-        && origin.getMaxStats().entrySet().stream()
+        && profession.getMaxStats().entrySet().stream()
+        .filter(entry -> stats.containsKey(entry.getKey()))
         .map(entry -> entry.getValue() >= stats.get(entry.getKey()))
         .reduce(Boolean::logicalAnd).orElse(true);
   }
@@ -83,16 +90,16 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
   }
 
   @Override
-  public SPositive getEV() {
+  public int getEV() {
     return ev;
   }
 
   private static class ENbkProfessionBuilder implements EntityTypeBuilder, EVBuilder, FrenchNounBuilder,
-          StatsInRangeBuilder {
+      StatsInRangeBuilder {
 
     private final List<FrenchNoun> names = new LinkedList<>();
     private EGeneralRarity rarity;
-    private SPositive ev;
+    private int ev;
     private Stats minStats;
     private Stats maxStats;
 
@@ -272,13 +279,13 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     }
 
     @Override
-    public SPositive getEV() {
+    public int getEV() {
       return ev;
     }
 
     @Override
     public ENbkProfessionBuilder setEV(int ev) {
-      this.ev = new SPositive(ev);
+      this.ev = ev;
       return this;
     }
 
