@@ -7,10 +7,10 @@ import commons.model.entity.utils.EntityUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import nbk.model.commons.NbkGame;
+import nbk.model.commons.characteristics.primary.enums.ESize;
+import nbk.model.commons.characteristics.primary.fields.HasSize;
 import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
-import nbk.model.entity.items.characteristics.primary.enums.ESize;
 import nbk.model.entity.items.characteristics.primary.enums.EWeight;
-import nbk.model.entity.items.characteristics.primary.fields.HasSize;
 import nbk.model.entity.items.characteristics.primary.fields.HasWeight;
 import nbk.model.entity.items.characteristics.primary.fields.IsBodyPart;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkPredefinedArmor;
@@ -25,14 +25,14 @@ public class NbkPredefinedArmor extends Item<NbkGame> implements HasWeight, IsBo
 
   private final ENbkPredefinedArmor predefinedArmor;
 
-  public static NbkPredefinedArmor create(GlobalConstraints globalConstraints)
-          throws NoAvailableEntityTypeException {
-    return new NbkPredefinedArmorBuilder(globalConstraints).build();
-  }
-
   private NbkPredefinedArmor(NbkPredefinedArmorBuilder builder) {
     super(builder);
     predefinedArmor = builder.predefinedArmor;
+  }
+
+  public static NbkPredefinedArmor create(GlobalConstraints globalConstraints)
+      throws NoAvailableEntityTypeException {
+    return new NbkPredefinedArmorBuilder(globalConstraints).build();
   }
 
   ENbkPredefinedArmor getPredefinedArmor() {

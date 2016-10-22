@@ -1,8 +1,8 @@
-package nbk.model.entity.items.characteristics.primary.enums;
+package nbk.model.commons.characteristics.primary.enums;
 
 import commons.model.entity.characteristics.primary.Primary;
 import commons.model.entity.constraints.GenericConstraint;
-import nbk.model.entity.items.characteristics.primary.fields.HasSize;
+import nbk.model.commons.characteristics.primary.fields.HasSize;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

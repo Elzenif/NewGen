@@ -5,9 +5,9 @@ import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.utils.EntityUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableEntityTypeException;
+import nbk.model.commons.characteristics.primary.enums.ESize;
 import nbk.model.entity.items.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.items.characteristics.primary.enums.ERange;
-import nbk.model.entity.items.characteristics.primary.enums.ESize;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkPredefinedWeapon;
 
 import java.util.function.Predicate;
@@ -19,14 +19,14 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
 
   private final ENbkPredefinedWeapon predefinedWeapon;
 
-  public static NbkPredefinedWeapon create(GlobalConstraints globalConstraints)
-          throws NoAvailableEntityTypeException {
-    return new PredefinedWeaponBuilder(globalConstraints).build();
-  }
-
   private NbkPredefinedWeapon(PredefinedWeaponBuilder builder) {
     super(builder);
     predefinedWeapon = builder.predefinedWeapon;
+  }
+
+  public static NbkPredefinedWeapon create(GlobalConstraints globalConstraints)
+      throws NoAvailableEntityTypeException {
+    return new PredefinedWeaponBuilder(globalConstraints).build();
   }
 
   ENbkPredefinedWeapon getPredefinedWeapon() {

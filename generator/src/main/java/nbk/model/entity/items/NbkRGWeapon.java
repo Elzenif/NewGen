@@ -6,9 +6,9 @@ import commons.model.entity.utils.EntityUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.utils.french.FrenchNoun;
+import nbk.model.commons.characteristics.primary.enums.ESize;
 import nbk.model.entity.items.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.items.characteristics.primary.enums.ERange;
-import nbk.model.entity.items.characteristics.primary.enums.ESize;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkQuality;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkWeaponType;
 import org.jetbrains.annotations.Contract;
@@ -22,6 +22,12 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
 
   private final ENbkWeaponType weaponType;
   private final ENbkQuality quality;
+
+  private NbkRGWeapon(RGWeaponBuilder builder) {
+    super(builder);
+    this.weaponType = builder.weaponType;
+    this.quality = builder.quality;
+  }
 
   @Contract("_ -> !null")
   public static NbkRGWeapon create(GlobalConstraints globalConstraints)
@@ -58,13 +64,6 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
     noun.addAdjective(quality.getName());
     return printRandomQuantity() + noun.toString();
   }
-
-  private NbkRGWeapon(RGWeaponBuilder builder) {
-    super(builder);
-    this.weaponType = builder.weaponType;
-    this.quality = builder.quality;
-  }
-
 
   private static class RGWeaponBuilder extends ItemBuilder {
 

@@ -1,6 +1,6 @@
-package nbk.model.entity.items.characteristics.primary.builders;
+package nbk.model.commons.characteristics.primary.builders;
 
-import nbk.model.entity.items.characteristics.primary.fields.HasSize;
+import nbk.model.commons.characteristics.primary.fields.HasSize;
 
 /**
  * Created by Germain on 26/06/2016.

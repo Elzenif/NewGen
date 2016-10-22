@@ -13,15 +13,15 @@ import commons.utils.MathUtils;
 import commons.utils.SPositive;
 import commons.utils.french.FrenchNoun;
 import commons.utils.french.Gender;
+import nbk.model.commons.characteristics.primary.builders.SizeBuilder;
+import nbk.model.commons.characteristics.primary.enums.ESize;
+import nbk.model.commons.characteristics.primary.fields.HasSize;
 import nbk.model.entity.items.characteristics.primary.builders.NbHandsBuilder;
 import nbk.model.entity.items.characteristics.primary.builders.RangeBuilder;
-import nbk.model.entity.items.characteristics.primary.builders.SizeBuilder;
 import nbk.model.entity.items.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.items.characteristics.primary.enums.ERange;
-import nbk.model.entity.items.characteristics.primary.enums.ESize;
 import nbk.model.entity.items.characteristics.primary.fields.HasNbHands;
 import nbk.model.entity.items.characteristics.primary.fields.HasRange;
-import nbk.model.entity.items.characteristics.primary.fields.HasSize;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;

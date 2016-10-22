@@ -10,12 +10,12 @@ import commons.model.entity.characteristics.secondary.Secondary;
 import commons.model.entity.constraints.Constraints;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
+import nbk.model.commons.characteristics.primary.enums.ESize;
+import nbk.model.commons.characteristics.primary.fields.HasSize;
 import nbk.model.entity.items.characteristics.primary.enums.ENbHands;
 import nbk.model.entity.items.characteristics.primary.enums.ERange;
-import nbk.model.entity.items.characteristics.primary.enums.ESize;
 import nbk.model.entity.items.characteristics.primary.fields.HasNbHands;
 import nbk.model.entity.items.characteristics.primary.fields.HasRange;
-import nbk.model.entity.items.characteristics.primary.fields.HasSize;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
@@ -437,6 +437,11 @@ public enum ENbkPredefinedWeapon implements Secondary, EntityType<String>, HasMa
           .setWeaponType(ENbkWeaponType.LAME_2MAINS)
           .isRelic());
 
+  private static final Constraints<ENbkPredefinedWeapon> CONSTRAINTS = Constraints.ConstraintsBuilder
+      .<ENbkPredefinedWeapon>start()
+      .setSecondaryClass(ENbkPredefinedWeapon.class)
+      .setPrimaryClasses(EItemRarity.class)
+      .build();
   private final List<String> names;
   private final EItemRarity rarity;
   private final ENbkWeaponType weaponType;
@@ -447,6 +452,18 @@ public enum ENbkPredefinedWeapon implements Secondary, EntityType<String>, HasMa
     rarity = builder.getRarity();
     weaponType = builder.getWeaponType();
     magic = builder.getMagic();
+  }
+
+  public static Constraints<ENbkPredefinedWeapon> getConstraints() {
+    return CONSTRAINTS;
+  }
+
+  @NotNull
+  public static Predicate<ENbkPredefinedWeapon> getPredicate(GlobalConstraints globalConstraints) {
+    Predicate<EItemRarity> rarityPredicate = globalConstraints.getPredicate(CONSTRAINTS, EItemRarity.class);
+    Predicate<ENbkWeaponType> weaponTypePredicate = ENbkWeaponType.getPredicate(globalConstraints);
+    return weapon -> rarityPredicate.test(weapon.getRarity())
+        && weaponTypePredicate.test(weapon.getWeaponType());
   }
 
   @Override
@@ -476,25 +493,6 @@ public enum ENbkPredefinedWeapon implements Secondary, EntityType<String>, HasMa
 
   @Override
   public ESize getSize() { return weaponType.getSize(); }
-
-  public static Constraints<ENbkPredefinedWeapon> getConstraints() {
-    return CONSTRAINTS;
-  }
-
-  private static final Constraints<ENbkPredefinedWeapon> CONSTRAINTS = Constraints.ConstraintsBuilder
-          .<ENbkPredefinedWeapon>start()
-          .setSecondaryClass(ENbkPredefinedWeapon.class)
-          .setPrimaryClasses(EItemRarity.class)
-          .build();
-
-  @NotNull
-  public static Predicate<ENbkPredefinedWeapon> getPredicate(GlobalConstraints globalConstraints) {
-    Predicate<EItemRarity> rarityPredicate = globalConstraints.getPredicate(CONSTRAINTS, EItemRarity.class);
-    Predicate<ENbkWeaponType> weaponTypePredicate = ENbkWeaponType.getPredicate(globalConstraints);
-    return weapon -> rarityPredicate.test(weapon.getRarity())
-            && weaponTypePredicate.test(weapon.getWeaponType());
-  }
-
 
   private static class ENbkPredefinedWeaponBuilder implements ItemTypeBuilder, MagicBuilder {
 
@@ -542,11 +540,6 @@ public enum ENbkPredefinedWeapon implements Secondary, EntityType<String>, HasMa
       return this;
     }
 
-    ENbkPredefinedWeaponBuilder setWeaponType(ENbkWeaponType weaponType) {
-      this.weaponType = weaponType;
-      return this;
-    }
-
     @Override
     public ENbkPredefinedWeaponBuilder isMagic() {
       magic = EMagic.MAGIC;
@@ -571,6 +564,11 @@ public enum ENbkPredefinedWeapon implements Secondary, EntityType<String>, HasMa
 
     ENbkWeaponType getWeaponType() {
       return weaponType;
+    }
+
+    ENbkPredefinedWeaponBuilder setWeaponType(ENbkWeaponType weaponType) {
+      this.weaponType = weaponType;
+      return this;
     }
 
     @Override
