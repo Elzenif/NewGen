@@ -1,6 +1,5 @@
 package nbk.model.entity.living;
 
-import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.utils.exception.StatNotInRangeException;
 import nbk.model.entity.living.characteristics.primary.StatUtils;
 import nbk.model.entity.living.characteristics.primary.Stats;
@@ -21,20 +20,20 @@ public class NbkHumanoidTest {
   private NbkHumanoid humanoid;
 
   @Test
-  public void newHumanoidShouldNotBeNull() throws NoAvailableEntityTypeException {
+  public void newHumanoidShouldNotBeNull() {
     humanoid = NbkHumanoid.create();
     assertThat(humanoid).isNotNull();
   }
 
   @Test
-  public void originShouldBeValid() throws NoAvailableEntityTypeException {
+  public void originShouldBeValid() {
     humanoid = NbkHumanoid.create();
     EnumSet<ENbkOrigin> origins = EnumSet.allOf(ENbkOrigin.class);
     assertThat(origins).contains(humanoid.getOrigin());
   }
 
   @Test
-  public void professionShouldBeValidOrNull() throws NoAvailableEntityTypeException {
+  public void professionShouldBeValidOrNull() {
     humanoid = NbkHumanoid.create();
     EnumSet<ENbkProfession> professions = EnumSet.allOf(ENbkProfession.class);
     ENbkProfession profession = humanoid.getProfession();
@@ -44,13 +43,13 @@ public class NbkHumanoidTest {
   }
 
   @Test
-  public void nbkLivingShouldHave7BaseStats() throws NoAvailableEntityTypeException {
+  public void nbkLivingShouldHave7BaseStats() {
     humanoid = NbkHumanoid.create();
     assertThat(humanoid.getStats()).hasSize(7);
   }
 
   @Test
-  public void baseStatsShouldBeBetween8And13() throws NoAvailableEntityTypeException {
+  public void baseStatsShouldBeBetween8And13() {
     humanoid = NbkHumanoid.create();
     humanoid.getStats().values().forEach(
         value -> assertThat(value >= 8 && value <= 13).isTrue()
@@ -58,7 +57,7 @@ public class NbkHumanoidTest {
   }
 
   @Test
-  public void humanoidCanBeCreatedWithStats() throws NoAvailableEntityTypeException, StatNotInRangeException {
+  public void humanoidCanBeCreatedWithStats() throws StatNotInRangeException {
     Stats stats = new Stats();
     int courage = StatUtils.randomStat();
     int intelligence = StatUtils.randomStat();
@@ -81,16 +80,16 @@ public class NbkHumanoidTest {
   }
 
   @Test
-  public void humanoidCannotBeCreatedWithStatsUnder8() throws NoAvailableEntityTypeException {
+  public void humanoidCannotBeCreatedWithStatsUnder8() {
     humanoidCannotBeCreatedWithStatsOutOfRange(-7);
   }
 
   @Test
-  public void humanoidCannotBeCreatedWithStatsOver13() throws NoAvailableEntityTypeException {
+  public void humanoidCannotBeCreatedWithStatsOver13() {
     humanoidCannotBeCreatedWithStatsOutOfRange(6);
   }
 
-  private void humanoidCannotBeCreatedWithStatsOutOfRange(int offset) throws NoAvailableEntityTypeException {
+  private void humanoidCannotBeCreatedWithStatsOutOfRange(int offset) {
     try {
       Stats stats = new Stats();
       stats.setCourage(StatUtils.randomStat() + offset);

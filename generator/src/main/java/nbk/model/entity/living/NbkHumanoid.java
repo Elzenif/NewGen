@@ -27,14 +27,24 @@ public class NbkHumanoid extends NbkLiving {
     profession = builder.profession;
   }
 
+  /**
+   * Create an humanoid without any constraint
+   *
+   * @return An humanoid
+   */
   @Contract(" -> !null")
-  public static NbkHumanoid create() throws NoAvailableEntityTypeException {
+  public static NbkHumanoid create() {
     return new HumanoidBuilder().build();
   }
 
+  /**
+   * Create an humanoid with the given stats as constraints
+   *
+   * @param stats Stats imposed for the humanoid
+   * @return An humanoid
+   */
   @Contract("_ -> !null")
-  public static NbkHumanoid create(Stats stats)
-      throws NoAvailableEntityTypeException {
+  public static NbkHumanoid create(Stats stats) {
     return new HumanoidBuilder(stats).build();
   }
 
@@ -59,9 +69,9 @@ public class NbkHumanoid extends NbkLiving {
     ENbkOrigin origin;
     ENbkProfession profession;
 
-    HumanoidBuilder() throws NoAvailableEntityTypeException {
+    HumanoidBuilder() {
       super(new Stats());
-      setOrigin(ENbkOrigin.getPredicate(this.stats));
+      setOrigin(ENbkOrigin.getPredicate(stats));
       initStatsAccordingTo(origin);
       setProfession(ENbkProfession.getPredicate(stats));
       if (profession != null) {
@@ -104,10 +114,12 @@ public class NbkHumanoid extends NbkLiving {
     }
 
     void setProfession(Predicate<ENbkProfession> predicate) {
-      try {
-        profession = EntityUtils.selectRandomRarity(ENbkProfession.values(), predicate);
-      } catch (NoAvailableEntityTypeException e) {
-        profession = null;
+      if (origin.getCanHaveProfession()) {
+        try {
+          profession = EntityUtils.selectRandomRarity(ENbkProfession.values(), predicate);
+        } catch (NoAvailableEntityTypeException e) {
+          profession = null;
+        }
       }
     }
 

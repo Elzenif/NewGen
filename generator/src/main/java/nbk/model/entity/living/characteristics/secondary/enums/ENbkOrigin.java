@@ -27,95 +27,131 @@ import java.util.function.Predicate;
 @SuppressWarnings("SpellCheckingInspection")
 public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasStatsInRange {
   HUMAN(new ENbkOriginBuilder()
-          .setMasculineNouns("Humain")
-          .setFeminineNouns("Humaine")
-          .common()
-          .setEV(30)),
+      .setMasculineNouns("Humain")
+      .setFeminineNouns("Humaine")
+      .common()
+      .setEV(30)),
   BARBARIAN(new ENbkOriginBuilder()
       .setNeutralNouns("Barbare")
-          .common()
-          .setEV(35)
-          .setMinCourage(12)
-          .setMinStrength(13)),
+      .common()
+      .setEV(35)
+      .setMinCourage(12)
+      .setMinStrength(13)),
   DWARF(new ENbkOriginBuilder()
-          .setMasculineNouns("Nain")
-          .setFeminineNouns("Naine")
-          .common()
-          .setEV(35)
-          .setMinCourage(11)
-          .setMinStrength(12)),
+      .setMasculineNouns("Nain")
+      .setFeminineNouns("Naine")
+      .common()
+      .setEV(35)
+      .setMinCourage(11)
+      .setMinStrength(12)),
   HIGH_ELF(new ENbkOriginBuilder()
       .setNeutralNouns("Haut Elfe")
-          .uncommon()
-          .setEV(25)
-          .setMinIntelligence(11)
-          .setMinCharisma(12)
-          .setMinAgility(12)
-          .setMaxStrength(12)),
+      .uncommon()
+      .setEV(25)
+      .setMinIntelligence(11)
+      .setMinCharisma(12)
+      .setMinAgility(12)
+      .setMaxStrength(12)),
   HALF_ELF(new ENbkOriginBuilder()
       .setNeutralNouns("Demi-Elfe")
-          .uncommon()
-          .setEV(28)
-          .setMinCharisma(10)
-          .setMinAgility(11)),
+      .uncommon()
+      .setEV(28)
+      .setMinCharisma(10)
+      .setMinAgility(11)),
   SYLVAN_ELF(new ENbkOriginBuilder()
       .setNeutralNouns("Elfe Sylvain")
-          .common()
-          .setEV(25)
-          .setMinCharisma(12)
-          .setMinAgility(10)
-          .setMaxStrength(11)),
+      .common()
+      .setEV(25)
+      .setMinCharisma(12)
+      .setMinAgility(10)
+      .setMaxStrength(11)),
   DARK_ELF(new ENbkOriginBuilder()
       .setNeutralNouns("Elfe noir")
-          .uncommon()
-          .setEV(25)
-          .setMinIntelligence(12)
-          .setMinAgility(13)),
+      .uncommon()
+      .setEV(25)
+      .setMinIntelligence(12)
+      .setMinAgility(13)),
   ORC(new ENbkOriginBuilder()
       .setNeutralNouns("Orque")
-          .uncommon()
-          .setEV(35)
-          .setMaxIntelligence(8)
-          .setMaxCharisma(10)
-          .setMinStrength(12)),
+      .uncommon()
+      .setEV(35)
+      .setMaxIntelligence(8)
+      .setMaxCharisma(10)
+      .setMinStrength(12)),
   HALF_ORC(new ENbkOriginBuilder()
       .setNeutralNouns("Demi-Orque")
-          .uncommon()
-          .setEV(35)
-          .setMaxIntelligence(10)
-          .setMaxAgility(11)
-          .setMinStrength(12)),
+      .uncommon()
+      .setEV(35)
+      .setMaxIntelligence(10)
+      .setMaxAgility(11)
+      .setMinStrength(12)),
   GOBLIN(new ENbkOriginBuilder()
       .setNeutralNouns("Gobelin")
-          .uncommon()
-          .setEV(20)
-          .setMaxCourage(10)
-          .setMaxIntelligence(10)
-          .setMaxCharisma(8)
-          .setMaxStrength(9)),
+      .uncommon()
+      .setEV(20)
+      .setMaxCourage(10)
+      .setMaxIntelligence(10)
+      .setMaxCharisma(8)
+      .setMaxStrength(9)),
   OGRE(new ENbkOriginBuilder()
-          .setMasculineNouns("Ogre")
-          .setFeminineNouns("Ogresse")
-          .uncommon()
-          .setEV(45)
-          .setMaxIntelligence(9)
-          .setMaxCharisma(10)
-          .setMaxAgility(11)
-          .setMinStrength(13)),
+      .setMasculineNouns("Ogre")
+      .setFeminineNouns("Ogresse")
+      .uncommon()
+      .setEV(45)
+      .setMaxIntelligence(9)
+      .setMaxCharisma(10)
+      .setMaxAgility(11)
+      .setMinStrength(13)),
   HOBBIT(new ENbkOriginBuilder()
       .setNeutralNouns("Hobbit")
-          .uncommon()
-          .setEV(25)
-          .setMinCourage(12)
-          .setMinIntelligence(10)
-          .setMaxStrength(10)),
+      .uncommon()
+      .setEV(25)
+      .setMinCourage(12)
+      .setMinIntelligence(10)
+      .setMaxStrength(10)),
   GNOME(new ENbkOriginBuilder()
       .setNeutralNouns("Gnome")
-          .uncommon()
-          .setEV(15)
-          .setMinIntelligence(10)
-          .setMinAgility(13)
-          .setMaxStrength(8));
+      .uncommon()
+      .setEV(15)
+      .setMinIntelligence(10)
+      .setMinAgility(13)
+      .setMaxStrength(8)),
+  MAFIA_DWARF(new ENbkOriginBuilder()
+      .setMasculineNouns("Nain de la Mafia")
+      .setFeminineNouns("Naine de la Mafia")
+      .rare()
+      .setEV(38)
+      .setCannotHaveProfession()
+      .setMinCourage(10)
+      .setMinIntelligence(11)
+      .setMinAgility(12)
+      .setMinStrength(11)),
+  SYLDERIAN_AMAZON(new ENbkOriginBuilder()
+      .setNeutralNouns("Amazone Syldérienne")
+      .rare()
+      .setEV(38)
+      .setCannotHaveProfession()
+      .setMinCourage(12)
+      .setMinCharisma(12)
+      .setMinAgility(11)
+      .setMinStrength(12)),
+  MURLOC(new ENbkOriginBuilder()
+      .setNeutralNouns("Murloc")
+      .rare()
+      .setEV(28)
+      .setMinCourage(13)
+      .setMinCharisma(11)
+      .setMinAgility(10)
+      .setMinStrength(10)),
+  TROLL(new ENbkOriginBuilder()
+      .setNeutralNouns("Troll")
+      .rare()
+      .setEV(50)
+      .setMinCourage(13)
+      .setMinStrength(13)
+      .setMaxCharisma(11)
+      .setMaxIntelligence(10)
+      .setMaxAgility(9));
 
 
   private final List<FrenchNoun> names;
@@ -123,6 +159,7 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
   private final EGeneralRarity rarity;
   private final Stats minStats;
   private final Stats maxStats;
+  private final boolean canHaveProfession;
 
   ENbkOrigin(ENbkOriginBuilder builder) {
     names = builder.getNames();
@@ -130,6 +167,7 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
     ev = builder.getEV();
     minStats = builder.getMinStats();
     maxStats = builder.getMaxStats();
+    canHaveProfession = builder.getCanHaveProfession();
   }
 
   @NotNull
@@ -169,14 +207,19 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
     return maxStats;
   }
 
+  public boolean getCanHaveProfession() {
+    return canHaveProfession;
+  }
+
   private static class ENbkOriginBuilder implements EntityTypeBuilder, EVBuilder, FrenchNounBuilder,
-          StatsInRangeBuilder {
+      StatsInRangeBuilder {
 
     private final List<FrenchNoun> names = new LinkedList<>();
     private EGeneralRarity rarity;
     private int ev;
     private Stats minStats;
     private Stats maxStats;
+    private boolean canHaveProfession = true;
 
     // Setters
     @Override
@@ -350,6 +393,11 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
       return this;
     }
 
+    ENbkOriginBuilder setCannotHaveProfession() {
+      canHaveProfession = false;
+      return this;
+    }
+
     // Getters
     @Override
     public List<FrenchNoun> getNames() {
@@ -380,6 +428,10 @@ public enum ENbkOrigin implements Secondary, EntityType<FrenchNoun>, HasEV, HasS
     @Override
     public Stats getMaxStats() {
       return (maxStats == null) ? new Stats() : maxStats;
+    }
+
+    public boolean getCanHaveProfession() {
+      return canHaveProfession;
     }
   }
 }
