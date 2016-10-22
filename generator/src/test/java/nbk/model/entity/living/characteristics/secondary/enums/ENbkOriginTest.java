@@ -20,6 +20,7 @@ public class ENbkOriginTest {
               assertThat(o.getEV()).isNotNull();
               assertThat(o.getMinStats()).isNotNull();
               assertThat(o.getMaxStats()).isNotNull();
+              assertThat(o.getSize()).isNotNull();
             }
     );
   }
