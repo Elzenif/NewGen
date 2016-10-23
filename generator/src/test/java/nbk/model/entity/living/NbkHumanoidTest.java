@@ -1,11 +1,14 @@
 package nbk.model.entity.living;
 
+import commons.model.commons.constraints.GenerationConstraints;
 import commons.utils.exception.StatNotInRangeException;
 import nbk.model.entity.living.characteristics.primary.StatUtils;
 import nbk.model.entity.living.characteristics.primary.Stats;
 import nbk.model.entity.living.characteristics.secondary.enums.ENbkOrigin;
 import nbk.model.entity.living.characteristics.secondary.enums.ENbkProfession;
+import nbk.model.entity.living.constraints.EHumanoidDraw;
 import org.assertj.core.api.JUnitSoftAssertions;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -23,6 +26,12 @@ public class NbkHumanoidTest {
   public JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
   private NbkHumanoid humanoid;
+  private GenerationConstraints generationConstraints;
+
+  @Before
+  public void setUp() throws Exception {
+    generationConstraints = new GenerationConstraints();
+  }
 
   @Test
   public void newHumanoidShouldNotBeNull() {
@@ -69,7 +78,8 @@ public class NbkHumanoidTest {
     stats.setAgility(agility);
     stats.setStrength(strength);
 
-    humanoid = NbkHumanoid.create(stats);
+    generationConstraints.getDrawKeyConstraint().putAll(stats);
+    humanoid = NbkHumanoid.create(generationConstraints);
 
     softly.assertThat(humanoid.getCourage()).isEqualTo(courage);
     softly.assertThat(humanoid.getIntelligence()).isEqualTo(intelligence);
@@ -92,35 +102,40 @@ public class NbkHumanoidTest {
     try {
       Stats stats = new Stats();
       stats.setCourage(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(stats);
+      generationConstraints.getDrawKeyConstraint().putAll(stats);
+      humanoid = NbkHumanoid.create(generationConstraints);
       fail();
     } catch (StatNotInRangeException e) {
     }
     try {
       Stats stats = new Stats();
       stats.setIntelligence(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(stats);
+      generationConstraints.getDrawKeyConstraint().putAll(stats);
+      humanoid = NbkHumanoid.create(generationConstraints);
       fail();
     } catch (StatNotInRangeException e) {
     }
     try {
       Stats stats = new Stats();
       stats.setCharisma(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(stats);
+      generationConstraints.getDrawKeyConstraint().putAll(stats);
+      humanoid = NbkHumanoid.create(generationConstraints);
       fail();
     } catch (StatNotInRangeException e) {
     }
     try {
       Stats stats = new Stats();
       stats.setAgility(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(stats);
+      generationConstraints.getDrawKeyConstraint().putAll(stats);
+      humanoid = NbkHumanoid.create(generationConstraints);
       fail();
     } catch (StatNotInRangeException e) {
     }
     try {
       Stats stats = new Stats();
       stats.setStrength(StatUtils.randomStat() + offset);
-      humanoid = NbkHumanoid.create(stats);
+      generationConstraints.getDrawKeyConstraint().putAll(stats);
+      humanoid = NbkHumanoid.create(generationConstraints);
       fail();
     } catch (StatNotInRangeException e) {
     }
@@ -129,9 +144,66 @@ public class NbkHumanoidTest {
   @Test
   public void humanoidShouldHaveEV() {
     humanoid = NbkHumanoid.create();
+
     softly.assertThat(humanoid.getEV()).isNotNull().isNotEqualTo(0);
 
-    humanoid = NbkHumanoid.create(new Stats());
+    humanoid = NbkHumanoid.create(generationConstraints);
+
     softly.assertThat(humanoid.getEV()).isNotNull().isNotEqualTo(0);
+  }
+
+  @Test
+  public void humanoidCanBeCreatedWithAGivenOrigin() {
+    generationConstraints.getMapConstraint().put(EHumanoidDraw.ORIGIN, ENbkOrigin.MURLOC);
+
+    humanoid = NbkHumanoid.create(generationConstraints);
+
+    assertThat(humanoid.getOrigin()).isEqualTo(ENbkOrigin.MURLOC);
+  }
+
+  @Test
+  public void humanoidCanBeCreatedWithAGivenProfession() {
+    generationConstraints.getMapConstraint().put(EHumanoidDraw.PROFESSION, ENbkProfession.SELLER);
+
+    humanoid = NbkHumanoid.create(generationConstraints);
+
+    assertThat(humanoid.getProfession()).isEqualTo(ENbkProfession.SELLER);
+  }
+
+  @Test
+  public void humanoidCannotBeCreatedWithIncompatiblesOriginAndProfession() {
+    generationConstraints.getMapConstraint().put(EHumanoidDraw.ORIGIN, ENbkOrigin.GOBLIN);
+    generationConstraints.getMapConstraint().put(EHumanoidDraw.PROFESSION, ENbkProfession.WARRIOR);
+
+    humanoid = NbkHumanoid.create(generationConstraints);
+
+    softly.assertThat(humanoid.getOrigin()).isEqualTo(ENbkOrigin.GOBLIN);
+    softly.assertThat(humanoid.getProfession()).isNotEqualTo(ENbkProfession.WARRIOR);
+  }
+
+  @Test
+  public void humanoidCannotBeCreatedWithIncompatiblesStatsAndOrigin() throws StatNotInRangeException {
+    Stats stats = new Stats();
+    stats.setStrength(12);
+    generationConstraints.getDrawKeyConstraint().putAll(stats);
+    generationConstraints.getMapConstraint().put(EHumanoidDraw.ORIGIN, ENbkOrigin.GOBLIN);
+
+    humanoid = NbkHumanoid.create(generationConstraints);
+
+    softly.assertThat(humanoid.getStrength()).isEqualTo(12);
+    softly.assertThat(humanoid.getOrigin()).isNotEqualTo(ENbkOrigin.GOBLIN);
+  }
+
+  @Test
+  public void humanoidCannotBeCreatedWithIncompatiblesStatsAndProfession() throws StatNotInRangeException {
+    Stats stats = new Stats();
+    stats.setIntelligence(9);
+    generationConstraints.getDrawKeyConstraint().putAll(stats);
+    generationConstraints.getMapConstraint().put(EHumanoidDraw.PROFESSION, ENbkProfession.MAGE);
+
+    humanoid = NbkHumanoid.create(generationConstraints);
+
+    softly.assertThat(humanoid.getIntelligence()).isEqualTo(9);
+    softly.assertThat(humanoid.getProfession()).isNotEqualTo(ENbkProfession.MAGE);
   }
 }
