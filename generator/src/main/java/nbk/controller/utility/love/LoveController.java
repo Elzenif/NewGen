@@ -17,12 +17,12 @@ public class LoveController extends UtilityController<ELoveDraw> {
   private final EnumMap<ELoveDraw, DrawChangeListener<ELoveDraw>> drawChangeListenerMap
       = new EnumMap<>(ELoveDraw.class);
 
-  public LoveController(LoveOptionRow loveOptionRow, UtilityResultRow loveResultRow) {
+  public LoveController(LoveOptionRow loveOptionRow, UtilityResultRow loveResultRow, int defaultValue) {
     super(loveOptionRow);
     generateActionListener = new GenerateLoveActionListener(loveOptionRow, loveResultRow, this);
     Arrays.stream(ELoveDraw.values()).forEach(loveDraw -> {
       drawChangeListenerMap.put(loveDraw, new DrawChangeListener<>(this, loveDraw));
-      generationConstraint.put(loveDraw, 1);
+      generationConstraint.put(loveDraw, defaultValue);
     });
   }
 
@@ -31,7 +31,7 @@ public class LoveController extends UtilityController<ELoveDraw> {
     generationConstraint.put(drawKey, (Integer) utilityOptionRow.getDrawValue(drawKey));
   }
 
-  public DrawChangeListener getDrawChangeListener(ELoveDraw loveDraw) {
+  public DrawChangeListener<ELoveDraw> getDrawChangeListener(ELoveDraw loveDraw) {
     return drawChangeListenerMap.get(loveDraw);
   }
 }

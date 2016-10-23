@@ -2,29 +2,23 @@ package commons.view.entity;
 
 import commons.controller.entity.EntityController;
 import commons.model.commons.Game;
+import commons.model.commons.GenerationConstraint;
 import commons.model.entity.IAvailableEntity;
-import commons.utils.TextFieldUtils;
 import commons.view.commons.options.ConstraintOptionRow;
-import commons.view.utils.ConstraintPanel;
 
-import javax.swing.BoxLayout;
-import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
-import java.text.MessageFormat;
 
 import static commons.view.utils.Constants.resourceBundle;
 
 /**
  * Created by Germain on 05/06/2016.
  */
-public abstract class EntityOptionRow<G extends Game> extends ConstraintOptionRow<EntityResultRow> {
+public abstract class EntityOptionRow<G extends Game, GC extends GenerationConstraint>
+    extends ConstraintOptionRow<EntityResultRow> {
 
   private final JSpinner numberOfEntitiesSpinner;
   private final SpinnerNumberModel numberOfEntitiesModel;
-
-  private final ConstraintPanel qualityPanel;
-  private final JFormattedTextField qualityTextField;
 
   protected EntityOptionRow(IAvailableEntity<G> availableEntity, int labelSize) {
     super(labelSize, availableEntity.getName());
@@ -38,26 +32,13 @@ public abstract class EntityOptionRow<G extends Game> extends ConstraintOptionRo
 
     centerPanel.add(constraintsCheckBoxPanel);
 
-    // quality constraints
-    qualityTextField = TextFieldUtils.createTwoDigitsField();
-    qualityTextField.setToolTipText(MessageFormat.format(resourceBundle.getString("tooltip.entity.qualityTextField"), name));
-    qualityPanel = new ConstraintPanel();
-    qualityPanel.setLayout(new BoxLayout(qualityPanel, BoxLayout.Y_AXIS));
-    qualityPanel.add(qualityTextField);
-    constraintPanel.add(qualityPanel);
   }
 
-  protected void setControllers(EntityController<G> entityController) {
+  protected void setControllers(EntityController<G, GC> entityController) {
     super.setControllers(entityController);
-    qualityTextField.addPropertyChangeListener(((EntityController) controller).getRarityChangeListener());
-    generateButton.addActionListener(controller.getGenerateActionListener());
   }
 
   public int getNumberOfEntitiesSelected() {
     return numberOfEntitiesModel.getNumber().intValue();
-  }
-
-  public JFormattedTextField getQualityTextField() {
-    return qualityTextField;
   }
 }

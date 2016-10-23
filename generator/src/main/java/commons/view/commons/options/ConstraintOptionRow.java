@@ -28,10 +28,8 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends BorderLay
   protected final ConstraintPanel constraintPanel;
   private final JCheckBox constraintsCheckBox;
   private final JLabel constraintsCheckBoxLabel;
-
-  protected JButton generateButton;
-
   protected ConstraintOptionRowController controller;
+  private JButton generateButton;
 
   protected ConstraintOptionRow(int labelSize, String name) {
     super(labelSize, name);
@@ -63,6 +61,7 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends BorderLay
   protected void setControllers(ConstraintOptionRowController controller) {
     this.controller = controller;
     constraintsCheckBox.addItemListener(controller.getConstraintsItemListener());
+    generateButton.addActionListener(controller.getGenerateActionListener());
   }
 
   @Override

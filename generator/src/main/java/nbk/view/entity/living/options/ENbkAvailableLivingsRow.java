@@ -1,7 +1,7 @@
 package nbk.view.entity.living.options;
 
 import commons.model.entity.living.IAvailableLiving;
-import commons.view.entity.EntityOptionRow;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import commons.view.entity.EntityResultRow;
 import commons.view.entity.IAvailableEntityRow;
 import nbk.model.commons.NbkGame;
@@ -10,17 +10,17 @@ import nbk.model.entity.living.ENbkAvailableLivings;
 /**
  * Created by Germain on 28/08/2016.
  */
-public enum ENbkAvailableLivingsRow implements IAvailableEntityRow<NbkGame> {
+public enum ENbkAvailableLivingsRow implements IAvailableEntityRow<NbkGame, DrawKeyConstraint> {
 
   HUMANOID_ROW(ENbkAvailableLivings.HUMANOID, new NbkHumanoidOptionRow());
 
   private final IAvailableLiving<NbkGame> living;
-  private final EntityOptionRow<NbkGame> entityOptionRow;
+  private final NbkLivingOptionRow livingOptionRow;
   private final EntityResultRow entityResultRow;
 
-  ENbkAvailableLivingsRow(IAvailableLiving<NbkGame> living, EntityOptionRow<NbkGame> entityOptionRow) {
+  ENbkAvailableLivingsRow(IAvailableLiving<NbkGame> living, NbkLivingOptionRow livingOptionRow) {
     this.living = living;
-    this.entityOptionRow = entityOptionRow;
+    this.livingOptionRow = livingOptionRow;
     this.entityResultRow = new EntityResultRow(this);
   }
 
@@ -30,8 +30,8 @@ public enum ENbkAvailableLivingsRow implements IAvailableEntityRow<NbkGame> {
   }
 
   @Override
-  public EntityOptionRow<NbkGame> getOptionRow() {
-    return entityOptionRow;
+  public NbkLivingOptionRow getOptionRow() {
+    return livingOptionRow;
   }
 
   @Override

@@ -1,8 +1,8 @@
 package commons.controller.utility;
 
 import commons.controller.commons.GenerateActionListener;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import commons.model.utility.constraints.IUtilityDrawKey;
-import commons.model.utility.constraints.UtilityConstraint;
 import commons.view.utility.UtilityOptionRow;
 import commons.view.utility.UtilityResultRow;
 import commons.view.utility.result.UtilityResult;
@@ -11,7 +11,7 @@ import commons.view.utility.result.UtilityResult;
  * Created by Germain on 01/10/2016.
  */
 public abstract class GenerateUtilityActionListener<K extends IUtilityDrawKey>
-    extends GenerateActionListener<UtilityOptionRow<K>, UtilityResultRow, UtilityResult, String, UtilityConstraint> {
+    extends GenerateActionListener<UtilityOptionRow<K>, UtilityResultRow, UtilityResult, String, DrawKeyConstraint> {
 
   protected GenerateUtilityActionListener(UtilityOptionRow<K> utilityOptionRow, UtilityResultRow utilityResultRow,
                                           UtilityController<K> utilityController) {
@@ -19,7 +19,7 @@ public abstract class GenerateUtilityActionListener<K extends IUtilityDrawKey>
   }
 
   @Override
-  protected UtilityConstraint newConstraint() {
-    return new UtilityConstraint();
+  protected DrawKeyConstraint newConstraint() {
+    return new DrawKeyConstraint();
   }
 }

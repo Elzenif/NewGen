@@ -2,6 +2,7 @@ package commons.model.utility.constraints;
 
 import com.google.common.collect.ForwardingMap;
 import commons.model.commons.GenerationConstraint;
+import commons.model.commons.IDrawKey;
 import commons.utils.MathUtils;
 import commons.utils.exception.ForbiddenValueException;
 
@@ -11,12 +12,12 @@ import java.util.Map;
 /**
  * Created by Germain on 01/10/2016.
  */
-public class UtilityConstraint extends ForwardingMap<IUtilityDrawKey, Integer> implements GenerationConstraint {
+public class DrawKeyConstraint extends ForwardingMap<IDrawKey, Integer> implements GenerationConstraint {
 
-  private final Map<IUtilityDrawKey, Integer> map = new HashMap<>();
+  private final Map<IDrawKey, Integer> map = new HashMap<>();
 
   @Override
-  protected Map<IUtilityDrawKey, Integer> delegate() {
+  protected Map<IDrawKey, Integer> delegate() {
     return map;
   }
 
@@ -26,7 +27,7 @@ public class UtilityConstraint extends ForwardingMap<IUtilityDrawKey, Integer> i
    * @return the previous value for given key, null if there was not any
    */
   @Override
-  public Integer put(IUtilityDrawKey key, Integer value) {
+  public Integer put(IDrawKey key, Integer value) {
     checkRange(value);
     return delegate().put(key, value);
   }

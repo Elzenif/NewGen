@@ -20,13 +20,14 @@ import static commons.view.utils.Constants.resourceBundle;
 public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
 
   private final Map<ELoveDraw, Pair<JSpinner, SpinnerNumberModel>> loveDrawMap;
+  private final int defaultValue = 10;
 
   public LoveOptionRow() {
     super(ENbkAvailableUtility.LOVE_ROLEPLAY.getName());
 
     loveDrawMap = new LinkedHashMap<>(ELoveDraw.values().length);
     for (ELoveDraw loveDraw : ELoveDraw.values()) {
-      SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(1, 1, 20, 1);
+      SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(defaultValue, 1, 20, 1);
       JSpinner jSpinner = new JSpinner(spinnerNumberModel);
       jSpinner.setAlignmentX(LEFT_ALIGNMENT);
       loveDrawMap.put(loveDraw, new Pair<>(jSpinner, spinnerNumberModel));
@@ -38,13 +39,13 @@ public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
 
   @Override
   public void setControllers(UtilityResultRow resultRow) {
-    super.setControllers(new LoveController(this, resultRow));
+    super.setControllers(new LoveController(this, resultRow, defaultValue));
     loveDrawMap.forEach((loveDraw, pair) ->
         pair.getLeft().addChangeListener(((LoveController) controller).getDrawChangeListener(loveDraw)));
   }
 
   @Override
-  public Object getDrawValue(ELoveDraw drawKey) {
+  public Integer getDrawValue(ELoveDraw drawKey) {
     return loveDrawMap.get(drawKey).getRight().getNumber().intValue();
   }
 }

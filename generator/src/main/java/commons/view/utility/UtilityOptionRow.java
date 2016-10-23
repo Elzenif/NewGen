@@ -21,6 +21,5 @@ public abstract class UtilityOptionRow<K extends IUtilityDrawKey>
 
   protected void setControllers(UtilityController utilityController) {
     super.setControllers(utilityController);
-    generateButton.addActionListener(controller.getGenerateActionListener());
   }
 }

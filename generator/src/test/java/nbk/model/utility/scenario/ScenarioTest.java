@@ -1,6 +1,6 @@
 package nbk.model.utility.scenario;
 
-import commons.model.utility.constraints.UtilityConstraint;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import org.assertj.core.api.JUnitSoftAssertions;
 import org.junit.Before;
 import org.junit.Rule;
@@ -14,17 +14,17 @@ public class ScenarioTest {
   @Rule
   public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
-  private UtilityConstraint utilityConstraint;
+  private DrawKeyConstraint drawKeyConstraint;
   private Scenario scenario;
 
   @Before
   public void setUp() throws Exception {
-    utilityConstraint = new UtilityConstraint();
+    drawKeyConstraint = new DrawKeyConstraint();
   }
 
   @Test
   public void sentencesShouldNotBeEmpty() {
-    scenario = new Scenario(utilityConstraint);
+    scenario = new Scenario(drawKeyConstraint);
     softly.assertThat(scenario.getBeginningSentence()).isNotEmpty();
     softly.assertThat(scenario.getGuySentence()).isNotEmpty();
     softly.assertThat(scenario.getQuestSentence()).isNotEmpty();

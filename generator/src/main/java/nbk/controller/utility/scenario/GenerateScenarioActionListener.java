@@ -1,7 +1,7 @@
 package nbk.controller.utility.scenario;
 
 import commons.controller.utility.UtilityController;
-import commons.model.utility.constraints.UtilityConstraint;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import commons.view.utility.UtilityOptionRow;
 import commons.view.utility.UtilityResultRow;
 import commons.view.utility.result.UtilityResult;
@@ -24,8 +24,8 @@ public class GenerateScenarioActionListener extends GenerateNbkUtilityActionList
   }
 
   @Override
-  protected Collection<UtilityResult> generateResult(UtilityConstraint utilityConstraint) {
-    Scenario scenario = new Scenario(utilityConstraint);
+  protected Collection<UtilityResult> generateResult(DrawKeyConstraint drawKeyConstraint) {
+    Scenario scenario = new Scenario(drawKeyConstraint);
     return new ScenarioResult(scenario).getResults();
   }
 }

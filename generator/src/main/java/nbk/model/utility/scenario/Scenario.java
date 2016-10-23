@@ -1,6 +1,6 @@
 package nbk.model.utility.scenario;
 
-import commons.model.utility.constraints.UtilityConstraint;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import commons.utils.MathUtils;
 import nbk.model.utility.scenario.constraints.EScenarioBeginning;
 import nbk.model.utility.scenario.constraints.EScenarioDraw;
@@ -27,24 +27,24 @@ public class Scenario {
 
   private final Map<EScenarioDraw, IScenarioDrawResult> scenarioDrawMap;
 
-  public Scenario(UtilityConstraint utilityConstraint) {
+  public Scenario(DrawKeyConstraint drawKeyConstraint) {
     scenarioDrawMap = new LinkedHashMap<>();
 
-    int beginning = utilityConstraint.get(BEGINNING);
+    int beginning = drawKeyConstraint.get(BEGINNING);
     if (beginning <= 10) beginning = 1;
     addSentence(BEGINNING, EScenarioBeginning.valueOf(SCENARIO_DRAW_NAME + beginning));
 
-    int guy = utilityConstraint.get(GUY);
+    int guy = drawKeyConstraint.get(GUY);
     addSentence(GUY, EScenarioGuy.valueOf(SCENARIO_DRAW_NAME + guy));
 
-    int quest = utilityConstraint.get(QUEST);
+    int quest = drawKeyConstraint.get(QUEST);
     quest = MathUtils.floor((quest + 1) / 2);
     addSentence(QUEST, EScenarioQuest.valueOf(SCENARIO_DRAW_NAME + quest));
 
-    int location = utilityConstraint.get(LOCATION);
+    int location = drawKeyConstraint.get(LOCATION);
     addSentence(LOCATION, EScenarioLocation.valueOf(SCENARIO_DRAW_NAME + location));
 
-    int loot = utilityConstraint.get(LOOT);
+    int loot = drawKeyConstraint.get(LOOT);
     loot = MathUtils.floor((loot + 1) / 2);
     addSentence(LOOT, EScenarioLoot.valueOf(SCENARIO_DRAW_NAME + loot));
   }

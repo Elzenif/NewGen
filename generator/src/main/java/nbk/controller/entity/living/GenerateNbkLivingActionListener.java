@@ -1,29 +1,34 @@
 package nbk.controller.entity.living;
 
-import commons.controller.entity.EntityController;
 import commons.controller.entity.GenerateEntityActionListener;
-import commons.model.entity.constraints.GlobalConstraints;
+import commons.controller.entity.living.LivingController;
 import commons.model.entity.living.Living;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import commons.utils.exception.NoAvailableEntityTypeException;
-import commons.view.entity.EntityOptionRow;
 import commons.view.entity.EntityResultRow;
 import commons.view.entity.results.living.LivingResult;
 import nbk.model.commons.NbkGame;
+import nbk.view.entity.living.options.NbkLivingOptionRow;
 
 /**
  * Created by Germain on 28/08/2016.
  */
-public abstract class GenerateNbkLivingActionListener extends GenerateEntityActionListener<NbkGame> {
+public abstract class GenerateNbkLivingActionListener extends GenerateEntityActionListener<NbkGame, DrawKeyConstraint> {
 
-  protected GenerateNbkLivingActionListener(EntityController<NbkGame> entityController,
-                                            EntityOptionRow<NbkGame> entityOptionRow, EntityResultRow entityResultRow) {
-    super(entityOptionRow, entityResultRow, entityController);
+  protected GenerateNbkLivingActionListener(LivingController<NbkGame> livingController,
+                                            NbkLivingOptionRow livingOptionRow, EntityResultRow entityResultRow) {
+    super(livingOptionRow, entityResultRow, livingController);
   }
 
   @Override
-  protected LivingResult generateOneResult(GlobalConstraints globalConstraints) {
+  protected DrawKeyConstraint newConstraint() {
+    return new DrawKeyConstraint();
+  }
+
+  @Override
+  protected LivingResult generateOneResult(DrawKeyConstraint drawKeyConstraint) {
     try {
-      Living living = generate(globalConstraints);
+      Living living = generate(drawKeyConstraint);
       return new LivingResult(living);
     } catch (NoAvailableEntityTypeException e) {
       e.printStackTrace();
@@ -32,5 +37,5 @@ public abstract class GenerateNbkLivingActionListener extends GenerateEntityActi
   }
 
   @Override
-  protected abstract Living<NbkGame> generate(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException;
+  protected abstract Living<NbkGame> generate(DrawKeyConstraint drawKeyConstraint) throws NoAvailableEntityTypeException;
 }

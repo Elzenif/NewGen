@@ -1,7 +1,7 @@
 package nbk.controller.utility.love;
 
 import commons.controller.utility.UtilityController;
-import commons.model.utility.constraints.UtilityConstraint;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import commons.view.utility.UtilityResultRow;
 import commons.view.utility.result.UtilityResult;
 import nbk.controller.utility.GenerateNbkUtilityActionListener;
@@ -23,7 +23,7 @@ public class GenerateLoveActionListener extends GenerateNbkUtilityActionListener
   }
 
   @Override
-  protected Collection<UtilityResult> generateResult(UtilityConstraint constraint) {
+  protected Collection<UtilityResult> generateResult(DrawKeyConstraint constraint) {
     Love love = new Love(constraint);
     return new LoveResult(love).getResults();
   }

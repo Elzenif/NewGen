@@ -17,16 +17,16 @@ public class ScenarioController extends UtilityController<EScenarioDraw> {
   private final EnumMap<EScenarioDraw, DrawChangeListener<EScenarioDraw>> drawChangeListenerMap
       = new EnumMap<>(EScenarioDraw.class);
 
-  public ScenarioController(ScenarioOptionRow scenarioOptionRow, UtilityResultRow scenarioResultRow) {
+  public ScenarioController(ScenarioOptionRow scenarioOptionRow, UtilityResultRow scenarioResultRow, int defaultValue) {
     super(scenarioOptionRow);
     generateActionListener = new GenerateScenarioActionListener(scenarioOptionRow, scenarioResultRow, this);
     Arrays.stream(EScenarioDraw.values()).forEach(scenarioDraw -> {
       drawChangeListenerMap.put(scenarioDraw, new DrawChangeListener<>(this, scenarioDraw));
-      generationConstraint.put(scenarioDraw, 1);
+      generationConstraint.put(scenarioDraw, defaultValue);
     });
   }
 
-  public DrawChangeListener getDrawChangeListener(EScenarioDraw scenarioDraw) {
+  public DrawChangeListener<EScenarioDraw> getDrawChangeListener(EScenarioDraw scenarioDraw) {
     return drawChangeListenerMap.get(scenarioDraw);
   }
 

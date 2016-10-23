@@ -18,7 +18,4 @@ public interface StatsBuilder extends HasStats {
 
   StatsBuilder setStrength(int strength) throws StatNotInRangeException;
 
-  StatsBuilder setAttack(int attack) throws StatNotInRangeException;
-
-  StatsBuilder setParry(int parry) throws StatNotInRangeException;
 }

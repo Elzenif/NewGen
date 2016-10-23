@@ -1,6 +1,6 @@
 package nbk.controller.entity.items;
 
-import commons.controller.entity.EntityController;
+import commons.controller.entity.items.ItemController;
 import commons.model.entity.characteristics.primary.enums.EItemRarity;
 import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
@@ -18,7 +18,7 @@ import java.util.EnumMap;
 /**
  * Created by Germain on 23/07/2016.
  */
-public class NbkWeaponController extends EntityController<NbkGame> {
+public class NbkWeaponController extends ItemController<NbkGame> {
 
   private final EnumMap<ENbHands, ActionListener> nbHandsActionListenerEnumMap = new EnumMap<>(ENbHands.class);
 

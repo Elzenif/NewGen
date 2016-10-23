@@ -20,13 +20,14 @@ import static commons.view.utils.Constants.resourceBundle;
 public class ScenarioOptionRow extends NbkUtilityOptionRow<EScenarioDraw> {
 
   private final Map<EScenarioDraw, Pair<JSpinner, SpinnerNumberModel>> scenarioDrawMap;
+  private final int defaultValue = 10;
 
   public ScenarioOptionRow() {
     super(ENbkAvailableUtility.SCENARIO.getName());
 
     scenarioDrawMap = new LinkedHashMap<>(EScenarioDraw.values().length);
     for (EScenarioDraw scenarioDraw : EScenarioDraw.values()) {
-      SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(1, 1, 20, 1);
+      SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(defaultValue, 1, 20, 1);
       JSpinner jSpinner = new JSpinner(spinnerNumberModel);
       jSpinner.setAlignmentX(LEFT_ALIGNMENT);
       scenarioDrawMap.put(scenarioDraw, new Pair<>(jSpinner, spinnerNumberModel));
@@ -38,13 +39,13 @@ public class ScenarioOptionRow extends NbkUtilityOptionRow<EScenarioDraw> {
 
   @Override
   public void setControllers(UtilityResultRow resultRow) {
-    super.setControllers(new ScenarioController(this, resultRow));
+    super.setControllers(new ScenarioController(this, resultRow, defaultValue));
     scenarioDrawMap.forEach((scenarioDraw, pair) ->
         pair.getLeft().addChangeListener(((ScenarioController) controller).getDrawChangeListener(scenarioDraw)));
   }
 
   @Override
-  public Object getDrawValue(EScenarioDraw drawKey) {
+  public Integer getDrawValue(EScenarioDraw drawKey) {
     return scenarioDrawMap.get(drawKey).getRight().getNumber().intValue();
   }
 }

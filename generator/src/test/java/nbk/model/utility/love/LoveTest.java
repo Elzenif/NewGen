@@ -1,6 +1,6 @@
 package nbk.model.utility.love;
 
-import commons.model.utility.constraints.UtilityConstraint;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import org.assertj.core.api.JUnitSoftAssertions;
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,17 +16,17 @@ public class LoveTest {
   @Rule
   public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
-  private UtilityConstraint utilityConstraint;
+  private DrawKeyConstraint drawKeyConstraint;
   private Love love;
 
   @Before
   public void setUp() throws Exception {
-    utilityConstraint = new UtilityConstraint();
+    drawKeyConstraint = new DrawKeyConstraint();
   }
 
   @Test
   public void sentencesShouldNotBeEmpty() {
-    love = new Love(utilityConstraint);
+    love = new Love(drawKeyConstraint);
     softly.assertThat(love.getActionSentence()).isNotEmpty();
     softly.assertThat(love.getTargetSentence()).isNotEmpty();
     softly.assertThat(love.getToolSentence()).isNotEmpty();
@@ -35,7 +35,7 @@ public class LoveTest {
 
   @Test
   public void scoreShouldBeBetweenMinus8And8() {
-    love = new Love(utilityConstraint);
+    love = new Love(drawKeyConstraint);
     assertThat(love.getLoveScore()).isNotNull().isBetween(-8, 8);
   }
 }

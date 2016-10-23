@@ -1,6 +1,6 @@
 package nbk.model.utility.love;
 
-import commons.model.utility.constraints.UtilityConstraint;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import nbk.model.utility.love.constraints.ELoveAction;
 import nbk.model.utility.love.constraints.ELoveDraw;
 import nbk.model.utility.love.constraints.ELovePosition;
@@ -25,7 +25,7 @@ public class Love {
 
   private final Map<ELoveDraw, ILoveDrawResult> loveDrawStringMap;
 
-  public Love(UtilityConstraint constraint) {
+  public Love(DrawKeyConstraint constraint) {
     loveDrawStringMap = new LinkedHashMap<>();
 
     int action = constraint.get(ACTION);

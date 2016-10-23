@@ -51,8 +51,8 @@ public class NbkHumanoid extends NbkLiving {
   @Override
   public String toString() {
     FrenchNoun originName = origin.getName();
-    FrenchNoun professionName = profession.getName(originName.getGender());
-    return originName.toString() + " " + professionName.toString();
+    String professionString = (profession == null) ? "" : profession.getName(originName.getGender()).toString();
+    return originName.toString() + " " + professionString;
   }
 
   ENbkOrigin getOrigin() {

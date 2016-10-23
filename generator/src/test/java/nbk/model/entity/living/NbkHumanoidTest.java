@@ -43,12 +43,6 @@ public class NbkHumanoidTest {
   }
 
   @Test
-  public void nbkLivingShouldHave7BaseStats() {
-    humanoid = NbkHumanoid.create();
-    assertThat(humanoid.getStats()).hasSize(7);
-  }
-
-  @Test
   public void baseStatsShouldBeBetween8And13() {
     humanoid = NbkHumanoid.create();
     humanoid.getStats().values().forEach(

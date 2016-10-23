@@ -1,6 +1,6 @@
 package nbk.controller.entity.items;
 
-import commons.controller.entity.EntityController;
+import commons.controller.entity.items.ItemController;
 import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableEntityTypeException;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Contract;
 public class GenerateNbkWeaponActionListener extends GenerateNbkItemActionListener {
 
   public GenerateNbkWeaponActionListener(NbkWeaponOptionRow entityOptionRow, EntityResultRow entityResultRow,
-                                         EntityController<NbkGame> entityController) {
+                                         ItemController<NbkGame> entityController) {
     super(entityOptionRow, entityResultRow, entityController);
   }
 
