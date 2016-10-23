@@ -1,6 +1,8 @@
 package nbk.model.entity.living.characteristics.primary;
 
 import com.google.common.collect.ForwardingMap;
+import commons.model.commons.IDrawKey;
+import commons.model.utility.constraints.DrawKeyConstraint;
 import commons.utils.exception.StatNotInRangeException;
 import nbk.model.entity.living.characteristics.primary.builders.StatsBuilder;
 
@@ -13,6 +15,15 @@ import java.util.Map;
 public class Stats extends ForwardingMap<EStat, Integer> implements StatsBuilder {
 
   private final EnumMap<EStat, Integer> statsMap = new EnumMap<>(EStat.class);
+
+  public Stats() {
+  }
+
+  public Stats(DrawKeyConstraint drawKeyConstraint) throws StatNotInRangeException {
+    for (Entry<IDrawKey, Integer> entry : drawKeyConstraint.entrySet()) {
+      StatUtils.setStat(statsMap, (EStat) entry.getKey(), entry.getValue());
+    }
+  }
 
   @Override
   protected Map<EStat, Integer> delegate() {

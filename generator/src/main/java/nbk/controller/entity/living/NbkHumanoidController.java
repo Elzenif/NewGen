@@ -15,7 +15,7 @@ import java.util.EnumMap;
 /**
  * Created by Germain on 28/08/2016.
  */
-public class NbkHumanoidController extends LivingController<NbkGame>
+public class NbkHumanoidController extends LivingController<NbkGame, EStat>
     implements HasDrawKeysController<EStat> {
 
   private final EnumMap<EStat, DrawChangeListener<EStat>> drawChangeListenerMap = new EnumMap<>(EStat.class);
@@ -34,6 +34,7 @@ public class NbkHumanoidController extends LivingController<NbkGame>
   }
 
   @Override
-  public void updateDrawKeyValue(EStat drawKey) {
+  public void updateDrawKeyValue(EStat stat) {
+    generationConstraint.put(stat, (Integer) livingOptionRow.getDrawValue(stat));
   }
 }

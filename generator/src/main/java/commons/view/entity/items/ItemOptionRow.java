@@ -5,6 +5,7 @@ import commons.controller.entity.items.ItemController;
 import commons.model.commons.Game;
 import commons.model.entity.IAvailableEntity;
 import commons.model.entity.constraints.GlobalConstraints;
+import commons.model.entity.items.IAvailableItem;
 import commons.utils.TextFieldUtils;
 import commons.view.entity.EntityOptionRow;
 import commons.view.utils.ConstraintPanel;
@@ -12,6 +13,7 @@ import commons.view.utils.ConstraintPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JFormattedTextField;
 import java.text.MessageFormat;
+import java.util.EnumSet;
 
 import static commons.view.utils.Constants.resourceBundle;
 
@@ -23,8 +25,8 @@ public abstract class ItemOptionRow<G extends Game> extends EntityOptionRow<G, G
   private final ConstraintPanel qualityPanel;
   private final JFormattedTextField qualityTextField;
 
-  protected ItemOptionRow(IAvailableEntity<G> availableEntity, int labelSize) {
-    super(availableEntity, labelSize);
+  protected ItemOptionRow(IAvailableEntity<G> availableItem, EnumSet<? extends IAvailableItem<G>> availableItems) {
+    super(availableItem, availableItems);
 
     // quality constraints
     qualityTextField = TextFieldUtils.createTwoDigitsField();

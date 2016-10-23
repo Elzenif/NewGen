@@ -15,8 +15,8 @@ public class NbkGame extends Game {
 
   private static final NbkGame INSTANCE = new NbkGame();
 
-  private final EnumSet<? extends IAvailableItem> availableItems;
-  private final EnumSet<? extends IAvailableLiving> availableLivings;
+  private final EnumSet<? extends IAvailableItem<NbkGame>> availableItems;
+  private final EnumSet<? extends IAvailableLiving<NbkGame>> availableLivings;
 
   private NbkGame() {
     super("Naheulbeuk");
@@ -28,11 +28,11 @@ public class NbkGame extends Game {
     return INSTANCE;
   }
 
-  public EnumSet<? extends IAvailableItem> getAvailableItems() {
+  public EnumSet<? extends IAvailableItem<NbkGame>> getAvailableItems() {
     return availableItems;
   }
 
-  public EnumSet<? extends IAvailableLiving> getAvailableLivings() {
+  public EnumSet<? extends IAvailableLiving<NbkGame>> getAvailableLivings() {
     return availableLivings;
   }
 }

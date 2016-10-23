@@ -11,7 +11,6 @@ import nbk.model.entity.items.characteristics.secondary.enums.ENbkQuality;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkWeaponType;
 import nbk.view.entity.items.options.NbkWeaponOptionRow;
 
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.EnumMap;
 
@@ -20,7 +19,7 @@ import java.util.EnumMap;
  */
 public class NbkWeaponController extends ItemController<NbkGame> {
 
-  private final EnumMap<ENbHands, ActionListener> nbHandsActionListenerEnumMap = new EnumMap<>(ENbHands.class);
+  private final EnumMap<ENbHands, NbHandsActionListener> nbHandsActionListenerEnumMap = new EnumMap<>(ENbHands.class);
 
   public NbkWeaponController(NbkWeaponOptionRow nbkWeaponOptionRow, EntityResultRow entityResultRow) {
     super(nbkWeaponOptionRow);
@@ -29,7 +28,7 @@ public class NbkWeaponController extends ItemController<NbkGame> {
             nbHandsActionListenerEnumMap.put(nbHands, new NbHandsActionListener(this, nbHands)));
   }
 
-  public ActionListener getNbHandsActionListener(ENbHands nbHands) {
+  public NbHandsActionListener getNbHandsActionListener(ENbHands nbHands) {
     return nbHandsActionListenerEnumMap.get(nbHands);
   }
 

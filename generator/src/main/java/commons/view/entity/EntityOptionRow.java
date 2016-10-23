@@ -4,10 +4,12 @@ import commons.controller.entity.EntityController;
 import commons.model.commons.Game;
 import commons.model.commons.GenerationConstraint;
 import commons.model.entity.IAvailableEntity;
+import commons.utils.MathUtils;
 import commons.view.commons.options.ConstraintOptionRow;
 
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.util.EnumSet;
 
 import static commons.view.utils.Constants.resourceBundle;
 
@@ -20,8 +22,8 @@ public abstract class EntityOptionRow<G extends Game, GC extends GenerationConst
   private final JSpinner numberOfEntitiesSpinner;
   private final SpinnerNumberModel numberOfEntitiesModel;
 
-  protected EntityOptionRow(IAvailableEntity<G> availableEntity, int labelSize) {
-    super(labelSize, availableEntity.getName());
+  protected EntityOptionRow(IAvailableEntity<G> availableEntity, EnumSet<? extends IAvailableEntity<G>> availableEntities) {
+    super(MathUtils.maxLength(availableEntities), availableEntity.getName());
 
     numberOfEntitiesModel = new SpinnerNumberModel(1, 1, 9, 1);
     numberOfEntitiesSpinner = new JSpinner(numberOfEntitiesModel);

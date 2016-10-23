@@ -17,7 +17,7 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 28/08/2016.
  */
-public class NbkHumanoidOptionRow extends NbkLivingOptionRow {
+public class NbkHumanoidOptionRow extends NbkLivingOptionRow<EStat> {
 
   private final Map<EStat, Pair<JSpinner, SpinnerNumberModel>> statMap = new LinkedHashMap<>(EStat.values().length);
   private final int defaultValue = 10;
@@ -35,5 +35,10 @@ public class NbkHumanoidOptionRow extends NbkLivingOptionRow {
     super.setControllers(new NbkHumanoidController(this, resultRow, defaultValue));
     statMap.forEach((stat, pair) ->
         pair.getLeft().addChangeListener(((NbkHumanoidController) controller).getDrawChangeListener(stat)));
+  }
+
+  @Override
+  public Integer getDrawValue(EStat stat) {
+    return statMap.get(stat).getRight().getNumber().intValue();
   }
 }

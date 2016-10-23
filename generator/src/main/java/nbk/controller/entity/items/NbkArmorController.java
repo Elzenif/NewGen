@@ -9,7 +9,6 @@ import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
 import nbk.model.entity.items.characteristics.secondary.enums.ENbkPredefinedArmor;
 import nbk.view.entity.items.options.NbkArmorOptionRow;
 
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.EnumMap;
 
@@ -18,7 +17,7 @@ import java.util.EnumMap;
  */
 public class NbkArmorController extends ItemController<NbkGame> {
 
-  private final EnumMap<EBodyPart, ActionListener> bodyPartActionListenerMap = new EnumMap<>(EBodyPart.class);
+  private final EnumMap<EBodyPart, BodyPartActionListener> bodyPartActionListenerMap = new EnumMap<>(EBodyPart.class);
 
   public NbkArmorController(NbkArmorOptionRow entityOptionRow, EntityResultRow entityResultRow) {
     super(entityOptionRow);
@@ -27,7 +26,7 @@ public class NbkArmorController extends ItemController<NbkGame> {
             bodyPartActionListenerMap.put(bodyPart, new BodyPartActionListener(this, bodyPart)));
   }
 
-  public ActionListener getBodyPartActionListener(EBodyPart bodyPart) {
+  public BodyPartActionListener getBodyPartActionListener(EBodyPart bodyPart) {
     return bodyPartActionListenerMap.get(bodyPart);
   }
 
