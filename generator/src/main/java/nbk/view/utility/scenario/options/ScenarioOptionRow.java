@@ -19,20 +19,14 @@ import static commons.view.utils.Constants.resourceBundle;
  */
 public class ScenarioOptionRow extends NbkUtilityOptionRow<EScenarioDraw> {
 
-  private final Map<EScenarioDraw, Pair<JSpinner, SpinnerNumberModel>> scenarioDrawMap;
+  private final Map<EScenarioDraw, Pair<JSpinner, SpinnerNumberModel>> scenarioDrawMap
+      = new LinkedHashMap<>(EScenarioDraw.values().length);
   private final int defaultValue = 10;
 
   public ScenarioOptionRow() {
     super(ENbkAvailableUtility.SCENARIO.getName());
 
-    scenarioDrawMap = new LinkedHashMap<>(EScenarioDraw.values().length);
-    for (EScenarioDraw scenarioDraw : EScenarioDraw.values()) {
-      SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(defaultValue, 1, 20, 1);
-      JSpinner jSpinner = new JSpinner(spinnerNumberModel);
-      jSpinner.setAlignmentX(LEFT_ALIGNMENT);
-      scenarioDrawMap.put(scenarioDraw, new Pair<>(jSpinner, spinnerNumberModel));
-      constraintPanel.add(jSpinner);
-    }
+    initDrawKeyConstraintPanel(scenarioDrawMap, EScenarioDraw.values(), defaultValue, 1, 20);
 
     finalizeRowConstruction(resourceBundle.getString("tooltip.scenario.generate"));
   }

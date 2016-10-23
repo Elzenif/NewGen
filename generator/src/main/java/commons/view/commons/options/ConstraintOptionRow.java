@@ -1,6 +1,8 @@
 package commons.view.commons.options;
 
 import commons.controller.intf.ConstraintOptionRowController;
+import commons.model.commons.IDrawKey;
+import commons.utils.Pair;
 import commons.view.commons.results.ResultRow;
 import commons.view.utils.ConstraintPanel;
 import commons.view.utils.HasConstraintPanel;
@@ -10,7 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import java.awt.FlowLayout;
+import java.util.Map;
 
 import static commons.view.utils.Constants.DAUPHINN_FONT;
 import static commons.view.utils.Constants.JPANEL_HGAP;
@@ -74,4 +79,25 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends BorderLay
     constraintPanel.setEnabled(checkBoxSelected);
   }
 
+  protected <K extends IDrawKey> void initDrawKeyConstraintPanel(Map<K, Pair<JSpinner, SpinnerNumberModel>> map,
+                                                                 K[] keyValues, int defaultValue, int minValue,
+                                                                 int maxValue) {
+    for (K key : keyValues) {
+      ConstraintPanel cPanel = new ConstraintPanel();
+      cPanel.setLayout(new BoxLayout(cPanel, BoxLayout.Y_AXIS));
+
+      JLabel jLabel = new JLabel(key.toString());
+      jLabel.setAlignmentX(LEFT_ALIGNMENT);
+
+      SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(defaultValue, minValue, maxValue, 1);
+      JSpinner jSpinner = new JSpinner(spinnerNumberModel);
+      jSpinner.setAlignmentX(LEFT_ALIGNMENT);
+      jSpinner.setMaximumSize(jSpinner.getPreferredSize());
+      map.put(key, new Pair<>(jSpinner, spinnerNumberModel));
+
+      cPanel.add(jLabel);
+      cPanel.add(jSpinner);
+      constraintPanel.add(cPanel);
+    }
+  }
 }
