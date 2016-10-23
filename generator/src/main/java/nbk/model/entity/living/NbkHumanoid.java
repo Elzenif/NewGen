@@ -6,6 +6,7 @@ import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.utils.french.FrenchNoun;
 import nbk.model.entity.living.characteristics.primary.EStat;
 import nbk.model.entity.living.characteristics.primary.Stats;
+import nbk.model.entity.living.characteristics.primary.fields.HasEV;
 import nbk.model.entity.living.characteristics.primary.fields.HasStatsInRange;
 import nbk.model.entity.living.characteristics.secondary.enums.ENbkOrigin;
 import nbk.model.entity.living.characteristics.secondary.enums.ENbkProfession;
@@ -16,15 +17,17 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 28/08/2016.
  */
-public class NbkHumanoid extends NbkLiving {
+public class NbkHumanoid extends NbkLiving implements HasEV {
 
   private final ENbkOrigin origin;
   private final ENbkProfession profession;
+  private final int ev;
 
   private NbkHumanoid(HumanoidBuilder builder) {
     super(builder);
     origin = builder.origin;
     profession = builder.profession;
+    ev = builder.ev;
   }
 
   /**
@@ -63,11 +66,17 @@ public class NbkHumanoid extends NbkLiving {
     return profession;
   }
 
+  @Override
+  public int getEV() {
+    return ev;
+  }
+
 
   private static class HumanoidBuilder extends NbkLivingBuilder {
 
     ENbkOrigin origin;
     ENbkProfession profession;
+    int ev;
 
     HumanoidBuilder() {
       super(new Stats());
@@ -125,7 +134,15 @@ public class NbkHumanoid extends NbkLiving {
 
     @Contract(" -> !null")
     public NbkHumanoid build() {
+      setEV();
       return new NbkHumanoid(this);
+    }
+
+    private void setEV() {
+      ev = origin.getEV();
+      if (profession != null) {
+        ev = profession.getEV(origin);
+      }
     }
   }
 }

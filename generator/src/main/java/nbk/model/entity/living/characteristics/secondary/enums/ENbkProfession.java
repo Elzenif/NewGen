@@ -11,10 +11,8 @@ import commons.utils.french.FrenchNoun;
 import commons.utils.french.Gender;
 import nbk.model.entity.living.characteristics.primary.Stats;
 import nbk.model.entity.living.characteristics.primary.builders.EABuilder;
-import nbk.model.entity.living.characteristics.primary.builders.EVBuilder;
 import nbk.model.entity.living.characteristics.primary.builders.StatsInRangeBuilder;
 import nbk.model.entity.living.characteristics.primary.fields.HasEA;
-import nbk.model.entity.living.characteristics.primary.fields.HasEV;
 import nbk.model.entity.living.characteristics.primary.fields.HasStatsInRange;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -28,14 +26,18 @@ import java.util.stream.Collectors;
  * Created by Germain on 08/09/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, HasEA, HasStatsInRange {
+public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEA, HasStatsInRange {
 
   WARRIOR(new ENbkProfessionBuilder()
       .setMasculineNouns("Guerrier", "Gladiateur")
       .setFeminineNouns("Guerrière", "Gladiateur")
-      .setEV(5)
       .setMinCourage(12)
-      .setMinStrength(12)),
+      .setMinStrength(12)) {
+    @Override
+    public int getEV(ENbkOrigin origin) {
+      return (origin == ENbkOrigin.HUMAN || origin == ENbkOrigin.BARBARIAN) ? origin.getEV() : origin.getEV() + 5;
+    }
+  },
   NINJA(new ENbkProfessionBuilder()
       .setNeutralNouns("Ninja", "Assassin")
       .uncommon()
@@ -54,19 +56,27 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
       .setMasculineNouns("Mage", "Sorcier")
       .setFeminineNouns("Sorcière")
       .uncommon()
-      .setEV(-30)
       .setEA(30)
-      .setMinIntelligence(12)),
+      .setMinIntelligence(12)) {
+    @Override
+    public int getEV(ENbkOrigin origin) {
+      return (origin == ENbkOrigin.HUMAN) ? 20 : (int) (origin.getEV() * 0.7);
+    }
+  },
   PALADIN(new ENbkProfessionBuilder()
       .setMasculineNouns("Paladin")
       .setFeminineNouns("Paladine")
       .uncommon()
-      .setEV(2)
       .setEA(10)
       .setMinCharisma(11)
       .setMinCourage(12)
       .setMinStrength(9)
-      .setMinIntelligence(10)),
+      .setMinIntelligence(10)) {
+    @Override
+    public int getEV(ENbkOrigin origin) {
+      return (origin == ENbkOrigin.HUMAN) ? 32 : origin.getEV() + 2;
+    }
+  },
   RANGER(new ENbkProfessionBuilder()
       .setNeutralNouns("Ranger")
       .setMinAgility(10)
@@ -99,7 +109,6 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
       .setMinCharisma(11)),;
 
   final List<FrenchNoun> names;
-  private final int ev;
   private final int ea;
   private final EGeneralRarity rarity;
   private final Stats minStats;
@@ -108,7 +117,6 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
   ENbkProfession(ENbkProfessionBuilder builder) {
     names = builder.getNames();
     rarity = builder.getRarity();
-    ev = builder.getEV();
     ea = builder.getEA();
     minStats = builder.getMinStats();
     maxStats = builder.getMaxStats();
@@ -159,17 +167,16 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
   }
 
   @Override
-  public int getEV() {
-    return ev;
-  }
-
-  @Override
   public int getEA() {
     return ea;
   }
 
+  public int getEV(ENbkOrigin origin) {
+    return origin.getEV();
+  }
 
-  private static class ENbkProfessionBuilder implements EntityTypeBuilder, EVBuilder, EABuilder, FrenchNounBuilder,
+
+  private static class ENbkProfessionBuilder implements EntityTypeBuilder, EABuilder, FrenchNounBuilder,
       StatsInRangeBuilder {
 
     private final List<FrenchNoun> names = new LinkedList<>();
@@ -360,17 +367,6 @@ public enum ENbkProfession implements Secondary, EntityType<FrenchNoun>, HasEV, 
     @Override
     public EGeneralRarity getRarity() {
       return rarity;
-    }
-
-    @Override
-    public int getEV() {
-      return ev;
-    }
-
-    @Override
-    public ENbkProfessionBuilder setEV(int ev) {
-      this.ev = ev;
-      return this;
     }
 
     @Override

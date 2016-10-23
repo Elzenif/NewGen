@@ -21,7 +21,6 @@ public class ENbkProfessionTest {
           assertThat(p.getRarity()).isNotNull();
           assertThat(p.getMinStats()).isNotNull();
           assertThat(p.getMaxStats()).isNotNull();
-          assertThat(p.getEV()).isNotNull();
           assertThat(p.getEA()).isNotNull();
         }
     );

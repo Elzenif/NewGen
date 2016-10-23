@@ -5,6 +5,8 @@ import nbk.model.entity.living.characteristics.primary.StatUtils;
 import nbk.model.entity.living.characteristics.primary.Stats;
 import nbk.model.entity.living.characteristics.secondary.enums.ENbkOrigin;
 import nbk.model.entity.living.characteristics.secondary.enums.ENbkProfession;
+import org.assertj.core.api.JUnitSoftAssertions;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.EnumSet;
@@ -16,6 +18,9 @@ import static org.junit.Assert.fail;
  * Created by Germain on 28/08/2016.
  */
 public class NbkHumanoidTest {
+
+  @Rule
+  public JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
   private NbkHumanoid humanoid;
 
@@ -66,11 +71,11 @@ public class NbkHumanoidTest {
 
     humanoid = NbkHumanoid.create(stats);
 
-    assertThat(humanoid.getCourage()).isEqualTo(courage);
-    assertThat(humanoid.getIntelligence()).isEqualTo(intelligence);
-    assertThat(humanoid.getCharisma()).isEqualTo(charisma);
-    assertThat(humanoid.getAgility()).isEqualTo(agility);
-    assertThat(humanoid.getStrength()).isEqualTo(strength);
+    softly.assertThat(humanoid.getCourage()).isEqualTo(courage);
+    softly.assertThat(humanoid.getIntelligence()).isEqualTo(intelligence);
+    softly.assertThat(humanoid.getCharisma()).isEqualTo(charisma);
+    softly.assertThat(humanoid.getAgility()).isEqualTo(agility);
+    softly.assertThat(humanoid.getStrength()).isEqualTo(strength);
   }
 
   @Test
@@ -119,5 +124,14 @@ public class NbkHumanoidTest {
       fail();
     } catch (StatNotInRangeException e) {
     }
+  }
+
+  @Test
+  public void humanoidShouldHaveEV() {
+    humanoid = NbkHumanoid.create();
+    softly.assertThat(humanoid.getEV()).isNotNull().isNotEqualTo(0);
+
+    humanoid = NbkHumanoid.create(new Stats());
+    softly.assertThat(humanoid.getEV()).isNotNull().isNotEqualTo(0);
   }
 }
