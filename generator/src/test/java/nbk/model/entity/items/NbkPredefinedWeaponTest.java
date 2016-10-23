@@ -1,7 +1,8 @@
 package nbk.model.entity.items;
 
+import commons.model.commons.constraints.GenerationConstraints;
+import commons.model.commons.constraints.PredicateConstraints;
 import commons.model.entity.characteristics.primary.enums.EItemRarity;
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.EOperator;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import nbk.model.commons.characteristics.primary.enums.ESize;
@@ -22,86 +23,86 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class NbkPredefinedWeaponTest {
 
-  private GlobalConstraints globalConstraints;
+  private PredicateConstraints predicateConstraints;
   private NbkPredefinedWeapon weapon;
 
   @Before
   public void init() {
-    globalConstraints = new GlobalConstraints();
+    predicateConstraints = new GenerationConstraints().getPredicateConstraints();
   }
 
   @Test
   public void testWeaponIsNotNull() throws NoAvailableEntityTypeException {
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
+    weapon = NbkPredefinedWeapon.create(predicateConstraints);
     assertThat(weapon).isNotNull();
   }
 
   @Test
   public void testPredefinedWeaponNotNull() throws NoAvailableEntityTypeException {
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
+    weapon = NbkPredefinedWeapon.create(predicateConstraints);
     assertThat(weapon.getPredefinedWeapon()).isNotNull();
   }
 
   @Test
   public void testPredefinedWeaponIsValid() throws NoAvailableEntityTypeException {
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
+    weapon = NbkPredefinedWeapon.create(predicateConstraints);
     Set<ENbkPredefinedWeapon> weaponTypes = EnumSet.allOf(ENbkPredefinedWeapon.class);
     assertThat(weaponTypes).contains(weapon.getPredefinedWeapon());
   }
 
   @Test
   public void testWeaponToStringIsNotNull() throws NoAvailableEntityTypeException {
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
+    weapon = NbkPredefinedWeapon.create(predicateConstraints);
     assertThat(weapon.toString()).isNotNull();
   }
 
   @Test
   public void testWeaponToStringIsValid() throws NoAvailableEntityTypeException {
-    weapon = NbkPredefinedWeapon.create(globalConstraints);
+    weapon = NbkPredefinedWeapon.create(predicateConstraints);
     assertThat(weapon.toString().contains("@")).isFalse();
   }
 
   @Test
   public void testCreateWeaponWithRarityConstraint() throws NoAvailableEntityTypeException {
     for (EItemRarity rarity : EItemRarity.values()) {
-      globalConstraints.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, rarity);
-      weapon = NbkPredefinedWeapon.create(globalConstraints);
+      predicateConstraints.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, rarity);
+      weapon = NbkPredefinedWeapon.create(predicateConstraints);
       assertThat(weapon).isNotNull();
       assertThat(EOperator.GTE.apply(weapon.getRarity(), rarity)).isTrue();
-      globalConstraints.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, rarity);
+      predicateConstraints.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, rarity);
     }
   }
 
   @Test
   public void testCreateWeaponWithHandsConstraint() throws NoAvailableEntityTypeException {
     for (ENbHands nbHands : ENbHands.values()) {
-      globalConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, nbHands);
-      weapon = NbkPredefinedWeapon.create(globalConstraints);
+      predicateConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, nbHands);
+      weapon = NbkPredefinedWeapon.create(predicateConstraints);
       assertThat(weapon).isNotNull();
       assertThat(weapon.getNbHands()).isEqualTo(nbHands);
-      globalConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, nbHands);
+      predicateConstraints.update(ENbkWeaponType.getConstraints(), ENbHands.class, nbHands);
     }
   }
 
   @Test
   public void testCreateWeaponWithRangeConstraint() throws NoAvailableEntityTypeException {
     for (ERange range : ERange.values()) {
-      globalConstraints.update(ENbkWeaponType.getConstraints(), ERange.class, range);
-      weapon = NbkPredefinedWeapon.create(globalConstraints);
+      predicateConstraints.update(ENbkWeaponType.getConstraints(), ERange.class, range);
+      weapon = NbkPredefinedWeapon.create(predicateConstraints);
       assertThat(weapon).isNotNull();
       assertThat(weapon.getRange()).isEqualTo(range);
-      globalConstraints.update(ENbkWeaponType.getConstraints(), ERange.class, range);
+      predicateConstraints.update(ENbkWeaponType.getConstraints(), ERange.class, range);
     }
   }
 
   @Test
   public void testCreateWeaponWithSizeConstraint() throws NoAvailableEntityTypeException {
     for (ESize size : ESize.values()) {
-      globalConstraints.update(ENbkWeaponType.getConstraints(), ESize.class, size);
-      weapon = NbkPredefinedWeapon.create(globalConstraints);
+      predicateConstraints.update(ENbkWeaponType.getConstraints(), ESize.class, size);
+      weapon = NbkPredefinedWeapon.create(predicateConstraints);
       assertThat(weapon).isNotNull();
       assertThat(weapon.getSize()).isEqualTo(size);
-      globalConstraints.update(ENbkWeaponType.getConstraints(), ESize.class, size);
+      predicateConstraints.update(ENbkWeaponType.getConstraints(), ESize.class, size);
     }
   }
 }

@@ -1,13 +1,13 @@
 package nbk.model.utility.love.constraints;
 
-import commons.model.utility.constraints.IUtilityDrawKey;
+import commons.model.commons.IDrawKey;
 import org.jetbrains.annotations.Contract;
 
 /**
  * Created by Germain on 24/07/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ELoveDraw implements IUtilityDrawKey {
+public enum ELoveDraw implements IDrawKey {
 
   ACTION("Action"),
   TARGET("Cible"),

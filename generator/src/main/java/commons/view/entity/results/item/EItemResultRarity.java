@@ -22,6 +22,10 @@ enum  EItemResultRarity implements HasRarity {
   LEG(EItemRarity.LEGENDARY, ColorUtils.ORANGE);
 
 
+  private static final Map<EItemRarity, Color> MAP = new HashMap<>(
+      Stream.of(EItemResultRarity.values()).
+          collect(Collectors.toMap(EItemResultRarity::getRarity, EItemResultRarity::getColor))
+  );
   private final EItemRarity rarity;
   private final Color color;
 
@@ -30,22 +34,17 @@ enum  EItemResultRarity implements HasRarity {
     this.color = color;
   }
 
-  public Color getColor() {
+  public static Color getItemResultColor(EItemRarity rarity) {
+    return MAP.get(rarity);
+  }
+
+  private Color getColor() {
     return color;
   }
 
   @Override
   public EItemRarity getRarity() {
     return rarity;
-  }
-
-  private static final Map<EItemRarity, Color> MAP = new HashMap<>(
-          Stream.of(EItemResultRarity.values()).
-                  collect(Collectors.toMap(EItemResultRarity::getRarity, EItemResultRarity::getColor))
-  );
-
-  public static Color getItemResultColor(EItemRarity rarity) {
-    return MAP.get(rarity);
   }
 
 }

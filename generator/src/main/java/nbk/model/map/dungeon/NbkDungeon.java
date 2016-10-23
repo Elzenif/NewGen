@@ -1,9 +1,10 @@
 package nbk.model.map.dungeon;
 
+import commons.model.commons.IDrawKey;
+import commons.model.commons.constraints.MapConstraint;
 import commons.model.map.EMapPart;
 import commons.model.map.Grid;
 import commons.model.map.Room;
-import commons.model.map.constraints.MapConstraint;
 import commons.utils.MathUtils;
 import commons.utils.Pair;
 import nbk.model.map.dungeon.constraints.EDungeonDraw;
@@ -66,7 +67,7 @@ public class NbkDungeon {
     buildGrid();
   }
 
-  public static NbkDungeon create(MapConstraint<EDungeonDraw> mapConstraint) {
+  public static NbkDungeon create(MapConstraint mapConstraint) {
     return new DungeonBuilder(mapConstraint).build();
   }
 
@@ -273,18 +274,14 @@ public class NbkDungeon {
     private int factor = 4;
     private int corridorWidth = 1;
 
-    public DungeonBuilder(MapConstraint<EDungeonDraw> mapConstraint) {
-      for (EDungeonDraw dungeonDrawKey : mapConstraint.keySet()) {
-        switch (dungeonDrawKey) {
-          case NB_ROOMS:
-            setNbRoomsDesired((Integer) mapConstraint.get(dungeonDrawKey));
-            break;
-          case TILE_SIZE:
-            setTileSize((Integer) mapConstraint.get(dungeonDrawKey));
-            break;
-          case RADIUS:
-            setRadius((EDungeonRadius) mapConstraint.get(dungeonDrawKey));
-            break;
+    public DungeonBuilder(MapConstraint mapConstraint) {
+      for (IDrawKey dungeonDrawKey : mapConstraint.keySet()) {
+        if (dungeonDrawKey.equals(EDungeonDraw.NB_ROOMS)) {
+          setNbRoomsDesired((Integer) mapConstraint.get(dungeonDrawKey));
+        } else if (dungeonDrawKey.equals(EDungeonDraw.TILE_SIZE)) {
+          setTileSize((Integer) mapConstraint.get(dungeonDrawKey));
+        } else if (dungeonDrawKey.equals(EDungeonDraw.RADIUS)) {
+          setRadius((EDungeonRadius) mapConstraint.get(dungeonDrawKey));
         }
       }
     }

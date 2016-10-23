@@ -1,7 +1,7 @@
 package nbk.controller.entity.items;
 
 import commons.controller.entity.items.ConstraintItemActionListener;
-import commons.model.entity.constraints.GenericConstraint;
+import commons.model.commons.constraints.intf.GenericPredicateConstraint;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
 
@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
  */
 public class BodyPartActionListener extends ConstraintItemActionListener<NbkGame, EBodyPart> {
 
-  public BodyPartActionListener(NbkArmorController armorController, GenericConstraint<EBodyPart> constraint) {
+  public BodyPartActionListener(NbkArmorController armorController, GenericPredicateConstraint<EBodyPart> constraint) {
     super(armorController, constraint);
   }
 

@@ -4,7 +4,6 @@ import commons.controller.entity.EntityController;
 import commons.controller.entity.items.ItemController;
 import commons.model.commons.Game;
 import commons.model.entity.IAvailableEntity;
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.items.IAvailableItem;
 import commons.utils.TextFieldUtils;
 import commons.view.entity.EntityOptionRow;
@@ -20,7 +19,7 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 23/10/2016.
  */
-public abstract class ItemOptionRow<G extends Game> extends EntityOptionRow<G, GlobalConstraints> {
+public abstract class ItemOptionRow<G extends Game> extends EntityOptionRow<G> {
 
   private final ConstraintPanel qualityPanel;
   private final JFormattedTextField qualityTextField;
@@ -43,7 +42,7 @@ public abstract class ItemOptionRow<G extends Game> extends EntityOptionRow<G, G
 
 
   @Override
-  protected void setControllers(EntityController<G, GlobalConstraints> entityController) {
+  protected void setControllers(EntityController<G> entityController) {
     super.setControllers(entityController);
     qualityTextField.addPropertyChangeListener(((ItemController) controller).getRarityChangeListener());
   }

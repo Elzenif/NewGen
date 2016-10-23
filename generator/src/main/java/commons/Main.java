@@ -14,7 +14,6 @@ import java.awt.FontFormatException;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.util.Enumeration;
 
 import static commons.view.utils.Constants.BENGUIAB_FONT;
@@ -48,13 +47,13 @@ public class Main {
       BENGUIAB_FONT = initFont("BENGUIAB", 0f);
       LITHOGRB_FONT = initFont("LITHOGRB", 0f);
       LITHOGRL_FONT = initFont("LITHOGRL", 0f);
-    } catch (IOException | FontFormatException | URISyntaxException e) {
+    } catch (IOException | FontFormatException e) {
       LOGGER.error("Cannot load fonts");
       e.printStackTrace();
     }
   }
 
-  private static Font initFont(String name, float sizeInc) throws IOException, FontFormatException, URISyntaxException {
+  private static Font initFont(String name, float sizeInc) throws IOException, FontFormatException {
     String pathname = "/fonts/" + name + ".TTF";
     InputStream is = new BufferedInputStream(Thread.currentThread().getClass().getResourceAsStream(pathname));
     Font font = Font.createFont(Font.TRUETYPE_FONT, is);

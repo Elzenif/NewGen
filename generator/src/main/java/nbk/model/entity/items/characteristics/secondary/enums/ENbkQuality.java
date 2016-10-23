@@ -1,11 +1,11 @@
 package nbk.model.entity.items.characteristics.secondary.enums;
 
+import commons.model.commons.constraints.PredicateConstraints;
+import commons.model.commons.constraints.PrimarySecondaryConstraints;
 import commons.model.entity.characteristics.primary.builders.ItemTypeBuilder;
 import commons.model.entity.characteristics.primary.enums.EItemRarity;
 import commons.model.entity.characteristics.primary.fields.EntityType;
 import commons.model.entity.characteristics.secondary.Secondary;
-import commons.model.entity.constraints.Constraints;
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import commons.utils.french.FrenchAdjective;
 import commons.utils.french.FrenchGenderAdjective;
@@ -44,12 +44,29 @@ public enum ENbkQuality implements Secondary, EntityType<FrenchAdjective> {
           .setNeutralAdjective("Durandil(TM)")
           .legendary());
 
+  public static final EnumMap<EItemRarity, ENbkQuality> QUALITY_MAP = new EnumMap<>(
+      Stream.of(ENbkQuality.values()).collect(Collectors.toMap(ENbkQuality::getRarity, Function.identity()))
+  );
+  private static final PrimarySecondaryConstraints<ENbkQuality> CONSTRAINTS = PrimarySecondaryConstraints.ConstraintsBuilder
+      .<ENbkQuality>start()
+      .setSecondaryClass(ENbkQuality.class)
+      .setPrimaryClasses(EItemRarity.class)
+      .build();
   private final List<FrenchAdjective> names;
   private final EItemRarity rarity;
 
   ENbkQuality(NbkQualityBuilder builder) {
     names = builder.getNames();
     rarity = builder.getRarity();
+  }
+
+  public static PrimarySecondaryConstraints<ENbkQuality> getConstraints() {
+    return CONSTRAINTS;
+  }
+
+  public static Predicate<ENbkQuality> getPredicate(PredicateConstraints predicateConstraints) {
+    Predicate<EItemRarity> rarityPredicate = predicateConstraints.getPredicate(ENbkQuality.getConstraints(), EItemRarity.class);
+    return quality -> rarityPredicate.test(quality.getRarity());
   }
 
   @Override
@@ -61,26 +78,6 @@ public enum ENbkQuality implements Secondary, EntityType<FrenchAdjective> {
   public FrenchAdjective getName() {
     return MathUtils.chooseRandom(names);
   }
-
-  public static final EnumMap<EItemRarity, ENbkQuality> QUALITY_MAP = new EnumMap<>(
-          Stream.of(ENbkQuality.values()).collect(Collectors.toMap(ENbkQuality::getRarity, Function.identity()))
-  );
-
-  public static Constraints<ENbkQuality> getConstraints() {
-    return CONSTRAINTS;
-  }
-
-  private static final Constraints<ENbkQuality> CONSTRAINTS = Constraints.ConstraintsBuilder
-          .<ENbkQuality>start()
-          .setSecondaryClass(ENbkQuality.class)
-          .setPrimaryClasses(EItemRarity.class)
-          .build();
-
-  public static Predicate<ENbkQuality> getPredicate(GlobalConstraints globalConstraints) {
-    Predicate<EItemRarity> rarityPredicate = globalConstraints.getPredicate(ENbkQuality.getConstraints(), EItemRarity.class);
-    return quality -> rarityPredicate.test(quality.getRarity());
-  }
-
 
   private static class NbkQualityBuilder implements ItemTypeBuilder {
 

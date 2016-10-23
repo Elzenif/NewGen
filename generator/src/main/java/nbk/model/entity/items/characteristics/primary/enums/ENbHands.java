@@ -1,7 +1,7 @@
 package nbk.model.entity.items.characteristics.primary.enums;
 
+import commons.model.commons.constraints.intf.GenericPredicateConstraint;
 import commons.model.entity.characteristics.primary.Primary;
-import commons.model.entity.constraints.GenericConstraint;
 import nbk.model.entity.items.characteristics.primary.fields.HasNbHands;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 28/06/2016.
  */
-public enum ENbHands implements Primary, HasNbHands, GenericConstraint<ENbHands> {
+public enum ENbHands implements Primary, HasNbHands, GenericPredicateConstraint<ENbHands> {
 
   ONE(1) {
     @Override

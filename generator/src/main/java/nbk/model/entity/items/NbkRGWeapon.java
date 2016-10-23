@@ -1,7 +1,7 @@
 package nbk.model.entity.items;
 
+import commons.model.commons.constraints.PredicateConstraints;
 import commons.model.entity.characteristics.primary.enums.EMagic;
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.utils.EntityUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableEntityTypeException;
@@ -30,9 +30,9 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
   }
 
   @Contract("_ -> !null")
-  public static NbkRGWeapon create(GlobalConstraints globalConstraints)
+  public static NbkRGWeapon create(PredicateConstraints predicateConstraints)
           throws NoAvailableEntityTypeException {
-    return new RGWeaponBuilder(globalConstraints).build();
+    return new RGWeaponBuilder(predicateConstraints).build();
   }
 
   public ENbkWeaponType getWeaponType() {
@@ -70,9 +70,9 @@ public class NbkRGWeapon extends NbkAbstractWeapon {
     ENbkWeaponType weaponType;
     ENbkQuality quality;
 
-    RGWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
-      setWeaponType(ENbkWeaponType.getPredicate(globalConstraints));
-      setQuality(ENbkQuality.getPredicate(globalConstraints));
+    RGWeaponBuilder(PredicateConstraints predicateConstraints) throws NoAvailableEntityTypeException {
+      setWeaponType(ENbkWeaponType.getPredicate(predicateConstraints));
+      setQuality(ENbkQuality.getPredicate(predicateConstraints));
       rarity = quality.getRarity();
     }
 

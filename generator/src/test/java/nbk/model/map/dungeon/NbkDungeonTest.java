@@ -1,9 +1,9 @@
 package nbk.model.map.dungeon;
 
+import commons.model.commons.constraints.GenerationConstraints;
+import commons.model.commons.constraints.MapConstraint;
 import commons.model.map.Room;
-import commons.model.map.constraints.MapConstraint;
 import nbk.model.map.dungeon.NbkDungeon.DungeonBuilder;
-import nbk.model.map.dungeon.constraints.EDungeonDraw;
 import nbk.model.map.dungeon.constraints.EDungeonRadius;
 import org.assertj.core.api.Condition;
 import org.assertj.core.api.JUnitSoftAssertions;
@@ -30,11 +30,11 @@ public class NbkDungeonTest {
   public JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
   private NbkDungeon dungeon;
-  private MapConstraint<EDungeonDraw> mapConstraint;
+  private MapConstraint mapConstraint;
 
   @Before
   public void setUp() throws Exception {
-    mapConstraint = new MapConstraint<>();
+    mapConstraint = new GenerationConstraints().getMapConstraint();
   }
 
   @Test

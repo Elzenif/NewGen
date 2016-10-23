@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Contract;
 /**
  * Created by Germain on 28/08/2016.
  */
-public abstract class Living<T extends Game> extends Entity<T> {
+public abstract class Living<T extends Game> extends Entity {
 
   protected Living(EntityBuilder builder) {
     super(builder);

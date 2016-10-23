@@ -1,5 +1,6 @@
-package commons.model.map.constraints;
+package commons.model.commons.constraints;
 
+import commons.model.commons.IDrawKey;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class MapConstraintTest {
 
-  private MapConstraint<EKeyTest> mapConstraint;
+  private MapConstraint mapConstraint;
 
   @Before
   public void setUp() throws Exception {
-    mapConstraint = new MapConstraint<>();
+    mapConstraint = new MapConstraint();
   }
 
   @Test
@@ -26,7 +27,7 @@ public class MapConstraintTest {
     assertThat(mapConstraint.get(EKeyTest.A)).isEqualTo(10);
   }
 
-  private enum EKeyTest implements IMapDrawKey {
+  private enum EKeyTest implements IDrawKey {
     A
   }
 }

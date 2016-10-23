@@ -1,5 +1,6 @@
 package nbk.view.map.options;
 
+import commons.model.commons.IDrawKey;
 import commons.model.map.EMapType;
 import commons.model.map.IAvailableMap;
 import commons.utils.MathUtils;
@@ -18,7 +19,8 @@ import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.text.MessageFormat;
 import java.util.Arrays;
-import java.util.EnumMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static commons.view.utils.Constants.resourceBundle;
 
@@ -26,11 +28,11 @@ import static commons.view.utils.Constants.resourceBundle;
  * Created by Germain on 24/09/2016.
  */
 public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
-    implements HasDrawKeysOptionRow<EDungeonDraw> {
+    implements HasDrawKeysOptionRow {
 
   private final ConstraintPanel basicOptionsPanel;
 
-  private final EnumMap<EDungeonDraw, JComboBox<Object>> dungeonDrawMap;
+  private final Map<IDrawKey, JComboBox<Object>> dungeonDrawMap = new LinkedHashMap<>(EDungeonDraw.values().length);
 
   public NbkDungeonOptionRow(IAvailableMap availableDungeon) {
     super(MathUtils.maxLength(Arrays.asList(EMapType.values())), availableDungeon.getName());
@@ -43,7 +45,6 @@ public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
     basicOptionsPanel = new ConstraintPanel();
     basicOptionsPanel.setLayout(new BoxLayout(basicOptionsPanel, BoxLayout.Y_AXIS));
 
-    dungeonDrawMap = new EnumMap<>(EDungeonDraw.class);
     for (EDungeonDraw dungeonDraw : EDungeonDraw.values()) {
       JPanel jPanel = new ConstraintPanel();
       jPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP / 2, Constants.JPANEL_VGAP / 2));
@@ -72,7 +73,7 @@ public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
   }
 
   @Override
-  public Object getDrawValue(EDungeonDraw drawKey) {
+  public Object getDrawValue(IDrawKey drawKey) {
     return dungeonDrawMap.get(drawKey).getSelectedItem();
   }
 }

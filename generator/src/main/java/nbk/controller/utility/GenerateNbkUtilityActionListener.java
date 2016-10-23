@@ -2,19 +2,17 @@ package nbk.controller.utility;
 
 import commons.controller.utility.GenerateUtilityActionListener;
 import commons.controller.utility.UtilityController;
-import commons.model.utility.constraints.IUtilityDrawKey;
 import commons.view.utility.UtilityOptionRow;
 import commons.view.utility.UtilityResultRow;
 
 /**
  * Created by Germain on 01/10/2016.
  */
-public abstract class GenerateNbkUtilityActionListener<K extends IUtilityDrawKey>
-    extends GenerateUtilityActionListener<K> {
+public abstract class GenerateNbkUtilityActionListener extends GenerateUtilityActionListener {
 
-  protected GenerateNbkUtilityActionListener(UtilityOptionRow<K> utilityOptionRow,
+  protected GenerateNbkUtilityActionListener(UtilityOptionRow utilityOptionRow,
                                              UtilityResultRow utilityResultRow,
-                                             UtilityController<K> utilityController) {
+                                             UtilityController utilityController) {
     super(utilityOptionRow, utilityResultRow, utilityController);
   }
 }

@@ -1,5 +1,7 @@
 package nbk.model.entity.items.characteristics.secondary.enums;
 
+import commons.model.commons.constraints.PredicateConstraints;
+import commons.model.commons.constraints.PrimarySecondaryConstraints;
 import commons.model.entity.characteristics.primary.builders.ItemTypeBuilder;
 import commons.model.entity.characteristics.primary.builders.MagicBuilder;
 import commons.model.entity.characteristics.primary.enums.EItemRarity;
@@ -7,8 +9,6 @@ import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.characteristics.primary.fields.EntityType;
 import commons.model.entity.characteristics.primary.fields.HasMagic;
 import commons.model.entity.characteristics.secondary.Secondary;
-import commons.model.entity.constraints.Constraints;
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import nbk.model.commons.characteristics.primary.enums.ESize;
 import nbk.model.commons.characteristics.primary.fields.HasSize;
@@ -437,7 +437,7 @@ public enum ENbkPredefinedWeapon implements Secondary, EntityType<String>, HasMa
           .setWeaponType(ENbkWeaponType.LAME_2MAINS)
           .isRelic());
 
-  private static final Constraints<ENbkPredefinedWeapon> CONSTRAINTS = Constraints.ConstraintsBuilder
+  private static final PrimarySecondaryConstraints<ENbkPredefinedWeapon> CONSTRAINTS = PrimarySecondaryConstraints.ConstraintsBuilder
       .<ENbkPredefinedWeapon>start()
       .setSecondaryClass(ENbkPredefinedWeapon.class)
       .setPrimaryClasses(EItemRarity.class)
@@ -454,14 +454,14 @@ public enum ENbkPredefinedWeapon implements Secondary, EntityType<String>, HasMa
     magic = builder.getMagic();
   }
 
-  public static Constraints<ENbkPredefinedWeapon> getConstraints() {
+  public static PrimarySecondaryConstraints<ENbkPredefinedWeapon> getConstraints() {
     return CONSTRAINTS;
   }
 
   @NotNull
-  public static Predicate<ENbkPredefinedWeapon> getPredicate(GlobalConstraints globalConstraints) {
-    Predicate<EItemRarity> rarityPredicate = globalConstraints.getPredicate(CONSTRAINTS, EItemRarity.class);
-    Predicate<ENbkWeaponType> weaponTypePredicate = ENbkWeaponType.getPredicate(globalConstraints);
+  public static Predicate<ENbkPredefinedWeapon> getPredicate(PredicateConstraints predicateConstraints) {
+    Predicate<EItemRarity> rarityPredicate = predicateConstraints.getPredicate(CONSTRAINTS, EItemRarity.class);
+    Predicate<ENbkWeaponType> weaponTypePredicate = ENbkWeaponType.getPredicate(predicateConstraints);
     return weapon -> rarityPredicate.test(weapon.getRarity())
         && weaponTypePredicate.test(weapon.getWeaponType());
   }

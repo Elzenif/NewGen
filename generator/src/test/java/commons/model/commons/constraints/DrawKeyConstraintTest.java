@@ -1,7 +1,6 @@
-package commons.model.utility;
+package commons.model.commons.constraints;
 
-import commons.model.utility.constraints.DrawKeyConstraint;
-import commons.model.utility.constraints.IUtilityDrawKey;
+import commons.model.commons.IDrawKey;
 import commons.utils.exception.ForbiddenValueException;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +42,7 @@ public class DrawKeyConstraintTest {
     assertThat(drawKeyConstraint.get(EKeyTest.A)).isNotNull().isBetween(1, 20);
   }
 
-  private enum EKeyTest implements IUtilityDrawKey {
+  private enum EKeyTest implements IDrawKey {
     A
   }
 }

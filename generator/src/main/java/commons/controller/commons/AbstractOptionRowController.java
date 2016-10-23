@@ -2,22 +2,21 @@ package commons.controller.commons;
 
 import commons.controller.entity.items.ConstraintsItemListener;
 import commons.controller.intf.ConstraintOptionRowController;
-import commons.model.commons.GenerationConstraint;
+import commons.model.commons.constraints.GenerationConstraints;
 
 /**
  * Created by Germain on 02/10/2016.
  */
-public abstract class AbstractOptionRowController<GC extends GenerationConstraint>
-    implements ConstraintOptionRowController<GC> {
+public abstract class AbstractOptionRowController
+    implements ConstraintOptionRowController {
 
-  protected final GC generationConstraint;
+  protected final GenerationConstraints generationConstraints;
   private final ConstraintsItemListener constraintsItemListener;
   protected GenerateActionListener generateActionListener;
 
-  protected AbstractOptionRowController(ConstraintsItemListener constraintsItemListener,
-                                        GC generationConstraint) {
+  protected AbstractOptionRowController(ConstraintsItemListener constraintsItemListener) {
     this.constraintsItemListener = constraintsItemListener;
-    this.generationConstraint = generationConstraint;
+    this.generationConstraints = new GenerationConstraints();
   }
 
   @Override
@@ -30,8 +29,7 @@ public abstract class AbstractOptionRowController<GC extends GenerationConstrain
     return generateActionListener;
   }
 
-  @Override
-  public GC getGenerationConstraint() {
-    return generationConstraint;
+  public GenerationConstraints getGenerationConstraints() {
+    return generationConstraints;
   }
 }

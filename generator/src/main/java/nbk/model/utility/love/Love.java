@@ -1,6 +1,6 @@
 package nbk.model.utility.love;
 
-import commons.model.utility.constraints.DrawKeyConstraint;
+import commons.model.commons.constraints.DrawKeyConstraint;
 import nbk.model.utility.love.constraints.ELoveAction;
 import nbk.model.utility.love.constraints.ELoveDraw;
 import nbk.model.utility.love.constraints.ELovePosition;

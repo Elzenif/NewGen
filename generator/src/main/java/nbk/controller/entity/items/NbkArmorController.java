@@ -1,8 +1,8 @@
 package nbk.controller.entity.items;
 
 import commons.controller.entity.items.ItemController;
+import commons.model.commons.constraints.intf.GenericPredicateConstraint;
 import commons.model.entity.characteristics.primary.enums.EItemRarity;
-import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
@@ -31,13 +31,13 @@ public class NbkArmorController extends ItemController<NbkGame> {
   }
 
   @Override
-  public void updateRarityConstraint(GenericConstraint<EItemRarity> constraint) {
-    generationConstraint.clear(ENbkPredefinedArmor.getConstraints(), EItemRarity.class);
-    generationConstraint.update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class, constraint);
+  public void updateRarityConstraint(GenericPredicateConstraint<EItemRarity> constraint) {
+    generationConstraints.getPredicateConstraints().clear(ENbkPredefinedArmor.getConstraints(), EItemRarity.class);
+    generationConstraints.getPredicateConstraints().update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class, constraint);
   }
 
-  public void updateBodyPartConstraint(GenericConstraint<EBodyPart> constraint) {
-    generationConstraint.update(ENbkPredefinedArmor.getConstraints(), EBodyPart.class, constraint);
+  public void updateBodyPartConstraint(GenericPredicateConstraint<EBodyPart> constraint) {
+    generationConstraints.getPredicateConstraints().update(ENbkPredefinedArmor.getConstraints(), EBodyPart.class, constraint);
   }
 
 }

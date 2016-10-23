@@ -1,7 +1,7 @@
 package nbk.model.entity.items.characteristics.primary.enums;
 
+import commons.model.commons.constraints.intf.GenericPredicateConstraint;
 import commons.model.entity.characteristics.primary.Primary;
-import commons.model.entity.constraints.GenericConstraint;
 import nbk.model.entity.items.characteristics.primary.fields.HasRange;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 14/07/2016.
  */
-public enum ERange implements Primary, HasRange, GenericConstraint<ERange> {
+public enum ERange implements Primary, HasRange, GenericPredicateConstraint<ERange> {
 
   CLOSE,
   LONG;

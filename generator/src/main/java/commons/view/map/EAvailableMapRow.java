@@ -11,7 +11,7 @@ public enum EAvailableMapRow implements IAvailableRow<NbkDungeonOptionRow, MapRe
 
   SIMPLE_DUNGEON(EMapType.SIMPLE_DUNGEON, new NbkDungeonOptionRow(EMapType.SIMPLE_DUNGEON));
 
-  private static MapResultRow dungeonResultRow = new MapResultRow();
+  private static final MapResultRow DUNGEON_RESULT_ROW = new MapResultRow();
   private final EMapType dungeonType;
   private final NbkDungeonOptionRow dungeonOptionRow;
 
@@ -32,6 +32,6 @@ public enum EAvailableMapRow implements IAvailableRow<NbkDungeonOptionRow, MapRe
 
   @Override
   public MapResultRow getResultRow() {
-    return dungeonResultRow;
+    return DUNGEON_RESULT_ROW;
   }
 }

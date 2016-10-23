@@ -1,4 +1,4 @@
-package commons.model.utility.constraints;
+package commons.model.commons.constraints.intf;
 
 /**
  * Created by Germain on 01/10/2016.

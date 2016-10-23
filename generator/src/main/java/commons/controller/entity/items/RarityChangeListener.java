@@ -1,8 +1,8 @@
 package commons.controller.entity.items;
 
 import commons.model.commons.Game;
+import commons.model.commons.constraints.intf.GenericPredicateConstraint;
 import commons.model.entity.characteristics.primary.enums.EItemRarity;
-import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.items.ItemOptionRow;
 
 import java.beans.PropertyChangeEvent;
@@ -25,7 +25,7 @@ public class RarityChangeListener<G extends Game> implements PropertyChangeListe
 
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    GenericConstraint<EItemRarity> constraint;
+    GenericPredicateConstraint<EItemRarity> constraint;
     try {
       int rarityLevel = Integer.parseInt(itemOptionRow.getQualityTextField().getText()) + 1; // so that the result belongs to [1;100]
       constraint = findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(rarityLevel, EItemRarity.getConstraintMapView());

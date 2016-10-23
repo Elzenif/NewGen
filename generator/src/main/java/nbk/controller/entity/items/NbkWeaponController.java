@@ -1,8 +1,9 @@
 package nbk.controller.entity.items;
 
 import commons.controller.entity.items.ItemController;
+import commons.model.commons.constraints.PredicateConstraints;
+import commons.model.commons.constraints.intf.GenericPredicateConstraint;
 import commons.model.entity.characteristics.primary.enums.EItemRarity;
-import commons.model.entity.constraints.GenericConstraint;
 import commons.view.entity.EntityResultRow;
 import nbk.model.commons.NbkGame;
 import nbk.model.entity.items.characteristics.primary.enums.ENbHands;
@@ -33,17 +34,18 @@ public class NbkWeaponController extends ItemController<NbkGame> {
   }
 
   @Override
-  public void updateRarityConstraint(GenericConstraint<EItemRarity> constraint) {
+  public void updateRarityConstraint(GenericPredicateConstraint<EItemRarity> constraint) {
     // different for randomly generated and predefined weapons
-    generationConstraint.clear(ENbkQuality.getConstraints(), EItemRarity.class);
-    generationConstraint.update(ENbkQuality.getConstraints(), EItemRarity.class, constraint);
-    generationConstraint.clear(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class);
-    generationConstraint.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, constraint);
+    PredicateConstraints predicateConstraints = generationConstraints.getPredicateConstraints();
+    predicateConstraints.clear(ENbkQuality.getConstraints(), EItemRarity.class);
+    predicateConstraints.update(ENbkQuality.getConstraints(), EItemRarity.class, constraint);
+    predicateConstraints.clear(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class);
+    predicateConstraints.update(ENbkPredefinedWeapon.getConstraints(), EItemRarity.class, constraint);
 
   }
 
-  public void updateNbHandsConstraint(GenericConstraint<ENbHands> constraint) {
-    generationConstraint.update(ENbkWeaponType.getConstraints(), ENbHands.class, constraint);
+  public void updateNbHandsConstraint(GenericPredicateConstraint<ENbHands> constraint) {
+    generationConstraints.getPredicateConstraints().update(ENbkWeaponType.getConstraints(), ENbHands.class, constraint);
   }
 
 }

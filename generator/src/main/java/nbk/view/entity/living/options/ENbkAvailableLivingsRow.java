@@ -1,7 +1,7 @@
 package nbk.view.entity.living.options;
 
+import commons.model.commons.constraints.DrawKeyConstraint;
 import commons.model.entity.living.IAvailableLiving;
-import commons.model.utility.constraints.DrawKeyConstraint;
 import commons.view.entity.EntityResultRow;
 import commons.view.entity.IAvailableEntityRow;
 import nbk.model.commons.NbkGame;

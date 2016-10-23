@@ -1,5 +1,6 @@
 package nbk.view.entity.living.options;
 
+import commons.model.commons.IDrawKey;
 import commons.utils.Pair;
 import commons.view.entity.EntityResultRow;
 import nbk.controller.entity.living.NbkHumanoidController;
@@ -17,9 +18,9 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 28/08/2016.
  */
-public class NbkHumanoidOptionRow extends NbkLivingOptionRow<EStat> {
+public class NbkHumanoidOptionRow extends NbkLivingOptionRow {
 
-  private final Map<EStat, Pair<JSpinner, SpinnerNumberModel>> statMap = new LinkedHashMap<>(EStat.values().length);
+  private final Map<IDrawKey, Pair<JSpinner, SpinnerNumberModel>> statMap = new LinkedHashMap<>(EStat.values().length);
   private final int defaultValue = 10;
 
   NbkHumanoidOptionRow() {
@@ -38,7 +39,7 @@ public class NbkHumanoidOptionRow extends NbkLivingOptionRow<EStat> {
   }
 
   @Override
-  public Integer getDrawValue(EStat stat) {
+  public Integer getDrawValue(IDrawKey stat) {
     return statMap.get(stat).getRight().getNumber().intValue();
   }
 }

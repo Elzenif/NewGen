@@ -1,5 +1,7 @@
 package nbk.model.entity.items.characteristics.secondary.enums;
 
+import commons.model.commons.constraints.PredicateConstraints;
+import commons.model.commons.constraints.PrimarySecondaryConstraints;
 import commons.model.entity.characteristics.primary.builders.FrenchNounBuilder;
 import commons.model.entity.characteristics.primary.builders.ItemTypeBuilder;
 import commons.model.entity.characteristics.primary.builders.QuantityBuilder;
@@ -7,8 +9,6 @@ import commons.model.entity.characteristics.primary.enums.EItemRarity;
 import commons.model.entity.characteristics.primary.fields.EntityType;
 import commons.model.entity.characteristics.primary.fields.HasQuantity;
 import commons.model.entity.characteristics.secondary.Secondary;
-import commons.model.entity.constraints.Constraints;
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import commons.utils.SPositive;
 import commons.utils.french.FrenchNoun;
@@ -123,7 +123,7 @@ public enum ENbkWeaponType implements Secondary, EntityType<FrenchNoun>, HasQuan
           .longRange()
           .smallSize());
 
-  private static final Constraints<ENbkWeaponType> CONSTRAINTS = Constraints.ConstraintsBuilder
+  private static final PrimarySecondaryConstraints<ENbkWeaponType> CONSTRAINTS = PrimarySecondaryConstraints.ConstraintsBuilder
       .<ENbkWeaponType>start()
       .setSecondaryClass(ENbkWeaponType.class)
       .setPrimaryClasses(ENbHands.class, ERange.class, ESize.class)
@@ -146,15 +146,15 @@ public enum ENbkWeaponType implements Secondary, EntityType<FrenchNoun>, HasQuan
     range = builder.getRange();
   }
 
-  public static Constraints<ENbkWeaponType> getConstraints() {
+  public static PrimarySecondaryConstraints<ENbkWeaponType> getConstraints() {
     return CONSTRAINTS;
   }
 
   @NotNull
-  public static Predicate<ENbkWeaponType> getPredicate(GlobalConstraints globalConstraints) {
-    Predicate<ENbHands> nbHandsPredicate = globalConstraints.getPredicate(CONSTRAINTS, ENbHands.class);
-    Predicate<ERange> rangePredicate = globalConstraints.getPredicate(CONSTRAINTS, ERange.class);
-    Predicate<ESize> sizePredicate = globalConstraints.getPredicate(CONSTRAINTS, ESize.class);
+  public static Predicate<ENbkWeaponType> getPredicate(PredicateConstraints predicateConstraints) {
+    Predicate<ENbHands> nbHandsPredicate = predicateConstraints.getPredicate(CONSTRAINTS, ENbHands.class);
+    Predicate<ERange> rangePredicate = predicateConstraints.getPredicate(CONSTRAINTS, ERange.class);
+    Predicate<ESize> sizePredicate = predicateConstraints.getPredicate(CONSTRAINTS, ESize.class);
     return weaponType -> nbHandsPredicate.test(weaponType.getNbHands())
         && rangePredicate.test(weaponType.getRange())
         && sizePredicate.test(weaponType.getSize());

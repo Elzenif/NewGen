@@ -1,5 +1,6 @@
 package nbk.view.utility.love.options;
 
+import commons.model.commons.IDrawKey;
 import commons.utils.Pair;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.love.LoveController;
@@ -17,9 +18,9 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 24/07/2016.
  */
-public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
+public class LoveOptionRow extends NbkUtilityOptionRow {
 
-  private final Map<ELoveDraw, Pair<JSpinner, SpinnerNumberModel>> loveDrawMap
+  private final Map<IDrawKey, Pair<JSpinner, SpinnerNumberModel>> loveDrawMap
       = new LinkedHashMap<>(ELoveDraw.values().length);
   private final int defaultValue = 10;
 
@@ -39,7 +40,7 @@ public class LoveOptionRow extends NbkUtilityOptionRow<ELoveDraw> {
   }
 
   @Override
-  public Integer getDrawValue(ELoveDraw drawKey) {
+  public Integer getDrawValue(IDrawKey drawKey) {
     return loveDrawMap.get(drawKey).getRight().getNumber().intValue();
   }
 }

@@ -19,10 +19,10 @@ public class DungeonResult implements MapResult {
   private boolean showGrid;
   private double scale;
 
-  public DungeonResult(NbkDungeon dungeon, boolean showGrid, double scale) {
+  public DungeonResult(NbkDungeon dungeon, boolean showGrid) {
     this.dungeon = dungeon;
     this.showGrid = showGrid;
-    this.scale = scale;
+    this.scale = (double) 1;
   }
 
   @Override

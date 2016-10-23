@@ -1,5 +1,7 @@
 package nbk.model.entity.items.characteristics.secondary.enums;
 
+import commons.model.commons.constraints.PredicateConstraints;
+import commons.model.commons.constraints.PrimarySecondaryConstraints;
 import commons.model.entity.characteristics.primary.builders.ItemTypeBuilder;
 import commons.model.entity.characteristics.primary.builders.MagicBuilder;
 import commons.model.entity.characteristics.primary.enums.EItemRarity;
@@ -7,8 +9,6 @@ import commons.model.entity.characteristics.primary.enums.EMagic;
 import commons.model.entity.characteristics.primary.fields.EntityType;
 import commons.model.entity.characteristics.primary.fields.HasMagic;
 import commons.model.entity.characteristics.secondary.Secondary;
-import commons.model.entity.constraints.Constraints;
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.utils.MathUtils;
 import nbk.model.commons.characteristics.primary.builders.SizeBuilder;
 import nbk.model.commons.characteristics.primary.enums.ESize;
@@ -591,7 +591,7 @@ public enum ENbkPredefinedArmor implements Secondary, EntityType<String>, HasMag
       .largeSize());
 
 
-  private static final Constraints<ENbkPredefinedArmor> CONSTRAINTS = Constraints.ConstraintsBuilder
+  private static final PrimarySecondaryConstraints<ENbkPredefinedArmor> CONSTRAINTS = PrimarySecondaryConstraints.ConstraintsBuilder
       .<ENbkPredefinedArmor>start()
       .setSecondaryClass(ENbkPredefinedArmor.class)
       .setPrimaryClasses(EItemRarity.class, EBodyPart.class, EWeight.class, ESize.class)
@@ -612,16 +612,16 @@ public enum ENbkPredefinedArmor implements Secondary, EntityType<String>, HasMag
     size = builder.getSize();
   }
 
-  public static Constraints<ENbkPredefinedArmor> getConstraints() {
+  public static PrimarySecondaryConstraints<ENbkPredefinedArmor> getConstraints() {
     return CONSTRAINTS;
   }
 
   @NotNull
-  public static Predicate<ENbkPredefinedArmor> getPredicate(GlobalConstraints globalConstraints) {
-    Predicate<EItemRarity> rarityPredicate = globalConstraints.getPredicate(CONSTRAINTS, EItemRarity.class);
-    Predicate<EBodyPart> bodyPartPredicate = globalConstraints.getPredicate(CONSTRAINTS, EBodyPart.class);
-    Predicate<EWeight> weightPredicate = globalConstraints.getPredicate(CONSTRAINTS, EWeight.class);
-    Predicate<ESize> sizePredicate = globalConstraints.getPredicate(CONSTRAINTS, ESize.class);
+  public static Predicate<ENbkPredefinedArmor> getPredicate(PredicateConstraints predicateConstraints) {
+    Predicate<EItemRarity> rarityPredicate = predicateConstraints.getPredicate(CONSTRAINTS, EItemRarity.class);
+    Predicate<EBodyPart> bodyPartPredicate = predicateConstraints.getPredicate(CONSTRAINTS, EBodyPart.class);
+    Predicate<EWeight> weightPredicate = predicateConstraints.getPredicate(CONSTRAINTS, EWeight.class);
+    Predicate<ESize> sizePredicate = predicateConstraints.getPredicate(CONSTRAINTS, ESize.class);
     return armor -> rarityPredicate.test(armor.getRarity())
         && armor.getBodyParts().stream().filter(bodyPartPredicate).findAny().isPresent()
         && weightPredicate.test(armor.getWeight())

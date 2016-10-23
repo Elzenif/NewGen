@@ -1,7 +1,7 @@
 package nbk.model.entity.items.characteristics.primary.enums;
 
+import commons.model.commons.constraints.intf.GenericPredicateConstraint;
 import commons.model.entity.characteristics.primary.Primary;
-import commons.model.entity.constraints.GenericConstraint;
 import nbk.model.entity.items.characteristics.primary.fields.IsBodyPart;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +14,7 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 26/06/2016.
  */
-public enum EBodyPart implements Primary, IsBodyPart, GenericConstraint<EBodyPart> {
+public enum EBodyPart implements Primary, IsBodyPart, GenericPredicateConstraint<EBodyPart> {
 
   HEAD(resourceBundle.getString("armor.bodyPart.head")),
   TORSO(resourceBundle.getString("armor.bodyPart.torso")),

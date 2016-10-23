@@ -1,6 +1,6 @@
 package nbk.model.utility.scenario;
 
-import commons.model.utility.constraints.DrawKeyConstraint;
+import commons.model.commons.constraints.DrawKeyConstraint;
 import commons.utils.MathUtils;
 import nbk.model.utility.scenario.constraints.EScenarioBeginning;
 import nbk.model.utility.scenario.constraints.EScenarioDraw;

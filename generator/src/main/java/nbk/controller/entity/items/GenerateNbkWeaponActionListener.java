@@ -1,7 +1,8 @@
 package nbk.controller.entity.items;
 
 import commons.controller.entity.items.ItemController;
-import commons.model.entity.constraints.GlobalConstraints;
+import commons.model.commons.constraints.GenerationConstraints;
+import commons.model.commons.constraints.PredicateConstraints;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.view.entity.EntityResultRow;
@@ -24,26 +25,26 @@ public class GenerateNbkWeaponActionListener extends GenerateNbkItemActionListen
 
   @Contract("_ -> !null")
   @Override
-  protected NbkAbstractWeapon generate(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
+  protected NbkAbstractWeapon generate(GenerationConstraints generationConstraints) throws NoAvailableEntityTypeException {
     if (MathUtils.random(1, 10) == 1) {
-      return generatePW(globalConstraints);
+      return generatePW(generationConstraints.getPredicateConstraints());
     } else {
-      return generateRGW(globalConstraints);
+      return generateRGW(generationConstraints.getPredicateConstraints());
     }
   }
 
   @Contract("_ -> !null")
-  private NbkAbstractWeapon generatePW(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
+  private NbkAbstractWeapon generatePW(PredicateConstraints predicateConstraints) throws NoAvailableEntityTypeException {
     try {
-      return NbkPredefinedWeapon.create(globalConstraints);
+      return NbkPredefinedWeapon.create(predicateConstraints);
     } catch (NoAvailableEntityTypeException e) {
       // if no one fits the constraints, generate a random weapon anyway
-      return generateRGW(globalConstraints);
+      return generateRGW(predicateConstraints);
     }
   }
 
   @Contract("_ -> !null")
-  private NbkRGWeapon generateRGW(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
-    return NbkRGWeapon.create(globalConstraints);
+  private NbkRGWeapon generateRGW(PredicateConstraints predicateConstraints) throws NoAvailableEntityTypeException {
+    return NbkRGWeapon.create(predicateConstraints);
   }
 }

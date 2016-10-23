@@ -1,6 +1,6 @@
 package nbk.model.map.dungeon.constraints;
 
-import commons.model.map.constraints.IMapDrawKey;
+import commons.model.commons.IDrawKey;
 import org.jetbrains.annotations.Contract;
 
 import static commons.view.utils.Constants.resourceBundle;
@@ -8,7 +8,7 @@ import static commons.view.utils.Constants.resourceBundle;
 /**
  * Created by Germain on 02/10/2016.
  */
-public enum EDungeonDraw implements IMapDrawKey {
+public enum EDungeonDraw implements IDrawKey {
   NB_ROOMS(EDungeonNbRooms.values(), 5, resourceBundle.getString("row.dungeon.nbRooms"),
       resourceBundle.getString("tooltip.dungeon.nbRooms")),
   TILE_SIZE(EDungeonTileSizes.values(), 5, resourceBundle.getString("row.dungeon.tileSize"),

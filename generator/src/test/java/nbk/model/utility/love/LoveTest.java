@@ -1,6 +1,7 @@
 package nbk.model.utility.love;
 
-import commons.model.utility.constraints.DrawKeyConstraint;
+import commons.model.commons.constraints.DrawKeyConstraint;
+import commons.model.commons.constraints.GenerationConstraints;
 import org.assertj.core.api.JUnitSoftAssertions;
 import org.junit.Before;
 import org.junit.Rule;
@@ -21,7 +22,7 @@ public class LoveTest {
 
   @Before
   public void setUp() throws Exception {
-    drawKeyConstraint = new DrawKeyConstraint();
+    drawKeyConstraint = new GenerationConstraints().getDrawKeyConstraint();
   }
 
   @Test

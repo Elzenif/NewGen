@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Contract;
 /**
  * Created by Germain on 04/06/2016.
  */
-public abstract class Item<T extends Game> extends Entity<T> implements HasMagic {
+public abstract class Item<T extends Game> extends Entity implements HasMagic {
 
   private final SPositive quantity;
   private final EMagic magic;
@@ -28,6 +28,11 @@ public abstract class Item<T extends Game> extends Entity<T> implements HasMagic
     super();
     quantity = SPositive.ONE;
     magic = EMagic.NOPE;
+  }
+
+  @Contract(" -> !null")
+  public static StubbedItem stubbedItem() {
+    return new StubbedItem();
   }
 
   @Override
@@ -46,12 +51,6 @@ public abstract class Item<T extends Game> extends Entity<T> implements HasMagic
   public EMagic getMagic() {
     return magic;
   }
-
-  @Contract(" -> !null")
-  public static StubbedItem stubbedItem() {
-    return new StubbedItem();
-  }
-
 
   protected abstract static class ItemBuilder extends EntityBuilder implements HasMagic, HasQuantity {
   }

@@ -1,7 +1,7 @@
 package nbk.view.commons;
 
-import commons.model.entity.constraints.GlobalConstraints;
-import commons.model.utility.constraints.DrawKeyConstraint;
+import commons.model.commons.constraints.DrawKeyConstraint;
+import commons.model.commons.constraints.PredicateConstraints;
 import commons.view.commons.game.GameTabbedPanelEmbedded;
 import commons.view.dice.DicePanel;
 import commons.view.entity.EntityPanel;
@@ -22,7 +22,7 @@ public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
 
   private final HiddenPanel<NbkGame> hiddenPanel;
   private final DicePanel dicePanel;
-  private final EntityPanel<NbkGame, ENbkAvailableItemsRow, GlobalConstraints> itemsPanel;
+  private final EntityPanel<NbkGame, ENbkAvailableItemsRow, PredicateConstraints> itemsPanel;
   private final UtilityPanel<ENbkAvailableUtilityRow> utilityPanel;
   private final EntityPanel<NbkGame, ENbkAvailableLivingsRow, DrawKeyConstraint> livingsPanel;
   private final MapPanel mapPanel;

@@ -1,7 +1,7 @@
 package nbk.model.entity.items;
 
+import commons.model.commons.constraints.PredicateConstraints;
 import commons.model.entity.characteristics.primary.enums.EMagic;
-import commons.model.entity.constraints.GlobalConstraints;
 import commons.model.entity.utils.EntityUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableEntityTypeException;
@@ -24,9 +24,9 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
     predefinedWeapon = builder.predefinedWeapon;
   }
 
-  public static NbkPredefinedWeapon create(GlobalConstraints globalConstraints)
+  public static NbkPredefinedWeapon create(PredicateConstraints predicateConstraints)
       throws NoAvailableEntityTypeException {
-    return new PredefinedWeaponBuilder(globalConstraints).build();
+    return new PredefinedWeaponBuilder(predicateConstraints).build();
   }
 
   ENbkPredefinedWeapon getPredefinedWeapon() {
@@ -58,13 +58,13 @@ public class NbkPredefinedWeapon extends NbkAbstractWeapon {
 
     ENbkPredefinedWeapon predefinedWeapon;
 
-    PredefinedWeaponBuilder(GlobalConstraints globalConstraints) throws NoAvailableEntityTypeException {
-      setPredefinedWeapon(getPredicate(globalConstraints));
+    PredefinedWeaponBuilder(PredicateConstraints predicateConstraints) throws NoAvailableEntityTypeException {
+      setPredefinedWeapon(getPredicate(predicateConstraints));
       rarity = predefinedWeapon.getRarity();
     }
 
-    Predicate<ENbkPredefinedWeapon> getPredicate(GlobalConstraints globalConstraints) {
-      return ENbkPredefinedWeapon.getPredicate(globalConstraints);
+    Predicate<ENbkPredefinedWeapon> getPredicate(PredicateConstraints predicateConstraints) {
+      return ENbkPredefinedWeapon.getPredicate(predicateConstraints);
     }
 
     void setPredefinedWeapon(Predicate<ENbkPredefinedWeapon> weaponPredicate) throws NoAvailableEntityTypeException {

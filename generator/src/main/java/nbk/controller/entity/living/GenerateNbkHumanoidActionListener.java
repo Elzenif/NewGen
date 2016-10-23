@@ -1,11 +1,10 @@
 package nbk.controller.entity.living;
 
-import commons.model.utility.constraints.DrawKeyConstraint;
+import commons.model.commons.constraints.GenerationConstraints;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.utils.exception.StatNotInRangeException;
 import commons.view.entity.EntityResultRow;
 import nbk.model.entity.living.NbkHumanoid;
-import nbk.model.entity.living.characteristics.primary.EStat;
 import nbk.model.entity.living.characteristics.primary.Stats;
 import nbk.view.entity.living.options.NbkHumanoidOptionRow;
 import org.slf4j.Logger;
@@ -14,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Germain on 28/08/2016.
  */
-public class GenerateNbkHumanoidActionListener extends GenerateNbkLivingActionListener<EStat> {
+public class GenerateNbkHumanoidActionListener extends GenerateNbkLivingActionListener {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GenerateNbkHumanoidActionListener.class);
 
@@ -25,11 +24,12 @@ public class GenerateNbkHumanoidActionListener extends GenerateNbkLivingActionLi
 
   @SuppressWarnings("HardCodedStringLiteral")
   @Override
-  protected NbkHumanoid generate(DrawKeyConstraint drawKeyConstraint) throws NoAvailableEntityTypeException {
+  protected NbkHumanoid generate(GenerationConstraints generationConstraints) throws NoAvailableEntityTypeException {
     if (optionRow.isConstraintsCheckBoxSelected()) {
       Stats stats;
       try {
-        stats = new Stats(drawKeyConstraint);
+        // TODO see for making stats a drawKeyConstraint ?
+        stats = new Stats(generationConstraints.getDrawKeyConstraint());
       } catch (StatNotInRangeException e) {
         LOGGER.error("Constraints are not suitable for stats construction");
         e.printStackTrace();

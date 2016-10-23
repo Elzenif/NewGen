@@ -9,7 +9,7 @@ import javax.swing.JMenu;
  */
 public abstract class Menu extends JMenu implements Controller {
 
-  public Menu(String name) {
+  protected Menu(String name) {
     super(name);
   }
 }

@@ -1,7 +1,6 @@
-package commons.model.utility.constraints;
+package commons.model.commons.constraints;
 
 import com.google.common.collect.ForwardingMap;
-import commons.model.commons.GenerationConstraint;
 import commons.model.commons.IDrawKey;
 import commons.utils.MathUtils;
 import commons.utils.exception.ForbiddenValueException;
@@ -12,9 +11,12 @@ import java.util.Map;
 /**
  * Created by Germain on 01/10/2016.
  */
-public class DrawKeyConstraint extends ForwardingMap<IDrawKey, Integer> implements GenerationConstraint {
+public class DrawKeyConstraint extends ForwardingMap<IDrawKey, Integer> {
 
   private final Map<IDrawKey, Integer> map = new HashMap<>();
+
+  DrawKeyConstraint() {
+  }
 
   @Override
   protected Map<IDrawKey, Integer> delegate() {

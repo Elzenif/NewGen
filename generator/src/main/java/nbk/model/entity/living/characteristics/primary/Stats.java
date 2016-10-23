@@ -2,7 +2,7 @@ package nbk.model.entity.living.characteristics.primary;
 
 import com.google.common.collect.ForwardingMap;
 import commons.model.commons.IDrawKey;
-import commons.model.utility.constraints.DrawKeyConstraint;
+import commons.model.commons.constraints.DrawKeyConstraint;
 import commons.utils.exception.StatNotInRangeException;
 import nbk.model.entity.living.characteristics.primary.builders.StatsBuilder;
 

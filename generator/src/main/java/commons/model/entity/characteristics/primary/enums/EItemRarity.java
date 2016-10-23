@@ -1,7 +1,7 @@
 package commons.model.entity.characteristics.primary.enums;
 
 import com.google.common.collect.Lists;
-import commons.model.entity.constraints.GenericConstraint;
+import commons.model.commons.constraints.intf.GenericPredicateConstraint;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,10 +22,21 @@ public enum EItemRarity implements IRarity<EItemRarity> {
   EPIC(5),
   LEGENDARY(1);
 
+  private static final Map<GenericPredicateConstraint<EItemRarity>, Integer> constraintMap = new LinkedHashMap<>(5);
+
+  static {
+    Lists.reverse(Arrays.asList(EItemRarity.values())).forEach(rarity -> constraintMap.put(rarity, rarity.getProba()));
+  }
+
   private final int proba;
 
   EItemRarity(int proba) {
     this.proba = proba;
+  }
+
+  @NotNull
+  public static Map<GenericPredicateConstraint<EItemRarity>, Integer> getConstraintMapView() {
+    return Collections.unmodifiableMap(constraintMap);
   }
 
   public int getProba() {
@@ -45,16 +56,5 @@ public enum EItemRarity implements IRarity<EItemRarity> {
   @Override
   public Predicate<EItemRarity> getPredicate() {
     return q -> q.ordinal() >= ordinal();
-  }
-
-  @NotNull
-  public static Map<GenericConstraint<EItemRarity>, Integer> getConstraintMapView() {
-    return Collections.unmodifiableMap(constraintMap);
-  }
-
-  private static final Map<GenericConstraint<EItemRarity>, Integer> constraintMap = new LinkedHashMap<>(5);
-
-  static {
-    Lists.reverse(Arrays.asList(EItemRarity.values())).forEach(rarity ->  constraintMap.put(rarity, rarity.getProba()));
   }
 }

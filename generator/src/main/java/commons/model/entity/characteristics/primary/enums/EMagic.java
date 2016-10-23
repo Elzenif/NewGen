@@ -1,9 +1,9 @@
 package commons.model.entity.characteristics.primary.enums;
 
+import commons.model.commons.constraints.PrimarySecondaryConstraints;
 import commons.model.entity.characteristics.primary.Primary;
 import commons.model.entity.characteristics.primary.fields.HasMagic;
 import commons.model.entity.characteristics.secondary.Secondary;
-import commons.model.entity.constraints.Constraints;
 import org.jetbrains.annotations.Contract;
 
 /**
@@ -16,20 +16,20 @@ public enum EMagic implements Primary, Secondary, HasMagic {
   RELIC;
 
 
+  private static final PrimarySecondaryConstraints<EMagic> CONSTRAINTS = PrimarySecondaryConstraints.ConstraintsBuilder
+      .<EMagic>start()
+      .setSecondaryClass(EMagic.class)
+      .setPrimaryClasses(EMagic.class)
+      .build();
+
+  public static PrimarySecondaryConstraints<EMagic> getConstraints() {
+    return CONSTRAINTS;
+  }
+
   @Contract(pure = true)
   @Override
   public EMagic getMagic() {
     return this;
   }
-
-  public static Constraints<EMagic> getConstraints() {
-    return CONSTRAINTS;
-  }
-
-  private static final Constraints<EMagic> CONSTRAINTS = Constraints.ConstraintsBuilder
-          .<EMagic>start()
-          .setSecondaryClass(EMagic.class)
-          .setPrimaryClasses(EMagic.class)
-          .build();
 
 }

@@ -2,7 +2,7 @@ package commons.controller.entity;
 
 import commons.controller.commons.GenerateActionListener;
 import commons.model.commons.Game;
-import commons.model.commons.GenerationConstraint;
+import commons.model.commons.constraints.GenerationConstraints;
 import commons.model.entity.Entity;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.view.entity.EntityOptionRow;
@@ -17,25 +17,25 @@ import java.util.stream.IntStream;
 /**
  * Created by Germain on 04/06/2016.
  */
-public abstract class GenerateEntityActionListener<G extends Game, GC extends GenerationConstraint>
-    extends GenerateActionListener<EntityOptionRow<G, GC>, EntityResultRow, EntityResult, String, GC> {
+public abstract class GenerateEntityActionListener<G extends Game>
+    extends GenerateActionListener<EntityOptionRow<G>, EntityResultRow, EntityResult, String> {
 
-  protected GenerateEntityActionListener(EntityOptionRow<G, GC> entityOptionRow, EntityResultRow entityResultRow,
-                                         EntityController<G, GC> entityController) {
+  protected GenerateEntityActionListener(EntityOptionRow<G> entityOptionRow, EntityResultRow entityResultRow,
+                                         EntityController<G> entityController) {
     super(entityOptionRow, entityResultRow, entityController);
   }
 
   @Override
-  protected Collection<EntityResult> generateResult(GC generalConstraint) {
+  protected Collection<EntityResult> generateResult(GenerationConstraints generationConstraints) {
     List<EntityResult> results = new ArrayList<>();
     IntStream.rangeClosed(1, optionRow.getNumberOfEntitiesSelected())
-        .forEach(i -> results.add(generateOneResult(generalConstraint)));
+        .forEach(i -> results.add(generateOneResult(generationConstraints)));
     return results;
   }
 
-  protected abstract EntityResult generateOneResult(GC generationConstraint);
+  protected abstract EntityResult generateOneResult(GenerationConstraints generationConstraints);
 
-  protected abstract Entity<G> generate(GC generationConstraint)
+  protected abstract Entity generate(GenerationConstraints generationConstraints)
       throws NoAvailableEntityTypeException;
 
 }

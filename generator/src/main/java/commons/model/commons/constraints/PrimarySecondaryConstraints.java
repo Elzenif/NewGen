@@ -1,4 +1,4 @@
-package commons.model.entity.constraints;
+package commons.model.commons.constraints;
 
 import commons.model.entity.characteristics.primary.Primary;
 import commons.model.entity.characteristics.secondary.Secondary;
@@ -12,13 +12,13 @@ import java.util.Set;
 /**
  * Created by Germain on 02/07/2016.
  */
-public class Constraints<E extends Secondary> {
+public class PrimarySecondaryConstraints<E extends Secondary> {
 
   private final Class<E> secondaryClass;
   private final Set<Class<? extends Primary>> primaryClasses;
 
   @SuppressWarnings("unchecked")
-  private Constraints(ConstraintsBuilder builder) {
+  private PrimarySecondaryConstraints(ConstraintsBuilder builder) {
     this.secondaryClass = (Class<E>) builder.secondaryClass;
     this.primaryClasses = builder.primaryClasses;
   }
@@ -35,7 +35,7 @@ public class Constraints<E extends Secondary> {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Constraints<?> that = (Constraints<?>) o;
+    PrimarySecondaryConstraints<?> that = (PrimarySecondaryConstraints<?>) o;
     return Objects.equals(secondaryClass, that.secondaryClass);
   }
 
@@ -46,8 +46,8 @@ public class Constraints<E extends Secondary> {
 
   public static class ConstraintsBuilder<E extends Secondary> {
 
-    private Class<? extends Secondary> secondaryClass;
     private final Set<Class> primaryClasses = new HashSet<>();
+    private Class<? extends Secondary> secondaryClass;
 
     @Contract(" -> !null")
     public static <F extends Secondary> ConstraintsBuilder<F> start() {
@@ -64,10 +64,10 @@ public class Constraints<E extends Secondary> {
       return this;
     }
 
-    public Constraints<E> build() {
+    public PrimarySecondaryConstraints<E> build() {
       if (secondaryClass == null || primaryClasses.size() == 0)
         throw new IllegalArgumentException("Missing class when building constraints");
-      return new Constraints<>(this);
+      return new PrimarySecondaryConstraints<>(this);
     }
   }
 }

@@ -1,37 +1,39 @@
 package nbk.controller.utility.scenario;
 
 import commons.controller.utility.UtilityController;
+import commons.model.commons.IDrawKey;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.DrawChangeListener;
 import nbk.model.utility.scenario.constraints.EScenarioDraw;
 import nbk.view.utility.scenario.options.ScenarioOptionRow;
 
 import java.util.Arrays;
-import java.util.EnumMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by Germain on 30/09/2016.
  */
-public class ScenarioController extends UtilityController<EScenarioDraw> {
+public class ScenarioController extends UtilityController {
 
-  private final EnumMap<EScenarioDraw, DrawChangeListener<EScenarioDraw>> drawChangeListenerMap
-      = new EnumMap<>(EScenarioDraw.class);
+  private final Map<IDrawKey, DrawChangeListener> drawChangeListenerMap
+      = new LinkedHashMap<>(EScenarioDraw.values().length);
 
   public ScenarioController(ScenarioOptionRow scenarioOptionRow, UtilityResultRow scenarioResultRow, int defaultValue) {
     super(scenarioOptionRow);
     generateActionListener = new GenerateScenarioActionListener(scenarioOptionRow, scenarioResultRow, this);
     Arrays.stream(EScenarioDraw.values()).forEach(scenarioDraw -> {
-      drawChangeListenerMap.put(scenarioDraw, new DrawChangeListener<>(this, scenarioDraw));
-      generationConstraint.put(scenarioDraw, defaultValue);
+      drawChangeListenerMap.put(scenarioDraw, new DrawChangeListener(this, scenarioDraw));
+      generationConstraints.getDrawKeyConstraint().put(scenarioDraw, defaultValue);
     });
   }
 
-  public DrawChangeListener<EScenarioDraw> getDrawChangeListener(EScenarioDraw scenarioDraw) {
+  public DrawChangeListener getDrawChangeListener(IDrawKey scenarioDraw) {
     return drawChangeListenerMap.get(scenarioDraw);
   }
 
   @Override
-  public void updateDrawKeyValue(EScenarioDraw drawKey) {
-    generationConstraint.put(drawKey, (Integer) utilityOptionRow.getDrawValue(drawKey));
+  public void updateDrawKeyValue(IDrawKey drawKey) {
+    generationConstraints.getDrawKeyConstraint().put(drawKey, (Integer) utilityOptionRow.getDrawValue(drawKey));
   }
 }

@@ -1,13 +1,12 @@
 package nbk.controller.utility.scenario;
 
 import commons.controller.utility.UtilityController;
-import commons.model.utility.constraints.DrawKeyConstraint;
+import commons.model.commons.constraints.GenerationConstraints;
 import commons.view.utility.UtilityOptionRow;
 import commons.view.utility.UtilityResultRow;
 import commons.view.utility.result.UtilityResult;
 import nbk.controller.utility.GenerateNbkUtilityActionListener;
 import nbk.model.utility.scenario.Scenario;
-import nbk.model.utility.scenario.constraints.EScenarioDraw;
 import nbk.view.utility.scenario.results.ScenarioResult;
 
 import java.util.Collection;
@@ -15,17 +14,17 @@ import java.util.Collection;
 /**
  * Created by Germain on 30/09/2016.
  */
-public class GenerateScenarioActionListener extends GenerateNbkUtilityActionListener<EScenarioDraw> {
+public class GenerateScenarioActionListener extends GenerateNbkUtilityActionListener {
 
-  public GenerateScenarioActionListener(UtilityOptionRow<EScenarioDraw> utilityOptionRow,
+  public GenerateScenarioActionListener(UtilityOptionRow utilityOptionRow,
                                         UtilityResultRow utilityResultRow,
-                                        UtilityController<EScenarioDraw> utilityController) {
+                                        UtilityController utilityController) {
     super(utilityOptionRow, utilityResultRow, utilityController);
   }
 
   @Override
-  protected Collection<UtilityResult> generateResult(DrawKeyConstraint drawKeyConstraint) {
-    Scenario scenario = new Scenario(drawKeyConstraint);
+  protected Collection<UtilityResult> generateResult(GenerationConstraints generationConstraints) {
+    Scenario scenario = new Scenario(generationConstraints.getDrawKeyConstraint());
     return new ScenarioResult(scenario).getResults();
   }
 }

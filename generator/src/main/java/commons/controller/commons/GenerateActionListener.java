@@ -1,6 +1,6 @@
 package commons.controller.commons;
 
-import commons.model.commons.GenerationConstraint;
+import commons.model.commons.constraints.GenerationConstraints;
 import commons.view.commons.options.ConstraintOptionRow;
 import commons.view.commons.results.Result;
 import commons.view.commons.results.ResultRow;
@@ -13,14 +13,14 @@ import java.util.Collection;
  * Created by Germain on 01/10/2016.
  */
 public abstract class GenerateActionListener<OR extends ConstraintOptionRow<RR>, RR extends ResultRow<R, S>,
-    R extends Result<S>, S, GC extends GenerationConstraint>
+    R extends Result<S>, S>
     implements ActionListener {
 
   protected final OR optionRow;
   protected final RR resultRow;
-  private final AbstractOptionRowController<GC> controller;
+  private final AbstractOptionRowController controller;
 
-  protected GenerateActionListener(OR optionRow, RR resultRow, AbstractOptionRowController<GC> controller) {
+  protected GenerateActionListener(OR optionRow, RR resultRow, AbstractOptionRowController controller) {
     this.optionRow = optionRow;
     this.resultRow = resultRow;
     this.controller = controller;
@@ -32,13 +32,11 @@ public abstract class GenerateActionListener<OR extends ConstraintOptionRow<RR>,
     resultRow.setResultsToPrint(generateResult(getConstraints()));
   }
 
-  private GC getConstraints() {
+  private GenerationConstraints getConstraints() {
     return (optionRow.isConstraintsCheckBoxSelected())
-        ? controller.getGenerationConstraint()
-        : newConstraint();
+        ? controller.getGenerationConstraints()
+        : new GenerationConstraints();
   }
 
-  protected abstract GC newConstraint();
-
-  protected abstract Collection<R> generateResult(GC constraint);
+  protected abstract Collection<R> generateResult(GenerationConstraints constraint);
 }
