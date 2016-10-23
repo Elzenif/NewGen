@@ -1,62 +1,53 @@
 package nbk.model.entity.living.characteristics.primary;
 
-import com.google.common.collect.ForwardingMap;
 import commons.model.commons.IDrawKey;
 import commons.model.commons.constraints.DrawKeyConstraint;
 import commons.utils.exception.StatNotInRangeException;
 import nbk.model.entity.living.characteristics.primary.builders.StatsBuilder;
 
-import java.util.EnumMap;
 import java.util.Map;
 
 /**
  * Created by Germain on 29/08/2016.
  */
-public class Stats extends ForwardingMap<EStat, Integer> implements StatsBuilder {
-
-  private final EnumMap<EStat, Integer> statsMap = new EnumMap<>(EStat.class);
+public class Stats extends DrawKeyConstraint implements StatsBuilder {
 
   public Stats() {
   }
 
   public Stats(DrawKeyConstraint drawKeyConstraint) throws StatNotInRangeException {
     for (Entry<IDrawKey, Integer> entry : drawKeyConstraint.entrySet()) {
-      StatUtils.setStat(statsMap, (EStat) entry.getKey(), entry.getValue());
+      StatUtils.setStat(map, (EStat) entry.getKey(), entry.getValue());
     }
   }
 
   @Override
-  protected Map<EStat, Integer> delegate() {
-    return statsMap;
-  }
-  
-  @Override
   public Stats setCourage(int courage) throws StatNotInRangeException {
-    StatUtils.setStat(statsMap, EStat.COURAGE, courage);
+    StatUtils.setStat(map, EStat.COURAGE, courage);
     return this;
   }
 
   @Override
   public Stats setIntelligence(int intelligence) throws StatNotInRangeException {
-    StatUtils.setStat(statsMap, EStat.INTELLIGENCE, intelligence);
+    StatUtils.setStat(map, EStat.INTELLIGENCE, intelligence);
     return this;
   }
 
   @Override
   public Stats setCharisma(int charisma) throws StatNotInRangeException {
-    StatUtils.setStat(statsMap, EStat.CHARISMA, charisma);
+    StatUtils.setStat(map, EStat.CHARISMA, charisma);
     return this;
   }
 
   @Override
   public Stats setAgility(int agility) throws StatNotInRangeException {
-    StatUtils.setStat(statsMap, EStat.AGILITY, agility);
+    StatUtils.setStat(map, EStat.AGILITY, agility);
     return this;
   }
 
   @Override
   public Stats setStrength(int strength) throws StatNotInRangeException {
-    StatUtils.setStat(statsMap, EStat.STRENGTH, strength);
+    StatUtils.setStat(map, EStat.STRENGTH, strength);
     return this;
   }
 
@@ -65,7 +56,7 @@ public class Stats extends ForwardingMap<EStat, Integer> implements StatsBuilder
     return this;
   }
 
-  public EnumMap<EStat, Integer> getStatsMap() {
-    return statsMap;
+  public Map<IDrawKey, Integer> getStatsMap() {
+    return map;
   }
 }

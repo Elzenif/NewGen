@@ -28,7 +28,6 @@ public class GenerateNbkHumanoidActionListener extends GenerateNbkLivingActionLi
     if (optionRow.isConstraintsCheckBoxSelected()) {
       Stats stats;
       try {
-        // TODO see for making stats a drawKeyConstraint ?
         stats = new Stats(generationConstraints.getDrawKeyConstraint());
       } catch (StatNotInRangeException e) {
         LOGGER.error("Constraints are not suitable for stats construction");

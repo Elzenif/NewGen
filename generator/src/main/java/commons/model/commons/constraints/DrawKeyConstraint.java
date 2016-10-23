@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public class DrawKeyConstraint extends ForwardingMap<IDrawKey, Integer> {
 
-  private final Map<IDrawKey, Integer> map = new HashMap<>();
+  protected final Map<IDrawKey, Integer> map = new HashMap<>();
 
-  DrawKeyConstraint() {
+  protected DrawKeyConstraint() {
   }
 
   @Override
