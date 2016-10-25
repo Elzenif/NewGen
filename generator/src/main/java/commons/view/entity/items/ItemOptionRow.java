@@ -5,12 +5,13 @@ import commons.controller.entity.items.ItemController;
 import commons.model.commons.Game;
 import commons.model.entity.IAvailableEntity;
 import commons.model.entity.items.IAvailableItem;
-import commons.utils.TextFieldUtils;
 import commons.view.entity.EntityOptionRow;
 import commons.view.utils.ConstraintPanel;
 
 import javax.swing.BoxLayout;
-import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import java.text.MessageFormat;
 import java.util.EnumSet;
 
@@ -22,28 +23,37 @@ import static commons.view.utils.Constants.resourceBundle;
 public abstract class ItemOptionRow<G extends Game> extends EntityOptionRow<G> {
 
   private final ConstraintPanel qualityPanel;
-  private final JFormattedTextField qualityTextField;
+  private final JLabel qualityLabel;
+  private final SpinnerNumberModel qualityNumberModel;
+  private final JSpinner qualitySpinner;
 
   protected ItemOptionRow(IAvailableEntity<G> availableItem, EnumSet<? extends IAvailableItem<G>> availableItems) {
     super(availableItem, availableItems);
 
     // quality constraints
-    qualityTextField = TextFieldUtils.createTwoDigitsField();
-    qualityTextField.setToolTipText(MessageFormat.format(resourceBundle.getString("tooltip.entity.qualityTextField"), name));
     qualityPanel = new ConstraintPanel();
     qualityPanel.setLayout(new BoxLayout(qualityPanel, BoxLayout.Y_AXIS));
-    qualityPanel.add(qualityTextField);
+
+    qualityLabel = new JLabel("D100");
+    qualityLabel.setAlignmentX(LEFT_ALIGNMENT);
+
+    qualityNumberModel = new SpinnerNumberModel(50, 1, 100, 1);
+    qualitySpinner = new JSpinner(qualityNumberModel);
+    qualitySpinner.setToolTipText(MessageFormat.format(resourceBundle.getString("tooltip.entity.qualityTextField"), name));
+    qualitySpinner.setAlignmentX(LEFT_ALIGNMENT);
+
+    qualityPanel.add(qualityLabel);
+    qualityPanel.add(qualitySpinner);
     constraintPanel.add(qualityPanel);
   }
-
-  public JFormattedTextField getQualityTextField() {
-    return qualityTextField;
-  }
-
 
   @Override
   protected void setControllers(EntityController<G> entityController) {
     super.setControllers(entityController);
-    qualityTextField.addPropertyChangeListener(((ItemController) controller).getRarityChangeListener());
+    qualitySpinner.addPropertyChangeListener(((ItemController) controller).getRarityChangeListener());
+  }
+
+  public int getQuality() {
+    return qualityNumberModel.getNumber().intValue();
   }
 }

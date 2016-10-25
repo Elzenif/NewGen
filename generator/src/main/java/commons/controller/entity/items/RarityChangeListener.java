@@ -27,7 +27,7 @@ public class RarityChangeListener<G extends Game> implements PropertyChangeListe
   public void propertyChange(PropertyChangeEvent evt) {
     GenericPredicateConstraint<EItemRarity> constraint;
     try {
-      int rarityLevel = Integer.parseInt(itemOptionRow.getQualityTextField().getText()) + 1; // so that the result belongs to [1;100]
+      int rarityLevel = itemOptionRow.getQuality();
       constraint = findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(rarityLevel, EItemRarity.getConstraintMapView());
     } catch (NumberFormatException e) {
       constraint = () -> p -> true;

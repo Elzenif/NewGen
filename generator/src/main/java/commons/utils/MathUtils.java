@@ -41,13 +41,13 @@ public class MathUtils {
   }
 
   /**
-   * Find the first key of map such as ref is lower than the sum of precedent values, i.e.
-   * 0 <= i <= map.size()-1
-   * if (ref <= map.first())
-   *    i = 0
-   * else
-   *    ref > sum(0,i-1)(map)
-   *    ref <= sum(0,i)(map)
+   * Find the first key of map such as ref is lower than the sum of precedent values, i.e.<br>
+   * 0 <= i <= map.size()-1<br>
+   * if (ref <= map.first())<br>
+   *    i = 0<br>
+   * else<br>
+   *    ref > sum(0,i-1)(map)<br>
+   *    ref <= sum(0,i)(map)<br>
    * @param ref the integer used to compare
    * @param map the map of values
    * @return key in the i_th position with i that satisfies the constraints
