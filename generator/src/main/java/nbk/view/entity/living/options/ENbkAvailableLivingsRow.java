@@ -1,6 +1,5 @@
 package nbk.view.entity.living.options;
 
-import commons.model.commons.constraints.DrawKeyConstraint;
 import commons.model.entity.living.IAvailableLiving;
 import commons.view.entity.EntityResultRow;
 import commons.view.entity.IAvailableEntityRow;
@@ -10,7 +9,7 @@ import nbk.model.entity.living.ENbkAvailableLivings;
 /**
  * Created by Germain on 28/08/2016.
  */
-public enum ENbkAvailableLivingsRow implements IAvailableEntityRow<NbkGame, DrawKeyConstraint> {
+public enum ENbkAvailableLivingsRow implements IAvailableEntityRow<NbkGame> {
 
   HUMANOID_ROW(ENbkAvailableLivings.HUMANOID, new NbkHumanoidOptionRow());
 

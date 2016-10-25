@@ -1,6 +1,5 @@
 package nbk.view.entity.items.options;
 
-import commons.model.commons.constraints.PredicateConstraints;
 import commons.model.entity.items.IAvailableItem;
 import commons.view.entity.EntityResultRow;
 import commons.view.entity.IAvailableEntityRow;
@@ -10,7 +9,7 @@ import nbk.model.entity.items.ENbkAvailableItem;
 /**
  * Created by Germain on 11/06/2016.
  */
-public enum ENbkAvailableItemsRow implements IAvailableEntityRow<NbkGame, PredicateConstraints> {
+public enum ENbkAvailableItemsRow implements IAvailableEntityRow<NbkGame> {
 
   WEAPON_ROW(ENbkAvailableItem.WEAPON, new NbkWeaponOptionRow()),
   ARMOR_ROW(ENbkAvailableItem.ARMOR, new NbkArmorOptionRow());

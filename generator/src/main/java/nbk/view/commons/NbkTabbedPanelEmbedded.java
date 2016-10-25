@@ -1,11 +1,7 @@
 package nbk.view.commons;
 
-import commons.model.commons.constraints.DrawKeyConstraint;
-import commons.model.commons.constraints.PredicateConstraints;
 import commons.view.commons.game.GameTabbedPanelEmbedded;
-import commons.view.dice.DicePanel;
 import commons.view.entity.EntityPanel;
-import commons.view.hidden.HiddenPanel;
 import commons.view.map.MapPanel;
 import commons.view.utility.UtilityPanel;
 import nbk.model.commons.NbkGame;
@@ -20,20 +16,13 @@ import static commons.view.utils.Constants.resourceBundle;
  */
 public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
 
-  private final HiddenPanel<NbkGame> hiddenPanel;
-  private final DicePanel dicePanel;
-  private final EntityPanel<NbkGame, ENbkAvailableItemsRow, PredicateConstraints> itemsPanel;
+  private final EntityPanel<NbkGame, ENbkAvailableItemsRow> itemsPanel;
   private final UtilityPanel<ENbkAvailableUtilityRow> utilityPanel;
-  private final EntityPanel<NbkGame, ENbkAvailableLivingsRow, DrawKeyConstraint> livingsPanel;
+  private final EntityPanel<NbkGame, ENbkAvailableLivingsRow> livingsPanel;
   private final MapPanel mapPanel;
 
   public NbkTabbedPanelEmbedded() {
-    hiddenPanel = new HiddenPanel<>(NbkGame.getInstance());
-    panelMap.put(resourceBundle.getString("panel.hidden"), hiddenPanel);
-
-    dicePanel = new DicePanel();
-    controllers.add(dicePanel);
-    panelMap.put(resourceBundle.getString("panel.dice"), dicePanel);
+    super(NbkGame.getInstance());
 
     itemsPanel = new EntityPanel<>(ENbkAvailableItemsRow.values());
     controllers.add(itemsPanel);

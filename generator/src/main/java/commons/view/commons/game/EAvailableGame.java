@@ -1,6 +1,8 @@
 package commons.view.commons.game;
 
 import commons.model.commons.Game;
+import dd.model.commons.DDGame;
+import dd.view.commons.DDTabbedPanelEmbedded;
 import nbk.model.commons.NbkGame;
 import nbk.view.commons.NbkTabbedPanelEmbedded;
 
@@ -11,7 +13,8 @@ import java.util.Arrays;
  */
 public enum EAvailableGame implements IAvailableGame {
 
-  NBK(NbkGame.getInstance(), true, new NbkTabbedPanelEmbedded());
+  NBK(NbkGame.getInstance(), true, new NbkTabbedPanelEmbedded()),
+  DD(DDGame.getInstance(), false, new DDTabbedPanelEmbedded());
 
   public static final int NB_GAMES = EAvailableGame.values().length;
   private final Game game;
