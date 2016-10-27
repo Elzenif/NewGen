@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import static commons.utils.CollectionUtils.setMaxSizeSet;
@@ -45,6 +47,20 @@ public class CollectionUtilsTest {
     set.add(2);
     set.add(3);
     set.add(4);
+  }
+
+  @Test
+  public void containsOnlyNullIsValid() {
+    List<Integer> list = new LinkedList<>();
+    assertThat(CollectionUtils.containsOnlyNull(list)).isFalse();
+    list.add(null);
+    assertThat(CollectionUtils.containsOnlyNull(list)).isTrue();
+    list.add(null);
+    assertThat(CollectionUtils.containsOnlyNull(list)).isTrue();
+    list.add(5);
+    assertThat(CollectionUtils.containsOnlyNull(list)).isFalse();
+    list.add(null);
+    assertThat(CollectionUtils.containsOnlyNull(list)).isFalse();
   }
 }
 

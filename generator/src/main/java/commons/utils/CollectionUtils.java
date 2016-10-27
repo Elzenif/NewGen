@@ -40,4 +40,16 @@ public class CollectionUtils {
     };
   }
 
+  @Contract(pure = true)
+  public static <T> boolean containsOnlyNull(Collection<T> collection) {
+    if (collection.isEmpty()) {
+      return false;
+    }
+    for (T t : collection) {
+      if (t != null) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

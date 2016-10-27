@@ -1,5 +1,6 @@
 package dd.view.entity.items.results;
 
+import commons.utils.CollectionUtils;
 import commons.utils.ColorUtils;
 import commons.view.entity.results.EntityResult;
 import dd.model.entity.items.treasure.DDTreasure;
@@ -22,7 +23,7 @@ public class TreasureResult extends EntityResult {
   @SuppressWarnings("HardCodedStringLiteral")
   @Override
   public String getRawResult() {
-    return (treasures.isEmpty())
+    return (treasures.isEmpty() || CollectionUtils.containsOnlyNull(treasures))
         ? "Rien de rien"
         : String.join(", ", treasures.stream().map(DDTreasure::toString).collect(Collectors.toList()));
   }

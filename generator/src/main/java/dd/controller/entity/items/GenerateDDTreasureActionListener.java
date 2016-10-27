@@ -22,6 +22,7 @@ public class GenerateDDTreasureActionListener extends GenerateEntityActionListen
     coinFactory = new DDCoinFactory();
   }
 
+  // FIXME bug when clicking on options, the value inside the level is not taken into account
   @Override
   protected TreasureResult generateOneResult(GenerationConstraints generationConstraints) {
     return new TreasureResult(coinFactory.generateTreasures(generationConstraints));
