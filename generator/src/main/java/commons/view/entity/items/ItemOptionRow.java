@@ -19,20 +19,21 @@ import static commons.view.utils.Constants.resourceBundle;
  */
 public abstract class ItemOptionRow<G extends Game> extends EntityOptionRow<G> {
 
-  protected final JSpinner qualitySpinner;
+  private final JSpinner qualitySpinner;
   private final SpinnerNumberModel qualityNumberModel;
 
   protected ItemOptionRow(IAvailableEntity<G> availableItem, EnumSet<? extends IAvailableItem<G>> availableItems) {
     super(availableItem, availableItems);
 
-    qualityNumberModel = new SpinnerNumberModel(50, 1, 100, 1);
+    qualityNumberModel = new SpinnerNumberModel(55, 1, 100, 1);
     qualitySpinner = new JSpinner(qualityNumberModel);
     constraintPanel.add(ViewUtils.createSpinnerWithLabelOnTop("D100", qualitySpinner,
-        MessageFormat.format(resourceBundle.getString("tooltip.entity.qualityTextField"), name)));
+        MessageFormat.format(resourceBundle.getString("tooltip.entity.quality.nbk"), name)));
   }
 
   protected void setControllers(ItemController<G> entityController) {
     super.setControllers(entityController);
+    qualitySpinner.addChangeListener(((ItemController) controller).getRarityChangeListener());
   }
 
   public int getQuality() {

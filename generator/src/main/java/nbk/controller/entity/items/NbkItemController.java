@@ -20,6 +20,7 @@ public abstract class NbkItemController extends ItemController<NbkGame> {
 
   public abstract void updateRarityConstraint(GenericPredicateConstraint<EItemRarity> constraint);
 
+  @Override
   public NbkRarityChangeListener getRarityChangeListener() {
     return rarityChangeListener;
   }

@@ -2,6 +2,7 @@ package dd.model.entity.items.factory;
 
 import commons.model.commons.constraints.DrawKeyConstraint;
 import commons.model.commons.constraints.GenerationConstraints;
+import commons.utils.MathUtils;
 import dd.model.entity.items.treasure.DDTreasure;
 import dd.model.entity.items.treasure.EDDTreasureDraw;
 
@@ -21,8 +22,12 @@ public abstract class DDTreasureFactory {
 
   public List<DDTreasure> generateTreasures(GenerationConstraints generationConstraints) {
     DrawKeyConstraint drawKeyConstraint = generationConstraints.getDrawKeyConstraint();
-    Integer level = drawKeyConstraint.get(EDDTreasureDraw.LEVEL);
-    Integer diceResult = drawKeyConstraint.get(EDDTreasureDraw.DICE);
+    int level = (drawKeyConstraint.containsKey(EDDTreasureDraw.LEVEL))
+        ? drawKeyConstraint.get(EDDTreasureDraw.LEVEL)
+        : 1;
+    int diceResult = (drawKeyConstraint.containsKey(EDDTreasureDraw.DICE))
+        ? drawKeyConstraint.get(EDDTreasureDraw.DICE)
+        : MathUtils.random(1, 100);
     return generateTreasures(level, diceResult);
   }
 

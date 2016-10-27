@@ -3,6 +3,7 @@ package nbk.controller.entity.items;
 import commons.controller.entity.GenerateEntityActionListener;
 import commons.controller.entity.items.ItemController;
 import commons.model.commons.constraints.GenerationConstraints;
+import commons.model.commons.constraints.PredicateConstraints;
 import commons.model.entity.items.Item;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.view.entity.EntityResultRow;
@@ -23,7 +24,7 @@ public abstract class GenerateNbkItemActionListener extends GenerateEntityAction
   @Override
   protected ItemResult generateOneResult(GenerationConstraints generationConstraints) {
     try {
-      Item item = generate(generationConstraints);
+      Item item = generate(generationConstraints.getPredicateConstraints());
       return new ItemResult(item);
     } catch (NoAvailableEntityTypeException e) {
       e.printStackTrace();
@@ -31,6 +32,5 @@ public abstract class GenerateNbkItemActionListener extends GenerateEntityAction
     }
   }
 
-  @Override
-  protected abstract Item<NbkGame> generate(GenerationConstraints generationConstraints) throws NoAvailableEntityTypeException;
+  protected abstract Item generate(PredicateConstraints predicateConstraints) throws NoAvailableEntityTypeException;
 }

@@ -16,7 +16,5 @@ public abstract class NbkItemOptionRow extends ItemOptionRow<NbkGame> {
 
   protected void setControllers(NbkItemController entityController) {
     super.setControllers(entityController);
-    qualitySpinner.addChangeListener(((NbkItemController) controller).getRarityChangeListener());
-
   }
 }

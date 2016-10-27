@@ -1,13 +1,13 @@
 package nbk.model.utility.love.constraints;
 
-import commons.model.commons.IDrawKey;
+import commons.model.commons.IDrawKeyIntegerValue;
 import org.jetbrains.annotations.Contract;
 
 /**
  * Created by Germain on 24/07/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum ELoveDraw implements IDrawKey {
+public enum ELoveDraw implements IDrawKeyIntegerValue {
 
   ACTION("Action"),
   TARGET("Cible"),
@@ -25,5 +25,10 @@ public enum ELoveDraw implements IDrawKey {
   @Override
   public String toString() {
     return name;
+  }
+
+  @Override
+  public int getMaxValue() {
+    return 20;
   }
 }

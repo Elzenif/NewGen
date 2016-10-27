@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Created by Germain on 26/09/2016.
  */
-public class NbkDungeonController extends AbstractOptionRowController implements HasDrawKeysController {
+public class NbkDungeonController extends AbstractOptionRowController implements HasDrawKeysController<IDrawKey> {
 
   private final NbkDungeonOptionRow dungeonOptionRow;
   private final SaveMapActionListener saveMapActionListener;

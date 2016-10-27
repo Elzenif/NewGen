@@ -1,13 +1,13 @@
 package nbk.model.entity.living.characteristics.primary;
 
-import commons.model.commons.IDrawKey;
+import commons.model.commons.IDrawKeyIntegerValue;
 import org.jetbrains.annotations.Contract;
 
 /**
  * Created by Germain on 29/08/2016.
  */
 @SuppressWarnings("HardCodedStringLiteral")
-public enum EStat implements IDrawKey {
+public enum EStat implements IDrawKeyIntegerValue {
   COURAGE("COU"),
   INTELLIGENCE("INT"),
   CHARISMA("CHA"),
@@ -25,5 +25,11 @@ public enum EStat implements IDrawKey {
   @Override
   public String toString() {
     return name;
+  }
+
+
+  @Override
+  public int getMaxValue() {
+    return 20;
   }
 }

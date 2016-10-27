@@ -1,6 +1,6 @@
 package nbk.view.utility.scenario.options;
 
-import commons.model.commons.IDrawKey;
+import commons.model.commons.IDrawKeyIntegerValue;
 import commons.utils.Pair;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.scenario.ScenarioController;
@@ -20,7 +20,7 @@ import static commons.view.utils.Constants.resourceBundle;
  */
 public class ScenarioOptionRow extends NbkUtilityOptionRow {
 
-  private final Map<IDrawKey, Pair<JSpinner, SpinnerNumberModel>> scenarioDrawMap
+  private final Map<IDrawKeyIntegerValue, Pair<JSpinner, SpinnerNumberModel>> scenarioDrawMap
       = new LinkedHashMap<>(EScenarioDraw.values().length);
   private final int defaultValue = 10;
 
@@ -40,7 +40,7 @@ public class ScenarioOptionRow extends NbkUtilityOptionRow {
   }
 
   @Override
-  public Integer getDrawValue(IDrawKey drawKey) {
+  public Integer getDrawValue(IDrawKeyIntegerValue drawKey) {
     return scenarioDrawMap.get(drawKey).getRight().getNumber().intValue();
   }
 }

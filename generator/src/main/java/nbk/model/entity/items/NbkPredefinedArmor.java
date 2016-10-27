@@ -6,7 +6,6 @@ import commons.model.entity.items.Item;
 import commons.model.entity.utils.EntityUtils;
 import commons.utils.SPositive;
 import commons.utils.exception.NoAvailableEntityTypeException;
-import nbk.model.commons.NbkGame;
 import nbk.model.commons.characteristics.primary.enums.ESize;
 import nbk.model.commons.characteristics.primary.fields.HasSize;
 import nbk.model.entity.items.characteristics.primary.enums.EBodyPart;
@@ -21,7 +20,7 @@ import java.util.function.Predicate;
 /**
  * Created by Germain on 26/06/2016.
  */
-public class NbkPredefinedArmor extends Item<NbkGame> implements HasWeight, IsBodyPart, HasSize {
+public class NbkPredefinedArmor extends Item implements HasWeight, IsBodyPart, HasSize {
 
   private final ENbkPredefinedArmor predefinedArmor;
 

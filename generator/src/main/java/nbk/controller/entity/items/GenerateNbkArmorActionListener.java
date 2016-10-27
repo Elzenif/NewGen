@@ -1,6 +1,6 @@
 package nbk.controller.entity.items;
 
-import commons.model.commons.constraints.GenerationConstraints;
+import commons.model.commons.constraints.PredicateConstraints;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.view.entity.EntityResultRow;
 import nbk.model.entity.items.NbkPredefinedArmor;
@@ -19,7 +19,7 @@ public class GenerateNbkArmorActionListener extends GenerateNbkItemActionListene
 
   @Contract("_ -> !null")
   @Override
-  protected NbkPredefinedArmor generate(GenerationConstraints generationConstraints) throws NoAvailableEntityTypeException {
-    return NbkPredefinedArmor.create(generationConstraints.getPredicateConstraints());
+  protected NbkPredefinedArmor generate(PredicateConstraints predicateConstraints) throws NoAvailableEntityTypeException {
+    return NbkPredefinedArmor.create(predicateConstraints);
   }
 }

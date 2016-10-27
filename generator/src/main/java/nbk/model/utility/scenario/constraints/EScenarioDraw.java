@@ -1,13 +1,13 @@
 package nbk.model.utility.scenario.constraints;
 
-import commons.model.commons.IDrawKey;
+import commons.model.commons.IDrawKeyIntegerValue;
 import org.jetbrains.annotations.Contract;
 
 /**
  * Created by Germain on 30/09/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum EScenarioDraw implements IDrawKey {
+public enum EScenarioDraw implements IDrawKeyIntegerValue {
 
   BEGINNING("Début"),
   GUY("Perso"),
@@ -26,5 +26,10 @@ public enum EScenarioDraw implements IDrawKey {
   @Override
   public String toString() {
     return name;
+  }
+
+  @Override
+  public int getMaxValue() {
+    return 20;
   }
 }

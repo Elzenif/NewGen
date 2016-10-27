@@ -1,7 +1,7 @@
 package nbk.controller.utility.scenario;
 
 import commons.controller.utility.UtilityController;
-import commons.model.commons.IDrawKey;
+import commons.model.commons.IDrawKeyIntegerValue;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.DrawChangeListener;
 import nbk.model.utility.scenario.constraints.EScenarioDraw;
@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class ScenarioController extends UtilityController {
 
-  private final Map<IDrawKey, DrawChangeListener> drawChangeListenerMap
+  private final Map<IDrawKeyIntegerValue, DrawChangeListener> drawChangeListenerMap
       = new LinkedHashMap<>(EScenarioDraw.values().length);
 
   public ScenarioController(ScenarioOptionRow scenarioOptionRow, UtilityResultRow scenarioResultRow, int defaultValue) {
@@ -28,12 +28,12 @@ public class ScenarioController extends UtilityController {
     });
   }
 
-  public DrawChangeListener getDrawChangeListener(IDrawKey scenarioDraw) {
+  public DrawChangeListener getDrawChangeListener(IDrawKeyIntegerValue scenarioDraw) {
     return drawChangeListenerMap.get(scenarioDraw);
   }
 
   @Override
-  public void updateDrawKeyValue(IDrawKey drawKey) {
+  public void updateDrawKeyValue(IDrawKeyIntegerValue drawKey) {
     generationConstraints.getDrawKeyConstraint().put(drawKey, (Integer) utilityOptionRow.getDrawValue(drawKey));
   }
 }

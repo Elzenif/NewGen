@@ -5,6 +5,7 @@ package dd.model.entity.items.treasure;
  */
 public abstract class DDTreasure {
 
+  public static final int LEVEL_MAX = 2;
   protected String name;
   protected String value;
 

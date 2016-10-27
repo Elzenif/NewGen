@@ -80,9 +80,10 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends BorderLay
     constraintPanel.setEnabled(checkBoxSelected);
   }
 
-  protected void initDrawKeyConstraintPanel(Map<IDrawKey, Pair<JSpinner, SpinnerNumberModel>> map,
-                                            IDrawKey[] keyValues, int defaultValue, int minValue, int maxValue) {
-    for (IDrawKey key : keyValues) {
+  protected <K extends IDrawKey> void initDrawKeyConstraintPanel(Map<K, Pair<JSpinner, SpinnerNumberModel>> map,
+                                                                 K[] keyValues, int defaultValue, int minValue,
+                                                                 int maxValue) {
+    for (K key : keyValues) {
       SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(defaultValue, minValue, maxValue, 1);
       JSpinner jSpinner = new JSpinner(spinnerNumberModel);
       map.put(key, new Pair<>(jSpinner, spinnerNumberModel));

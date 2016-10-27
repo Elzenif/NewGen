@@ -3,8 +3,6 @@ package commons.controller.entity;
 import commons.controller.commons.GenerateActionListener;
 import commons.model.commons.Game;
 import commons.model.commons.constraints.GenerationConstraints;
-import commons.model.entity.Entity;
-import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.view.entity.EntityOptionRow;
 import commons.view.entity.EntityResultRow;
 import commons.view.entity.results.EntityResult;
@@ -34,8 +32,4 @@ public abstract class GenerateEntityActionListener<G extends Game>
   }
 
   protected abstract EntityResult generateOneResult(GenerationConstraints generationConstraints);
-
-  protected abstract Entity generate(GenerationConstraints generationConstraints)
-      throws NoAvailableEntityTypeException;
-
 }

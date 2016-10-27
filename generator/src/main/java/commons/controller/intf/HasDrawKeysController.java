@@ -6,10 +6,10 @@ import nbk.controller.utility.DrawChangeListener;
 /**
  * Created by Germain on 02/10/2016.
  */
-public interface HasDrawKeysController {
+public interface HasDrawKeysController<K extends IDrawKey> {
 
-  DrawChangeListener getDrawChangeListener(IDrawKey drawKey);
+  DrawChangeListener getDrawChangeListener(K drawKey);
 
-  void updateDrawKeyValue(IDrawKey drawKey);
+  void updateDrawKeyValue(K drawKey);
 
 }

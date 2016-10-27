@@ -1,7 +1,7 @@
 package nbk.controller.utility.love;
 
 import commons.controller.utility.UtilityController;
-import commons.model.commons.IDrawKey;
+import commons.model.commons.IDrawKeyIntegerValue;
 import commons.view.utility.UtilityResultRow;
 import nbk.controller.utility.DrawChangeListener;
 import nbk.model.utility.love.constraints.ELoveDraw;
@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class LoveController extends UtilityController {
 
-  private final Map<IDrawKey, DrawChangeListener> drawChangeListenerMap
+  private final Map<IDrawKeyIntegerValue, DrawChangeListener> drawChangeListenerMap
       = new LinkedHashMap<>(ELoveDraw.values().length);
 
   public LoveController(LoveOptionRow loveOptionRow, UtilityResultRow loveResultRow, int defaultValue) {
@@ -29,12 +29,12 @@ public class LoveController extends UtilityController {
   }
 
   @Override
-  public void updateDrawKeyValue(IDrawKey drawKey) {
+  public void updateDrawKeyValue(IDrawKeyIntegerValue drawKey) {
     generationConstraints.getDrawKeyConstraint().put(drawKey, (Integer) utilityOptionRow.getDrawValue(drawKey));
   }
 
   @Override
-  public DrawChangeListener getDrawChangeListener(IDrawKey loveDraw) {
+  public DrawChangeListener getDrawChangeListener(IDrawKeyIntegerValue loveDraw) {
     return drawChangeListenerMap.get(loveDraw);
   }
 }

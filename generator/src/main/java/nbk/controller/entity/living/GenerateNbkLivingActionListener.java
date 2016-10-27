@@ -31,6 +31,5 @@ public abstract class GenerateNbkLivingActionListener extends GenerateEntityActi
     }
   }
 
-  @Override
   protected abstract Living<NbkGame> generate(GenerationConstraints drawKeyConstraint) throws NoAvailableEntityTypeException;
 }

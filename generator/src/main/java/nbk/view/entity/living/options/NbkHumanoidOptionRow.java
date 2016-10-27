@@ -1,6 +1,7 @@
 package nbk.view.entity.living.options;
 
 import commons.model.commons.IDrawKey;
+import commons.model.commons.IDrawKeyIntegerValue;
 import commons.utils.Pair;
 import commons.view.entity.EntityResultRow;
 import nbk.controller.entity.living.NbkHumanoidController;
@@ -35,7 +36,8 @@ public class NbkHumanoidOptionRow extends NbkLivingOptionRow {
   public void setControllers(EntityResultRow resultRow) {
     super.setControllers(new NbkHumanoidController(this, resultRow, defaultValue));
     statMap.forEach((stat, pair) ->
-        pair.getLeft().addChangeListener(((NbkHumanoidController) controller).getDrawChangeListener(stat)));
+        pair.getLeft().addChangeListener(((NbkHumanoidController) controller)
+            .getDrawChangeListener((IDrawKeyIntegerValue) stat)));
   }
 
   @Override

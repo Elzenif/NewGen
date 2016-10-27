@@ -28,7 +28,7 @@ import static commons.view.utils.Constants.resourceBundle;
  * Created by Germain on 24/09/2016.
  */
 public class NbkDungeonOptionRow extends ConstraintOptionRow<MapResultRow>
-    implements HasDrawKeysOptionRow {
+    implements HasDrawKeysOptionRow<IDrawKey> {
 
   private final ConstraintPanel basicOptionsPanel;
 

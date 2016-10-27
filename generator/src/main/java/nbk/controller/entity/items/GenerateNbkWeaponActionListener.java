@@ -1,7 +1,6 @@
 package nbk.controller.entity.items;
 
 import commons.controller.entity.items.ItemController;
-import commons.model.commons.constraints.GenerationConstraints;
 import commons.model.commons.constraints.PredicateConstraints;
 import commons.utils.MathUtils;
 import commons.utils.exception.NoAvailableEntityTypeException;
@@ -25,11 +24,11 @@ public class GenerateNbkWeaponActionListener extends GenerateNbkItemActionListen
 
   @Contract("_ -> !null")
   @Override
-  protected NbkAbstractWeapon generate(GenerationConstraints generationConstraints) throws NoAvailableEntityTypeException {
+  protected NbkAbstractWeapon generate(PredicateConstraints predicateConstraints) throws NoAvailableEntityTypeException {
     if (MathUtils.random(1, 10) == 1) {
-      return generatePW(generationConstraints.getPredicateConstraints());
+      return generatePW(predicateConstraints);
     } else {
-      return generateRGW(generationConstraints.getPredicateConstraints());
+      return generateRGW(predicateConstraints);
     }
   }
 

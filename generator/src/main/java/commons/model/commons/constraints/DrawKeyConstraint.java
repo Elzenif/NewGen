@@ -1,7 +1,7 @@
 package commons.model.commons.constraints;
 
 import com.google.common.collect.ForwardingMap;
-import commons.model.commons.IDrawKey;
+import commons.model.commons.IDrawKeyIntegerValue;
 import commons.utils.MathUtils;
 import commons.utils.exception.ForbiddenValueException;
 
@@ -11,15 +11,15 @@ import java.util.Map;
 /**
  * Created by Germain on 01/10/2016.
  */
-public class DrawKeyConstraint extends ForwardingMap<IDrawKey, Integer> {
+public class DrawKeyConstraint extends ForwardingMap<IDrawKeyIntegerValue, Integer> {
 
-  protected final Map<IDrawKey, Integer> map = new HashMap<>();
+  protected final Map<IDrawKeyIntegerValue, Integer> map = new HashMap<>();
 
   protected DrawKeyConstraint() {
   }
 
   @Override
-  protected Map<IDrawKey, Integer> delegate() {
+  protected Map<IDrawKeyIntegerValue, Integer> delegate() {
     return map;
   }
 
@@ -29,8 +29,8 @@ public class DrawKeyConstraint extends ForwardingMap<IDrawKey, Integer> {
    * @return the previous value for given key, null if there was not any
    */
   @Override
-  public Integer put(IDrawKey key, Integer value) {
-    checkRange(value);
+  public Integer put(IDrawKeyIntegerValue key, Integer value) {
+    checkRange(key.getMaxValue(), value);
     return delegate().put(key, value);
   }
 
@@ -44,11 +44,11 @@ public class DrawKeyConstraint extends ForwardingMap<IDrawKey, Integer> {
     return (result != null) ? result : MathUtils.random(1, 20);
   }
 
-  private void checkRange(Integer value) {
+  private void checkRange(int maxValue, int value) {
     if (value < 1) {
       throw new ForbiddenValueException("Value should be greater than 1");
     }
-    if (value > 20) {
+    if (value > maxValue) {
       throw new ForbiddenValueException("Value should be less than 20");
     }
   }

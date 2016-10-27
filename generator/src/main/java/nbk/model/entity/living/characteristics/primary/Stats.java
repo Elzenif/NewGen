@@ -1,6 +1,6 @@
 package nbk.model.entity.living.characteristics.primary;
 
-import commons.model.commons.IDrawKey;
+import commons.model.commons.IDrawKeyIntegerValue;
 import commons.model.commons.constraints.DrawKeyConstraint;
 import commons.utils.exception.StatNotInRangeException;
 import nbk.model.entity.living.characteristics.primary.builders.StatsBuilder;
@@ -16,7 +16,7 @@ public class Stats extends DrawKeyConstraint implements StatsBuilder {
   }
 
   public Stats(DrawKeyConstraint drawKeyConstraint) throws StatNotInRangeException {
-    for (Entry<IDrawKey, Integer> entry : drawKeyConstraint.entrySet()) {
+    for (Entry<IDrawKeyIntegerValue, Integer> entry : drawKeyConstraint.entrySet()) {
       StatUtils.setStat(map, (EStat) entry.getKey(), entry.getValue());
     }
   }
@@ -56,7 +56,7 @@ public class Stats extends DrawKeyConstraint implements StatsBuilder {
     return this;
   }
 
-  public Map<IDrawKey, Integer> getStatsMap() {
+  public Map<IDrawKeyIntegerValue, Integer> getStatsMap() {
     return map;
   }
 }
