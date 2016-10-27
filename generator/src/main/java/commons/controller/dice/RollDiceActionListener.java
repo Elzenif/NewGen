@@ -2,7 +2,6 @@ package commons.controller.dice;
 
 import commons.model.dice.Dice;
 import commons.model.dice.DiceTestInfo;
-import commons.model.dice.EDiceNumber;
 import commons.utils.StringUtils;
 import commons.view.dice.DiceOptionRow;
 import commons.view.dice.DiceResultRow;
@@ -22,11 +21,11 @@ import static commons.view.utils.Constants.resourceBundle;
  */
 public class RollDiceActionListener implements ActionListener {
 
-  private final EDiceNumber diceNumber;
+  private final int diceNumber;
   private final DiceOptionRow diceOptionRow;
   private final DiceResultRow diceResultRow;
 
-  public RollDiceActionListener(EDiceNumber diceNumber, DiceOptionRow diceOptionRow, DiceResultRow diceResultRow) {
+  public RollDiceActionListener(int diceNumber, DiceOptionRow diceOptionRow, DiceResultRow diceResultRow) {
     this.diceNumber = diceNumber;
     this.diceOptionRow = diceOptionRow;
     this.diceResultRow = diceResultRow;

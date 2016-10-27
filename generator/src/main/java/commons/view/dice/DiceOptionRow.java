@@ -109,7 +109,7 @@ public class DiceOptionRow extends BorderLayoutOptionRow<DiceResultRow> {
 
   @Override
   public void setControllers(DiceResultRow diceResultRow) {
-    rollDiceButton.addActionListener(new RollDiceActionListener(diceNumber, this, diceResultRow));
+    rollDiceButton.addActionListener(new RollDiceActionListener(diceNumber.getDiceNumber(), this, diceResultRow));
     numberOfDiceSpinner.addChangeListener(new NumberOfDiceChangeListener(this));
     addScoreCheckBox.addItemListener(new AddScoreCheckBoxItemListener(this));
     addScoreSpinner.addChangeListener(new AddScoreSpinnerChangeListener(this));

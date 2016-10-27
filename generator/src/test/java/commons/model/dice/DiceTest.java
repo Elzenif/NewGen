@@ -10,13 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DiceTest {
 
   private Dice dice;
-  private DiceTestInfo diceTestInfo;
 
   @Test
   public void testFinalScoreEqualsScoreIfAddScoreIs0() {
-    diceTestInfo = new DiceTestInfo(false, null, 0);
     for (EDiceNumber diceNumber : EDiceNumber.values()) {
-      dice = new Dice(diceNumber, 0, diceTestInfo);
+      dice = new Dice(diceNumber.getDiceNumber());
       dice.roll();
       int finalScore = dice.getFinalScore();
       int score = dice.getScore();
@@ -27,13 +25,24 @@ public class DiceTest {
 
   @Test
   public void testDiceRollIsInRange() {
-    diceTestInfo = new DiceTestInfo(false, null, 0);
     for (EDiceNumber diceNumber : EDiceNumber.values()) {
-      dice = new Dice(diceNumber, 0, diceTestInfo);
+      dice = new Dice(diceNumber.getDiceNumber());
       dice.roll();
       int result = dice.getFinalScore();
 
-      assertThat(1 <= result && result <= diceNumber.getDiceNumber()).isTrue();
+      assertThat(result).isBetween(1, diceNumber.getDiceNumber());
+    }
+  }
+
+  @Test
+  public void testDiceRollIsInRangeWithIterations() {
+    int iterations = 5;
+    for (EDiceNumber diceNumber : EDiceNumber.values()) {
+      dice = new Dice(diceNumber.getDiceNumber(), iterations);
+      dice.roll();
+      int result = dice.getFinalScore();
+
+      assertThat(result).isBetween(iterations, iterations * diceNumber.getDiceNumber());
     }
   }
 }

@@ -21,9 +21,9 @@ public abstract class GenerateNbkItemActionListener extends GenerateEntityAction
   }
 
   @Override
-  protected ItemResult generateOneResult(GenerationConstraints predicateConstraints) {
+  protected ItemResult generateOneResult(GenerationConstraints generationConstraints) {
     try {
-      Item item = generate(predicateConstraints);
+      Item item = generate(generationConstraints);
       return new ItemResult(item);
     } catch (NoAvailableEntityTypeException e) {
       e.printStackTrace();
@@ -32,5 +32,5 @@ public abstract class GenerateNbkItemActionListener extends GenerateEntityAction
   }
 
   @Override
-  protected abstract Item<NbkGame> generate(GenerationConstraints predicateConstraints) throws NoAvailableEntityTypeException;
+  protected abstract Item<NbkGame> generate(GenerationConstraints generationConstraints) throws NoAvailableEntityTypeException;
 }

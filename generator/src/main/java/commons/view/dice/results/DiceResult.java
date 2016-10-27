@@ -38,7 +38,7 @@ public class DiceResult extends AbstractDiceResult {
   private void setDiceResultType() {
     if (dice.getScore() == 1) {
       diceResultType = EDiceResultType.CRITIC;
-    } else if (dice.getScore() == dice.getDiceMax().getDiceNumber()) {
+    } else if (dice.getScore() == dice.getDiceNumber()) {
       diceResultType = EDiceResultType.FUMBLE;
     } else {
       diceResultType = EDiceResultType.NORMAL;

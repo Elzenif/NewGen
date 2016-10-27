@@ -6,6 +6,7 @@ import commons.utils.Pair;
 import commons.view.commons.results.ResultRow;
 import commons.view.utils.ConstraintPanel;
 import commons.view.utils.HasConstraintPanel;
+import commons.view.utils.ViewUtils;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -82,21 +83,10 @@ public abstract class ConstraintOptionRow<T extends ResultRow> extends BorderLay
   protected void initDrawKeyConstraintPanel(Map<IDrawKey, Pair<JSpinner, SpinnerNumberModel>> map,
                                             IDrawKey[] keyValues, int defaultValue, int minValue, int maxValue) {
     for (IDrawKey key : keyValues) {
-      ConstraintPanel cPanel = new ConstraintPanel();
-      cPanel.setLayout(new BoxLayout(cPanel, BoxLayout.Y_AXIS));
-
-      JLabel jLabel = new JLabel(key.toString());
-      jLabel.setAlignmentX(LEFT_ALIGNMENT);
-
       SpinnerNumberModel spinnerNumberModel = new SpinnerNumberModel(defaultValue, minValue, maxValue, 1);
       JSpinner jSpinner = new JSpinner(spinnerNumberModel);
-      jSpinner.setAlignmentX(LEFT_ALIGNMENT);
-      jSpinner.setMaximumSize(jSpinner.getPreferredSize());
       map.put(key, new Pair<>(jSpinner, spinnerNumberModel));
-
-      cPanel.add(jLabel);
-      cPanel.add(jSpinner);
-      constraintPanel.add(cPanel);
+      constraintPanel.add(ViewUtils.createSpinnerWithLabelOnTop(key.toString(), jSpinner, null));
     }
   }
 }

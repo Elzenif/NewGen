@@ -15,6 +15,7 @@ public class DDTreasureOptionRow extends DDItemOptionRow {
   protected DDTreasureOptionRow() {
     super(EDDAvailableItem.TREASURE);
 
+
     finalizeRowConstruction(MessageFormat.format(resourceBundle.getString("tooltip.entity.generate"), name));
   }
 
