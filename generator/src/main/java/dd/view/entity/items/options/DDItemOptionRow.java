@@ -30,7 +30,7 @@ public abstract class DDItemOptionRow extends ItemOptionRow<DDGame> {
         resourceBundle.getString("tooltip.entity.quality.dd")));
   }
 
-  protected void setController(DDItemController itemController) {
+  protected void setControllers(DDItemController itemController) {
     super.setControllers(itemController);
     levelSpinner.addChangeListener(((DDItemController) controller).getLevelChangeListener());
   }

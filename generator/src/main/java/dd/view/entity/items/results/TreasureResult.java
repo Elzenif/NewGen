@@ -25,7 +25,7 @@ public class TreasureResult extends EntityResult {
   public String getRawResult() {
     return (treasures.isEmpty() || CollectionUtils.containsOnlyNull(treasures))
         ? "Rien de rien"
-        : String.join(", ", treasures.stream().map(DDTreasure::toString).collect(Collectors.toList()));
+        : String.join(",  ", treasures.stream().map(DDTreasure::toString).collect(Collectors.toList()));
   }
 
   @Override

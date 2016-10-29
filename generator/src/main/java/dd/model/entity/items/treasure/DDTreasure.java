@@ -3,11 +3,23 @@ package dd.model.entity.items.treasure;
 /**
  * Created by Germain on 26/10/2016.
  */
-public abstract class DDTreasure {
+public class DDTreasure {
 
   public static final int LEVEL_MAX = 2;
   protected String name;
   protected String value;
+
+  public DDTreasure() {
+  }
+
+  public DDTreasure(String name) {
+    this.name = name;
+  }
+
+  public DDTreasure(String name, String value) {
+    this.name = name;
+    this.value = value;
+  }
 
   public String getName() {
     return name;
@@ -31,7 +43,7 @@ public abstract class DDTreasure {
     if (name != null) {
       result += name;
       if (value != null) {
-        result += " " + value;
+        result += " (" + value + ")";
       }
     }
     return result;

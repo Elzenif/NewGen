@@ -52,4 +52,17 @@ public class CollectionUtils {
     }
     return true;
   }
+
+
+  public static <T> boolean doesNotContainNull(Collection<T> collection) {
+    if (collection.isEmpty()) {
+      return true;
+    }
+    for (T t : collection) {
+      if (t == null) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

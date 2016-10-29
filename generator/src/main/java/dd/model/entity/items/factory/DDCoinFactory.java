@@ -1,7 +1,6 @@
 package dd.model.entity.items.factory;
 
 import commons.model.dice.Dice;
-import dd.model.entity.items.treasure.DDCoin;
 import dd.model.entity.items.treasure.DDTreasure;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,6 +12,15 @@ import java.util.List;
  */
 public class DDCoinFactory extends DDTreasureFactory {
 
+  private static final DDCoinFactory INSTANCE = new DDCoinFactory();
+
+  private DDCoinFactory() {
+  }
+
+  public static DDCoinFactory getInstance() {
+    return INSTANCE;
+  }
+
   @Override
   protected List<DDTreasure> generate(int level, int diceResult) {
     return Collections.singletonList(getCoin(level, diceResult));
@@ -20,7 +28,7 @@ public class DDCoinFactory extends DDTreasureFactory {
 
   @SuppressWarnings("HardCodedStringLiteral")
   @Nullable
-  private DDCoin getCoin(int level, int diceResult) {
+  private DDTreasure getCoin(int level, int diceResult) {
     switch (level) {
       case 1:
         return getCoin(diceResult, 14, 29, 52, 95, new Dice(6), new Dice(8), new Dice(2, 8), new Dice(3),
@@ -46,8 +54,8 @@ public class DDCoinFactory extends DDTreasureFactory {
   }
 
   @Nullable
-  private DDCoin getCoin(int diceResult, int p0Dice, int p1Dice, int p2Dice, int p3Dice, Dice dice1, Dice dice2,
-                         Dice dice3, Dice dice4, String value1, String value2, String value3, String value4) {
+  private DDTreasure getCoin(int diceResult, int p0Dice, int p1Dice, int p2Dice, int p3Dice, Dice dice1, Dice dice2,
+                             Dice dice3, Dice dice4, String value1, String value2, String value3, String value4) {
     String value;
     Dice dice;
     if (diceResult <= p0Dice) {
@@ -66,6 +74,6 @@ public class DDCoinFactory extends DDTreasureFactory {
       value = value4;
     }
     dice.roll();
-    return new DDCoin(dice.getScore() + value);
+    return new DDTreasure(dice.getScore() + value);
   }
 }

@@ -62,5 +62,17 @@ public class CollectionUtilsTest {
     list.add(null);
     assertThat(CollectionUtils.containsOnlyNull(list)).isFalse();
   }
+
+  @Test
+  public void doesNotContainNullIsValid() {
+    List<Integer> list = new LinkedList<>();
+    assertThat(CollectionUtils.doesNotContainNull(list)).isTrue();
+    list.add(2);
+    assertThat(CollectionUtils.doesNotContainNull(list)).isTrue();
+    list.add(null);
+    assertThat(CollectionUtils.doesNotContainNull(list)).isFalse();
+    list.add(5);
+    assertThat(CollectionUtils.doesNotContainNull(list)).isFalse();
+  }
 }
 
