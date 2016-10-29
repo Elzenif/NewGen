@@ -21,20 +21,20 @@ import static commons.view.utils.Constants.resourceBundle;
  */
 public class NbkHumanoidOptionRow extends NbkLivingOptionRow {
 
+  private static final int DEFAULT_STAT = 10;
   private final Map<IDrawKey, Pair<JSpinner, SpinnerNumberModel>> statMap = new LinkedHashMap<>(EStat.values().length);
-  private final int defaultValue = 10;
 
   NbkHumanoidOptionRow() {
     super(ENbkAvailableLivings.HUMANOID);
 
-    initDrawKeyConstraintPanel(statMap, EStat.values(), defaultValue, 8, 13);
+    initDrawKeyConstraintPanel(statMap, EStat.values(), DEFAULT_STAT, 8, 13);
 
     finalizeRowConstruction(MessageFormat.format(resourceBundle.getString("tooltip.entity.generate"), name));
   }
 
   @Override
   public void setControllers(EntityResultRow resultRow) {
-    super.setControllers(new NbkHumanoidController(this, resultRow, defaultValue));
+    super.setControllers(new NbkHumanoidController(this, resultRow, DEFAULT_STAT));
     statMap.forEach((stat, pair) ->
         pair.getLeft().addChangeListener(((NbkHumanoidController) controller)
             .getDrawChangeListener((IDrawKeyIntegerValue) stat)));

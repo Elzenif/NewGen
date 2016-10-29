@@ -1,7 +1,6 @@
 package nbk.controller.entity.living;
 
 import commons.model.commons.constraints.GenerationConstraints;
-import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.view.entity.EntityResultRow;
 import nbk.model.entity.living.NbkHumanoid;
 import nbk.view.entity.living.options.NbkHumanoidOptionRow;
@@ -18,7 +17,7 @@ public class GenerateNbkHumanoidActionListener extends GenerateNbkLivingActionLi
 
   @SuppressWarnings("HardCodedStringLiteral")
   @Override
-  protected NbkHumanoid generate(GenerationConstraints generationConstraints) throws NoAvailableEntityTypeException {
+  protected NbkHumanoid generate(GenerationConstraints generationConstraints) {
     if (optionRow.isConstraintsCheckBoxSelected()) {
       return NbkHumanoid.create(generationConstraints);
     } else {

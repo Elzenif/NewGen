@@ -17,13 +17,14 @@ import static commons.view.utils.Constants.resourceBundle;
  */
 public abstract class DDItemOptionRow extends ItemOptionRow<DDGame> {
 
+  public static final int DEFAULT_LEVEL = 1;
   private final SpinnerNumberModel levelNumberModel;
   private final JSpinner levelSpinner;
 
   protected DDItemOptionRow(IAvailableItem<DDGame> availableItem) {
     super(availableItem, DDGame.getInstance().getAvailableItems());
 
-    levelNumberModel = new SpinnerNumberModel(1, 1, DDTreasure.LEVEL_MAX, 1);
+    levelNumberModel = new SpinnerNumberModel(DEFAULT_LEVEL, 1, DDTreasure.LEVEL_MAX, 1);
     levelSpinner = new JSpinner(levelNumberModel);
     constraintPanel.add(ViewUtils.createSpinnerWithLabelOnTop(resourceBundle.getString("row.item.level"), levelSpinner,
         resourceBundle.getString("tooltip.entity.quality.dd")));

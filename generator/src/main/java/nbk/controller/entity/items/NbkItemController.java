@@ -16,6 +16,7 @@ public abstract class NbkItemController extends ItemController<NbkGame> {
   protected NbkItemController(ItemOptionRow<NbkGame> itemOptionRow) {
     super(itemOptionRow);
     rarityChangeListener = new NbkRarityChangeListener(this, itemOptionRow);
+    updateRarityConstraint(() -> p -> true);
   }
 
   public abstract void updateRarityConstraint(GenericPredicateConstraint<EItemRarity> constraint);

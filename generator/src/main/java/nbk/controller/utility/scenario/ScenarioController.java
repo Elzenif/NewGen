@@ -16,14 +16,14 @@ import java.util.Map;
  */
 public class ScenarioController extends UtilityController {
 
-  private final Map<IDrawKeyIntegerValue, DrawChangeListener> drawChangeListenerMap
+  private final Map<IDrawKeyIntegerValue, DrawChangeListener<IDrawKeyIntegerValue>> drawChangeListenerMap
       = new LinkedHashMap<>(EScenarioDraw.values().length);
 
   public ScenarioController(ScenarioOptionRow scenarioOptionRow, UtilityResultRow scenarioResultRow, int defaultValue) {
     super(scenarioOptionRow);
     generateActionListener = new GenerateScenarioActionListener(scenarioOptionRow, scenarioResultRow, this);
     Arrays.stream(EScenarioDraw.values()).forEach(scenarioDraw -> {
-      drawChangeListenerMap.put(scenarioDraw, new DrawChangeListener(this, scenarioDraw));
+      drawChangeListenerMap.put(scenarioDraw, new DrawChangeListener<>(this, scenarioDraw));
       generationConstraints.getDrawKeyConstraint().put(scenarioDraw, defaultValue);
     });
   }

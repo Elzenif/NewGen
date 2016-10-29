@@ -18,7 +18,7 @@ public abstract class GenerateActionListener<OR extends ConstraintOptionRow<RR>,
 
   protected final OR optionRow;
   protected final RR resultRow;
-  protected final AbstractOptionRowController controller;
+  private final AbstractOptionRowController controller;
 
   protected GenerateActionListener(OR optionRow, RR resultRow, AbstractOptionRowController controller) {
     this.optionRow = optionRow;

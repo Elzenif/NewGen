@@ -26,7 +26,7 @@ public class NbkDungeonController extends AbstractOptionRowController implements
   private final ShowGridItemListener showGridItemListener;
   private final ZoomChangeListener zoomChangeListener;
 
-  private final Map<IDrawKey, DrawChangeListener> drawChangeListenerMap
+  private final Map<IDrawKey, DrawChangeListener<IDrawKey>> drawChangeListenerMap
       = new LinkedHashMap<>(EDungeonDraw.values().length);
 
   public NbkDungeonController(NbkDungeonOptionRow dungeonOptionRow, MapResultRow mapResultRow) {
@@ -39,7 +39,7 @@ public class NbkDungeonController extends AbstractOptionRowController implements
     zoomChangeListener = new ZoomChangeListener(mapResultRow);
 
     Arrays.stream(EDungeonDraw.values()).forEach(dungeonDraw -> {
-      drawChangeListenerMap.put(dungeonDraw, new DrawChangeListener(this, dungeonDraw));
+      drawChangeListenerMap.put(dungeonDraw, new DrawChangeListener<>(this, dungeonDraw));
       generationConstraints.getMapConstraint().put(dungeonDraw, dungeonDraw.getDefaultValue());
     });
   }

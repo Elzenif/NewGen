@@ -4,7 +4,6 @@ import commons.controller.entity.GenerateEntityActionListener;
 import commons.controller.entity.living.LivingController;
 import commons.model.commons.constraints.GenerationConstraints;
 import commons.model.entity.living.Living;
-import commons.utils.exception.NoAvailableEntityTypeException;
 import commons.view.entity.EntityResultRow;
 import commons.view.entity.results.living.LivingResult;
 import nbk.model.commons.NbkGame;
@@ -22,14 +21,9 @@ public abstract class GenerateNbkLivingActionListener extends GenerateEntityActi
 
   @Override
   protected LivingResult generateOneResult(GenerationConstraints drawKeyConstraint) {
-    try {
-      Living living = generate(drawKeyConstraint);
-      return new LivingResult(living);
-    } catch (NoAvailableEntityTypeException e) {
-      e.printStackTrace();
-      return new LivingResult(Living.stubbedLiving());
-    }
+    Living living = generate(drawKeyConstraint);
+    return new LivingResult(living);
   }
 
-  protected abstract Living<NbkGame> generate(GenerationConstraints drawKeyConstraint) throws NoAvailableEntityTypeException;
+  protected abstract Living<NbkGame> generate(GenerationConstraints drawKeyConstraint);
 }

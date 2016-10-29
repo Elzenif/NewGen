@@ -25,6 +25,7 @@ public class NbkWeaponController extends NbkItemController {
     generateActionListener = new GenerateNbkWeaponActionListener(nbkWeaponOptionRow, entityResultRow, this);
     Arrays.stream(ENbHands.values()).forEach(nbHands ->
             nbHandsActionListenerEnumMap.put(nbHands, new NbHandsActionListener(this, nbHands)));
+    updateNbHandsConstraint(() -> p -> true);
   }
 
   public NbHandsActionListener getNbHandsActionListener(ENbHands nbHands) {

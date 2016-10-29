@@ -17,6 +17,8 @@ public abstract class DDItemController extends ItemController<DDGame> {
     super(itemOptionRow);
     rarityChangeListener = new DDRarityChangeListener(itemOptionRow, this);
     levelChangeListener = new DDLevelChangeListener(itemOptionRow, this);
+    updateRarityConstraint(DDItemOptionRow.DEFAULT_RARITY);
+    updateLevelConstraint(DDItemOptionRow.DEFAULT_LEVEL);
   }
 
   @Override

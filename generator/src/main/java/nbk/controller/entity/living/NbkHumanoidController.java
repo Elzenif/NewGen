@@ -19,7 +19,7 @@ import java.util.Map;
 public class NbkHumanoidController extends LivingController<NbkGame>
     implements HasDrawKeysController<IDrawKeyIntegerValue> {
 
-  private final Map<IDrawKeyIntegerValue, DrawChangeListener> drawChangeListenerMap
+  private final Map<IDrawKeyIntegerValue, DrawChangeListener<IDrawKeyIntegerValue>> drawChangeListenerMap
       = new LinkedHashMap<>(EStat.values().length);
 
   public NbkHumanoidController(NbkHumanoidOptionRow nbkHumanoidOptionRow, EntityResultRow resultRow,
@@ -27,7 +27,7 @@ public class NbkHumanoidController extends LivingController<NbkGame>
     super(nbkHumanoidOptionRow);
     generateActionListener = new GenerateNbkHumanoidActionListener(nbkHumanoidOptionRow, resultRow, this);
     Arrays.stream(EStat.values()).forEach(stat -> {
-      drawChangeListenerMap.put(stat, new DrawChangeListener(this, stat));
+      drawChangeListenerMap.put(stat, new DrawChangeListener<>(this, stat));
       generationConstraints.getDrawKeyConstraint().put(stat, defaultValue);
     });
   }

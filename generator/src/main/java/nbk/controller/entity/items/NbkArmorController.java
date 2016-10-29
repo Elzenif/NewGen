@@ -22,6 +22,7 @@ public class NbkArmorController extends NbkItemController {
     generateActionListener = new GenerateNbkArmorActionListener(entityOptionRow, entityResultRow, this);
     Arrays.stream(EBodyPart.values()).forEach(bodyPart ->
             bodyPartActionListenerMap.put(bodyPart, new BodyPartActionListener(this, bodyPart)));
+    updateBodyPartConstraint(() -> p -> true);
   }
 
   public BodyPartActionListener getBodyPartActionListener(EBodyPart bodyPart) {
@@ -31,11 +32,13 @@ public class NbkArmorController extends NbkItemController {
   @Override
   public void updateRarityConstraint(GenericPredicateConstraint<EItemRarity> constraint) {
     generationConstraints.getPredicateConstraints().clear(ENbkPredefinedArmor.getConstraints(), EItemRarity.class);
-    generationConstraints.getPredicateConstraints().update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class, constraint);
+    generationConstraints.getPredicateConstraints().update(ENbkPredefinedArmor.getConstraints(), EItemRarity.class,
+        constraint);
   }
 
   public void updateBodyPartConstraint(GenericPredicateConstraint<EBodyPart> constraint) {
-    generationConstraints.getPredicateConstraints().update(ENbkPredefinedArmor.getConstraints(), EBodyPart.class, constraint);
+    generationConstraints.getPredicateConstraints().update(ENbkPredefinedArmor.getConstraints(), EBodyPart.class,
+        constraint);
   }
 
 }

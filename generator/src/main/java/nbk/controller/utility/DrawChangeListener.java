@@ -11,12 +11,12 @@ import java.awt.event.ActionListener;
 /**
  * Created by Germain on 01/10/2016.
  */
-public class DrawChangeListener implements ChangeListener, ActionListener {
+public class DrawChangeListener<K extends IDrawKey> implements ChangeListener, ActionListener {
 
-  private final HasDrawKeysController controller;
-  private final IDrawKey drawKey;
+  private final HasDrawKeysController<K> controller;
+  private final K drawKey;
 
-  public DrawChangeListener(HasDrawKeysController controller, IDrawKey drawKey) {
+  public DrawChangeListener(HasDrawKeysController<K> controller, K drawKey) {
     this.controller = controller;
     this.drawKey = drawKey;
   }

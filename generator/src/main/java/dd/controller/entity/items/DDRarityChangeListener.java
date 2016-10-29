@@ -20,7 +20,7 @@ public class DDRarityChangeListener implements ChangeListener {
 
   @Override
   public void stateChanged(ChangeEvent e) {
-    int rarityLevel = itemOptionRow.getQuality();
+    int rarityLevel = itemOptionRow.getRarity();
     itemController.updateRarityConstraint(rarityLevel);
   }
 }

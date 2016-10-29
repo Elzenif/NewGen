@@ -16,14 +16,14 @@ import java.util.Map;
  */
 public class LoveController extends UtilityController {
 
-  private final Map<IDrawKeyIntegerValue, DrawChangeListener> drawChangeListenerMap
+  private final Map<IDrawKeyIntegerValue, DrawChangeListener<IDrawKeyIntegerValue>> drawChangeListenerMap
       = new LinkedHashMap<>(ELoveDraw.values().length);
 
   public LoveController(LoveOptionRow loveOptionRow, UtilityResultRow loveResultRow, int defaultValue) {
     super(loveOptionRow);
     generateActionListener = new GenerateLoveActionListener(loveOptionRow, loveResultRow, this);
     Arrays.stream(ELoveDraw.values()).forEach(loveDraw -> {
-      drawChangeListenerMap.put(loveDraw, new DrawChangeListener(this, loveDraw));
+      drawChangeListenerMap.put(loveDraw, new DrawChangeListener<>(this, loveDraw));
       generationConstraints.getDrawKeyConstraint().put(loveDraw, defaultValue);
     });
   }

@@ -26,7 +26,7 @@ public class NbkRarityChangeListener implements ChangeListener {
   @Override
   public void stateChanged(ChangeEvent e) {
     GenericPredicateConstraint<EItemRarity> constraint;
-    int rarityLevel = itemOptionRow.getQuality();
+    int rarityLevel = itemOptionRow.getRarity();
     constraint = findFirstKeySuchAsIntegerIsLowerThanSumOfPrecedentValues(rarityLevel,
         EItemRarity.getConstraintMapView());
     itemController.updateRarityConstraint(constraint);
