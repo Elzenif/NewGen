@@ -1,7 +1,7 @@
 package dd.model.entity.items.factory;
 
 import commons.model.dice.Dice;
-import dd.model.entity.items.treasure.DDTreasure;
+import dd.model.entity.items.treasures.DDTreasure;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;

@@ -2,9 +2,11 @@ package dd.model.entity.items.factory;
 
 import commons.model.commons.constraints.DrawKeyConstraint;
 import commons.model.commons.constraints.GenerationConstraints;
+import commons.model.dice.Dice;
 import commons.utils.MathUtils;
-import dd.model.entity.items.treasure.DDTreasure;
-import dd.model.entity.items.treasure.EDDTreasureDraw;
+import dd.model.entity.items.factory.subfactory.DDTreasureSubFactory;
+import dd.model.entity.items.treasures.DDTreasure;
+import dd.model.entity.items.treasures.EDDTreasureDraw;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -40,4 +42,10 @@ public abstract class DDTreasureFactory {
   }
 
   protected abstract List<DDTreasure> generate(int level, int diceResult);
+
+  protected <F extends DDTreasureSubFactory> F getSubFactory(F factory, Dice dice) {
+    dice.roll();
+    factory.setNumberToGenerate(dice.getScore());
+    return factory;
+  }
 }

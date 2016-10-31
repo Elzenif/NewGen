@@ -3,7 +3,7 @@ package dd.view.entity.items.results;
 import commons.utils.CollectionUtils;
 import commons.utils.ColorUtils;
 import commons.view.entity.results.EntityResult;
-import dd.model.entity.items.treasure.DDTreasure;
+import dd.model.entity.items.treasures.DDTreasure;
 
 import java.awt.Color;
 import java.util.List;

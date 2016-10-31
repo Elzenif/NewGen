@@ -1,4 +1,4 @@
-package dd.model.entity.items.treasure;
+package dd.model.entity.items.treasures;
 
 import commons.model.commons.IDrawKeyIntegerValue;
 

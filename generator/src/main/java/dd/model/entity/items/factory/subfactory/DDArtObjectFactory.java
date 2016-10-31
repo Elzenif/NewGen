@@ -1,12 +1,12 @@
 package dd.model.entity.items.factory.subfactory;
 
-import dd.model.entity.items.characteristics.fields.DDItemType;
-import dd.model.entity.items.treasure.enums.EDDArtObject;
+import dd.model.entity.items.characteristics.fields.DDOneRarityItemType;
+import dd.model.entity.items.treasures.enums.EDDArtObject;
 
 /**
  * Created by Germain on 29/10/2016.
  */
-public class DDArtObjectFactory extends DDTreasureSubFactory {
+public class DDArtObjectFactory extends DDOneRarityTreasureSubFactory {
 
   private static final DDArtObjectFactory INSTANCE = new DDArtObjectFactory();
 
@@ -18,7 +18,7 @@ public class DDArtObjectFactory extends DDTreasureSubFactory {
   }
 
   @Override
-  protected DDItemType[] getValues() {
+  protected DDOneRarityItemType[] getValues() {
     return EDDArtObject.values();
   }
 }

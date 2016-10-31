@@ -5,7 +5,7 @@ import commons.view.entity.items.ItemOptionRow;
 import commons.view.utils.ViewUtils;
 import dd.controller.entity.items.DDItemController;
 import dd.model.commons.DDGame;
-import dd.model.entity.items.treasure.DDTreasure;
+import dd.model.entity.items.treasures.DDTreasure;
 
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;

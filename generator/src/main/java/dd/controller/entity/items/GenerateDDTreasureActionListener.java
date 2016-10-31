@@ -5,6 +5,7 @@ import commons.model.commons.constraints.GenerationConstraints;
 import commons.view.entity.EntityResultRow;
 import dd.model.commons.DDGame;
 import dd.model.entity.items.factory.DDCoinFactory;
+import dd.model.entity.items.factory.DDNonPreciousItemFactory;
 import dd.model.entity.items.factory.DDPreciousItemFactory;
 import dd.view.entity.items.options.DDTreasureOptionRow;
 import dd.view.entity.items.results.TreasureResult;
@@ -16,6 +17,7 @@ public class GenerateDDTreasureActionListener extends GenerateEntityActionListen
 
   private final DDCoinFactory coinFactory;
   private final DDPreciousItemFactory preciousItemFactory;
+  private final DDNonPreciousItemFactory itemFactory;
 
   public GenerateDDTreasureActionListener(DDTreasureOptionRow treasureOptionRow, EntityResultRow entityResultRow,
                                           DDTreasureController treasureController) {
@@ -23,8 +25,10 @@ public class GenerateDDTreasureActionListener extends GenerateEntityActionListen
 
     coinFactory = DDCoinFactory.getInstance();
     preciousItemFactory = DDPreciousItemFactory.getInstance();
+    itemFactory = DDNonPreciousItemFactory.getInstance();
 
     coinFactory.setNextFactory(preciousItemFactory);
+    preciousItemFactory.setNextFactory(itemFactory);
   }
 
   @Override

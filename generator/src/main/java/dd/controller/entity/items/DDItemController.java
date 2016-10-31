@@ -2,7 +2,7 @@ package dd.controller.entity.items;
 
 import commons.controller.entity.items.ItemController;
 import dd.model.commons.DDGame;
-import dd.model.entity.items.treasure.EDDTreasureDraw;
+import dd.model.entity.items.treasures.EDDTreasureDraw;
 import dd.view.entity.items.options.DDItemOptionRow;
 
 /**

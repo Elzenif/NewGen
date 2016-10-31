@@ -1,6 +1,6 @@
 package dd.model.entity.items.factory;
 
-import dd.model.entity.items.treasure.DDTreasure;
+import dd.model.entity.items.treasures.DDTreasure;
 import org.junit.Before;
 import org.junit.Test;
 

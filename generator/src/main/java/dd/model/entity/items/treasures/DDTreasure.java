@@ -1,4 +1,4 @@
-package dd.model.entity.items.treasure;
+package dd.model.entity.items.treasures;
 
 /**
  * Created by Germain on 26/10/2016.
