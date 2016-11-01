@@ -2,7 +2,7 @@ package dd.model.entity.items.treasures.enums;
 
 import commons.model.dice.Dice;
 import commons.model.entity.characteristics.primary.CustomRarity;
-import dd.model.entity.items.characteristics.builders.DDItemTypeBuilder;
+import dd.model.entity.items.characteristics.builders.DDOneRarityItemTypeBuilder;
 import dd.model.entity.items.characteristics.fields.DDOneRarityItemType;
 
 /**
@@ -11,45 +11,53 @@ import dd.model.entity.items.characteristics.fields.DDOneRarityItemType;
 @SuppressWarnings("SpellCheckingInspection")
 public enum EDDSpecialObject implements DDOneRarityItemType {
 
-  SO1(new DDItemTypeBuilder()
+  SO1(new DDOneRarityItemTypeBuilder()
       .setNames("feu grégeois")
       .setRarity(new CustomRarity(12))
-      .setValue(new Dice(1, 4), " flasques, 20 po chacune")
+      .setDiceValue(new Dice(1, 4))
+      .setCoinValue(" flasques, 20 po chacune")
   ),
-  SO2(new DDItemTypeBuilder()
+  SO2(new DDOneRarityItemTypeBuilder()
       .setNames("acide")
       .setRarity(new CustomRarity(12))
-      .setValue(new Dice(2, 4), " flasques, 10 po chacune")
+      .setDiceValue(new Dice(2, 4))
+      .setCoinValue(" flasques, 10 po chacune")
   ),
-  SO3(new DDItemTypeBuilder()
+  SO3(new DDOneRarityItemTypeBuilder()
       .setNames("bâtonnets fumigènes")
       .setRarity(new CustomRarity(12))
-      .setValue(new Dice(1, 4), ", 20 po chacun")
+      .setDiceValue(new Dice(1, 4))
+      .setCoinValue(", 20 po chacun")
   ),
-  SO4(new DDItemTypeBuilder()
+  SO4(new DDOneRarityItemTypeBuilder()
       .setNames("eau bénite")
       .setRarity(new CustomRarity(12))
-      .setValue(new Dice(1, 4), " flasques, 25 po chacune")
+      .setDiceValue(new Dice(1, 4))
+      .setCoinValue(" flasques, 25 po chacune")
   ),
-  SO5(new DDItemTypeBuilder()
+  SO5(new DDOneRarityItemTypeBuilder()
       .setNames("antidote")
       .setRarity(new CustomRarity(14))
-      .setValue(new Dice(1, 4), " doses, 50 po chacune")
+      .setDiceValue(new Dice(1, 4))
+      .setCoinValue(" doses, 50 po chacune")
   ),
-  SO6(new DDItemTypeBuilder()
+  SO6(new DDOneRarityItemTypeBuilder()
       .setNames("torche éternelle")
       .setRarity(new CustomRarity(12))
-      .setValue(new Dice(1, 1), " 50 po ?")
+      .setDiceValue(new Dice(1, 1))
+      .setCoinValue(" 50 po ?")
   ),
-  SO7(new DDItemTypeBuilder()
+  SO7(new DDOneRarityItemTypeBuilder()
       .setNames("sacoches immobilisantes")
       .setRarity(new CustomRarity(14))
-      .setValue(new Dice(1, 4), ", 50 po chacune")
+      .setDiceValue(new Dice(1, 4))
+      .setCoinValue(", 50 po chacune")
   ),
-  SO8(new DDItemTypeBuilder()
+  SO8(new DDOneRarityItemTypeBuilder()
       .setNames("pierres à tonnerre")
       .setRarity(new CustomRarity(12))
-      .setValue(new Dice(1, 4), ", 30 po chacune")
+      .setDiceValue(new Dice(1, 4))
+      .setCoinValue(", 30 po chacune")
   );
 
   private final String name;
@@ -57,7 +65,7 @@ public enum EDDSpecialObject implements DDOneRarityItemType {
   private final Dice diceValue;
   private final String coinValue;
 
-  EDDSpecialObject(DDItemTypeBuilder builder) {
+  EDDSpecialObject(DDOneRarityItemTypeBuilder builder) {
     name = builder.getNames().get(0);
     rarity = builder.getRarity();
     diceValue = builder.getDiceValue();
