@@ -3,6 +3,8 @@ package dd.model.entity.items.factory.subfactory.enums;
 import commons.model.entity.characteristics.primary.CustomRarity;
 import dd.model.entity.items.characteristics.fields.DDOneRarityItemTypeFactory;
 import dd.model.entity.items.factory.subfactory.DDMasterworkCommonMeleeWeaponFactory;
+import dd.model.entity.items.factory.subfactory.DDMasterworkCommonRangeWeaponFactory;
+import dd.model.entity.items.factory.subfactory.DDMasterworkUncommonWeaponFactory;
 import dd.model.entity.items.factory.subfactory.DDOneRarityTreasureSubFactory;
 
 /**
@@ -10,7 +12,9 @@ import dd.model.entity.items.factory.subfactory.DDOneRarityTreasureSubFactory;
  */
 public enum EDDNonMagicWeaponFactory implements DDOneRarityItemTypeFactory {
 
-  F1(50, DDMasterworkCommonMeleeWeaponFactory.getInstance());
+  F1(50, DDMasterworkCommonMeleeWeaponFactory.getInstance()),
+  F2(20, DDMasterworkUncommonWeaponFactory.getInstance()),
+  F3(30, DDMasterworkCommonRangeWeaponFactory.getInstance());
 
   private final CustomRarity rarity;
   private final DDOneRarityTreasureSubFactory factory;

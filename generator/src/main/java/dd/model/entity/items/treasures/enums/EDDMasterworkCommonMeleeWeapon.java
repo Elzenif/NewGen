@@ -8,7 +8,7 @@ import dd.model.entity.items.characteristics.fields.DDOneRarityItemType;
  * Created by Germain on 01/11/2016.
  */
 @SuppressWarnings("SpellCheckingInspection")
-public enum EDDMasterworkCommonMeleeWeaponFactory implements DDOneRarityItemType {
+public enum EDDMasterworkCommonMeleeWeapon implements DDOneRarityItemType {
 
   W1(new DDOneRarityItemTypeBuilder()
       .setNames("bâton")
@@ -79,7 +79,7 @@ public enum EDDMasterworkCommonMeleeWeaponFactory implements DDOneRarityItemType
   private final String coinValue;
   private final CustomRarity rarity;
 
-  EDDMasterworkCommonMeleeWeaponFactory(DDOneRarityItemTypeBuilder builder) {
+  EDDMasterworkCommonMeleeWeapon(DDOneRarityItemTypeBuilder builder) {
     name = builder.getNames().get(0);
     coinValue = builder.getCoinValue();
     rarity = builder.getRarity();

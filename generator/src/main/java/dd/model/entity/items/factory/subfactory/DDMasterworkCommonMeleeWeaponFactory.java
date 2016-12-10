@@ -1,7 +1,7 @@
 package dd.model.entity.items.factory.subfactory;
 
 import dd.model.entity.items.characteristics.fields.DDOneRarityItemType;
-import dd.model.entity.items.treasures.enums.EDDMasterworkCommonMeleeWeaponFactory;
+import dd.model.entity.items.treasures.enums.EDDMasterworkCommonMeleeWeapon;
 
 /**
  * Created by Germain on 01/11/2016.
@@ -19,6 +19,6 @@ public class DDMasterworkCommonMeleeWeaponFactory extends DDOneRarityTreasureSub
 
   @Override
   protected DDOneRarityItemType[] getValues() {
-    return EDDMasterworkCommonMeleeWeaponFactory.values();
+    return EDDMasterworkCommonMeleeWeapon.values();
   }
 }
