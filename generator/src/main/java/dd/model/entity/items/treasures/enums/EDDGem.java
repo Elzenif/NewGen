@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Germain on 29/10/2016.
  */
-@SuppressWarnings({"HardCodedStringLiteral", "SpellCheckingInspection"})
+@SuppressWarnings("SpellCheckingInspection")
 public enum EDDGem implements DDOneRarityItemType {
 
   GEM1(new DDOneRarityItemTypeBuilder()
