@@ -44,7 +44,7 @@ public enum EDDSpecialObject implements DDOneRarityItemType {
   SO6(new DDOneRarityItemTypeBuilder()
       .setNames("torche éternelle")
       .setRarity(new CustomRarity(12))
-      .setDiceValue(new Dice(1, 1))
+      .setDiceValue(Dice.D1)
       .setCoinValue(" 50 po ?")
   ),
   SO7(new DDOneRarityItemTypeBuilder()

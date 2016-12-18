@@ -7,6 +7,8 @@ import commons.utils.MathUtils;
  */
 public class Dice {
 
+  public static final Dice D1 = new Dice(1, 1);
+
   private final int diceNumber;
   private final int addScore;
   private final DiceTestInfo diceTestInfo;

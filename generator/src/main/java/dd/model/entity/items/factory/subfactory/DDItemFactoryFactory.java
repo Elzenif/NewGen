@@ -3,8 +3,8 @@ package dd.model.entity.items.factory.subfactory;
 import commons.model.entity.utils.EntityUtils;
 import commons.utils.exception.NoAvailableEntityTypeException;
 import dd.model.entity.items.characteristics.EDDItemPowerRarityKey;
-import dd.model.entity.items.characteristics.fields.DDMultipleRaritiesItemType;
 import dd.model.entity.items.factory.subfactory.enums.EDDItemFactoryFactory;
+import dd.model.entity.items.treasures.DDTreasure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ public class DDItemFactoryFactory extends DDMultipleRaritiesTreasureSubFactory {
 
   @SuppressWarnings("HardCodedStringLiteral")
   @Override
-  protected DDMultipleRaritiesItemType[] getValues(EDDItemPowerRarityKey powerRarityKey) {
+  protected DDTreasure getTreasure(EDDItemPowerRarityKey powerRarityKey) {
     EDDItemFactoryFactory factory;
     try {
       factory = EntityUtils.selectRandomWithCustomRarity(EDDItemFactoryFactory.values(), powerRarityKey);
@@ -33,6 +33,6 @@ public class DDItemFactoryFactory extends DDMultipleRaritiesTreasureSubFactory {
       factory = EDDItemFactoryFactory.values()[0];
       LOGGER.error("Error while selecting random factory");
     }
-    return factory.getFactory().getValues(powerRarityKey);
+    return factory.getFactory().getTreasure(powerRarityKey);
   }
 }

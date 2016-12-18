@@ -20,92 +20,92 @@ public enum EDDRing implements DDMultipleRaritiesItemType {
       .setWeakRarity(18)
       .setInterRarity(0)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "2000 po")),
+      .setValue(Dice.D1, "2000 po")),
   R2(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("feuille morte")
       .setWeakRarity(10)
       .setInterRarity(0)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "2200 po")),
+      .setValue(Dice.D1, "2200 po")),
   R3(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("escalade")
       .setWeakRarity(8)
       .setInterRarity(0)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "2500 po")),
+      .setValue(Dice.D1, "2500 po")),
   R4(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("nage")
       .setWeakRarity(8)
       .setInterRarity(0)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "2500 po")),
+      .setValue(Dice.D1, "2500 po")),
   R5(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("saut")
       .setWeakRarity(8)
       .setInterRarity(0)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "2500 po")),
+      .setValue(Dice.D1, "2500 po")),
   R6(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("subsistance")
       .setWeakRarity(8)
       .setInterRarity(0)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "2500 po")),
+      .setValue(Dice.D1, "2500 po")),
   R7(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("contresort")
       .setWeakRarity(10)
       .setInterRarity(5)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "4000 po")),
+      .setValue(Dice.D1, "4000 po")),
   R8(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("barrière mentale")
       .setWeakRarity(5)
       .setInterRarity(3)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "8000 po")),
+      .setValue(Dice.D1, "8000 po")),
   R9(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("protection +2")
       .setWeakRarity(5)
       .setInterRarity(10)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "8000 po")),
+      .setValue(Dice.D1, "8000 po")),
   R10(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("bouclier de force")
       .setWeakRarity(5)
       .setInterRarity(5)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "8500 po")),
+      .setValue(Dice.D1, "8500 po")),
   R11(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("bélier")
       .setWeakRarity(5)
       .setInterRarity(5)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "8600 po")),
+      .setValue(Dice.D1, "8600 po")),
 
   R15(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("amitié avec les animaux")
       .setWeakRarity(3)
       .setInterRarity(5)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "10800 po")),
+      .setValue(Dice.D1, "10800 po")),
   R16(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("résistance aux énergies destructives, mineur")
       .setWeakRarity(3)
       .setInterRarity(5)
       .setPowerfulRarity(2)
-      .setValue(new Dice(1, 1), "12000 po")),
+      .setValue(Dice.D1, "12000 po")),
   R17(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("caméléon")
       .setWeakRarity(2)
       .setInterRarity(4)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "12700 po")),
+      .setValue(Dice.D1, "12700 po")),
   R18(new DDMultipleRaritiesItemTypeBuilder()
       .setNames("marche sur l'onde")
       .setWeakRarity(2)
       .setInterRarity(5)
       .setPowerfulRarity(0)
-      .setValue(new Dice(1, 1), "15000 po")),
+      .setValue(Dice.D1, "15000 po")),
   // TODO continue other rarities
   ;
 

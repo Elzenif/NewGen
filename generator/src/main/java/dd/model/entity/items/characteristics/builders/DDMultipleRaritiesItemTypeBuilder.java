@@ -20,6 +20,7 @@ public class DDMultipleRaritiesItemTypeBuilder {
   private final Map<EDDItemPowerRarityKey, HasRarity> map = new HashMap<>();
   private Dice diceValue;
   private String coinValue;
+  private boolean deadlyArrow = false;
 
   public DDMultipleRaritiesItemTypeBuilder setNames(String first, String... others) {
     names.add(first);
@@ -48,6 +49,11 @@ public class DDMultipleRaritiesItemTypeBuilder {
     return this;
   }
 
+  public DDMultipleRaritiesItemTypeBuilder deadlyArrow() {
+    deadlyArrow = true;
+    return this;
+  }
+
   public List<String> getNames() {
     return names;
   }
@@ -64,4 +70,7 @@ public class DDMultipleRaritiesItemTypeBuilder {
     return coinValue;
   }
 
+  public boolean isDeadlyArrow() {
+    return deadlyArrow;
+  }
 }

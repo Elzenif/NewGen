@@ -6,6 +6,7 @@ import dd.model.entity.items.characteristics.EDDItemPowerRarityKey;
 import dd.model.entity.items.characteristics.fields.DDMultipleRaritiesItemTypeFactory;
 import dd.model.entity.items.factory.subfactory.DDMultipleRaritiesTreasureSubFactory;
 import dd.model.entity.items.factory.subfactory.DDRingFactory;
+import dd.model.entity.items.factory.subfactory.DDWeaponFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,8 @@ import java.util.Map;
  */
 public enum EDDItemFactoryFactory implements DDMultipleRaritiesItemTypeFactory<EDDItemPowerRarityKey> {
 
-  F1(DDRingFactory.getInstance(), 2, 10, 10);
+  F1(DDRingFactory.getInstance(), 2, 10, 10),
+  F2(DDWeaponFactory.getInstance(), 5, 10, 10);
 
   private final DDMultipleRaritiesTreasureSubFactory factory;
   private final Map<EDDItemPowerRarityKey, HasRarity> map = new HashMap<>();

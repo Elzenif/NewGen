@@ -30,7 +30,7 @@ public class DDPreciousItemFactory extends DDTreasureFactory {
   private List<DDTreasure> generateFromPreciousItemSubFactory(int level, int diceResult) {
     switch (level) {
       case 1:
-        return generateFromPreciousItemSubFactory(diceResult, 90, 95, new Dice(1, 1), new Dice(1, 1));
+        return generateFromPreciousItemSubFactory(diceResult, 90, 95, Dice.D1, Dice.D1);
       case 2:
         return generateFromPreciousItemSubFactory(diceResult, 81, 95, new Dice(1, 3), new Dice(1, 3));
       default:

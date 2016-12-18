@@ -31,9 +31,9 @@ public class DDNonPreciousItemFactory extends DDTreasureFactory {
   private List<DDTreasure> generateFromItemSubFactory(int level, int diceResult) {
     switch (level) {
       case 1:
-        return generateFromItemSubFactory(diceResult, 71, 95, new Dice(1, 1), new Dice(1, 1));
+        return generateFromItemSubFactory(diceResult, 71, 95, Dice.D1, Dice.D1);
       case 2:
-        return generateFromItemSubFactory(diceResult, 49, 85, new Dice(1, 1), new Dice(1, 1));
+        return generateFromItemSubFactory(diceResult, 49, 85, Dice.D1, Dice.D1);
       default:
         return Collections.emptyList();
     }
