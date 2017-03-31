@@ -1,8 +1,8 @@
 package commons.view.dice.results;
 
 
+import commons.Constants;
 import commons.utils.ColorUtils;
-import commons.view.utils.Constants;
 
 import java.awt.Color;
 import java.awt.Font;

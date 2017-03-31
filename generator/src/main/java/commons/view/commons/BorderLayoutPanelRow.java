@@ -1,6 +1,6 @@
 package commons.view.commons;
 
-import commons.view.utils.Constants;
+import commons.Constants;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.JLabel;

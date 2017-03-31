@@ -1,6 +1,6 @@
 package commons.model.map;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 24/09/2016.

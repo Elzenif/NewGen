@@ -14,16 +14,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 24/07/2016.
  */
-public abstract class GameTabbedPanelEmbedded<G extends Game> extends JTabbedPane implements Controller {
+public abstract class GameTabbedPanelEmbedded<G extends Game> extends JTabbedPane implements Controller<MainFrame> {
 
   protected final Map<String, JPanel> panelMap = new LinkedHashMap<>();
 
-  protected final List<Controller> controllers = new ArrayList<>();
+  protected final List<Controller<MainFrame>> controllers = new ArrayList<>();
 
   private final HiddenPanel<G> hiddenPanel;
   private final DicePanel dicePanel;

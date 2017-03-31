@@ -5,7 +5,7 @@ import commons.view.entity.EntityPanel;
 import dd.model.commons.DDGame;
 import dd.view.entity.items.options.EDDAvailableItemsRow;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 25/10/2016.

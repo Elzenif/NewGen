@@ -1,6 +1,6 @@
 package commons.model.map;
 
-import commons.model.commons.HasName;
+import commons.model.utils.HasName;
 
 /**
  * Created by Germain on 24/09/2016.

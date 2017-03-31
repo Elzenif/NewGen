@@ -5,12 +5,12 @@ import commons.view.MainFrame;
 
 import javax.swing.JMenuItem;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 08/10/2016.
  */
-public class HelpMenu extends Menu {
+public class HelpMenu extends AMenu<MainFrame> {
 
   private final JMenuItem aboutMenuItem;
 

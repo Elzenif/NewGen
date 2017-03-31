@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 07/05/2016.

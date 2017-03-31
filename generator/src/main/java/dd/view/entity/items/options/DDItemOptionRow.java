@@ -10,7 +10,7 @@ import dd.model.entity.items.treasures.DDTreasure;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 25/10/2016.

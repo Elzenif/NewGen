@@ -1,9 +1,9 @@
 package commons.view.commons.options;
 
+import commons.Constants;
 import commons.utils.StringUtils;
 import commons.view.commons.BorderLayoutPanelRow;
 import commons.view.commons.results.ResultRow;
-import commons.view.utils.Constants;
 
 import javax.swing.JLabel;
 

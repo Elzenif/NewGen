@@ -10,7 +10,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.util.EnumSet;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 05/06/2016.

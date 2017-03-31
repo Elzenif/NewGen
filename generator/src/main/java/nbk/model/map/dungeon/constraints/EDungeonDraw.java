@@ -3,7 +3,7 @@ package nbk.model.map.dungeon.constraints;
 import commons.model.commons.IDrawKey;
 import org.jetbrains.annotations.Contract;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 02/10/2016.

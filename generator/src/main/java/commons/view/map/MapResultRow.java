@@ -1,7 +1,7 @@
 package commons.view.map;
 
+import commons.Constants;
 import commons.view.commons.results.GraphResultRow;
-import commons.view.utils.Constants;
 import commons.view.utils.ConstraintPanel;
 import nbk.controller.map.NbkDungeonController;
 import nbk.view.map.results.DungeonResult;
@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JSlider;
 import java.util.Collection;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 24/09/2016.

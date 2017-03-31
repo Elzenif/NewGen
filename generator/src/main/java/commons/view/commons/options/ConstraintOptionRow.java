@@ -18,10 +18,10 @@ import javax.swing.SpinnerNumberModel;
 import java.awt.FlowLayout;
 import java.util.Map;
 
-import static commons.view.utils.Constants.DAUPHINN_FONT;
-import static commons.view.utils.Constants.JPANEL_HGAP;
-import static commons.view.utils.Constants.JPANEL_VGAP;
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.DAUPHINN_FONT;
+import static commons.Constants.JPANEL_HGAP;
+import static commons.Constants.JPANEL_VGAP;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 29/09/2016.

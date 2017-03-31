@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>common</module>
         <module>generator</module>
         <module>pk-helper</module>
     </modules>
@@ -27,6 +28,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>elzenif</groupId>
+                <artifactId>common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations-java5</artifactId>

@@ -1,10 +1,10 @@
 package commons.view;
 
+import commons.Constants;
 import commons.controller.MainFrameWindowListener;
 import commons.controller.intf.Controller;
 import commons.view.commons.game.GameTabbedPanel;
 import commons.view.menu.MenuBar;
-import commons.view.utils.Constants;
 import commons.view.utils.ScreenCheck;
 import org.jetbrains.annotations.NonNls;
 import org.slf4j.Logger;
@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.Container;
-import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.BufferedReader;
@@ -26,21 +25,21 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 07/05/2016.
  */
-public class MainFrame extends JFrame {
+public class MainFrame extends AMainFrame {
 
   @NonNls
   public static final String GUI_PROP_FILE = "gui.properties";
   private static final Logger LOGGER = LoggerFactory.getLogger(MainFrame.class);
-  private final List<Controller> controllers = new ArrayList<>();
+  private final List<Controller<MainFrame>> controllers = new ArrayList<>();
   private MenuBar menuBar;
   private GameTabbedPanel tabbedPane;
 
-  public MainFrame() throws HeadlessException {
+  public MainFrame() {
     setUpUIComponents();
     setControllers();
 

@@ -3,7 +3,7 @@ package dd.model.entity.items;
 import commons.model.entity.items.IAvailableItem;
 import dd.model.commons.DDGame;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 25/10/2016.

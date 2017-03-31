@@ -1,6 +1,6 @@
 package commons.view.dice.results;
 
-import commons.view.utils.Constants;
+import commons.Constants;
 
 import java.awt.Font;
 

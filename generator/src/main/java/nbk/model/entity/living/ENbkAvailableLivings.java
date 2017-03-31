@@ -3,7 +3,7 @@ package nbk.model.entity.living;
 import commons.model.entity.living.IAvailableLiving;
 import nbk.model.commons.NbkGame;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 28/08/2016.

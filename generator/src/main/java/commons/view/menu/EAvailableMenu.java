@@ -1,17 +1,19 @@
 package commons.view.menu;
 
+import commons.view.MainFrame;
+
 /**
  * Created by Germain on 08/10/2016.
  */
-public enum EAvailableMenu implements IAvailableMenu {
+public enum EAvailableMenu implements IAvailableMenu<MainFrame> {
 
   GAME_MENU(new GameMenu()),
   HELP_MENU(new HelpMenu());
 
 
-  private final Menu menu;
+  private final AMenu<MainFrame> menu;
 
-  EAvailableMenu(Menu menu) {
+  EAvailableMenu(AMenu<MainFrame> menu) {
     this.menu = menu;
   }
 
@@ -21,7 +23,7 @@ public enum EAvailableMenu implements IAvailableMenu {
   }
 
   @Override
-  public Menu getMenu() {
+  public AMenu<MainFrame> getMenu() {
     return menu;
   }
 }

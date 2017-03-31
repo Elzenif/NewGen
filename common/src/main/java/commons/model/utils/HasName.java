@@ -1,4 +1,4 @@
-package commons.model.commons;
+package commons.model.utils;
 
 /**
  * Created by Germain on 05/06/2016.

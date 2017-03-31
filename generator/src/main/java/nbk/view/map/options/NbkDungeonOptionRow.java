@@ -1,5 +1,6 @@
 package nbk.view.map.options;
 
+import commons.Constants;
 import commons.model.commons.IDrawKey;
 import commons.model.map.EMapType;
 import commons.model.map.IAvailableMap;
@@ -7,7 +8,6 @@ import commons.utils.MathUtils;
 import commons.view.commons.options.ConstraintOptionRow;
 import commons.view.commons.options.HasDrawKeysOptionRow;
 import commons.view.map.MapResultRow;
-import commons.view.utils.Constants;
 import commons.view.utils.ConstraintPanel;
 import nbk.controller.map.NbkDungeonController;
 import nbk.model.map.dungeon.constraints.EDungeonDraw;
@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 24/09/2016.

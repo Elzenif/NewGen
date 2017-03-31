@@ -12,7 +12,7 @@ import java.text.MessageFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 13/06/2016.

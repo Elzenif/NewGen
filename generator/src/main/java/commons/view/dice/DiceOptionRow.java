@@ -1,5 +1,6 @@
 package commons.view.dice;
 
+import commons.Constants;
 import commons.controller.dice.AddScoreCheckBoxItemListener;
 import commons.controller.dice.AddScoreSpinnerChangeListener;
 import commons.controller.dice.NumberOfDiceChangeListener;
@@ -10,7 +11,6 @@ import commons.utils.EOperator;
 import commons.utils.MathUtils;
 import commons.utils.StringUtils;
 import commons.view.commons.options.BorderLayoutOptionRow;
-import commons.view.utils.Constants;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,8 +23,8 @@ import java.awt.FlowLayout;
 import java.text.MessageFormat;
 import java.util.Arrays;
 
-import static commons.view.utils.Constants.JPANEL_HGAP;
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.JPANEL_HGAP;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 21/05/2016.

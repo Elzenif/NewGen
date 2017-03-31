@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 26/06/2016.

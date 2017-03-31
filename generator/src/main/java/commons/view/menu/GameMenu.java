@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 08/10/2016.
  */
-public class GameMenu extends Menu {
+public class GameMenu extends AMenu<MainFrame> {
 
   private final ButtonGroup gameButtonGroup = new ButtonGroup();
   private final Set<JRadioButtonMenuItem> gameButtons;

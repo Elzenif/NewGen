@@ -1,12 +1,12 @@
 package commons.view.commons;
 
+import commons.Constants;
 import commons.controller.intf.Controller;
 import commons.utils.CollectionUtils;
 import commons.utils.Pair;
 import commons.view.MainFrame;
 import commons.view.commons.options.OptionRow;
 import commons.view.commons.results.ResultRow;
-import commons.view.utils.Constants;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -15,13 +15,13 @@ import java.awt.GridLayout;
 import java.util.HashSet;
 import java.util.Set;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 04/06/2016.
  */
 public abstract class DoublePanel<O extends JPanel & OptionRow<R>, R extends JPanel & ResultRow>
-    extends JPanel implements Controller {
+    extends JPanel implements Controller<MainFrame> {
 
   private final Set<Pair<O, R>> rowPairs;
   private final JPanel leftPanel;

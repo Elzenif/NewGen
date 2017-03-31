@@ -1,6 +1,6 @@
 package commons.view.commons.results;
 
-import commons.view.utils.Constants;
+import commons.Constants;
 import commons.view.utils.ConstraintPanel;
 
 import javax.swing.ImageIcon;

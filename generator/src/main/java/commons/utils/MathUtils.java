@@ -1,6 +1,6 @@
 package commons.utils;
 
-import commons.model.commons.HasName;
+import commons.model.utils.HasName;
 
 import java.util.Collection;
 import java.util.List;

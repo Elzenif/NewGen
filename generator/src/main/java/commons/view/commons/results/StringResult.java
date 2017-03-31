@@ -1,6 +1,6 @@
 package commons.view.commons.results;
 
-import commons.view.utils.Constants;
+import commons.Constants;
 
 import java.awt.Color;
 import java.awt.Font;

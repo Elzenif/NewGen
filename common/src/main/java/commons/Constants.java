@@ -1,4 +1,4 @@
-package commons.view.utils;
+package commons;
 
 import org.jetbrains.annotations.NonNls;
 

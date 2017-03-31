@@ -1,6 +1,6 @@
 package commons.view.commons;
 
-import commons.model.commons.HasName;
+import commons.model.utils.HasName;
 import commons.view.commons.options.OptionRow;
 import commons.view.commons.results.ResultRow;
 

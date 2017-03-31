@@ -1,6 +1,6 @@
 package commons.model.entity.characteristics.primary.fields;
 
-import commons.model.commons.HasName;
+import commons.model.utils.HasName;
 
 /**
  * Created by Germain on 04/06/2016.

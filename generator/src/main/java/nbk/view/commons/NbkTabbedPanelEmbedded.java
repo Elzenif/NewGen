@@ -9,7 +9,7 @@ import nbk.view.entity.items.options.ENbkAvailableItemsRow;
 import nbk.view.entity.living.options.ENbkAvailableLivingsRow;
 import nbk.view.utility.options.ENbkAvailableUtilityRow;
 
-import static commons.view.utils.Constants.resourceBundle;
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 24/07/2016.

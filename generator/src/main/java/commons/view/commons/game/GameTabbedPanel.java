@@ -2,6 +2,7 @@ package commons.view.commons.game;
 
 import commons.controller.intf.Controller;
 import commons.utils.CollectionUtils;
+import commons.view.MainFrame;
 
 import javax.swing.JPanel;
 import java.awt.CardLayout;
@@ -19,7 +20,7 @@ public class GameTabbedPanel extends JPanel {
   private final CardLayout cardLayout;
   private final Set<GameTabbedPanelEmbedded> tabbedPanels;
 
-  private final List<Controller> controllers = new ArrayList<>();
+  private final List<Controller<MainFrame>> controllers = new ArrayList<>();
 
   public GameTabbedPanel() {
 
@@ -37,7 +38,7 @@ public class GameTabbedPanel extends JPanel {
     cardLayout.show(this, EAvailableGame.getDefault().getName());
   }
 
-  public List<Controller> getControllers() {
+  public List<Controller<MainFrame>> getControllers() {
     return controllers;
   }
 }
