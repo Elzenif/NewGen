@@ -52,7 +52,7 @@ public class DDWeaponFactory extends DDMultipleRaritiesTreasureSubFactory {
       deadlyArrowTarget = EntityUtils.selectRandomRarity(EDDDeadlyArrowTarget.values(), p -> true);
     } catch (NoAvailableEntityTypeException e) {
       deadlyArrowTarget = EDDDeadlyArrowTarget.values()[0];
-      LOGGER.error("Error while selecting random deadly arrow target");
+      LOGGER.error("Error while selecting random deadly arrow target", e);
     }
     target = " (" + deadlyArrowTarget.getName() + ")";
     return target;
@@ -64,7 +64,7 @@ public class DDWeaponFactory extends DDMultipleRaritiesTreasureSubFactory {
       weaponType = EntityUtils.selectRandomRarity(weaponTypeFactory.getFactory().getValues(), p -> true);
     } catch (NoAvailableEntityTypeException e) {
       weaponType = weaponTypeFactory.getFactory().getValues()[0];
-      LOGGER.error("Error while selecting random weapon type");
+      LOGGER.error("Error while selecting random weapon type", e);
     }
     return weaponType;
   }
@@ -75,7 +75,7 @@ public class DDWeaponFactory extends DDMultipleRaritiesTreasureSubFactory {
       weaponTypeFactory = EntityUtils.selectRandomRarity(EDDNonMagicWeaponFactory.values(), p -> true);
     } catch (NoAvailableEntityTypeException e) {
       weaponTypeFactory = EDDNonMagicWeaponFactory.F1;
-      LOGGER.error("Error while selecting random weapon type factory");
+      LOGGER.error("Error while selecting random weapon type factory", e);
     }
     return weaponTypeFactory;
   }
@@ -87,7 +87,7 @@ public class DDWeaponFactory extends DDMultipleRaritiesTreasureSubFactory {
       specificWeapon = EntityUtils.selectRandomWithCustomRarity(EDDSpecificWeapon.values(), powerRarityKey);
     } catch (NoAvailableEntityTypeException e) {
       specificWeapon = EDDSpecificWeapon.values()[0];
-      LOGGER.error("Error while selecting random specific weapon");
+      LOGGER.error("Error while selecting random specific weapon", e);
     }
     return specificWeapon;
   }
@@ -98,7 +98,7 @@ public class DDWeaponFactory extends DDMultipleRaritiesTreasureSubFactory {
       weaponBonus = EntityUtils.selectRandomWithCustomRarity(EDDWeaponBonus.values(), powerRarityKey);
     } catch (NoAvailableEntityTypeException e) {
       weaponBonus = EDDWeaponBonus.values()[0];
-      LOGGER.error("Error while selecting random weapon bonus");
+      LOGGER.error("Error while selecting random weapon bonus", e);
     }
     return weaponBonus;
   }

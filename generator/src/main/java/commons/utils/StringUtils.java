@@ -57,6 +57,10 @@ public class StringUtils {
 
   @NotNull
   public static Iterable<String> split(String string) {
-    return Splitter.on(" ").split(string);
+    return Splitter.on(" ").trimResults().omitEmptyStrings().split(string);
+  }
+
+  public static boolean isEmpty(String s) {
+    return s == null || s.isEmpty();
   }
 }

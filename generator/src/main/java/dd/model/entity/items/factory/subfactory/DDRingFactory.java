@@ -34,7 +34,7 @@ public class DDRingFactory extends DDMultipleRaritiesTreasureSubFactory {
       item = EntityUtils.selectRandomWithCustomRarity(values, powerRarityKey);
     } catch (NoAvailableEntityTypeException e) {
       item = values[0];
-      LOGGER.error("Error while selecting random treasure");
+      LOGGER.error("Error while selecting random treasure", e);
     }
     return new DDTreasure(item.getName(), item.getValue());
   }

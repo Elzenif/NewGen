@@ -64,7 +64,7 @@ public class NbkHumanoid extends NbkLiving implements HasEV {
         return new HumanoidBuilder(stats).build();
       }
     } catch (StatNotInRangeException e) {
-      LOGGER.warn("Constraints are not suitable for stats construction : create humanoid without constraints");
+      LOGGER.warn("Constraints are not suitable for stats construction : create humanoid without constraints", e);
       e.printStackTrace();
       return new HumanoidBuilder().build();
     }

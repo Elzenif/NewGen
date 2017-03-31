@@ -30,7 +30,7 @@ public class DDNonMagicWeaponFactoryFactory extends DDOneRarityTreasureSubFactor
       factory = EntityUtils.selectRandomRarity(EDDNonMagicWeaponFactory.values(), p -> true);
     } catch (NoAvailableEntityTypeException e) {
       factory = EDDNonMagicWeaponFactory.values()[0];
-      LOGGER.error("Error while selecting random factory");
+      LOGGER.error("Error while selecting random factory", e);
     }
     return factory.getFactory().getValues();
   }

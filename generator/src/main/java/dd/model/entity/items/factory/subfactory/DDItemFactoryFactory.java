@@ -31,7 +31,7 @@ public class DDItemFactoryFactory extends DDMultipleRaritiesTreasureSubFactory {
       factory = EntityUtils.selectRandomWithCustomRarity(EDDItemFactoryFactory.values(), powerRarityKey);
     } catch (NoAvailableEntityTypeException e) {
       factory = EDDItemFactoryFactory.values()[0];
-      LOGGER.error("Error while selecting random factory");
+      LOGGER.error("Error while selecting random factory", e);
     }
     return factory.getFactory().getTreasure(powerRarityKey);
   }
