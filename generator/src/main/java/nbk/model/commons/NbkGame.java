@@ -5,6 +5,7 @@ import commons.model.entity.items.IAvailableItem;
 import commons.model.entity.living.IAvailableLiving;
 import nbk.model.entity.items.ENbkAvailableItem;
 import nbk.model.entity.living.ENbkAvailableLivings;
+import org.jetbrains.annotations.Contract;
 
 import java.util.EnumSet;
 
@@ -24,6 +25,7 @@ public class NbkGame extends Game {
     availableLivings = EnumSet.allOf(ENbkAvailableLivings.class);
   }
 
+  @Contract(pure = true)
   public static NbkGame getInstance() {
     return INSTANCE;
   }

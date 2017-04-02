@@ -1,6 +1,6 @@
 package commons;
 
-import commons.view.MainFrame;
+import commons.view.GameMainFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,9 +20,9 @@ import static commons.Constants.LITHOGRL_FONT;
 /**
  * Created by Germain on 01/05/2016.
  */
-public class Main {
+public class GameMain {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(GameMain.class);
 
   public static void main(String[] args) {
     try {
@@ -32,7 +32,7 @@ public class Main {
     }
     initFonts();
     MainHelper.setUIFont(new FontUIResource(Constants.SOURCE_CODE_PRO, Font.PLAIN, Constants.FONT_SIZE_INT));
-    SwingUtilities.invokeLater(MainFrame::new);
+    SwingUtilities.invokeLater(GameMainFrame::new);
   }
 
   @SuppressWarnings({"SpellCheckingInspection", "HardCodedStringLiteral"})

@@ -1,6 +1,6 @@
 package commons.controller.menu;
 
-import commons.view.MainFrame;
+import commons.view.GameMainFrame;
 import commons.view.commons.game.GameTabbedPanel;
 
 import java.awt.CardLayout;
@@ -12,10 +12,10 @@ import java.awt.event.ActionListener;
  */
 public class GameMenuActionListener implements ActionListener {
 
-  private final MainFrame mainFrame;
+  private final GameMainFrame mainFrame;
   private final String gameName;
 
-  public GameMenuActionListener(MainFrame view, String gameName) {
+  public GameMenuActionListener(GameMainFrame view, String gameName) {
     this.mainFrame = view;
     this.gameName = gameName;
   }

@@ -30,7 +30,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>pk.Main</mainClass>
+                            <mainClass>commons.PkMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

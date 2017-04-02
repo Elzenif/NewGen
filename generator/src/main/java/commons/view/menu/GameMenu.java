@@ -2,7 +2,7 @@ package commons.view.menu;
 
 import commons.controller.menu.GameMenuActionListener;
 import commons.utils.CollectionUtils;
-import commons.view.MainFrame;
+import commons.view.GameMainFrame;
 import commons.view.commons.game.EAvailableGame;
 
 import javax.swing.ButtonGroup;
@@ -16,7 +16,7 @@ import static commons.Constants.resourceBundle;
 /**
  * Created by Germain on 08/10/2016.
  */
-public class GameMenu extends AMenu<MainFrame> {
+public class GameMenu extends AMenu<GameMainFrame> {
 
   private final ButtonGroup gameButtonGroup = new ButtonGroup();
   private final Set<JRadioButtonMenuItem> gameButtons;
@@ -37,7 +37,7 @@ public class GameMenu extends AMenu<MainFrame> {
   }
 
   @Override
-  public void setControllers(MainFrame mainFrame) {
+  public void setControllers(GameMainFrame mainFrame) {
     gameButtons.forEach(rb -> rb.addActionListener(new GameMenuActionListener(mainFrame, rb.getText())));
   }
 }

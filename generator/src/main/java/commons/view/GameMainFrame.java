@@ -21,15 +21,15 @@ import static commons.Constants.resourceBundle;
 /**
  * Created by Germain on 07/05/2016.
  */
-public class MainFrame extends AMainFrame {
+public class GameMainFrame extends AMainFrame {
 
   @NonNls
   private static final String GUI_PROP_FILE = "gui.properties";
-  private final List<Controller<MainFrame>> controllers = new ArrayList<>();
+  private final List<Controller<GameMainFrame>> controllers = new ArrayList<>();
   private MenuBar menuBar;
   private GameTabbedPanel tabbedPane;
 
-  public MainFrame() {
+  public GameMainFrame() {
     setUpUIComponents();
     setControllers();
 

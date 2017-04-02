@@ -1,20 +1,20 @@
 package commons.view.menu;
 
-import commons.view.MainFrame;
+import commons.view.GameMainFrame;
 import org.jetbrains.annotations.Contract;
 
 /**
  * Created by Germain on 08/10/2016.
  */
-public enum EAvailableMenu implements IAvailableMenu<MainFrame> {
+public enum EAvailableMenu implements IAvailableMenu<GameMainFrame> {
 
   GAME_MENU(new GameMenu()),
   HELP_MENU(new HelpMenu());
 
 
-  private final AMenu<MainFrame> menu;
+  private final AMenu<GameMainFrame> menu;
 
-  EAvailableMenu(AMenu<MainFrame> menu) {
+  EAvailableMenu(AMenu<GameMainFrame> menu) {
     this.menu = menu;
   }
 
@@ -25,7 +25,7 @@ public enum EAvailableMenu implements IAvailableMenu<MainFrame> {
 
   @Contract(pure = true)
   @Override
-  public AMenu<MainFrame> getMenu() {
+  public AMenu<GameMainFrame> getMenu() {
     return menu;
   }
 }

@@ -4,7 +4,7 @@ import commons.Constants;
 import commons.controller.intf.Controller;
 import commons.utils.CollectionUtils;
 import commons.utils.Pair;
-import commons.view.MainFrame;
+import commons.view.GameMainFrame;
 import commons.view.commons.options.OptionRow;
 import commons.view.commons.results.ResultRow;
 
@@ -21,7 +21,7 @@ import static commons.Constants.resourceBundle;
  * Created by Germain on 04/06/2016.
  */
 public abstract class DoublePanel<O extends JPanel & OptionRow<R>, R extends JPanel & ResultRow>
-    extends JPanel implements Controller<MainFrame> {
+    extends JPanel implements Controller<GameMainFrame> {
 
   private final Set<Pair<O, R>> rowPairs;
   private final JPanel leftPanel;
@@ -54,7 +54,7 @@ public abstract class DoublePanel<O extends JPanel & OptionRow<R>, R extends JPa
   }
 
   @Override
-  public void setControllers(MainFrame mainFrame) {
+  public void setControllers(GameMainFrame mainFrame) {
     rowPairs.forEach(rowPair -> rowPair.getLeft().setControllers(rowPair.getRight()));
   }
 }

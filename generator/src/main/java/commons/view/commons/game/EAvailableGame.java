@@ -1,17 +1,19 @@
 package commons.view.commons.game;
 
 import commons.model.commons.Game;
+import commons.view.intf.ITabbedPanel;
 import dd.model.commons.DDGame;
 import dd.view.commons.DDTabbedPanelEmbedded;
 import nbk.model.commons.NbkGame;
 import nbk.view.commons.NbkTabbedPanelEmbedded;
+import org.jetbrains.annotations.Contract;
 
 import java.util.Arrays;
 
 /**
  * Created by Germain on 12/06/2016.
  */
-public enum EAvailableGame implements IAvailableGame {
+public enum EAvailableGame implements ITabbedPanel<GameTabbedPanelEmbedded> {
 
   NBK(NbkGame.getInstance(), true, new NbkTabbedPanelEmbedded()),
   DD(DDGame.getInstance(), false, new DDTabbedPanelEmbedded());
@@ -34,18 +36,20 @@ public enum EAvailableGame implements IAvailableGame {
         .orElse(NBK.getGame());
   }
 
-  @Override
+  @Contract(pure = true)
   public Game getGame() {
     return game;
   }
 
+  @Contract(pure = true)
   @Override
   public boolean isDefault() {
     return def;
   }
 
+  @Contract(pure = true)
   @Override
-  public GameTabbedPanelEmbedded getGameTabbedPanelEmbedded() {
+  public GameTabbedPanelEmbedded getTabbedPanelEmbedded() {
     return gameTabbedPanelEmbedded;
   }
 

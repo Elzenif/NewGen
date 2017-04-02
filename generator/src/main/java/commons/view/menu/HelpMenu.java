@@ -1,11 +1,11 @@
 package commons.view.menu;
 
-import commons.view.MainFrame;
+import commons.view.GameMainFrame;
 
 /**
  * Created by Germain on 08/10/2016.
  */
-public class HelpMenu extends AHelpMenu<MainFrame> {
+public class HelpMenu extends AHelpMenu<GameMainFrame> {
 
 
   public HelpMenu() {

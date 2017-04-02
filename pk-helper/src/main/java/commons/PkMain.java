@@ -1,8 +1,6 @@
-package pk;
+package commons;
 
-import commons.Constants;
-import commons.MainHelper;
-import pk.view.MainFrame;
+import commons.view.PkMainFrame;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -14,7 +12,7 @@ import java.awt.Font;
 /**
  * Created by Germain on 31/03/2017.
  */
-public class Main {
+public class PkMain {
 
   public static void main(String[] args) {
     try {
@@ -24,7 +22,7 @@ public class Main {
     }
     initFonts();
     MainHelper.setUIFont(new FontUIResource(Constants.SOURCE_CODE_PRO, Font.PLAIN, Constants.FONT_SIZE_INT));
-    SwingUtilities.invokeLater(MainFrame::new);
+    SwingUtilities.invokeLater(PkMainFrame::new);
   }
 
   private static void initFonts() {

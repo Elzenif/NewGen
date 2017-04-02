@@ -1,10 +1,10 @@
-package pk.view;
+package commons.view;
 
 import commons.controller.MainFrameWindowListener;
 import commons.controller.intf.Controller;
-import commons.view.AMainFrame;
+import commons.view.commons.PkTabbedPanel;
 import org.jetbrains.annotations.NonNls;
-import pk.view.menu.MenuBar;
+import commons.view.menu.MenuBar;
 
 import javax.swing.JFrame;
 
@@ -18,14 +18,15 @@ import static commons.Constants.resourceBundle;
 /**
  * Created by Germain on 31/03/2017.
  */
-public class MainFrame extends AMainFrame {
+public class PkMainFrame extends AMainFrame {
 
   @NonNls
   private static final String GUI_PROP_FILE = "gui.properties";
-  private final List<Controller<MainFrame>> controllers = new ArrayList<>();
+  private final List<Controller<PkMainFrame>> controllers = new ArrayList<>();
   private MenuBar menuBar;
+  private PkTabbedPanel tabbedPanel;
 
-  public MainFrame() {
+  public PkMainFrame() {
     setUpUIComponents();
     setControllers();
 
@@ -49,6 +50,11 @@ public class MainFrame extends AMainFrame {
     menuBar = new MenuBar();
     setJMenuBar(menuBar);
     controllers.add(menuBar);
+
+    tabbedPanel = new PkTabbedPanel();
+    controllers.addAll(tabbedPanel.getControllers());
+
+    contentPane.add(tabbedPanel);
   }
 
   private void setControllers() {

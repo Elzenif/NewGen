@@ -2,36 +2,31 @@ package commons.view.commons.game;
 
 import commons.controller.intf.Controller;
 import commons.model.commons.Game;
-import commons.view.MainFrame;
+import commons.view.ATabbedPanelEmbedded;
+import commons.view.GameMainFrame;
+import commons.view.HiddenPanel;
 import commons.view.dice.DicePanel;
-import commons.view.hidden.HiddenPanel;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 24/07/2016.
  */
-public abstract class GameTabbedPanelEmbedded<G extends Game> extends JTabbedPane implements Controller<MainFrame> {
+public abstract class GameTabbedPanelEmbedded extends ATabbedPanelEmbedded<GameMainFrame> {
 
-  protected final Map<String, JPanel> panelMap = new LinkedHashMap<>();
+  protected final List<Controller<GameMainFrame>> controllers = new ArrayList<>();
 
-  protected final List<Controller<MainFrame>> controllers = new ArrayList<>();
-
-  private final HiddenPanel<G> hiddenPanel;
+  private final HiddenPanel hiddenPanel;
   private final DicePanel dicePanel;
 
-  protected GameTabbedPanelEmbedded(G game) {
-    super(SwingConstants.TOP);
-
-    hiddenPanel = new HiddenPanel<>(game);
+  protected GameTabbedPanelEmbedded(Game game) {
+    String path = "/images/" + game.getName() + ".png";
+    URL resource = getClass().getResource(path);
+    hiddenPanel = new HiddenPanel(path, resource);
     panelMap.put(resourceBundle.getString("panel.hidden"), hiddenPanel);
 
     dicePanel = new DicePanel();
@@ -40,11 +35,7 @@ public abstract class GameTabbedPanelEmbedded<G extends Game> extends JTabbedPan
   }
 
   @Override
-  public void setControllers(MainFrame mainFrame) {
+  public void setControllers(GameMainFrame mainFrame) {
     controllers.forEach(controller -> controller.setControllers(mainFrame));
-  }
-
-  protected void addPanels() {
-    panelMap.forEach(this::addTab);
   }
 }

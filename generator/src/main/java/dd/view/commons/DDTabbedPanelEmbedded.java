@@ -10,7 +10,7 @@ import static commons.Constants.resourceBundle;
 /**
  * Created by Germain on 25/10/2016.
  */
-public class DDTabbedPanelEmbedded extends GameTabbedPanelEmbedded<DDGame> {
+public class DDTabbedPanelEmbedded extends GameTabbedPanelEmbedded {
 
   private final EntityPanel<DDGame, EDDAvailableItemsRow> itemsPanel;
 

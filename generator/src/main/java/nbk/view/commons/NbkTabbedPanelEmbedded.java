@@ -14,7 +14,7 @@ import static commons.Constants.resourceBundle;
 /**
  * Created by Germain on 24/07/2016.
  */
-public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded<NbkGame> {
+public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded {
 
   private final EntityPanel<NbkGame, ENbkAvailableItemsRow> itemsPanel;
   private final UtilityPanel<ENbkAvailableUtilityRow> utilityPanel;

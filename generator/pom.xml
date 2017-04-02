@@ -30,7 +30,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>commons.Main</mainClass>
+                            <mainClass>commons.GameMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -42,7 +42,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>commons.Main</mainClass>
+                            <mainClass>commons.GameMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
