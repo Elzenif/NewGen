@@ -44,7 +44,6 @@ public class GameMain {
       LITHOGRL_FONT = MainHelper.initFont("LITHOGRL", 0f);
     } catch (IOException | FontFormatException e) {
       LOGGER.error("Cannot load fonts");
-      e.printStackTrace();
     }
   }
 

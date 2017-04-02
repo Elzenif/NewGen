@@ -30,4 +30,5 @@ public class Constants {
   public static Font DAUPHINN_FONT;
   public static Font LITHOGRL_FONT;
   public static Font LITHOGRB_FONT;
+  public static Font PKMON_FONT;
 }
