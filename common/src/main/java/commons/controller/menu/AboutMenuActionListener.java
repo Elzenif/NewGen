@@ -1,6 +1,6 @@
 package commons.controller.menu;
 
-import commons.view.MainFrame;
+import commons.view.AMainFrame;
 
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
@@ -13,9 +13,9 @@ import static commons.Constants.resourceBundle;
  */
 public class AboutMenuActionListener implements ActionListener {
 
-  private final MainFrame mainFrame;
+  private final AMainFrame mainFrame;
 
-  public AboutMenuActionListener(MainFrame mainFrame) {
+  public AboutMenuActionListener(AMainFrame mainFrame) {
     this.mainFrame = mainFrame;
   }
 

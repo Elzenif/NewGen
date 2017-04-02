@@ -1,6 +1,6 @@
 package commons.controller;
 
-import commons.view.MainFrame;
+import commons.view.AMainFrame;
 import org.jetbrains.annotations.NonNls;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,23 +22,23 @@ public class MainFrameWindowListener extends WindowAdapter {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MainFrameWindowListener.class);
 
-  private final Frame frame;
+  private final AMainFrame mainFrame;
 
-  public MainFrameWindowListener(Frame frame) {
-    this.frame = frame;
+  public MainFrameWindowListener(AMainFrame mainFrame) {
+    this.mainFrame = mainFrame;
   }
 
   @Override
   public void windowClosing(WindowEvent e) {
-    // restore the frame from full screen
-    frame.setExtendedState(Frame.NORMAL);
-    Rectangle bounds = frame.getBounds();
+    // restore the mainFrame from full screen
+    mainFrame.setExtendedState(Frame.NORMAL);
+    Rectangle bounds = mainFrame.getBounds();
     int x = (int) bounds.getX();
     int y = (int) bounds.getY();
     int width = (int) bounds.getWidth();
     int height = (int) bounds.getHeight();
 
-    File file = new File(MainFrame.GUI_PROP_FILE);
+    File file = new File(mainFrame.getGuiPropFile());
     Properties properties = new Properties();
     properties.setProperty("x", "" + x);
     properties.setProperty("y", "" + y);
@@ -47,7 +47,7 @@ public class MainFrameWindowListener extends WindowAdapter {
 
     try {
       BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-      @NonNls String comments = "Properties of the user frame";
+      @NonNls String comments = "Properties of the user mainFrame";
       properties.store(bufferedWriter, comments);
     } catch (IOException e1) {
       e1.printStackTrace();

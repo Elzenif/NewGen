@@ -5,4 +5,5 @@ package commons.view.intf;
  */
 public interface IMainFrame {
 
+  String getGuiPropFile();
 }

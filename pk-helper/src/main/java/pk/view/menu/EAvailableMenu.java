@@ -1,20 +1,22 @@
-package commons.view.menu;
+package pk.view.menu;
 
-import commons.view.MainFrame;
+import commons.view.menu.AHelpMenu;
+import commons.view.menu.AMenu;
+import commons.view.menu.IAvailableMenu;
 import org.jetbrains.annotations.Contract;
+import pk.view.MainFrame;
 
 /**
- * Created by Germain on 08/10/2016.
+ * Created by Germain on 02/04/2017.
  */
 public enum EAvailableMenu implements IAvailableMenu<MainFrame> {
 
-  GAME_MENU(new GameMenu()),
   HELP_MENU(new HelpMenu());
 
 
   private final AMenu<MainFrame> menu;
 
-  EAvailableMenu(AMenu<MainFrame> menu) {
+  EAvailableMenu(AHelpMenu<MainFrame> menu) {
     this.menu = menu;
   }
 

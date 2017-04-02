@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 /**
  * Created by Germain on 04/10/2016.
  */
-public class ScreenCheck {
+public final class ScreenCheck {
 
   public static Rectangle getVirtualBounds() {
     Rectangle bounds = new Rectangle(0, 0, 0, 0);
