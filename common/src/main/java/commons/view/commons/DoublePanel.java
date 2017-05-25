@@ -4,7 +4,7 @@ import commons.Constants;
 import commons.controller.intf.Controller;
 import commons.utils.CollectionUtils;
 import commons.utils.Pair;
-import commons.view.GameMainFrame;
+import commons.view.AMainFrame;
 import commons.view.commons.options.OptionRow;
 import commons.view.commons.results.ResultRow;
 
@@ -20,18 +20,16 @@ import static commons.Constants.resourceBundle;
 /**
  * Created by Germain on 04/06/2016.
  */
-public abstract class DoublePanel<O extends JPanel & OptionRow<R>, R extends JPanel & ResultRow>
-    extends JPanel implements Controller<GameMainFrame> {
+public abstract class DoublePanel<O extends JPanel & OptionRow<R>, R extends JPanel & ResultRow, F extends AMainFrame>
+    extends JPanel implements Controller<F> {
 
   private final Set<Pair<O, R>> rowPairs;
-  private final JPanel leftPanel;
-  private final JPanel rightPanel;
 
   protected DoublePanel(IAvailableRow<O, R>[] availableRows) {
     setLayout(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
 
-    leftPanel = setPanel(resourceBundle.getString("panel.options"), availableRows.length);
-    rightPanel = setPanel(resourceBundle.getString("panel.results"), availableRows.length);
+    JPanel leftPanel = setPanel(resourceBundle.getString("panel.options"), availableRows.length);
+    JPanel rightPanel = setPanel(resourceBundle.getString("panel.results"), availableRows.length);
 
     rowPairs = CollectionUtils.setMaxSizeSet(new HashSet<>(), availableRows.length);
 
@@ -54,7 +52,7 @@ public abstract class DoublePanel<O extends JPanel & OptionRow<R>, R extends JPa
   }
 
   @Override
-  public void setControllers(GameMainFrame mainFrame) {
+  public void setControllers(AMainFrame mainFrame) {
     rowPairs.forEach(rowPair -> rowPair.getLeft().setControllers(rowPair.getRight()));
   }
 }

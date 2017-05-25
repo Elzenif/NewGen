@@ -12,12 +12,10 @@ import static commons.Constants.resourceBundle;
  */
 public class DDTabbedPanelEmbedded extends GameTabbedPanelEmbedded {
 
-  private final EntityPanel<DDGame, EDDAvailableItemsRow> itemsPanel;
-
   public DDTabbedPanelEmbedded() {
     super(DDGame.getInstance());
 
-    itemsPanel = new EntityPanel<>(EDDAvailableItemsRow.values());
+    EntityPanel<DDGame, EDDAvailableItemsRow> itemsPanel = new EntityPanel<>(EDDAvailableItemsRow.values());
     controllers.add(itemsPanel);
     panelMap.put(resourceBundle.getString("panel.item"), itemsPanel);
 

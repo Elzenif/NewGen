@@ -17,7 +17,9 @@ public class HiddenPanel extends JPanel {
 
   private final JLabel iconLabel;
 
-  public HiddenPanel(String path, URL resource) {
+  public HiddenPanel(String name) {
+    String path = "/images/" + name + ".png";
+    URL resource = getClass().getResource(path);
     iconLabel = new JLabel();
     if (resource == null) {
       LOGGER.warn(path + " not found in resources");

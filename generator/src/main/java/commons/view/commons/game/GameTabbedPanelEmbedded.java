@@ -7,7 +7,6 @@ import commons.view.GameMainFrame;
 import commons.view.HiddenPanel;
 import commons.view.dice.DicePanel;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,16 +19,11 @@ public abstract class GameTabbedPanelEmbedded extends ATabbedPanelEmbedded<GameM
 
   protected final List<Controller<GameMainFrame>> controllers = new ArrayList<>();
 
-  private final HiddenPanel hiddenPanel;
-  private final DicePanel dicePanel;
-
   protected GameTabbedPanelEmbedded(Game game) {
-    String path = "/images/" + game.getName() + ".png";
-    URL resource = getClass().getResource(path);
-    hiddenPanel = new HiddenPanel(path, resource);
+    HiddenPanel hiddenPanel = new HiddenPanel(game.getName());
     panelMap.put(resourceBundle.getString("panel.hidden"), hiddenPanel);
 
-    dicePanel = new DicePanel();
+    DicePanel dicePanel = new DicePanel();
     controllers.add(dicePanel);
     panelMap.put(resourceBundle.getString("panel.dice"), dicePanel);
   }

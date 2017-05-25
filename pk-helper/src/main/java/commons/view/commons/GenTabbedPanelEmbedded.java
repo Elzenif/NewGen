@@ -6,12 +6,8 @@ import commons.view.ATabbedPanelEmbedded;
 import commons.view.HiddenPanel;
 import commons.view.PkMainFrame;
 
-import javax.swing.JPanel;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static commons.Constants.resourceBundle;
 
@@ -20,16 +16,10 @@ import static commons.Constants.resourceBundle;
  */
 public abstract class GenTabbedPanelEmbedded extends ATabbedPanelEmbedded<PkMainFrame> {
 
-  protected final Map<String, JPanel> panelMap = new LinkedHashMap<>();
-
   protected final List<Controller<PkMainFrame>> controllers = new ArrayList<>();
 
-  private final HiddenPanel hiddenPanel;
-
   public GenTabbedPanelEmbedded(Gen gen) {
-    String path = "/images/" + gen.getRomanNumber() + ".png";
-    URL resource = getClass().getResource(path);
-    hiddenPanel = new HiddenPanel(path, resource);
+    HiddenPanel hiddenPanel = new HiddenPanel( gen.getRomanNumber());
     panelMap.put(resourceBundle.getString("panel.hidden"), hiddenPanel);
   }
 
@@ -38,7 +28,4 @@ public abstract class GenTabbedPanelEmbedded extends ATabbedPanelEmbedded<PkMain
     controllers.forEach(controller -> controller.setControllers(mainFrame));
   }
 
-  protected void addPanels() {
-    panelMap.forEach(this::addTab);
-  }
 }

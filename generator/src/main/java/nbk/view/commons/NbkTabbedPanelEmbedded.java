@@ -16,27 +16,22 @@ import static commons.Constants.resourceBundle;
  */
 public class NbkTabbedPanelEmbedded extends GameTabbedPanelEmbedded {
 
-  private final EntityPanel<NbkGame, ENbkAvailableItemsRow> itemsPanel;
-  private final UtilityPanel<ENbkAvailableUtilityRow> utilityPanel;
-  private final EntityPanel<NbkGame, ENbkAvailableLivingsRow> livingsPanel;
-  private final MapPanel mapPanel;
-
   public NbkTabbedPanelEmbedded() {
     super(NbkGame.getInstance());
 
-    itemsPanel = new EntityPanel<>(ENbkAvailableItemsRow.values());
+    EntityPanel<NbkGame, ENbkAvailableItemsRow> itemsPanel = new EntityPanel<>(ENbkAvailableItemsRow.values());
     controllers.add(itemsPanel);
     panelMap.put(resourceBundle.getString("panel.item"), itemsPanel);
 
-    livingsPanel = new EntityPanel<>(ENbkAvailableLivingsRow.values());
+    EntityPanel<NbkGame, ENbkAvailableLivingsRow> livingsPanel = new EntityPanel<>(ENbkAvailableLivingsRow.values());
     controllers.add(livingsPanel);
     panelMap.put(resourceBundle.getString("panel.living"), livingsPanel);
 
-    utilityPanel = new UtilityPanel<>(ENbkAvailableUtilityRow.values());
+    UtilityPanel<ENbkAvailableUtilityRow> utilityPanel = new UtilityPanel<>(ENbkAvailableUtilityRow.values());
     controllers.add(utilityPanel);
     panelMap.put(resourceBundle.getString("panel.utility"), utilityPanel);
 
-    mapPanel = new MapPanel();
+    MapPanel mapPanel = new MapPanel();
     controllers.add(mapPanel);
     panelMap.put(resourceBundle.getString("panel.map"), mapPanel);
 
