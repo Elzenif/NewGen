@@ -3,7 +3,6 @@ package generator;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
 
 /**
@@ -21,7 +20,6 @@ public class VaadinUI extends UI {
 
   @Override
   protected void init(VaadinRequest request) {
-    HorizontalLayout mainLayout = new HorizontalLayout(tresorGenerator);
-    setContent(mainLayout);
+    setContent(tresorGenerator);
   }
 }

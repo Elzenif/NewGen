@@ -64,14 +64,14 @@ public class MathUtilsTest {
 
   @Test
   public void testFindBetweenNumbers() throws NoAvailableEntityTypeException {
-    List<Integer> integers = Arrays.asList(1, 2, 3);
-    Integer integer = MathUtils.findFirstElementAcceptingThePredicate(integers, p -> p % 2 == 0);
-    assertThat(integer).isEqualTo(2);
+    List<Integer> integers = Arrays.asList(1, 2, 3, 4);
+    integers = MathUtils.findAllElementsAcceptingThePredicate(integers, p -> p % 2 == 0);
+    assertThat(integers).containsExactlyInAnyOrder(2, 4);
   }
 
   @Test(expected = NoAvailableEntityTypeException.class)
   public void testFindBetweenNumbersError() throws NoAvailableEntityTypeException {
     List<Integer> integers = Arrays.asList(1, 5, 3);
-    MathUtils.findFirstElementAcceptingThePredicate(integers, p -> p % 2 == 0);
+    MathUtils.findAllElementsAcceptingThePredicate(integers, p -> p % 2 == 0);
   }
 }

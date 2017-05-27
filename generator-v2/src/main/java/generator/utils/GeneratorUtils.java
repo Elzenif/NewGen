@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class GeneratorUtils {
 
-  public static <T extends DDRandomEntity> T findOne(List<T> randomEntities) throws NoAvailableEntityTypeException {
+  public static <T extends DDRandomEntity> List<T> findAll(List<T> randomEntities) throws NoAvailableEntityTypeException {
     int random = MathUtils.random(1, 100);
-    return MathUtils.findFirstElementAcceptingThePredicate(randomEntities,
+    return MathUtils.findAllElementsAcceptingThePredicate(randomEntities,
         e -> e.getPrcMin() <= random && e.getPrcMax() >= random);
   }
 

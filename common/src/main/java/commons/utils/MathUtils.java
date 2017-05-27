@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Random;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Created by Germain on 04/06/2016.
@@ -86,7 +87,12 @@ public class MathUtils {
     return (int) Math.floor(x);
   }
 
-  public static <T> T findFirstElementAcceptingThePredicate(List<T> elements, Predicate<T> predicate) throws NoAvailableEntityTypeException {
-    return elements.stream().filter(predicate).findFirst().orElseThrow(NoAvailableEntityTypeException::new);
+  public static <T> List<T> findAllElementsAcceptingThePredicate(List<T> elements, Predicate<T> predicate)
+      throws NoAvailableEntityTypeException {
+    List<T> results = elements.stream().filter(predicate).collect(Collectors.toList());
+    if (results.isEmpty()) {
+      throw new NoAvailableEntityTypeException();
+    }
+    return results;
   }
 }
