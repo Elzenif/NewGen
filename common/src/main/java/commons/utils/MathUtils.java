@@ -1,6 +1,7 @@
 package commons.utils;
 
 import commons.model.utils.HasName;
+import commons.utils.exception.NoAvailableEntityTypeException;
 
 import java.util.Collection;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Random;
+import java.util.function.Predicate;
 
 /**
  * Created by Germain on 04/06/2016.
@@ -72,8 +74,8 @@ public class MathUtils {
     double u = Math.random() + Math.random();
     double r = (u > 1) ? 2 - u : u;
     return new Pair<>(
-            roundM((int) (radius * r * Math.cos(t)), tileSize),
-            roundM((int) (radius * r * Math.sin(t)), tileSize));
+        roundM((int) (radius * r * Math.cos(t)), tileSize),
+        roundM((int) (radius * r * Math.sin(t)), tileSize));
   }
 
   public static double mean(int x, int y) {
@@ -82,5 +84,9 @@ public class MathUtils {
 
   public static int floor(double x) {
     return (int) Math.floor(x);
+  }
+
+  public static <T> T findFirstElementAcceptingThePredicate(List<T> elements, Predicate<T> predicate) throws NoAvailableEntityTypeException {
+    return elements.stream().filter(predicate).findFirst().orElseThrow(NoAvailableEntityTypeException::new);
   }
 }

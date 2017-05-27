@@ -1,8 +1,6 @@
 package generator.model.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -10,24 +8,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "dnd35_tresors")
-public class Tresor {
+public class Tresor extends DDRandomEntity {
 
-  @Id
-  @GeneratedValue
-  private Integer id;
   private Integer niveau;
   private Integer prcMin;
   private Integer prcMax;
   private String type;
   private String detail;
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
 
   public Integer getNiveau() {
     return niveau;
