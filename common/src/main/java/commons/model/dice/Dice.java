@@ -72,6 +72,11 @@ public class Dice {
     }
   }
 
+  public int rollAndGetScore() {
+    roll();
+    return getFinalScore();
+  }
+
   public boolean isTest() {
     return diceTestInfo.isTest();
   }

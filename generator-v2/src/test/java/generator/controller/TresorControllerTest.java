@@ -37,7 +37,7 @@ public class TresorControllerTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void convertTresorPiecesWhenError2() {
-    tresorController.convertTresor(TresorType.pieces, "310x100pa");
+    tresorController.convertTresor(TresorType.pieces, "3d1d0x100pa");
   }
 
   @Test(expected = IllegalArgumentException.class)
