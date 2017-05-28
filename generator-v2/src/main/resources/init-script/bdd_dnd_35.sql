@@ -8799,7 +8799,7 @@ INSERT INTO `dnd35_tresors` (`id`, `niveau`, `prcMin`, `prcMax`, `type`, `detail
 (151, 14, 59, 92, 'objets', '1xintermédiaire'),
 (152, 14, 93, 100, 'objets', '1xpuissant'),
 (153, 15, 1, 3, 'pieces', NULL),
-(154, 15, 4, 74, 'pieces', 'd8x1000po'),
+(154, 15, 4, 74, 'pieces', '1d8x1000po'),
 (155, 15, 75, 100, 'pieces', '3d4x100pp'),
 (156, 15, 1, 9, 'biens', NULL),
 (157, 15, 10, 65, 'biens', '2d10xgemmes'),

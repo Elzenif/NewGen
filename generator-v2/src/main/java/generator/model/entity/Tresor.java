@@ -1,6 +1,8 @@
 package generator.model.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 /**
@@ -13,7 +15,8 @@ public class Tresor extends DDRandomEntity {
   private Integer niveau;
   private Integer prcMin;
   private Integer prcMax;
-  private String type;
+  @Enumerated(value = EnumType.STRING)
+  private TresorType type;
   private String detail;
 
   public Integer getNiveau() {
@@ -40,11 +43,11 @@ public class Tresor extends DDRandomEntity {
     this.prcMax = prcMax;
   }
 
-  public String getType() {
+  public TresorType getType() {
     return type;
   }
 
-  public void setType(String type) {
+  public void setType(TresorType type) {
     this.type = type;
   }
 

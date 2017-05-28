@@ -2,11 +2,15 @@ package commons.model.dice;
 
 import commons.utils.MathUtils;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Germain on 25/06/2016.
  */
 public class Dice {
 
+  public static final List<Integer> values = Arrays.asList(4, 6, 8, 10, 12, 20, 100);
   private final int diceNumber;
   private final int addScore;
   private final DiceTestInfo diceTestInfo;
@@ -25,7 +29,7 @@ public class Dice {
     this.addScore = copy.getAddScore();
     this.diceTestInfo = copy.getDiceTestInfo();
     this.score = copy.getScore();
-    iterations = copy.getIterations();
+    this.iterations = copy.getIterations();
   }
 
   public Dice(int diceNumber) {
@@ -78,5 +82,9 @@ public class Dice {
 
   private int getIterations() {
     return iterations;
+  }
+
+  public void resetScore() {
+    score = 0;
   }
 }

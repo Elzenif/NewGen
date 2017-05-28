@@ -13,8 +13,8 @@ public class DiceTest {
 
   @Test
   public void testFinalScoreEqualsScoreIfAddScoreIs0() {
-    for (EDiceNumber diceNumber : EDiceNumber.values()) {
-      dice = new Dice(diceNumber.getDiceNumber());
+    for (Integer diceNumber : Dice.values) {
+      dice = new Dice(diceNumber);
       dice.roll();
       int finalScore = dice.getFinalScore();
       int score = dice.getScore();
@@ -25,24 +25,24 @@ public class DiceTest {
 
   @Test
   public void testDiceRollIsInRange() {
-    for (EDiceNumber diceNumber : EDiceNumber.values()) {
-      dice = new Dice(diceNumber.getDiceNumber());
+    for (Integer diceNumber : Dice.values) {
+      dice = new Dice(diceNumber);
       dice.roll();
       int result = dice.getFinalScore();
 
-      assertThat(result).isBetween(1, diceNumber.getDiceNumber());
+      assertThat(result).isBetween(1, diceNumber);
     }
   }
 
   @Test
   public void testDiceRollIsInRangeWithIterations() {
     int iterations = 5;
-    for (EDiceNumber diceNumber : EDiceNumber.values()) {
-      dice = new Dice(diceNumber.getDiceNumber(), iterations);
+    for (Integer diceNumber : Dice.values) {
+      dice = new Dice(iterations, diceNumber);
       dice.roll();
       int result = dice.getFinalScore();
 
-      assertThat(result).isBetween(iterations, iterations * diceNumber.getDiceNumber());
+      assertThat(result).isBetween(iterations, iterations * diceNumber);
     }
   }
 }
