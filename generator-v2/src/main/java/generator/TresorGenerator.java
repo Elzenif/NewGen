@@ -8,13 +8,13 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-import commons.utils.exception.NoAvailableEntityTypeException;
+import commons.utils.MathUtils;
 import generator.controller.TresorController;
 import generator.model.entity.Tresor;
 import generator.model.repository.TresorRepository;
-import generator.utils.GeneratorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,6 +35,7 @@ public class TresorGenerator extends VerticalLayout {
   private Button generateButton = new Button("Générer");
   private Label resultLabel;
 
+  @Autowired
   public TresorGenerator(TresorRepository tresorRepository, TresorController tresorController) {
     this.tresorRepository = tresorRepository;
     this.tresorController = tresorController;
@@ -48,20 +49,16 @@ public class TresorGenerator extends VerticalLayout {
   }
 
   private void generate() {
-    List<Tresor> tresors = tresorRepository.findByNiveau(generationLevel);
-    try {
-      resultLabel = new Label();
-      resultLabel.setContentMode(ContentMode.HTML);
-      tresors = GeneratorUtils.findAll(tresors);
-      String text = tresors.stream()
-          .filter(tresor -> tresor.getDetail() != null)
-          .map(tresor -> tresorController.convertTresor(tresor.getType(), tresor.getDetail()))
-          .collect(Collectors.joining("<br/>"));
-      resultLabel.setValue(text.isEmpty() ? "Rien" : text);
-      addComponent(resultLabel);
-    } catch (NoAvailableEntityTypeException e) {
-      String message = String.format("Could not find entity in %s", tresors);
-      LOGGER.error(message, e);
-    }
+    int random = MathUtils.random(1, 100);
+    List<Tresor> tresors = tresorRepository.findByNiveauAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(generationLevel,
+        random, random);
+    resultLabel = new Label();
+    resultLabel.setContentMode(ContentMode.HTML);
+    String text = tresors.stream()
+        .filter(tresor -> tresor.getDetail() != null)
+        .map(tresor -> tresorController.convertTresor(tresor.getType(), tresor.getDetail()))
+        .collect(Collectors.joining("<br/>"));
+    resultLabel.setValue(text.isEmpty() ? "Rien" : text);
+    addComponent(resultLabel);
   }
 }

@@ -1,10 +1,7 @@
 package generator.utils;
 
 import commons.model.dice.Dice;
-import commons.utils.MathUtils;
 import commons.utils.Pair;
-import commons.utils.exception.NoAvailableEntityTypeException;
-import generator.model.entity.DDRandomEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -15,12 +12,6 @@ import java.util.stream.Collectors;
  * Created by Germain on 27/05/2017.
  */
 public class GeneratorUtils {
-
-  public static <T extends DDRandomEntity> List<T> findAll(List<T> randomEntities) throws NoAvailableEntityTypeException {
-    int random = MathUtils.random(1, 100);
-    return MathUtils.findAllElementsAcceptingThePredicate(randomEntities,
-        e -> e.getPrcMin() <= random && e.getPrcMax() >= random);
-  }
 
   /**
    * Get the multiplier from the detail string.

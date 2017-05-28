@@ -8,9 +8,24 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class DDRandomEntity extends DDEntity {
 
-  public abstract Integer getPrcMin();
+  protected Integer prcMin;
+  protected Integer prcMax;
 
-  public abstract Integer getPrcMax();
+  public Integer getPrcMin() {
+    return prcMin;
+  }
+
+  public void setPrcMin(Integer prcMin) {
+    this.prcMin = prcMin;
+  }
+
+  public Integer getPrcMax() {
+    return prcMax;
+  }
+
+  public void setPrcMax(Integer prcMax) {
+    this.prcMax = prcMax;
+  }
 
 
 }

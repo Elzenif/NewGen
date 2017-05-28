@@ -1,7 +1,6 @@
 package commons.utils;
 
 import commons.model.utils.HasName;
-import commons.utils.exception.NoAvailableEntityTypeException;
 
 import java.util.Collection;
 import java.util.List;
@@ -9,8 +8,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Random;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Created by Germain on 04/06/2016.
@@ -87,12 +84,4 @@ public class MathUtils {
     return (int) Math.floor(x);
   }
 
-  public static <T> List<T> findAllElementsAcceptingThePredicate(List<T> elements, Predicate<T> predicate)
-      throws NoAvailableEntityTypeException {
-    List<T> results = elements.stream().filter(predicate).collect(Collectors.toList());
-    if (results.isEmpty()) {
-      throw new NoAvailableEntityTypeException();
-    }
-    return results;
-  }
 }

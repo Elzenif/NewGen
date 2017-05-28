@@ -13,8 +13,6 @@ import javax.persistence.Table;
 public class Tresor extends DDRandomEntity {
 
   private Integer niveau;
-  private Integer prcMin;
-  private Integer prcMax;
   @Enumerated(value = EnumType.STRING)
   private TresorType type;
   private String detail;
@@ -25,22 +23,6 @@ public class Tresor extends DDRandomEntity {
 
   public void setNiveau(Integer niveau) {
     this.niveau = niveau;
-  }
-
-  public Integer getPrcMin() {
-    return prcMin;
-  }
-
-  public void setPrcMin(Integer prcMin) {
-    this.prcMin = prcMin;
-  }
-
-  public Integer getPrcMax() {
-    return prcMax;
-  }
-
-  public void setPrcMax(Integer prcMax) {
-    this.prcMax = prcMax;
   }
 
   public TresorType getType() {
