@@ -15,11 +15,6 @@ public class GeneratorUtilsTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void getMultiplierError2() {
-    GeneratorUtils.getMultiplier("2d3d3xas");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
   public void getMultiplierError3() {
     GeneratorUtils.getMultiplier("2dxas");
   }

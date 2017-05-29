@@ -5,8 +5,7 @@ import commons.utils.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 /**
  * Created by Germain on 27/05/2017.
@@ -26,23 +25,11 @@ public class GeneratorUtils {
       String s = String.format("String %s is not parsed correctly. Split: %s", detail, Arrays.toString(split));
       throw new IllegalArgumentException(s);
     }
-    List<Integer> integers = Arrays.stream(split[0].split("d"))
-        .map(Integer::valueOf)
-        .collect(Collectors.toList());
-    if (split[0].contains("d") && integers.size() != 2) {
-      String s = String.format("String %s is not parsed correctly. Split: %s", split[0],  integers);
-      throw new IllegalArgumentException(s);
+    Optional<Integer> roll = Dice.getRollFromString(split[0]);
+    if (!roll.isPresent()) {
+      String message = String.format("String %s is not parsed correctly", split[0]);
+      throw new IllegalArgumentException(message);
     }
-    int score;
-    if (integers.size() == 1) {
-      score = integers.get(0);
-    } else if (integers.size() == 2) {
-      Dice dice = new Dice(integers.get(0), integers.get(1));
-      score = dice.rollAndGetScore();
-    } else {
-      String s = String.format("String %s is not parsed correctly. Split: %s", split[0],  integers);
-      throw new IllegalArgumentException(s);
-    }
-    return new Pair<>(score, split[1]);
+    return new Pair<>(roll.get(), split[1]);
   }
 }

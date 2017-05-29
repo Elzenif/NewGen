@@ -17,18 +17,21 @@ import java.util.stream.IntStream;
  * Created by Germain on 27/05/2017.
  */
 @Service
+@SuppressWarnings("SpellCheckingInspection")
 public class TresorController {
 
   private final PiecesController piecesController;
   private final GemmeController gemmeController;
   private final ObjetArtController objetArtController;
+  private final ObjetNonMagiqueController objetNonMagiqueController;
 
   @Autowired
   public TresorController(PiecesController piecesController, GemmeController gemmeController,
-                          ObjetArtController objetArtController) {
+                          ObjetArtController objetArtController, ObjetNonMagiqueController objetNonMagiqueController) {
     this.piecesController = piecesController;
     this.gemmeController = gemmeController;
     this.objetArtController = objetArtController;
+    this.objetNonMagiqueController = objetNonMagiqueController;
   }
 
   public String convertTresor(TresorType tresorType, @NotNull String detail) {
@@ -45,12 +48,13 @@ public class TresorController {
     }
   }
 
-  @SuppressWarnings("SpellCheckingInspection")
   private String generate(String detailsRight) {
     if (Objects.equals(detailsRight, "gemme") || Objects.equals(detailsRight, "gemmes")) {
       return gemmeController.generate();
     } else if (Objects.equals(detailsRight, "objet_art") || Objects.equals(detailsRight, "objets_art")) {
       return objetArtController.generate();
+    } else if (Objects.equals(detailsRight, "non_magique")) {
+      return objetNonMagiqueController.generate();
     }
     return "ERROR";
   }

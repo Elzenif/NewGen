@@ -1,11 +1,10 @@
 package generator.controller;
 
-import generator.ConfigTest;
 import generator.model.entity.TresorType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.regex.Pattern;
@@ -16,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by Germain on 28/05/2017.
  */
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = ConfigTest.class)
+@SpringBootTest
 public class TresorControllerTest {
 
   @Autowired
@@ -33,11 +32,6 @@ public class TresorControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void convertTresorPiecesWhenError1() {
     tresorController.convertTresor(TresorType.pieces, "d10x100pa");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void convertTresorPiecesWhenError2() {
-    tresorController.convertTresor(TresorType.pieces, "3d1d0x100pa");
   }
 
   @Test(expected = IllegalArgumentException.class)

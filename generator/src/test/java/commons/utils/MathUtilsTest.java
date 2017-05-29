@@ -1,6 +1,5 @@
 package commons.utils;
 
-import commons.utils.exception.NoAvailableEntityTypeException;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -60,18 +59,5 @@ public class MathUtilsTest {
     assertThat(MathUtils.roundM(2, 5)).isEqualTo(5);
     assertThat(MathUtils.roundM(3, 5)).isEqualTo(5);
     assertThat(MathUtils.roundM(4, 5)).isEqualTo(5);
-  }
-
-  @Test
-  public void testFindBetweenNumbers() throws NoAvailableEntityTypeException {
-    List<Integer> integers = Arrays.asList(1, 2, 3, 4);
-    integers = MathUtils.findAllElementsAcceptingThePredicate(integers, p -> p % 2 == 0);
-    assertThat(integers).containsExactlyInAnyOrder(2, 4);
-  }
-
-  @Test(expected = NoAvailableEntityTypeException.class)
-  public void testFindBetweenNumbersError() throws NoAvailableEntityTypeException {
-    List<Integer> integers = Arrays.asList(1, 5, 3);
-    MathUtils.findAllElementsAcceptingThePredicate(integers, p -> p % 2 == 0);
   }
 }
