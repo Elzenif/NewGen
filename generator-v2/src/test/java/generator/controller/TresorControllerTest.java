@@ -1,5 +1,6 @@
 package generator.controller;
 
+import commons.utils.MathUtils;
 import generator.model.entity.TresorType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,4 +55,10 @@ public class TresorControllerTest {
     tresorController.convertTresor(TresorType.pieces, "2d10x100p");
   }
 
+  @Test
+  public void generateTest() {
+    for (int i = 0; i < 1000; i++) {
+      tresorController.generate(MathUtils.random(1, 20));
+    }
+  }
 }

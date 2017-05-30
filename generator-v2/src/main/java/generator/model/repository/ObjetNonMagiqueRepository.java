@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 /**
  * Created by Germain on 28/05/2017.
  */
+@SuppressWarnings("SpellCheckingInspection")
 public interface ObjetNonMagiqueRepository extends BaseRepository<ObjetNonMagique> {
 
   @Query("SELECT o FROM ObjetNonMagique o WHERE " +
