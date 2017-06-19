@@ -36,6 +36,11 @@ public class ArmeInhabituelle extends Arme {
         '}';
   }
 
+  @Override
+  public boolean isCac() {
+    return type == Type.cac;
+  }
+
   private enum Type {
     cac, distance;
   }

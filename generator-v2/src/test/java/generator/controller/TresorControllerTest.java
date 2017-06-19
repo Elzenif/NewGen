@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by Germain on 28/05/2017.
  */
+@SuppressWarnings("SpellCheckingInspection")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TresorControllerTest {

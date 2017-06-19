@@ -5,8 +5,9 @@ import javax.persistence.MappedSuperclass;
 /**
  * Created by Germain on 30/05/2017.
  */
+@SuppressWarnings("SpellCheckingInspection")
 @MappedSuperclass
-public class Arme extends DDRandomEntity {
+public abstract class Arme extends DDRandomEntity {
 
   protected String arme;
   protected Integer prix;
@@ -26,5 +27,7 @@ public class Arme extends DDRandomEntity {
   public void setPrix(Integer prix) {
     this.prix = prix;
   }
+
+  public abstract boolean isCac();
 
 }

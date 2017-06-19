@@ -21,4 +21,9 @@ public class ArmeCorpsACorps extends Arme {
         ", prix=" + prix +
         '}';
   }
+
+  @Override
+  public boolean isCac() {
+    return true;
+  }
 }

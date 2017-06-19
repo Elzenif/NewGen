@@ -42,4 +42,9 @@ public class ArmeDistance extends Arme {
         ", prcMaxMunition=" + prcMaxMunition +
         '}';
   }
+
+  @Override
+  public boolean isCac() {
+    return true;
+  }
 }

@@ -40,8 +40,8 @@ public class ObjetNonMagiqueController {
       String size = MathUtils.random(1, 100) <= 10 ? "P" : "M";
       return objet + " (" + size + ")";
     } else if (Objects.equals(objetNonMagique.getCategorie(), "arme")) {
-      Optional<Arme> arme = armeController.generateArme(objet);
-      return arme.map(a -> a.getArme() + " (" + a.getPrix() + "po)").orElse("ERROR");
+      Arme arme = armeController.generateArme(objet);
+      return arme.getArme() + " (" + arme.getPrix() + "po)";
     }
     return objet;
   }
