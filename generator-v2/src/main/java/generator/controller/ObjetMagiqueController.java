@@ -18,11 +18,14 @@ public class ObjetMagiqueController {
 
   private final ObjetMagiqueRepository objetMagiqueRepository;
   private final AnneauController anneauController;
+  private final ArmeController armeController;
 
   @Autowired
-  public ObjetMagiqueController(ObjetMagiqueRepository objetMagiqueRepository, AnneauController anneauController) {
+  public ObjetMagiqueController(ObjetMagiqueRepository objetMagiqueRepository, AnneauController anneauController,
+          ArmeController armeController) {
     this.objetMagiqueRepository = objetMagiqueRepository;
     this.anneauController = anneauController;
+    this.armeController = armeController;
   }
 
   public String generate(String detailsRight) {
@@ -33,6 +36,8 @@ public class ObjetMagiqueController {
     String categorie = objetMagique.getCategorie();
     if (Objects.equals(categorie, "anneaux")) {
       return anneauController.generate(puissance);
+    } else if (Objects.equals(categorie, "armes")) {
+      return armeController.generate(puissance);
     }
     return "ERROR ObjetMagique";
   }
