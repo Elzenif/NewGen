@@ -47,4 +47,9 @@ public class ArmeDistance extends Arme {
   public boolean isCac() {
     return true;
   }
+
+  @Override
+  public boolean isMunition() {
+    return prcMaxMunition - prcMinMunition < 99;
+  }
 }

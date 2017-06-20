@@ -1,13 +1,16 @@
 package generator.controller;
 
+import generator.model.entity.Arme;
+import generator.model.entity.ArmeCorpsACorps;
 import generator.model.entity.ProprieteSpeciale;
 import generator.model.entity.ProprieteSpecialeArmeCac;
 import generator.model.repository.ProprieteSpecialeArmeCacRepository;
+import generator.model.repository.ProprieteSpecialeArmeDistanceRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -24,11 +27,15 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class ProprieteSpecialeControllerTest {
 
-  @InjectMocks
   private ProprieteSpecialeController proprieteSpecialeController;
-
   @Mock
   private ProprieteSpecialeArmeCacRepository proprieteSpecialeArmeCacRepository;
+  @Mock
+  private ProprieteSpecialeArmeDistanceRepository proprieteSpecialeArmeDistanceRepository;
+  @Autowired
+  private ArmeInfoController armeInfoController;
+
+  private Arme arme;
   private ProprieteSpecialeArmeCac prop0;
   private ProprieteSpecialeArmeCac prop1;
   private ProprieteSpecialeArmeCac prop2;
@@ -36,6 +43,16 @@ public class ProprieteSpecialeControllerTest {
 
   @Before
   public void setUp() throws Exception {
+    proprieteSpecialeController = new ProprieteSpecialeController(proprieteSpecialeArmeCacRepository,
+            proprieteSpecialeArmeDistanceRepository, armeInfoController);
+
+    arme = new ArmeCorpsACorps();
+    arme.setId(1);
+    arme.setArme("arme");
+    arme.setPrix(10);
+    arme.setPrcMin(1);
+    arme.setPrcMax(5);
+
     prop0 = new ProprieteSpecialeArmeCac();
     prop0.setId(0);
     prop0.setModificateur(null);
@@ -71,7 +88,7 @@ public class ProprieteSpecialeControllerTest {
     doReturn(prop1).when(proprieteSpecialeArmeCacRepository)
             .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt());
 
-    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", true);
+    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", arme);
 
     assertThat(proprieteSpeciales).containsExactly(prop1);
   }
@@ -82,7 +99,7 @@ public class ProprieteSpecialeControllerTest {
             .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt()))
             .thenReturn(prop0, prop1, prop2);
 
-    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", true);
+    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", arme);
 
     assertThat(proprieteSpeciales).containsExactly(prop1, prop2);
   }
@@ -93,7 +110,7 @@ public class ProprieteSpecialeControllerTest {
             .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt()))
             .thenReturn(prop0, prop1, prop1, prop2);
 
-    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", true);
+    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", arme);
 
     assertThat(proprieteSpeciales).containsExactly(prop1, prop2);
   }
@@ -104,7 +121,7 @@ public class ProprieteSpecialeControllerTest {
             .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt()))
             .thenReturn(prop0, prop3, prop2, prop1);
 
-    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", true);
+    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", arme);
 
     assertThat(proprieteSpeciales).containsExactly(prop3, prop1);
   }
@@ -114,7 +131,7 @@ public class ProprieteSpecialeControllerTest {
     doReturn(prop0).when(proprieteSpecialeArmeCacRepository)
             .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt());
 
-    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", true);
+    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController.generateProprieteSpecialeArme("faible", arme);
 
     assertThat(proprieteSpeciales).isEmpty();
 

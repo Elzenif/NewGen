@@ -41,6 +41,11 @@ public class ArmeInhabituelle extends Arme {
     return type == Type.cac;
   }
 
+  @Override
+  public boolean isMunition() {
+    return false;
+  }
+
   private enum Type {
     cac, distance;
   }

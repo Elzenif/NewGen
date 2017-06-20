@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * Created by Germain on 28/05/2017.
  */
+@SuppressWarnings("SpellCheckingInspection")
 @Service
 public class GemmeController {
 

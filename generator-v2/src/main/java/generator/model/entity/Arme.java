@@ -30,4 +30,6 @@ public abstract class Arme extends DDRandomEntity {
 
   public abstract boolean isCac();
 
+  public abstract boolean isMunition();
+
 }

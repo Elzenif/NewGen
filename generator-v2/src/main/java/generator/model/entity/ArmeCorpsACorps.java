@@ -26,4 +26,9 @@ public class ArmeCorpsACorps extends Arme {
   public boolean isCac() {
     return true;
   }
+
+  @Override
+  public boolean isMunition() {
+    return false;
+  }
 }

@@ -7,6 +7,8 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Germain on 22/05/2016.
@@ -58,5 +60,14 @@ public class StringUtils {
   @NotNull
   public static Iterable<String> split(String string) {
     return Splitter.on(" ").split(string);
+  }
+
+  public static String removePatternAtEndOfString(String s, String regex) {
+    Pattern pattern = Pattern.compile(regex);
+    Matcher matcher = pattern.matcher(s);
+    if (matcher.find()) {
+      return s.substring(0, matcher.start());
+    }
+    return s;
   }
 }
