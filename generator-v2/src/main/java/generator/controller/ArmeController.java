@@ -61,10 +61,10 @@ public class ArmeController {
 
   @NotNull
   private String generateArmeWithProprieteSpeciale(String puissance, Arme arme) {
-    ArmeBonus armeBonus;List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
+    List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
             .generateProprieteSpecialeArme(puissance, arme);
     int totalBonus = proprieteSpeciales.stream().mapToInt(ProprieteSpeciale::getModificateur).sum();
-    armeBonus = armeBonusRepository.findFirstByBonus(String.valueOf(totalBonus));
+    ArmeBonus armeBonus = armeBonusRepository.findFirstByBonus(String.valueOf(totalBonus));
     return arme.getArme() + " (" + arme.getPrix() + armeBonus.getPrixBase() + "po)";
   }
 

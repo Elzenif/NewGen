@@ -4,6 +4,7 @@ import generator.model.entity.Arme;
 import generator.model.entity.ArmeCorpsACorps;
 import generator.model.entity.ProprieteSpeciale;
 import generator.model.entity.ProprieteSpecialeArmeCac;
+import generator.model.repository.AdversaireDesigneRepository;
 import generator.model.repository.ProprieteSpecialeArmeCacRepository;
 import generator.model.repository.ProprieteSpecialeArmeDistanceRepository;
 import org.junit.Before;
@@ -34,6 +35,8 @@ public class ProprieteSpecialeControllerTest {
   private ProprieteSpecialeArmeDistanceRepository proprieteSpecialeArmeDistanceRepository;
   @Autowired
   private ArmeInfoController armeInfoController;
+  @Autowired
+  private AdversaireDesigneRepository adversaireDesigneRepository;
 
   private Arme arme;
   private ProprieteSpecialeArmeCac prop0;
@@ -44,7 +47,7 @@ public class ProprieteSpecialeControllerTest {
   @Before
   public void setUp() throws Exception {
     proprieteSpecialeController = new ProprieteSpecialeController(proprieteSpecialeArmeCacRepository,
-            proprieteSpecialeArmeDistanceRepository, armeInfoController);
+            proprieteSpecialeArmeDistanceRepository, armeInfoController, adversaireDesigneRepository);
 
     arme = new ArmeCorpsACorps();
     arme.setId(1);

@@ -26,12 +26,12 @@ public class ArmeInfoController {
 	}
 
 	public boolean isCompatible(Arme arme, ProprieteSpeciale proprieteSpeciale) {
-    if (arme.isMunition()) {
-      return false;
-    }
     String proprieteSpecialeNom = proprieteSpeciale.getNom();
     if (!constraintsArme.contains(proprieteSpecialeNom)) {
       return true;
+    }
+    if (arme.isMunition()) {
+      return false;
     }
     String armeNom = StringUtils.removePatternAtEndOfString(arme.getArme(), "( )?\\(.*\\)");
     ArmeInfo armeInfo = armeInfoRepository.findFirstByNomContainingIgnoreCase(armeNom);

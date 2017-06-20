@@ -22,4 +22,18 @@ public abstract class DDEntity {
     this.id = id;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    DDEntity ddEntity = (DDEntity) o;
+
+    return id != null ? id.equals(ddEntity.id) : ddEntity.id == null;
+  }
+
+  @Override
+  public int hashCode() {
+    return id != null ? id.hashCode() : 0;
+  }
 }
