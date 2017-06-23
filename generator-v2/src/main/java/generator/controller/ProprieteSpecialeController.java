@@ -42,7 +42,7 @@ public class ProprieteSpecialeController {
     int cpt = 0;
     int max = 10;
     int totalWanted = 1;
-    int totalBonus = 0;
+    int totalBonus = bonus;
     while (proprieteSpeciales.size() < totalWanted && cpt < max) {
       cpt++;
       ProprieteSpeciale proprieteSpeciale;
@@ -67,6 +67,27 @@ public class ProprieteSpecialeController {
         }
         proprieteSpeciales.add(proprieteSpeciale);
         totalBonus += proprieteSpeciale.getModificateur();
+      }
+    }
+    return proprieteSpeciales;
+  }
+
+  public List<ProprieteSpeciale> generateProprieteSpecialeArmure(String puissance, int bonus) {
+    List<ProprieteSpeciale> proprieteSpeciales = new ArrayList<>();
+    int cpt = 0;
+    int max = 10;
+    int totalWanted = 1;
+    int totalBonus = bonus;
+    while (proprieteSpeciales.size() < totalWanted && cpt < max) {
+      cpt++;
+      int r1 = MathUtils.random(1, 100);
+      ProprieteSpeciale proprieteSpeciale = proprieteSpecialeArmureRepository
+              .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+      if (Objects.equals(proprieteSpeciale.getNom(), "rejouez deux fois le dé")) {
+        totalWanted++;
+      } else if (!proprieteSpeciales.contains(proprieteSpeciale) &&
+              totalBonus + proprieteSpeciale.getModificateur() <=) {
+        proprieteSpeciales.add(proprieteSpeciale);
       }
     }
     return proprieteSpeciales;
