@@ -19,13 +19,15 @@ public class ObjetMagiqueController {
   private final ObjetMagiqueRepository objetMagiqueRepository;
   private final AnneauController anneauController;
   private final ArmeController armeController;
+  private final ArmureEtBouclierController armureEtBouclierController;
 
   @Autowired
   public ObjetMagiqueController(ObjetMagiqueRepository objetMagiqueRepository, AnneauController anneauController,
-          ArmeController armeController) {
+                                ArmeController armeController, ArmureEtBouclierController armureEtBouclierController) {
     this.objetMagiqueRepository = objetMagiqueRepository;
     this.anneauController = anneauController;
     this.armeController = armeController;
+    this.armureEtBouclierController = armureEtBouclierController;
   }
 
   public String generate(String detailsRight) {
@@ -38,6 +40,8 @@ public class ObjetMagiqueController {
       return anneauController.generate(puissance);
     } else if (Objects.equals(categorie, "armes")) {
       return armeController.generate(puissance);
+    } else if (Objects.equals(categorie, "armures et boucliers")) {
+      return armureEtBouclierController.generate(puissance);
     }
     return "ERROR ObjetMagique";
   }

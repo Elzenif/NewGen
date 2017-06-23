@@ -6,25 +6,54 @@ import javax.persistence.Table;
 @SuppressWarnings("SpellCheckingInspection")
 @Entity
 @Table(name = "dnd35_objetsmagiquesarmesspecifiques")
-public class ArmeSpecifique extends DDRandomPuissanceEntity {
+public class ArmeSpecifique extends ObjetSpecifique implements IArme {
 
-  private String arme;
-  private String prix;
+  private boolean cac;
+  private boolean munition;
+  private boolean tranchant;
+  private boolean perforant;
+  private boolean contondant;
 
-  public String getArme() {
-    return arme;
+  @Override
+  public boolean isCac() {
+    return cac;
   }
 
-  public void setArme(String arme) {
-    this.arme = arme;
+  public void setCac(boolean cac) {
+    this.cac = cac;
   }
 
-  public String getPrix() {
-    return prix;
+  @Override
+  public boolean isMunition() {
+    return munition;
   }
 
-  public void setPrix(String prix) {
-    this.prix = prix;
+  public void setMunition(boolean munition) {
+    this.munition = munition;
+  }
+
+  public boolean isTranchant() {
+    return tranchant;
+  }
+
+  public void setTranchant(boolean tranchant) {
+    this.tranchant = tranchant;
+  }
+
+  public boolean isPerforant() {
+    return perforant;
+  }
+
+  public void setPerforant(boolean perforant) {
+    this.perforant = perforant;
+  }
+
+  public boolean isContondant() {
+    return contondant;
+  }
+
+  public void setContondant(boolean contondant) {
+    this.contondant = contondant;
   }
 
   @Override
@@ -32,10 +61,15 @@ public class ArmeSpecifique extends DDRandomPuissanceEntity {
     return "ArmeSpecifique{" +
             "prcMin=" + prcMin +
             ", puissance='" + puissance + '\'' +
-            ", prcMax=" + prcMax +
             ", arme='" + arme + '\'' +
+            ", prcMax=" + prcMax +
+            ", prix=" + prix +
             ", id=" + id +
-            ", prix='" + prix + '\'' +
+            ", cac=" + cac +
+            ", munition=" + munition +
+            ", tranchant=" + tranchant +
+            ", perforant=" + perforant +
+            ", contondant=" + contondant +
             '}';
   }
 }

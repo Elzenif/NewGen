@@ -5,15 +5,17 @@ import javax.persistence.Table;
 
 @SuppressWarnings("SpellCheckingInspection")
 @Entity
-@Table(name = "dnd35_objetsmagiquestypesarmes")
-public class TypeArme extends TypeObjet {
+@Table(name = "dnd35_objetsmagiquesboucliersspecifiques")
+public class BouclierSpecifique extends ObjetSpecifique {
 
   @Override
   public String toString() {
-    return "TypeArme{" +
+    return "BouclierSpecifique{" +
             "prcMin=" + prcMin +
+            ", puissance='" + puissance + '\'' +
+            ", arme='" + arme + '\'' +
             ", prcMax=" + prcMax +
-            ", type='" + type + '\'' +
+            ", prix='" + prix + '\'' +
             ", id=" + id +
             '}';
   }

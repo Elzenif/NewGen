@@ -2,12 +2,9 @@ package generator.model.entity;
 
 import javax.persistence.MappedSuperclass;
 
-/**
- * Created by Germain on 30/05/2017.
- */
 @SuppressWarnings("SpellCheckingInspection")
 @MappedSuperclass
-public abstract class Arme extends DDRandomEntity implements IArme {
+public abstract class ObjetSpecifique extends DDRandomPuissanceEntity {
 
   protected String arme;
   protected Integer prix;
@@ -27,5 +24,4 @@ public abstract class Arme extends DDRandomEntity implements IArme {
   public void setPrix(Integer prix) {
     this.prix = prix;
   }
-
 }

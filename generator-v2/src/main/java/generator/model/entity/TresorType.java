@@ -3,8 +3,8 @@ package generator.model.entity;
 /**
  * Created by Germain on 27/05/2017.
  */
-@SuppressWarnings("SpellCheckingInspection")
+@SuppressWarnings({"SpellCheckingInspection", "unused"})
 public enum TresorType {
 
-  pieces, biens, objets;
+  pieces, biens, objets
 }

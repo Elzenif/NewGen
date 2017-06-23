@@ -1,6 +1,78 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+DROP TABLE IF EXISTS dnd35.dnd35_tresors;
+DROP TABLE IF EXISTS dnd35.dnd35_taillepoids;
+DROP TABLE IF EXISTS dnd35.dnd35_sorts;
+DROP TABLE IF EXISTS dnd35.dnd35_sortdomaine;
+DROP TABLE IF EXISTS dnd35.dnd35_sortclasse;
+DROP TABLE IF EXISTS dnd35.dnd35_sauvegardes;
+DROP TABLE IF EXISTS dnd35.dnd35_religion;
+DROP TABLE IF EXISTS dnd35.dnd35_races;
+DROP TABLE IF EXISTS dnd35.dnd35_racedon;
+DROP TABLE IF EXISTS dnd35.dnd35_racedieu;
+DROP TABLE IF EXISTS dnd35.dnd35_racecompetence;
+DROP TABLE IF EXISTS dnd35.dnd35_racecapacitespeciale;
+DROP TABLE IF EXISTS dnd35.dnd35_pieges;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsnonmagiques;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquestypesparchemins;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquestypesboucliers;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquestypesarmures;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquestypesarmes;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquessceptres;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquespotionshuiles;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesparcheminsnombresorts;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesparcheminsniveausorts;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesparchemins;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesmerveilleux;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesboucliersspecifiques;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesboucliersproprietesspeciales;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesbatons;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesbaguettes;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmuresspecifiques;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmuresproprietesspeciales;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmures;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmesspecifiques;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmesinhabituelles;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmesdistanceproprietesspeciales;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmesdistance;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmescorpsacorpsproprietesspeciales;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmescorpsacorps;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesarmes;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesanneaux;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiquesadversairesdesignes;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsmagiques;
+DROP TABLE IF EXISTS dnd35.dnd35_objetsart;
+DROP TABLE IF EXISTS dnd35.dnd35_objets;
+DROP TABLE IF EXISTS dnd35.dnd35_modificateurtaille;
+DROP TABLE IF EXISTS dnd35.dnd35_modificateurs;
+DROP TABLE IF EXISTS dnd35.dnd35_langues;
+DROP TABLE IF EXISTS dnd35.dnd35_langueraceclasse;
+DROP TABLE IF EXISTS dnd35.dnd35_gemmes;
+DROP TABLE IF EXISTS dnd35.dnd35_experience;
+DROP TABLE IF EXISTS dnd35.dnd35_effetdon;
+DROP TABLE IF EXISTS dnd35.dnd35_effetcharge;
+DROP TABLE IF EXISTS dnd35.dnd35_effetage;
+DROP TABLE IF EXISTS dnd35.dnd35_dons;
+DROP TABLE IF EXISTS dnd35.dnd35_donprerequis;
+DROP TABLE IF EXISTS dnd35.dnd35_competencesynergie;
+DROP TABLE IF EXISTS dnd35.dnd35_competences;
+DROP TABLE IF EXISTS dnd35.dnd35_classesalignements;
+DROP TABLE IF EXISTS dnd35.dnd35_classes;
+DROP TABLE IF EXISTS dnd35.dnd35_classepredilection;
+DROP TABLE IF EXISTS dnd35.dnd35_classeleveling;
+DROP TABLE IF EXISTS dnd35.dnd35_classedon;
+DROP TABLE IF EXISTS dnd35.dnd35_classedieu;
+DROP TABLE IF EXISTS dnd35.dnd35_classecompetence;
+DROP TABLE IF EXISTS dnd35.dnd35_classecapacitespeciale;
+DROP TABLE IF EXISTS dnd35.dnd35_charge;
+DROP TABLE IF EXISTS dnd35.dnd35_caracteristiques;
+DROP TABLE IF EXISTS dnd35.dnd35_capacitesspeciales;
+DROP TABLE IF EXISTS dnd35.dnd35_armuresboucliers;
+DROP TABLE IF EXISTS dnd35.dnd35_armes;
+DROP TABLE IF EXISTS dnd35.dnd35_alignements;
+DROP TABLE IF EXISTS dnd35.dnd35_age;
+
 --
 -- Table structure for table `dnd35_age`
 --
@@ -4066,8 +4138,8 @@ INSERT INTO `dnd35_objetsMagiquesArmesCorpsACorps` (`id`, `prcMin`, `prcmax`, `a
 (9, 61, 71, 'hache de guerre naine', 330),
 (10, 72, 75, 'kama', 302),
 (11, 76, 79, 'lance', 302),
-(12, 80, 83, 'masse d''arme légère', 305),
-(13, 84, 88, 'masse d''arme lourde', 312),
+(12, 80, 83, 'masse d''armes légère', 305),
+(13, 84, 88, 'masse d''armes lourde', 312),
 (14, 89, 92, 'nunchaku', 302),
 (15, 93, 96, 'rapière', 320),
 (16, 97, 100, 'siangham', 303);
@@ -4341,7 +4413,12 @@ CREATE TABLE IF NOT EXISTS `dnd35_objetsMagiquesArmesSpecifiques` (
   `prcMin` int(11) NOT NULL,
   `prcmax` int(11) NOT NULL,
   `arme` varchar(50) NOT NULL,
-  `prix` int(11) DEFAULT NULL,
+  `prix` INT(11) DEFAULT NULL,
+  `cac`  BIT DEFAULT b'1' NULL,
+  `munition` BIT DEFAULT b'0' NULL,
+  `tranchant` BIT DEFAULT b'0' NULL,
+  `perforant` BIT DEFAULT b'0' NULL,
+  `contondant` BIT DEFAULT b'0' NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
@@ -4349,55 +4426,56 @@ CREATE TABLE IF NOT EXISTS `dnd35_objetsMagiquesArmesSpecifiques` (
 -- Dumping data for table `dnd35_objetsMagiquesArmesSpecifiques`
 --
 
-INSERT INTO `dnd35_objetsMagiquesArmesSpecifiques` (`id`, `puissance`, `prcMin`, `prcmax`, `arme`, `prix`) VALUES
-(1, 'faible', 1, 15, 'flèche endormante', 132),
-(2, 'faible', 16, 25, 'carreau hurleur', 267),
-(3, 'faible', 26, 45, 'dague de maître en argent', 322),
-(4, 'faible', 46, 65, 'épée longue de maître en fer froid', 330),
-(5, 'faible', 66, 75, 'javeline de foudre', 1500),
-(6, 'faible', 76, 80, 'flèche mortelle', 2282),
-(7, 'faible', 81, 90, 'dague en adamantium', 3002),
-(8, 'faible', 91, 100, 'hache d''armes en adamantium', 3010),
-(9, 'intermédiaire', 1, 9, 'javeline de foudre', 1500),
-(49, 'intermédiaire', 10, 15, 'flèche mortelle', 2282),
-(10, 'intermédiaire', 16, 24, 'dague en adamantium', 3002),
-(11, 'intermédiaire', 25, 33, 'hache d''armes en adamantium', 3010),
-(12, 'intermédiaire', 34, 37, 'grande flèche mortelle', 4057),
-(13, 'intermédiaire', 38, 40, 'brise-arme', 4315),
-(14, 'intermédiaire', 41, 46, 'dague venimeuse', 8302),
-(15, 'intermédiaire', 47, 51, 'trident d''alerte', 10115),
-(16, 'intermédiaire', 52, 56, 'regret du changeant', 12780),
-(17, 'intermédiaire', 57, 62, 'dague de l''assassin', 18302),
-(18, 'intermédiaire', 63, 66, 'trident de domination aquatique', 18650),
-(19, 'intermédiaire', 67, 74, 'épée ardente', 20715),
-(20, 'intermédiaire', 75, 79, 'épée de bonne fortune (0 souhait)', 22060),
-(21, 'intermédiaire', 80, 86, 'épée de précision', 22310),
-(22, 'intermédiaire', 87, 91, 'épée des plans', 22315),
-(23, 'intermédiaire', 92, 95, 'épée des neufs vies', 23057),
-(24, 'intermédiaire', 96, 97, 'arc long su serment', 25600),
-(25, 'intermédiaire', 98, 100, 'épée voleuse de vie', 25715),
-(27, 'puissante', 1, 3, 'regret du changeant', 12780),
-(28, 'puissante', 4, 7, 'dague de l''assassin', 18302),
-(29, 'puissante', 8, 8, 'trident de domination aquatique', 18650),
-(30, 'puissante', 10, 13, 'épée ardente', 20715),
-(31, 'puissante', 14, 17, 'épée de bonne fortune (0 souhait)', 22060),
-(32, 'puissante', 18, 24, 'épée de précision', 22310),
-(33, 'puissante', 25, 31, 'épée des plans', 22315),
-(34, 'puissante', 32, 37, 'épée des neufs vies', 23057),
-(35, 'puissante', 38, 41, 'arc long su serment', 25600),
-(36, 'puissante', 42, 46, 'épée voleuse de vie', 25715),
-(37, 'puissante', 47, 51, 'masse dépouvante', 38552),
-(38, 'puissante', 52, 57, 'hache dévitalisante', 40320),
-(39, 'puissante', 58, 62, 'cimeterre des bois', 47315),
-(40, 'puissante', 63, 67, 'rapière d''anémie', 50320),
-(41, 'puissante', 68, 73, 'épée radieuse', 50335),
-(42, 'puissante', 74, 79, 'épée de givre', 54475),
-(43, 'puissante', 80, 84, 'marteau de lancer nain', 60312),
-(44, 'puissante', 85, 91, 'épée de bonne fortune (1 souhait)', 62360),
-(45, 'puissante', 92, 95, 'masse de démolition', 75312),
-(46, 'puissante', 96, 97, 'épée de bonne fortune (2 souhait)', 102660),
-(47, 'puissante', 98, 99, 'épée de justice', 120630),
-(48, 'puissante', 100, 100, 'épée de bonne fortune (3 souhait)', 142960);
+INSERT INTO `dnd35_objetsMagiquesArmesSpecifiques` (`id`, `puissance`, `prcMin`, `prcmax`, `arme`, `prix`, `cac`, `munition`,
+                                                    `tranchant`, `perforant`, `contondant`) VALUES
+(1, 'faible', 1, 15, 'flèche endormante', 132, 0, 1, 0, 1, 0),
+(2, 'faible', 16, 25, 'carreau hurleur', 267, 0, 1, 0, 1, 0),
+(3, 'faible', 26, 45, 'dague de maître en argent', 322, 1, 0, 1, 1, 0),
+(4, 'faible', 46, 65, 'épée longue de maître en fer froid', 330, 1, 0, 1, 0, 0),
+(5, 'faible', 66, 75, 'javeline de foudre', 1500, 0, 0, 0, 1, 0),
+(6, 'faible', 76, 80, 'flèche mortelle', 2282, 0, 1, 0, 1, 0),
+(7, 'faible', 81, 90, 'dague en adamantium', 3002, 1, 0, 1, 1, 0),
+(8, 'faible', 91, 100, 'hache d''armes en adamantium', 3010, 1, 0, 1, 0, 0),
+(9, 'intermédiaire', 1, 9, 'javeline de foudre', 1500, 0, 0, 0, 1, 0),
+(49, 'intermédiaire', 10, 15, 'flèche mortelle', 2282, 0, 1, 0, 1, 0),
+(10, 'intermédiaire', 16, 24, 'dague en adamantium', 3002, 1, 0, 1, 1, 0),
+(11, 'intermédiaire', 25, 33, 'hache d''armes en adamantium', 3010, 1, 0, 1, 0, 0),
+(12, 'intermédiaire', 34, 37, 'grande flèche mortelle', 4057, 0, 1, 0, 1, 0),
+(13, 'intermédiaire', 38, 40, 'brise-arme', 4315, 1, 0, 1, 0, 0),
+(14, 'intermédiaire', 41, 46, 'dague venimeuse', 8302, 1, 0, 1, 1, 0),
+(15, 'intermédiaire', 47, 51, 'trident d''alerte', 10115, 1, 0, 0, 1, 0),
+(16, 'intermédiaire', 52, 56, 'regret du changeant', 12780, 1, 0, 1, 0, 0),
+(17, 'intermédiaire', 57, 62, 'dague de l''assassin', 18302, 1, 0, 1, 1, 0),
+(18, 'intermédiaire', 63, 66, 'trident de domination aquatique', 18650, 1, 0, 0, 1, 0),
+(19, 'intermédiaire', 67, 74, 'épée ardente', 20715, 1, 0, 1, 0, 0),
+(20, 'intermédiaire', 75, 79, 'épée de bonne fortune (0 souhait)', 22060, 1, 0, 0, 1, 0),
+(21, 'intermédiaire', 80, 86, 'épée de précision', 22310, 1, 0, 0, 1, 0),
+(22, 'intermédiaire', 87, 91, 'épée des plans', 22315, 1, 0, 1, 0, 0),
+(23, 'intermédiaire', 92, 95, 'épée des neufs vies', 23057, 1, 0, 1, 0, 0),
+(24, 'intermédiaire', 96, 97, 'arc long du serment', 25600, 0, 0, 0, 0, 0),
+(25, 'intermédiaire', 98, 100, 'épée voleuse de vie', 25715, 1, 0, 1, 0, 0),
+(27, 'puissante', 1, 3, 'regret du changeant', 12780, 1, 0, 1, 0, 0),
+(28, 'puissante', 4, 7, 'dague de l''assassin', 18302, 1, 0, 1, 1, 0),
+(29, 'puissante', 8, 8, 'trident de domination aquatique', 18650, 1, 0, 0, 1, 0),
+(30, 'puissante', 10, 13, 'épée ardente', 20715, 1, 0, 1, 0, 0),
+(31, 'puissante', 14, 17, 'épée de bonne fortune (0 souhait)', 22060, 1, 0, 0, 1, 0),
+(32, 'puissante', 18, 24, 'épée de précision', 22310, 1, 0, 0, 1, 0),
+(33, 'puissante', 25, 31, 'épée des plans', 22315, 1, 0, 1, 0, 0),
+(34, 'puissante', 32, 37, 'épée des neufs vies', 23057, 1, 0, 1, 0, 0),
+(35, 'puissante', 38, 41, 'arc long du serment', 25600, 0, 0, 0, 0, 0),
+(36, 'puissante', 42, 46, 'épée voleuse de vie', 25715, 1, 0, 1, 0, 0),
+(37, 'puissante', 47, 51, 'masse d''épouvante', 38552, 1, 0, 0, 0, 1),
+(38, 'puissante', 52, 57, 'hache dévitalisante', 40320, 1, 0, 1, 0, 0),
+(39, 'puissante', 58, 62, 'cimeterre des bois', 47315, 1, 0, 1, 0, 0),
+(40, 'puissante', 63, 67, 'rapière d''anémie', 50320, 1, 0, 0, 1, 0),
+(41, 'puissante', 68, 73, 'épée radieuse', 50335, 1, 0, 1, 0, 0),
+(42, 'puissante', 74, 79, 'épée de givre', 54475, 1, 0, 1, 0, 0),
+(43, 'puissante', 80, 84, 'marteau de lancer nain', 60312, 0, 1, 0, 0, 1),
+(44, 'puissante', 85, 91, 'épée de bonne fortune (1 souhait)', 62360, 1, 0, 0, 1, 0),
+(45, 'puissante', 92, 95, 'masse de démolition', 75312, 1, 0, 0, 0, 1),
+(46, 'puissante', 96, 97, 'épée de bonne fortune (2 souhait)', 102660, 1, 0, 0, 1, 0),
+(47, 'puissante', 98, 99, 'épée de justice', 120630, 1, 0, 1, 0, 0),
+(48, 'puissante', 100, 100, 'épée de bonne fortune (3 souhait)', 142960, 1, 0, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -4437,7 +4515,7 @@ INSERT INTO `dnd35_objetsMagiquesArmures` (`id`, `puissance`, `prcMin`, `prcmax`
 (14, 'intermédiaire', 51, 55, 'bouclier', 4, 16000),
 (15, 'intermédiaire', 56, 57, 'armure', 4, 16000),
 (16, 'intermédiaire', 58, 60, 'armure spécifique', NULL, NULL),
-(17, 'intermédiaire', 51, 53, 'bouclier spécifique', NULL, NULL),
+(17, 'intermédiaire', 61, 63, 'bouclier spécifique', NULL, NULL),
 (18, 'intermédiaire', 64, 100, 'propriété spéciale', NULL, NULL),
 (19, 'puissante', 1, 8, 'bouclier', 3, 9000),
 (20, 'puissante', 9, 16, 'armure', 3, 16000),

@@ -1,12 +1,8 @@
 package generator.controller;
 
 import commons.utils.MathUtils;
-import generator.model.entity.AdversaireDesigne;
-import generator.model.entity.Arme;
-import generator.model.entity.ProprieteSpeciale;
-import generator.model.repository.AdversaireDesigneRepository;
-import generator.model.repository.ProprieteSpecialeArmeCacRepository;
-import generator.model.repository.ProprieteSpecialeArmeDistanceRepository;
+import generator.model.entity.*;
+import generator.model.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +18,26 @@ public class ProprieteSpecialeController {
   private final ProprieteSpecialeArmeDistanceRepository proprieteSpecialeArmeDistanceRepository;
   private final ArmeInfoController armeInfoController;
   private final AdversaireDesigneRepository adversaireDesigneRepository;
+  private final ProprieteSpecialeArmureRepository proprieteSpecialeArmureRepository;
+  private final ProprieteSpecialeBouclierRepository proprieteSpecialeBouclierRepository;
+
 
   @Autowired
   public ProprieteSpecialeController(ProprieteSpecialeArmeCacRepository proprieteSpecialeArmeCacRepository,
                                      ProprieteSpecialeArmeDistanceRepository proprieteSpecialeArmeDistanceRepository,
+                                     ProprieteSpecialeArmureRepository proprieteSpecialeArmureRepository,
+                                     ProprieteSpecialeBouclierRepository proprieteSpecialeBouclierRepository,
                                      ArmeInfoController armeInfoController,
                                      AdversaireDesigneRepository adversaireDesigneRepository) {
     this.proprieteSpecialeArmeCacRepository = proprieteSpecialeArmeCacRepository;
     this.proprieteSpecialeArmeDistanceRepository = proprieteSpecialeArmeDistanceRepository;
+    this.proprieteSpecialeArmureRepository = proprieteSpecialeArmureRepository;
+    this.proprieteSpecialeBouclierRepository = proprieteSpecialeBouclierRepository;
     this.armeInfoController = armeInfoController;
     this.adversaireDesigneRepository = adversaireDesigneRepository;
   }
 
-  public List<ProprieteSpeciale> generateProprieteSpecialeArme(String puissance, Arme arme) {
+  public List<ProprieteSpeciale> generateProprieteSpecialeArme(String puissance, IArme arme, int bonus) {
     List<ProprieteSpeciale> proprieteSpeciales = new ArrayList<>();
     int cpt = 0;
     int max = 10;
@@ -55,7 +58,7 @@ public class ProprieteSpecialeController {
         totalWanted++;
       } else if (!proprieteSpeciales.contains(proprieteSpeciale) &&
               totalBonus + proprieteSpeciale.getModificateur() <= 10 &&
-              armeInfoController.isCompatible(arme, proprieteSpeciale)) {
+              checkCompatibility(arme, proprieteSpeciale)) {
         if (Objects.equals(proprieteSpeciale.getNom(), "tueuse")) {
           int r2 = MathUtils.random(1, 100);
           AdversaireDesigne adversaireDesigne = adversaireDesigneRepository
@@ -67,5 +70,14 @@ public class ProprieteSpecialeController {
       }
     }
     return proprieteSpeciales;
+  }
+
+  private boolean checkCompatibility(IArme arme, ProprieteSpeciale proprieteSpeciale) {
+    if (arme instanceof Arme) {
+      return armeInfoController.isCompatible((Arme) arme, proprieteSpeciale);
+    } else if (arme instanceof ArmeSpecifique) {
+      return armeInfoController.isCompatible((ArmeSpecifique) arme, proprieteSpeciale);
+    }
+    return true;
   }
 }
