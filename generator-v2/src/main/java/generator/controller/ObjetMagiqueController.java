@@ -33,8 +33,7 @@ public class ObjetMagiqueController {
   public String generate(String detailsRight) {
     String puissance = processInput(detailsRight);
     int r1 = MathUtils.random(1, 100);
-    ObjetMagique objetMagique = objetMagiqueRepository
-        .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+    ObjetMagique objetMagique = objetMagiqueRepository.findRandomByPuissance(puissance, r1);
     String categorie = objetMagique.getCategorie();
     if (Objects.equals(categorie, "anneaux")) {
       return anneauController.generate(puissance);

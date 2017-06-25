@@ -95,8 +95,7 @@ public class ProprieteSpecialeControllerTest {
 
   @Test
   public void generateOnePropriete() {
-    doReturn(prop1).when(proprieteSpecialeArmeCacRepository)
-        .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt());
+    doReturn(prop1).when(proprieteSpecialeArmeCacRepository).findRandomByPuissance(anyString(), anyInt());
 
     List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
         .generateProprieteSpecialeArme("faible", arme, 0);
@@ -106,8 +105,7 @@ public class ProprieteSpecialeControllerTest {
 
   @Test
   public void generateTwoProprietes() {
-    when(proprieteSpecialeArmeCacRepository
-        .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt()))
+    when(proprieteSpecialeArmeCacRepository.findRandomByPuissance(anyString(), anyInt()))
         .thenReturn(prop0, prop1, prop2);
 
     List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
@@ -118,8 +116,7 @@ public class ProprieteSpecialeControllerTest {
 
   @Test
   public void generateTwoProprietesWhenSameOneAppearsTwice() {
-    when(proprieteSpecialeArmeCacRepository
-        .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt()))
+    when(proprieteSpecialeArmeCacRepository.findRandomByPuissance(anyString(), anyInt()))
         .thenReturn(prop0, prop1, prop1, prop2);
 
     List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
@@ -130,8 +127,7 @@ public class ProprieteSpecialeControllerTest {
 
   @Test
   public void generateTwoProprietesWhenTotalModificateurGreaterThan10() {
-    when(proprieteSpecialeArmeCacRepository
-        .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt()))
+    when(proprieteSpecialeArmeCacRepository.findRandomByPuissance(anyString(), anyInt()))
         .thenReturn(prop0, prop3, prop2, prop1);
 
     List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
@@ -142,8 +138,7 @@ public class ProprieteSpecialeControllerTest {
 
   @Test
   public void generateSecurityForInfiniteLoop() {
-    doReturn(prop0).when(proprieteSpecialeArmeCacRepository)
-        .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(anyString(), anyInt(), anyInt());
+    doReturn(prop0).when(proprieteSpecialeArmeCacRepository).findRandomByPuissance(anyString(), anyInt());
 
     List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
         .generateProprieteSpecialeArme("faible", arme, 0);

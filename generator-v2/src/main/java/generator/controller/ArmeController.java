@@ -59,8 +59,7 @@ public class ArmeController {
     while (cpt < max) {
       cpt++;
       int r1 = MathUtils.random(1, 100);
-      ArmeBonus armeBonus = armeBonusRepository
-          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+      ArmeBonus armeBonus = armeBonusRepository.findRandomByPuissance(puissance, r1);
       if (Objects.equals(armeBonus.getBonus(), "propriété spéciale")) {
         withProprieteSpeciale = true;
       } else if (Objects.equals(armeBonus.getBonus(), "arme spécifique")) {
@@ -75,7 +74,7 @@ public class ArmeController {
   @NotNull
   private String generateArme(String puissance, ArmeBonus armeBonus, boolean withProprieteSpeciale) {
     int r = MathUtils.random(1, 100);
-    TypeArme typeArme = typeArmeRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r, r);
+    TypeArme typeArme = typeArmeRepository.findRandom(r);
     Arme arme = generateArme(typeArme.getType());
     int bonus = Integer.parseInt(armeBonus.getBonus());
     int prix = arme.getPrix();
@@ -98,13 +97,11 @@ public class ArmeController {
   @NotNull
   private String generateArmeSpecifique(String puissance, boolean withProprieteSpeciale) {
     int r2 = MathUtils.random(1, 100);
-    ArmeSpecifique armeSpecifique = armeSpecifiqueRepository
-        .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r2, r2);
+    ArmeSpecifique armeSpecifique = armeSpecifiqueRepository.findRandomByPuissance(puissance, r2);
     String adversaireString = "";
     if (armeSpecifique.getArme().contains("flèche mortelle")) {
       int r3 = MathUtils.random(1, 100);
-      AdversaireDesigne adversaireDesigne = adversaireDesigneRepository
-          .findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r3, r3);
+      AdversaireDesigne adversaireDesigne = adversaireDesigneRepository.findRandom(r3);
       adversaireString = "( " + adversaireDesigne.getAdversaire() + ")";
     }
     int prix = armeSpecifique.getPrix();
@@ -127,9 +124,9 @@ public class ArmeController {
     int r4 = MathUtils.random(1, 100);
     Arme arme = null;
     if (type.contains("arme de corps à corps usuelle")) {
-      arme = armeCorpsACorpsRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r4, r4);
+      arme = armeCorpsACorpsRepository.findRandom(r4);
     } else if (type.contains("arme inhabituelle")) {
-      arme = armeInhabituelleRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r4, r4);
+      arme = armeInhabituelleRepository.findRandom(r4);
     } else if (type.contains("arme à distance usuelle")) {
       int r5 = MathUtils.random(1, 100);
       arme = armeDistanceRepository.findArmeDistance(r4, r5);

@@ -24,7 +24,7 @@ public class ObjetArtController {
 
   public String generate() {
     int random = MathUtils.random(1, 100);
-    ObjetArt objetArt = objetArtRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(random, random);
+    ObjetArt objetArt = objetArtRepository.findRandom(random);
     return piecesController.chooseRandomAndAddValue(objetArt.getExemples(), ";", objetArt.getValeur());
   }
 }

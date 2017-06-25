@@ -55,14 +55,7 @@ public class ProprieteSpecialeController {
     while (proprieteSpeciales.size() < totalWanted && cpt < max) {
       cpt++;
       ProprieteSpeciale proprieteSpeciale;
-      int r1 = MathUtils.random(1, 100);
-      if (arme.isCac()) {
-        proprieteSpeciale = proprieteSpecialeArmeCacRepository
-            .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
-      } else {
-        proprieteSpeciale = proprieteSpecialeArmeDistanceRepository
-            .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
-      }
+      proprieteSpeciale = getProprieteSpeciale(puissance, arme.isCac());
       if (proprieteSpeciale.getModificateur() == null) {
         totalWanted++;
       } else if (!proprieteSpeciales.contains(proprieteSpeciale) &&
@@ -70,8 +63,7 @@ public class ProprieteSpecialeController {
           checkCompatibility(arme, proprieteSpeciale)) {
         if (Objects.equals(proprieteSpeciale.getNom(), "tueuse")) {
           int r2 = MathUtils.random(1, 100);
-          AdversaireDesigne adversaireDesigne = adversaireDesigneRepository
-              .findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r2, r2);
+          AdversaireDesigne adversaireDesigne = adversaireDesigneRepository.findRandom(r2);
           proprieteSpeciale.setNom("tueuse (" + adversaireDesigne.getAdversaire() + ")");
         }
         proprieteSpeciales.add(proprieteSpeciale);
@@ -79,6 +71,17 @@ public class ProprieteSpecialeController {
       }
     }
     return proprieteSpeciales;
+  }
+
+  private ProprieteSpeciale getProprieteSpeciale(String puissance, boolean isCac) {
+    ProprieteSpeciale proprieteSpeciale;
+    int r1 = MathUtils.random(1, 100);
+    if (isCac) {
+      proprieteSpeciale = proprieteSpecialeArmeCacRepository.findRandomByPuissance(puissance, r1);
+    } else {
+      proprieteSpeciale = proprieteSpecialeArmeDistanceRepository.findRandomByPuissance(puissance, r1);
+    }
+    return proprieteSpeciale;
   }
 
   public List<ProprieteSpecialePrix> generateProprieteSpecialeArmureBouclier(String puissance, int bonus,
@@ -109,11 +112,9 @@ public class ProprieteSpecialeController {
     ProprieteSpecialePrix proprieteSpeciale;
     int r = MathUtils.random(1, 100);
     if (isArmure) {
-      proprieteSpeciale = proprieteSpecialeArmureRepository
-          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r, r);
+      proprieteSpeciale = proprieteSpecialeArmureRepository.findRandomByPuissance(puissance, r);
     } else {
-      proprieteSpeciale = proprieteSpecialeBouclierRepository
-          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r, r);
+      proprieteSpeciale = proprieteSpecialeBouclierRepository.findRandomByPuissance(puissance, r);
     }
     return proprieteSpeciale;
   }

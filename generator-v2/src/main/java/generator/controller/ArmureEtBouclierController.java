@@ -51,8 +51,7 @@ public class ArmureEtBouclierController {
     while (cpt < max) {
       cpt++;
       int r1 = MathUtils.random(1, 100);
-      ArmureEtBouclier armureEtBouclier = armureEtBouclierRepository
-          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+      ArmureEtBouclier armureEtBouclier = armureEtBouclierRepository.findRandomByPuissance(puissance, r1);
       if (Objects.equals(armureEtBouclier.getType(), "propriété spéciale")) {
         withProprieteSpeciale = true;
       } else if (Objects.equals(armureEtBouclier.getType(), "armure spécifique")) {
@@ -94,9 +93,9 @@ public class ArmureEtBouclierController {
     TypeObjetPrix typeObjet;
     int r = MathUtils.random(1, 100);
     if (isArmure) {
-      typeObjet = typeArmureRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r, r);
+      typeObjet = typeArmureRepository.findRandom(r);
     } else {
-      typeObjet = typeBouclierRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r, r);
+      typeObjet = typeBouclierRepository.findRandom(r);
     }
     return typeObjet;
   }
@@ -127,11 +126,9 @@ public class ArmureEtBouclierController {
     ObjetSpecifique objetSpecifique;
     int r = MathUtils.random(1, 100);
     if (isArmure) {
-      objetSpecifique = armureSpecifiqueRepository
-          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r, r);
+      objetSpecifique = armureSpecifiqueRepository.findRandomByPuissance(puissance, r);
     } else {
-      objetSpecifique = bouclierSpecifiqueRepository
-          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r, r);
+      objetSpecifique = bouclierSpecifiqueRepository.findRandomByPuissance(puissance, r);
     }
     return objetSpecifique;
   }

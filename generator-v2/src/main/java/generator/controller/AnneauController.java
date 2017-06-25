@@ -22,8 +22,7 @@ public class AnneauController {
 
   public String generate(String puissance) {
     int r1 = MathUtils.random(1, 100);
-    Anneau anneau = anneauRepository
-        .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+    Anneau anneau = anneauRepository.findRandomByPuissance(puissance, r1);
     return "Anneau " + anneau.getNom() +
         (anneau.getModificateur() == null ? "" : " +" + anneau.getModificateur()) +
         " (" + anneau.getPrix() + ")";

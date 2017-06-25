@@ -24,7 +24,7 @@ public class GemmeController {
 
   public String generate() {
     int random = MathUtils.random(1, 100);
-    Gemme gemme = gemmeRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(random, random);
+    Gemme gemme = gemmeRepository.findRandom(random);
     return piecesController.chooseRandomAndAddValue(gemme.getExemples(), ";", gemme.getValeur());
   }
 }
