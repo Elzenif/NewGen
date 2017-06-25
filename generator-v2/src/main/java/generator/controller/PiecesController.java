@@ -11,7 +11,7 @@ import java.util.Arrays;
  * Created by Germain on 28/05/2017.
  */
 @Service
-public class PiecesController {
+public class PiecesController extends AbstractController {
 
   public String generate(String detail) {
     Pair<Integer, String> pair = GeneratorUtils.getMultiplier(detail);

@@ -1,6 +1,5 @@
 package generator.controller;
 
-import commons.utils.MathUtils;
 import commons.utils.Pair;
 import generator.model.entity.Tresor;
 import generator.model.entity.TresorType;
@@ -20,7 +19,7 @@ import java.util.stream.IntStream;
  */
 @Service
 @SuppressWarnings("SpellCheckingInspection")
-public class TresorController {
+public class TresorController extends AbstractController {
 
   private final TresorRepository tresorRepository;
   private final PiecesController piecesController;
@@ -43,7 +42,7 @@ public class TresorController {
   }
 
   public String generate(Integer generationLevel) {
-    int random = MathUtils.random(1, 100);
+    int random = roll100();
     List<Tresor> tresors = tresorRepository.findByNiveauAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(generationLevel,
         random, random);
     return tresors.stream()

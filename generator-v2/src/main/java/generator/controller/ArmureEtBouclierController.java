@@ -1,6 +1,5 @@
 package generator.controller;
 
-import commons.utils.MathUtils;
 import generator.model.entity.ArmureEtBouclier;
 import generator.model.entity.ObjetSpecifique;
 import generator.model.entity.ProprieteSpecialePrix;
@@ -20,7 +19,7 @@ import java.util.Objects;
 
 @SuppressWarnings("SpellCheckingInspection")
 @Service
-public class ArmureEtBouclierController {
+public class ArmureEtBouclierController extends AbstractController {
 
   private final ArmureEtBouclierRepository armureEtBouclierRepository;
   private final ArmureSpecifiqueRepository armureSpecifiqueRepository;
@@ -50,8 +49,7 @@ public class ArmureEtBouclierController {
     boolean withProprieteSpeciale = false;
     while (cpt < max) {
       cpt++;
-      int r1 = MathUtils.random(1, 100);
-      ArmureEtBouclier armureEtBouclier = armureEtBouclierRepository.findRandomByPuissance(puissance, r1);
+      ArmureEtBouclier armureEtBouclier = armureEtBouclierRepository.findRandomByPuissance(puissance, roll100());
       if (Objects.equals(armureEtBouclier.getType(), "propriété spéciale")) {
         withProprieteSpeciale = true;
       } else if (Objects.equals(armureEtBouclier.getType(), "armure spécifique")) {
@@ -91,7 +89,7 @@ public class ArmureEtBouclierController {
 
   private TypeObjetPrix getTypeObjet(boolean isArmure) {
     TypeObjetPrix typeObjet;
-    int r = MathUtils.random(1, 100);
+    int r = roll100();
     if (isArmure) {
       typeObjet = typeArmureRepository.findRandom(r);
     } else {
@@ -124,7 +122,7 @@ public class ArmureEtBouclierController {
 
   private ObjetSpecifique getObjetSpecifique(String puissance, boolean isArmure) {
     ObjetSpecifique objetSpecifique;
-    int r = MathUtils.random(1, 100);
+    int r = roll100();
     if (isArmure) {
       objetSpecifique = armureSpecifiqueRepository.findRandomByPuissance(puissance, r);
     } else {

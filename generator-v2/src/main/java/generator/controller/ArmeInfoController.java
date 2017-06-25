@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @SuppressWarnings("SpellCheckingInspection")
 @Service
-public class ArmeInfoController {
+public class ArmeInfoController extends AbstractController {
 
   private final ArmeInfoRepository armeInfoRepository;
   private final static List<String> constraintsArme = Arrays.asList("acérée", "destruction", "vorpale", "boomerang");

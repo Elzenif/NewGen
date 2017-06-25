@@ -1,6 +1,5 @@
 package generator.controller;
 
-import commons.utils.MathUtils;
 import generator.model.entity.Gemme;
 import generator.model.repository.GemmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
  */
 @SuppressWarnings("SpellCheckingInspection")
 @Service
-public class GemmeController {
+public class GemmeController extends AbstractController {
 
   private final PiecesController piecesController;
   private final GemmeRepository gemmeRepository;
@@ -23,8 +22,7 @@ public class GemmeController {
   }
 
   public String generate() {
-    int random = MathUtils.random(1, 100);
-    Gemme gemme = gemmeRepository.findRandom(random);
+    Gemme gemme = gemmeRepository.findRandom(roll100());
     return piecesController.chooseRandomAndAddValue(gemme.getExemples(), ";", gemme.getValeur());
   }
 }

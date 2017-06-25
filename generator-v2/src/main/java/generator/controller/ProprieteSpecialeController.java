@@ -1,6 +1,5 @@
 package generator.controller;
 
-import commons.utils.MathUtils;
 import generator.model.entity.AdversaireDesigne;
 import generator.model.entity.Arme;
 import generator.model.entity.ArmeSpecifique;
@@ -21,7 +20,7 @@ import java.util.Objects;
 
 @SuppressWarnings("SpellCheckingInspection")
 @Service
-public class ProprieteSpecialeController {
+public class ProprieteSpecialeController extends AbstractController {
 
   private final ProprieteSpecialeArmeCacRepository proprieteSpecialeArmeCacRepository;
   private final ProprieteSpecialeArmeDistanceRepository proprieteSpecialeArmeDistanceRepository;
@@ -62,8 +61,7 @@ public class ProprieteSpecialeController {
           totalBonus + proprieteSpeciale.getModificateur() <= 10 &&
           checkCompatibility(arme, proprieteSpeciale)) {
         if (Objects.equals(proprieteSpeciale.getNom(), "tueuse")) {
-          int r2 = MathUtils.random(1, 100);
-          AdversaireDesigne adversaireDesigne = adversaireDesigneRepository.findRandom(r2);
+          AdversaireDesigne adversaireDesigne = adversaireDesigneRepository.findRandom(roll100());
           proprieteSpeciale.setNom("tueuse (" + adversaireDesigne.getAdversaire() + ")");
         }
         proprieteSpeciales.add(proprieteSpeciale);
@@ -75,11 +73,11 @@ public class ProprieteSpecialeController {
 
   private ProprieteSpeciale getProprieteSpeciale(String puissance, boolean isCac) {
     ProprieteSpeciale proprieteSpeciale;
-    int r1 = MathUtils.random(1, 100);
+    int r = roll100();
     if (isCac) {
-      proprieteSpeciale = proprieteSpecialeArmeCacRepository.findRandomByPuissance(puissance, r1);
+      proprieteSpeciale = proprieteSpecialeArmeCacRepository.findRandomByPuissance(puissance, r);
     } else {
-      proprieteSpeciale = proprieteSpecialeArmeDistanceRepository.findRandomByPuissance(puissance, r1);
+      proprieteSpeciale = proprieteSpecialeArmeDistanceRepository.findRandomByPuissance(puissance, r);
     }
     return proprieteSpeciale;
   }
@@ -110,7 +108,7 @@ public class ProprieteSpecialeController {
 
    private ProprieteSpecialePrix getProprieteSpecialeArmureBouclier(String puissance, boolean isArmure) {
     ProprieteSpecialePrix proprieteSpeciale;
-    int r = MathUtils.random(1, 100);
+    int r = roll100();
     if (isArmure) {
       proprieteSpeciale = proprieteSpecialeArmureRepository.findRandomByPuissance(puissance, r);
     } else {

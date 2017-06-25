@@ -1,6 +1,5 @@
 package generator.controller;
 
-import commons.utils.MathUtils;
 import generator.model.entity.AdversaireDesigne;
 import generator.model.entity.Arme;
 import generator.model.entity.ArmeBonus;
@@ -24,7 +23,7 @@ import java.util.Objects;
 
 @SuppressWarnings("SpellCheckingInspection")
 @Service
-public class ArmeController {
+public class ArmeController extends AbstractController {
 
   private final ArmeBonusRepository armeBonusRepository;
   private final ArmeSpecifiqueRepository armeSpecifiqueRepository;
@@ -58,8 +57,7 @@ public class ArmeController {
     boolean withProprieteSpeciale = false;
     while (cpt < max) {
       cpt++;
-      int r1 = MathUtils.random(1, 100);
-      ArmeBonus armeBonus = armeBonusRepository.findRandomByPuissance(puissance, r1);
+      ArmeBonus armeBonus = armeBonusRepository.findRandomByPuissance(puissance, roll100());
       if (Objects.equals(armeBonus.getBonus(), "propriété spéciale")) {
         withProprieteSpeciale = true;
       } else if (Objects.equals(armeBonus.getBonus(), "arme spécifique")) {
@@ -73,8 +71,7 @@ public class ArmeController {
 
   @NotNull
   private String generateArme(String puissance, ArmeBonus armeBonus, boolean withProprieteSpeciale) {
-    int r = MathUtils.random(1, 100);
-    TypeArme typeArme = typeArmeRepository.findRandom(r);
+    TypeArme typeArme = typeArmeRepository.findRandom(roll100());
     Arme arme = generateArme(typeArme.getType());
     int bonus = Integer.parseInt(armeBonus.getBonus());
     int prix = arme.getPrix();
@@ -96,12 +93,10 @@ public class ArmeController {
 
   @NotNull
   private String generateArmeSpecifique(String puissance, boolean withProprieteSpeciale) {
-    int r2 = MathUtils.random(1, 100);
-    ArmeSpecifique armeSpecifique = armeSpecifiqueRepository.findRandomByPuissance(puissance, r2);
+    ArmeSpecifique armeSpecifique = armeSpecifiqueRepository.findRandomByPuissance(puissance, roll100());
     String adversaireString = "";
     if (armeSpecifique.getArme().contains("flèche mortelle")) {
-      int r3 = MathUtils.random(1, 100);
-      AdversaireDesigne adversaireDesigne = adversaireDesigneRepository.findRandom(r3);
+      AdversaireDesigne adversaireDesigne = adversaireDesigneRepository.findRandom(roll100());
       adversaireString = "( " + adversaireDesigne.getAdversaire() + ")";
     }
     int prix = armeSpecifique.getPrix();
@@ -121,15 +116,14 @@ public class ArmeController {
 
   @NotNull
   public Arme generateArme(String type) {
-    int r4 = MathUtils.random(1, 100);
+    int r4 = roll100();
     Arme arme = null;
     if (type.contains("arme de corps à corps usuelle")) {
       arme = armeCorpsACorpsRepository.findRandom(r4);
     } else if (type.contains("arme inhabituelle")) {
       arme = armeInhabituelleRepository.findRandom(r4);
     } else if (type.contains("arme à distance usuelle")) {
-      int r5 = MathUtils.random(1, 100);
-      arme = armeDistanceRepository.findArmeDistance(r4, r5);
+      arme = armeDistanceRepository.findArmeDistance(r4, roll100());
     }
     if (arme == null) {
       throw new RuntimeException("Could not find any arme");

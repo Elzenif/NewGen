@@ -1,6 +1,4 @@
-package generator.model.repository;
-
-import generator.model.entity.ObjetSpecifique;
+package generator.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

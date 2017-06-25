@@ -1,6 +1,5 @@
 package generator.controller;
 
-import commons.utils.MathUtils;
 import generator.model.entity.ObjetArt;
 import generator.model.repository.ObjetArtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
  */
 @SuppressWarnings("SpellCheckingInspection")
 @Service
-public class ObjetArtController {
+public class ObjetArtController extends AbstractController {
 
   private final PiecesController piecesController;
   private final ObjetArtRepository objetArtRepository;
@@ -23,8 +22,7 @@ public class ObjetArtController {
   }
 
   public String generate() {
-    int random = MathUtils.random(1, 100);
-    ObjetArt objetArt = objetArtRepository.findRandom(random);
+    ObjetArt objetArt = objetArtRepository.findRandom(roll100());
     return piecesController.chooseRandomAndAddValue(objetArt.getExemples(), ";", objetArt.getValeur());
   }
 }

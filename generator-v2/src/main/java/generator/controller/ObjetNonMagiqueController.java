@@ -1,7 +1,6 @@
 package generator.controller;
 
 import commons.model.dice.Dice;
-import commons.utils.MathUtils;
 import generator.model.entity.Arme;
 import generator.model.entity.ObjetNonMagique;
 import generator.model.repository.ObjetNonMagiqueRepository;
@@ -16,7 +15,7 @@ import java.util.Optional;
  */
 @SuppressWarnings("SpellCheckingInspection")
 @Service
-public class ObjetNonMagiqueController {
+public class ObjetNonMagiqueController extends AbstractController {
 
   private final ObjetNonMagiqueRepository objetNonMagiqueRepository;
   private final ArmeController armeController;
@@ -28,16 +27,16 @@ public class ObjetNonMagiqueController {
   }
 
   public String generate() {
-    int r1 = MathUtils.random(1, 100);
-    int r2 = MathUtils.random(1, 100);
-    int r3 = MathUtils.random(1, 100);
+    int r1 = roll100();
+    int r2 = roll100();
+    int r3 = roll100();
     ObjetNonMagique objetNonMagique = objetNonMagiqueRepository.findObjetNonMagique(r1, r2, r3);
     String objet = objetNonMagique.getObjet();
     if (Objects.equals(objetNonMagique.getCategorie(), "objet spécial")) {
       Optional<Integer> nb = Dice.getRollFromString(objet);
       return nb.map(i -> objet.replaceFirst(Dice.REGEXP, String.valueOf(i))).orElse(objet);
     } else if (Objects.equals(objetNonMagique.getCategorie(), "armure")) {
-      String size = MathUtils.random(1, 100) <= 10 ? "P" : "M";
+      String size = roll100() <= 10 ? "P" : "M";
       return objet + " (" + size + ")";
     } else if (Objects.equals(objetNonMagique.getCategorie(), "arme")) {
       Arme arme = armeController.generateArme(objet);
