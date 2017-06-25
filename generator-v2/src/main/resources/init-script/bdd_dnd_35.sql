@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS dnd35_objetsmagiquestypesboucliers;
 DROP TABLE IF EXISTS dnd35_objetsmagiquestypesarmures;
 DROP TABLE IF EXISTS dnd35_objetsmagiquestypesarmes;
 DROP TABLE IF EXISTS dnd35_objetsmagiquessceptres;
+DROP TABLE IF EXISTS dnd35_objetsmagiquespuissants;
 DROP TABLE IF EXISTS dnd35_objetsmagiquespotionshuiles;
 DROP TABLE IF EXISTS dnd35_objetsmagiquesparcheminsnombresorts;
 DROP TABLE IF EXISTS dnd35_objetsmagiquesparcheminsniveausorts;
@@ -2790,6 +2791,25 @@ INSERT INTO dnd35_objetsMagiquesPotionsHuiles (id, puissance, prcMin, prcmax, po
   (142, 'puissante', 100, 100, 'Panoplie magique (+5) (huile)', 3000);
 
 -- --------------------------------------------------------
+
+CREATE TABLE dnd35_objetsmagiquespuissants (
+  id     INT(11) NOT NULL AUTO_INCREMENT,
+  niveau INT(11) NOT NULL,
+  nb     INT(11),
+  PRIMARY KEY (id)
+)ENGINE = MyISAM DEFAULT CHARSET = utf8 AUTO_INCREMENT = 10;
+
+INSERT INTO dnd35_objetsmagiquespuissants (niveau, nb) VALUES
+  (21, 1),
+  (22, 2),
+  (23, 4),
+  (24, 6),
+  (25, 9),
+  (26, 12),
+  (27, 17),
+  (28, 23),
+  (29, 31),
+  (30, 42);
 
 --
 -- Table structure for table dnd35_objetsMagiquesSceptres

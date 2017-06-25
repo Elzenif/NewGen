@@ -3,6 +3,7 @@ package generator.controller;
 import commons.utils.Pair;
 import generator.model.entity.Tresor;
 import generator.model.entity.TresorType;
+import generator.model.repository.ObjetPuissantRepository;
 import generator.model.repository.TresorRepository;
 import generator.utils.GeneratorUtils;
 import org.jetbrains.annotations.NotNull;
@@ -27,28 +28,49 @@ public class TresorController extends AbstractController {
   private final ObjetArtController objetArtController;
   private final ObjetNonMagiqueController objetNonMagiqueController;
   private final ObjetMagiqueController objetMagiqueController;
+  private final ObjetPuissantRepository objetPuissantRepository;
 
   @Autowired
   public TresorController(TresorRepository tresorRepository, PiecesController piecesController,
                           GemmeController gemmeController, ObjetArtController objetArtController,
                           ObjetNonMagiqueController objetNonMagiqueController,
-                          ObjetMagiqueController objetMagiqueController) {
+                          ObjetMagiqueController objetMagiqueController,
+                          ObjetPuissantRepository objetPuissantRepository) {
     this.tresorRepository = tresorRepository;
     this.piecesController = piecesController;
     this.gemmeController = gemmeController;
     this.objetArtController = objetArtController;
     this.objetNonMagiqueController = objetNonMagiqueController;
     this.objetMagiqueController = objetMagiqueController;
+    this.objetPuissantRepository = objetPuissantRepository;
   }
 
   public String generate(Integer generationLevel) {
     int random = roll100();
-    List<Tresor> tresors = tresorRepository.findByNiveauAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(generationLevel,
+    int level;
+    int additonal = 0;
+    if (generationLevel > 20) {
+      level = 20;
+      additonal = getNbObjetsPuissants(Math.min(30, generationLevel));
+    } else {
+      level = generationLevel;
+    }
+    List<Tresor> tresors = tresorRepository.findByNiveauAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(level,
         random, random);
+    if (additonal > 0) {
+      Tresor tresor = new Tresor();
+      tresor.setType(TresorType.objets);
+      tresor.setDetail(additonal + "xpuissants");
+      tresors.add(tresor);
+    }
     return tresors.stream()
         .filter(tresor -> tresor.getDetail() != null)
         .map(tresor -> convertTresor(tresor.getType(), tresor.getDetail()))
         .collect(Collectors.joining("<br/>"));
+  }
+
+  private int getNbObjetsPuissants(Integer generationLevel) {
+    return objetPuissantRepository.findFirstByNiveau(generationLevel).getNb();
   }
 
 
