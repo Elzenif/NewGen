@@ -59,17 +59,17 @@ public class ArmeSpecifique extends ObjetSpecifique implements IArme {
   @Override
   public String toString() {
     return "ArmeSpecifique{" +
-            "prcMin=" + prcMin +
-            ", puissance='" + puissance + '\'' +
-            ", arme='" + arme + '\'' +
-            ", prcMax=" + prcMax +
-            ", prix=" + prix +
-            ", id=" + id +
-            ", cac=" + cac +
-            ", munition=" + munition +
-            ", tranchant=" + tranchant +
-            ", perforant=" + perforant +
-            ", contondant=" + contondant +
-            '}';
+        "prcMin=" + prcMin +
+        ", puissance='" + puissance + '\'' +
+        ", arme='" + arme + '\'' +
+        ", prcMax=" + prcMax +
+        ", prix=" + prix +
+        ", id=" + id +
+        ", cac=" + cac +
+        ", munition=" + munition +
+        ", tranchant=" + tranchant +
+        ", perforant=" + perforant +
+        ", contondant=" + contondant +
+        '}';
   }
 }

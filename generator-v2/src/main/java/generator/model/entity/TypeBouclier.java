@@ -6,15 +6,16 @@ import javax.persistence.Table;
 @SuppressWarnings("SpellCheckingInspection")
 @Entity
 @Table(name = "dnd35_objetsmagiquestypesboucliers")
-public class TypeBouclier extends TypeObjet {
+public class TypeBouclier extends TypeObjetPrix {
 
   @Override
   public String toString() {
     return "TypeBouclier{" +
-            "type='" + type + '\'' +
-            ", prcMin=" + prcMin +
-            ", prcMax=" + prcMax +
-            ", id=" + id +
-            '}';
+        "prix=" + prix +
+        ", type='" + type + '\'' +
+        ", prcMin=" + prcMin +
+        ", prcMax=" + prcMax +
+        ", id=" + id +
+        '}';
   }
 }

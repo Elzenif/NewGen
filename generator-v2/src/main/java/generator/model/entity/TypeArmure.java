@@ -6,15 +6,16 @@ import javax.persistence.Table;
 @SuppressWarnings("SpellCheckingInspection")
 @Entity
 @Table(name = "dnd35_objetsmagiquestypesarmures")
-public class TypeArmure extends TypeObjet {
+public class TypeArmure extends TypeObjetPrix {
 
   @Override
   public String toString() {
     return "TypeArmure{" +
-            "type='" + type + '\'' +
-            ", prcMin=" + prcMin +
-            ", prcMax=" + prcMax +
-            ", id=" + id +
-            '}';
+        "type='" + type + '\'' +
+        ", prcMin=" + prcMin +
+        ", prix=" + prix +
+        ", prcMax=" + prcMax +
+        ", id=" + id +
+        '}';
   }
 }

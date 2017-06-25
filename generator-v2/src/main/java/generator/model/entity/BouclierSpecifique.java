@@ -11,12 +11,12 @@ public class BouclierSpecifique extends ObjetSpecifique {
   @Override
   public String toString() {
     return "BouclierSpecifique{" +
-            "prcMin=" + prcMin +
-            ", puissance='" + puissance + '\'' +
-            ", arme='" + arme + '\'' +
-            ", prcMax=" + prcMax +
-            ", prix='" + prix + '\'' +
-            ", id=" + id +
-            '}';
+        "prcMin=" + prcMin +
+        ", puissance='" + puissance + '\'' +
+        ", arme='" + arme + '\'' +
+        ", prcMax=" + prcMax +
+        ", prix='" + prix + '\'' +
+        ", id=" + id +
+        '}';
   }
 }

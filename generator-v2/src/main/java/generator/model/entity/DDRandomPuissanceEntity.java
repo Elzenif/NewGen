@@ -6,7 +6,7 @@ import javax.persistence.MappedSuperclass;
  * Created by Germain on 30/05/2017.
  */
 @MappedSuperclass
-public abstract class DDRandomPuissanceEntity extends DDRandomEntity{
+public abstract class DDRandomPuissanceEntity extends DDRandomEntity {
 
   protected String puissance;
 

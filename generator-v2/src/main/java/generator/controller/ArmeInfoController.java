@@ -17,16 +17,16 @@ import java.util.Objects;
 @Service
 public class ArmeInfoController {
 
-	private final ArmeInfoRepository armeInfoRepository;
-	private final static List<String> constraintsArme = Arrays.asList("acérée", "destruction", "vorpale", "boomerang");
+  private final ArmeInfoRepository armeInfoRepository;
+  private final static List<String> constraintsArme = Arrays.asList("acérée", "destruction", "vorpale", "boomerang");
   private final static List<String> armesDeJet = Arrays.asList("Javeline", "Dard", "Bolas", "Shuriken");
 
-	@Autowired
-	public ArmeInfoController(ArmeInfoRepository armeInfoRepository) {
-		this.armeInfoRepository = armeInfoRepository;
-	}
+  @Autowired
+  public ArmeInfoController(ArmeInfoRepository armeInfoRepository) {
+    this.armeInfoRepository = armeInfoRepository;
+  }
 
-	public boolean isCompatible(Arme arme, ProprieteSpeciale proprieteSpeciale) {
+  public boolean isCompatible(Arme arme, ProprieteSpeciale proprieteSpeciale) {
     String proprieteSpecialeNom = proprieteSpeciale.getNom();
     if (!constraintsArme.contains(proprieteSpecialeNom)) {
       return true;
@@ -36,22 +36,22 @@ public class ArmeInfoController {
     }
     String armeNom = StringUtils.removePatternAtEndOfString(arme.getArme(), "( )?\\(.*\\)");
     ArmeInfo armeInfo = armeInfoRepository.findFirstByNomContainingIgnoreCase(armeNom);
-		String typeDegats = armeInfo.getTypeDegats();
-		if (Objects.equals(proprieteSpecialeNom, "acérée")) {
-			return typeDegats.contains("Perforant") || typeDegats.contains("perforant") || typeDegats.contains("Tranchant")
-					|| typeDegats.contains("tranchant");
-		}
-		if (Objects.equals(proprieteSpecialeNom, "destruction")) {
-			return typeDegats.contains("Contondant");
-		}
-		if (Objects.equals(proprieteSpecialeNom, "vorpale")) {
-			return typeDegats.contains("Tranchant") || typeDegats.contains("tranchant");
-		}
+    String typeDegats = armeInfo.getTypeDegats();
+    if (Objects.equals(proprieteSpecialeNom, "acérée")) {
+      return typeDegats.contains("Perforant") || typeDegats.contains("perforant") || typeDegats.contains("Tranchant")
+          || typeDegats.contains("tranchant");
+    }
+    if (Objects.equals(proprieteSpecialeNom, "destruction")) {
+      return typeDegats.contains("Contondant");
+    }
+    if (Objects.equals(proprieteSpecialeNom, "vorpale")) {
+      return typeDegats.contains("Tranchant") || typeDegats.contains("tranchant");
+    }
     if (Objects.equals(proprieteSpecialeNom, "boomerang")) {
       return armesDeJet.contains(armeInfo.getNom());
     }
     return true;
-	}
+  }
 
   public boolean isCompatible(ArmeSpecifique armeSpecifique, ProprieteSpeciale proprieteSpeciale) {
     String proprieteSpecialeNom = proprieteSpeciale.getNom();
@@ -67,6 +67,6 @@ public class ArmeInfoController {
     if (Objects.equals(proprieteSpecialeNom, "boomerang")) {
       return !armeSpecifique.isMunition();
     }
-	  return true;
+    return true;
   }
 }

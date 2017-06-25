@@ -39,13 +39,13 @@ public class ArmureEtBouclier extends DDRandomPuissanceEntity {
   @Override
   public String toString() {
     return "ArmureEtBouclier{" +
-            "prcMin=" + prcMin +
-            ", puissance='" + puissance + '\'' +
-            ", prcMax=" + prcMax +
-            ", type='" + type + '\'' +
-            ", id=" + id +
-            ", modificateur=" + modificateur +
-            ", prix=" + prix +
-            '}';
+        "prcMin=" + prcMin +
+        ", puissance='" + puissance + '\'' +
+        ", prcMax=" + prcMax +
+        ", type='" + type + '\'' +
+        ", id=" + id +
+        ", modificateur=" + modificateur +
+        ", prix=" + prix +
+        '}';
   }
 }

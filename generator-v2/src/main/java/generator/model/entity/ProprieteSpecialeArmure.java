@@ -11,13 +11,13 @@ public class ProprieteSpecialeArmure extends ProprieteSpecialePrix {
   @Override
   public String toString() {
     return "ProprieteSpecialeArmure{" +
-            "prcMin=" + prcMin +
-            ", puissance='" + puissance + '\'' +
-            ", modificateurPrix=" + modificateurPrix +
-            ", nom='" + nom + '\'' +
-            ", prcMax=" + prcMax +
-            ", modificateur=" + modificateur +
-            ", id=" + id +
-            '}';
+        "prcMin=" + prcMin +
+        ", puissance='" + puissance + '\'' +
+        ", modificateurPrix=" + modificateurPrix +
+        ", nom='" + nom + '\'' +
+        ", prcMax=" + prcMax +
+        ", modificateur=" + modificateur +
+        ", id=" + id +
+        '}';
   }
 }

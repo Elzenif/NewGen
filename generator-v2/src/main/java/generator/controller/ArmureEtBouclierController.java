@@ -2,8 +2,15 @@ package generator.controller;
 
 import commons.utils.MathUtils;
 import generator.model.entity.ArmureEtBouclier;
-import generator.model.entity.ProprieteSpeciale;
-import generator.model.repository.*;
+import generator.model.entity.ObjetSpecifique;
+import generator.model.entity.ProprieteSpecialePrix;
+import generator.model.entity.TypeObjetPrix;
+import generator.model.repository.ArmureEtBouclierRepository;
+import generator.model.repository.ArmureSpecifiqueRepository;
+import generator.model.repository.BouclierSpecifiqueRepository;
+import generator.model.repository.TypeArmureRepository;
+import generator.model.repository.TypeBouclierRepository;
+import generator.utils.GeneratorUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,29 +52,87 @@ public class ArmureEtBouclierController {
       cpt++;
       int r1 = MathUtils.random(1, 100);
       ArmureEtBouclier armureEtBouclier = armureEtBouclierRepository
-              .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
       if (Objects.equals(armureEtBouclier.getType(), "propriété spéciale")) {
         withProprieteSpeciale = true;
       } else if (Objects.equals(armureEtBouclier.getType(), "armure spécifique")) {
-        return generateArmureSpecifique(puissance, withProprieteSpeciale);
+        return generateSpecifique(puissance, withProprieteSpeciale, true);
+      } else if (Objects.equals(armureEtBouclier.getType(), "bouclier spécifique")) {
+        return generateSpecifique(puissance, withProprieteSpeciale, false);
+      } else if (Objects.equals(armureEtBouclier.getType(), "armure")) {
+        return generateArmureBouclier(puissance, withProprieteSpeciale, armureEtBouclier, true);
+      } else {
+        return generateArmureBouclier(puissance, withProprieteSpeciale, armureEtBouclier, false);
       }
     }
-    return "ERROR not implemented yet";
+    return "ERROR generating ArmureBouclier, try again";
   }
 
   @NotNull
-  private String generateArmureSpecifique(String puissance, boolean withProprieteSpeciale) {
-    int r2 = MathUtils.random(1, 100);
-    ArmureSpecifique armureSpecifique = armureSpecifiqueRepository
-            .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r2, r2);
-    int prix = armureSpecifique.getPrix();
+  private String generateArmureBouclier(String puissance, boolean withProprieteSpeciale,
+                                        ArmureEtBouclier armureEtBouclier, boolean isArmure) {
+    TypeObjetPrix typeObjet = getTypeObjet(isArmure);
+    int prix = typeObjet.getPrix();
+    int bonus = armureEtBouclier.getModificateur();
+    String propString = "";
+    String bonusString;
+    if (withProprieteSpeciale) {
+      List<ProprieteSpecialePrix> proprieteSpeciales = proprieteSpecialeController
+          .generateProprieteSpecialeArmureBouclier(puissance, bonus, isArmure);
+      bonus += GeneratorUtils.getTotalBonus(proprieteSpeciales);
+      if (bonus > armureEtBouclier.getModificateur()) {
+        prix += armureEtBouclierRepository.findFirstByModificateur(bonus).getPrix();
+      }
+      prix += GeneratorUtils.getTotalPrix(proprieteSpeciales);
+      propString = GeneratorUtils.getProprietes(proprieteSpeciales);
+    }
+    bonusString = " +" + bonus;
+    return typeObjet.getType() + bonusString + propString + " (" + prix + "po)";
+  }
+
+  private TypeObjetPrix getTypeObjet(boolean isArmure) {
+    TypeObjetPrix typeObjet;
+    int r = MathUtils.random(1, 100);
+    if (isArmure) {
+      typeObjet = typeArmureRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r, r);
+    } else {
+      typeObjet = typeBouclierRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r, r);
+    }
+    return typeObjet;
+  }
+
+  @NotNull
+  private String generateSpecifique(String puissance, boolean withProprieteSpeciale, boolean isArmure) {
+    ObjetSpecifique objetSpecifique;
+    objetSpecifique = getObjetSpecifique(puissance, isArmure);
+    int prix = objetSpecifique.getPrix();
     String propString = "";
     String bonusString = "";
     if (withProprieteSpeciale) {
-      List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
-              .generateProprieteSpecialeArmure(puissance, 0);
-
+      List<ProprieteSpecialePrix> proprieteSpeciales = proprieteSpecialeController
+          .generateProprieteSpecialeArmureBouclier(puissance, 0, isArmure);
+      int bonus = GeneratorUtils.getTotalBonus(proprieteSpeciales);
+      if (bonus > 0) {
+        bonusString = " +" + bonus;
+        ArmureEtBouclier armureEtBouclier = armureEtBouclierRepository.findFirstByModificateur(bonus);
+        prix += armureEtBouclier.getPrix();
+      }
+      prix += GeneratorUtils.getTotalPrix(proprieteSpeciales);
+      propString = GeneratorUtils.getProprietes(proprieteSpeciales);
     }
-    return armureSpecifique.getArme() + bonusString + propString + " (" + prix + "po)";
+    return objetSpecifique.getArme() + bonusString + propString + " (" + prix + "po)";
+  }
+
+  private ObjetSpecifique getObjetSpecifique(String puissance, boolean isArmure) {
+    ObjetSpecifique objetSpecifique;
+    int r = MathUtils.random(1, 100);
+    if (isArmure) {
+      objetSpecifique = armureSpecifiqueRepository
+          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r, r);
+    } else {
+      objetSpecifique = bouclierSpecifiqueRepository
+          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r, r);
+    }
+    return objetSpecifique;
   }
 }

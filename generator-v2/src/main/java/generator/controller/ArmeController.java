@@ -1,23 +1,34 @@
 package generator.controller;
 
 import commons.utils.MathUtils;
-import generator.model.entity.*;
-import generator.model.repository.*;
+import generator.model.entity.AdversaireDesigne;
+import generator.model.entity.Arme;
+import generator.model.entity.ArmeBonus;
+import generator.model.entity.ArmeSpecifique;
+import generator.model.entity.ProprieteSpeciale;
+import generator.model.entity.TypeArme;
+import generator.model.repository.AdversaireDesigneRepository;
+import generator.model.repository.ArmeBonusRepository;
+import generator.model.repository.ArmeCorpsACorpsRepository;
+import generator.model.repository.ArmeDistanceRepository;
+import generator.model.repository.ArmeInhabituelleRepository;
+import generator.model.repository.ArmeSpecifiqueRepository;
+import generator.model.repository.TypeArmeRepository;
+import generator.utils.GeneratorUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("SpellCheckingInspection")
 @Service
 public class ArmeController {
 
-	private final ArmeBonusRepository armeBonusRepository;
-	private final ArmeSpecifiqueRepository armeSpecifiqueRepository;
-	private final AdversaireDesigneRepository adversaireDesigneRepository;
+  private final ArmeBonusRepository armeBonusRepository;
+  private final ArmeSpecifiqueRepository armeSpecifiqueRepository;
+  private final AdversaireDesigneRepository adversaireDesigneRepository;
   private final TypeArmeRepository typeArmeRepository;
   private final ArmeCorpsACorpsRepository armeCorpsACorpsRepository;
   private final ArmeInhabituelleRepository armeInhabituelleRepository;
@@ -25,15 +36,15 @@ public class ArmeController {
   private final ProprieteSpecialeController proprieteSpecialeController;
 
   @Autowired
-	public ArmeController(ArmeBonusRepository armeBonusRepository, ArmeSpecifiqueRepository armeSpecifiqueRepository,
+  public ArmeController(ArmeBonusRepository armeBonusRepository, ArmeSpecifiqueRepository armeSpecifiqueRepository,
                         AdversaireDesigneRepository adversaireDesigneRepository, TypeArmeRepository typeArmeRepository,
                         ArmeCorpsACorpsRepository armeCorpsACorpsRepository,
                         ArmeInhabituelleRepository armeInhabituelleRepository,
                         ArmeDistanceRepository armeDistanceRepository,
                         ProprieteSpecialeController proprieteSpecialeController) {
-		this.armeBonusRepository = armeBonusRepository;
-		this.armeSpecifiqueRepository = armeSpecifiqueRepository;
-		this.adversaireDesigneRepository = adversaireDesigneRepository;
+    this.armeBonusRepository = armeBonusRepository;
+    this.armeSpecifiqueRepository = armeSpecifiqueRepository;
+    this.adversaireDesigneRepository = adversaireDesigneRepository;
     this.typeArmeRepository = typeArmeRepository;
     this.armeCorpsACorpsRepository = armeCorpsACorpsRepository;
     this.armeInhabituelleRepository = armeInhabituelleRepository;
@@ -41,7 +52,7 @@ public class ArmeController {
     this.proprieteSpecialeController = proprieteSpecialeController;
   }
 
-	public String generate(String puissance) {
+  public String generate(String puissance) {
     int cpt = 0;
     int max = 10;
     boolean withProprieteSpeciale = false;
@@ -49,7 +60,7 @@ public class ArmeController {
       cpt++;
       int r1 = MathUtils.random(1, 100);
       ArmeBonus armeBonus = armeBonusRepository
-              .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
       if (Objects.equals(armeBonus.getBonus(), "propriété spéciale")) {
         withProprieteSpeciale = true;
       } else if (Objects.equals(armeBonus.getBonus(), "arme spécifique")) {
@@ -63,8 +74,8 @@ public class ArmeController {
 
   @NotNull
   private String generateArme(String puissance, ArmeBonus armeBonus, boolean withProprieteSpeciale) {
-    int r4 = MathUtils.random(1, 100);
-    TypeArme typeArme = typeArmeRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r4, r4);
+    int r = MathUtils.random(1, 100);
+    TypeArme typeArme = typeArmeRepository.findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r, r);
     Arme arme = generateArme(typeArme.getType());
     int bonus = Integer.parseInt(armeBonus.getBonus());
     int prix = arme.getPrix();
@@ -72,13 +83,11 @@ public class ArmeController {
     String bonusString;
     if (withProprieteSpeciale) {
       List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
-              .generateProprieteSpecialeArme(puissance, arme, bonus);
-      bonus += proprieteSpeciales.stream().mapToInt(ProprieteSpeciale::getModificateur).sum();
+          .generateProprieteSpecialeArme(puissance, arme, bonus);
+      bonus += GeneratorUtils.getTotalBonus(proprieteSpeciales);
       ArmeBonus trueArmeBonus = armeBonusRepository.findFirstByBonus(String.valueOf(bonus));
       prix += trueArmeBonus.getPrixBase();
-      propString = " " + proprieteSpeciales.stream()
-              .map(ProprieteSpeciale::getNom)
-              .collect(Collectors.joining(", "));
+      propString = GeneratorUtils.getProprietes(proprieteSpeciales);
     } else {
       prix += armeBonus.getPrixBase();
     }
@@ -90,12 +99,12 @@ public class ArmeController {
   private String generateArmeSpecifique(String puissance, boolean withProprieteSpeciale) {
     int r2 = MathUtils.random(1, 100);
     ArmeSpecifique armeSpecifique = armeSpecifiqueRepository
-            .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r2, r2);
+        .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r2, r2);
     String adversaireString = "";
     if (armeSpecifique.getArme().contains("flèche mortelle")) {
       int r3 = MathUtils.random(1, 100);
       AdversaireDesigne adversaireDesigne = adversaireDesigneRepository
-              .findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r3, r3);
+          .findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r3, r3);
       adversaireString = "( " + adversaireDesigne.getAdversaire() + ")";
     }
     int prix = armeSpecifique.getPrix();
@@ -103,14 +112,12 @@ public class ArmeController {
     String bonusString = "";
     if (withProprieteSpeciale) {
       List<ProprieteSpeciale> proprieteSpeciales = proprieteSpecialeController
-              .generateProprieteSpecialeArme(puissance, armeSpecifique, 0);
-      int bonus = proprieteSpeciales.stream().mapToInt(ProprieteSpeciale::getModificateur).sum();
+          .generateProprieteSpecialeArme(puissance, armeSpecifique, 0);
+      int bonus = GeneratorUtils.getTotalBonus(proprieteSpeciales);
       bonusString = " +" + bonus;
       ArmeBonus trueArmeBonus = armeBonusRepository.findFirstByBonus(String.valueOf(bonus));
       prix += trueArmeBonus.getPrixBase();
-      propString = " " + proprieteSpeciales.stream()
-              .map(ProprieteSpeciale::getNom)
-              .collect(Collectors.joining(", "));
+      propString = GeneratorUtils.getProprietes(proprieteSpeciales);
     }
     return armeSpecifique.getArme() + adversaireString + bonusString + propString + " (" + prix + "po)";
   }

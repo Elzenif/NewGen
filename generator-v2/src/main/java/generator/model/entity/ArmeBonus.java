@@ -30,12 +30,12 @@ public class ArmeBonus extends DDRandomPuissanceEntity {
   @Override
   public String toString() {
     return "ArmeBonus{" +
-            "prcMin=" + prcMin +
-            ", puissance='" + puissance + '\'' +
-            ", prcMax=" + prcMax +
-            ", bonus='" + bonus + '\'' +
-            ", id=" + id +
-            ", prixBase=" + prixBase +
-            '}';
+        "prcMin=" + prcMin +
+        ", puissance='" + puissance + '\'' +
+        ", prcMax=" + prcMax +
+        ", bonus='" + bonus + '\'' +
+        ", id=" + id +
+        ", prixBase=" + prixBase +
+        '}';
   }
 }

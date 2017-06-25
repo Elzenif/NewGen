@@ -1,8 +1,17 @@
 package generator.controller;
 
 import commons.utils.MathUtils;
-import generator.model.entity.*;
-import generator.model.repository.*;
+import generator.model.entity.AdversaireDesigne;
+import generator.model.entity.Arme;
+import generator.model.entity.ArmeSpecifique;
+import generator.model.entity.IArme;
+import generator.model.entity.ProprieteSpeciale;
+import generator.model.entity.ProprieteSpecialePrix;
+import generator.model.repository.AdversaireDesigneRepository;
+import generator.model.repository.ProprieteSpecialeArmeCacRepository;
+import generator.model.repository.ProprieteSpecialeArmeDistanceRepository;
+import generator.model.repository.ProprieteSpecialeArmureRepository;
+import generator.model.repository.ProprieteSpecialeBouclierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,20 +58,20 @@ public class ProprieteSpecialeController {
       int r1 = MathUtils.random(1, 100);
       if (arme.isCac()) {
         proprieteSpeciale = proprieteSpecialeArmeCacRepository
-                .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+            .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
       } else {
         proprieteSpeciale = proprieteSpecialeArmeDistanceRepository
-                .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+            .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
       }
       if (proprieteSpeciale.getModificateur() == null) {
         totalWanted++;
       } else if (!proprieteSpeciales.contains(proprieteSpeciale) &&
-              totalBonus + proprieteSpeciale.getModificateur() <= 10 &&
-              checkCompatibility(arme, proprieteSpeciale)) {
+          totalBonus + proprieteSpeciale.getModificateur() <= 10 &&
+          checkCompatibility(arme, proprieteSpeciale)) {
         if (Objects.equals(proprieteSpeciale.getNom(), "tueuse")) {
           int r2 = MathUtils.random(1, 100);
           AdversaireDesigne adversaireDesigne = adversaireDesigneRepository
-                  .findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r2, r2);
+              .findFirstByPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(r2, r2);
           proprieteSpeciale.setNom("tueuse (" + adversaireDesigne.getAdversaire() + ")");
         }
         proprieteSpeciales.add(proprieteSpeciale);
@@ -72,25 +81,41 @@ public class ProprieteSpecialeController {
     return proprieteSpeciales;
   }
 
-  public List<ProprieteSpeciale> generateProprieteSpecialeArmure(String puissance, int bonus) {
-    List<ProprieteSpeciale> proprieteSpeciales = new ArrayList<>();
+  public List<ProprieteSpecialePrix> generateProprieteSpecialeArmureBouclier(String puissance, int bonus,
+                                                                             boolean isArmure) {
+    List<ProprieteSpecialePrix> proprieteSpeciales = new ArrayList<>();
     int cpt = 0;
     int max = 10;
     int totalWanted = 1;
     int totalBonus = bonus;
     while (proprieteSpeciales.size() < totalWanted && cpt < max) {
       cpt++;
-      int r1 = MathUtils.random(1, 100);
-      ProprieteSpeciale proprieteSpeciale = proprieteSpecialeArmureRepository
-              .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r1, r1);
+      ProprieteSpecialePrix proprieteSpeciale = getProprieteSpecialeArmureBouclier(puissance, isArmure);
       if (Objects.equals(proprieteSpeciale.getNom(), "rejouez deux fois le dé")) {
         totalWanted++;
-      } else if (!proprieteSpeciales.contains(proprieteSpeciale) &&
-              totalBonus + proprieteSpeciale.getModificateur() <=) {
-        proprieteSpeciales.add(proprieteSpeciale);
+      } else if (!proprieteSpeciales.contains(proprieteSpeciale)) {
+        if (proprieteSpeciale.getModificateur() == null) {
+          proprieteSpeciales.add(proprieteSpeciale);
+        } else if (totalBonus + proprieteSpeciale.getModificateur() <= 10) {
+          proprieteSpeciales.add(proprieteSpeciale);
+          totalBonus += proprieteSpeciale.getModificateur();
+        }
       }
     }
     return proprieteSpeciales;
+  }
+
+   private ProprieteSpecialePrix getProprieteSpecialeArmureBouclier(String puissance, boolean isArmure) {
+    ProprieteSpecialePrix proprieteSpeciale;
+    int r = MathUtils.random(1, 100);
+    if (isArmure) {
+      proprieteSpeciale = proprieteSpecialeArmureRepository
+          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r, r);
+    } else {
+      proprieteSpeciale = proprieteSpecialeBouclierRepository
+          .findFirstByPuissanceAndPrcMinLessThanEqualAndPrcMaxGreaterThanEqual(puissance, r, r);
+    }
+    return proprieteSpeciale;
   }
 
   private boolean checkCompatibility(IArme arme, ProprieteSpeciale proprieteSpeciale) {

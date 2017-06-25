@@ -11,12 +11,12 @@ public class ProprieteSpecialeArmeCac extends ProprieteSpeciale {
   @Override
   public String toString() {
     return "ProprieteSpecialeArmeCac{" +
-            "prcMin=" + prcMin +
-            ", puissance='" + puissance + '\'' +
-            ", nom='" + nom + '\'' +
-            ", prcMax=" + prcMax +
-            ", modificateur=" + modificateur +
-            ", id=" + id +
-            '}';
+        "prcMin=" + prcMin +
+        ", puissance='" + puissance + '\'' +
+        ", nom='" + nom + '\'' +
+        ", prcMax=" + prcMax +
+        ", modificateur=" + modificateur +
+        ", id=" + id +
+        '}';
   }
 }

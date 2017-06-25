@@ -111,18 +111,18 @@ public class ArmeInfo extends DDEntity {
   @Override
   public String toString() {
     return "ArmeInfo{" +
-            "type='" + type + '\'' +
-            ", sousType='" + sousType + '\'' +
-            ", id=" + id +
-            ", nom='" + nom + '\'' +
-            ", degatsP='" + degatsP + '\'' +
-            ", degatsM='" + degatsM + '\'' +
-            ", critique='" + critique + '\'' +
-            ", portee=" + portee +
-            ", poids=" + poids +
-            ", typeDegats='" + typeDegats + '\'' +
-            ", prix=" + prix +
-            ", forceMin=" + forceMin +
-            '}';
+        "type='" + type + '\'' +
+        ", sousType='" + sousType + '\'' +
+        ", id=" + id +
+        ", nom='" + nom + '\'' +
+        ", degatsP='" + degatsP + '\'' +
+        ", degatsM='" + degatsM + '\'' +
+        ", critique='" + critique + '\'' +
+        ", portee=" + portee +
+        ", poids=" + poids +
+        ", typeDegats='" + typeDegats + '\'' +
+        ", prix=" + prix +
+        ", forceMin=" + forceMin +
+        '}';
   }
 }

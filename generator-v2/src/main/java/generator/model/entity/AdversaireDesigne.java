@@ -21,10 +21,10 @@ public class AdversaireDesigne extends DDRandomEntity {
   @Override
   public String toString() {
     return "AdversaireDesigne{" +
-            "prcMin=" + prcMin +
-            ", prcMax=" + prcMax +
-            ", adversaire='" + adversaire + '\'' +
-            ", id=" + id +
-            '}';
+        "prcMin=" + prcMin +
+        ", prcMax=" + prcMax +
+        ", adversaire='" + adversaire + '\'' +
+        ", id=" + id +
+        '}';
   }
 }

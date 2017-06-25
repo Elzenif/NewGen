@@ -13,12 +13,12 @@ public class ArmureSpecifique extends ObjetSpecifique {
   @Override
   public String toString() {
     return "ArmureSpecifique{" +
-            "prcMin=" + prcMin +
-            ", puissance='" + puissance + '\'' +
-            ", arme='" + arme + '\'' +
-            ", prcMax=" + prcMax +
-            ", prix='" + prix + '\'' +
-            ", id=" + id +
-            '}';
+        "prcMin=" + prcMin +
+        ", puissance='" + puissance + '\'' +
+        ", arme='" + arme + '\'' +
+        ", prcMax=" + prcMax +
+        ", prix='" + prix + '\'' +
+        ", id=" + id +
+        '}';
   }
 }

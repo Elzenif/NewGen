@@ -4,4 +4,5 @@ import generator.model.entity.ProprieteSpecialeArmure;
 
 @SuppressWarnings("SpellCheckingInspection")
 public interface ProprieteSpecialeArmureRepository extends BaseRandomPuissanceRepository<ProprieteSpecialeArmure> {
+
 }

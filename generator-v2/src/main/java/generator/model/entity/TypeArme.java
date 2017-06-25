@@ -11,10 +11,10 @@ public class TypeArme extends TypeObjet {
   @Override
   public String toString() {
     return "TypeArme{" +
-            "prcMin=" + prcMin +
-            ", prcMax=" + prcMax +
-            ", type='" + type + '\'' +
-            ", id=" + id +
-            '}';
+        "prcMin=" + prcMin +
+        ", prcMax=" + prcMax +
+        ", type='" + type + '\'' +
+        ", id=" + id +
+        '}';
   }
 }
