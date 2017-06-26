@@ -45,4 +45,16 @@ public class DiceTest {
       assertThat(result).isBetween(iterations, iterations * diceNumber);
     }
   }
+
+  @Test
+  public void getRollFromString1() {
+    Integer result = Dice.getRollFromString("2d1").orElse(1);
+    assertThat(result).isEqualTo(2);
+  }
+
+  @Test
+  public void getRollFromString2() {
+    Integer result = Dice.getRollFromString("2d1+3").orElse(1);
+    assertThat(result).isEqualTo(5);
+  }
 }

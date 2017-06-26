@@ -2,14 +2,12 @@ package commons.model.dice;
 
 import commons.utils.MathUtils;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Created by Germain on 25/06/2016.
@@ -17,18 +15,34 @@ import java.util.stream.Collectors;
 public class Dice {
 
   public static final List<Integer> values = Arrays.asList(4, 6, 8, 10, 12, 20, 100);
-  public static final String REGEXP = "((\\d)+d(\\d)+)";
+  public static final String REGEXP = "(\\d+)d(\\d+)(\\+\\d+)*";
+  private final int iterations;
   private final int diceNumber;
   private final int addScore;
   private final DiceTestInfo diceTestInfo;
-  private final int iterations;
   private int score;
 
-  public Dice(int diceNumber, int addScore, DiceTestInfo diceTestInfo) {
+  public Dice(int iterations, int diceNumber, int addScore, DiceTestInfo diceTestInfo) {
+    this.iterations = iterations;
     this.diceNumber = diceNumber;
     this.addScore = addScore;
     this.diceTestInfo = diceTestInfo;
-    iterations = 1;
+  }
+
+  public Dice(int diceNumber, int addScore, DiceTestInfo diceTestInfo) {
+    this(1, diceNumber, addScore, diceTestInfo);
+  }
+
+  public Dice(int diceNumber) {
+    this(1, diceNumber, 0, null);
+  }
+
+  public Dice(int iterations, int diceNumber) {
+    this(iterations, diceNumber, 0, null);
+  }
+
+  public Dice(int iterations, int diceNumber, int addScore) {
+    this(iterations, diceNumber, addScore, null);
   }
 
   public Dice(Dice copy) {
@@ -37,20 +51,6 @@ public class Dice {
     this.diceTestInfo = copy.getDiceTestInfo();
     this.score = copy.getScore();
     this.iterations = copy.getIterations();
-  }
-
-  public Dice(int diceNumber) {
-    this.diceNumber = diceNumber;
-    this.addScore = 0;
-    this.diceTestInfo = null;
-    this.iterations = 1;
-  }
-
-  public Dice(int iterations, int diceNumber) {
-    this.diceNumber = diceNumber;
-    this.addScore = 0;
-    this.diceTestInfo = null;
-    this.iterations = iterations;
   }
 
   public int getDiceNumber() {
@@ -103,18 +103,6 @@ public class Dice {
     score = 0;
   }
 
-  @NotNull
-  public static Dice getDiceFromString(String diceString) {
-    List<Integer> integers = Arrays.stream(diceString.split("d"))
-        .map(Integer::valueOf)
-        .collect(Collectors.toList());
-    if (integers.size() != 2) {
-      String message = String.format("Wrong input %s", diceString);
-      throw new IllegalArgumentException(message);
-    }
-    return new Dice(integers.get(0), integers.get(1));
-  }
-
   public static Optional<Integer> getRollFromString(String s) {
     if (s.matches("(\\d)+")) {
       return Optional.of(Integer.valueOf(s));
@@ -122,8 +110,10 @@ public class Dice {
     Pattern pattern = Pattern.compile(Dice.REGEXP);
     Matcher matcher = pattern.matcher(s);
     if (matcher.find()) {
-      String diceString = matcher.group(1);
-      Dice dice = Dice.getDiceFromString(diceString);
+      int iterations = Integer.parseInt(matcher.group(1));
+      int diceNumber = Integer.parseInt(matcher.group(2));
+      int addScore = matcher.group(3) == null ? 0 : Integer.parseInt(matcher.group(3));
+      Dice dice = new Dice(iterations, diceNumber, addScore);
       return Optional.of(dice.rollAndGetScore());
     } else {
       return Optional.empty();
