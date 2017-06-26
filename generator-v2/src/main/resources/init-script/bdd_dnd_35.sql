@@ -43,14 +43,14 @@ DROP TABLE IF EXISTS dnd35_armes;
 CREATE TABLE IF NOT EXISTS dnd35_armes (
   id       INT(11)      NOT NULL AUTO_INCREMENT,
   type enum('Arme courante', 'Arme de guerre', 'Arme exotique', '') NOT NULL DEFAULT 'Arme courante',
-  sousType enum('Combat à mains nues', 'Armes de corps à corps légères', 'Armes de corps à corps à une main', 'Armes de corps à corps à deux mains', 'Armes à distance', '', '') NOT NULL,
+  sousType enum('Combat à mains nues', 'Armes de corps à corps légères', 'Armes de corps à corps à une main', 'Armes de corps à corps à deux mains', 'Armes à distance', '') NOT NULL,
   nom      VARCHAR(255) NOT NULL,
   degatsP  VARCHAR(10)  NOT NULL,
   degatsM  VARCHAR(10)  NOT NULL,
   critique VARCHAR(15)  NOT NULL,
   portee   INT(11)               DEFAULT NULL,
   poids    FLOAT                 DEFAULT NULL,
-  typeDegats enum('Perforant', 'Contondant', 'Tranchant', 'Contondant et perforant', 'Perforant ou tranchant', '', '', '', '', '') NOT NULL DEFAULT 'Contondant',
+  typeDegats enum('Perforant', 'Contondant', 'Tranchant', 'Contondant et perforant', 'Perforant ou tranchant', '') NOT NULL DEFAULT 'Contondant',
   prix     FLOAT                 DEFAULT NULL,
   forceMin INT(11)               DEFAULT NULL,
   PRIMARY KEY (id)
