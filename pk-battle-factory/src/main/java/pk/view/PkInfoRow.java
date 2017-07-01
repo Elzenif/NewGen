@@ -1,37 +1,57 @@
 package pk.view;
 
 import commons.Constants;
-import pk.controller.PkDocumentListener;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import pk.model.entity.PokemonSpeciesNames;
+import pk.model.repository.PokemonSpeciesNamesRepository;
 
+import javax.annotation.PostConstruct;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.List;
 
 /**
  * Created by Germain on 01/07/2017.
  */
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PkInfoRow extends JPanel {
 
-  private final JPanel leftPanel;
-  private final JTextField nameTextField;
-  private final JPanel rightPanel;
-  private final CardLayout cardLayout;
-  private final JLabel label;
-  private final JTextPane textPane;
+  private final PokemonSpeciesNamesRepository pokemonSpeciesNamesRepository;
 
-  public PkInfoRow() {
+  private JPanel leftPanel;
+  private JComboBox nameComboBox;
+  private JPanel rightPanel;
+  private CardLayout cardLayout;
+  private JLabel label;
+  private JTextPane textPane;
+
+  @Autowired
+  public PkInfoRow(PokemonSpeciesNamesRepository pokemonSpeciesNamesRepository) {
+    this.pokemonSpeciesNamesRepository = pokemonSpeciesNamesRepository;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
-
+  }
+  
+  @PostConstruct
+  public void init() {
     leftPanel = new JPanel();
     leftPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
     JLabel name = new JLabel(Constants.resourceBundle.getString("name"));
     leftPanel.add(name);
-    nameTextField = new JTextField(12);
-    leftPanel.add(nameTextField);
+    List<PokemonSpeciesNames> pokemonSpeciesNames = pokemonSpeciesNamesRepository.findAllByIdLocalLanguageId(5);
+    Object[] names = pokemonSpeciesNames.stream().map(PokemonSpeciesNames::getName).toArray();
+    nameComboBox = new JComboBox(names);
+    AutoCompleteDecorator.decorate(nameComboBox);
+    leftPanel.add(nameComboBox);
 
     rightPanel = new JPanel();
     cardLayout = new CardLayout();
@@ -44,8 +64,6 @@ public class PkInfoRow extends JPanel {
 
     add(leftPanel);
     add(rightPanel);
-
-    nameTextField.getDocument().addDocumentListener(new PkDocumentListener(this));
   }
 
   public JLabel getLabel() {

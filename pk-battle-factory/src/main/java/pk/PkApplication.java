@@ -29,11 +29,6 @@ public class PkApplication {
     } catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
       LOGGER.error("Error while setting look and feel", e);
     }
-//    try {
-//      Constants.PKMON_FONT = MainHelper.initFont("PKMNDB", 1f);
-//    } catch (IOException | FontFormatException e) {
-//      LOGGER.error("Error while initializing font", e);
-//    }
     MainHelper.setUIFont(new FontUIResource(Constants.SOURCE_CODE_PRO, Font.PLAIN, 12));
 
     ConfigurableApplicationContext context = new SpringApplicationBuilder(PkApplication.class).headless(false)

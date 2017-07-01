@@ -1,7 +1,5 @@
 package pk.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pk.view.PkInfoRow;
 
 import javax.swing.Timer;
@@ -15,7 +13,6 @@ import java.awt.event.ActionListener;
  */
 public class PkDocumentListener implements DocumentListener {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(PkDocumentListener.class);
   private final PkInfoRow pkInfoRow;
   private final ActionListener timerListener = new TimerListener();
   private final Timer writeDeleteTimer = new Timer(1000, timerListener);
