@@ -13,7 +13,7 @@ import java.awt.GridLayout;
 public abstract class TeamPanel extends JPanel {
 
   public TeamPanel(String title) {
-    setLayout(new GridLayout(3, 1, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+    setLayout(new GridLayout(4, 1, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
     setBorder(BorderFactory.createTitledBorder(null, title, TitledBorder.DEFAULT_JUSTIFICATION,
         TitledBorder.DEFAULT_POSITION, Constants.BENGUIAB_FONT));
   }

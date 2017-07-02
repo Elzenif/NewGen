@@ -3,9 +3,8 @@ package pk.view;
 import commons.Constants;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import pk.controller.PkNameActionListener;
 import pk.model.entity.PokemonSpeciesName;
 import pk.model.repository.PokemonSpeciesNameRepository;
 
@@ -24,10 +23,10 @@ import java.util.Locale;
  * Created by Germain on 01/07/2017.
  */
 @Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PkInfoRow extends JPanel {
 
   private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
+  private final PkNameActionListener pkNameActionListener;
 
   private JPanel leftPanel;
   private JComboBox nameComboBox;
@@ -37,8 +36,10 @@ public class PkInfoRow extends JPanel {
   private JTextPane textPane;
 
   @Autowired
-  public PkInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository) {
+  public PkInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
+                   PkNameActionListener pkNameActionListener) {
     this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
+    this.pkNameActionListener = pkNameActionListener;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
   
@@ -66,6 +67,8 @@ public class PkInfoRow extends JPanel {
 
     add(leftPanel);
     add(rightPanel);
+
+    nameComboBox.addActionListener(pkNameActionListener);
   }
 
   public JLabel getLabel() {

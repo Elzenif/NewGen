@@ -2,8 +2,9 @@ package pk.view;
 
 import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import javax.swing.JScrollPane;
 
 /**
  * Created by Germain on 01/07/2017.
@@ -12,20 +13,19 @@ import org.springframework.stereotype.Component;
 public class OwnTeamPanel extends TeamPanel {
 
   private final PkInfoRow pkInfoRow1;
-  private final PkInfoRow pkInfoRow2;
-  private final PkInfoRow pkInfoRow3;
+  private final PkInfoTable pkInfoTable;
 
   @Autowired
-  public OwnTeamPanel(@Qualifier("pkInfoRow1") PkInfoRow pkInfoRow1,
-                      @Qualifier("pkInfoRow2") PkInfoRow pkInfoRow2,
-                      @Qualifier("pkInfoRow3") PkInfoRow pkInfoRow3) {
+  public OwnTeamPanel(PkInfoRow pkInfoRow1, PkInfoTable pkInfoTable) {
     super(Constants.resourceBundle.getString("panel.team.own"));
     this.pkInfoRow1 = pkInfoRow1;
-    this.pkInfoRow2 = pkInfoRow2;
-    this.pkInfoRow3 = pkInfoRow3;
+    this.pkInfoTable = pkInfoTable;
 
     add(pkInfoRow1);
-    add(pkInfoRow2);
-    add(pkInfoRow3);
+
+    JScrollPane scrollPane = new JScrollPane(pkInfoTable);
+    pkInfoTable.setFillsViewportHeight(true);
+    add(scrollPane);
+
   }
 }
