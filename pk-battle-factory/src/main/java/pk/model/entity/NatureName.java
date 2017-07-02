@@ -12,35 +12,38 @@ import javax.persistence.Table;
  * Created by Germain on 02/07/2017.
  */
 @Entity
-@Table(name = "pokemon_species_names")
-public class PokemonSpeciesName {
+@Table(name = "nature_names")
+public class NatureName {
 
   @EmbeddedId
-  private PokemonSpeciesNameId id;
-  @MapsId("pokemonSpeciesId")
-  @JoinColumn(name = "pokemon_species_id", referencedColumnName = "id")
+  private NatureNameId id;
+  @MapsId("natureId")
+  @JoinColumn(name = "nature_id", referencedColumnName = "id")
   @ManyToOne(fetch = FetchType.LAZY)
-  private PokemonSpecies pokemonSpecies;
+  private Nature nature;
   @MapsId("localLanguageId")
   @JoinColumn(name = "local_language_id", referencedColumnName = "id")
   @ManyToOne(fetch = FetchType.LAZY)
   private Language language;
   private String name;
 
-  public PokemonSpecies getPokemonSpecies() {
-    return pokemonSpecies;
+  public NatureName() {
   }
 
-  public void setPokemonSpecies(PokemonSpecies pokemonSpecies) {
-    this.pokemonSpecies = pokemonSpecies;
-  }
-
-  public PokemonSpeciesNameId getId() {
+  public NatureNameId getId() {
     return id;
   }
 
-  public void setId(PokemonSpeciesNameId id) {
+  public void setId(NatureNameId id) {
     this.id = id;
+  }
+
+  public Nature getNature() {
+    return nature;
+  }
+
+  public void setNature(Nature nature) {
+    this.nature = nature;
   }
 
   public Language getLanguage() {
@@ -61,8 +64,8 @@ public class PokemonSpeciesName {
 
   @Override
   public String toString() {
-    return "PokemonSpeciesName{" +
-        ", pokemonSpecies=" + pokemonSpecies.getId() +
+    return "NatureName{" +
+        "nature=" + nature.getId() +
         ", language=" + language.getId() +
         ", name='" + name + '\'' +
         '}';
@@ -73,7 +76,7 @@ public class PokemonSpeciesName {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    PokemonSpeciesName that = (PokemonSpeciesName) o;
+    NatureName that = (NatureName) o;
 
     return id != null ? id.equals(that.id) : that.id == null;
   }

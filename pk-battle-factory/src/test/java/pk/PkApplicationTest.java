@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import pk.model.entity.PokemonSpeciesName;
+import pk.model.projection.PokemonFactoryProjection;
+import pk.model.repository.PokemonFactoryRepository;
 import pk.model.repository.PokemonSpeciesNameRepository;
 
 import java.util.List;
@@ -26,6 +28,8 @@ public class PkApplicationTest {
 
   @Autowired
   private PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
+  @Autowired
+  private PokemonFactoryRepository pokemonFactoryRepository;
 
   @Test
   public void loadContext() {
@@ -33,5 +37,10 @@ public class PkApplicationTest {
     List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository.findAllByLanguage(language);
     String found = "Found " + pokemonSpeciesNames.size();
     LOGGER.info(found);
+
+    List<PokemonFactoryProjection> projectionList = pokemonFactoryRepository.find("Raichu", language);
+    for (PokemonFactoryProjection pokemonFactoryProjection : projectionList) {
+      LOGGER.info("Found " + pokemonFactoryProjection.getString());
+    }
   }
 }
