@@ -22,6 +22,9 @@ public class PokemonFactory {
   @JoinColumn(name = "nature_id", referencedColumnName = "id")
   @ManyToOne(fetch = FetchType.LAZY)
   private Nature nature;
+  @JoinColumn(name = "item_id", referencedColumnName = "id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Item item;
 
   public PokemonFactory() {
   }
@@ -50,12 +53,21 @@ public class PokemonFactory {
     this.nature = nature;
   }
 
+  public Item getItem() {
+    return item;
+  }
+
+  public void setItem(Item item) {
+    this.item = item;
+  }
+
   @Override
   public String toString() {
     return "PokemonFactory{" +
         "id=" + id +
         ", pokemonSpecies=" + pokemonSpecies.getId() +
         ", nature=" + nature.getId() +
+        ", item=" + item.getId() +
         '}';
   }
 

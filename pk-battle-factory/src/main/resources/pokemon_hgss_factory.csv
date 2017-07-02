@@ -2,15 +2,15 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 003,Bold,Big Root,170,,170,,170,,Giga Drain,Ingrain,Leech Seed,Sleep Powder,2
 003,,White Herb,,,,,,,Leaf Storm,,Sleep Powder,Amnesia,1
 006,Modest,White Herb,,,,252,,252,Overheat,Solar Beam,Will-o-wisp,Sunny Day,2
-006,Timid,BrightPowder,,,,252,,252,Blast Burn,Air Slash,Focus Blast,Ancientpower,45
+006,Timid,Bright Powder,,,,252,,252,Blast Burn,Air Slash,Focus Blast,Ancientpower,45
 006,Modest,Petaya Berry,,,,252,,252,Flamethrower,Air Slash,Smokescreen,Scary Face,12
 009,Modest,Mystic Water,,,170,170,170,,Hydro Pump,Signal Beam,Icy Wind,Mirror Coat,12
 009,Adamant,Shell Bell,252,252,,,,,Waterfall,Focus Punch,Double Team,Aqua Ring,23
 009,Modest,Shell Bell,252,,,252,,,Hydro Cannon,Ice Beam,Hyper Beam,Focus Blast,4
-026,Adamant,Wide-Angle Lens,252,252,,,,,Thunder Punch,Iron Tail,Slam,Quick Attack,1
+026,Adamant,Wide Lens,252,252,,,,,Thunder Punch,Iron Tail,Slam,Quick Attack,1
 026,,,,,,,,,,,,Thunder Wave,3
 026,Timid,Petaya Berry,,,,252,,252,Thunderbolt,Focus Blast,Signal Beam,Nasty Plot,4
-026,Adamant,BrightPowder,,252,,,,252,Volt Tackle,Return,Brick Break,Thunder Wave,4
+026,Adamant,Bright Powder,,252,,,,252,Volt Tackle,Return,Brick Break,Thunder Wave,4
 031,Adamant,Payapa Berry,252,252,,,,,Earthquake,Poison Fang,Aerial Ace,Charm,1
 031,Adamant,Razor Claw,252,252,,,,,Earthquake,Poison Jab,Superpower,Crunch,5
 034,Modest,Expert Belt,,,,252,,252,Earth Power,Sludge Bomb,Ice Beam,Shadow Ball,3
@@ -27,12 +27,12 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 059,,Salac Berry,,,,,,,Flare Blitz,Endure,Thunder Fang,,23
 062,Modest,Rindo Berry,252,,,252,,,Surf,Vacuum Wave,Psychic,Double Team,12
 062,Adamant,Lax Incense,252,252,,,,,Waterfall,Dynamic Punch,Poison Jab,Bulk Up,2
-065,Timid,BrightPowder,,,,252,,252,Psychic,Shadow Ball,Calm Mind,Future Sight,12
+065,Timid,Bright Powder,,,,252,,252,Psychic,Shadow Ball,Calm Mind,Future Sight,12
 065,Modest,Colbur Berry,,,,252,,252,Psychic,Focus Blast,Charge Beam,Recover,2
 068,Adamant,Scope Lens,252,252,,,,,Cross Chop,Earthquake,Bullet Punch,Foresight,12
 068,,,,,,,,,Stone Edge,,,,2
 068,,,,,,,,,Revenge,Earthquake,Payback,Counter,3
-071,Modest,Papaya Berry,252,,,252,,,Leaf Storm,Sludge Bomb,Sleep Powder,Gastro Acid,1
+071,Modest,Payapa Berry,252,,,252,,,Leaf Storm,Sludge Bomb,Sleep Powder,Gastro Acid,1
 071,,,,,,,,,Seed Bomb,,,,3
 071,,Power Herb,,,,,,,Sludge Bomb,Solar Beam,,Synthesis,4
 073,,,,,,,,,,,,Confuse Ray,2
@@ -40,7 +40,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 076,Impish,Focus Band,,252,252,,,,Earthquake,Rock Slide,Sucker Punch,Sandstorm,12
 076,Adamant,White Herb,,252,252,,,,Earthquake,Superpower,Fire Punch,Thunder Punch,2
 078,Modest,White Herb,,,,252,,252,Overheat,Solar Beam,Swift,Sunny Day,2
-078,Adamant,BrightPowder,,252,,,,252,Flare Blitz,Poison Jab,Iron Tail,Horn Drill,3
+078,Adamant,Bright Powder,,252,,,,252,Flare Blitz,Poison Jab,Iron Tail,Horn Drill,3
 078,Jolly,Chesto Berry,,252,,,,252,Flare Blitz,Megahorn,Double-edge,Hypnosis,45
 080,Bold,Chesto Berry,,,252,252,,,Psychic,Surf,Calm Mind,Yawn,1
 080,Modest,Choice Specs,252,,,252,,,Psychic,Flamethrower,Shadow Ball,Signal Beam,3
@@ -59,7 +59,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 101,Modest,Chesto Berry,,,,252,,252,Thunderbolt,Swift,Thunder Wave,Light Screen,1
 101,Timid,Damp Rock,,,,252,,252,Thunder,Hyper Beam,Magnet Rise,Rain Dance,3
 101,,,,,,,,,Charge Beam,Swagger,,,3
-103,Modest,BrightPowder,252,,,252,,,Solar Beam,Psychic,Synthesis,Sunny Day,1
+103,Modest,Bright Powder,252,,,252,,,Solar Beam,Psychic,Synthesis,Sunny Day,1
 103,Modest,Lum Berry,252,,,252,,,Dream Eater,Hypnosis,Leech Seed,Ingrain,3
 103,,Focus Sash,,,,,,,Wood Hammer,Zen Headbutt,,Trick,3
 105,Adamant,Razor Claw,,252,252,,,,Bone Rush,Brick Break,Iron Tail,Sandstorm,12
@@ -74,10 +74,10 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 115,,,,,,,,,Dizzy Punch,Thunder Punch,,,3
 115,Adamant,Muscle Band,252,252,,,,,Giga Impact,Earthquake,Crunch,Outrage,4
 121,Timid,Lum Berry,,,,252,,252,Surf,Psychic,Confuse Ray,Thunder Wave,1
-121,Timid,Wide-Angle Lens,,,,252,,252,Hydro Pump,Blizzard,Thunder,Recover,2
+121,Timid,Wide Lens,,,,252,,252,Hydro Pump,Blizzard,Thunder,Recover,2
 121,,,,,,,,,Psychic,Signal Beam,Power Gem,,3
 121,,,,,,,,,Thunderbolt,Ice Beam,,,4
-122,Calm,Chery Berry,,,,252,252,,Psychic,Signal Beam,Copycat,Mimic,1
+122,Calm,Cheri Berry,,,,252,252,,Psychic,Signal Beam,Copycat,Mimic,1
 122,Modest,Kasib Berry,,,,252,252,,Psychic,Thunder,Energy Ball,Hyper Beam,34
 122,,,,,,,,,,Focus Blast,,,4
 124,Modest,Expert Belt,,,,252,,252,Blizzard,Energy Ball,Signal Beam,Wring Out,3
@@ -94,7 +94,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 131,Adamant,Leftovers,252,252,,,,,Aqua Tail,Avalanche,Ice Shard,Curse,12
 131,Adamant,Lum Berry,252,252,,,,,Waterfall,Outrage,Zen Headbutt,Dragon Dance,34
 134,Modest,Expert Belt,252,,,252,,,Surf,Ice Beam,Shadow Ball,Signal Beam,4
-134,Modest,BrightPowder,252,,,252,,,Surf,Ice Beam,Acid Armor,Baton Pass,1
+134,Modest,Bright Powder,252,,,252,,,Surf,Ice Beam,Acid Armor,Baton Pass,1
 134,Modest,Damp Rock,252,,,252,,,Hydro Pump,Ice Beam,Acid Armor,Rain Dance,
 134,Modest,Leftovers,252,,,252,,,Muddy Water,Blizzard,Aqua Ring,Yawn,5
 135,Timid,Focus Sash,,,,252,,252,Thunderbolt,Thunder Wave,Agility,Baton Pass,1
@@ -103,7 +103,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 135,,,,,,,,,Thunderbolt,Signal Beam,Shadow Ball,,5
 136,Modest,White Herb,,,,252,252,,Overheat,Shadow Ball,Mud-slap,Will-o-wisp,3
 136,Adamant,White Herb,,252,,,252,,Fire Fang,Giga Impact,Superpower,Bite,3
-142,Jolly,'King''s Rock',,252,,,,252,Rock Slide,Aerial Ace,Torment,Taunt,1
+142,Jolly,King's Rock,,252,,,,252,Rock Slide,Aerial Ace,Torment,Taunt,1
 142,Jolly,Razor Fang,,252,,,,252,Bite,Fire Fang,Thunder Fang,Ice Fang,2
 142,Adamant,Yache Berry,,252,,,,252,Giga Impact,Earthquake,Rock Slide,Crunch,4
 143,Adamant,Chesto Berry,,252,,,252,,Fire Punch,Thunder Punch,Ice Punch,Rest,2
@@ -122,14 +122,14 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 154,Modest,Lax Incense,252,,,252,,,Frenzy Plant,Ancientpower,Hyper Beam,Light Screen,4
 157,,Shuca Berry,,,,,,,Shadow Claw,,,,4
 157,Modest,White Herb,,,,252,,252,Overheat,Solar Beam,Focus Blast,Sunny Day,5
-160,Adamant,'King''s Rock',,252,252,,,,Waterfall,Ice Fang,Rock Slide,Scary Face,1
+160,Adamant,King's Rock,,252,252,,,,Waterfall,Ice Fang,Rock Slide,Scary Face,1
 160,Modest,Wise Glasses,,,252,252,,,Hydro Cannon,Ice Beam,Focus Blast,Ancientpower,5
 169,,Razor Fang,,252,,,,252,Air Slash,Zen Headbutt,Bite,Twister,2
 169,,,,,,,,,Sludge Bomb,Dark Pulse,Heat Wave,,4
 169,Adamant,Razor Claw,,252,,,,252,Cross Poison,Brave Bird,X-scissor,Zen Headbutt,4
 171,Modest,Expert Belt,252,,,252,,,Surf,Thunderbolt,Ice Beam,Signal Beam,3
 171,,,,,,,,,Thunder,,,Rain Dance,4
-181,Careful,Chery Berry,,252,,,252,,Thunder Punch,Fire Punch,Focus Punch,Thunder Wave,2
+181,Careful,Cheri Berry,,252,,,252,,Thunder Punch,Fire Punch,Focus Punch,Thunder Wave,2
 181,Modest,Shuca Berry,,,,252,252,,Thunderbolt,Power Gem,Light Screen,Thunder Wave,2
 181,Quiet,Zoom Lens,252,,,252,,,Thunder,Focus Blast,Signal Beam,Power Gem,3
 186,Modest,Wacan Berry,,,,252,252,,Hydro Pump,Ice Beam,Psychic,Hypnosis,4
@@ -138,7 +138,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 195,Careful,Leftovers,170,,170,,170,,Dive,Yawn,Curse,Amnesia,
 196,Timid,Lum Berry,,,,252,,252,Psychic,Reflect,Calm Mind,Baton Pass,1
 197,Careful,Leftovers,,,252,,252,,Payback,Confuse Ray,Curse,Baton Pass,1
-197,Impish,BrightPowder,,,252,,252,,Payback,Trump Card,Curse,Moonlight,4
+197,Impish,Bright Powder,,,252,,252,,Payback,Trump Card,Curse,Moonlight,4
 199,Quiet,Shell Bell,170,,170,,170,,Psychic,Brine,Yawn,Trick Room,2
 205,,Sitrus Berry,,,,,,,Bug Bite,Toxik Spikes,Spikes,,12
 205,Adamant,Leftovers,,252,252,,,,Dig,Swagger,Toxik,Double Team,23
@@ -150,7 +150,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 208,Brave,Quick Claw,,252,252,,,,Gyro Ball,Earthquake,Stone Edge,Explosion,4
 210,Adamant,Razor Claw,252,252,,,,,Return,Rock Slide,Crunch,Thunder Wave,1
 210,,,,,,,,,Fire Punch,Ice Punch,Thunder Punch,,2
-212,Impish,BrightPowder,,252,252,,,,X-scissor,Bullet Punch,Sword Dance,Baton Pass,1
+212,Impish,Bright Powder,,252,252,,,,X-scissor,Bullet Punch,Sword Dance,Baton Pass,1
 212,Jolly,Salac Berry,,252,,,,252,X-scissor,Quick Attack,Reversal,Endure,3
 212,,,,,,,,,X-scissor,Iron Head,,,4
 213,Impish,Lax Incense,,,252,,252,,Stone Edge,Bug Bite,Swagger,Power Trick,1
@@ -174,7 +174,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 230,Adamant,Lum Berry,252,252,,,,,Waterfall,Outrage,Iron Head,Dragon Dance,3
 230,Timid,Razor Fang,,,,252,,252,Surf,Dragon Pulse,Smokescreen,Rain Dance,12
 232,Adamant,White Herb,,252,252,,,,Earthquake,Superpower,Gunk Shot,Counter,23
-233,Modest,Chery Berry,252,,,252,,,Tri Attack,Charge Beam,Thunder Wave,Recycle,1
+233,Modest,Cheri Berry,252,,,252,,,Tri Attack,Charge Beam,Thunder Wave,Recycle,1
 233,,,,,,,,,Tri Attack,Thunderbolt,,,3
 241,,,,,,,,,Return,Iron Head,Thunder Wave,Milk,1
 241,Adamant,Salac Berry,,252,,,,252,Facade,Zen Headbutt,Counter,Endure,3
@@ -190,13 +190,13 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 248,Adamant,Chople Berry,252,252,,,,,Stone Edge,Crunch,Earthquake,Dragon Dance,4
 254,Jolly,Liechi Berry,,252,,,,252,Leaf Blade,Crunch,Quick Attack,Screech,1
 257,Adamant,Salac Berry,,252,,,,252,Blaze Kick,Reversal,Aerial Ace,Endure,1
-257,Timid,BrightPowder,,,,252,,252,Blast Burn,Focus Blast,Solar Beam,Sunny Day,3
+257,Timid,Bright Powder,,,,252,,252,Blast Burn,Focus Blast,Solar Beam,Sunny Day,3
 260,,,,,,,,,Aqua Tail,,,,5
 272,Adamant,Muscle Band,,252,,,252,,Waterfall,Razor Leaf,Drain Punch,Sword Dance,1
 272,Impish,Leftovers,170,,170,,170,,Leech Seed,Toxik,Double Team,Rain Dance,2
 275,Jolly,Persim Berry,,252,,,,252,Seed Bomb,Faint Attack,X-scissor,Fake Out,1
 275,Calm,Leftovers,170,,170,,170,,Giga Drain,Leech Seed,Double Team,Synthesis,2
-275,Adamant,Chery Berry,252,252,,,,,Seed Bomb,Sucker Punch,Aerial Ace,Explosion,4
+275,Adamant,Cheri Berry,252,252,,,,,Seed Bomb,Sucker Punch,Aerial Ace,Explosion,4
 282,Calm,Chesto Berry,,,,252,252,,Psychic,Thunderbolt,Calm Mind,Rest,2
 282,,,,,,,,,Psychic,Focus Blast,Energy Ball,Charge Beam,3
 282,Timid,Wise Glasses,,,,252,,252,Psychic,Thunderbolt,Shadow Ball,Destiny Bond,4
@@ -220,7 +220,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 308,Adamant,Scope Lens,,252,,,,252,Psycho Cut,Fire Punch,Thunder Punch,Ice Punch,4
 310,Adamant,Shuca Berry,,252,,,,252,Thunder Fang,Crunch,Roar,Thunder Wave,1
 310,,,,,,,,,Hyper Beam,,,,2
-310,Timid,BrightPowder,,,,252,,252,Thunderbolt,Flamethrower,Signal Beam,Swift,4
+310,Timid,Bright Powder,,,,252,,252,Thunderbolt,Flamethrower,Signal Beam,Swift,4
 310,Adamant,Quick Claw,,252,,,,252,Thunder Fang,Fire Fang,Ice Fang,Bite,5
 321,Modest,Sitrus Berry,252,,,252,,,Surf,Ice Beam,Attract,Double Team,1
 321,,,,,,,,,,,Whirlpool,Amnesia,2
@@ -242,7 +242,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 346,Calm,Leftovers,170,,170,,170,,Stone Edge,Seed Bomb,Earthquake,Mirror Coat,4
 348,,,,,,,,,Aerial Ace,Crush Claw,,,3
 348,Adamant,Choice Band,,252,252,,,,Stone Edge,Superpower,Earthquake,Giga Impact,3
-350,Calm,Wide-Angle Lens,,,,252,252,,Hydro Pump,Blizzard,Mirror Coat,Recover,3
+350,Calm,Wide Lens,,,,252,252,,Hydro Pump,Blizzard,Mirror Coat,Recover,3
 350,Modest,Shell Bell,252,,,252,,,Surf,Ice Beam,Attract,Hypnosis,12
 359,Jolly,Chople Berry,,252,,,,252,Sucker Punch,Facade,Double Team,Taunt,1
 359,Adamant,Quick Claw,252,252,,,,,Punishment,Swagger,Attract,Thunder Wave,2
@@ -252,11 +252,11 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 365,Adamant,Chople Berry,252,252,,,,,Ice Fang,Aquatail,Swagger,Encore,2
 365,Brave,Life Orb,252,252,,,,,Avalanche,Earthquake,Crunch,Curse,3
 365,,Leftovers,,,,,,,Ice Beam,Surf,Signal Beam,,4
-373,Adamant,Chery Berry,,252,,,,252,Dragon Claw,Aerial Ace,Aqua Tail,Scary Face,1
+373,Adamant,Cheri Berry,,252,,,,252,Dragon Claw,Aerial Ace,Aqua Tail,Scary Face,1
 373,,,,,,,,,Draco Meteor,,,,2
 373,,,,,,,,,Dragon Claw,Thunder Fang,Dragon Dance,,3
 373,,,,,,,,,Outrage,,,,5
-376,Adamant,BrightPowder,,252,252,,,,Zen Headbutt,Bullet Punch,Facade,Light Screen,1
+376,Adamant,Bright Powder,,252,252,,,,Zen Headbutt,Bullet Punch,Facade,Light Screen,1
 376,Modest,Wise Glasses,,,252,252,,,Psychic,Flash Cannon,Shadow Ball,Sludge Bomb,2
 376,Adamant,Quick Claw,252,252,,,,,Meteor Mash,Zen Headbutt,Earthquake,Explosion,45
 379,Adamant,Razor Claw,252,252,,,,,Shadow Claw,Aerial Ace,Thunder Punch,Ice Punch,4
@@ -266,12 +266,12 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 389,Adamant,Quick Claw,252,252,,,,,Wood Hammer,Earthquake,Stone Edge,Crunch,4
 392,Jolly,Coba Berry,,252,,,,252,Close Combat,Fire Punch,U-turn,Fake Out,12
 392,,,,,,,,,Shadow Claw,,,,3
-392,Jolly,'King''s Rock',,252,,,,252,Flare Blitz,Close Combat,Earthquake,Thunder Punch,5
+392,Jolly,King's Rock,,252,,,,252,Flare Blitz,Close Combat,Earthquake,Thunder Punch,5
 395,Adamant,Razor Claw,,252,,,252,,Waterfall,Metal Claw,Brick Break,Knock Off,12
 395,Adamant,Razor Claw,,252,,,252,,Drill Peck,Aqua Jet,Shadow Claw,Rock Slide,2
 395,Brave,Quick Claw,,252,,252,,,Surf,Earthquake,Blizzard,Signal Beam,3
 398,,,,,,,,,Return,Double Team,Roost,,2
-398,Jolly,'King''s Rock',,252,,,,252,Endeavor,Aerial Ace,Endure,Quick Attack,2
+398,Jolly,King's Rock,,252,,,,252,Endeavor,Aerial Ace,Endure,Quick Attack,2
 398,Adamant,Muscle Band,,252,,,,252,Brave Bird,Return,Steel Wing,Pursuit,23
 405,Adamant,Muscle Band,252,252,,,,,Thunder Fang,Ice Fang,Crunch,Thunder Wave,3
 405,,,,,,,,,Thunderbolt,Signal Beam,Thunder Wave,Magnet Rise,23
@@ -301,12 +301,12 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 430,Adamant,Wacan Berry,252,252,,,,,Night Slash,Aerial Ace,Torment,Taunt,12
 430,,,,,,,,,Night Slash,Sucker Punch,,,4
 435,Timid,Shuca Berry,,,,252,,252,Sludge Bomb,Dark Pulse,Flamethrower,Shadow Ball,345
-437,Impish,'King''s Rock',,,252,,252,,Extrasensory,Iron Head,Rock Slide,Trick Room,1
+437,Impish,King's Rock,,,252,,252,,Extrasensory,Iron Head,Rock Slide,Trick Room,1
 437,Calm,Lum Berry,,,252,,252,,Dream Eater,Hypnosis,Signal Beam,Trick Room,2
 437,Adamant,Quick Claw,252,252,,,,,Zen Headbutt,Iron Head,Earthquake,Explosion,
 445,Modest,White Herb,,,,252,,252,Draco Meteor,Earth Power,Flamethrower,Surf,2
 445,Adamant,Focus Sash,,252,,,,252,Dragon Rush,Stone Edge,Aqua Tail,Aerial Ace,5
-445,Jolly,BrightPowder,,252,,,,252,Dragon Claw,Earthquake,Double Team,Sandstorm,12
+445,Jolly,Bright Powder,,252,,,,252,Dragon Claw,Earthquake,Double Team,Sandstorm,12
 448,Adamant,Scope Lens,,252,,,,252,Cross Chop,Stone Edge,Thunder Punch,Ice Punch,3
 448,Modest,Expert Belt,,,,252,,252,Aura Sphere,Psychic,Shadow Ball,Dragon Pulse,4
 448,Adamant,Muscle Band,,252,,,,252,Close Combat,Earthquake,Blaze Kick,Shadow Claw,5
@@ -315,7 +315,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 450,Impish,Sitrus Berry,,252,252,,,,Earthquake,Swagger,Sand Tomb,Yawn,23
 452,,,,,,,,,Aqua Tail,Crunch,,,1
 452,Adamant,Iron Ball,,252,252,,,,Payback,Poison Jab,Fling,Knock Off,2
-454,Adamant,Wide-Angle Lens,,252,,,,252,Dynamic Punch,Poison Jab,Thunder Punch,Ice Punch,2
+454,Adamant,Wide Lens,,252,,,,252,Dynamic Punch,Poison Jab,Thunder Punch,Ice Punch,2
 454,Modest,Wise Glasses,,,,252,,252,Sludge Bomb,Focus Blast,Shadow Ball,Dark Pulse,3
 454,Adamant,Razor Claw,,252,,,,252,Gunk Shot,Cross Chop,Earthquake,Stone Edge,4
 454,Adamant,Black Sludge,,252,,,,252,Poison Jab,Brick Break,X-scissor,Knock Off,12
@@ -324,7 +324,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 460,,Occa Berry,,,,,,,Energy Ball,,,,4
 461,Adamant,Focus Sash,,252,,,,252,Night Slash,X-scissor,Metal Claw,Counter,3
 462,Bold,Light Clay,,,252,252,,,Thunderbolt,Mirror Shot,Light Screen,Reflect,1
-462,Modest,BrightPowder,,,252,252,,,Thunderbolt,Flash Cannon,Tri Attack,Signal Beam,4
+462,Modest,Bright Powder,,,252,252,,,Thunderbolt,Flash Cannon,Tri Attack,Signal Beam,4
 462,Modest,Chesto Berry,,252,252,,,,Charge Beam,Flash Cannon,Magnet Rise,Thunder Wave,5
 463,Careful,Chesto Berry,252,252,,,,,Return,Earthquake,Belly Drum,Rest,1
 463,Modest,Expert Belt,252,,,252,,,Surf,Ice Beam,Thunderbolt,Shadow Ball,2
@@ -343,7 +343,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 469,Timid,Coba Berry,,,,252,,252,Signal Beam,Air Cutter,Detect,Double Team,1
 469,Modest,Lum Berry,,,,252,,252,Silver Wind,Ancientpower,Ominous Wind,Giga Drain,4
 470,Jolly,Scope Lens,,252,,,,252,Leaf Blade,Aerial Ace,Double Team,Baton Pass,1
-470,Jolly,BrightPowder,,252,,,,252,Leaf Blade,Last Resort,Curse,Grass Whistle,2
+470,Jolly,Bright Powder,,252,,,,252,Leaf Blade,Last Resort,Curse,Grass Whistle,2
 471,Calm,Lax Incense,,,,252,252,,Ice Beam,Water Pulse,Double Team,Baton Pass,1
 471,Calm,Leftovers,,,,252,252,,Ice Beam,Double Team,Yawn,Hail,2
 472,Adamant,Yache Berry,,252,252,,,,Earthquake,Aerial Ace,Sword Dance,Baton Pass,12
@@ -355,7 +355,7 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 474-Z,Modest,Choice Scarf,,,,252,,252,Tri Attack,Thunder Wave,Recover,Trick,3
 474-Z,Modest,Expert Belt,,,,252,,252,Tri Attack,Shadow Ball,Thunderbolt,Recover,45
 475,Careful,Kasib Berry,,252,,,252,,Zen Headbutt,Brick Break,Thunder Wave,Confuse Ray,1
-475,Jolly,BrightPowder,,252,,,,252,Drain Punch,Fire Punch,Thunder Punch,Ice Punch,23
+475,Jolly,Bright Powder,,252,,,,252,Drain Punch,Fire Punch,Thunder Punch,Ice Punch,23
 475,Adamant,Scope Lens,,252,,,252,,Psycho Cut,Stone Edge,Aerial Ace,X-scissor,3
 475,Adamant,Scope Lens,,252,,,252,,Psycho Cut,Close Combat,Leaf Blade,Night Slash,4
 476,,,,,,,,,,,Ancientpower,Thunder Wave,1
@@ -367,4 +367,4 @@ Id,Nature,Object,HP,Atk,Def,SpA,SpD,Spe,Move 1,Move 2,Move 3,Move 4,Encounter 10
 478,Adamant,Focus Band,,252,,,,252,Ice Punch,Sucker Punch,Swagger,Psych Up,2
 478,Modest,Lax Incense,,,,252,,252,Blizzard,Shadow Ball,Psychic,Hail,345
 485,Modest,Shuca Berry,,,,252,252,,Heat Wave,Flash Cannon,Ancientpower,Scary Face,5
-486,Adamant,BrightPowder,252,252,,,,,Crush Grip,Earthquake,Stone Edge,Drain Punch,5
+486,Adamant,Bright Powder,252,252,,,,,Crush Grip,Earthquake,Stone Edge,Drain Punch,5

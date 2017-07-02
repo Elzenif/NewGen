@@ -52,6 +52,7 @@ public class PkNameActionListener implements ActionListener {
         Vector<Object> vector = new Vector<>();
         vector.add(projection.getPkName());
         vector.add(projection.getNatureName());
+        vector.add(projection.getItemName());
         data.add(vector);
       }
       pkInfoTable.getDataModel().setDataVector(data, pkInfoTable.getColumnNames());

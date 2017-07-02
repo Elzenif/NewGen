@@ -18,7 +18,8 @@ public class PkInfoTable extends JTable {
 
   private final DefaultTableModel dataModel;
   private Vector<String> columnNames = new Vector<>(
-      Arrays.asList(resourceBundle.getString("name"), resourceBundle.getString("nature")));
+      Arrays.asList(resourceBundle.getString("name"), resourceBundle.getString("nature"),
+          resourceBundle.getString("item")));
 
   public PkInfoTable() {
     dataModel = new DefaultTableModel(columnNames, 0);
