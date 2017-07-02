@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Created by Germain on 02/07/2017.
  */
 @Embeddable
-public class PokemonSpeciesNamesId implements Serializable {
+public class PokemonSpeciesNameId implements Serializable {
 
   private Integer pokemonSpeciesId;
   private Integer localLanguageId;
@@ -33,7 +33,7 @@ public class PokemonSpeciesNamesId implements Serializable {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    PokemonSpeciesNamesId that = (PokemonSpeciesNamesId) o;
+    PokemonSpeciesNameId that = (PokemonSpeciesNameId) o;
 
     if (pokemonSpeciesId != null ? !pokemonSpeciesId.equals(that.pokemonSpeciesId) : that.pokemonSpeciesId != null)
       return false;

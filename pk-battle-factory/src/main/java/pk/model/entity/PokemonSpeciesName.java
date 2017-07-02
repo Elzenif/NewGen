@@ -2,6 +2,10 @@ package pk.model.entity;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 /**
@@ -9,19 +13,31 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "pokemon_species_names")
-public class PokemonSpeciesNames {
+public class PokemonSpeciesName {
 
   @EmbeddedId
-  private PokemonSpeciesNamesId id;
+  private PokemonSpeciesNameId id;
+  @MapsId("localLanguageId")
+  @JoinColumn(name = "local_language_id", referencedColumnName = "id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Language language;
   private String name;
   private String genus;
 
-  public PokemonSpeciesNamesId getId() {
+  public PokemonSpeciesNameId getId() {
     return id;
   }
 
-  public void setId(PokemonSpeciesNamesId id) {
+  public void setId(PokemonSpeciesNameId id) {
     this.id = id;
+  }
+
+  public Language getLanguage() {
+    return language;
+  }
+
+  public void setLanguage(Language language) {
+    this.language = language;
   }
 
   public String getName() {
@@ -42,8 +58,9 @@ public class PokemonSpeciesNames {
 
   @Override
   public String toString() {
-    return "PokemonSpeciesNames{" +
+    return "PokemonSpeciesName{" +
         "id=" + id +
+        ", language=" + language +
         ", name='" + name + '\'' +
         ", genus='" + genus + '\'' +
         '}';

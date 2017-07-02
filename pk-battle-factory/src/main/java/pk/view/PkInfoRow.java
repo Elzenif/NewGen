@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import pk.model.entity.PokemonSpeciesNames;
-import pk.model.repository.PokemonSpeciesNamesRepository;
+import pk.model.entity.PokemonSpeciesName;
+import pk.model.repository.PokemonSpeciesNameRepository;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JComboBox;
@@ -18,6 +18,7 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Germain on 01/07/2017.
@@ -26,7 +27,7 @@ import java.util.List;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PkInfoRow extends JPanel {
 
-  private final PokemonSpeciesNamesRepository pokemonSpeciesNamesRepository;
+  private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
 
   private JPanel leftPanel;
   private JComboBox nameComboBox;
@@ -36,8 +37,8 @@ public class PkInfoRow extends JPanel {
   private JTextPane textPane;
 
   @Autowired
-  public PkInfoRow(PokemonSpeciesNamesRepository pokemonSpeciesNamesRepository) {
-    this.pokemonSpeciesNamesRepository = pokemonSpeciesNamesRepository;
+  public PkInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository) {
+    this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
   
@@ -47,8 +48,9 @@ public class PkInfoRow extends JPanel {
     leftPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
     JLabel name = new JLabel(Constants.resourceBundle.getString("name"));
     leftPanel.add(name);
-    List<PokemonSpeciesNames> pokemonSpeciesNames = pokemonSpeciesNamesRepository.findAllByIdLocalLanguageId(5);
-    Object[] names = pokemonSpeciesNames.stream().map(PokemonSpeciesNames::getName).toArray();
+    String language = Locale.getDefault().getLanguage();
+    List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository.findAllByLanguage(language);
+    Object[] names = pokemonSpeciesNames.stream().map(PokemonSpeciesName::getName).toArray();
     nameComboBox = new JComboBox(names);
     AutoCompleteDecorator.decorate(nameComboBox);
     leftPanel.add(nameComboBox);

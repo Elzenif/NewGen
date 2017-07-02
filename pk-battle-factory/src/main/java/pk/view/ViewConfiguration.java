@@ -2,7 +2,7 @@ package pk.view;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pk.model.repository.PokemonSpeciesNamesRepository;
+import pk.model.repository.PokemonSpeciesNameRepository;
 
 /**
  * Created by Germain on 02/07/2017.
@@ -11,17 +11,17 @@ import pk.model.repository.PokemonSpeciesNamesRepository;
 public class ViewConfiguration {
 
   @Bean
-  public PkInfoRow pkInfoRow1(PokemonSpeciesNamesRepository pokemonSpeciesNamesRepository) {
-    return new PkInfoRow(pokemonSpeciesNamesRepository);
+  public PkInfoRow pkInfoRow1(PokemonSpeciesNameRepository pokemonSpeciesNameRepository) {
+    return new PkInfoRow(pokemonSpeciesNameRepository);
   }
 
   @Bean
-  public PkInfoRow pkInfoRow2(PokemonSpeciesNamesRepository pokemonSpeciesNamesRepository) {
-    return new PkInfoRow(pokemonSpeciesNamesRepository);
+  public PkInfoRow pkInfoRow2(PokemonSpeciesNameRepository pokemonSpeciesNameRepository) {
+    return new PkInfoRow(pokemonSpeciesNameRepository);
   }
 
   @Bean
-  public PkInfoRow pkInfoRow3(PokemonSpeciesNamesRepository pokemonSpeciesNamesRepository) {
-    return new PkInfoRow(pokemonSpeciesNamesRepository);
+  public PkInfoRow pkInfoRow3(PokemonSpeciesNameRepository pokemonSpeciesNameRepository) {
+    return new PkInfoRow(pokemonSpeciesNameRepository);
   }
 }
