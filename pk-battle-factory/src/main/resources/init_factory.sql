@@ -1,24 +1,3 @@
-DROP TABLE IF EXISTS pokemon_factory;
-
-CREATE TABLE pokemon_factory (
-  id                 INT AUTO_INCREMENT PRIMARY KEY,
-  pokemon_species_id INT NOT NULL,
-  nature_id          INT NULL,
-  item_id            INT NULL,
-  hp                 INT NULL,
-  attack             INT NULL,
-  defense            INT NULL,
-  special_attack     INT NULL,
-  special_defense    INT NULL,
-  speed              INT NULL,
-
-  CONSTRAINT pokemon_factory_species_id FOREIGN KEY (pokemon_species_id) REFERENCES pokemon_species (id),
-  CONSTRAINT pokemon_factory_nature_id FOREIGN KEY (nature_id) REFERENCES natures (id),
-  CONSTRAINT pokemon_factory_item_id FOREIGN KEY (item_id) REFERENCES items (id)
-)
-ENGINE = InnoDB;
-
-
 DROP TABLE IF EXISTS tmp_pokemon_factory;
 CREATE TABLE tmp_pokemon_factory (
   id                 INT AUTO_INCREMENT PRIMARY KEY,
@@ -68,18 +47,63 @@ INSERT INTO pokemon_factory (pokemon_species_id, nature_id, item_id)
     LEFT JOIN item_names itn ON tmp.item = itn.name AND itn.local_language_id = 9
     LEFT JOIN items it ON itn.item_id = it.id;
 
+DROP TABLE IF EXISTS pokemon_factory_stats;
+CREATE TABLE pokemon_factory_stats (
+  pokemon_factory_id INT NOT NULL,
+  stat_id            INT NOT NULL,
+  ev                 INT DEFAULT 0,
+  PRIMARY KEY (pokemon_factory_id, stat_id),
+  CONSTRAINT pokemon_factory_stats_pokemon_factory_id FOREIGN KEY (pokemon_factory_id) REFERENCES pokemon_factory (id),
+  CONSTRAINT pokemon_factory_stats_id FOREIGN KEY (stat_id) REFERENCES stats (id)
+)
+ENGINE = InnoDB;
 
-SELECT
-  pokemonfac0_.id   AS col_0_0_,
-  pokemonspe2_.name AS col_1_0_,
-  naturename5_.name AS col_2_0_
-FROM pokemon_factory pokemonfac0_ INNER JOIN pokemon_species pokemonspe1_
-    ON pokemonfac0_.pokemon_species_id = pokemonspe1_.id
-  INNER JOIN pokemon_species_names pokemonspe2_ ON pokemonspe1_.id = pokemonspe2_.pokemon_species_id
-  INNER JOIN languages language3_ ON pokemonspe2_.local_language_id = language3_.id
-  LEFT OUTER JOIN natures nature4_ ON pokemonfac0_.nature_id = nature4_.id
-  LEFT OUTER JOIN nature_names naturename5_ ON nature4_.id = naturename5_.nature_id
-  LEFT OUTER JOIN languages language6_ ON naturename5_.local_language_id = language6_.id
-WHERE pokemonspe2_.name = ? AND language3_.iso639 = ? AND CASE WHEN pokemonfac0_.nature_id IS NULL
-  THEN ?
-                                                          ELSE language6_.iso639 END = ?;
+TRUNCATE pokemon_factory_stats;
+INSERT INTO pokemon_factory_stats (pokemon_factory_id, stat_id, ev)
+  SELECT
+    tmp.id,
+    s.id,
+    tmp.hp
+  FROM tmp_pokemon_factory tmp, stat_names sn
+    INNER JOIN stats s ON sn.stat_id = s.id
+  WHERE sn.local_language_id = 9 AND sn.name = 'HP';
+INSERT INTO pokemon_factory_stats (pokemon_factory_id, stat_id, ev)
+  SELECT
+    tmp.id,
+    s.id,
+    tmp.atk
+  FROM tmp_pokemon_factory tmp, stat_names sn
+    INNER JOIN stats s ON sn.stat_id = s.id
+  WHERE sn.local_language_id = 9 AND sn.name = 'Attack';
+INSERT INTO pokemon_factory_stats (pokemon_factory_id, stat_id, ev)
+  SELECT
+    tmp.id,
+    s.id,
+    tmp.def
+  FROM tmp_pokemon_factory tmp, stat_names sn
+    INNER JOIN stats s ON sn.stat_id = s.id
+  WHERE sn.local_language_id = 9 AND sn.name = 'Defense';
+INSERT INTO pokemon_factory_stats (pokemon_factory_id, stat_id, ev)
+  SELECT
+    tmp.id,
+    s.id,
+    tmp.spa
+  FROM tmp_pokemon_factory tmp, stat_names sn
+    INNER JOIN stats s ON sn.stat_id = s.id
+  WHERE sn.local_language_id = 9 AND sn.name = 'Special Attack';
+INSERT INTO pokemon_factory_stats (pokemon_factory_id, stat_id, ev)
+  SELECT
+    tmp.id,
+    s.id,
+    tmp.spd
+  FROM tmp_pokemon_factory tmp, stat_names sn
+    INNER JOIN stats s ON sn.stat_id = s.id
+  WHERE sn.local_language_id = 9 AND sn.name = 'Special Defense';
+INSERT INTO pokemon_factory_stats (pokemon_factory_id, stat_id, ev)
+  SELECT
+    tmp.id,
+    s.id,
+    tmp.spe
+  FROM tmp_pokemon_factory tmp, stat_names sn
+    INNER JOIN stats s ON sn.stat_id = s.id
+  WHERE sn.local_language_id = 9 AND sn.name = 'Speed';

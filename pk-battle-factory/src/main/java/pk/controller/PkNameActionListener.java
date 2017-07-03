@@ -2,8 +2,7 @@ package pk.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pk.model.projection.PokemonFactoryProjection;
-import pk.model.repository.PokemonFactoryRepository;
+import pk.model.dto.PokemonFactoryDTO;
 import pk.view.PkInfoTable;
 
 import javax.swing.JComboBox;
@@ -11,7 +10,6 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Locale;
 import java.util.Vector;
 
 /**
@@ -20,7 +18,7 @@ import java.util.Vector;
 @Component
 public class PkNameActionListener implements ActionListener {
 
-  private final PokemonFactoryRepository pokemonFactoryRepository;
+  private final PokemonFactoryController pokemonFactoryController;
   private final PkInfoTable pkInfoTable;
   private final ActionListener timerListener = new TimerListener();
   private final Timer timer = new Timer(1000, timerListener);
@@ -28,8 +26,8 @@ public class PkNameActionListener implements ActionListener {
   private String name;
 
   @Autowired
-  public PkNameActionListener(PokemonFactoryRepository pokemonFactoryRepository, PkInfoTable pkInfoTable) {
-    this.pokemonFactoryRepository = pokemonFactoryRepository;
+  public PkNameActionListener(PokemonFactoryController pokemonFactoryController, PkInfoTable pkInfoTable) {
+    this.pokemonFactoryController = pokemonFactoryController;
     this.pkInfoTable = pkInfoTable;
   }
 
@@ -45,14 +43,15 @@ public class PkNameActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-      List<PokemonFactoryProjection> projections = pokemonFactoryRepository.find(name, Locale.getDefault().getLanguage());
+      List<PokemonFactoryDTO> pokemonFactoryDTOS = pokemonFactoryController.findByName(name);
 
       Vector<Vector<Object>> data = new Vector<>();
-      for (PokemonFactoryProjection projection : projections) {
+      for (PokemonFactoryDTO pokemonFactoryDTO : pokemonFactoryDTOS) {
         Vector<Object> vector = new Vector<>();
-        vector.add(projection.getPkName());
-        vector.add(projection.getNatureName());
-        vector.add(projection.getItemName());
+        vector.add(pokemonFactoryDTO.getPkName());
+        vector.add(pokemonFactoryDTO.getNatureName());
+        vector.add(pokemonFactoryDTO.getItemName());
+        vector.addAll(pokemonFactoryDTO.getStats());
         data.add(vector);
       }
       pkInfoTable.getDataModel().setDataVector(data, pkInfoTable.getColumnNames());

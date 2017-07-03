@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import java.util.Arrays;
 import java.util.Vector;
 
@@ -18,8 +17,16 @@ public class PkInfoTable extends JTable {
 
   private final DefaultTableModel dataModel;
   private Vector<String> columnNames = new Vector<>(
-      Arrays.asList(resourceBundle.getString("name"), resourceBundle.getString("nature"),
-          resourceBundle.getString("item")));
+      Arrays.asList(resourceBundle.getString("name"),
+          resourceBundle.getString("nature"),
+          resourceBundle.getString("item"),
+          resourceBundle.getString("hp"),
+          resourceBundle.getString("atk"),
+          resourceBundle.getString("def"),
+          resourceBundle.getString("spAtk"),
+          resourceBundle.getString("spDef"),
+          resourceBundle.getString("speed")
+          ));
 
   public PkInfoTable() {
     dataModel = new DefaultTableModel(columnNames, 0);

@@ -8,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import pk.controller.PokemonFactoryController;
+import pk.model.dto.PokemonFactoryDTO;
 import pk.model.entity.PokemonSpeciesName;
-import pk.model.projection.PokemonFactoryProjection;
-import pk.model.repository.PokemonFactoryRepository;
 import pk.model.repository.PokemonSpeciesNameRepository;
 
 import java.util.List;
 import java.util.Locale;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Germain on 02/07/2017.
@@ -27,20 +29,27 @@ public class PkApplicationTest {
   private static final Logger LOGGER = LoggerFactory.getLogger(PkApplicationTest.class);
 
   @Autowired
-  private PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
+  private PokemonFactoryController pokemonFactoryController;
   @Autowired
-  private PokemonFactoryRepository pokemonFactoryRepository;
+  private PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
 
   @Test
   public void loadContext() {
+  }
+
+  @Test
+  public void testFindAllByLanguage() {
     String language = Locale.getDefault().getLanguage();
     List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository.findAllByLanguage(language);
-    String found = "Found " + pokemonSpeciesNames.size();
-    LOGGER.info(found);
+    assertThat(pokemonSpeciesNames).hasSize(721);
+  }
 
-    List<PokemonFactoryProjection> projectionList = pokemonFactoryRepository.find("Raichu", language);
-    for (PokemonFactoryProjection pokemonFactoryProjection : projectionList) {
-      LOGGER.info("Found " + pokemonFactoryProjection.getString());
+  @Test
+  public void testFindPokemonFactoryByName() {
+    List<PokemonFactoryDTO> pokemonFactoryDTOS = pokemonFactoryController.findByName("Raichu");
+    for (PokemonFactoryDTO pokemonFactoryDTO : pokemonFactoryDTOS) {
+      LOGGER.info("Found " + pokemonFactoryDTO.toString());
     }
+    assertThat(pokemonFactoryDTOS).hasSize(4);
   }
 }
