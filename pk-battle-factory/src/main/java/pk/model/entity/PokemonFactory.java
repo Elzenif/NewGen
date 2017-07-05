@@ -1,12 +1,6 @@
 package pk.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -29,6 +23,13 @@ public class PokemonFactory {
   private Item item;
   @OneToMany(mappedBy = "pokemonFactory")
   private List<PokemonFactoryStat> pokemonFactoryStats;
+  @ManyToMany
+	@JoinTable(name = "pokemon_factory_moves",
+          joinColumns = @JoinColumn(name = "pokemon_factory_id", referencedColumnName = "id", nullable = false,
+                  foreignKey = @ForeignKey(name = "pokemon_factory_moves_pokemon_factory_id")),
+          inverseJoinColumns = @JoinColumn(name = "move_id", referencedColumnName = "id", nullable = false),
+                  foreignKey = @ForeignKey(name = "pokemon_factory_moves_move_id"))
+  private List<Move> moves;
 
   public PokemonFactory() {
   }
@@ -71,6 +72,14 @@ public class PokemonFactory {
 
   public void setPokemonFactoryStats(List<PokemonFactoryStat> pokemonFactoryStats) {
     this.pokemonFactoryStats = pokemonFactoryStats;
+  }
+
+  public List<Move> getMoves() {
+    return moves;
+  }
+
+  public void setMoves(List<Move> moves) {
+    this.moves = moves;
   }
 
   @Override

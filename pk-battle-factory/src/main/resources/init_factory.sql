@@ -10,17 +10,21 @@ CREATE TABLE tmp_pokemon_factory (
   spa                INT         NULL,
   spd                INT         NULL,
   spe                INT         NULL,
+  move1 VARCHAR(20) NULL,
+  move2 VARCHAR(20) NULL,
+  move3 VARCHAR(20) NULL,
+  move4 VARCHAR(20) NULL,
   CONSTRAINT tmp_pokemon_factory_species_id FOREIGN KEY (pokemon_species_id) REFERENCES pokemon_species (id)
 )
 ENGINE = InnoDB;
 
 TRUNCATE tmp_pokemon_factory;
-LOAD DATA LOCAL INFILE 'F:\\NewGen\\pk-battle-factory\\src\\main\\resources\\pokemon_hgss_factory.csv'
+LOAD DATA LOCAL INFILE 'C:\\Workspace\\NewGen\\pk-battle-factory\\src\\main\\resources\\pokemon_hgss_factory.csv'
 INTO TABLE tmp_pokemon_factory
 COLUMNS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(pokemon_species_id, nature, item, hp, atk, def, spa, spd, spe)
+(pokemon_species_id, nature, item, hp, atk, def, spa, spd, spe, move1, move2, move3, move4)
 SET id = NULL;
 
 DROP TABLE IF EXISTS pokemon_factory;
@@ -107,3 +111,46 @@ INSERT INTO pokemon_factory_stats (pokemon_factory_id, stat_id, ev)
   FROM tmp_pokemon_factory tmp, stat_names sn
     INNER JOIN stats s ON sn.stat_id = s.id
   WHERE sn.local_language_id = 9 AND sn.name = 'Speed';
+
+DROP TABLE IF EXISTS  pokemon_factory_moves;
+CREATE TABLE pokemon_factory_moves (
+  pokemon_factory_id INT NOT NULL,
+  move_id INT NOT NULL,
+  PRIMARY KEY (pokemon_factory_id, move_id),
+  CONSTRAINT pokemon_factory_moves_pokemon_factory_id FOREIGN KEY (pokemon_factory_id) REFERENCES pokemon_factory (id),
+  CONSTRAINT pokemon_factory_moves_move_id FOREIGN KEY (move_id) REFERENCES moves (id)
+);
+
+TRUNCATE pokemon_factory_moves;
+INSERT INTO pokemon_factory_moves (pokemon_factory_id, move_id)
+  SELECT
+    tmp.id as pokemon_id,
+    m.id as move_id
+  FROM tmp_pokemon_factory tmp
+    INNER JOIN move_names mn ON tmp.move1 = mn.name
+    INNER JOIN moves m ON mn.move_id = m.id
+  WHERE mn.local_language_id = 9;
+INSERT INTO pokemon_factory_moves (pokemon_factory_id, move_id)
+  SELECT
+    tmp.id as pokemon_id,
+    m.id as move_id
+  FROM tmp_pokemon_factory tmp
+    INNER JOIN move_names mn ON tmp.move2 = mn.name
+    INNER JOIN moves m ON mn.move_id = m.id
+  WHERE mn.local_language_id = 9;
+INSERT INTO pokemon_factory_moves (pokemon_factory_id, move_id)
+  SELECT
+    tmp.id as pokemon_id,
+    m.id as move_id
+  FROM tmp_pokemon_factory tmp
+    INNER JOIN move_names mn ON tmp.move3 = mn.name
+    INNER JOIN moves m ON mn.move_id = m.id
+  WHERE mn.local_language_id = 9;
+INSERT INTO pokemon_factory_moves (pokemon_factory_id, move_id)
+  SELECT
+    tmp.id as pokemon_id,
+    m.id as move_id
+  FROM tmp_pokemon_factory tmp
+    INNER JOIN move_names mn ON tmp.move4 = mn.name
+    INNER JOIN moves m ON mn.move_id = m.id
+  WHERE mn.local_language_id = 9;

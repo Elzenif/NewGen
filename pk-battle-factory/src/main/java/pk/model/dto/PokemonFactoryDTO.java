@@ -3,6 +3,7 @@ package pk.model.dto;
 import pk.model.projection.PokemonFactoryProjection;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Germain on 03/07/2017.
@@ -74,6 +75,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         ", pkName='" + pkName + '\'' +
         ", natureName='" + natureName + '\'' +
         ", itemName='" + itemName + '\'' +
+        ", stats='" + stats.stream().map(Object::toString).collect(Collectors.joining(", ")) + '\'' +
         '}';
   }
 
