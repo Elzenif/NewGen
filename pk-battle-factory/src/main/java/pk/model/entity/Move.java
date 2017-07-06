@@ -33,6 +33,14 @@ public class Move {
     this.moveNames = moveNames;
   }
 
+  public List<PokemonFactory> getPokemonFactoryList() {
+    return pokemonFactoryList;
+  }
+
+  public void setPokemonFactoryList(List<PokemonFactory> pokemonFactoryList) {
+    this.pokemonFactoryList = pokemonFactoryList;
+  }
+
   @Override
   public String toString() {
     return "Move{" +

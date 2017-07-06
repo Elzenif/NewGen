@@ -15,13 +15,15 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   private String natureName;
   private String itemName;
   private List<Integer> stats;
+  private List<String> moves;
 
-  public PokemonFactoryDTO(PokemonFactoryProjection p, List<Integer> stats) {
+  public PokemonFactoryDTO(PokemonFactoryProjection p, List<Integer> stats, List<String> moves) {
     this.id = p.getId();
     this.pkName = p.getPkName();
     this.natureName = p.getNatureName();
     this.itemName = p.getItemName();
     this.stats = stats;
+    this.moves = moves;
   }
 
   @Override
@@ -68,6 +70,14 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.stats = stats;
   }
 
+  public List<String> getMoves() {
+    return moves;
+  }
+
+  public void setMoves(List<String> moves) {
+    this.moves = moves;
+  }
+
   @Override
   public String toString() {
     return "PokemonFactoryProjectionImpl{" +
@@ -76,6 +86,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         ", natureName='" + natureName + '\'' +
         ", itemName='" + itemName + '\'' +
         ", stats='" + stats.stream().map(Object::toString).collect(Collectors.joining(", ")) + '\'' +
+        ", moves='" + moves.stream().map(Object::toString).collect(Collectors.joining(", ")) + '\'' +
         '}';
   }
 

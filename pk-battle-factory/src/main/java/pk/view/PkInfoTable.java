@@ -25,7 +25,11 @@ public class PkInfoTable extends JTable {
           resourceBundle.getString("def"),
           resourceBundle.getString("spAtk"),
           resourceBundle.getString("spDef"),
-          resourceBundle.getString("speed")
+          resourceBundle.getString("speed"),
+          resourceBundle.getString("move1"),
+          resourceBundle.getString("move2"),
+          resourceBundle.getString("move3"),
+          resourceBundle.getString("move4")
           ));
 
   public PkInfoTable() {

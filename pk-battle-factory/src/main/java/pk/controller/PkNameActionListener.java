@@ -52,6 +52,7 @@ public class PkNameActionListener implements ActionListener {
         vector.add(pokemonFactoryDTO.getNatureName());
         vector.add(pokemonFactoryDTO.getItemName());
         vector.addAll(pokemonFactoryDTO.getStats());
+        vector.addAll(pokemonFactoryDTO.getMoves());
         data.add(vector);
       }
       pkInfoTable.getDataModel().setDataVector(data, pkInfoTable.getColumnNames());

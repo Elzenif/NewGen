@@ -1,9 +1,10 @@
 package pk.model.entity;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class MoveNameId {
+public class MoveNameId implements Serializable {
 
   private Integer moveId;
   private Integer localLanguageId;
