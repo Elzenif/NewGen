@@ -12,73 +12,84 @@ import pk.model.repository.PokemonSpeciesNameRepository;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by Germain on 01/07/2017.
+ * Created by Germain on 10/07/2017.
  */
 @Component
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
-public class PkInfoRow extends JPanel {
+public class PkOpponentInfoRow extends JPanel {
 
   private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
   private final PkNameActionListener pkNameActionListener;
 
   private JPanel leftPanel;
+  private JComboBox<PkOpponentCriteria> criteriaComboBox;
+  private JPanel leftPanel2;
+  private CardLayout leftCardLayout;
   private JComboBox nameComboBox;
+  private JComboBox typeComboBox;
+
   private JPanel rightPanel;
-  private CardLayout cardLayout;
-  private JLabel label;
-  private JTextPane textPane;
+
 
   @Autowired
-  public PkInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
-                   PkNameActionListener pkNameActionListener) {
+  public PkOpponentInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
+                           PkNameActionListener pkNameActionListener) {
     this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
     this.pkNameActionListener = pkNameActionListener;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
-  
+
+
   @PostConstruct
   public void init() {
     leftPanel = new JPanel();
     leftPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
-    JLabel name = new JLabel(Constants.resourceBundle.getString("name"));
-    leftPanel.add(name);
+
+    criteriaComboBox = new JComboBox<>(PkOpponentCriteria.values());
+    leftPanel.add(criteriaComboBox);
+
+    leftPanel2 = new JPanel();
+    leftCardLayout = new CardLayout();
+    leftPanel2.setLayout(leftCardLayout);
+
     String language = Locale.getDefault().getLanguage();
     List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository.findAllByLanguage(language);
     Object[] names = pokemonSpeciesNames.stream().map(PokemonSpeciesName::getName).toArray();
     nameComboBox = new JComboBox<>(names);
     AutoCompleteDecorator.decorate(nameComboBox);
-    leftPanel.add(nameComboBox);
+    leftPanel2.add(PkOpponentCriteria.NAME.getName(), nameComboBox);
+
+    typeComboBox = new JComboBox<>(new String[]{"eau", "feu"});
+    AutoCompleteDecorator.decorate(typeComboBox);
+    leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
+
+    leftCardLayout.show(leftPanel2, PkOpponentCriteria.NAME.getName());
+    leftPanel.add(leftPanel2);
 
     rightPanel = new JPanel();
-    cardLayout = new CardLayout();
-    rightPanel.setLayout(cardLayout);
-    label = new JLabel();
-    rightPanel.add("false", label);
-    textPane = new JTextPane();
-    rightPanel.add("true", textPane);
-    cardLayout.show(rightPanel, "false");
 
     add(leftPanel);
     add(rightPanel);
 
+    criteriaComboBox.addActionListener(new PkOpponentCriteriaActionListener());
     nameComboBox.addActionListener(pkNameActionListener);
   }
 
-  public JLabel getLabel() {
-    return label;
-  }
+  private class PkOpponentCriteriaActionListener implements ActionListener {
 
-  public JTextPane getTextPane() {
-    return textPane;
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      leftCardLayout.show(leftPanel2, ((PkOpponentCriteria) criteriaComboBox.getSelectedItem()).getName());
+    }
   }
 }

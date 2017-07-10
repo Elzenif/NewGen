@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS=0;
+
 DROP TABLE IF EXISTS tmp_pokemon_factory;
 CREATE TABLE tmp_pokemon_factory (
   id                 INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,7 +21,7 @@ CREATE TABLE tmp_pokemon_factory (
 ENGINE = InnoDB;
 
 TRUNCATE tmp_pokemon_factory;
-LOAD DATA LOCAL INFILE 'C:\\Workspace\\NewGen\\pk-battle-factory\\src\\main\\resources\\pokemon_hgss_factory.csv'
+LOAD DATA LOCAL INFILE 'F:\\NewGen\\pk-battle-factory\\src\\main\\resources\\pokemon_hgss_factory.csv'
 INTO TABLE tmp_pokemon_factory
 COLUMNS TERMINATED BY ','
 LINES TERMINATED BY '\n'

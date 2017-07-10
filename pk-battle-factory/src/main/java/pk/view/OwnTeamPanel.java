@@ -4,8 +4,6 @@ import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.swing.JScrollPane;
-
 /**
  * Created by Germain on 01/07/2017.
  */
@@ -13,19 +11,18 @@ import javax.swing.JScrollPane;
 public class OwnTeamPanel extends TeamPanel {
 
   private final PkInfoRow pkInfoRow1;
-  private final PkInfoTable pkInfoTable;
+  private final PkInfoRow pkInfoRow2;
+  private final PkInfoRow pkInfoRow3;
 
   @Autowired
-  public OwnTeamPanel(PkInfoRow pkInfoRow1, PkInfoTable pkInfoTable) {
+  public OwnTeamPanel(PkInfoRow pkInfoRow1, PkInfoRow pkInfoRow2, PkInfoRow pkInfoRow3) {
     super(Constants.resourceBundle.getString("panel.team.own"));
     this.pkInfoRow1 = pkInfoRow1;
-    this.pkInfoTable = pkInfoTable;
+    this.pkInfoRow2 = pkInfoRow2;
+    this.pkInfoRow3 = pkInfoRow3;
 
     add(pkInfoRow1);
-
-    JScrollPane scrollPane = new JScrollPane(pkInfoTable);
-    pkInfoTable.setFillsViewportHeight(true);
-    add(scrollPane);
-
+    add(pkInfoRow2);
+    add(pkInfoRow3);
   }
 }
