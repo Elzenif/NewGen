@@ -1,10 +1,12 @@
 package pk.view;
 
 import org.springframework.stereotype.Component;
+import pk.model.dto.PokemonFactoryDTO;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 import static commons.Constants.resourceBundle;
@@ -49,5 +51,20 @@ public class PkInfoTable extends JTable {
   public Class<?> getColumnClass(int column) {
     Object val = getValueAt(0, column);
     return val == null ? String.class : val.getClass();
+  }
+
+  public void update(List<PokemonFactoryDTO> pokemonFactoryDTOS) {
+    Vector<Vector<Object>> data = new Vector<>();
+    for (PokemonFactoryDTO pokemonFactoryDTO : pokemonFactoryDTOS) {
+      Vector<Object> vector = new Vector<>();
+      vector.add(pokemonFactoryDTO.getPkName());
+      vector.add(pokemonFactoryDTO.getNatureName());
+      vector.add(pokemonFactoryDTO.getItemName());
+      vector.addAll(pokemonFactoryDTO.getStats());
+      vector.addAll(pokemonFactoryDTO.getMoves());
+      data.add(vector);
+    }
+    getDataModel().setDataVector(data, getColumnNames());
+
   }
 }

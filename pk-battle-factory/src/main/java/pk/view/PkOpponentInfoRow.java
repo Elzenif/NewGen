@@ -7,8 +7,11 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pk.controller.PkNameActionListener;
+import pk.controller.PkTypeActionListener;
 import pk.model.entity.PokemonSpeciesName;
+import pk.model.entity.TypeName;
 import pk.model.repository.PokemonSpeciesNameRepository;
+import pk.model.repository.TypeNameRepository;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JComboBox;
@@ -29,7 +32,9 @@ import java.util.Locale;
 public class PkOpponentInfoRow extends JPanel {
 
   private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
+  private final TypeNameRepository typeNameRepository;
   private final PkNameActionListener pkNameActionListener;
+  private final PkTypeActionListener pkTypeActionListener;
 
   private JPanel leftPanel;
   private JComboBox<PkOpponentCriteria> criteriaComboBox;
@@ -43,9 +48,13 @@ public class PkOpponentInfoRow extends JPanel {
 
   @Autowired
   public PkOpponentInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
-                           PkNameActionListener pkNameActionListener) {
+                           TypeNameRepository typeNameRepository,
+                           PkNameActionListener pkNameActionListener,
+                           PkTypeActionListener pkTypeActionListener) {
     this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
+    this.typeNameRepository = typeNameRepository;
     this.pkNameActionListener = pkNameActionListener;
+    this.pkTypeActionListener = pkTypeActionListener;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
 
@@ -69,7 +78,9 @@ public class PkOpponentInfoRow extends JPanel {
     AutoCompleteDecorator.decorate(nameComboBox);
     leftPanel2.add(PkOpponentCriteria.NAME.getName(), nameComboBox);
 
-    typeComboBox = new JComboBox<>(new String[]{"eau", "feu"});
+    List<TypeName> typeNames = typeNameRepository.findAllByLanguage(language);
+    Object[] types = typeNames.stream().map(TypeName::getName).toArray();
+    typeComboBox = new JComboBox<>(types);
     AutoCompleteDecorator.decorate(typeComboBox);
     leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
 
@@ -83,6 +94,7 @@ public class PkOpponentInfoRow extends JPanel {
 
     criteriaComboBox.addActionListener(new PkOpponentCriteriaActionListener());
     nameComboBox.addActionListener(pkNameActionListener);
+    typeComboBox.addActionListener(pkTypeActionListener);
   }
 
   private class PkOpponentCriteriaActionListener implements ActionListener {

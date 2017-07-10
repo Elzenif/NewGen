@@ -10,20 +10,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Germain on 02/07/2017.
+ * Created by Germain on 10/07/2017.
  */
 @Component
-public class PkNameActionListener implements DelayedActionListener {
+public class PkTypeActionListener implements DelayedActionListener {
 
   private final PokemonFactoryController pokemonFactoryController;
   private final PkInfoTable pkInfoTable;
-  private final ActionListener timerListener = new TimerListener();
+  private final ActionListener timerListener = new PkTypeActionListener.TimerListener();
   private final Timer timer = new Timer(getDelay(), timerListener);
 
-  private String name;
+  private String type;
 
   @Autowired
-  public PkNameActionListener(PokemonFactoryController pokemonFactoryController, PkInfoTable pkInfoTable) {
+  public PkTypeActionListener(PokemonFactoryController pokemonFactoryController, PkInfoTable pkInfoTable) {
     this.pokemonFactoryController = pokemonFactoryController;
     this.pkInfoTable = pkInfoTable;
   }
@@ -32,14 +32,14 @@ public class PkNameActionListener implements DelayedActionListener {
   public void actionPerformed(ActionEvent e) {
     timer.restart();
     JComboBox cb = (JComboBox) e.getSource();
-    name = (String) cb.getSelectedItem();
+    type = (String) cb.getSelectedItem();
   }
 
   private class TimerListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      pkInfoTable.update(pokemonFactoryController.findByName(name));
+      pkInfoTable.update(pokemonFactoryController.findByType(type));
       Timer timer = (Timer) e.getSource();
       timer.stop();
     }
