@@ -8,7 +8,8 @@ import org.jetbrains.annotations.Contract;
  */
 public enum PkOpponentCriteria {
   NAME(Constants.resourceBundle.getString("name")),
-  TYPE(Constants.resourceBundle.getString("type"));
+  TYPE(Constants.resourceBundle.getString("type")),
+  MOVE(Constants.resourceBundle.getString("move"));
 
   private final String name;
 

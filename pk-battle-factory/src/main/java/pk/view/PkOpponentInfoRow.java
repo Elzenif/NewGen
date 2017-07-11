@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import pk.controller.PkMoveActionListener;
 import pk.controller.PkNameActionListener;
 import pk.controller.PkTypeActionListener;
+import pk.model.entity.MoveName;
 import pk.model.entity.PokemonSpeciesName;
 import pk.model.entity.TypeName;
+import pk.model.repository.MoveNameRepository;
 import pk.model.repository.PokemonSpeciesNameRepository;
 import pk.model.repository.TypeNameRepository;
 
@@ -33,8 +36,10 @@ public class PkOpponentInfoRow extends JPanel {
 
   private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
   private final TypeNameRepository typeNameRepository;
+  private final MoveNameRepository moveNameRepository;
   private final PkNameActionListener pkNameActionListener;
   private final PkTypeActionListener pkTypeActionListener;
+  private final PkMoveActionListener pkMoveActionListener;
 
   private JPanel leftPanel;
   private JComboBox<PkOpponentCriteria> criteriaComboBox;
@@ -42,19 +47,22 @@ public class PkOpponentInfoRow extends JPanel {
   private CardLayout leftCardLayout;
   private JComboBox nameComboBox;
   private JComboBox typeComboBox;
+  private JComboBox moveComboBox;
 
   private JPanel rightPanel;
 
 
   @Autowired
   public PkOpponentInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
-                           TypeNameRepository typeNameRepository,
-                           PkNameActionListener pkNameActionListener,
-                           PkTypeActionListener pkTypeActionListener) {
+                           TypeNameRepository typeNameRepository, MoveNameRepository moveNameRepository,
+                           PkNameActionListener pkNameActionListener, PkTypeActionListener pkTypeActionListener,
+                           PkMoveActionListener pkMoveActionListener) {
     this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
     this.typeNameRepository = typeNameRepository;
+    this.moveNameRepository = moveNameRepository;
     this.pkNameActionListener = pkNameActionListener;
     this.pkTypeActionListener = pkTypeActionListener;
+    this.pkMoveActionListener = pkMoveActionListener;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
 
@@ -84,6 +92,12 @@ public class PkOpponentInfoRow extends JPanel {
     AutoCompleteDecorator.decorate(typeComboBox);
     leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
 
+    List<MoveName> moveNames = moveNameRepository.findAllByLanguage(language);
+    Object[] moves = moveNames.stream().map(MoveName::getName).toArray();
+    moveComboBox = new JComboBox<>(moves);
+    AutoCompleteDecorator.decorate(moveComboBox);
+    leftPanel2.add(PkOpponentCriteria.MOVE.getName(), moveComboBox);
+
     leftCardLayout.show(leftPanel2, PkOpponentCriteria.NAME.getName());
     leftPanel.add(leftPanel2);
 
@@ -95,6 +109,7 @@ public class PkOpponentInfoRow extends JPanel {
     criteriaComboBox.addActionListener(new PkOpponentCriteriaActionListener());
     nameComboBox.addActionListener(pkNameActionListener);
     typeComboBox.addActionListener(pkTypeActionListener);
+    moveComboBox.addActionListener(pkMoveActionListener);
   }
 
   private class PkOpponentCriteriaActionListener implements ActionListener {

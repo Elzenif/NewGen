@@ -28,23 +28,15 @@ public class PkInfoTable extends JTable {
           resourceBundle.getString("spAtk"),
           resourceBundle.getString("spDef"),
           resourceBundle.getString("speed"),
-          resourceBundle.getString("move1"),
-          resourceBundle.getString("move2"),
-          resourceBundle.getString("move3"),
-          resourceBundle.getString("move4")
+          resourceBundle.getString("move") + " 1",
+          resourceBundle.getString("move") + " 2",
+          resourceBundle.getString("move") + " 3",
+          resourceBundle.getString("move") + " 4"
           ));
 
   public PkInfoTable() {
     dataModel = new DefaultTableModel(columnNames, 0);
     setModel(dataModel);
-  }
-
-  public DefaultTableModel getDataModel() {
-    return dataModel;
-  }
-
-  public Vector<String> getColumnNames() {
-    return columnNames;
   }
 
   @Override
@@ -64,7 +56,6 @@ public class PkInfoTable extends JTable {
       vector.addAll(pokemonFactoryDTO.getMoves());
       data.add(vector);
     }
-    getDataModel().setDataVector(data, getColumnNames());
-
+    dataModel.setDataVector(data, columnNames);
   }
 }

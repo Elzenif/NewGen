@@ -44,6 +44,11 @@ public class PokemonFactoryController {
     return find(pokemonFactoryRepository.findByType(type, language).stream(), language);
   }
 
+  public List<PokemonFactoryDTO> findByMove(String move) {
+    String language = Locale.getDefault().getLanguage();
+    return find(pokemonFactoryRepository.findByMove(move, language).stream(), language);
+  }
+
   private List<PokemonFactoryDTO> find(Stream<PokemonFactoryProjection> projections, String language) {
     return projections
         .map(p -> new PokemonFactoryDTO(p,
