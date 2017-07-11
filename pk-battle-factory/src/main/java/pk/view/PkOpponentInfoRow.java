@@ -80,19 +80,20 @@ public class PkOpponentInfoRow extends JPanel {
     leftPanel2.setLayout(leftCardLayout);
 
     String language = Locale.getDefault().getLanguage();
-    List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository.findAllByLanguage(language);
+    List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository
+        .findAllByLanguageAndGenerationMax(language, 4);
     Object[] names = pokemonSpeciesNames.stream().map(PokemonSpeciesName::getName).toArray();
     nameComboBox = new JComboBox<>(names);
     AutoCompleteDecorator.decorate(nameComboBox);
     leftPanel2.add(PkOpponentCriteria.NAME.getName(), nameComboBox);
 
-    List<TypeName> typeNames = typeNameRepository.findAllByLanguage(language);
+    List<TypeName> typeNames = typeNameRepository.findAllByLanguage(language, 4);
     Object[] types = typeNames.stream().map(TypeName::getName).toArray();
     typeComboBox = new JComboBox<>(types);
     AutoCompleteDecorator.decorate(typeComboBox);
     leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
 
-    List<MoveName> moveNames = moveNameRepository.findAllByLanguage(language);
+    List<MoveName> moveNames = moveNameRepository.findAllByLanguage(language, 4);
     Object[] moves = moveNames.stream().map(MoveName::getName).toArray();
     moveComboBox = new JComboBox<>(moves);
     AutoCompleteDecorator.decorate(moveComboBox);

@@ -53,7 +53,8 @@ public class PkInfoRow extends JPanel {
     JLabel name = new JLabel(Constants.resourceBundle.getString("name"));
     leftPanel.add(name);
     String language = Locale.getDefault().getLanguage();
-    List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository.findAllByLanguage(language);
+    List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository
+        .findAllByLanguageAndGenerationMax(language, 4);
     Object[] names = pokemonSpeciesNames.stream().map(PokemonSpeciesName::getName).toArray();
     nameComboBox = new JComboBox<>(names);
     AutoCompleteDecorator.decorate(nameComboBox);

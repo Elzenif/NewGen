@@ -9,6 +9,7 @@ public class Move {
 
   @Id
   private String id;
+  private Integer generationId;
   @OneToMany(mappedBy = "move")
   private List<MoveName> moveNames;
   @ManyToMany(mappedBy = "moves")
@@ -23,6 +24,14 @@ public class Move {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public Integer getGenerationId() {
+    return generationId;
+  }
+
+  public void setGenerationId(Integer generationId) {
+    this.generationId = generationId;
   }
 
   public List<MoveName> getMoveNames() {
@@ -44,8 +53,9 @@ public class Move {
   @Override
   public String toString() {
     return "Move{" +
-            "id='" + id + '\'' +
-            '}';
+        "id='" + id + '\'' +
+        ", generationId=" + generationId +
+        '}';
   }
 
   @Override

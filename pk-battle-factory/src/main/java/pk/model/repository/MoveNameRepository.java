@@ -18,6 +18,9 @@ public interface MoveNameRepository extends Repository<MoveName, MoveNameId> {
           "WHERE pf.id = ?1 AND l.iso639 = ?2")
   List<MoveName> find(Integer pokemonFactoryId, String language);
 
-  @Query("SELECT mn FROM MoveName mn INNER JOIN mn.language l WHERE l.iso639 = ?1")
-  List<MoveName> findAllByLanguage(String language);
+  @Query("SELECT mn FROM MoveName mn " +
+      "INNER JOIN mn.language l " +
+      "INNER JOIN mn.move m " +
+      "WHERE l.iso639 = ?1 AND m.generationId <= ?2")
+  List<MoveName> findAllByLanguage(String language, Integer generationMax);
 }

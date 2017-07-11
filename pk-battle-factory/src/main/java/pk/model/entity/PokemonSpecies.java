@@ -15,6 +15,7 @@ public class PokemonSpecies {
 
   @Id
   private Integer id;
+  private Integer generationId;
   @OneToMany(mappedBy = "pokemonSpecies")
   private List<Pokemon> pokemonList;
   @OneToMany(mappedBy = "pokemonSpecies")
@@ -29,6 +30,14 @@ public class PokemonSpecies {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public Integer getGenerationId() {
+    return generationId;
+  }
+
+  public void setGenerationId(Integer generationId) {
+    this.generationId = generationId;
   }
 
   public List<Pokemon> getPokemonList() {
@@ -51,6 +60,7 @@ public class PokemonSpecies {
   public String toString() {
     return "PokemonSpecies{" +
         "id=" + id +
+        ", generationId=" + generationId +
         '}';
   }
 

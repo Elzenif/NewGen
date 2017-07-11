@@ -13,6 +13,9 @@ import java.util.List;
 @org.springframework.stereotype.Repository
 public interface PokemonSpeciesNameRepository extends Repository<PokemonSpeciesName, PokemonSpeciesNameId> {
 
-  @Query("SELECT p FROM PokemonSpeciesName p INNER JOIN p.language l WHERE l.iso639 = ?1")
-  List<PokemonSpeciesName> findAllByLanguage(String languageIso639);
+  @Query("SELECT pn FROM PokemonSpeciesName pn " +
+      "INNER JOIN pn.language l " +
+      "INNER JOIN pn.pokemonSpecies p " +
+      "WHERE l.iso639 = ?1 AND p.generationId <= ?2")
+  List<PokemonSpeciesName> findAllByLanguageAndGenerationMax(String language, Integer generationMax);
 }

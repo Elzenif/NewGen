@@ -15,6 +15,8 @@ public class Type {
 
   @Id
   private Integer id;
+  private Integer generationId;
+  private Integer damageClassId;
   @OneToMany(mappedBy = "type")
   private List<TypeName> typeNames;
 
@@ -29,6 +31,22 @@ public class Type {
     this.id = id;
   }
 
+  public Integer getGenerationId() {
+    return generationId;
+  }
+
+  public void setGenerationId(Integer generationId) {
+    this.generationId = generationId;
+  }
+
+  public Integer getDamageClassId() {
+    return damageClassId;
+  }
+
+  public void setDamageClassId(Integer damageClassId) {
+    this.damageClassId = damageClassId;
+  }
+
   public List<TypeName> getTypeNames() {
     return typeNames;
   }
@@ -41,6 +59,8 @@ public class Type {
   public String toString() {
     return "Type{" +
         "id=" + id +
+        ", generationId=" + generationId +
+        ", damageClassId=" + damageClassId +
         '}';
   }
 

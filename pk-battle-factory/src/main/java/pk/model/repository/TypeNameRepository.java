@@ -13,7 +13,10 @@ import java.util.List;
 @org.springframework.stereotype.Repository
 public interface TypeNameRepository extends Repository<TypeName, TypeNameId> {
 
-  @Query("SELECT t FROM TypeName t INNER JOIN t.language l WHERE l.iso639 = ?1")
-  List<TypeName> findAllByLanguage(String languageIso639);
+  @Query("SELECT tn FROM TypeName tn " +
+      "INNER JOIN tn.language l " +
+      "INNER JOIN tn.type t " +
+      "WHERE l.iso639 = ?1 AND t.generationId <= ?2 AND t.damageClassId IS NOT NULL")
+  List<TypeName> findAllByLanguage(String language, Integer generationMax);
 
 }
