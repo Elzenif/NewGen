@@ -10,19 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class OwnTeamPanel extends TeamPanel {
 
-  private final PkInfoRow pkInfoRow1;
-  private final PkInfoRow pkInfoRow2;
-  private final PkInfoRow pkInfoRow3;
-
   @Autowired
-  public OwnTeamPanel(PkInfoRow pkInfoRow1, PkInfoRow pkInfoRow2, PkInfoRow pkInfoRow3) {
+  public OwnTeamPanel(PkOwnInfoRow pkOwnInfoRow1, PkOwnInfoRow pkOwnInfoRow2, PkOwnInfoRow pkOwnInfoRow3) {
     super(Constants.resourceBundle.getString("panel.team.own"));
-    this.pkInfoRow1 = pkInfoRow1;
-    this.pkInfoRow2 = pkInfoRow2;
-    this.pkInfoRow3 = pkInfoRow3;
-
-    add(pkInfoRow1);
-    add(pkInfoRow2);
-    add(pkInfoRow3);
+    add(pkOwnInfoRow1);
+    add(pkOwnInfoRow2);
+    add(pkOwnInfoRow3);
   }
 }

@@ -12,7 +12,8 @@ import javax.swing.JMenuBar;
 public class MenuBar extends JMenuBar {
 
   @Autowired
-  public MenuBar(HelpMenu helpMenu) {
+  public MenuBar(OptionMenu optionMenu, HelpMenu helpMenu) {
+    add(optionMenu);
     add(helpMenu);
   }
 }

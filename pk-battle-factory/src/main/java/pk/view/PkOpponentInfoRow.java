@@ -9,12 +9,10 @@ import org.springframework.stereotype.Component;
 import pk.controller.PkMoveActionListener;
 import pk.controller.PkNameActionListener;
 import pk.controller.PkTypeActionListener;
-import pk.model.entity.MoveName;
-import pk.model.entity.PokemonSpeciesName;
-import pk.model.entity.TypeName;
 import pk.model.repository.MoveNameRepository;
 import pk.model.repository.PokemonSpeciesNameRepository;
 import pk.model.repository.TypeNameRepository;
+import pk.view.menu.OptionMenu;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JComboBox;
@@ -24,30 +22,26 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by Germain on 10/07/2017.
  */
 @Component
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
-public class PkOpponentInfoRow extends JPanel {
+public class PkOpponentInfoRow extends PkInfoRow {
 
-  private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
-  private final TypeNameRepository typeNameRepository;
-  private final MoveNameRepository moveNameRepository;
   private final PkNameActionListener pkNameActionListener;
   private final PkTypeActionListener pkTypeActionListener;
   private final PkMoveActionListener pkMoveActionListener;
+  private final OptionMenu optionMenu;
 
   private JPanel leftPanel;
   private JComboBox<PkOpponentCriteria> criteriaComboBox;
   private JPanel leftPanel2;
   private CardLayout leftCardLayout;
-  private JComboBox nameComboBox;
-  private JComboBox typeComboBox;
-  private JComboBox moveComboBox;
+  private JComboBox<Object> nameComboBox;
+  private JComboBox<Object> typeComboBox;
+  private JComboBox<Object> moveComboBox;
 
   private JPanel rightPanel;
 
@@ -56,13 +50,12 @@ public class PkOpponentInfoRow extends JPanel {
   public PkOpponentInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
                            TypeNameRepository typeNameRepository, MoveNameRepository moveNameRepository,
                            PkNameActionListener pkNameActionListener, PkTypeActionListener pkTypeActionListener,
-                           PkMoveActionListener pkMoveActionListener) {
-    this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
-    this.typeNameRepository = typeNameRepository;
-    this.moveNameRepository = moveNameRepository;
+                           PkMoveActionListener pkMoveActionListener, OptionMenu optionMenu) {
+    super(pokemonSpeciesNameRepository, typeNameRepository, moveNameRepository);
     this.pkNameActionListener = pkNameActionListener;
     this.pkTypeActionListener = pkTypeActionListener;
     this.pkMoveActionListener = pkMoveActionListener;
+    this.optionMenu = optionMenu;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
 
@@ -79,23 +72,15 @@ public class PkOpponentInfoRow extends JPanel {
     leftCardLayout = new CardLayout();
     leftPanel2.setLayout(leftCardLayout);
 
-    String language = Locale.getDefault().getLanguage();
-    List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository
-        .findAllByLanguageAndGenerationMax(language, 4);
-    Object[] names = pokemonSpeciesNames.stream().map(PokemonSpeciesName::getName).toArray();
-    nameComboBox = new JComboBox<>(names);
+    nameComboBox = new JComboBox<>(getAllPokemonSpeciesNames(1, optionMenu.getSelectedGeneration()));
     AutoCompleteDecorator.decorate(nameComboBox);
     leftPanel2.add(PkOpponentCriteria.NAME.getName(), nameComboBox);
 
-    List<TypeName> typeNames = typeNameRepository.findAllByLanguage(language, 4);
-    Object[] types = typeNames.stream().map(TypeName::getName).toArray();
-    typeComboBox = new JComboBox<>(types);
+    typeComboBox = new JComboBox<>(getAllTypeNames(1, optionMenu.getSelectedGeneration()));
     AutoCompleteDecorator.decorate(typeComboBox);
     leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
 
-    List<MoveName> moveNames = moveNameRepository.findAllByLanguage(language, 4);
-    Object[] moves = moveNames.stream().map(MoveName::getName).toArray();
-    moveComboBox = new JComboBox<>(moves);
+    moveComboBox = new JComboBox<>(getAllMoveNames(1, optionMenu.getSelectedGeneration()));
     AutoCompleteDecorator.decorate(moveComboBox);
     leftPanel2.add(PkOpponentCriteria.MOVE.getName(), moveComboBox);
 
@@ -111,6 +96,33 @@ public class PkOpponentInfoRow extends JPanel {
     nameComboBox.addActionListener(pkNameActionListener);
     typeComboBox.addActionListener(pkTypeActionListener);
     moveComboBox.addActionListener(pkMoveActionListener);
+
+    optionMenu.addPkGenerationAware(this);
+  }
+
+  @Override
+  public void updateGeneration(int oldGeneration, int newGeneration) {
+    if (oldGeneration > newGeneration) {
+      for (Object name : getAllPokemonSpeciesNames(newGeneration + 1, oldGeneration)) {
+        nameComboBox.removeItem(name);
+      }
+      for (Object type : getAllTypeNames(newGeneration + 1, oldGeneration)) {
+        typeComboBox.removeItem(type);
+      }
+      for (Object move : getAllMoveNames(newGeneration + 1, oldGeneration)) {
+        moveComboBox.removeItem(move);
+      }
+    } else if (oldGeneration < newGeneration) {
+      for (Object name : getAllPokemonSpeciesNames(oldGeneration + 1, newGeneration)) {
+        nameComboBox.addItem(name);
+      }
+      for (Object type : getAllTypeNames(oldGeneration + 1, newGeneration)) {
+        typeComboBox.addItem(type);
+      }
+      for (Object move : getAllMoveNames(oldGeneration + 1, newGeneration)) {
+        moveComboBox.addItem(move);
+      }
+    }
   }
 
   private class PkOpponentCriteriaActionListener implements ActionListener {

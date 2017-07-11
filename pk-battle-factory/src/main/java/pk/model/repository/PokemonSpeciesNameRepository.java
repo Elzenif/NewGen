@@ -16,6 +16,7 @@ public interface PokemonSpeciesNameRepository extends Repository<PokemonSpeciesN
   @Query("SELECT pn FROM PokemonSpeciesName pn " +
       "INNER JOIN pn.language l " +
       "INNER JOIN pn.pokemonSpecies p " +
-      "WHERE l.iso639 = ?1 AND p.generationId <= ?2")
-  List<PokemonSpeciesName> findAllByLanguageAndGenerationMax(String language, Integer generationMax);
+      "WHERE l.iso639 = ?1 AND p.generationId >= ?2 AND p.generationId <= ?3")
+  List<PokemonSpeciesName> findAllByLanguageAndGeneration(String language, Integer generationMin,
+                                                          Integer generationMax);
 }

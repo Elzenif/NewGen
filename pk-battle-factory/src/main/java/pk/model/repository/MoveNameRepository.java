@@ -21,6 +21,6 @@ public interface MoveNameRepository extends Repository<MoveName, MoveNameId> {
   @Query("SELECT mn FROM MoveName mn " +
       "INNER JOIN mn.language l " +
       "INNER JOIN mn.move m " +
-      "WHERE l.iso639 = ?1 AND m.generationId <= ?2")
-  List<MoveName> findAllByLanguage(String language, Integer generationMax);
+      "WHERE l.iso639 = ?1 AND m.generationId >= ?2 AND m.generationId <= ?3")
+  List<MoveName> findAllByLanguage(String language, Integer generationMin, Integer generationMax);
 }
