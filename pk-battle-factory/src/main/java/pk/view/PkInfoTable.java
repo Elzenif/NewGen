@@ -58,6 +58,9 @@ public class PkInfoTable extends JTable {
       vector.add(pokemonFactoryDTO.getItemName());
       vector.addAll(pokemonFactoryDTO.getStats());
       vector.addAll(pokemonFactoryDTO.getMoves());
+      for (int i = 0; i < 4 - pokemonFactoryDTO.getMoves().size(); i++) {
+        vector.add(null);
+      }
       vector.add(pokemonFactoryDTO.getEncounter100());
       data.add(vector);
     }
