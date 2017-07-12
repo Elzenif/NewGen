@@ -7,30 +7,27 @@ import pk.model.repository.PokemonSpeciesNameRepository;
 import pk.view.menu.OptionMenu;
 
 import javax.annotation.PostConstruct;
-import javax.swing.DefaultComboBoxModel;
 import java.util.Locale;
 
 /**
  * Created by Germain on 12/07/2017.
  */
 @Component
-public class PokemonSpeciesNamesComboBoxModel extends DefaultComboBoxModel<Object> {
+public class PkNameComboBoxModel extends PkComboBoxModel {
 
   private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
-  private final OptionMenu optionMenu;
-  private final GetAllFunction getAllFunction;
 
   @Autowired
-  public PokemonSpeciesNamesComboBoxModel(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
-                                          OptionMenu optionMenu) {
+  public PkNameComboBoxModel(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
+                             OptionMenu optionMenu) {
+    super(optionMenu);
     this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
-    this.optionMenu = optionMenu;
     getAllFunction = this::getAllPokemonSpeciesNames;
   }
 
   @PostConstruct
   public void init() {
-    addAll(1, optionMenu.getSelectedGeneration());
+    super.init();
   }
 
   private Object[] getAllPokemonSpeciesNames(Integer generationMin, Integer generationMax) {
@@ -39,15 +36,5 @@ public class PokemonSpeciesNamesComboBoxModel extends DefaultComboBoxModel<Objec
         .stream()
         .map(PokemonSpeciesName::getName)
         .toArray();
-  }
-
-  public GetAllFunction getGetAllFunction() {
-    return getAllFunction;
-  }
-
-  public void addAll(Integer generationMin, Integer generationMax) {
-    for (Object item : getAllFunction.apply(generationMin, generationMax)) {
-      addElement(item);
-    }
   }
 }

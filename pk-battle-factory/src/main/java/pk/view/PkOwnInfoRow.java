@@ -7,10 +7,6 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pk.controller.PkNameActionListener;
-import pk.model.repository.MoveNameRepository;
-import pk.model.repository.PokemonSpeciesNameRepository;
-import pk.model.repository.TypeNameRepository;
-import pk.view.menu.OptionMenu;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JLabel;
@@ -25,10 +21,9 @@ import java.awt.GridLayout;
  */
 @Component
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
-public class PkOwnInfoRow extends PkInfoRow implements PkGenerationAware {
+public class PkOwnInfoRow extends PkInfoRow {
 
   private final PkNameActionListener pkNameActionListener;
-  private final OptionMenu optionMenu;
 
   private PkNameComboBox nameComboBox;
 
@@ -39,12 +34,8 @@ public class PkOwnInfoRow extends PkInfoRow implements PkGenerationAware {
   private JTextPane textPane;
 
   @Autowired
-  public PkOwnInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository, TypeNameRepository typeNameRepository,
-                      MoveNameRepository moveNameRepository, PkNameActionListener pkNameActionListener,
-                      OptionMenu optionMenu) {
-    super(pokemonSpeciesNameRepository, typeNameRepository, moveNameRepository);
+  public PkOwnInfoRow(PkNameActionListener pkNameActionListener) {
     this.pkNameActionListener = pkNameActionListener;
-    this.optionMenu = optionMenu;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
 
@@ -76,11 +67,7 @@ public class PkOwnInfoRow extends PkInfoRow implements PkGenerationAware {
     add(leftPanel);
     add(rightPanel);
 
-    comboBoxMap.put(nameComboBox, this::getAllPokemonSpeciesNames);
-
     nameComboBox.addActionListener(pkNameActionListener);
-
-    optionMenu.addPkGenerationAware(this);
   }
 
   public JLabel getLabel() {

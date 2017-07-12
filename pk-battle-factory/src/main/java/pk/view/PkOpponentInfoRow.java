@@ -9,10 +9,6 @@ import org.springframework.stereotype.Component;
 import pk.controller.PkMoveActionListener;
 import pk.controller.PkNameActionListener;
 import pk.controller.PkTypeActionListener;
-import pk.model.repository.MoveNameRepository;
-import pk.model.repository.PokemonSpeciesNameRepository;
-import pk.model.repository.TypeNameRepository;
-import pk.view.menu.OptionMenu;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JComboBox;
@@ -33,32 +29,42 @@ public class PkOpponentInfoRow extends PkInfoRow {
   private final PkNameActionListener pkNameActionListener;
   private final PkTypeActionListener pkTypeActionListener;
   private final PkMoveActionListener pkMoveActionListener;
-  private final OptionMenu optionMenu;
+
+  private PkNameComboBox nameComboBox;
+  private PkTypeComboBox typeComboBox;
+  private PkMoveComboBox moveComboBox;
 
   private JPanel leftPanel;
   private JComboBox<PkOpponentCriteria> criteriaComboBox;
   private JPanel leftPanel2;
   private CardLayout leftCardLayout;
-  private JComboBox<Object> nameComboBox;
-  private JComboBox<Object> typeComboBox;
-  private JComboBox<Object> moveComboBox;
 
   private JPanel rightPanel;
 
 
   @Autowired
-  public PkOpponentInfoRow(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
-                           TypeNameRepository typeNameRepository, MoveNameRepository moveNameRepository,
-                           PkNameActionListener pkNameActionListener, PkTypeActionListener pkTypeActionListener,
-                           PkMoveActionListener pkMoveActionListener, OptionMenu optionMenu) {
-    super(pokemonSpeciesNameRepository, typeNameRepository, moveNameRepository);
+  public PkOpponentInfoRow(PkNameActionListener pkNameActionListener, PkTypeActionListener pkTypeActionListener,
+                           PkMoveActionListener pkMoveActionListener) {
     this.pkNameActionListener = pkNameActionListener;
     this.pkTypeActionListener = pkTypeActionListener;
     this.pkMoveActionListener = pkMoveActionListener;
-    this.optionMenu = optionMenu;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
 
+  @Autowired
+  public void setNameComboBox(PkNameComboBox nameComboBox) {
+    this.nameComboBox = nameComboBox;
+  }
+
+  @Autowired
+  public void setTypeComboBox(PkTypeComboBox typeComboBox) {
+    this.typeComboBox = typeComboBox;
+  }
+
+  @Autowired
+  public void setMoveComboBox(PkMoveComboBox moveComboBox) {
+    this.moveComboBox = moveComboBox;
+  }
 
   @PostConstruct
   public void init() {
@@ -72,15 +78,15 @@ public class PkOpponentInfoRow extends PkInfoRow {
     leftCardLayout = new CardLayout();
     leftPanel2.setLayout(leftCardLayout);
 
-    nameComboBox = new JComboBox<>(getAllPokemonSpeciesNames(1, optionMenu.getSelectedGeneration()));
+    nameComboBox.setEditable(true);
     AutoCompleteDecorator.decorate(nameComboBox);
     leftPanel2.add(PkOpponentCriteria.NAME.getName(), nameComboBox);
 
-    typeComboBox = new JComboBox<>(getAllTypeNames(1, optionMenu.getSelectedGeneration()));
+    typeComboBox.setEditable(true);
     AutoCompleteDecorator.decorate(typeComboBox);
     leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
 
-    moveComboBox = new JComboBox<>(getAllMoveNames(1, optionMenu.getSelectedGeneration()));
+    moveComboBox.setEditable(true);
     AutoCompleteDecorator.decorate(moveComboBox);
     leftPanel2.add(PkOpponentCriteria.MOVE.getName(), moveComboBox);
 
@@ -92,16 +98,10 @@ public class PkOpponentInfoRow extends PkInfoRow {
     add(leftPanel);
     add(rightPanel);
 
-    comboBoxMap.put(nameComboBox, this::getAllPokemonSpeciesNames);
-    comboBoxMap.put(typeComboBox, this::getAllTypeNames);
-    comboBoxMap.put(moveComboBox, this::getAllMoveNames);
-
     criteriaComboBox.addActionListener(new PkOpponentCriteriaActionListener());
     nameComboBox.addActionListener(pkNameActionListener);
     typeComboBox.addActionListener(pkTypeActionListener);
     moveComboBox.addActionListener(pkMoveActionListener);
-
-    optionMenu.addPkGenerationAware(this);
   }
 
   private class PkOpponentCriteriaActionListener implements ActionListener {
