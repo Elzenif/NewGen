@@ -6,6 +6,7 @@ import pk.model.entity.TypeName;
 import pk.model.repository.MoveNameRepository;
 import pk.model.repository.PokemonSpeciesNameRepository;
 import pk.model.repository.TypeNameRepository;
+import pk.view.model.GetAllFunction;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -77,11 +78,5 @@ public abstract class PkInfoRow extends JPanel implements PkGenerationAware {
       comboBoxMap.forEach((comboBox, f) -> addAllToComboBox(comboBox, f, oldGeneration, newGeneration));
     }
 
-  }
-
-  @FunctionalInterface
-  protected interface GetAllFunction {
-
-    Object[] apply(Integer generationMin, Integer generationMax);
   }
 }

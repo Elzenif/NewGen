@@ -13,7 +13,6 @@ import pk.model.repository.TypeNameRepository;
 import pk.view.menu.OptionMenu;
 
 import javax.annotation.PostConstruct;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -31,8 +30,9 @@ public class PkOwnInfoRow extends PkInfoRow implements PkGenerationAware {
   private final PkNameActionListener pkNameActionListener;
   private final OptionMenu optionMenu;
 
+  private PkNameComboBox nameComboBox;
+
   private JPanel leftPanel;
-  private JComboBox<Object> nameComboBox;
   private JPanel rightPanel;
   private CardLayout cardLayout;
   private JLabel label;
@@ -47,14 +47,19 @@ public class PkOwnInfoRow extends PkInfoRow implements PkGenerationAware {
     this.optionMenu = optionMenu;
     setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
-  
+
+  @Autowired
+  public void setNameComboBox(PkNameComboBox nameComboBox) {
+    this.nameComboBox = nameComboBox;
+  }
+
   @PostConstruct
   public void init() {
     leftPanel = new JPanel();
     leftPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
     JLabel name = new JLabel(Constants.resourceBundle.getString("name"));
     leftPanel.add(name);
-    nameComboBox = new JComboBox<>(getAllPokemonSpeciesNames(1, optionMenu.getSelectedGeneration()));
+
     nameComboBox.setEditable(true);
     AutoCompleteDecorator.decorate(nameComboBox);
     leftPanel.add(nameComboBox);

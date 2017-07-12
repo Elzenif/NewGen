@@ -5,6 +5,7 @@ import pk.model.dto.PokemonFactoryDTO;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -38,6 +39,8 @@ public class PkInfoTable extends JTable {
   public PkInfoTable() {
     dataModel = new DefaultTableModel(columnNames, 0);
     setModel(dataModel);
+
+    TableColumn nameColumn = getColumnModel().getColumn(0);
   }
 
   @Override
