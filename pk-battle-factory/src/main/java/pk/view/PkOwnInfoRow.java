@@ -71,6 +71,8 @@ public class PkOwnInfoRow extends PkInfoRow implements PkGenerationAware {
     add(leftPanel);
     add(rightPanel);
 
+    comboBoxMap.put(nameComboBox, this::getAllPokemonSpeciesNames);
+
     nameComboBox.addActionListener(pkNameActionListener);
 
     optionMenu.addPkGenerationAware(this);
@@ -82,18 +84,5 @@ public class PkOwnInfoRow extends PkInfoRow implements PkGenerationAware {
 
   public JTextPane getTextPane() {
     return textPane;
-  }
-
-  @Override
-  public void updateGeneration(int oldGeneration, int newGeneration) {
-    if (oldGeneration > newGeneration) {
-      for (Object name : getAllPokemonSpeciesNames(newGeneration + 1, oldGeneration)) {
-        nameComboBox.removeItem(name);
-      }
-    } else if (oldGeneration < newGeneration) {
-      for (Object name : getAllPokemonSpeciesNames(oldGeneration + 1, newGeneration)) {
-        nameComboBox.addItem(name);
-      }
-    }
   }
 }

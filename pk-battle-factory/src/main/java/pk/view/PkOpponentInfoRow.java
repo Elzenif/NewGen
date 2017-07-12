@@ -92,37 +92,16 @@ public class PkOpponentInfoRow extends PkInfoRow {
     add(leftPanel);
     add(rightPanel);
 
+    comboBoxMap.put(nameComboBox, this::getAllPokemonSpeciesNames);
+    comboBoxMap.put(typeComboBox, this::getAllTypeNames);
+    comboBoxMap.put(moveComboBox, this::getAllMoveNames);
+
     criteriaComboBox.addActionListener(new PkOpponentCriteriaActionListener());
     nameComboBox.addActionListener(pkNameActionListener);
     typeComboBox.addActionListener(pkTypeActionListener);
     moveComboBox.addActionListener(pkMoveActionListener);
 
     optionMenu.addPkGenerationAware(this);
-  }
-
-  @Override
-  public void updateGeneration(int oldGeneration, int newGeneration) {
-    if (oldGeneration > newGeneration) {
-      for (Object name : getAllPokemonSpeciesNames(newGeneration + 1, oldGeneration)) {
-        nameComboBox.removeItem(name);
-      }
-      for (Object type : getAllTypeNames(newGeneration + 1, oldGeneration)) {
-        typeComboBox.removeItem(type);
-      }
-      for (Object move : getAllMoveNames(newGeneration + 1, oldGeneration)) {
-        moveComboBox.removeItem(move);
-      }
-    } else if (oldGeneration < newGeneration) {
-      for (Object name : getAllPokemonSpeciesNames(oldGeneration + 1, newGeneration)) {
-        nameComboBox.addItem(name);
-      }
-      for (Object type : getAllTypeNames(oldGeneration + 1, newGeneration)) {
-        typeComboBox.addItem(type);
-      }
-      for (Object move : getAllMoveNames(oldGeneration + 1, newGeneration)) {
-        moveComboBox.addItem(move);
-      }
-    }
   }
 
   private class PkOpponentCriteriaActionListener implements ActionListener {
