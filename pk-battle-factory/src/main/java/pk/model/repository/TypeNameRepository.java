@@ -16,7 +16,8 @@ public interface TypeNameRepository extends Repository<TypeName, TypeNameId> {
   @Query("SELECT tn FROM TypeName tn " +
       "INNER JOIN tn.language l " +
       "INNER JOIN tn.type t " +
-      "WHERE l.iso639 = ?1 AND t.generationId >= ?2 AND t.generationId <= ?3 AND t.damageClassId IS NOT NULL")
+      "WHERE l.iso639 = ?1 AND t.generationId >= ?2 AND t.generationId <= ?3 AND t.damageClassId IS NOT NULL " +
+      "ORDER BY tn.name")
   List<TypeName> findAllByLanguage(String language, Integer generationMin, Integer generationMax);
 
 }
