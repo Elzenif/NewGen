@@ -16,6 +16,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   private String itemName;
   private List<Integer> stats;
   private List<String> moves;
+  private String encounter100;
 
   public PokemonFactoryDTO(PokemonFactoryProjection p, List<Integer> stats, List<String> moves) {
     this.id = p.getId();
@@ -24,6 +25,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.itemName = p.getItemName();
     this.stats = stats;
     this.moves = moves;
+    this.encounter100 = p.getEncounter100();
   }
 
   @Override
@@ -79,6 +81,15 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   }
 
   @Override
+  public String getEncounter100() {
+    return encounter100;
+  }
+
+  public void setEncounter100(String encounter100) {
+    this.encounter100 = encounter100;
+  }
+
+  @Override
   public String toString() {
     return "PokemonFactoryProjectionImpl{" +
         "id=" + id +
@@ -87,6 +98,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         ", itemName='" + itemName + '\'' +
         ", stats='" + stats.stream().map(Object::toString).collect(Collectors.joining(", ")) + '\'' +
         ", moves='" + moves.stream().map(Object::toString).collect(Collectors.joining(", ")) + '\'' +
+        ", encounter100='" + encounter100 + '\'' +
         '}';
   }
 

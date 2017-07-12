@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Germain on 02/07/2017.
  */
 @Entity
-@Table(name = "pokemon_factory")
+@Table(name = "pokemon_factory_hgss")
 public class PokemonFactory {
 
   @Id
@@ -24,12 +24,13 @@ public class PokemonFactory {
   @OneToMany(mappedBy = "pokemonFactory")
   private List<PokemonFactoryStat> pokemonFactoryStats;
   @ManyToMany
-	@JoinTable(name = "pokemon_factory_moves",
+	@JoinTable(name = "pokemon_factory_hgss_moves",
           joinColumns = @JoinColumn(name = "pokemon_factory_id", referencedColumnName = "id", nullable = false,
-                  foreignKey = @ForeignKey(name = "pokemon_factory_moves_pokemon_factory_id")),
+                  foreignKey = @ForeignKey(name = "pokemon_factory_hgss_moves_pokemon_factory_id")),
           inverseJoinColumns = @JoinColumn(name = "move_id", referencedColumnName = "id", nullable = false),
-                  foreignKey = @ForeignKey(name = "pokemon_factory_moves_move_id"))
+                  foreignKey = @ForeignKey(name = "pokemon_factory_hgss_moves_move_id"))
   private List<Move> moves;
+  private String encounter100;
 
   public PokemonFactory() {
   }
@@ -82,6 +83,14 @@ public class PokemonFactory {
     this.moves = moves;
   }
 
+  public String getEncounter100() {
+    return encounter100;
+  }
+
+  public void setEncounter100(String encounter100) {
+    this.encounter100 = encounter100;
+  }
+
   @Override
   public String toString() {
     return "PokemonFactory{" +
@@ -89,6 +98,7 @@ public class PokemonFactory {
         ", pokemonSpecies=" + pokemonSpecies.getId() +
         ", nature=" + nature.getId() +
         ", item=" + item.getId() +
+        ", encounter100='" + encounter100 + '\'' +
         '}';
   }
 

@@ -16,7 +16,8 @@ public interface PokemonFactoryRepository extends Repository<PokemonFactory, Int
   @Query("SELECT pokemonFactory.id AS id, " +
       "pokemonSpeciesNames.name AS pkName, " +
       "natureNames.name AS natureName, " +
-      "itemNames.name AS itemName " +
+      "itemNames.name AS itemName, " +
+      "pokemonFactory.encounter100 AS encounter100 " +
       "FROM PokemonFactory pokemonFactory " +
       "INNER JOIN pokemonFactory.pokemonSpecies pokemonSpecies " +
       "INNER JOIN pokemonSpecies.pokemonSpeciesNames pokemonSpeciesNames " +
@@ -35,7 +36,8 @@ public interface PokemonFactoryRepository extends Repository<PokemonFactory, Int
   @Query("SELECT DISTINCT pokemonFactory.id AS id, " +
       "pokemonSpeciesNames.name AS pkName, " +
       "natureNames.name AS natureName, " +
-      "itemNames.name AS itemName " +
+      "itemNames.name AS itemName, " +
+      "pokemonFactory.encounter100 AS encounter100 " +
       "FROM PokemonFactory pokemonFactory " +
       "INNER JOIN pokemonFactory.pokemonSpecies pokemonSpecies " +
       "INNER JOIN pokemonSpecies.pokemonSpeciesNames pokemonSpeciesNames " +
@@ -61,7 +63,8 @@ public interface PokemonFactoryRepository extends Repository<PokemonFactory, Int
   @Query("SELECT DISTINCT pokemonFactory.id AS id, " +
       "pokemonSpeciesNames.name AS pkName, " +
       "natureNames.name AS natureName, " +
-      "itemNames.name AS itemName " +
+      "itemNames.name AS itemName, " +
+      "pokemonFactory.encounter100 AS encounter100 " +
       "FROM PokemonFactory pokemonFactory " +
       "INNER JOIN pokemonFactory.pokemonSpecies pokemonSpecies " +
       "INNER JOIN pokemonSpecies.pokemonSpeciesNames pokemonSpeciesNames " +

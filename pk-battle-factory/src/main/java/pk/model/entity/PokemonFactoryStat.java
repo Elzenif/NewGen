@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * Created by Germain on 03/07/2017.
  */
 @Entity
-@Table(name = "pokemon_factory_stats")
+@Table(name = "pokemon_factory_hgss_stats")
 public class PokemonFactoryStat {
 
   @EmbeddedId

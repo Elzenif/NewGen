@@ -31,7 +31,8 @@ public class PkInfoTable extends JTable {
           resourceBundle.getString("move") + " 1",
           resourceBundle.getString("move") + " 2",
           resourceBundle.getString("move") + " 3",
-          resourceBundle.getString("move") + " 4"
+          resourceBundle.getString("move") + " 4",
+          resourceBundle.getString("encounter") + " 100"
           ));
 
   public PkInfoTable() {
@@ -54,6 +55,7 @@ public class PkInfoTable extends JTable {
       vector.add(pokemonFactoryDTO.getItemName());
       vector.addAll(pokemonFactoryDTO.getStats());
       vector.addAll(pokemonFactoryDTO.getMoves());
+      vector.add(pokemonFactoryDTO.getEncounter100());
       data.add(vector);
     }
     dataModel.setDataVector(data, columnNames);
