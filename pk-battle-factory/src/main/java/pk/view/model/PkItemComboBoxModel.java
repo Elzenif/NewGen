@@ -29,9 +29,9 @@ public class PkItemComboBoxModel extends PkComboBoxModel {
     super.init();
   }
 
-  private Object[] getAllNatureNames(Integer generationMin, Integer generationMax) {
+  private Object[] getAllNatureNames(Integer generationMax) {
     return itemNameRepository
-        .findAllByLanguage(Locale.getDefault().getLanguage())
+        .findAllByLanguageForFactory(Locale.getDefault().getLanguage(), generationMax)
         .stream()
         .map(ItemName::getName)
         .toArray();

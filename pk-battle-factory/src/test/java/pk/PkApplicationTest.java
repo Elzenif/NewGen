@@ -49,7 +49,7 @@ public class PkApplicationTest {
   public void testFindAllByLanguage() {
     String language = Locale.getDefault().getLanguage();
     List<PokemonSpeciesName> pokemonSpeciesNames = pokemonSpeciesNameRepository
-        .findAllByLanguageAndGeneration(language, 1, 6);
+        .findAllByLanguageAndGeneration(language, 6);
     assertThat(pokemonSpeciesNames).hasSize(721);
   }
 
@@ -65,14 +65,14 @@ public class PkApplicationTest {
   @Test
   public void testFindAllMovesByGeneration() {
     String language = Locale.getDefault().getLanguage();
-    List<MoveName> moveNames = moveNameRepository.findAllByLanguage(language, 1,4);
+    List<MoveName> moveNames = moveNameRepository.findAllByLanguage(language, 4);
     assertThat(moveNames).hasSize(485);
   }
 
   @Test
   public void testFindAllTypes() {
     String language = Locale.getDefault().getLanguage();
-    List<TypeName> typeNames = typeNameRepository.findAllByLanguage(language, 1,4);
+    List<TypeName> typeNames = typeNameRepository.findAllByLanguage(language, 4);
     assertThat(typeNames).hasSize(17);
     assertThat(typeNames).extracting("name").doesNotContain("Fairy", "Fée");
   }

@@ -27,9 +27,9 @@ public class PkMoveComboBoxModel extends PkComboBoxModel {
     super.init();
   }
 
-  private Object[] getAllMoveNames(Integer generationMin, Integer generationMax) {
+  private Object[] getAllMoveNames(Integer generationMax) {
     return moveNameRepository
-        .findAllByLanguage(Locale.getDefault().getLanguage(), generationMin, generationMax)
+        .findAllByLanguage(Locale.getDefault().getLanguage(), generationMax)
         .stream()
         .map(MoveName::getName)
         .toArray();

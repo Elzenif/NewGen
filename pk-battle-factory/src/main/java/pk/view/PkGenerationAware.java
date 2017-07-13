@@ -5,5 +5,5 @@ package pk.view;
  */
 public interface PkGenerationAware {
 
-  void updateGeneration(int oldGeneration, int newGeneration);
+  void updateGeneration();
 }

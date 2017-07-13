@@ -27,12 +27,11 @@ public class PkTypeComboBoxModel extends PkComboBoxModel {
     super.init();
   }
 
-  private Object[] getAllTypeNames(Integer generationMin, Integer generationMax) {
+  private Object[] getAllTypeNames(Integer generationMax) {
     return typeNameRepository
-        .findAllByLanguage(Locale.getDefault().getLanguage(), generationMin, generationMax)
+        .findAllByLanguage(Locale.getDefault().getLanguage(), generationMax)
         .stream()
         .map(TypeName::getName)
         .toArray();
   }
-
 }

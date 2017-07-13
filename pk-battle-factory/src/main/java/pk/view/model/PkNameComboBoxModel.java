@@ -30,9 +30,9 @@ public class PkNameComboBoxModel extends PkComboBoxModel {
     super.init();
   }
 
-  private Object[] getAllPokemonSpeciesNames(Integer generationMin, Integer generationMax) {
+  private Object[] getAllPokemonSpeciesNames(Integer generationMax) {
     return pokemonSpeciesNameRepository
-        .findAllByLanguageAndGeneration(Locale.getDefault().getLanguage(), generationMin, generationMax)
+        .findAllByLanguageAndGeneration(Locale.getDefault().getLanguage(), generationMax)
         .stream()
         .map(PokemonSpeciesName::getName)
         .toArray();

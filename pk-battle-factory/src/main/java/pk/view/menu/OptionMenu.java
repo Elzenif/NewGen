@@ -58,10 +58,10 @@ public class OptionMenu extends JMenu {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      for (PkGenerationAware pkGenerationAwareElement : pkGenerationAwareElements) {
-        pkGenerationAwareElement.updateGeneration(selectedGeneration, generation);
-      }
       selectedGeneration = generation;
+      for (PkGenerationAware pkGenerationAwareElement : pkGenerationAwareElements) {
+        pkGenerationAwareElement.updateGeneration();
+      }
     }
   }
 }

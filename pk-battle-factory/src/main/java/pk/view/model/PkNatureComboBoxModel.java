@@ -27,7 +27,7 @@ public class PkNatureComboBoxModel extends PkComboBoxModel {
     super.init();
   }
 
-  private Object[] getAllNatureNames(Integer generationMin, Integer generationMax) {
+  private Object[] getAllNatureNames(Integer generationMax) {
     return natureNameRepository
         .findAllByLanguage(Locale.getDefault().getLanguage())
         .stream()
