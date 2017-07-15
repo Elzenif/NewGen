@@ -1,7 +1,6 @@
 package pk.view;
 
 import commons.Constants;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -52,7 +51,6 @@ public class PkOwnInfoRow extends PkInfoRow {
     leftPanel.add(name);
 
     nameComboBox.setEditable(true);
-    AutoCompleteDecorator.decorate(nameComboBox);
     leftPanel.add(nameComboBox);
 
     rightPanel = new JPanel();

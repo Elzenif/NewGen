@@ -11,6 +11,7 @@ import java.util.List;
 public class PokemonFactory {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   @JoinColumn(name = "pokemon_species_id", referencedColumnName = "id")
   @ManyToOne(fetch = FetchType.LAZY)
@@ -95,9 +96,9 @@ public class PokemonFactory {
   public String toString() {
     return "PokemonFactory{" +
         "id=" + id +
-        ", pokemonSpecies=" + pokemonSpecies.getId() +
-        ", nature=" + nature.getId() +
-        ", item=" + item.getId() +
+        ", pokemonSpecies=" + (pokemonSpecies == null ? null : pokemonSpecies.getId()) +
+        ", nature=" + (nature == null ? null : nature.getId()) +
+        ", item=" + (item == null ? null : item.getId()) +
         ", encounter100='" + encounter100 + '\'' +
         '}';
   }

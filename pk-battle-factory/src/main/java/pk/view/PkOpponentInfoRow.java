@@ -1,7 +1,6 @@
 package pk.view;
 
 import commons.Constants;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -79,15 +78,12 @@ public class PkOpponentInfoRow extends PkInfoRow {
     leftPanel2.setLayout(leftCardLayout);
 
     nameComboBox.setEditable(true);
-    AutoCompleteDecorator.decorate(nameComboBox);
     leftPanel2.add(PkOpponentCriteria.NAME.getName(), nameComboBox);
 
     typeComboBox.setEditable(true);
-    AutoCompleteDecorator.decorate(typeComboBox);
     leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
 
     moveComboBox.setEditable(true);
-    AutoCompleteDecorator.decorate(moveComboBox);
     leftPanel2.add(PkOpponentCriteria.MOVE.getName(), moveComboBox);
 
     leftCardLayout.show(leftPanel2, PkOpponentCriteria.NAME.getName());

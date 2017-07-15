@@ -1,5 +1,6 @@
 package pk.view;
 
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import pk.view.model.PkComboBoxModel;
 import pk.view.model.SharedComboBoxModel;
 
@@ -10,14 +11,8 @@ import javax.swing.JComboBox;
  */
 public class PkComboBox extends JComboBox<Object> {
 
-  private final PkComboBoxModel originalComboBoxModel;
-
   public PkComboBox(PkComboBoxModel originalComboBoxModel) {
-    this.originalComboBoxModel = originalComboBoxModel;
     setModel(new SharedComboBoxModel(originalComboBoxModel));
-  }
-
-  public PkComboBoxModel getOriginalComboBoxModel() {
-    return originalComboBoxModel;
+    AutoCompleteDecorator.decorate(this);
   }
 }

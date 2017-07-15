@@ -15,6 +15,11 @@ public class PokemonFactoryStatId implements Serializable {
   public PokemonFactoryStatId() {
   }
 
+  public PokemonFactoryStatId(Integer pokemonFactoryId, Integer statId) {
+    this.pokemonFactoryId = pokemonFactoryId;
+    this.statId = statId;
+  }
+
   public Integer getPokemonFactoryId() {
     return pokemonFactoryId;
   }

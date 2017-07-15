@@ -3,7 +3,6 @@ package pk.view;
 import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pk.controller.NewLineActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,18 +21,14 @@ public class PkMainPanel extends JSplitPane {
   private final OwnTeamPanel ownTeamPanel;
   private final OpponentTeamPanel opponentTeamPanel;
   private final PkInfoTable pkInfoTable;
-  private final NewLineActionListener newLineActionListener;
-  private final JButton newLineButton;
-  private final JButton saveButton;
 
   @Autowired
   public PkMainPanel(OwnTeamPanel ownTeamPanel, OpponentTeamPanel opponentTeamPanel, PkInfoTable pkInfoTable,
-                     NewLineActionListener newLineActionListener) {
+                     NewLineButton newLineButton, JButton saveButton) {
     super(VERTICAL_SPLIT);
     this.ownTeamPanel = ownTeamPanel;
     this.opponentTeamPanel = opponentTeamPanel;
     this.pkInfoTable = pkInfoTable;
-    this.newLineActionListener = newLineActionListener;
 
     JPanel superiorPanel = new JPanel();
     BoxLayout boxLayout = new BoxLayout(superiorPanel, BoxLayout.Y_AXIS);
@@ -45,11 +40,8 @@ public class PkMainPanel extends JSplitPane {
     superiorPanel.add(centralPanel);
 
     JPanel leftButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    newLineButton = new JButton(Constants.resourceBundle.getString("newLine"));
     leftButtonPanel.add(newLineButton);
     JPanel rightButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    saveButton = new JButton(Constants.resourceBundle.getString("save"));
-    saveButton.setEnabled(false);
     rightButtonPanel.add(saveButton);
 
     JPanel buttonPanel = new JPanel(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP / 2));
@@ -62,7 +54,5 @@ public class PkMainPanel extends JSplitPane {
 
     setTopComponent(superiorPanel);
     setBottomComponent(scrollPane);
-
-    newLineButton.addActionListener(newLineActionListener);
   }
 }

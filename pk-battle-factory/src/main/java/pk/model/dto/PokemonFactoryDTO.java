@@ -1,8 +1,11 @@
 package pk.model.dto;
 
+import org.jetbrains.annotations.NotNull;
 import pk.model.projection.PokemonFactoryProjection;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -26,6 +29,21 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.stats = stats;
     this.moves = moves;
     this.encounter100 = p.getEncounter100();
+  }
+
+  public PokemonFactoryDTO(List<Object> values) {
+    pkName = String.valueOf(values.get(0));
+    natureName = String.valueOf(values.get(1));
+    itemName = String.valueOf(values.get(2));
+    stats = new ArrayList<>(6);
+    for (int i = 3; i <= 8; i++) {
+      stats.add((Integer) values.get(i));
+    }
+    moves = new ArrayList<>(4);
+    for (int i = 9; i <= 12; i++) {
+      moves.add(String.valueOf(values.get(i)));
+    }
+    encounter100 = String.valueOf(values.get(13));
   }
 
   @Override
@@ -91,15 +109,32 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
 
   @Override
   public String toString() {
-    return "PokemonFactoryProjectionImpl{" +
+    return "PokemonFactoryDTO{" +
         "id=" + id +
         ", pkName='" + pkName + '\'' +
         ", natureName='" + natureName + '\'' +
         ", itemName='" + itemName + '\'' +
-        ", stats='" + stats.stream().map(Object::toString).collect(Collectors.joining(", ")) + '\'' +
-        ", moves='" + moves.stream().map(Object::toString).collect(Collectors.joining(", ")) + '\'' +
+        ", stats='" + getStringOfList(stats) +
+        ", moves='" + getStringOfList(moves) +
         ", encounter100='" + encounter100 + '\'' +
         '}';
+  }
+
+  @NotNull
+  private String getStringOfList(List<?> list) {
+    return list.stream()
+        .filter(Objects::nonNull)
+        .map(Object::toString)
+        .collect(Collectors.joining(", ")) + '\'';
+  }
+
+  public boolean compareWithoutId(PokemonFactoryDTO other) {
+    if (pkName != null ? !pkName.equals(other.pkName) : other.pkName != null) return false;
+    if (natureName != null ? !natureName.equals(other.natureName) : other.natureName != null) return false;
+    if (itemName != null ? !itemName.equals(other.itemName) : other.itemName != null) return false;
+    if (stats != null ? !stats.equals(other.stats) : other.stats != null) return false;
+    if (moves != null ? !moves.equals(other.moves) : other.moves != null) return false;
+    return encounter100 != null ? encounter100.equals(other.encounter100) : other.encounter100 == null;
   }
 
   @Override
@@ -109,11 +144,24 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
 
     PokemonFactoryDTO that = (PokemonFactoryDTO) o;
 
-    return id != null ? id.equals(that.id) : that.id == null;
+    if (id != null ? !id.equals(that.id) : that.id != null) return false;
+    if (pkName != null ? !pkName.equals(that.pkName) : that.pkName != null) return false;
+    if (natureName != null ? !natureName.equals(that.natureName) : that.natureName != null) return false;
+    if (itemName != null ? !itemName.equals(that.itemName) : that.itemName != null) return false;
+    if (stats != null ? !stats.equals(that.stats) : that.stats != null) return false;
+    if (moves != null ? !moves.equals(that.moves) : that.moves != null) return false;
+    return encounter100 != null ? encounter100.equals(that.encounter100) : that.encounter100 == null;
   }
 
   @Override
   public int hashCode() {
-    return id != null ? id.hashCode() : 0;
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (pkName != null ? pkName.hashCode() : 0);
+    result = 31 * result + (natureName != null ? natureName.hashCode() : 0);
+    result = 31 * result + (itemName != null ? itemName.hashCode() : 0);
+    result = 31 * result + (stats != null ? stats.hashCode() : 0);
+    result = 31 * result + (moves != null ? moves.hashCode() : 0);
+    result = 31 * result + (encounter100 != null ? encounter100.hashCode() : 0);
+    return result;
   }
 }

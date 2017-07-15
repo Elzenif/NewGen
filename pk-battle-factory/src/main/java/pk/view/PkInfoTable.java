@@ -3,14 +3,15 @@ package pk.view;
 import org.jdesktop.swingx.autocomplete.ComboBoxCellEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pk.controller.PkInfoTableModelListener;
 import pk.model.dto.PokemonFactoryDTO;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -38,52 +39,45 @@ public class PkInfoTable extends JTable {
           resourceBundle.getString("move") + " 3",
           resourceBundle.getString("move") + " 4",
           resourceBundle.getString("encounter") + " 100"
-          ));
+      ));
+  private SaveButton saveButton;
   private PkNameComboBox nameComboBox;
   private PkMoveComboBox moveComboBox;
   private PkNatureComboBox natureComboBox;
   private PkItemComboBox itemComboBox;
+  private boolean editing;
+  private Vector<Vector<Object>> data;
+  private List<PokemonFactoryDTO> pokemonFactoryDTOS;
 
   @Autowired
-  public PkInfoTable(PkInfoTableModelListener pkInfoTableModelListener) {
+  public PkInfoTable() {
     dataModel = new DefaultTableModel(columnNames, 0);
     setModel(dataModel);
-    dataModel.addTableModelListener(pkInfoTableModelListener);
   }
 
   @PostConstruct
   public void init() {
     setupColumns();
-  }
-
-  @Autowired
-  public void setNameComboBox(PkNameComboBox nameComboBox) {
-    this.nameComboBox = nameComboBox;
-  }
-
-  @Autowired
-  public void setMoveComboBox(PkMoveComboBox moveComboBox) {
-    this.moveComboBox = moveComboBox;
-  }
-
-  @Autowired
-  public void setNatureComboBox(PkNatureComboBox natureComboBox) {
-    this.natureComboBox = natureComboBox;
-  }
-
-  @Autowired
-  public void setItemComboBox(PkItemComboBox itemComboBox) {
-    this.itemComboBox = itemComboBox;
+    dataModel.addTableModelListener(this);
+    editing = false;
   }
 
   @Override
   public Class<?> getColumnClass(int column) {
-    Object val = getValueAt(0, column);
-    return val == null ? String.class : val.getClass();
+    return (column >= 3 && column <= 8) || column == 13 ? Integer.class : String.class;
+  }
+
+  public DefaultTableModel getDataModel() {
+    return dataModel;
+  }
+
+  public List<PokemonFactoryDTO> getPokemonFactoryDTOS() {
+    return pokemonFactoryDTOS;
   }
 
   public void update(List<PokemonFactoryDTO> pokemonFactoryDTOS) {
-    Vector<Vector<Object>> data = new Vector<>();
+    this.pokemonFactoryDTOS = pokemonFactoryDTOS;
+    data = new Vector<>();
     for (PokemonFactoryDTO pokemonFactoryDTO : pokemonFactoryDTOS) {
       Vector<Object> vector = new Vector<>();
       vector.add(pokemonFactoryDTO.getPkName());
@@ -97,6 +91,18 @@ public class PkInfoTable extends JTable {
       vector.add(pokemonFactoryDTO.getEncounter100());
       data.add(vector);
     }
+    dataModel.setDataVector(data, columnNames);
+    setupColumns();
+  }
+
+  public void newLine() {
+    this.pokemonFactoryDTOS = Collections.emptyList();
+    data = new Vector<>();
+    Vector<Object> rowData = new Vector<>();
+    for (int i = 0; i < getColumnCount(); i++) {
+      rowData.add(null);
+    }
+    data.add(rowData);
     dataModel.setDataVector(data, columnNames);
     setupColumns();
   }
@@ -132,5 +138,45 @@ public class PkInfoTable extends JTable {
     move3Column.setCellEditor(new ComboBoxCellEditor(moveComboBox));
     TableColumn move4Column = getColumnModel().getColumn(12);
     move4Column.setCellEditor(new ComboBoxCellEditor(moveComboBox));
+  }
+
+  @Override
+  public void tableChanged(TableModelEvent e) {
+    super.tableChanged(e);
+    if (!editing) {
+      if (saveButton != null) {
+        saveButton.setEnabled(true);
+      }
+      editing = true;
+    }
+  }
+
+  @Autowired
+  public void setNameComboBox(PkNameComboBox nameComboBox) {
+    this.nameComboBox = nameComboBox;
+  }
+
+  @Autowired
+  public void setMoveComboBox(PkMoveComboBox moveComboBox) {
+    this.moveComboBox = moveComboBox;
+  }
+
+  @Autowired
+  public void setNatureComboBox(PkNatureComboBox natureComboBox) {
+    this.natureComboBox = natureComboBox;
+  }
+
+  @Autowired
+  public void setItemComboBox(PkItemComboBox itemComboBox) {
+    this.itemComboBox = itemComboBox;
+  }
+
+  @Autowired
+  public void setSaveButton(SaveButton saveButton) {
+    this.saveButton = saveButton;
+  }
+
+  public void setEditing(boolean editing) {
+    this.editing = editing;
   }
 }

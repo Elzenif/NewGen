@@ -1,6 +1,7 @@
 package commons.utils;
 
 import com.google.common.base.Splitter;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.RoundingMode;
@@ -69,5 +70,10 @@ public class StringUtils {
       return s.substring(0, matcher.start());
     }
     return s;
+  }
+
+  @Contract(value = "null -> true", pure = true)
+  public static boolean isEmpty(String s) {
+    return s == null || s.isEmpty();
   }
 }

@@ -26,4 +26,10 @@ public interface ItemNameRepository extends Repository<ItemName, ItemNameId> {
       "AND generation.id <= ?2 " +
       "ORDER BY itemName.name")
   List<ItemName> findAllByLanguageForFactory(String language, Integer generationMax);
+
+  @Query("SELECT itemName FROM ItemName itemName " +
+      "INNER JOIN itemName.item item " +
+      "INNER JOIN itemName.language l " +
+      "WHERE itemName.name = ?1 AND l.iso639 = ?2")
+  ItemName findByName(String itemName, String language);
 }

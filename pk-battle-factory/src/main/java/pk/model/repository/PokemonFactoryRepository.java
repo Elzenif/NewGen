@@ -1,7 +1,7 @@
 package pk.model.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.Repository;
 import pk.model.entity.PokemonFactory;
 import pk.model.projection.PokemonFactoryProjection;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Germain on 02/07/2017.
  */
 @org.springframework.stereotype.Repository
-public interface PokemonFactoryRepository extends Repository<PokemonFactory, Integer> {
+public interface PokemonFactoryRepository extends JpaRepository<PokemonFactory, Integer> {
 
   @Query("SELECT pokemonFactory.id AS id, " +
       "pokemonSpeciesNames.name AS pkName, " +
