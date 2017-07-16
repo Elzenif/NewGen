@@ -13,9 +13,12 @@ public interface PokemonFactoryProjection {
 
   String getItemName();
 
+  String getEncounter50();
+
   String getEncounter100();
 
   default String getString() {
-    return getId() + " " + getPkName() + " " + getNatureName() + " " + getItemName() + " " + getEncounter100();
+    return getId() + " " + getPkName() + " " + getNatureName() + " " + getItemName() + " " + getEncounter50() + " " +
+        getEncounter100();
   }
 }

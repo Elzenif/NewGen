@@ -17,6 +17,7 @@ public interface PokemonFactoryRepository extends JpaRepository<PokemonFactory, 
       "pokemonSpeciesNames.name AS pkName, " +
       "natureNames.name AS natureName, " +
       "itemNames.name AS itemName, " +
+      "pokemonFactory.encounter50 AS encounter50, " +
       "pokemonFactory.encounter100 AS encounter100 " +
       "FROM PokemonFactory pokemonFactory " +
       "INNER JOIN pokemonFactory.pokemonSpecies pokemonSpecies " +
@@ -37,6 +38,7 @@ public interface PokemonFactoryRepository extends JpaRepository<PokemonFactory, 
       "pokemonSpeciesNames.name AS pkName, " +
       "natureNames.name AS natureName, " +
       "itemNames.name AS itemName, " +
+      "pokemonFactory.encounter50 AS encounter50, " +
       "pokemonFactory.encounter100 AS encounter100 " +
       "FROM PokemonFactory pokemonFactory " +
       "INNER JOIN pokemonFactory.pokemonSpecies pokemonSpecies " +
@@ -64,6 +66,7 @@ public interface PokemonFactoryRepository extends JpaRepository<PokemonFactory, 
       "pokemonSpeciesNames.name AS pkName, " +
       "natureNames.name AS natureName, " +
       "itemNames.name AS itemName, " +
+      "pokemonFactory.encounter50 AS encounter50, " +
       "pokemonFactory.encounter100 AS encounter100 " +
       "FROM PokemonFactory pokemonFactory " +
       "INNER JOIN pokemonFactory.pokemonSpecies pokemonSpecies " +

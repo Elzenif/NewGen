@@ -36,6 +36,7 @@ CREATE TABLE pokemon_factory_hgss (
   pokemon_species_id INT NOT NULL,
   nature_id          INT NULL,
   item_id            INT NULL,
+  encounter50        VARCHAR(20) NULL,
   encounter100       VARCHAR(20) NULL,
   CONSTRAINT pokemon_factory_hgss_species_id FOREIGN KEY (pokemon_species_id) REFERENCES pokemon_species (id),
   CONSTRAINT pokemon_factory_hgss_nature_id FOREIGN KEY (nature_id) REFERENCES natures (id),

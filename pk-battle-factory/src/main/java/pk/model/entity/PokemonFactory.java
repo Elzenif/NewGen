@@ -31,6 +31,7 @@ public class PokemonFactory {
           inverseJoinColumns = @JoinColumn(name = "move_id", referencedColumnName = "id", nullable = false),
                   foreignKey = @ForeignKey(name = "pokemon_factory_hgss_moves_move_id"))
   private List<Move> moves;
+  private String encounter50;
   private String encounter100;
 
   public PokemonFactory() {
@@ -84,6 +85,14 @@ public class PokemonFactory {
     this.moves = moves;
   }
 
+  public String getEncounter50() {
+    return encounter50;
+  }
+
+  public void setEncounter50(String encounter50) {
+    this.encounter50 = encounter50;
+  }
+
   public String getEncounter100() {
     return encounter100;
   }
@@ -99,6 +108,7 @@ public class PokemonFactory {
         ", pokemonSpecies=" + (pokemonSpecies == null ? null : pokemonSpecies.getId()) +
         ", nature=" + (nature == null ? null : nature.getId()) +
         ", item=" + (item == null ? null : item.getId()) +
+        ", encounter50='" + encounter50 + '\'' +
         ", encounter100='" + encounter100 + '\'' +
         '}';
   }

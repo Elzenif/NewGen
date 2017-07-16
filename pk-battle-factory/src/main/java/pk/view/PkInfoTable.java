@@ -40,6 +40,7 @@ public class PkInfoTable extends JTable {
           resourceBundle.getString("move") + " 2",
           resourceBundle.getString("move") + " 3",
           resourceBundle.getString("move") + " 4",
+          resourceBundle.getString("encounter") + " 50",
           resourceBundle.getString("encounter") + " 100"
       ));
   private SaveButton saveButton;
@@ -68,7 +69,7 @@ public class PkInfoTable extends JTable {
 
   @Override
   public Class<?> getColumnClass(int column) {
-    return (column >= 3 && column <= 8) || column == 13 ? Integer.class : String.class;
+    return (column >= 3 && column <= 8) || column == 13 || column == 14 ? Integer.class : String.class;
   }
 
   public DefaultTableModel getDataModel() {
@@ -93,6 +94,7 @@ public class PkInfoTable extends JTable {
       for (int i = 0; i < 4 - pokemonFactoryDTO.getMoves().size(); i++) {
         vector.add(null);
       }
+      vector.add(pokemonFactoryDTO.getEncounter50());
       vector.add(pokemonFactoryDTO.getEncounter100());
       data.add(vector);
     }

@@ -31,6 +31,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   private String itemName;
   private List<Integer> stats;
   private List<String> moves;
+  private String encounter50;
   private String encounter100;
 
   public PokemonFactoryDTO(PokemonFactoryProjection p, List<Integer> stats, List<String> moves) {
@@ -40,6 +41,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.itemName = p.getItemName();
     this.stats = stats;
     this.moves = moves;
+    this.encounter50 = p.getEncounter50();
     this.encounter100 = p.getEncounter100();
   }
 
@@ -55,7 +57,8 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     for (int i = 9; i <= 12; i++) {
       moves.add(String.valueOf(values.get(i)));
     }
-    encounter100 = String.valueOf(values.get(13));
+    encounter50 = String.valueOf(values.get(13));
+    encounter100 = String.valueOf(values.get(14));
   }
 
   @Override
@@ -111,6 +114,15 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   }
 
   @Override
+  public String getEncounter50() {
+    return encounter50;
+  }
+
+  public void setEncounter50(String encounter50) {
+    this.encounter50 = encounter50;
+  }
+
+  @Override
   public String getEncounter100() {
     return encounter100;
   }
@@ -128,6 +140,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         ", itemName='" + itemName + '\'' +
         ", stats='" + getStringOfList(stats) +
         ", moves='" + getStringOfList(moves) +
+        ", encounter50='" + encounter50 + '\'' +
         ", encounter100='" + encounter100 + '\'' +
         '}';
   }
@@ -162,6 +175,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     if (itemName != null ? !itemName.equals(other.itemName) : other.itemName != null) return false;
     if (stats != null ? !stats.equals(other.stats) : other.stats != null) return false;
     if (moves != null ? !moves.equals(other.moves) : other.moves != null) return false;
+    if (encounter50 != null ? !encounter50.equals(other.encounter50) : other.encounter50 != null) return false;
     return encounter100 != null ? encounter100.equals(other.encounter100) : other.encounter100 == null;
   }
 
@@ -178,6 +192,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     if (itemName != null ? !itemName.equals(that.itemName) : that.itemName != null) return false;
     if (stats != null ? !stats.equals(that.stats) : that.stats != null) return false;
     if (moves != null ? !moves.equals(that.moves) : that.moves != null) return false;
+    if (encounter50 != null ? !encounter50.equals(that.encounter50) : that.encounter50 != null) return false;
     return encounter100 != null ? encounter100.equals(that.encounter100) : that.encounter100 == null;
   }
 
@@ -189,6 +204,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     result = 31 * result + (itemName != null ? itemName.hashCode() : 0);
     result = 31 * result + (stats != null ? stats.hashCode() : 0);
     result = 31 * result + (moves != null ? moves.hashCode() : 0);
+    result = 31 * result + (encounter50 != null ? encounter50.hashCode() : 0);
     result = 31 * result + (encounter100 != null ? encounter100.hashCode() : 0);
     return result;
   }

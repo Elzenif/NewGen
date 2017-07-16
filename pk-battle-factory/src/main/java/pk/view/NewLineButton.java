@@ -26,7 +26,6 @@ public class NewLineButton extends JButton implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     pkInfoTable.newLine();
-    setEnabled(false);
   }
 
   @Autowired

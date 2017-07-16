@@ -120,6 +120,7 @@ public class PokemonFactoryController {
       pokemonFactory.setItem(itemName.getItem());
     }
 
+    pokemonFactory.setEncounter50(pokemonFactoryDTO.getEncounter50());
     pokemonFactory.setEncounter100(pokemonFactoryDTO.getEncounter100());
 
     pokemonFactory = pokemonFactoryRepository.save(pokemonFactory);
