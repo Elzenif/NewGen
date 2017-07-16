@@ -8,6 +8,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,5 +76,10 @@ public class StringUtils {
   @Contract(value = "null -> true", pure = true)
   public static boolean isEmpty(String s) {
     return s == null || s.isEmpty();
+  }
+
+  @Contract(value = "null -> true", pure = true)
+  public static boolean isNull(String s) {
+    return isEmpty(s) || Objects.equals(s, "null");
   }
 }

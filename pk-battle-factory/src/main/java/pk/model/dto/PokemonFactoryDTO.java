@@ -1,5 +1,6 @@
 package pk.model.dto;
 
+import commons.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import pk.model.projection.PokemonFactoryProjection;
 
@@ -140,13 +141,18 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   }
 
   public String prettyPrint() {
-    String s = pkName + " @ " + itemName + '\n';
-    s += natureName + '\n';
+    String s = pkName;
+    s += StringUtils.isNull(itemName) ? "" : (" @ " + itemName);
+    s += '\n';
+    s += StringUtils.isNull(natureName) ? "" : natureName;
+    s += '\n';
     s += IntStream.rangeClosed(0, 5).boxed()
         .filter(i -> stats.get(i) != 0)
         .map(i -> stats.get(i) + " " + statNames.get(i))
         .collect(Collectors.joining(" / ")) + '\n';
-    s += " - " + moves.stream().collect(Collectors.joining("\n - "));
+    s += " - " + moves.stream()
+        .filter(move -> !StringUtils.isNull(move))
+        .collect(Collectors.joining("\n - "));
     return s;
   }
 

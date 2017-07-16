@@ -47,6 +47,7 @@ public class PkInfoTable extends JTable {
   private PkMoveComboBox moveComboBox;
   private PkNatureComboBox natureComboBox;
   private PkItemComboBox itemComboBox;
+  private boolean newLine;
   private boolean editing;
   private Vector<Vector<Object>> data;
   private List<PokemonFactoryDTO> pokemonFactoryDTOS;
@@ -79,6 +80,7 @@ public class PkInfoTable extends JTable {
   }
 
   public void update(List<PokemonFactoryDTO> pokemonFactoryDTOS) {
+    newLine = false;
     this.pokemonFactoryDTOS = pokemonFactoryDTOS;
     data = new Vector<>();
     for (PokemonFactoryDTO pokemonFactoryDTO : pokemonFactoryDTOS) {
@@ -99,7 +101,8 @@ public class PkInfoTable extends JTable {
   }
 
   public void newLine() {
-    this.pokemonFactoryDTOS = Collections.emptyList();
+    newLine = true;
+    pokemonFactoryDTOS = Collections.emptyList();
     data = new Vector<>();
     Vector<Object> rowData = new Vector<>();
     for (int i = 0; i < getColumnCount(); i++) {
@@ -152,11 +155,13 @@ public class PkInfoTable extends JTable {
       }
       editing = true;
     }
-    int selectedRow = getSelectedRow();
-    if (lastRowEdited != null && selectedRow >= 0) {
-      PokemonFactoryDTO pokemonFactoryDTO = getPokemonFactoryDTO(selectedRow, getColumnCount());
-      String text = pokemonFactoryDTO.prettyPrint();
-      lastRowEdited.showText(text);
+    if (!newLine) {
+      int selectedRow = getSelectedRow();
+      if (lastRowEdited != null && selectedRow >= 0) {
+        PokemonFactoryDTO pokemonFactoryDTO = getPokemonFactoryDTO(selectedRow, getColumnCount());
+        String text = pokemonFactoryDTO.prettyPrint();
+        lastRowEdited.showText(text);
+      }
     }
   }
 
