@@ -1,6 +1,5 @@
 package pk.view;
 
-import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -13,8 +12,6 @@ import javax.annotation.PostConstruct;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,12 +30,9 @@ public class PkOpponentInfoRow extends PkInfoRow {
   private PkTypeComboBox typeComboBox;
   private PkMoveComboBox moveComboBox;
 
-  private JPanel leftPanel;
   private JComboBox<PkOpponentCriteria> criteriaComboBox;
   private JPanel leftPanel2;
   private CardLayout leftCardLayout;
-
-  private JPanel rightPanel;
 
 
   @Autowired
@@ -47,7 +41,6 @@ public class PkOpponentInfoRow extends PkInfoRow {
     this.pkNameActionListener = pkNameActionListener;
     this.pkTypeActionListener = pkTypeActionListener;
     this.pkMoveActionListener = pkMoveActionListener;
-    setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
 
   @Autowired
@@ -67,11 +60,10 @@ public class PkOpponentInfoRow extends PkInfoRow {
 
   @PostConstruct
   public void init() {
-    leftPanel = new JPanel();
-    leftPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+    preInit();
 
     criteriaComboBox = new JComboBox<>(PkOpponentCriteria.values());
-    leftPanel.add(criteriaComboBox);
+    add(criteriaComboBox);
 
     leftPanel2 = new JPanel();
     leftCardLayout = new CardLayout();
@@ -87,17 +79,14 @@ public class PkOpponentInfoRow extends PkInfoRow {
     leftPanel2.add(PkOpponentCriteria.MOVE.getName(), moveComboBox);
 
     leftCardLayout.show(leftPanel2, PkOpponentCriteria.NAME.getName());
-    leftPanel.add(leftPanel2);
-
-    rightPanel = new JPanel();
-
-    add(leftPanel);
-    add(rightPanel);
+    add(leftPanel2);
 
     criteriaComboBox.addActionListener(new PkOpponentCriteriaActionListener());
     nameComboBox.addActionListener(pkNameActionListener);
     typeComboBox.addActionListener(pkTypeActionListener);
     moveComboBox.addActionListener(pkMoveActionListener);
+
+    postInit();
   }
 
   private class PkOpponentCriteriaActionListener implements ActionListener {

@@ -44,15 +44,20 @@ public class PkMainPanel extends JSplitPane {
     JPanel rightButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     rightButtonPanel.add(saveButton);
 
+    JPanel bottomPanel = new JPanel();
+    BoxLayout boxLayout2 = new BoxLayout(bottomPanel, BoxLayout.Y_AXIS);
+    bottomPanel.setLayout(boxLayout2);
+
     JPanel buttonPanel = new JPanel(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP / 2));
     buttonPanel.add(leftButtonPanel);
     buttonPanel.add(rightButtonPanel);
-    superiorPanel.add(buttonPanel);
+    bottomPanel.add(buttonPanel);
 
     JScrollPane scrollPane = new JScrollPane(pkInfoTable);
     pkInfoTable.setFillsViewportHeight(true);
+    bottomPanel.add(scrollPane);
 
     setTopComponent(superiorPanel);
-    setBottomComponent(scrollPane);
+    setBottomComponent(bottomPanel);
   }
 }

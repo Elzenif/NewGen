@@ -9,11 +9,6 @@ import pk.controller.PkNameActionListener;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 
 /**
  * Created by Germain on 01/07/2017.
@@ -26,16 +21,10 @@ public class PkOwnInfoRow extends PkInfoRow {
 
   private PkNameComboBox nameComboBox;
 
-  private JPanel leftPanel;
-  private JPanel rightPanel;
-  private CardLayout cardLayout;
-  private JLabel label;
-  private JTextPane textPane;
 
   @Autowired
   public PkOwnInfoRow(PkNameActionListener pkNameActionListener) {
     this.pkNameActionListener = pkNameActionListener;
-    setLayout(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
   }
 
   @Autowired
@@ -45,34 +34,16 @@ public class PkOwnInfoRow extends PkInfoRow {
 
   @PostConstruct
   public void init() {
-    leftPanel = new JPanel();
-    leftPanel.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+    preInit();
+
     JLabel name = new JLabel(Constants.resourceBundle.getString("name"));
-    leftPanel.add(name);
+    add(name);
 
     nameComboBox.setEditable(true);
-    leftPanel.add(nameComboBox);
-
-    rightPanel = new JPanel();
-    cardLayout = new CardLayout();
-    rightPanel.setLayout(cardLayout);
-    label = new JLabel();
-    rightPanel.add("false", label);
-    textPane = new JTextPane();
-    rightPanel.add("true", textPane);
-    cardLayout.show(rightPanel, "false");
-
-    add(leftPanel);
-    add(rightPanel);
+    add(nameComboBox);
 
     nameComboBox.addActionListener(pkNameActionListener);
-  }
 
-  public JLabel getLabel() {
-    return label;
-  }
-
-  public JTextPane getTextPane() {
-    return textPane;
+    postInit();
   }
 }

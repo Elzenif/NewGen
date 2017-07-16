@@ -2,7 +2,6 @@ package pk.view;
 
 import commons.Constants;
 import commons.utils.StringUtils;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +41,7 @@ public class SaveButton extends JButton implements ActionListener {
     List<PokemonFactoryDTO> pokemonFactoryDTOS = pkInfoTable.getPokemonFactoryDTOS();
     int columnCount = pkInfoTable.getDataModel().getColumnCount();
     if (pokemonFactoryDTOS.isEmpty()) { // new line
-      PokemonFactoryDTO pokemonFactoryDTO = getPokemonFactoryDTO(0, columnCount);
+      PokemonFactoryDTO pokemonFactoryDTO = pkInfoTable.getPokemonFactoryDTO(0, columnCount);
       LOGGER.info(pokemonFactoryDTO.toString());
       String pkName = pokemonFactoryDTO.getPkName();
       if (StringUtils.isEmpty(pkName) || Objects.equals(pkName, "null")) {
@@ -60,7 +58,7 @@ public class SaveButton extends JButton implements ActionListener {
       int rowCount = pkInfoTable.getDataModel().getRowCount();
       for (int row = 0; row < rowCount; row++) {
         PokemonFactoryDTO existingDTO = pokemonFactoryDTOS.get(row);
-        PokemonFactoryDTO pokemonFactoryDTO = getPokemonFactoryDTO(row, columnCount);
+        PokemonFactoryDTO pokemonFactoryDTO = pkInfoTable.getPokemonFactoryDTO(row, columnCount);
         if (!existingDTO.compareWithoutId(pokemonFactoryDTO)) {
           pokemonFactoryController.update(existingDTO.getId(), pokemonFactoryDTO);
         }
@@ -75,15 +73,6 @@ public class SaveButton extends JButton implements ActionListener {
   private void showError(String key) {
     JOptionPane.showMessageDialog((SwingUtilities.getWindowAncestor(this)),
         Constants.resourceBundle.getString(key));
-  }
-
-  @NotNull
-  private PokemonFactoryDTO getPokemonFactoryDTO(int row, int columnCount) {
-    List<Object> values = new ArrayList<>(columnCount);
-    for (int col = 0; col < columnCount; col++) {
-      values.add(pkInfoTable.getValueAt(row, col));
-    }
-    return new PokemonFactoryDTO(values);
   }
 
   @Autowired

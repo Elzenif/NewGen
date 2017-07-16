@@ -1,6 +1,7 @@
 package pk.view;
 
 import org.jdesktop.swingx.autocomplete.ComboBoxCellEditor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pk.model.dto.PokemonFactoryDTO;
@@ -10,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -48,6 +50,7 @@ public class PkInfoTable extends JTable {
   private boolean editing;
   private Vector<Vector<Object>> data;
   private List<PokemonFactoryDTO> pokemonFactoryDTOS;
+  private PkInfoRow lastRowEdited;
 
   @Autowired
   public PkInfoTable() {
@@ -149,7 +152,23 @@ public class PkInfoTable extends JTable {
       }
       editing = true;
     }
+    int selectedRow = getSelectedRow();
+    if (lastRowEdited != null && selectedRow >= 0) {
+      PokemonFactoryDTO pokemonFactoryDTO = getPokemonFactoryDTO(selectedRow, getColumnCount());
+      String text = pokemonFactoryDTO.prettyPrint();
+      lastRowEdited.showText(text);
+    }
   }
+
+  @NotNull
+  public PokemonFactoryDTO getPokemonFactoryDTO(int row, int columnCount) {
+    List<Object> values = new ArrayList<>(columnCount);
+    for (int col = 0; col < columnCount; col++) {
+      values.add(getValueAt(row, col));
+    }
+    return new PokemonFactoryDTO(values);
+  }
+
 
   @Autowired
   public void setNameComboBox(PkNameComboBox nameComboBox) {
@@ -178,5 +197,9 @@ public class PkInfoTable extends JTable {
 
   public void setEditing(boolean editing) {
     this.editing = editing;
+  }
+
+  public void setLastRowEdited(PkInfoRow lastRowEdited) {
+    this.lastRowEdited = lastRowEdited;
   }
 }

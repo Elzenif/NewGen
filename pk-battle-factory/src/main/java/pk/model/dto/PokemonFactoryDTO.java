@@ -4,15 +4,26 @@ import org.jetbrains.annotations.NotNull;
 import pk.model.projection.PokemonFactoryProjection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 03/07/2017.
  */
 public class PokemonFactoryDTO implements PokemonFactoryProjection {
 
+  private static final List<String> statNames = Arrays.asList(
+      resourceBundle.getString("hp"),
+      resourceBundle.getString("atk"),
+      resourceBundle.getString("def"),
+      resourceBundle.getString("spAtk"),
+      resourceBundle.getString("spDef"),
+      resourceBundle.getString("speed"));
   private Integer id;
   private String pkName;
   private String natureName;
@@ -126,6 +137,17 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         .filter(Objects::nonNull)
         .map(Object::toString)
         .collect(Collectors.joining(", ")) + '\'';
+  }
+
+  public String prettyPrint() {
+    String s = pkName + " @ " + itemName + '\n';
+    s += natureName + '\n';
+    s += IntStream.rangeClosed(0, 5).boxed()
+        .filter(i -> stats.get(i) != 0)
+        .map(i -> stats.get(i) + " " + statNames.get(i))
+        .collect(Collectors.joining(" / ")) + '\n';
+    s += " - " + moves.stream().collect(Collectors.joining("\n - "));
+    return s;
   }
 
   public boolean compareWithoutId(PokemonFactoryDTO other) {
