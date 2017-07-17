@@ -48,8 +48,8 @@ public class PokemonFactoryController {
   private final StatRepository statRepository;
   private final PokemonStatRepository pokemonStatRepository;
 
-  private Integer level = 100;
-  private Integer iv = 0;
+  private double level = 100;
+  private double iv = 0;
 
 
   @Autowired
@@ -188,14 +188,23 @@ public class PokemonFactoryController {
   }
 
   @NotNull
-  private String getOtherFormula(PokemonStat pokemonStat, Integer ev, double natureBonus) {
+  private String getOtherFormula(PokemonStat pokemonStat, int ev, double natureBonus) {
     // Others:  (((IV + 2 * BaseStat + (EV/4) ) * Level/100 ) + 5) * Nature Value
-    return String.valueOf(((int) (((iv + 2 * pokemonStat.getBaseStat() + (ev / 4) * level / 100) + 5) * natureBonus)));
+    return String.valueOf((int) (((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 5) * natureBonus));
   }
 
   @NotNull
-  private String getHPFormula(PokemonStat pokemonStat, Integer ev) {
+  private String getHPFormula(PokemonStat pokemonStat, int ev) {
     // HP :     (((IV + 2 * BaseStat + (EV/4) ) * Level/100 ) + 10 + Level
-    return String.valueOf((iv + 2 * pokemonStat.getBaseStat() + (ev / 4) * level / 100) + 10 + level);
+
+    return String.valueOf((int) ((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 10 + level));
+  }
+
+  public void setLevel(int level) {
+    this.level = level;
+  }
+
+  public void setIv(int iv) {
+    this.iv = iv;
   }
 }
