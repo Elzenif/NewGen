@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import pk.controller.PkMoveActionListener;
 import pk.controller.PkNameActionListener;
 import pk.controller.PkTypeActionListener;
+import pk.controller.PokemonFactoryController;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JComboBox;
@@ -36,8 +37,9 @@ public class PkOpponentInfoRow extends PkInfoRow {
 
 
   @Autowired
-  public PkOpponentInfoRow(PkNameActionListener pkNameActionListener, PkTypeActionListener pkTypeActionListener,
-                           PkMoveActionListener pkMoveActionListener) {
+  public PkOpponentInfoRow(PokemonFactoryController pokemonFactoryController, PkNameActionListener pkNameActionListener,
+                           PkTypeActionListener pkTypeActionListener, PkMoveActionListener pkMoveActionListener) {
+    super(pokemonFactoryController);
     this.pkNameActionListener = pkNameActionListener;
     this.pkTypeActionListener = pkTypeActionListener;
     this.pkMoveActionListener = pkMoveActionListener;

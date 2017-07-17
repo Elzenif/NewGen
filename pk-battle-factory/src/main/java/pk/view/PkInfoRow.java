@@ -1,6 +1,8 @@
 package pk.view;
 
 import commons.Constants;
+import pk.controller.PokemonFactoryController;
+import pk.model.dto.PokemonFactoryDTO;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,12 +15,14 @@ import java.awt.FlowLayout;
  */
 public abstract class PkInfoRow extends JPanel {
 
+  private final PokemonFactoryController pokemonFactoryController;
   private JPanel rightPanel;
   private CardLayout cardLayout;
-  private JLabel label;
   private JTextArea textArea;
+  private JTextArea statArea;
 
-  public PkInfoRow() {
+  public PkInfoRow(PokemonFactoryController pokemonFactoryController) {
+    this.pokemonFactoryController = pokemonFactoryController;
     setLayout(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP, 1));
   }
 
@@ -29,19 +33,30 @@ public abstract class PkInfoRow extends JPanel {
     rightPanel = new JPanel();
     cardLayout = new CardLayout();
     rightPanel.setLayout(cardLayout);
-    label = new JLabel();
+
+    JLabel label = new JLabel();
     rightPanel.add("false", label);
+
+    JPanel areasPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, Constants.JPANEL_HGAP * 2, 0));
     textArea = new JTextArea();
     textArea.setOpaque(false);
     textArea.setRows(7);
-    rightPanel.add("true", textArea);
+    areasPanel.add(textArea);
+    statArea = new JTextArea();
+    statArea.setOpaque(false);
+    statArea.setRows(6);
+    areasPanel.add(statArea);
+    rightPanel.add("true", areasPanel);
+
     cardLayout.show(rightPanel, "false");
 
     add(rightPanel);
   }
 
-  public void showText(String text) {
-    textArea.setText(text);
+  public void showText(PokemonFactoryDTO pokemonFactoryDTO) {
+    textArea.setText(pokemonFactoryDTO.prettyPrint());
+    String stats = pokemonFactoryController.printStats(pokemonFactoryDTO);
+    statArea.setText(stats);
     cardLayout.show(rightPanel, "true");
   }
 }

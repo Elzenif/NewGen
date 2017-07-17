@@ -160,9 +160,8 @@ public class PkInfoTable extends JTable {
     if (!newLine) {
       int selectedRow = getSelectedRow();
       if (lastRowEdited != null && selectedRow >= 0) {
-        PokemonFactoryDTO pokemonFactoryDTO = getPokemonFactoryDTO(selectedRow, getColumnCount());
-        String text = pokemonFactoryDTO.prettyPrint();
-        lastRowEdited.showText(text);
+        PokemonFactoryDTO pokemonFactoryDTO = pokemonFactoryDTOS.get(selectedRow);
+        lastRowEdited.showText(pokemonFactoryDTO);
       }
     }
   }

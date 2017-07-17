@@ -2,8 +2,6 @@ package pk.view;
 
 import commons.Constants;
 import commons.utils.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pk.controller.PokemonFactoryController;
@@ -14,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,8 +22,6 @@ import java.util.Objects;
 @Component
 public class SaveButton extends JButton implements ActionListener {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(SaveButton.class);
-  private NewLineButton newLineButton;
   private PkInfoTable pkInfoTable;
   private PokemonFactoryController pokemonFactoryController;
 
@@ -42,7 +39,6 @@ public class SaveButton extends JButton implements ActionListener {
     int columnCount = pkInfoTable.getDataModel().getColumnCount();
     if (pokemonFactoryDTOS.isEmpty()) { // new line
       PokemonFactoryDTO pokemonFactoryDTO = pkInfoTable.getPokemonFactoryDTO(0, columnCount);
-      LOGGER.info(pokemonFactoryDTO.toString());
       String pkName = pokemonFactoryDTO.getPkName();
       if (StringUtils.isEmpty(pkName) || Objects.equals(pkName, "null")) {
         showError("error.missingPkName");
@@ -54,6 +50,7 @@ public class SaveButton extends JButton implements ActionListener {
         return;
       }
       pokemonFactoryController.insertNewPokemon(pokemonFactoryDTO);
+      pkInfoTable.update(Collections.emptyList());
     } else { // compare existing
       int rowCount = pkInfoTable.getDataModel().getRowCount();
       for (int row = 0; row < rowCount; row++) {
@@ -67,17 +64,11 @@ public class SaveButton extends JButton implements ActionListener {
 
     setEnabled(false);
     pkInfoTable.setEditing(false);
-    newLineButton.setEnabled(true);
   }
 
   private void showError(String key) {
     JOptionPane.showMessageDialog((SwingUtilities.getWindowAncestor(this)),
         Constants.resourceBundle.getString(key));
-  }
-
-  @Autowired
-  public void setNewLineButton(NewLineButton newLineButton) {
-    this.newLineButton = newLineButton;
   }
 
   @Autowired

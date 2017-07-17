@@ -6,6 +6,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pk.controller.PkNameActionListener;
+import pk.controller.PokemonFactoryController;
 
 import javax.annotation.PostConstruct;
 import javax.swing.JLabel;
@@ -23,7 +24,8 @@ public class PkOwnInfoRow extends PkInfoRow {
 
 
   @Autowired
-  public PkOwnInfoRow(PkNameActionListener pkNameActionListener) {
+  public PkOwnInfoRow(PokemonFactoryController pokemonFactoryController, PkNameActionListener pkNameActionListener) {
+    super(pokemonFactoryController);
     this.pkNameActionListener = pkNameActionListener;
   }
 

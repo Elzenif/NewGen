@@ -30,14 +30,9 @@ public class PkMainPanel extends JSplitPane {
     this.opponentTeamPanel = opponentTeamPanel;
     this.pkInfoTable = pkInfoTable;
 
-    JPanel superiorPanel = new JPanel();
-    BoxLayout boxLayout = new BoxLayout(superiorPanel, BoxLayout.Y_AXIS);
-    superiorPanel.setLayout(boxLayout);
-
-    JPanel centralPanel = new JPanel(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
-    centralPanel.add(ownTeamPanel);
-    centralPanel.add(opponentTeamPanel);
-    superiorPanel.add(centralPanel);
+    JPanel superiorPanel = new JPanel(new GridLayout(1, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP));
+    superiorPanel.add(ownTeamPanel);
+    superiorPanel.add(opponentTeamPanel);
 
     JPanel leftButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     leftButtonPanel.add(newLineButton);

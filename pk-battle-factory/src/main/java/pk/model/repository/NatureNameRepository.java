@@ -20,8 +20,10 @@ public interface NatureNameRepository extends Repository<NatureName, NatureNameI
   List<NatureName> findAllByLanguage(String language);
 
   @Query("SELECT nn FROM NatureName nn " +
-      "INNER JOIN nn.nature n " +
+      "JOIN FETCH nn.nature n " +
       "INNER JOIN nn.language l " +
+      "JOIN FETCH n.decreasedStat dec " +
+      "JOIN FETCH n.increasedStat inc " +
       "WHERE nn.name = ?1 AND l.iso639 = ?2")
   NatureName findByName(String natureName, String language);
 }

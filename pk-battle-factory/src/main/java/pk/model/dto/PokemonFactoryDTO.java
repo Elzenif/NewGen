@@ -18,7 +18,7 @@ import static commons.Constants.resourceBundle;
  */
 public class PokemonFactoryDTO implements PokemonFactoryProjection {
 
-  private static final List<String> statNames = Arrays.asList(
+  public static final List<String> statNames = Arrays.asList(
       resourceBundle.getString("hp"),
       resourceBundle.getString("atk"),
       resourceBundle.getString("def"),
