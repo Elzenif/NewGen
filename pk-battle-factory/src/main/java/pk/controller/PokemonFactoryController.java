@@ -1,5 +1,6 @@
 package pk.controller;
 
+import commons.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -156,7 +157,7 @@ public class PokemonFactoryController {
   public String printStats(PokemonFactoryDTO pokemonFactoryDTO) {
     List<PokemonStat> pokemonStats = pokemonStatRepository.findStats(pokemonFactoryDTO.getId());
     Nature nature;
-    if (pokemonFactoryDTO.getNatureName() == null) {
+    if (StringUtils.isNull(pokemonFactoryDTO.getNatureName())) {
       nature = null;
     } else {
       String language = Locale.getDefault().getLanguage();

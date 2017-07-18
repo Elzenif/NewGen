@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 import pk.model.dto.PokemonFactoryDTO;
 
 import javax.annotation.PostConstruct;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -146,6 +148,11 @@ public class PkInfoTable extends JTable {
     move3Column.setCellEditor(new ComboBoxCellEditor(moveComboBox));
     TableColumn move4Column = getColumnModel().getColumn(12);
     move4Column.setCellEditor(new ComboBoxCellEditor(moveComboBox));
+
+    TableColumn enc50Column = getColumnModel().getColumn(13);
+    enc50Column.setCellEditor(new DefaultCellEditor(new JTextField()));
+    TableColumn enc100Column = getColumnModel().getColumn(14);
+    enc100Column.setCellEditor(new DefaultCellEditor(new JTextField()));
   }
 
   @Override
@@ -160,7 +167,9 @@ public class PkInfoTable extends JTable {
     if (!newLine) {
       int selectedRow = getSelectedRow();
       if (lastRowEdited != null && selectedRow >= 0) {
-        PokemonFactoryDTO pokemonFactoryDTO = pokemonFactoryDTOS.get(selectedRow);
+        // TODO get value from table + id
+        PokemonFactoryDTO pokemonFactoryDTO = getPokemonFactoryDTO(selectedRow, getColumnCount());
+        pokemonFactoryDTO.setId(pokemonFactoryDTOS.get(selectedRow).getId());
         lastRowEdited.showText(pokemonFactoryDTO);
       }
     }
