@@ -108,7 +108,7 @@ public class PokemonFactoryController {
 
   @Transactional
   public void update(Integer id, PokemonFactoryDTO pokemonFactoryDTO) {
-    savePokemonFactory(pokemonFactoryDTO, pokemonFactoryRepository.findOne(id));
+    savePokemonFactory(pokemonFactoryDTO, pokemonFactoryRepository.getOne(id));
   }
 
   private void savePokemonFactory(PokemonFactoryDTO pokemonFactoryDTO, PokemonFactory pokemonFactory) {
@@ -139,13 +139,13 @@ public class PokemonFactoryController {
       PokemonFactoryStat pokemonFactoryStat = new PokemonFactoryStat();
       pokemonFactoryStat.setId(new PokemonFactoryStatId(pokemonFactory.getId(), i));
       pokemonFactoryStat.setPokemonFactory(pokemonFactory);
-      Stat stat = statRepository.findOne(i);
+      Stat stat = statRepository.getOne(i);
       pokemonFactoryStat.setStat(stat);
       pokemonFactoryStat.setEv(ev == null ? 0 : ev);
       i++;
       pokemonFactoryStats.add(pokemonFactoryStat);
     }
-    pokemonFactoryStatRepository.save(pokemonFactoryStats);
+    pokemonFactoryStatRepository.saveAll(pokemonFactoryStats);
     pokemonFactory.setPokemonFactoryStats(pokemonFactoryStats);
 
     List<MoveName> moveNames = moveNameRepository.findByName(pokemonFactoryDTO.getMoves(), language);
