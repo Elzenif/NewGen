@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 @Component
 public class NewLineButton extends JButton implements ActionListener {
 
-  private PkInfoTable pkInfoTable;
+  private PkInfoGrid pkInfoGrid;
 
   @Autowired
   public NewLineButton() {
@@ -25,11 +25,11 @@ public class NewLineButton extends JButton implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    pkInfoTable.newLine();
+    pkInfoGrid.newLine();
   }
 
   @Autowired
-  public void setPkInfoTable(PkInfoTable pkInfoTable) {
-    this.pkInfoTable = pkInfoTable;
+  public void setPkInfoGrid(PkInfoGrid pkInfoGrid) {
+    this.pkInfoGrid = pkInfoGrid;
   }
 }

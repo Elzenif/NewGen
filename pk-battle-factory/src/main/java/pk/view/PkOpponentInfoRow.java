@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import pk.controller.PkMoveActionListener;
-import pk.controller.PkNameActionListener;
-import pk.controller.PkTypeActionListener;
+import pk.controller.PkMoveValueChangeListener;
+import pk.controller.PkNameValueChangeListener;
+import pk.controller.PkTypeValueChangeListener;
 import pk.controller.PokemonFactoryController;
 
 import javax.annotation.PostConstruct;
@@ -23,9 +23,9 @@ import java.awt.event.ActionListener;
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
 public class PkOpponentInfoRow extends PkInfoRow {
 
-  private final PkNameActionListener pkNameActionListener;
-  private final PkTypeActionListener pkTypeActionListener;
-  private final PkMoveActionListener pkMoveActionListener;
+  private final PkNameValueChangeListener pkNameValueChangeListener;
+  private final PkTypeValueChangeListener pkTypeValueChangeListener;
+  private final PkMoveValueChangeListener pkMoveValueChangeListener;
 
   private PkNameComboBox nameComboBox;
   private PkTypeComboBox typeComboBox;
@@ -37,12 +37,12 @@ public class PkOpponentInfoRow extends PkInfoRow {
 
 
   @Autowired
-  public PkOpponentInfoRow(PokemonFactoryController pokemonFactoryController, PkNameActionListener pkNameActionListener,
-                           PkTypeActionListener pkTypeActionListener, PkMoveActionListener pkMoveActionListener) {
+  public PkOpponentInfoRow(PokemonFactoryController pokemonFactoryController, PkNameValueChangeListener pkNameValueChangeListener,
+                           PkTypeValueChangeListener pkTypeValueChangeListener, PkMoveValueChangeListener pkMoveValueChangeListener) {
     super(pokemonFactoryController);
-    this.pkNameActionListener = pkNameActionListener;
-    this.pkTypeActionListener = pkTypeActionListener;
-    this.pkMoveActionListener = pkMoveActionListener;
+    this.pkNameValueChangeListener = pkNameValueChangeListener;
+    this.pkTypeValueChangeListener = pkTypeValueChangeListener;
+    this.pkMoveValueChangeListener = pkMoveValueChangeListener;
   }
 
   @Autowired
@@ -64,29 +64,29 @@ public class PkOpponentInfoRow extends PkInfoRow {
   public void init() {
     preInit();
 
-    criteriaComboBox = new JComboBox<>(PkOpponentCriteria.values());
-    add(criteriaComboBox);
-
-    leftPanel2 = new JPanel();
-    leftCardLayout = new CardLayout();
-    leftPanel2.setLayout(leftCardLayout);
-
-    nameComboBox.setEditable(true);
-    leftPanel2.add(PkOpponentCriteria.NAME.getName(), nameComboBox);
-
-    typeComboBox.setEditable(true);
-    leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
-
-    moveComboBox.setEditable(true);
-    leftPanel2.add(PkOpponentCriteria.MOVE.getName(), moveComboBox);
-
-    leftCardLayout.show(leftPanel2, PkOpponentCriteria.NAME.getName());
-    add(leftPanel2);
-
-    criteriaComboBox.addActionListener(new PkOpponentCriteriaActionListener());
-    nameComboBox.addActionListener(pkNameActionListener);
-    typeComboBox.addActionListener(pkTypeActionListener);
-    moveComboBox.addActionListener(pkMoveActionListener);
+//    criteriaComboBox = new JComboBox<>(PkOpponentCriteria.values());
+//    add(criteriaComboBox);
+//
+//    leftPanel2 = new JPanel();
+//    leftCardLayout = new CardLayout();
+//    leftPanel2.setLayout(leftCardLayout);
+//
+//    nameComboBox.setEditable(true);
+//    leftPanel2.add(PkOpponentCriteria.NAME.getName(), nameComboBox);
+//
+//    typeComboBox.setEditable(true);
+//    leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
+//
+//    moveComboBox.setEditable(true);
+//    leftPanel2.add(PkOpponentCriteria.MOVE.getName(), moveComboBox);
+//
+//    leftCardLayout.show(leftPanel2, PkOpponentCriteria.NAME.getName());
+//    add(leftPanel2);
+//
+//    criteriaComboBox.addActionListener(new PkOpponentCriteriaActionListener());
+//    nameComboBox.addActionListener(pkNameActionListener);
+//    typeComboBox.addActionListener(pkTypeActionListener);
+//    moveComboBox.addActionListener(pkMoveValueChangeListener);
 
     postInit();
   }

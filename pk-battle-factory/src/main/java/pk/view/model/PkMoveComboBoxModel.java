@@ -6,13 +6,15 @@ import pk.model.repository.MoveNameRepository;
 import pk.view.menu.OptionMenu;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Locale;
+import java.util.function.Function;
 
 /**
  * Created by Germain on 12/07/2017.
  */
 @Component
-public class PkMoveComboBoxModel extends PkComboBoxModel {
+public class PkMoveComboBoxModel extends PkComboBoxModel<MoveName> {
 
   private final MoveNameRepository moveNameRepository;
 
@@ -25,6 +27,16 @@ public class PkMoveComboBoxModel extends PkComboBoxModel {
   @PostConstruct
   public void init() {
     super.init();
+  }
+
+  @Override
+  public List<MoveName> getAllElements() {
+    return moveNameRepository.findAllByLanguage(Locale.getDefault().getLanguage(), getGeneration());
+  }
+
+  @Override
+  public Function<MoveName, String> getCaptionGenerator() {
+    return MoveName::getName;
   }
 
   private Object[] getAllMoveNames(Integer generationMax) {

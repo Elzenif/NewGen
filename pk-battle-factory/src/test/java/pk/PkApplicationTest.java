@@ -19,6 +19,7 @@ import pk.model.repository.TypeNameRepository;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -55,7 +56,8 @@ public class PkApplicationTest {
 
   @Test
   public void testFindPokemonFactoryByName() {
-    List<PokemonFactoryDTO> pokemonFactoryDTOS = pokemonFactoryController.findByName("Raichu");
+    List<PokemonFactoryDTO> pokemonFactoryDTOS = pokemonFactoryController.findByName("Raichu")
+        .collect(Collectors.toList());
     for (PokemonFactoryDTO pokemonFactoryDTO : pokemonFactoryDTOS) {
       LOGGER.info("Found " + pokemonFactoryDTO.toString());
     }

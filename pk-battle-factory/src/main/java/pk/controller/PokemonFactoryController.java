@@ -72,22 +72,22 @@ public class PokemonFactoryController {
     this.pokemonStatRepository = pokemonStatRepository;
   }
 
-  public List<PokemonFactoryDTO> findByName(String name) {
+  public Stream<PokemonFactoryDTO> findByName(String name) {
     String language = Locale.getDefault().getLanguage();
     return find(pokemonFactoryRepository.findByName(name, language).stream(), language);
   }
 
-  public List<PokemonFactoryDTO> findByType(String type) {
+  public Stream<PokemonFactoryDTO> findByType(String type) {
     String language = Locale.getDefault().getLanguage();
     return find(pokemonFactoryRepository.findByType(type, language).stream(), language);
   }
 
-  public List<PokemonFactoryDTO> findByMove(String move) {
+  public Stream<PokemonFactoryDTO> findByMove(String move) {
     String language = Locale.getDefault().getLanguage();
     return find(pokemonFactoryRepository.findByMove(move, language).stream(), language);
   }
 
-  private List<PokemonFactoryDTO> find(Stream<PokemonFactoryProjection> projections, String language) {
+  private Stream<PokemonFactoryDTO> find(Stream<PokemonFactoryProjection> projections, String language) {
     return projections
         .map(p -> new PokemonFactoryDTO(p,
             pokemonFactoryStatRepository.find(p.getId())
@@ -97,8 +97,7 @@ public class PokemonFactoryController {
             moveNameRepository.find(p.getId(), language)
                 .stream()
                 .map(MoveName::getName)
-                .collect(Collectors.toList())))
-        .collect(Collectors.toList());
+                .collect(Collectors.toList())));
   }
 
   @Transactional
@@ -107,8 +106,8 @@ public class PokemonFactoryController {
   }
 
   @Transactional
-  public void update(Integer id, PokemonFactoryDTO pokemonFactoryDTO) {
-    savePokemonFactory(pokemonFactoryDTO, pokemonFactoryRepository.getOne(id));
+  public void update(PokemonFactoryDTO pokemonFactoryDTO) {
+    savePokemonFactory(pokemonFactoryDTO, pokemonFactoryRepository.getOne(pokemonFactoryDTO.getId()));
   }
 
   private void savePokemonFactory(PokemonFactoryDTO pokemonFactoryDTO, PokemonFactory pokemonFactory) {
@@ -119,14 +118,10 @@ public class PokemonFactoryController {
     pokemonFactory.setPokemonSpecies(pokemonSpeciesName.getPokemonSpecies());
 
     NatureName natureName = natureNameRepository.findByName(pokemonFactoryDTO.getNatureName(), language);
-    if (natureName != null) {
-      pokemonFactory.setNature(natureName.getNature());
-    }
+    pokemonFactory.setNature(natureName == null ? null : natureName.getNature());
 
     ItemName itemName = itemNameRepository.findByName(pokemonFactoryDTO.getItemName(), language);
-    if (itemName != null) {
-      pokemonFactory.setItem(itemName.getItem());
-    }
+    pokemonFactory.setItem(itemName == null ? null : itemName.getItem());
 
     pokemonFactory.setEncounter50(pokemonFactoryDTO.getEncounter50());
     pokemonFactory.setEncounter100(pokemonFactoryDTO.getEncounter100());
@@ -170,7 +165,7 @@ public class PokemonFactoryController {
   }
 
   private String printStat(Integer index, PokemonStat pokemonStat, Integer ev, Nature nature) {
-    String s = PokemonFactoryDTO.statNames.get(index);
+    String s = PokemonFactoryDTO.STAT_NAMES.get(index);
     double natureBonus = getBonusFromNature(index + 1, nature);
     s += "\t" + (index == 0 ? getHPFormula(pokemonStat, ev) : getOtherFormula(pokemonStat, ev, natureBonus));
     return s;

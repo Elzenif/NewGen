@@ -7,13 +7,15 @@ import pk.model.repository.ItemNameRepository;
 import pk.view.menu.OptionMenu;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Locale;
+import java.util.function.Function;
 
 /**
  * Created by Germain on 12/07/2017.
  */
 @Component
-public class PkItemComboBoxModel extends PkComboBoxModel {
+public class PkItemComboBoxModel extends PkComboBoxModel<ItemName> {
 
   private final ItemNameRepository itemNameRepository;
 
@@ -27,6 +29,16 @@ public class PkItemComboBoxModel extends PkComboBoxModel {
   @PostConstruct
   public void init() {
     super.init();
+  }
+
+  @Override
+  public List<ItemName> getAllElements() {
+    return itemNameRepository.findAllByLanguageForFactory(Locale.getDefault().getLanguage(), getGeneration());
+  }
+
+  @Override
+  public Function<ItemName, String> getCaptionGenerator() {
+    return ItemName::getName;
   }
 
   private Object[] getAllNatureNames(Integer generationMax) {

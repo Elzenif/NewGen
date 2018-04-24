@@ -7,13 +7,15 @@ import pk.model.repository.PokemonSpeciesNameRepository;
 import pk.view.menu.OptionMenu;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Locale;
+import java.util.function.Function;
 
 /**
  * Created by Germain on 12/07/2017.
  */
 @Component
-public class PkNameComboBoxModel extends PkComboBoxModel {
+public class PkNameComboBoxModel extends PkComboBoxModel<PokemonSpeciesName> {
 
   private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
 
@@ -36,5 +38,16 @@ public class PkNameComboBoxModel extends PkComboBoxModel {
         .stream()
         .map(PokemonSpeciesName::getName)
         .toArray();
+  }
+
+  @Override
+  public List<PokemonSpeciesName> getAllElements() {
+    return pokemonSpeciesNameRepository
+        .findAllByLanguageAndGeneration(Locale.getDefault().getLanguage(), getGeneration());
+  }
+
+  @Override
+  public Function<PokemonSpeciesName, String> getCaptionGenerator() {
+    return PokemonSpeciesName::getName;
   }
 }

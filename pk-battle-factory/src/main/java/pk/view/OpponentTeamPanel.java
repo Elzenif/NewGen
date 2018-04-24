@@ -13,9 +13,9 @@ public class OpponentTeamPanel extends TeamPanel {
   @Autowired
   public OpponentTeamPanel(PkOpponentInfoRow pkOpponentInfoRow1, PkOpponentInfoRow pkOpponentInfoRow2,
                            PkOpponentInfoRow pkOpponentInfoRow3) {
-    super(Constants.resourceBundle.getString("panel.team.opponent"));
-    add(pkOpponentInfoRow1);
-    add(pkOpponentInfoRow2);
-    add(pkOpponentInfoRow3);
+    super(Constants.resourceBundle.getString("panel.team.opponent"), 3);
+    addComponent(pkOpponentInfoRow1);
+    addComponent(pkOpponentInfoRow2);
+    addComponent(pkOpponentInfoRow3);
   }
 }

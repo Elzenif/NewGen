@@ -3,13 +3,13 @@ package pk.view.model;
 import pk.view.PkGenerationAware;
 import pk.view.menu.OptionMenu;
 
-import javax.swing.DefaultComboBoxModel;
+import java.util.List;
 import java.util.function.Function;
 
 /**
  * Created by Germain on 12/07/2017.
  */
-public abstract class PkComboBoxModel extends DefaultComboBoxModel<Object> implements PkGenerationAware {
+public abstract class PkComboBoxModel<T> implements PkGenerationAware {
 
   private final OptionMenu optionMenu;
   protected Function<Integer, Object[]> getAllFunction;
@@ -19,19 +19,18 @@ public abstract class PkComboBoxModel extends DefaultComboBoxModel<Object> imple
   }
 
   public void init() {
-    addAll(optionMenu.getSelectedGeneration());
     optionMenu.addPkGenerationAware(this);
-  }
-
-  private void addAll(Integer generationMax) {
-    for (Object item : getAllFunction.apply(generationMax)) {
-      addElement(item);
-    }
   }
 
   @Override
   public void updateGeneration() {
-    removeAllElements();
-    addAll(optionMenu.getSelectedGeneration());
+  }
+
+  public abstract List<T> getAllElements();
+
+  public abstract Function<T, String> getCaptionGenerator();
+
+  protected Integer getGeneration() {
+    return optionMenu.getSelectedGeneration();
   }
 }

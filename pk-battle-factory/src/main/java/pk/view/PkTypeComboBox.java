@@ -1,9 +1,11 @@
 package pk.view;
 
+import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import pk.model.entity.TypeName;
 import pk.view.model.PkTypeComboBoxModel;
 
 /**
@@ -11,10 +13,10 @@ import pk.view.model.PkTypeComboBoxModel;
  */
 @Component
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
-public class PkTypeComboBox extends PkComboBox {
+public class PkTypeComboBox extends PkComboBox<TypeName> {
 
   @Autowired
   public PkTypeComboBox(PkTypeComboBoxModel pkTypeComboBoxModel) {
-    super(pkTypeComboBoxModel);
+    super(pkTypeComboBoxModel, Constants.resourceBundle.getString("type"));
   }
 }

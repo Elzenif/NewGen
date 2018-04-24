@@ -1,9 +1,11 @@
 package pk.view;
 
+import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import pk.model.entity.NatureName;
 import pk.view.model.PkNatureComboBoxModel;
 
 /**
@@ -11,10 +13,10 @@ import pk.view.model.PkNatureComboBoxModel;
  */
 @Component
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
-public class PkNatureComboBox extends PkComboBox {
+public class PkNatureComboBox extends PkComboBox<NatureName> {
 
   @Autowired
   public PkNatureComboBox(PkNatureComboBoxModel originalComboBoxModel) {
-    super(originalComboBoxModel);
+    super(originalComboBoxModel, Constants.resourceBundle.getString("nature"));
   }
 }

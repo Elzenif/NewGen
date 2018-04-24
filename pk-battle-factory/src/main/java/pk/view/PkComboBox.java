@@ -1,18 +1,27 @@
 package pk.view;
 
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import com.vaadin.ui.ComboBox;
 import pk.view.model.PkComboBoxModel;
-import pk.view.model.SharedComboBoxModel;
-
-import javax.swing.JComboBox;
 
 /**
  * Created by Germain on 12/07/2017.
  */
-public class PkComboBox extends JComboBox<Object> {
+public class PkComboBox<T> extends ComboBox<T> {
 
-  public PkComboBox(PkComboBoxModel originalComboBoxModel) {
-    setModel(new SharedComboBoxModel(originalComboBoxModel));
-    AutoCompleteDecorator.decorate(this);
+  private final PkComboBoxModel<T> model;
+
+  public PkComboBox(PkComboBoxModel<T> model, String caption) {
+    super(caption, model.getAllElements());
+    this.model = model;
+    setItemCaptionGenerator(model.getCaptionGenerator()::apply);
+    setEmptySelectionAllowed(false);
+    setWidth(100.0F, Unit.PERCENTAGE);
+//    setPlaceholder();
+//    setModel(new SharedComboBoxModel(model));
+//    AutoCompleteDecorator.decorate(this);
+  }
+
+  public PkComboBoxModel<T> getModel() {
+    return model;
   }
 }

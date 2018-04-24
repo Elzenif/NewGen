@@ -4,7 +4,6 @@ import commons.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import pk.model.projection.PokemonFactoryProjection;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +17,7 @@ import static commons.Constants.resourceBundle;
  */
 public class PokemonFactoryDTO implements PokemonFactoryProjection {
 
-  public static final List<String> statNames = Arrays.asList(
+  public static final List<String> STAT_NAMES = Arrays.asList(
       resourceBundle.getString("hp"),
       resourceBundle.getString("atk"),
       resourceBundle.getString("def"),
@@ -41,24 +40,12 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.itemName = p.getItemName();
     this.stats = stats;
     this.moves = moves;
+    int movesSize = moves.size();
+    for (int i = 0; i < 4 - movesSize; i++) {
+      this.moves.add(null);
+    }
     this.encounter50 = p.getEncounter50();
     this.encounter100 = p.getEncounter100();
-  }
-
-  public PokemonFactoryDTO(List<Object> values) {
-    pkName = String.valueOf(values.get(0));
-    natureName = String.valueOf(values.get(1));
-    itemName = String.valueOf(values.get(2));
-    stats = new ArrayList<>(6);
-    for (int i = 3; i <= 8; i++) {
-      stats.add((Integer) values.get(i));
-    }
-    moves = new ArrayList<>(4);
-    for (int i = 9; i <= 12; i++) {
-      moves.add(String.valueOf(values.get(i)));
-    }
-    encounter50 = String.valueOf(values.get(13));
-    encounter100 = String.valueOf(values.get(14));
   }
 
   @Override
@@ -138,8 +125,8 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         ", pkName='" + pkName + '\'' +
         ", natureName='" + natureName + '\'' +
         ", itemName='" + itemName + '\'' +
-        ", stats='" + getStringOfList(stats) +
-        ", moves='" + getStringOfList(moves) +
+        ", stats='" + getStringOfList(stats) + '\'' +
+        ", moves='" + getStringOfList(moves) + '\'' +
         ", encounter50='" + encounter50 + '\'' +
         ", encounter100='" + encounter100 + '\'' +
         '}';
@@ -150,7 +137,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     return list.stream()
         .filter(Objects::nonNull)
         .map(Object::toString)
-        .collect(Collectors.joining(", ")) + '\'';
+        .collect(Collectors.joining(", "));
   }
 
   public String prettyPrint() {
@@ -161,22 +148,12 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     s += '\n';
     s += IntStream.rangeClosed(0, 5).boxed()
         .filter(i -> stats.get(i) != 0)
-        .map(i -> stats.get(i) + " " + statNames.get(i))
+        .map(i -> stats.get(i) + " " + STAT_NAMES.get(i))
         .collect(Collectors.joining(" / ")) + '\n';
     s += " - " + moves.stream()
         .filter(move -> !StringUtils.isNull(move))
         .collect(Collectors.joining("\n - "));
     return s;
-  }
-
-  public boolean compareWithoutId(PokemonFactoryDTO other) {
-    if (pkName != null ? !pkName.equals(other.pkName) : other.pkName != null) return false;
-    if (natureName != null ? !natureName.equals(other.natureName) : other.natureName != null) return false;
-    if (itemName != null ? !itemName.equals(other.itemName) : other.itemName != null) return false;
-    if (stats != null ? !stats.equals(other.stats) : other.stats != null) return false;
-    if (moves != null ? !moves.equals(other.moves) : other.moves != null) return false;
-    if (encounter50 != null ? !encounter50.equals(other.encounter50) : other.encounter50 != null) return false;
-    return encounter100 != null ? encounter100.equals(other.encounter100) : other.encounter100 == null;
   }
 
   @Override

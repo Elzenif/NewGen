@@ -1,8 +1,10 @@
 package pk.view;
 
+import commons.Constants;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import pk.model.entity.ItemName;
 import pk.view.model.PkItemComboBoxModel;
 
 /**
@@ -10,9 +12,9 @@ import pk.view.model.PkItemComboBoxModel;
  */
 @Component
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
-public class PkItemComboBox extends PkComboBox {
+public class PkItemComboBox extends PkComboBox<ItemName> {
 
   public PkItemComboBox(PkItemComboBoxModel originalComboBoxModel) {
-    super(originalComboBoxModel);
+    super(originalComboBoxModel, Constants.resourceBundle.getString("item"));
   }
 }
