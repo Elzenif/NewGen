@@ -47,6 +47,13 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/eu.maxschuster/vaadin-autocompletetextfield -->
+        <dependency>
+            <groupId>eu.maxschuster</groupId>
+            <artifactId>vaadin-autocompletetextfield</artifactId>
+            <version>3.0-alpha-2</version>
+        </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

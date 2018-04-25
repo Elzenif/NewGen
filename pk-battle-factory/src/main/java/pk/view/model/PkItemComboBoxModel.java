@@ -23,7 +23,6 @@ public class PkItemComboBoxModel extends PkComboBoxModel<ItemName> {
   public PkItemComboBoxModel(OptionMenu optionMenu, ItemNameRepository itemNameRepository) {
     super(optionMenu);
     this.itemNameRepository = itemNameRepository;
-    getAllFunction = this::getAllNatureNames;
   }
 
   @PostConstruct
@@ -41,11 +40,4 @@ public class PkItemComboBoxModel extends PkComboBoxModel<ItemName> {
     return ItemName::getName;
   }
 
-  private Object[] getAllNatureNames(Integer generationMax) {
-    return itemNameRepository
-        .findAllByLanguageForFactory(Locale.getDefault().getLanguage(), generationMax)
-        .stream()
-        .map(ItemName::getName)
-        .toArray();
-  }
 }

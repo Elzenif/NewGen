@@ -12,7 +12,6 @@ import java.util.function.Function;
 public abstract class PkComboBoxModel<T> implements PkGenerationAware {
 
   private final OptionMenu optionMenu;
-  protected Function<Integer, Object[]> getAllFunction;
 
   public PkComboBoxModel(OptionMenu optionMenu) {
     this.optionMenu = optionMenu;

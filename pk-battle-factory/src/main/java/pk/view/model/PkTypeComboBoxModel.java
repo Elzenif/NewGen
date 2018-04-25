@@ -21,7 +21,6 @@ public class PkTypeComboBoxModel extends PkComboBoxModel<TypeName> {
   public PkTypeComboBoxModel(OptionMenu optionMenu, TypeNameRepository typeNameRepository) {
     super(optionMenu);
     this.typeNameRepository = typeNameRepository;
-    getAllFunction = this::getAllTypeNames;
   }
 
   @PostConstruct
@@ -39,11 +38,4 @@ public class PkTypeComboBoxModel extends PkComboBoxModel<TypeName> {
     return TypeName::getName;
   }
 
-  private Object[] getAllTypeNames(Integer generationMax) {
-    return typeNameRepository
-        .findAllByLanguage(Locale.getDefault().getLanguage(), generationMax)
-        .stream()
-        .map(TypeName::getName)
-        .toArray();
-  }
 }

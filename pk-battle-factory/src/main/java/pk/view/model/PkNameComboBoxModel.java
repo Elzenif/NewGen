@@ -24,20 +24,11 @@ public class PkNameComboBoxModel extends PkComboBoxModel<PokemonSpeciesName> {
                              OptionMenu optionMenu) {
     super(optionMenu);
     this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
-    getAllFunction = this::getAllPokemonSpeciesNames;
   }
 
   @PostConstruct
   public void init() {
     super.init();
-  }
-
-  private Object[] getAllPokemonSpeciesNames(Integer generationMax) {
-    return pokemonSpeciesNameRepository
-        .findAllByLanguageAndGeneration(Locale.getDefault().getLanguage(), generationMax)
-        .stream()
-        .map(PokemonSpeciesName::getName)
-        .toArray();
   }
 
   @Override

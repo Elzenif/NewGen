@@ -3,15 +3,21 @@ package pk.view;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.renderers.TextRenderer;
+import eu.maxschuster.vaadin.autocompletetextfield.AutocompleteTextField;
+import eu.maxschuster.vaadin.autocompletetextfield.provider.CollectionSuggestionProvider;
+import eu.maxschuster.vaadin.autocompletetextfield.provider.MatchMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pk.controller.PokemonFactoryController;
 import pk.model.dto.PokemonFactoryDTO;
+import pk.model.entity.NatureName;
+import pk.view.model.PkNatureComboBoxModel;
 
-import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static commons.Constants.resourceBundle;
@@ -24,14 +30,15 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PkInfoGrid.class);
   private boolean newLine;
-  private List<PokemonFactoryDTO> pokemonFactoryDTOS;
-  private PkInfoRow lastRowEdited;
   private final PokemonFactoryController pokemonFactoryController;
+  private final PkNatureComboBoxModel pkNatureComboBoxModel;
 
 
   @Autowired
-  public PkInfoGrid(PokemonFactoryController pokemonFactoryController) {
+  public PkInfoGrid(PokemonFactoryController pokemonFactoryController,
+                    PkNatureComboBoxModel pkNatureComboBoxModel) {
     this.pokemonFactoryController = pokemonFactoryController;
+    this.pkNatureComboBoxModel = pkNatureComboBoxModel;
 
     setSizeFull();
     setSelectionMode(SelectionMode.NONE);
@@ -54,6 +61,7 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
       getDataProvider().refreshAll();
     });
   }
+
   public void update(Function<String, Stream<PokemonFactoryDTO>> findFunction, String param) {
     newLine = false;
 
@@ -73,7 +81,11 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
         .setCaption(resourceBundle.getString("name"))
         .setEditorComponent(nameTextField, PokemonFactoryDTO::setPkName);
 
-    TextField natureTextField = new TextField();
+    CollectionSuggestionProvider natureNameProvider = new CollectionSuggestionProvider(
+        pkNatureComboBoxModel.getAllElements().stream().map(NatureName::getName).collect(Collectors.toList()),
+        MatchMode.CONTAINS, true, Locale.getDefault());
+    AutocompleteTextField natureTextField = new AutocompleteTextField()
+        .withSuggestionProvider(natureNameProvider);
     addColumn(PokemonFactoryDTO::getNatureName, new TextRenderer())
         .setCaption(resourceBundle.getString("nature"))
         .setExpandRatio(2)
@@ -157,6 +169,5 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
 //  }
 
   public void setLastRowEdited(PkInfoRow lastRowEdited) {
-    this.lastRowEdited = lastRowEdited;
   }
 }

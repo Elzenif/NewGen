@@ -21,7 +21,6 @@ public class PkMoveComboBoxModel extends PkComboBoxModel<MoveName> {
   public PkMoveComboBoxModel(OptionMenu optionMenu, MoveNameRepository moveNameRepository) {
     super(optionMenu);
     this.moveNameRepository = moveNameRepository;
-    getAllFunction = this::getAllMoveNames;
   }
 
   @PostConstruct
@@ -39,11 +38,4 @@ public class PkMoveComboBoxModel extends PkComboBoxModel<MoveName> {
     return MoveName::getName;
   }
 
-  private Object[] getAllMoveNames(Integer generationMax) {
-    return moveNameRepository
-        .findAllByLanguage(Locale.getDefault().getLanguage(), generationMax)
-        .stream()
-        .map(MoveName::getName)
-        .toArray();
-  }
 }

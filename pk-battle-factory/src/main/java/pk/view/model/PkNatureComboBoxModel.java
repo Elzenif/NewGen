@@ -21,7 +21,6 @@ public class PkNatureComboBoxModel extends PkComboBoxModel<NatureName> {
   public PkNatureComboBoxModel(OptionMenu optionMenu, NatureNameRepository natureNameRepository) {
     super(optionMenu);
     this.natureNameRepository = natureNameRepository;
-    getAllFunction = this::getAllNatureNames;
   }
 
   @PostConstruct
@@ -39,11 +38,4 @@ public class PkNatureComboBoxModel extends PkComboBoxModel<NatureName> {
     return NatureName::getName;
   }
 
-  private Object[] getAllNatureNames(Integer generationMax) {
-    return natureNameRepository
-        .findAllByLanguage(Locale.getDefault().getLanguage())
-        .stream()
-        .map(NatureName::getName)
-        .toArray();
-  }
 }
