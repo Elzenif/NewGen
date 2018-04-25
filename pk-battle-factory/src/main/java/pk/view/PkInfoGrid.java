@@ -12,7 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pk.controller.PokemonFactoryController;
 import pk.model.dto.PokemonFactoryDTO;
+import pk.model.entity.ItemName;
+import pk.model.entity.MoveName;
 import pk.model.entity.NatureName;
+import pk.view.model.PkItemComboBoxModel;
+import pk.view.model.PkMoveComboBoxModel;
 import pk.view.model.PkNatureComboBoxModel;
 
 import java.util.Locale;
@@ -32,13 +36,17 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
   private boolean newLine;
   private final PokemonFactoryController pokemonFactoryController;
   private final PkNatureComboBoxModel pkNatureComboBoxModel;
-
+  private final PkItemComboBoxModel pkItemComboBoxModel;
+  private final PkMoveComboBoxModel pkMoveComboBoxModel;
 
   @Autowired
   public PkInfoGrid(PokemonFactoryController pokemonFactoryController,
-                    PkNatureComboBoxModel pkNatureComboBoxModel) {
+                    PkNatureComboBoxModel pkNatureComboBoxModel, PkItemComboBoxModel pkItemComboBoxModel,
+                    PkMoveComboBoxModel pkMoveComboBoxModel) {
     this.pokemonFactoryController = pokemonFactoryController;
     this.pkNatureComboBoxModel = pkNatureComboBoxModel;
+    this.pkItemComboBoxModel = pkItemComboBoxModel;
+    this.pkMoveComboBoxModel = pkMoveComboBoxModel;
 
     setSizeFull();
     setSelectionMode(SelectionMode.NONE);
@@ -83,7 +91,7 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
 
     CollectionSuggestionProvider natureNameProvider = new CollectionSuggestionProvider(
         pkNatureComboBoxModel.getAllElements().stream().map(NatureName::getName).collect(Collectors.toList()),
-        MatchMode.CONTAINS, true, Locale.getDefault());
+        MatchMode.BEGINS, true, Locale.getDefault());
     AutocompleteTextField natureTextField = new AutocompleteTextField()
         .withSuggestionProvider(natureNameProvider);
     addColumn(PokemonFactoryDTO::getNatureName, new TextRenderer())
@@ -91,60 +99,95 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
         .setExpandRatio(2)
         .setEditorComponent(natureTextField, PokemonFactoryDTO::setNatureName);
 
-    TextField itemTextField = new TextField();
+    CollectionSuggestionProvider itemNameProvider = new CollectionSuggestionProvider(
+        pkItemComboBoxModel.getAllElements().stream().map(ItemName::getName).collect(Collectors.toList()),
+        MatchMode.BEGINS, true, Locale.getDefault());
+    AutocompleteTextField itemTextField = new AutocompleteTextField()
+        .withSuggestionProvider(itemNameProvider);
     addColumn(PokemonFactoryDTO::getItemName, new TextRenderer())
         .setCaption(resourceBundle.getString("item"))
         .setExpandRatio(2)
         .setEditorComponent(itemTextField, PokemonFactoryDTO::setItemName);
 
-    addColumn(p -> p.getStats().get(0), new TextRenderer())
+    TextField hpTextField = new TextField();
+    addColumn(p -> p.getStats().get(1).toString(), new TextRenderer())
         .setCaption(resourceBundle.getString("hp"))
-        .setExpandRatio(0);
+        .setExpandRatio(0)
+        .setEditorComponent(hpTextField, (p, ev) -> p.getStats().put(1, Integer.valueOf(ev)));
 
-    addColumn(p -> p.getStats().get(1), new TextRenderer())
+    TextField atkTextField = new TextField();
+    addColumn(p -> p.getStats().get(2).toString(), new TextRenderer())
         .setCaption(resourceBundle.getString("atk"))
-        .setExpandRatio(0);
+        .setExpandRatio(0)
+        .setEditorComponent(atkTextField, (p, ev) -> p.getStats().put(2, Integer.valueOf(ev)));
 
-    addColumn(p -> p.getStats().get(2), new TextRenderer())
+    TextField defTextField = new TextField();
+    addColumn(p -> p.getStats().get(3).toString(), new TextRenderer())
         .setCaption(resourceBundle.getString("def"))
-        .setExpandRatio(0);
+        .setExpandRatio(0)
+        .setEditorComponent(defTextField, (p, ev) -> p.getStats().put(3, Integer.valueOf(ev)));
 
-    addColumn(p -> p.getStats().get(3), new TextRenderer())
+    TextField spAtkTextField = new TextField();
+    addColumn(p -> p.getStats().get(4).toString(), new TextRenderer())
         .setCaption(resourceBundle.getString("spAtk"))
-        .setExpandRatio(0);
+        .setExpandRatio(0)
+        .setEditorComponent(spAtkTextField, (p, ev) -> p.getStats().put(4, Integer.valueOf(ev)));
 
-    addColumn(p -> p.getStats().get(4), new TextRenderer())
+    TextField spDefTextField = new TextField();
+    addColumn(p -> p.getStats().get(5).toString(), new TextRenderer())
         .setCaption(resourceBundle.getString("spDef"))
-        .setExpandRatio(0);
+        .setExpandRatio(0)
+        .setEditorComponent(spDefTextField, (p, ev) -> p.getStats().put(5, Integer.valueOf(ev)));
 
-    addColumn(p -> p.getStats().get(5), new TextRenderer())
+    TextField speedTextField = new TextField();
+    addColumn(p -> p.getStats().get(6).toString(), new TextRenderer())
         .setCaption(resourceBundle.getString("speed"))
-        .setExpandRatio(0);
+        .setExpandRatio(0)
+        .setEditorComponent(speedTextField, (p, ev) -> p.getStats().put(6, Integer.valueOf(ev)));
 
-    addColumn(p -> p.getMoves().get(0), new TextRenderer())
-        .setCaption(resourceBundle.getString("move") + " 1")
-        .setExpandRatio(2);
+    CollectionSuggestionProvider moveNameProvider = new CollectionSuggestionProvider(
+        pkMoveComboBoxModel.getAllElements().stream().map(MoveName::getName).collect(Collectors.toList()),
+        MatchMode.BEGINS, true, Locale.getDefault());
 
+    AutocompleteTextField move1TextField = new AutocompleteTextField()
+        .withSuggestionProvider(moveNameProvider);
     addColumn(p -> p.getMoves().get(1), new TextRenderer())
-        .setCaption(resourceBundle.getString("move") + " 2")
-        .setExpandRatio(2);
+        .setCaption(resourceBundle.getString("move") + " 1")
+        .setExpandRatio(2)
+        .setEditorComponent(move1TextField, (p, move) -> p.getMoves().put(1, move));
 
+    AutocompleteTextField move2TextField = new AutocompleteTextField()
+        .withSuggestionProvider(moveNameProvider);
     addColumn(p -> p.getMoves().get(2), new TextRenderer())
-        .setCaption(resourceBundle.getString("move") + " 3")
-        .setExpandRatio(2);
+        .setCaption(resourceBundle.getString("move") + " 2")
+        .setExpandRatio(2)
+        .setEditorComponent(move2TextField, (p, move) -> p.getMoves().put(2, move));
 
+    AutocompleteTextField move3TextField = new AutocompleteTextField()
+        .withSuggestionProvider(moveNameProvider);
     addColumn(p -> p.getMoves().get(3), new TextRenderer())
-        .setCaption(resourceBundle.getString("move") + " 4")
-        .setExpandRatio(2);
+        .setCaption(resourceBundle.getString("move") + " 3")
+        .setExpandRatio(2)
+        .setEditorComponent(move3TextField, (p, move) -> p.getMoves().put(3, move));
 
+    AutocompleteTextField move4TextField = new AutocompleteTextField()
+        .withSuggestionProvider(moveNameProvider);
+    addColumn(p -> p.getMoves().get(4), new TextRenderer())
+        .setCaption(resourceBundle.getString("move") + " 4")
+        .setExpandRatio(2)
+        .setEditorComponent(move4TextField, (p, move) -> p.getMoves().put(4, move));
+
+    TextField encounter50TextField = new TextField();
     addColumn(PokemonFactoryDTO::getEncounter50, new TextRenderer())
         .setCaption(resourceBundle.getString("encounter") + " 50")
-        .setExpandRatio(0);
+        .setExpandRatio(0)
+        .setEditorComponent(encounter50TextField, PokemonFactoryDTO::setEncounter50);
 
+    TextField encounter100TextField = new TextField();
     addColumn(PokemonFactoryDTO::getEncounter100, new TextRenderer())
         .setCaption(resourceBundle.getString("encounter") + " 100")
-        .setExpandRatio(0);
-
+        .setExpandRatio(0)
+        .setEditorComponent(encounter100TextField, PokemonFactoryDTO::setEncounter100);
   }
 
 

@@ -29,6 +29,7 @@ import pk.model.repository.StatRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -129,21 +130,19 @@ public class PokemonFactoryController {
     pokemonFactory = pokemonFactoryRepository.save(pokemonFactory);
 
     List<PokemonFactoryStat> pokemonFactoryStats = new ArrayList<>(6);
-    int i = 1;
-    for (Integer ev : pokemonFactoryDTO.getStats()) {
+    for (Map.Entry<Integer, Integer> entry : pokemonFactoryDTO.getStats().entrySet()) {
       PokemonFactoryStat pokemonFactoryStat = new PokemonFactoryStat();
-      pokemonFactoryStat.setId(new PokemonFactoryStatId(pokemonFactory.getId(), i));
+      pokemonFactoryStat.setId(new PokemonFactoryStatId(pokemonFactory.getId(), entry.getKey()));
       pokemonFactoryStat.setPokemonFactory(pokemonFactory);
-      Stat stat = statRepository.getOne(i);
+      Stat stat = statRepository.getOne(entry.getKey());
       pokemonFactoryStat.setStat(stat);
-      pokemonFactoryStat.setEv(ev == null ? 0 : ev);
-      i++;
+      pokemonFactoryStat.setEv(entry.getValue() == null ? 0 : entry.getValue());
       pokemonFactoryStats.add(pokemonFactoryStat);
     }
     pokemonFactoryStatRepository.saveAll(pokemonFactoryStats);
     pokemonFactory.setPokemonFactoryStats(pokemonFactoryStats);
 
-    List<MoveName> moveNames = moveNameRepository.findByName(pokemonFactoryDTO.getMoves(), language);
+    List<MoveName> moveNames = moveNameRepository.findByNames(pokemonFactoryDTO.getMoves().values(), language);
     pokemonFactory.setMoves(moveNames.stream().map(MoveName::getMove).collect(Collectors.toList()));
 
     pokemonFactoryRepository.save(pokemonFactory);

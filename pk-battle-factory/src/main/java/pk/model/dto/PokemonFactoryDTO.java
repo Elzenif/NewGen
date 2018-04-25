@@ -5,7 +5,10 @@ import org.jetbrains.annotations.NotNull;
 import pk.model.projection.PokemonFactoryProjection;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -28,8 +31,8 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   private String pkName;
   private String natureName;
   private String itemName;
-  private List<Integer> stats;
-  private List<String> moves;
+  private Map<Integer, Integer> stats = new LinkedHashMap<>(6);
+  private Map<Integer, String> moves = new LinkedHashMap<>(4);
   private String encounter50;
   private String encounter100;
 
@@ -38,11 +41,17 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.pkName = p.getPkName();
     this.natureName = p.getNatureName();
     this.itemName = p.getItemName();
-    this.stats = stats;
-    this.moves = moves;
+    int j = 1;
+    for (Integer stat : stats) {
+      this.stats.put(j, stat);
+      j++;
+    }
     int movesSize = moves.size();
-    for (int i = 0; i < 4 - movesSize; i++) {
-      this.moves.add(null);
+    for (int i = 1; i <= movesSize; i++) {
+      this.moves.put(i, moves.get(i - 1));
+    }
+    for (int i = 4 - movesSize; i >= 1; i--) {
+      this.moves.put(i, null);
     }
     this.encounter50 = p.getEncounter50();
     this.encounter100 = p.getEncounter100();
@@ -84,19 +93,19 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.itemName = itemName;
   }
 
-  public List<Integer> getStats() {
+  public Map<Integer, Integer> getStats() {
     return stats;
   }
 
-  public void setStats(List<Integer> stats) {
+  public void setStats(Map<Integer, Integer> stats) {
     this.stats = stats;
   }
 
-  public List<String> getMoves() {
+  public Map<Integer, String> getMoves() {
     return moves;
   }
 
-  public void setMoves(List<String> moves) {
+  public void setMoves(Map<Integer, String> moves) {
     this.moves = moves;
   }
 
@@ -125,15 +134,15 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         ", pkName='" + pkName + '\'' +
         ", natureName='" + natureName + '\'' +
         ", itemName='" + itemName + '\'' +
-        ", stats='" + getStringOfList(stats) + '\'' +
-        ", moves='" + getStringOfList(moves) + '\'' +
+        ", stats='" + getStringOfList(stats.values()) + '\'' +
+        ", moves='" + getStringOfList(moves.values()) + '\'' +
         ", encounter50='" + encounter50 + '\'' +
         ", encounter100='" + encounter100 + '\'' +
         '}';
   }
 
   @NotNull
-  private String getStringOfList(List<?> list) {
+  private String getStringOfList(Collection<?> list) {
     return list.stream()
         .filter(Objects::nonNull)
         .map(Object::toString)
@@ -146,11 +155,11 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     s += '\n';
     s += StringUtils.isNull(natureName) ? "" : natureName;
     s += '\n';
-    s += IntStream.rangeClosed(0, 5).boxed()
+    s += IntStream.rangeClosed(1, 6).boxed()
         .filter(i -> stats.get(i) != 0)
         .map(i -> stats.get(i) + " " + STAT_NAMES.get(i))
         .collect(Collectors.joining(" / ")) + '\n';
-    s += " - " + moves.stream()
+    s += " - " + moves.values().stream()
         .filter(move -> !StringUtils.isNull(move))
         .collect(Collectors.joining("\n - "));
     return s;

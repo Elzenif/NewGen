@@ -5,6 +5,7 @@ import org.springframework.data.repository.Repository;
 import pk.model.entity.MoveName;
 import pk.model.entity.MoveNameId;
 
+import java.util.Collection;
 import java.util.List;
 
 @org.springframework.stereotype.Repository
@@ -28,5 +29,5 @@ public interface MoveNameRepository extends Repository<MoveName, MoveNameId> {
       "INNER JOIN mn.move m " +
       "INNER JOIN mn.language l " +
       "WHERE mn.name IN ?1 AND l.iso639 = ?2")
-  List<MoveName> findByName(List<String> moveName, String language);
+  List<MoveName> findByNames(Collection<String> moveNames, String language);
 }
