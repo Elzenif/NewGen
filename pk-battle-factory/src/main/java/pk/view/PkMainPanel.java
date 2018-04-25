@@ -1,15 +1,11 @@
 package pk.view;
 
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.VerticalSplitPanel;
-import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.FlowLayout;
 
 /**
  * Created by Germain on 01/07/2017.
@@ -26,27 +22,24 @@ public class PkMainPanel extends VerticalSplitPanel {
     superiorPanel.setFirstComponent(ownTeamPanel);
     superiorPanel.setSecondComponent(opponentTeamPanel);
 
-    JPanel leftButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    leftButtonPanel.add(new JLabel("IV"));
-    leftButtonPanel.add(ivSpinner);
-    leftButtonPanel.add(new JLabel(Constants.resourceBundle.getString("level")));
-    leftButtonPanel.add(levelSpinner);
-    leftButtonPanel.add(newLineButton);
+    HorizontalLayout buttonLayout = new HorizontalLayout(newLineButton);
+//    buttonLayout.add(new JLabel("IV"));
+//    buttonLayout.add(ivSpinner);
+//    buttonLayout.add(new JLabel(Constants.resourceBundle.getString("level")));
+//    buttonLayout.add(levelSpinner);
 
-    JPanel bottomPanel = new JPanel();
-    BoxLayout boxLayout2 = new BoxLayout(bottomPanel, BoxLayout.Y_AXIS);
-    bottomPanel.setLayout(boxLayout2);
+    VerticalLayout bottomLayout = new VerticalLayout(buttonLayout, pkInfoGrid);
 
 //    JPanel buttonPanel = new JPanel(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP / 2));
-//    buttonPanel.add(leftButtonPanel);
+//    buttonPanel.add(buttonLayout);
 //    buttonPanel.add(rightButtonPanel);
-//    bottomPanel.add(buttonPanel);
+//    bottomLayout.add(buttonPanel);
 
 //    JScrollPane scrollPane = new JScrollPane(pkInfoGrid);
 //    pkInfoGrid.setFillsViewportHeight(true);
-//    bottomPanel.add(scrollPane);
+//    bottomLayout.add(scrollPane);
 
     setFirstComponent(superiorPanel);
-    setSecondComponent(pkInfoGrid);
+    setSecondComponent(bottomLayout);
   }
 }

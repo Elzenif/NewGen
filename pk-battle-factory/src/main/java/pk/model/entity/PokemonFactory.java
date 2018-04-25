@@ -13,7 +13,7 @@ public class PokemonFactory {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  @JoinColumn(name = "pokemon_species_id", referencedColumnName = "id")
+  @JoinColumn(name = "pokemon_species_id", referencedColumnName = "id", nullable = false)
   @ManyToOne(fetch = FetchType.LAZY)
   private PokemonSpecies pokemonSpecies;
   @JoinColumn(name = "nature_id", referencedColumnName = "id")

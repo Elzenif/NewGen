@@ -2,6 +2,8 @@ package pk.controller;
 
 import commons.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +42,8 @@ import java.util.stream.Stream;
  */
 @Component
 public class PokemonFactoryController {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(PokemonFactoryController.class);
 
   private final PokemonFactoryRepository pokemonFactoryRepository;
   private final PokemonFactoryStatRepository pokemonFactoryStatRepository;
@@ -116,6 +120,10 @@ public class PokemonFactoryController {
 
     PokemonSpeciesName pokemonSpeciesName = pokemonSpeciesNameRepository
         .findByName(pokemonFactoryDTO.getPkName(), language);
+    if (pokemonSpeciesName == null) {
+      LOGGER.error(String.format("Cannot save without a valid name: %s", pokemonFactoryDTO.getPkName()));
+      return;
+    }
     pokemonFactory.setPokemonSpecies(pokemonSpeciesName.getPokemonSpecies());
 
     NatureName natureName = natureNameRepository.findByName(pokemonFactoryDTO.getNatureName(), language);

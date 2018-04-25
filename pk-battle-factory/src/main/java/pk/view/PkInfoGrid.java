@@ -1,5 +1,6 @@
 package pk.view;
 
+import com.vaadin.data.provider.DataProvider;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.renderers.TextRenderer;
@@ -15,8 +16,10 @@ import pk.model.dto.PokemonFactoryDTO;
 import pk.model.entity.ItemName;
 import pk.model.entity.MoveName;
 import pk.model.entity.NatureName;
+import pk.model.entity.PokemonSpeciesName;
 import pk.view.model.PkItemComboBoxModel;
 import pk.view.model.PkMoveComboBoxModel;
+import pk.view.model.PkNameComboBoxModel;
 import pk.view.model.PkNatureComboBoxModel;
 
 import java.util.Locale;
@@ -35,15 +38,17 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
   private static final Logger LOGGER = LoggerFactory.getLogger(PkInfoGrid.class);
   private boolean newLine;
   private final PokemonFactoryController pokemonFactoryController;
+  private final PkNameComboBoxModel pkNameComboBoxModel;
   private final PkNatureComboBoxModel pkNatureComboBoxModel;
   private final PkItemComboBoxModel pkItemComboBoxModel;
   private final PkMoveComboBoxModel pkMoveComboBoxModel;
 
   @Autowired
   public PkInfoGrid(PokemonFactoryController pokemonFactoryController,
-                    PkNatureComboBoxModel pkNatureComboBoxModel, PkItemComboBoxModel pkItemComboBoxModel,
-                    PkMoveComboBoxModel pkMoveComboBoxModel) {
+                    PkNameComboBoxModel pkNameComboBoxModel, PkNatureComboBoxModel pkNatureComboBoxModel,
+                    PkItemComboBoxModel pkItemComboBoxModel, PkMoveComboBoxModel pkMoveComboBoxModel) {
     this.pokemonFactoryController = pokemonFactoryController;
+    this.pkNameComboBoxModel = pkNameComboBoxModel;
     this.pkNatureComboBoxModel = pkNatureComboBoxModel;
     this.pkItemComboBoxModel = pkItemComboBoxModel;
     this.pkMoveComboBoxModel = pkMoveComboBoxModel;
@@ -80,14 +85,19 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
 
   public void newLine() {
     newLine = true;
-//    pokemonFactoryDTOS = Collections.emptyList();
+
+    setDataProvider(DataProvider.ofItems(new PokemonFactoryDTO()));
   }
 
   private void setupColumns() {
-    TextField nameTextField = new TextField();
+    CollectionSuggestionProvider speciesNameProvider = new CollectionSuggestionProvider(
+        pkNameComboBoxModel.getAllElements().stream().map(PokemonSpeciesName::getName).collect(Collectors.toList()),
+        MatchMode.BEGINS, true, Locale.getDefault());
+    AutocompleteTextField speciesNameTextField = new AutocompleteTextField()
+        .withSuggestionProvider(speciesNameProvider);
     addColumn(PokemonFactoryDTO::getPkName, new TextRenderer())
         .setCaption(resourceBundle.getString("name"))
-        .setEditorComponent(nameTextField, PokemonFactoryDTO::setPkName);
+        .setEditorComponent(speciesNameTextField, PokemonFactoryDTO::setPkName);
 
     CollectionSuggestionProvider natureNameProvider = new CollectionSuggestionProvider(
         pkNatureComboBoxModel.getAllElements().stream().map(NatureName::getName).collect(Collectors.toList()),

@@ -36,6 +36,15 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   private String encounter50;
   private String encounter100;
 
+  public PokemonFactoryDTO() {
+    for (int i = 1; i <= 6; i++) {
+      stats.put(i, 0);
+    }
+    for (int i = 1; i <= 4; i++) {
+      moves.put(i, null);
+    }
+  }
+
   public PokemonFactoryDTO(PokemonFactoryProjection p, List<Integer> stats, List<String> moves) {
     this.id = p.getId();
     this.pkName = p.getPkName();
