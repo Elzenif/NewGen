@@ -1,8 +1,6 @@
 package pk.view;
 
-import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.TextArea;
 import pk.controller.PokemonFactoryController;
 import pk.model.dto.PokemonFactoryDTO;
@@ -16,9 +14,6 @@ public abstract class PkInfoRow extends HorizontalLayout {
   private HorizontalLayout rightPanel;
   private TextArea textArea;
   private TextArea statArea;
-  private Label label;
-  private HorizontalLayout areasPanel;
-  private Component currentComponent;
 
   public PkInfoRow(PokemonFactoryController pokemonFactoryController) {
     this.pokemonFactoryController = pokemonFactoryController;
@@ -28,34 +23,28 @@ public abstract class PkInfoRow extends HorizontalLayout {
   }
 
   protected void postInit() {
-    rightPanel = new HorizontalLayout();
-
-    label = new Label();
-    rightPanel.addComponent(label);
-
-    currentComponent = label;
-
-    areasPanel = new HorizontalLayout();
     textArea = new TextArea();
-//    textArea.setOpaque(false);
     textArea.setRows(7);
-    areasPanel.addComponent(textArea);
-    statArea = new TextArea();
-//    statArea.setOpaque(false);
-    statArea.setRows(6);
-    areasPanel.addComponent(statArea);
+    textArea.setReadOnly(true);
+    textArea.setWidth(20, Unit.EM);
 
-//    rightPanel.setContent(areasPanel);
+    statArea = new TextArea();
+    statArea.setRows(6);
+    statArea.setReadOnly(true);
+    statArea.setWidth(8, Unit.EM);
+
+    rightPanel = new HorizontalLayout(textArea, statArea);
+    rightPanel.setVisible(false);
 
     addComponent(rightPanel);
   }
 
   public void showText(PokemonFactoryDTO pokemonFactoryDTO) {
     textArea.setValue(pokemonFactoryDTO.prettyPrint());
+
     String stats = pokemonFactoryController.printStats(pokemonFactoryDTO);
     statArea.setValue(stats);
 
-    rightPanel.replaceComponent(currentComponent, areasPanel);
-    currentComponent = areasPanel;
+    rightPanel.setVisible(true);
   }
 }

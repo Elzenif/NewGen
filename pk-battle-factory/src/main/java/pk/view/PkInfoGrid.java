@@ -42,6 +42,7 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
   private final PkNatureComboBoxModel pkNatureComboBoxModel;
   private final PkItemComboBoxModel pkItemComboBoxModel;
   private final PkMoveComboBoxModel pkMoveComboBoxModel;
+  private PkInfoRow lastRowEdited;
 
   @Autowired
   public PkInfoGrid(PokemonFactoryController pokemonFactoryController,
@@ -54,11 +55,16 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
     this.pkMoveComboBoxModel = pkMoveComboBoxModel;
 
     setSizeFull();
-    setSelectionMode(SelectionMode.NONE);
+    setSelectionMode(SelectionMode.SINGLE);
     setupColumns();
     getEditor().setEnabled(true);
 
+    setupSelectionListener();
     setupSaveListener();
+  }
+
+  private void setupSelectionListener() {
+    addSelectionListener(event -> event.getFirstSelectedItem().ifPresent(p -> lastRowEdited.showText(p)));
   }
 
   private void setupSaveListener() {
@@ -77,7 +83,6 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
 
   public void update(Function<String, Stream<PokemonFactoryDTO>> findFunction, String param) {
     newLine = false;
-
     setDataProvider(
         (sortOrder, offset, limit) -> findFunction.apply(param),
         () -> Math.toIntExact(findFunction.apply(param).count()));
@@ -85,7 +90,6 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
 
   public void newLine() {
     newLine = true;
-
     setDataProvider(DataProvider.ofItems(new PokemonFactoryDTO()));
   }
 
@@ -222,5 +226,6 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
 //  }
 
   public void setLastRowEdited(PkInfoRow lastRowEdited) {
+    this.lastRowEdited = lastRowEdited;
   }
 }

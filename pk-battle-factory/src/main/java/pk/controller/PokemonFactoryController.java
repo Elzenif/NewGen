@@ -167,15 +167,15 @@ public class PokemonFactoryController {
       nature = natureName.getNature();
     }
     return IntStream.rangeClosed(0, 5).boxed()
-        .map(i -> printStat(i, pokemonStats.get(i), pokemonFactoryDTO.getStats().get(i), nature))
+        .map(i -> printStat(i, pokemonStats.get(i), pokemonFactoryDTO.getStats().get(i + 1), nature))
         .collect(Collectors.joining("\n"));
   }
 
   private String printStat(Integer index, PokemonStat pokemonStat, Integer ev, Nature nature) {
     String s = PokemonFactoryDTO.STAT_NAMES.get(index);
     double natureBonus = getBonusFromNature(index + 1, nature);
-    s += "\t" + (index == 0 ? getHPFormula(pokemonStat, ev) : getOtherFormula(pokemonStat, ev, natureBonus));
-    return s;
+    s += '\t' + (index == 0 ? getHPFormula(pokemonStat, ev) : getOtherFormula(pokemonStat, ev, natureBonus));
+    return s.length() <= 8 ? '\t' + s : s;
   }
 
   private double getBonusFromNature(Integer index, Nature nature) {
@@ -193,14 +193,16 @@ public class PokemonFactoryController {
   @NotNull
   private String getOtherFormula(PokemonStat pokemonStat, int ev, double natureBonus) {
     // Others:  (((IV + 2 * BaseStat + (EV/4) ) * Level/100 ) + 5) * Nature Value
-    return String.valueOf((int) (((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 5) * natureBonus));
+    return String.valueOf(
+        (int) (((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 5) * natureBonus));
   }
 
   @NotNull
   private String getHPFormula(PokemonStat pokemonStat, int ev) {
     // HP :     (((IV + 2 * BaseStat + (EV/4) ) * Level/100 ) + 10 + Level
 
-    return String.valueOf((int) ((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 10 + level));
+    return String
+        .valueOf((int) ((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 10 + level));
   }
 
   public void setLevel(int level) {

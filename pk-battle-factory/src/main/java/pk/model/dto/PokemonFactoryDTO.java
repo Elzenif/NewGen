@@ -164,9 +164,9 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     s += '\n';
     s += StringUtils.isNull(natureName) ? "" : natureName;
     s += '\n';
-    s += IntStream.rangeClosed(1, 6).boxed()
-        .filter(i -> stats.get(i) != 0)
-        .map(i -> stats.get(i) + " " + STAT_NAMES.get(i))
+    s += IntStream.rangeClosed(0, 5).boxed()
+        .filter(i -> stats.get(i + 1) != 0)
+        .map(i -> stats.get(i + 1) + " " + STAT_NAMES.get(i))
         .collect(Collectors.joining(" / ")) + '\n';
     s += " - " + moves.values().stream()
         .filter(move -> !StringUtils.isNull(move))
