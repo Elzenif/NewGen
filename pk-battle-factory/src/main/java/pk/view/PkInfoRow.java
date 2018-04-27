@@ -34,7 +34,7 @@ public abstract class PkInfoRow extends HorizontalLayout {
     statArea.setWidth(8, Unit.EM);
 
     rightPanel = new HorizontalLayout(textArea, statArea);
-    rightPanel.setVisible(false);
+    rightPanel.setVisible(true);
 
     addComponent(rightPanel);
   }
@@ -44,7 +44,5 @@ public abstract class PkInfoRow extends HorizontalLayout {
 
     String stats = pokemonFactoryController.printStats(pokemonFactoryDTO);
     statArea.setValue(stats);
-
-    rightPanel.setVisible(true);
   }
 }

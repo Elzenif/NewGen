@@ -1,25 +1,23 @@
 package pk.view;
 
+import com.vaadin.data.HasValue;
+import com.vaadin.data.provider.DataProvider;
+import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import pk.controller.PkMoveValueChangeListener;
 import pk.controller.PkNameValueChangeListener;
 import pk.controller.PkTypeValueChangeListener;
 import pk.controller.PokemonFactoryController;
 
 import javax.annotation.PostConstruct;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Germain on 10/07/2017.
  */
-@Component
+@org.springframework.stereotype.Component
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
 public class PkOpponentInfoRow extends PkInfoRow {
 
@@ -31,14 +29,14 @@ public class PkOpponentInfoRow extends PkInfoRow {
   private PkTypeComboBox typeComboBox;
   private PkMoveComboBox moveComboBox;
 
-  private JComboBox<PkOpponentCriteria> criteriaComboBox;
-  private JPanel leftPanel2;
-  private CardLayout leftCardLayout;
-
+  private ComboBox<PkOpponentCriteria> criteriaComboBox;
+  private Component currentComponent;
 
   @Autowired
-  public PkOpponentInfoRow(PokemonFactoryController pokemonFactoryController, PkNameValueChangeListener pkNameValueChangeListener,
-                           PkTypeValueChangeListener pkTypeValueChangeListener, PkMoveValueChangeListener pkMoveValueChangeListener) {
+  public PkOpponentInfoRow(PokemonFactoryController pokemonFactoryController,
+                           PkNameValueChangeListener pkNameValueChangeListener,
+                           PkTypeValueChangeListener pkTypeValueChangeListener,
+                           PkMoveValueChangeListener pkMoveValueChangeListener) {
     super(pokemonFactoryController);
     this.pkNameValueChangeListener = pkNameValueChangeListener;
     this.pkTypeValueChangeListener = pkTypeValueChangeListener;
@@ -64,38 +62,42 @@ public class PkOpponentInfoRow extends PkInfoRow {
   public void init() {
     preInit();
 
-//    criteriaComboBox = new JComboBox<>(PkOpponentCriteria.values());
-//    add(criteriaComboBox);
-//
-//    leftPanel2 = new JPanel();
-//    leftCardLayout = new CardLayout();
-//    leftPanel2.setLayout(leftCardLayout);
-//
-//    nameComboBox.setEditable(true);
-//    leftPanel2.add(PkOpponentCriteria.NAME.getName(), nameComboBox);
-//
-//    typeComboBox.setEditable(true);
-//    leftPanel2.add(PkOpponentCriteria.TYPE.getName(), typeComboBox);
-//
-//    moveComboBox.setEditable(true);
-//    leftPanel2.add(PkOpponentCriteria.MOVE.getName(), moveComboBox);
-//
-//    leftCardLayout.show(leftPanel2, PkOpponentCriteria.NAME.getName());
-//    add(leftPanel2);
-//
-//    criteriaComboBox.addActionListener(new PkOpponentCriteriaActionListener());
-//    nameComboBox.addActionListener(pkNameActionListener);
-//    typeComboBox.addActionListener(pkTypeActionListener);
-//    moveComboBox.addActionListener(pkMoveValueChangeListener);
+    criteriaComboBox = new ComboBox<>(" ");
+    criteriaComboBox.setWidth(7, Unit.EM);
+    criteriaComboBox.setDataProvider(DataProvider.ofItems(PkOpponentCriteria.values()));
+    addComponent(criteriaComboBox);
+
+    currentComponent = nameComboBox;
+    addComponent(currentComponent);
+
+    criteriaComboBox.addValueChangeListener(new PkOpponentCriteriaValueChangeListener());
+    nameComboBox.addValueChangeListener(pkNameValueChangeListener);
+    typeComboBox.addValueChangeListener(pkTypeValueChangeListener);
+    moveComboBox.addValueChangeListener(pkMoveValueChangeListener);
 
     postInit();
   }
 
-  private class PkOpponentCriteriaActionListener implements ActionListener {
+  private class PkOpponentCriteriaValueChangeListener implements HasValue.ValueChangeListener<PkOpponentCriteria> {
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-      leftCardLayout.show(leftPanel2, ((PkOpponentCriteria) criteriaComboBox.getSelectedItem()).getName());
+    public void valueChange(HasValue.ValueChangeEvent<PkOpponentCriteria> event) {
+      Component newComponent;
+      switch (event.getValue()) {
+      case MOVE:
+        newComponent = moveComboBox;
+        break;
+      case NAME:
+        newComponent = nameComboBox;
+        break;
+      case TYPE:
+        newComponent = typeComboBox;
+        break;
+      default:
+        return;
+      }
+      replaceComponent(currentComponent, newComponent);
+      currentComponent = newComponent;
     }
   }
 }

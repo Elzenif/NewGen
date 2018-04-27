@@ -101,6 +101,7 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
         .withSuggestionProvider(speciesNameProvider);
     addColumn(PokemonFactoryDTO::getPkName, new TextRenderer())
         .setCaption(resourceBundle.getString("name"))
+        .setExpandRatio(2)
         .setEditorComponent(speciesNameTextField, PokemonFactoryDTO::setPkName);
 
     CollectionSuggestionProvider natureNameProvider = new CollectionSuggestionProvider(
@@ -203,27 +204,6 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
         .setExpandRatio(0)
         .setEditorComponent(encounter100TextField, PokemonFactoryDTO::setEncounter100);
   }
-
-
-  //  @Override
-//  public void tableChanged(TableModelEvent e) {
-//    super.tableChanged(e);
-//    if (!editing) {
-//      if (saveButton != null) {
-//        saveButton.setEnabled(true);
-//      }
-//      editing = true;
-//    }
-//    if (!newLine) {
-//      int selectedRow = getSelectedRow();
-//      if (lastRowEdited != null && selectedRow >= 0) {
-//        // TODO get value from table + id
-//        PokemonFactoryDTO pokemonFactoryDTO = getPokemonFactoryDTO(selectedRow, getColumnCount());
-//        pokemonFactoryDTO.setId(pokemonFactoryDTOS.get(selectedRow).getId());
-//        lastRowEdited.showText(pokemonFactoryDTO);
-//      }
-//    }
-//  }
 
   public void setLastRowEdited(PkInfoRow lastRowEdited) {
     this.lastRowEdited = lastRowEdited;

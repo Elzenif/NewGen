@@ -16,9 +16,6 @@ public class PkComboBox<T> extends ComboBox<T> {
     setItemCaptionGenerator(model.getCaptionGenerator()::apply);
     setEmptySelectionAllowed(false);
     setWidth(100.0F, Unit.PERCENTAGE);
-//    setPlaceholder();
-//    setModel(new SharedComboBoxModel(model));
-//    AutoCompleteDecorator.decorate(this);
   }
 
   public PkComboBoxModel<T> getModel() {
