@@ -1,5 +1,6 @@
 package pk.view;
 
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
@@ -15,31 +16,20 @@ public class PkMainPanel extends VerticalSplitPanel {
 
   @Autowired
   public PkMainPanel(OwnTeamPanel ownTeamPanel, OpponentTeamPanel opponentTeamPanel, PkInfoGrid pkInfoGrid,
-                     NewLineButton newLineButton, LevelSpinner levelSpinner,
-                     IVSpinner ivSpinner) {
-
+                     NewLineButton newLineButton, LevelField levelField, IVField ivField) {
     HorizontalSplitPanel superiorPanel = new HorizontalSplitPanel();
     superiorPanel.setFirstComponent(ownTeamPanel);
     superiorPanel.setSecondComponent(opponentTeamPanel);
 
-    HorizontalLayout buttonLayout = new HorizontalLayout(newLineButton);
-//    buttonLayout.add(new JLabel("IV"));
-//    buttonLayout.add(ivSpinner);
-//    buttonLayout.add(new JLabel(Constants.resourceBundle.getString("level")));
-//    buttonLayout.add(levelSpinner);
+    HorizontalLayout buttonLayout = new HorizontalLayout(newLineButton, ivField, levelField);
+    buttonLayout.setComponentAlignment(newLineButton, Alignment.BOTTOM_CENTER);
+    buttonLayout.setComponentAlignment(ivField, Alignment.BOTTOM_CENTER);
+    buttonLayout.setComponentAlignment(levelField, Alignment.BOTTOM_CENTER);
 
     VerticalLayout bottomLayout = new VerticalLayout(buttonLayout, pkInfoGrid);
 
-//    JPanel buttonPanel = new JPanel(new GridLayout(0, 2, Constants.JPANEL_HGAP, Constants.JPANEL_VGAP / 2));
-//    buttonPanel.add(buttonLayout);
-//    buttonPanel.add(rightButtonPanel);
-//    bottomLayout.add(buttonPanel);
-
-//    JScrollPane scrollPane = new JScrollPane(pkInfoGrid);
-//    pkInfoGrid.setFillsViewportHeight(true);
-//    bottomLayout.add(scrollPane);
-
     setFirstComponent(superiorPanel);
     setSecondComponent(bottomLayout);
+    setSplitPosition(65, Unit.PERCENTAGE);
   }
 }

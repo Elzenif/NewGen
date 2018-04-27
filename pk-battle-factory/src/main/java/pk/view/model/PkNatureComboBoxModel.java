@@ -3,9 +3,7 @@ package pk.view.model;
 import org.springframework.stereotype.Component;
 import pk.model.entity.NatureName;
 import pk.model.repository.NatureNameRepository;
-import pk.view.menu.OptionMenu;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
@@ -14,18 +12,12 @@ import java.util.function.Function;
  * Created by Germain on 12/07/2017.
  */
 @Component
-public class PkNatureComboBoxModel extends PkComboBoxModel<NatureName> {
+public class PkNatureComboBoxModel implements PkComboBoxModel<NatureName> {
 
   private final NatureNameRepository natureNameRepository;
 
-  public PkNatureComboBoxModel(OptionMenu optionMenu, NatureNameRepository natureNameRepository) {
-    super(optionMenu);
+  public PkNatureComboBoxModel(NatureNameRepository natureNameRepository) {
     this.natureNameRepository = natureNameRepository;
-  }
-
-  @PostConstruct
-  public void init() {
-    super.init();
   }
 
   @Override

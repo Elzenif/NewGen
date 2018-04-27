@@ -18,7 +18,7 @@ public enum PkOpponentCriteria {
   }
 
   @Contract(pure = true)
-  public String getName() {
+  private String getName() {
     return name;
   }
 

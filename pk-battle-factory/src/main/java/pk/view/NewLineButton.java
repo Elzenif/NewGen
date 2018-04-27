@@ -16,7 +16,6 @@ public class NewLineButton extends Button implements Button.ClickListener {
   @Autowired
   public NewLineButton() {
     super(Constants.resourceBundle.getString("newLine"));
-
     addClickListener(this);
   }
 

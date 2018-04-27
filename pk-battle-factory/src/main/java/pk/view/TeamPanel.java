@@ -3,10 +3,15 @@ package pk.view;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Germain on 01/07/2017.
  */
-public abstract class TeamPanel extends GridLayout {
+public abstract class TeamPanel<T extends PkInfoRow> extends GridLayout {
+
+  private final List<T> pkInfoRows = new ArrayList<>();
 
   public TeamPanel(String title, int rows) {
     super(1, rows);
@@ -16,5 +21,14 @@ public abstract class TeamPanel extends GridLayout {
       setRowExpandRatio(i, 1F);
       setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
     }
+  }
+
+  protected void add(T pkInfoRow) {
+    addComponent(pkInfoRow);
+    pkInfoRows.add(pkInfoRow);
+  }
+
+  public List<T> getPkInfoRows() {
+    return pkInfoRows;
   }
 }

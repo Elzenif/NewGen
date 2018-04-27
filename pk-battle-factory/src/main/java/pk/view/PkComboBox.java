@@ -10,7 +10,7 @@ public class PkComboBox<T> extends ComboBox<T> {
 
   private final PkComboBoxModel<T> model;
 
-  public PkComboBox(PkComboBoxModel<T> model, String caption) {
+  protected PkComboBox(PkComboBoxModel<T> model, String caption) {
     super(caption, model.getAllElements());
     this.model = model;
     setItemCaptionGenerator(model.getCaptionGenerator()::apply);

@@ -1,12 +1,11 @@
 package pk.view.model;
 
+import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pk.model.entity.PokemonSpeciesName;
 import pk.model.repository.PokemonSpeciesNameRepository;
-import pk.view.menu.OptionMenu;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
@@ -15,26 +14,19 @@ import java.util.function.Function;
  * Created by Germain on 12/07/2017.
  */
 @Component
-public class PkNameComboBoxModel extends PkComboBoxModel<PokemonSpeciesName> {
+public class PkNameComboBoxModel implements PkComboBoxModel<PokemonSpeciesName> {
 
   private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
 
   @Autowired
-  public PkNameComboBoxModel(PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
-                             OptionMenu optionMenu) {
-    super(optionMenu);
+  public PkNameComboBoxModel(PokemonSpeciesNameRepository pokemonSpeciesNameRepository) {
     this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
-  }
-
-  @PostConstruct
-  public void init() {
-    super.init();
   }
 
   @Override
   public List<PokemonSpeciesName> getAllElements() {
     return pokemonSpeciesNameRepository
-        .findAllByLanguageAndGeneration(Locale.getDefault().getLanguage(), getGeneration());
+        .findAllByLanguageAndGeneration(Locale.getDefault().getLanguage(), Constants.GENERATION);
   }
 
   @Override

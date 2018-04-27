@@ -32,7 +32,7 @@ public interface PokemonFactoryRepository extends JpaRepository<PokemonFactory, 
       "WHERE pokemonSpeciesNames.name = ?1 AND l1.iso639 = ?2 " +
       "AND (CASE WHEN (pokemonFactory.nature IS NULL) THEN ?2 ELSE l2.iso639 END) = ?2 " +
       "AND (CASE WHEN (pokemonFactory.item IS NULL) THEN ?2 ELSE l3.iso639 END) = ?2")
-  List<PokemonFactoryProjection> findByName(String name, String language);
+  List<PokemonFactoryProjection> findByNameAndLanguage(String name, String language);
 
   @Query("SELECT DISTINCT pokemonFactory.id AS id, " +
       "pokemonSpeciesNames.name AS pkName, " +
@@ -60,7 +60,7 @@ public interface PokemonFactoryRepository extends JpaRepository<PokemonFactory, 
       "AND (CASE WHEN (pokemonFactory.nature IS NULL) THEN ?2 ELSE l3.iso639 END) = ?2 " +
       "AND (CASE WHEN (pokemonFactory.item IS NULL) THEN ?2 ELSE l4.iso639 END) = ?2 " +
       "ORDER BY pokemonSpecies.id")
-  List<PokemonFactoryProjection> findByType(String type, String language);
+  List<PokemonFactoryProjection> findByTypeAndLanguage(String type, String language);
 
   @Query("SELECT DISTINCT pokemonFactory.id AS id, " +
       "pokemonSpeciesNames.name AS pkName, " +
@@ -85,5 +85,5 @@ public interface PokemonFactoryRepository extends JpaRepository<PokemonFactory, 
       "AND moveNames.name = ?1 AND l2.iso639 = ?2 " +
       "AND (CASE WHEN (pokemonFactory.nature IS NULL) THEN ?2 ELSE l3.iso639 END) = ?2 " +
       "AND (CASE WHEN (pokemonFactory.item IS NULL) THEN ?2 ELSE l4.iso639 END) = ?2")
-  List<PokemonFactoryProjection> findByMove(String move, String language);
+  List<PokemonFactoryProjection> findByMoveAndLanguage(String move, String language);
 }

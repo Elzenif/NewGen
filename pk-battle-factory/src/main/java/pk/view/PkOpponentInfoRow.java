@@ -29,7 +29,6 @@ public class PkOpponentInfoRow extends PkInfoRow {
   private PkTypeComboBox typeComboBox;
   private PkMoveComboBox moveComboBox;
 
-  private ComboBox<PkOpponentCriteria> criteriaComboBox;
   private Component currentComponent;
 
   @Autowired
@@ -60,9 +59,7 @@ public class PkOpponentInfoRow extends PkInfoRow {
 
   @PostConstruct
   public void init() {
-    preInit();
-
-    criteriaComboBox = new ComboBox<>(" ");
+    ComboBox<PkOpponentCriteria> criteriaComboBox = new ComboBox<>(" ");
     criteriaComboBox.setWidth(7, Unit.EM);
     criteriaComboBox.setDataProvider(DataProvider.ofItems(PkOpponentCriteria.values()));
     addComponent(criteriaComboBox);

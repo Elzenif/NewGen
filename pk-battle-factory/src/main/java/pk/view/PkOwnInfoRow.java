@@ -34,8 +34,6 @@ public class PkOwnInfoRow extends PkInfoRow {
 
   @PostConstruct
   public void init() {
-    preInit();
-
     addComponent(nameComboBox);
 
     nameComboBox.addValueChangeListener(pkNameValueChangeListener);

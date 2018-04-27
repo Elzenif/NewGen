@@ -25,7 +25,7 @@ public abstract class PkValueChangeListener<T> implements HasValue.ValueChangeLi
   private PkComboBox<T> cb;
   private String param;
 
-  public PkValueChangeListener(PkInfoGrid pkInfoGrid, Function<String, Stream<PokemonFactoryDTO>> findFunction) {
+  protected PkValueChangeListener(PkInfoGrid pkInfoGrid, Function<String, Stream<PokemonFactoryDTO>> findFunction) {
     this.pkInfoGrid = pkInfoGrid;
     this.findFunction = findFunction;
   }

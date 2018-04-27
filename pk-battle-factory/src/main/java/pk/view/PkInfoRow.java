@@ -2,6 +2,8 @@ package pk.view;
 
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextArea;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pk.controller.PokemonFactoryController;
 import pk.model.dto.PokemonFactoryDTO;
 
@@ -10,16 +12,14 @@ import pk.model.dto.PokemonFactoryDTO;
  */
 public abstract class PkInfoRow extends HorizontalLayout {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(PkInfoRow.class);
   private final PokemonFactoryController pokemonFactoryController;
-  private HorizontalLayout rightPanel;
   private TextArea textArea;
   private TextArea statArea;
+  private PokemonFactoryDTO pokemonFactoryDTO;
 
   public PkInfoRow(PokemonFactoryController pokemonFactoryController) {
     this.pokemonFactoryController = pokemonFactoryController;
-  }
-
-  protected void preInit() {
   }
 
   protected void postInit() {
@@ -27,22 +27,27 @@ public abstract class PkInfoRow extends HorizontalLayout {
     textArea.setRows(7);
     textArea.setReadOnly(true);
     textArea.setWidth(20, Unit.EM);
+    addComponent(textArea);
 
     statArea = new TextArea();
     statArea.setRows(6);
     statArea.setReadOnly(true);
     statArea.setWidth(8, Unit.EM);
-
-    rightPanel = new HorizontalLayout(textArea, statArea);
-    rightPanel.setVisible(true);
-
-    addComponent(rightPanel);
+    addComponent(statArea);
   }
 
   public void showText(PokemonFactoryDTO pokemonFactoryDTO) {
-    textArea.setValue(pokemonFactoryDTO.prettyPrint());
+    this.pokemonFactoryDTO = pokemonFactoryDTO;
+    refresh();
+  }
 
-    String stats = pokemonFactoryController.printStats(pokemonFactoryDTO);
-    statArea.setValue(stats);
+  public void refresh() {
+    if (pokemonFactoryDTO != null) {
+      LOGGER.debug(String.format("Refreshing %s", pokemonFactoryDTO));
+      textArea.setValue(pokemonFactoryDTO.prettyPrint());
+
+      String stats = pokemonFactoryController.printStats(pokemonFactoryDTO);
+      statArea.setValue(stats);
+    }
   }
 }

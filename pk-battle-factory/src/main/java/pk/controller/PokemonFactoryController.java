@@ -79,17 +79,17 @@ public class PokemonFactoryController {
 
   public Stream<PokemonFactoryDTO> findByName(String name) {
     String language = Locale.getDefault().getLanguage();
-    return find(pokemonFactoryRepository.findByName(name, language).stream(), language);
+    return find(pokemonFactoryRepository.findByNameAndLanguage(name, language).stream(), language);
   }
 
   public Stream<PokemonFactoryDTO> findByType(String type) {
     String language = Locale.getDefault().getLanguage();
-    return find(pokemonFactoryRepository.findByType(type, language).stream(), language);
+    return find(pokemonFactoryRepository.findByTypeAndLanguage(type, language).stream(), language);
   }
 
   public Stream<PokemonFactoryDTO> findByMove(String move) {
     String language = Locale.getDefault().getLanguage();
-    return find(pokemonFactoryRepository.findByMove(move, language).stream(), language);
+    return find(pokemonFactoryRepository.findByMoveAndLanguage(move, language).stream(), language);
   }
 
   private Stream<PokemonFactoryDTO> find(Stream<PokemonFactoryProjection> projections, String language) {

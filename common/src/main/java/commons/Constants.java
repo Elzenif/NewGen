@@ -20,6 +20,8 @@ public class Constants {
   public static final int FONT_SIZE_INT = 12;
   public static final float FONT_SIZE_FLOAT = 12f;
 
+  public static final int GENERATION = 4;
+
   @NonNls
   public static final ResourceBundle resourceBundle = ResourceBundle.getBundle("locale/user-interface");
 
