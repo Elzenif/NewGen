@@ -27,6 +27,8 @@ import pk.model.repository.PokemonFactoryStatRepository;
 import pk.model.repository.PokemonSpeciesNameRepository;
 import pk.model.repository.PokemonStatRepository;
 import pk.model.repository.StatRepository;
+import pk.view.IVSlider;
+import pk.view.LevelSlider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +56,8 @@ public class PokemonFactoryController {
   private final StatRepository statRepository;
   private final PokemonStatRepository pokemonStatRepository;
 
-  private double level = 100;
-  private double iv = 0;
+  private double level = LevelSlider.DEFAULT_LEVEL;
+  private double iv = IVSlider.DEFAULT_IV;
 
 
   @Autowired

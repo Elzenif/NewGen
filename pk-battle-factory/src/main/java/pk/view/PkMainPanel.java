@@ -16,15 +16,15 @@ public class PkMainPanel extends VerticalSplitPanel {
 
   @Autowired
   public PkMainPanel(OwnTeamPanel ownTeamPanel, OpponentTeamPanel opponentTeamPanel, PkInfoGrid pkInfoGrid,
-                     NewLineButton newLineButton, LevelField levelField, IVField ivField) {
+                     NewLineButton newLineButton, LevelSlider levelSlider, IVSlider ivSlider) {
     HorizontalSplitPanel superiorPanel = new HorizontalSplitPanel();
     superiorPanel.setFirstComponent(ownTeamPanel);
     superiorPanel.setSecondComponent(opponentTeamPanel);
 
-    HorizontalLayout buttonLayout = new HorizontalLayout(newLineButton, ivField, levelField);
+    HorizontalLayout buttonLayout = new HorizontalLayout(newLineButton, ivSlider, levelSlider);
     buttonLayout.setComponentAlignment(newLineButton, Alignment.BOTTOM_CENTER);
-    buttonLayout.setComponentAlignment(ivField, Alignment.BOTTOM_CENTER);
-    buttonLayout.setComponentAlignment(levelField, Alignment.BOTTOM_CENTER);
+    buttonLayout.setComponentAlignment(ivSlider, Alignment.BOTTOM_CENTER);
+    buttonLayout.setComponentAlignment(levelSlider, Alignment.BOTTOM_CENTER);
 
     VerticalLayout bottomLayout = new VerticalLayout(buttonLayout, pkInfoGrid);
 
