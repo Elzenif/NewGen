@@ -13,9 +13,9 @@ public class PokemonFactory {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  @JoinColumn(name = "pokemon_species_id", referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "pokemon_id", referencedColumnName = "id", nullable = false)
   @ManyToOne(fetch = FetchType.LAZY)
-  private PokemonSpecies pokemonSpecies;
+  private Pokemon pokemon;
   @JoinColumn(name = "nature_id", referencedColumnName = "id")
   @ManyToOne(fetch = FetchType.LAZY)
   private Nature nature;
@@ -45,12 +45,12 @@ public class PokemonFactory {
     this.id = id;
   }
 
-  public PokemonSpecies getPokemonSpecies() {
-    return pokemonSpecies;
+  public Pokemon getPokemon() {
+    return pokemon;
   }
 
-  public void setPokemonSpecies(PokemonSpecies pokemonSpecies) {
-    this.pokemonSpecies = pokemonSpecies;
+  public void setPokemon(Pokemon pokemon) {
+    this.pokemon = pokemon;
   }
 
   public Nature getNature() {
@@ -105,7 +105,7 @@ public class PokemonFactory {
   public String toString() {
     return "PokemonFactory{" +
         "id=" + id +
-        ", pokemonSpecies=" + (pokemonSpecies == null ? null : pokemonSpecies.getId()) +
+        ", pokemon=" + (pokemon == null ? null : pokemon.getId()) +
         ", nature=" + (nature == null ? null : nature.getId()) +
         ", item=" + (item == null ? null : item.getId()) +
         ", encounter50='" + encounter50 + '\'' +

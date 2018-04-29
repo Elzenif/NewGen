@@ -13,7 +13,7 @@ public abstract class TeamPanel<T extends PkInfoRow> extends GridLayout {
 
   private final List<T> pkInfoRows = new ArrayList<>();
 
-  public TeamPanel(String title, int rows) {
+  protected TeamPanel(String title, int rows) {
     super(1, rows);
     setCaption(title);
     for (int i = 0; i < rows; i++) {

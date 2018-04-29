@@ -16,9 +16,8 @@ public interface PokemonStatRepository extends Repository<PokemonStat, PokemonSt
   @Query("SELECT pokemonStat FROM PokemonStat pokemonStat " +
       "INNER JOIN pokemonStat.stat stat " +
       "INNER JOIN pokemonStat.pokemon pokemon " +
-      "INNER JOIN pokemon.pokemonSpecies pokemonSpecies " +
-      "INNER JOIN pokemonSpecies.pokemonFactories pokemonFactories " +
-      "WHERE pokemonFactories.id = ?1 AND pokemon.id < 10000 " +
+      "INNER JOIN pokemon.pokemonFactories pokemonFactories " +
+      "WHERE pokemonFactories.id = ?1 AND pokemon.id < 1000 " +
       "ORDER BY stat.id")
   List<PokemonStat> findStats(Integer pokemonFactoryId);
 }

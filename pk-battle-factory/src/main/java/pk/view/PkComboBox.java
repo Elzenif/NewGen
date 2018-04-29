@@ -15,7 +15,7 @@ public class PkComboBox<T> extends ComboBox<T> {
     this.model = model;
     setItemCaptionGenerator(model.getCaptionGenerator()::apply);
     setEmptySelectionAllowed(false);
-    setWidth(100.0F, Unit.PERCENTAGE);
+    setWidth(11, Unit.EM);
   }
 
   public PkComboBoxModel<T> getModel() {

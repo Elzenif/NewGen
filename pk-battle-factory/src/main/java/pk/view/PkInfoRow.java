@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import pk.controller.PokemonFactoryController;
 import pk.model.dto.PokemonFactoryDTO;
 
+import java.util.Map;
+
 /**
  * Created by Germain on 11/07/2017.
  */
@@ -42,12 +44,18 @@ public abstract class PkInfoRow extends HorizontalLayout {
   }
 
   public void refresh() {
-    if (pokemonFactoryDTO != null) {
+    if (pokemonFactoryDTO != null && pokemonFactoryDTO.getId() != null) {
       LOGGER.debug(String.format("Refreshing %s", pokemonFactoryDTO));
       textArea.setValue(pokemonFactoryDTO.prettyPrint());
 
-      String stats = pokemonFactoryController.printStats(pokemonFactoryDTO);
-      statArea.setValue(stats);
+      Map<Integer, Integer> stats = pokemonFactoryController.computeStats(pokemonFactoryDTO);
+
+      String printedStats = pokemonFactoryController.printStats(stats);
+      statArea.setValue(printedStats);
     }
+  }
+
+  public PokemonFactoryDTO getPokemonFactoryDTO() {
+    return pokemonFactoryDTO;
   }
 }

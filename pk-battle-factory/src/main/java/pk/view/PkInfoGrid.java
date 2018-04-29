@@ -64,7 +64,11 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
   }
 
   private void setupSelectionListener() {
-    addSelectionListener(event -> event.getFirstSelectedItem().ifPresent(p -> lastRowEdited.showText(p)));
+    addSelectionListener(event -> event.getFirstSelectedItem().ifPresent(p -> {
+      if (lastRowEdited != null) {
+        lastRowEdited.showText(p);
+      }
+    }));
   }
 
   private void setupSaveListener() {
@@ -73,6 +77,7 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
       if (newLine) {
         pokemonFactoryController.insertNewPokemon(pokemonFactoryDTO);
         LOGGER.debug(String.format("New %s was saved", pokemonFactoryDTO.toString()));
+        update(pokemonFactoryController::findByName, pokemonFactoryDTO.getPkName());
       } else {
         pokemonFactoryController.update(pokemonFactoryDTO);
         LOGGER.debug(String.format("%s was updated", pokemonFactoryDTO.toString()));
@@ -83,9 +88,7 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
 
   public void update(Function<String, Stream<PokemonFactoryDTO>> findFunction, String param) {
     newLine = false;
-    setDataProvider(
-        (sortOrder, offset, limit) -> findFunction.apply(param),
-        () -> Math.toIntExact(findFunction.apply(param).count()));
+    setDataProvider(DataProvider.fromStream(findFunction.apply(param)));
   }
 
   public void newLine() {

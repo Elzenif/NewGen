@@ -20,8 +20,6 @@ public class PokemonSpecies {
   private List<Pokemon> pokemonList;
   @OneToMany(mappedBy = "pokemonSpecies")
   private List<PokemonSpeciesName> pokemonSpeciesNames;
-  @OneToMany(mappedBy = "pokemonSpecies")
-  private List<PokemonFactory> pokemonFactories;
 
   public PokemonSpecies() {
   }
@@ -56,14 +54,6 @@ public class PokemonSpecies {
 
   public void setPokemonSpeciesNames(List<PokemonSpeciesName> pokemonSpeciesNames) {
     this.pokemonSpeciesNames = pokemonSpeciesNames;
-  }
-
-  public List<PokemonFactory> getPokemonFactories() {
-    return pokemonFactories;
-  }
-
-  public void setPokemonFactories(List<PokemonFactory> pokemonFactories) {
-    this.pokemonFactories = pokemonFactories;
   }
 
   @Override

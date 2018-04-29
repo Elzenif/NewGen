@@ -1,7 +1,5 @@
 package pk.model.entity;
 
-import pk.model.Generation;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

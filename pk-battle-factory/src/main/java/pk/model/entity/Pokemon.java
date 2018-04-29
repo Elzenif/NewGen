@@ -23,6 +23,8 @@ public class Pokemon {
   private PokemonSpecies pokemonSpecies;
   @OneToMany(mappedBy = "pokemon")
   private List<PokemonType> pokemonTypes;
+  @OneToMany(mappedBy = "pokemon")
+  private List<PokemonFactory> pokemonFactories;
 
   public Pokemon() {
   }
@@ -49,6 +51,14 @@ public class Pokemon {
 
   public void setPokemonTypes(List<PokemonType> pokemonTypes) {
     this.pokemonTypes = pokemonTypes;
+  }
+
+  public List<PokemonFactory> getPokemonFactories() {
+    return pokemonFactories;
+  }
+
+  public void setPokemonFactories(List<PokemonFactory> pokemonFactories) {
+    this.pokemonFactories = pokemonFactories;
   }
 
   @Override

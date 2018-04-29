@@ -38,8 +38,6 @@ public abstract class PkValueChangeListener<T> implements HasValue.ValueChangeLi
     HasComponents parent = cb.getParent();
     if (parent instanceof PkInfoRow) {
       pkInfoGrid.setLastRowEdited((PkInfoRow) parent);
-    } else if (parent.getParent() instanceof PkInfoRow) {
-      pkInfoGrid.setLastRowEdited((PkInfoRow) parent.getParent());
     } else {
       throw new IllegalStateException(String.format("Issue with element %s", parent));
     }

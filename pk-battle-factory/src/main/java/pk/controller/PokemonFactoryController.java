@@ -1,7 +1,6 @@
 package pk.controller;
 
 import commons.utils.StringUtils;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +11,10 @@ import pk.model.entity.ItemName;
 import pk.model.entity.MoveName;
 import pk.model.entity.Nature;
 import pk.model.entity.NatureName;
+import pk.model.entity.Pokemon;
 import pk.model.entity.PokemonFactory;
 import pk.model.entity.PokemonFactoryStat;
 import pk.model.entity.PokemonFactoryStatId;
-import pk.model.entity.PokemonSpeciesName;
 import pk.model.entity.PokemonStat;
 import pk.model.entity.Stat;
 import pk.model.projection.PokemonFactoryProjection;
@@ -24,7 +23,7 @@ import pk.model.repository.MoveNameRepository;
 import pk.model.repository.NatureNameRepository;
 import pk.model.repository.PokemonFactoryRepository;
 import pk.model.repository.PokemonFactoryStatRepository;
-import pk.model.repository.PokemonSpeciesNameRepository;
+import pk.model.repository.PokemonRepository;
 import pk.model.repository.PokemonStatRepository;
 import pk.model.repository.StatRepository;
 import pk.view.IVSlider;
@@ -50,7 +49,7 @@ public class PokemonFactoryController {
   private final PokemonFactoryRepository pokemonFactoryRepository;
   private final PokemonFactoryStatRepository pokemonFactoryStatRepository;
   private final MoveNameRepository moveNameRepository;
-  private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
+  private final PokemonRepository pokemonRepository;
   private final NatureNameRepository natureNameRepository;
   private final ItemNameRepository itemNameRepository;
   private final StatRepository statRepository;
@@ -64,7 +63,7 @@ public class PokemonFactoryController {
   public PokemonFactoryController(PokemonFactoryRepository pokemonFactoryRepository,
                                   PokemonFactoryStatRepository pokemonFactoryStatRepository,
                                   MoveNameRepository moveNameRepository,
-                                  PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
+                                  PokemonRepository pokemonRepository,
                                   NatureNameRepository natureNameRepository,
                                   ItemNameRepository itemNameRepository,
                                   StatRepository statRepository,
@@ -72,7 +71,7 @@ public class PokemonFactoryController {
     this.pokemonFactoryRepository = pokemonFactoryRepository;
     this.pokemonFactoryStatRepository = pokemonFactoryStatRepository;
     this.moveNameRepository = moveNameRepository;
-    this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
+    this.pokemonRepository = pokemonRepository;
     this.natureNameRepository = natureNameRepository;
     this.itemNameRepository = itemNameRepository;
     this.statRepository = statRepository;
@@ -120,13 +119,12 @@ public class PokemonFactoryController {
   private void savePokemonFactory(PokemonFactoryDTO pokemonFactoryDTO, PokemonFactory pokemonFactory) {
     String language = Locale.getDefault().getLanguage();
 
-    PokemonSpeciesName pokemonSpeciesName = pokemonSpeciesNameRepository
-        .findByName(pokemonFactoryDTO.getPkName(), language);
-    if (pokemonSpeciesName == null) {
+    Pokemon pokemon = pokemonRepository.findByNameAndLanguage(pokemonFactoryDTO.getPkName(), language);
+    if (pokemon == null) {
       LOGGER.error(String.format("Cannot save without a valid name: %s", pokemonFactoryDTO.getPkName()));
       return;
     }
-    pokemonFactory.setPokemonSpecies(pokemonSpeciesName.getPokemonSpecies());
+    pokemonFactory.setPokemon(pokemon);
 
     NatureName natureName = natureNameRepository.findByName(pokemonFactoryDTO.getNatureName(), language);
     pokemonFactory.setNature(natureName == null ? null : natureName.getNature());
@@ -158,7 +156,7 @@ public class PokemonFactoryController {
     pokemonFactoryRepository.save(pokemonFactory);
   }
 
-  public String printStats(PokemonFactoryDTO pokemonFactoryDTO) {
+  public Map<Integer, Integer> computeStats(PokemonFactoryDTO pokemonFactoryDTO) {
     List<PokemonStat> pokemonStats = pokemonStatRepository.findStats(pokemonFactoryDTO.getId());
     Nature nature;
     if (StringUtils.isNull(pokemonFactoryDTO.getNatureName())) {
@@ -169,14 +167,24 @@ public class PokemonFactoryController {
       nature = natureName.getNature();
     }
     return IntStream.rangeClosed(0, 5).boxed()
-        .map(i -> printStat(i, pokemonStats.get(i), pokemonFactoryDTO.getStats().get(i + 1), nature))
+        .collect(Collectors.toMap(i -> i,
+            i -> computeStat(i, pokemonStats.get(i), pokemonFactoryDTO.getStats().get(i + 1), nature)));
+  }
+
+  private int computeStat(Integer index, PokemonStat pokemonStat, Integer ev, Nature nature) {
+    double natureBonus = getBonusFromNature(index + 1, nature);
+    return index == 0 ? getHPFormula(pokemonStat, ev) : getOtherFormula(pokemonStat, ev, natureBonus);
+  }
+
+  public String printStats(Map<Integer, Integer> stats) {
+    return stats.entrySet().stream()
+        .map(entry -> printStat(entry.getKey(), entry.getValue()))
         .collect(Collectors.joining("\n"));
   }
 
-  private String printStat(Integer index, PokemonStat pokemonStat, Integer ev, Nature nature) {
+  private String printStat(Integer index, int computedStat) {
     String s = PokemonFactoryDTO.STAT_NAMES.get(index);
-    double natureBonus = getBonusFromNature(index + 1, nature);
-    s += '\t' + (index == 0 ? getHPFormula(pokemonStat, ev) : getOtherFormula(pokemonStat, ev, natureBonus));
+    s += " \t" + computedStat;
     return s.length() <= 8 ? '\t' + s : s;
   }
 
@@ -192,19 +200,14 @@ public class PokemonFactoryController {
     }
   }
 
-  @NotNull
-  private String getOtherFormula(PokemonStat pokemonStat, int ev, double natureBonus) {
+  private int getOtherFormula(PokemonStat pokemonStat, int ev, double natureBonus) {
     // Others:  (((IV + 2 * BaseStat + (EV/4) ) * Level/100 ) + 5) * Nature Value
-    return String.valueOf(
-        (int) (((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 5) * natureBonus));
+    return (int) (((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 5) * natureBonus);
   }
 
-  @NotNull
-  private String getHPFormula(PokemonStat pokemonStat, int ev) {
+  private int getHPFormula(PokemonStat pokemonStat, int ev) {
     // HP :     (((IV + 2 * BaseStat + (EV/4) ) * Level/100 ) + 10 + Level
-
-    return String
-        .valueOf((int) ((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 10 + level));
+    return (int) ((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 10 + level);
   }
 
   public void setLevel(int level) {
