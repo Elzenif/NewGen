@@ -2,6 +2,7 @@ package pk.view;
 
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextArea;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pk.controller.PokemonFactoryController;
@@ -55,7 +56,11 @@ public abstract class PkInfoRow extends HorizontalLayout {
     }
   }
 
+  @NotNull
   public PokemonFactoryDTO getPokemonFactoryDTO() {
+    if (pokemonFactoryDTO == null) {
+      pokemonFactoryDTO = new PokemonFactoryDTO();
+    }
     return pokemonFactoryDTO;
   }
 }
