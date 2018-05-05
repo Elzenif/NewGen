@@ -1,4 +1,4 @@
-package pk.view;
+package pk.view.helper;
 
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.ui.Button;
@@ -10,14 +10,17 @@ import com.vaadin.ui.Window;
 import commons.Constants;
 import org.springframework.stereotype.Component;
 import pk.model.dto.PokemonFactoryDTO;
-import pk.model.repository.TypeNameRepository;
+import pk.view.main.OpponentTeamPanel;
+import pk.view.main.OwnTeamPanel;
+import pk.view.main.PkInfoRow;
+import pk.view.main.TeamPanel;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class OptionWindow extends Window implements Button.ClickListener {
+public class HelperWindow extends Window implements Button.ClickListener {
 
   private final OwnTeamPanel ownTeamPanel;
   private final OpponentTeamPanel opponentTeamPanel;
@@ -27,14 +30,10 @@ public class OptionWindow extends Window implements Button.ClickListener {
   private VerticalLayout opponentResultLayout;
   private final GridLayout gridLayout;
 
-  private final TypeNameRepository typeNameRepository;
-
-  public OptionWindow(OwnTeamPanel ownTeamPanel, OpponentTeamPanel opponentTeamPanel,
-                      TypeNameRepository typeNameRepository) {
-    super(Constants.resourceBundle.getString("menu.options"));
+  public HelperWindow(OwnTeamPanel ownTeamPanel, OpponentTeamPanel opponentTeamPanel) {
+    super(Constants.resourceBundle.getString("menu.helper"));
     this.ownTeamPanel = ownTeamPanel;
     this.opponentTeamPanel = opponentTeamPanel;
-    this.typeNameRepository = typeNameRepository;
 
     ownCheckBoxGroup = buildCheckBox("panel.team.own");
     opponentCheckBoxGroup = buildCheckBox("panel.team.opponent");
@@ -96,13 +95,13 @@ public class OptionWindow extends Window implements Button.ClickListener {
     Set<PokemonFactoryDTO> pokemons = checkBoxGroup.getSelectedItems();
 
     /*
-    * Useful info?
-    * List duels between each pair of pokemon
-    * Colour code for easy winner, tough match up, balanced match up, to difficult to judge
-    * In tooltip ->
-    *   Damage calculation range of each attack
-    *   Possibility of OHKO, 2 OHKO, etc...
-    */
+     * Useful info?
+     * List duels between each pair of pokemon
+     * Colour code for easy winner, tough match up, balanced match up, to difficult to judge
+     * In tooltip ->
+     *   Damage calculation range of each attack
+     *   Possibility of OHKO, 2 OHKO, etc...
+     */
 
     VerticalLayout newResultLayout = new VerticalLayout();
     for (PokemonFactoryDTO pokemon : pokemons) {

@@ -3,7 +3,7 @@ package pk.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pk.model.entity.TypeName;
-import pk.view.PkInfoGrid;
+import pk.view.main.PkInfoGrid;
 
 /**
  * Created by Germain on 10/07/2017.

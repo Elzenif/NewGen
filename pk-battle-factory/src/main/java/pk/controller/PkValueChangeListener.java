@@ -5,9 +5,9 @@ import com.vaadin.ui.HasComponents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pk.model.dto.PokemonFactoryDTO;
-import pk.view.PkComboBox;
-import pk.view.PkInfoGrid;
-import pk.view.PkInfoRow;
+import pk.view.main.PkComboBox;
+import pk.view.main.PkInfoGrid;
+import pk.view.main.PkInfoRow;
 
 import java.util.Optional;
 import java.util.function.Function;

@@ -1,4 +1,4 @@
-package pk.view;
+package pk.view.main;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
@@ -8,11 +8,11 @@ import com.vaadin.ui.HorizontalLayout;
 public class ButtonLayout extends HorizontalLayout {
 
   public ButtonLayout(NewLineButton newLineButton, LevelSlider levelSlider, IVSlider ivSlider,
-                      OptionButton optionButton) {
+                      HelperButton helperButton) {
     add(newLineButton);
     add(ivSlider);
     add(levelSlider);
-    add(optionButton);
+    add(helperButton);
   }
 
   private void add(Component component) {

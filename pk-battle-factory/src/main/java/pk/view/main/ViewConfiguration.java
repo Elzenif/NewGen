@@ -1,4 +1,4 @@
-package pk.view;
+package pk.view.main;
 
 import org.springframework.context.annotation.Configuration;
 

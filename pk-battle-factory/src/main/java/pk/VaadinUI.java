@@ -3,7 +3,7 @@ package pk;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.UI;
-import pk.view.PkMainPanel;
+import pk.view.main.PkMainPanel;
 
 @SpringUI
 public class VaadinUI extends UI {

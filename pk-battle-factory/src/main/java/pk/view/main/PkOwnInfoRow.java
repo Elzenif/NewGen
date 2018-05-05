@@ -1,4 +1,4 @@
-package pk.view;
+package pk.view.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;

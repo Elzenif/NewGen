@@ -1,4 +1,4 @@
-package pk.view;
+package pk.view.main;
 
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextArea;

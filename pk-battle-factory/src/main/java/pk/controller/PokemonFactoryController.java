@@ -26,8 +26,8 @@ import pk.model.repository.PokemonFactoryStatRepository;
 import pk.model.repository.PokemonRepository;
 import pk.model.repository.PokemonStatRepository;
 import pk.model.repository.StatRepository;
-import pk.view.IVSlider;
-import pk.view.LevelSlider;
+import pk.view.main.IVSlider;
+import pk.view.main.LevelSlider;
 
 import java.util.ArrayList;
 import java.util.List;

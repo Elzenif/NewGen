@@ -1,4 +1,4 @@
-package pk.view;
+package pk.view.main;
 
 import com.vaadin.ui.ComboBox;
 import pk.view.model.PkComboBoxModel;

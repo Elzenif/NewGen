@@ -1,4 +1,4 @@
-package pk.view;
+package pk.view.main;
 
 import commons.Constants;
 import org.jetbrains.annotations.Contract;

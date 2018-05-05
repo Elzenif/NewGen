@@ -1,4 +1,4 @@
-package pk.view;
+package pk.view.main;
 
 import com.vaadin.data.HasValue;
 import com.vaadin.data.provider.DataProvider;
