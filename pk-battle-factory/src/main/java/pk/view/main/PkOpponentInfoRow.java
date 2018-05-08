@@ -4,6 +4,7 @@ import com.vaadin.data.HasValue;
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
+import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -59,9 +60,10 @@ public class PkOpponentInfoRow extends PkInfoRow {
 
   @PostConstruct
   public void init() {
-    ComboBox<PkOpponentCriteria> criteriaComboBox = new ComboBox<>(" ");
+    ComboBox<PkOpponentCriteria> criteriaComboBox = new ComboBox<>(Constants.resourceBundle.getString("criteria"));
     criteriaComboBox.setWidth(7, Unit.EM);
     criteriaComboBox.setDataProvider(DataProvider.ofItems(PkOpponentCriteria.values()));
+    criteriaComboBox.setValue(PkOpponentCriteria.NAME);
     addComponent(criteriaComboBox);
 
     currentComponent = nameComboBox;
