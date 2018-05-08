@@ -10,7 +10,6 @@ public class ComputeButton extends Button implements Button.ClickListener {
 
   private HelperWindow helperWindow;
 
-  @Autowired
   public ComputeButton() {
     super(Constants.resourceBundle.getString("compute"));
 

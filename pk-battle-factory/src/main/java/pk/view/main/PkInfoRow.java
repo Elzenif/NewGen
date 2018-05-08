@@ -39,13 +39,13 @@ public abstract class PkInfoRow extends HorizontalLayout {
     addComponent(statArea);
   }
 
-  public void showText(PokemonFactoryDTO pokemonFactoryDTO) {
+  public void setPokemonAndShowText(PokemonFactoryDTO pokemonFactoryDTO) {
     this.pokemonFactoryDTO = pokemonFactoryDTO;
     refresh();
   }
 
   public void refresh() {
-    if (pokemonFactoryDTO != null && pokemonFactoryDTO.getId() != null) {
+    if (hasOnePokemon()) {
       LOGGER.debug(String.format("Refreshing %s", pokemonFactoryDTO));
       textArea.setValue(pokemonFactoryDTO.prettyPrint());
 
@@ -62,5 +62,9 @@ public abstract class PkInfoRow extends HorizontalLayout {
       pokemonFactoryDTO = new PokemonFactoryDTO();
     }
     return pokemonFactoryDTO;
+  }
+
+  public boolean hasOnePokemon() {
+    return pokemonFactoryDTO != null && pokemonFactoryDTO.getId() != null;
   }
 }
