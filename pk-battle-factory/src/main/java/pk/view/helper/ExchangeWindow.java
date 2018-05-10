@@ -1,5 +1,6 @@
 package pk.view.helper;
 
+import com.vaadin.data.provider.DataProvider;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.RadioButtonGroup;
@@ -7,31 +8,28 @@ import com.vaadin.ui.Window;
 import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pk.model.data.OpponentPokemonModel;
+import pk.model.data.OwnPokemonModel;
 import pk.model.dto.PokemonFactoryDTO;
-import pk.view.ViewUtils;
-import pk.view.main.OpponentTeamPanel;
-import pk.view.main.OwnTeamPanel;
-import pk.view.main.PkInfoRow;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 public class ExchangeWindow extends Window implements Button.ClickListener {
 
-  private final OwnTeamPanel ownTeamPanel;
-  private final OpponentTeamPanel opponentTeamPanel;
+  private final OwnPokemonModel ownPokemonModel;
+  private final OpponentPokemonModel opponentPokemonModel;
   private final RadioButtonGroup<PokemonFactoryDTO> ownRadioButtonGroup;
   private final RadioButtonGroup<PokemonFactoryDTO> opponentRadioButtonGroup;
   private final Button button;
 
-  private Map<Boolean, PokemonFactoryDTO> pokemonMap = new HashMap<>(2);
+  private final Map<Boolean, PokemonFactoryDTO> pokemonMap = new HashMap<>(2);
 
   @Autowired
-  public ExchangeWindow(OwnTeamPanel ownTeamPanel, OpponentTeamPanel opponentTeamPanel) {
-    this.ownTeamPanel = ownTeamPanel;
-    this.opponentTeamPanel = opponentTeamPanel;
+  public ExchangeWindow(OwnPokemonModel ownPokemonModel, OpponentPokemonModel opponentPokemonModel) {
+    this.ownPokemonModel = ownPokemonModel;
+    this.opponentPokemonModel = opponentPokemonModel;
 
     ownRadioButtonGroup = buildRadioButtonGroup("panel.team.own", true);
     opponentRadioButtonGroup = buildRadioButtonGroup("panel.team.opponent", false);
@@ -61,8 +59,8 @@ public class ExchangeWindow extends Window implements Button.ClickListener {
   }
 
   public void refresh() {
-    ViewUtils.refreshData(ownTeamPanel, ownRadioButtonGroup);
-    ViewUtils.refreshData(opponentTeamPanel, opponentRadioButtonGroup);
+    ownRadioButtonGroup.setDataProvider(DataProvider.ofCollection(ownPokemonModel.values()));
+    opponentRadioButtonGroup.setDataProvider(DataProvider.ofCollection(opponentPokemonModel.values()));
 
     center();
     setHeight(50f, Unit.PERCENTAGE);
@@ -74,22 +72,9 @@ public class ExchangeWindow extends Window implements Button.ClickListener {
     PokemonFactoryDTO ownPokemon = pokemonMap.get(true);
     PokemonFactoryDTO opponentPokemon = pokemonMap.get(false);
 
-    Map<PokemonFactoryDTO, PkInfoRow> ownPokemons = ownTeamPanel.getPkInfoRows().stream()
-        .filter(PkInfoRow::hasOnePokemon)
-        .collect(Collectors.toMap(PkInfoRow::getPokemonFactoryDTO, p -> p));
-    Map<PokemonFactoryDTO, PkInfoRow> opponentPokemons = opponentTeamPanel.getPkInfoRows().stream()
-        .filter(PkInfoRow::hasOnePokemon)
-        .collect(Collectors.toMap(PkInfoRow::getPokemonFactoryDTO, p -> p));
-
-    ownPokemons.get(ownPokemon).setPokemonAndShowText(opponentPokemon);
-    opponentPokemons.get(opponentPokemon).setPokemonAndShowText(ownPokemon);
+    ownPokemonModel.replacePokemon(ownPokemon, opponentPokemon);
+    opponentPokemonModel.replacePokemon(opponentPokemon, ownPokemon);
 
     getUI().removeWindow(this);
   }
-//
-//  @Autowired
-//  public void setPkInfoRows(OwnTeamPanel ownTeamPanel, OpponentTeamPanel opponentTeamPanel) {
-//    ownInfoRows.addAll(ownTeamPanel.getPkInfoRows());
-//    opponentInfoRows.addAll(opponentTeamPanel.getPkInfoRows());
-//  }
 }

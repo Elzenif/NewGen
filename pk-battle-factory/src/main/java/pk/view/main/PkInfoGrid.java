@@ -66,7 +66,7 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
   private void setupSelectionListener() {
     addSelectionListener(event -> event.getFirstSelectedItem().ifPresent(p -> {
       if (lastRowEdited != null) {
-        lastRowEdited.setPokemonAndShowText(p);
+        lastRowEdited.updatePokemon(p);
       }
     }));
   }

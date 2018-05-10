@@ -1,25 +1,25 @@
 package pk.view.helper;
 
+import com.vaadin.data.provider.DataProvider;
 import com.vaadin.ui.CheckBoxGroup;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Window;
 import commons.Constants;
 import org.springframework.stereotype.Component;
+import pk.model.data.OpponentPokemonModel;
+import pk.model.data.OwnPokemonModel;
 import pk.model.dto.PokemonFactoryDTO;
-import pk.view.ViewUtils;
-import pk.view.main.OpponentTeamPanel;
-import pk.view.main.OwnTeamPanel;
 
 import javax.annotation.PostConstruct;
 
 @Component
 public class HelperWindow extends Window {
 
-  private final OwnTeamPanel ownTeamPanel;
-  private final OpponentTeamPanel opponentTeamPanel;
   private final ComputeButton computeButton;
   private final ExchangeButton exchangeButton;
+  private final OwnPokemonModel ownPokemonModel;
+  private final OpponentPokemonModel opponentPokemonModel;
 
   private GridLayout gridLayout;
   private CheckBoxGroup<PokemonFactoryDTO> ownCheckBoxGroup;
@@ -27,13 +27,13 @@ public class HelperWindow extends Window {
   private OwnResultPanel ownResultPanel;
   private OpponentResultPanel opponentResultPanel;
 
-  public HelperWindow(OwnTeamPanel ownTeamPanel, OpponentTeamPanel opponentTeamPanel,
-                      ComputeButton computeButton, ExchangeButton exchangeButton) {
+  public HelperWindow(ComputeButton computeButton, ExchangeButton exchangeButton,
+                      OwnPokemonModel ownPokemonModel, OpponentPokemonModel opponentPokemonModel) {
     super(Constants.resourceBundle.getString("menu.helper"));
-    this.ownTeamPanel = ownTeamPanel;
-    this.opponentTeamPanel = opponentTeamPanel;
     this.computeButton = computeButton;
     this.exchangeButton = exchangeButton;
+    this.ownPokemonModel = ownPokemonModel;
+    this.opponentPokemonModel = opponentPokemonModel;
   }
 
   @PostConstruct
@@ -69,8 +69,8 @@ public class HelperWindow extends Window {
   }
 
   public void refresh() {
-    ViewUtils.refreshData(ownTeamPanel, ownCheckBoxGroup);
-    ViewUtils.refreshData(opponentTeamPanel, opponentCheckBoxGroup);
+    ownCheckBoxGroup.setDataProvider(DataProvider.ofCollection(ownPokemonModel.values()));
+    opponentCheckBoxGroup.setDataProvider(DataProvider.ofCollection(opponentPokemonModel.values()));
 
     center();
     setHeight(75f, Unit.PERCENTAGE);
