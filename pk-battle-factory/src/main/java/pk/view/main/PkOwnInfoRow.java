@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pk.controller.PkNameValueChangeListener;
 import pk.controller.PokemonFactoryController;
-import pk.model.data.OwnPokemonModel;
+import pk.model.data.OwnPokemonRowModel;
 
 import javax.annotation.PostConstruct;
 
@@ -23,9 +23,9 @@ public class PkOwnInfoRow extends PkInfoRow {
 
 
   @Autowired
-  public PkOwnInfoRow(PokemonFactoryController pokemonFactoryController, OwnPokemonModel ownPokemonModel,
+  public PkOwnInfoRow(PokemonFactoryController pokemonFactoryController, OwnPokemonRowModel ownPokemonRowModel,
                       PkNameValueChangeListener pkNameValueChangeListener) {
-    super(pokemonFactoryController, ownPokemonModel);
+    super(pokemonFactoryController, ownPokemonRowModel);
     this.pkNameValueChangeListener = pkNameValueChangeListener;
   }
 

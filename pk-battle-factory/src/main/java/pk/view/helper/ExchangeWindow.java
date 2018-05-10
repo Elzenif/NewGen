@@ -8,8 +8,8 @@ import com.vaadin.ui.Window;
 import commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pk.model.data.OpponentPokemonModel;
-import pk.model.data.OwnPokemonModel;
+import pk.model.data.OpponentPokemonRowModel;
+import pk.model.data.OwnPokemonRowModel;
 import pk.model.dto.PokemonFactoryDTO;
 
 import java.util.HashMap;
@@ -18,8 +18,8 @@ import java.util.Map;
 @Component
 public class ExchangeWindow extends Window implements Button.ClickListener {
 
-  private final OwnPokemonModel ownPokemonModel;
-  private final OpponentPokemonModel opponentPokemonModel;
+  private final OwnPokemonRowModel ownPokemonRowModel;
+  private final OpponentPokemonRowModel opponentPokemonRowModel;
   private final RadioButtonGroup<PokemonFactoryDTO> ownRadioButtonGroup;
   private final RadioButtonGroup<PokemonFactoryDTO> opponentRadioButtonGroup;
   private final Button button;
@@ -27,9 +27,9 @@ public class ExchangeWindow extends Window implements Button.ClickListener {
   private final Map<Boolean, PokemonFactoryDTO> pokemonMap = new HashMap<>(2);
 
   @Autowired
-  public ExchangeWindow(OwnPokemonModel ownPokemonModel, OpponentPokemonModel opponentPokemonModel) {
-    this.ownPokemonModel = ownPokemonModel;
-    this.opponentPokemonModel = opponentPokemonModel;
+  public ExchangeWindow(OwnPokemonRowModel ownPokemonRowModel, OpponentPokemonRowModel opponentPokemonRowModel) {
+    this.ownPokemonRowModel = ownPokemonRowModel;
+    this.opponentPokemonRowModel = opponentPokemonRowModel;
 
     ownRadioButtonGroup = buildRadioButtonGroup("panel.team.own", true);
     opponentRadioButtonGroup = buildRadioButtonGroup("panel.team.opponent", false);
@@ -59,8 +59,8 @@ public class ExchangeWindow extends Window implements Button.ClickListener {
   }
 
   public void refresh() {
-    ownRadioButtonGroup.setDataProvider(DataProvider.ofCollection(ownPokemonModel.values()));
-    opponentRadioButtonGroup.setDataProvider(DataProvider.ofCollection(opponentPokemonModel.values()));
+    ownRadioButtonGroup.setDataProvider(DataProvider.ofCollection(ownPokemonRowModel.values()));
+    opponentRadioButtonGroup.setDataProvider(DataProvider.ofCollection(opponentPokemonRowModel.values()));
 
     center();
     setHeight(50f, Unit.PERCENTAGE);
@@ -72,8 +72,8 @@ public class ExchangeWindow extends Window implements Button.ClickListener {
     PokemonFactoryDTO ownPokemon = pokemonMap.get(true);
     PokemonFactoryDTO opponentPokemon = pokemonMap.get(false);
 
-    ownPokemonModel.replacePokemon(ownPokemon, opponentPokemon);
-    opponentPokemonModel.replacePokemon(opponentPokemon, ownPokemon);
+    ownPokemonRowModel.replacePokemon(ownPokemon, opponentPokemon);
+    opponentPokemonRowModel.replacePokemon(opponentPokemon, ownPokemon);
 
     getUI().removeWindow(this);
   }

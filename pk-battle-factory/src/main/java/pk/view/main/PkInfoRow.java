@@ -5,7 +5,7 @@ import com.vaadin.ui.TextArea;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pk.controller.PokemonFactoryController;
-import pk.model.data.PokemonModel;
+import pk.model.data.PokemonRowModel;
 import pk.model.dto.PokemonFactoryDTO;
 
 import java.util.Map;
@@ -18,14 +18,14 @@ public abstract class PkInfoRow extends HorizontalLayout {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PkInfoRow.class);
   private final PokemonFactoryController pokemonFactoryController;
-  private final PokemonModel pokemonModel;
+  private final PokemonRowModel pokemonRowModel;
   private TextArea textArea;
   private TextArea statArea;
 
-  public PkInfoRow(PokemonFactoryController pokemonFactoryController, PokemonModel pokemonModel) {
+  public PkInfoRow(PokemonFactoryController pokemonFactoryController, PokemonRowModel pokemonRowModel) {
     setId(UUID.randomUUID().toString());
     this.pokemonFactoryController = pokemonFactoryController;
-    this.pokemonModel = pokemonModel;
+    this.pokemonRowModel = pokemonRowModel;
   }
 
   protected void postInit() {
@@ -43,12 +43,12 @@ public abstract class PkInfoRow extends HorizontalLayout {
   }
 
   public void updatePokemon(PokemonFactoryDTO pokemonFactoryDTO) {
-    pokemonModel.put(this, pokemonFactoryDTO);
+    pokemonRowModel.put(this, pokemonFactoryDTO);
   }
 
   public void refresh() {
-    if (pokemonModel.hasOnePokemon(this)) {
-      PokemonFactoryDTO pokemonFactoryDTO = pokemonModel.get(this);
+    if (pokemonRowModel.hasOnePokemon(this)) {
+      PokemonFactoryDTO pokemonFactoryDTO = pokemonRowModel.get(this);
 
       LOGGER.debug(String.format("Refreshing %s", pokemonFactoryDTO));
       textArea.setValue(pokemonFactoryDTO.prettyPrint());

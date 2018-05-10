@@ -7,8 +7,8 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Window;
 import commons.Constants;
 import org.springframework.stereotype.Component;
-import pk.model.data.OpponentPokemonModel;
-import pk.model.data.OwnPokemonModel;
+import pk.model.data.OpponentPokemonRowModel;
+import pk.model.data.OwnPokemonRowModel;
 import pk.model.dto.PokemonFactoryDTO;
 
 import javax.annotation.PostConstruct;
@@ -18,8 +18,8 @@ public class HelperWindow extends Window {
 
   private final ComputeButton computeButton;
   private final ExchangeButton exchangeButton;
-  private final OwnPokemonModel ownPokemonModel;
-  private final OpponentPokemonModel opponentPokemonModel;
+  private final OwnPokemonRowModel ownPokemonRowModel;
+  private final OpponentPokemonRowModel opponentPokemonRowModel;
 
   private GridLayout gridLayout;
   private CheckBoxGroup<PokemonFactoryDTO> ownCheckBoxGroup;
@@ -28,12 +28,12 @@ public class HelperWindow extends Window {
   private OpponentResultPanel opponentResultPanel;
 
   public HelperWindow(ComputeButton computeButton, ExchangeButton exchangeButton,
-                      OwnPokemonModel ownPokemonModel, OpponentPokemonModel opponentPokemonModel) {
+                      OwnPokemonRowModel ownPokemonRowModel, OpponentPokemonRowModel opponentPokemonRowModel) {
     super(Constants.resourceBundle.getString("menu.helper"));
     this.computeButton = computeButton;
     this.exchangeButton = exchangeButton;
-    this.ownPokemonModel = ownPokemonModel;
-    this.opponentPokemonModel = opponentPokemonModel;
+    this.ownPokemonRowModel = ownPokemonRowModel;
+    this.opponentPokemonRowModel = opponentPokemonRowModel;
   }
 
   @PostConstruct
@@ -69,8 +69,8 @@ public class HelperWindow extends Window {
   }
 
   public void refresh() {
-    ownCheckBoxGroup.setDataProvider(DataProvider.ofCollection(ownPokemonModel.values()));
-    opponentCheckBoxGroup.setDataProvider(DataProvider.ofCollection(opponentPokemonModel.values()));
+    ownCheckBoxGroup.setDataProvider(DataProvider.ofCollection(ownPokemonRowModel.values()));
+    opponentCheckBoxGroup.setDataProvider(DataProvider.ofCollection(opponentPokemonRowModel.values()));
 
     center();
     setHeight(75f, Unit.PERCENTAGE);

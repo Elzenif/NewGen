@@ -12,7 +12,7 @@ import pk.controller.PkMoveValueChangeListener;
 import pk.controller.PkNameValueChangeListener;
 import pk.controller.PkTypeValueChangeListener;
 import pk.controller.PokemonFactoryController;
-import pk.model.data.OpponentPokemonModel;
+import pk.model.data.OpponentPokemonRowModel;
 
 import javax.annotation.PostConstruct;
 
@@ -34,11 +34,11 @@ public class PkOpponentInfoRow extends PkInfoRow {
   private Component currentComponent;
 
   @Autowired
-  public PkOpponentInfoRow(PokemonFactoryController pokemonFactoryController, OpponentPokemonModel opponentPokemonModel,
+  public PkOpponentInfoRow(PokemonFactoryController pokemonFactoryController, OpponentPokemonRowModel opponentPokemonRowModel,
                            PkNameValueChangeListener pkNameValueChangeListener,
                            PkTypeValueChangeListener pkTypeValueChangeListener,
                            PkMoveValueChangeListener pkMoveValueChangeListener) {
-    super(pokemonFactoryController, opponentPokemonModel);
+    super(pokemonFactoryController, opponentPokemonRowModel);
     this.pkNameValueChangeListener = pkNameValueChangeListener;
     this.pkTypeValueChangeListener = pkTypeValueChangeListener;
     this.pkMoveValueChangeListener = pkMoveValueChangeListener;
