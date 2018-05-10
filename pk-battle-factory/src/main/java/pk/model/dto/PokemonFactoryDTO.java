@@ -35,6 +35,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   private Map<Integer, String> moves = new LinkedHashMap<>(4);
   private String encounter50;
   private String encounter100;
+  private Integer pokemonSpeciesId;
 
   public PokemonFactoryDTO() {
     for (int i = 1; i <= 6; i++) {
@@ -64,6 +65,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     }
     this.encounter50 = p.getEncounter50();
     this.encounter100 = p.getEncounter100();
+    this.pokemonSpeciesId = p.getPokemonSpeciesId();
   }
 
   @Override
@@ -137,6 +139,15 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   }
 
   @Override
+  public Integer getPokemonSpeciesId() {
+    return pokemonSpeciesId;
+  }
+
+  public void setPokemonSpeciesId(Integer pokemonSpeciesId) {
+    this.pokemonSpeciesId = pokemonSpeciesId;
+  }
+
+  @Override
   public String toString() {
     return "PokemonFactoryDTO{" +
         "id=" + id +
@@ -147,6 +158,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         ", moves='" + getStringOfList(moves.values()) + '\'' +
         ", encounter50='" + encounter50 + '\'' +
         ", encounter100='" + encounter100 + '\'' +
+        ", pokemonSpeciesId=" + pokemonSpeciesId +
         '}';
   }
 
@@ -174,6 +186,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     return s;
   }
 
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -188,7 +201,8 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     if (stats != null ? !stats.equals(that.stats) : that.stats != null) return false;
     if (moves != null ? !moves.equals(that.moves) : that.moves != null) return false;
     if (encounter50 != null ? !encounter50.equals(that.encounter50) : that.encounter50 != null) return false;
-    return encounter100 != null ? encounter100.equals(that.encounter100) : that.encounter100 == null;
+    if (encounter100 != null ? !encounter100.equals(that.encounter100) : that.encounter100 != null) return false;
+    return pokemonSpeciesId != null ? pokemonSpeciesId.equals(that.pokemonSpeciesId) : that.pokemonSpeciesId == null;
   }
 
   @Override
@@ -201,6 +215,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     result = 31 * result + (moves != null ? moves.hashCode() : 0);
     result = 31 * result + (encounter50 != null ? encounter50.hashCode() : 0);
     result = 31 * result + (encounter100 != null ? encounter100.hashCode() : 0);
+    result = 31 * result + (pokemonSpeciesId != null ? pokemonSpeciesId.hashCode() : 0);
     return result;
   }
 }
