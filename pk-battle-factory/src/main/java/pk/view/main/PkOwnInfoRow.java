@@ -39,6 +39,7 @@ public class PkOwnInfoRow extends PkInfoRow {
     addComponent(nameComboBox);
 
     nameComboBox.addValueChangeListener(pkNameValueChangeListener);
+    nameComboBox.addFocusListener(pkNameValueChangeListener);
 
     postInit();
   }

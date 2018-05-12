@@ -82,7 +82,7 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
         pokemonFactoryController.update(pokemonFactoryDTO);
         LOGGER.debug(String.format("%s was updated", pokemonFactoryDTO.toString()));
       }
-      getDataProvider().refreshAll();
+//      getDataProvider().refreshAll();
     });
   }
 

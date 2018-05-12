@@ -71,9 +71,15 @@ public class PkOpponentInfoRow extends PkInfoRow {
     addComponent(currentComponent);
 
     criteriaComboBox.addValueChangeListener(new PkOpponentCriteriaValueChangeListener());
+
     nameComboBox.addValueChangeListener(pkNameValueChangeListener);
+    nameComboBox.addFocusListener(pkNameValueChangeListener);
+
     typeComboBox.addValueChangeListener(pkTypeValueChangeListener);
+    typeComboBox.addFocusListener(pkTypeValueChangeListener);
+
     moveComboBox.addValueChangeListener(pkMoveValueChangeListener);
+    moveComboBox.addFocusListener(pkMoveValueChangeListener);
 
     postInit();
   }

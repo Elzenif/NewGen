@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 public class OpponentPokemonRowModel extends PokemonRowModel {
 
   public OpponentPokemonRowModel() {
-    super(3);
+    super(6);
   }
 }

@@ -12,11 +12,15 @@ public class OpponentTeamPanel extends TeamPanel<PkOpponentInfoRow> {
 
   @Autowired
   public OpponentTeamPanel(PkOpponentInfoRow pkOpponentInfoRow1, PkOpponentInfoRow pkOpponentInfoRow2,
-                           PkOpponentInfoRow pkOpponentInfoRow3) {
-    super(Constants.resourceBundle.getString("panel.team.opponent"), 3);
+                           PkOpponentInfoRow pkOpponentInfoRow3, PkOpponentInfoRow pkOpponentInfoRow4,
+                           PkOpponentInfoRow pkOpponentInfoRow5, PkOpponentInfoRow pkOpponentInfoRow6) {
+    super(Constants.resourceBundle.getString("panel.team.opponent"), 6);
     add(pkOpponentInfoRow1);
     add(pkOpponentInfoRow2);
     add(pkOpponentInfoRow3);
+    add(pkOpponentInfoRow4);
+    add(pkOpponentInfoRow5);
+    add(pkOpponentInfoRow6);
   }
 
 }

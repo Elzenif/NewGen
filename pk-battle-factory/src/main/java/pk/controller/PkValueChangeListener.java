@@ -1,6 +1,7 @@
 package pk.controller;
 
 import com.vaadin.data.HasValue;
+import com.vaadin.event.FieldEvents;
 import com.vaadin.ui.HasComponents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,8 @@ import java.util.stream.Stream;
 /**
  * Created by Germain on 10/07/2017.
  */
-public abstract class PkValueChangeListener<T> implements HasValue.ValueChangeListener<T> {
+public abstract class PkValueChangeListener<T> implements HasValue.ValueChangeListener<T> ,
+    FieldEvents.FocusListener {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PkValueChangeListener.class);
   private final PkInfoGrid pkInfoGrid;
@@ -32,7 +34,16 @@ public abstract class PkValueChangeListener<T> implements HasValue.ValueChangeLi
 
   @Override
   public void valueChange(HasValue.ValueChangeEvent<T> event) {
-    cb = (PkComboBox<T>) event.getSource();
+    updateGrid((PkComboBox<T>) event.getSource());
+  }
+
+  @Override
+  public void focus(FieldEvents.FocusEvent event) {
+    updateGrid((PkComboBox<T>) event.getSource());
+  }
+
+  private void updateGrid(PkComboBox<T> source) {
+    cb = source;
     Optional<T> selectedItem = cb.getSelectedItem();
     selectedItem.ifPresent(t -> param = cb.getModel().getCaptionGenerator().apply(selectedItem.get()));
     HasComponents parent = cb.getParent();
