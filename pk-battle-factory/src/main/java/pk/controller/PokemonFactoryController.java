@@ -1,6 +1,7 @@
 package pk.controller;
 
 import commons.utils.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,7 +117,7 @@ public class PokemonFactoryController {
     savePokemonFactory(pokemonFactoryDTO, pokemonFactoryRepository.getOne(pokemonFactoryDTO.getId()));
   }
 
-  private void savePokemonFactory(PokemonFactoryDTO pokemonFactoryDTO, PokemonFactory pokemonFactory) {
+  private void savePokemonFactory(@NotNull PokemonFactoryDTO pokemonFactoryDTO, PokemonFactory pokemonFactory) {
     String language = Locale.getDefault().getLanguage();
 
     Pokemon pokemon = pokemonRepository.findByNameAndLanguage(pokemonFactoryDTO.getPkName(), language);

@@ -61,6 +61,7 @@ public abstract class PkInfoRow extends HorizontalLayout {
       PkImage newImage = PkImage.of(pokemonFactoryDTO);
       replaceComponent(pkImage, newImage);
       pkImage = newImage;
+      // Add type in vertical layout
 
       textArea.setValue(pokemonFactoryDTO.prettyPrint());
       textArea.setVisible(true);

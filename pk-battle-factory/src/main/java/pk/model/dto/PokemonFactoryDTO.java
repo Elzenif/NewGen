@@ -60,7 +60,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     for (int i = 1; i <= movesSize; i++) {
       this.moves.put(i, moves.get(i - 1));
     }
-    for (int i = 4 - movesSize; i >= 1; i--) {
+    for (int i = 4; i >= 1 + movesSize; i--) {
       this.moves.put(i, null);
     }
     this.encounter50 = p.getEncounter50();

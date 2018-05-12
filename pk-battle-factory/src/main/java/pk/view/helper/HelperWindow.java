@@ -1,71 +1,62 @@
 package pk.view.helper;
 
 import com.vaadin.data.provider.DataProvider;
-import com.vaadin.ui.CheckBoxGroup;
-import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import commons.Constants;
+import commons.utils.Pair;
 import org.springframework.stereotype.Component;
 import pk.model.data.OpponentPokemonRowModel;
 import pk.model.data.OwnPokemonRowModel;
 import pk.model.dto.PokemonFactoryDTO;
+import pk.view.utils.PkCheckBoxGroup;
 
 import javax.annotation.PostConstruct;
+import java.util.Set;
 
 @Component
 public class HelperWindow extends Window {
 
   private final ComputeButton computeButton;
   private final ExchangeButton exchangeButton;
+  private final ResultPanel resultPanel;
   private final OwnPokemonRowModel ownPokemonRowModel;
   private final OpponentPokemonRowModel opponentPokemonRowModel;
 
-  private GridLayout gridLayout;
-  private CheckBoxGroup<PokemonFactoryDTO> ownCheckBoxGroup;
-  private CheckBoxGroup<PokemonFactoryDTO> opponentCheckBoxGroup;
-  private OwnResultPanel ownResultPanel;
-  private OpponentResultPanel opponentResultPanel;
+  private PkCheckBoxGroup ownCheckBoxGroup;
+  private PkCheckBoxGroup opponentCheckBoxGroup;
 
-  public HelperWindow(ComputeButton computeButton, ExchangeButton exchangeButton,
+  public HelperWindow(ComputeButton computeButton, ExchangeButton exchangeButton, ResultPanel resultPanel,
                       OwnPokemonRowModel ownPokemonRowModel, OpponentPokemonRowModel opponentPokemonRowModel) {
     super(Constants.resourceBundle.getString("menu.helper"));
     this.computeButton = computeButton;
     this.exchangeButton = exchangeButton;
     this.ownPokemonRowModel = ownPokemonRowModel;
     this.opponentPokemonRowModel = opponentPokemonRowModel;
+    this.resultPanel = resultPanel;
   }
 
   @PostConstruct
   public void init() {
-    ownCheckBoxGroup = buildCheckBox("panel.team.own");
-    opponentCheckBoxGroup = buildCheckBox("panel.team.opponent");
+    ownCheckBoxGroup = new PkCheckBoxGroup("panel.team.own");
+    opponentCheckBoxGroup = new PkCheckBoxGroup("panel.team.opponent");
+    ownCheckBoxGroup.addSelectionListener(e -> checkComputeButtonEnableState(ownCheckBoxGroup, opponentCheckBoxGroup));
+    opponentCheckBoxGroup.addSelectionListener(e -> checkComputeButtonEnableState(ownCheckBoxGroup, opponentCheckBoxGroup));
 
-    gridLayout = new GridLayout(2, 3);
+    VerticalLayout buttonLayout = new VerticalLayout(computeButton, exchangeButton);
 
-    ownResultPanel = new OwnResultPanel();
-    opponentResultPanel = new OpponentResultPanel();
+    HorizontalLayout mainLayout = new HorizontalLayout(ownCheckBoxGroup, opponentCheckBoxGroup, buttonLayout,
+        resultPanel);
+//    mainLayout.setHeight(100f, Unit.PERCENTAGE);
+//    mainLayout.setWidth(100f, Unit.PERCENTAGE);
 
-    HorizontalLayout buttonLayout = new HorizontalLayout(computeButton, exchangeButton);
-    gridLayout.addComponent(buttonLayout, 0, 0, 1, 0);
-    gridLayout.addComponent(ownCheckBoxGroup, 0, 1);
-    gridLayout.addComponent(opponentCheckBoxGroup, 1, 1);
-    gridLayout.addComponent(ownResultPanel, 0, 2);
-    gridLayout.addComponent(opponentResultPanel, 1, 2);
-
-    gridLayout.setHeight(100f, Unit.PERCENTAGE);
-    gridLayout.setWidth(100f, Unit.PERCENTAGE);
-
-    setContent(gridLayout);
+    setContent(mainLayout);
 
   }
 
-  private CheckBoxGroup<PokemonFactoryDTO> buildCheckBox(String captionKey) {
-    CheckBoxGroup<PokemonFactoryDTO> checkBoxGroup = new CheckBoxGroup<>(
-        Constants.resourceBundle.getString(captionKey));
-    checkBoxGroup.setItemCaptionGenerator(PokemonFactoryDTO::getPkName);
-    checkBoxGroup.setItemEnabledProvider(p -> p.getPkName() != null);
-    return checkBoxGroup;
+  private void checkComputeButtonEnableState(PkCheckBoxGroup ownCheckBoxGroup, PkCheckBoxGroup opponentCheckBoxGroup) {
+    computeButton.setEnabled(!ownCheckBoxGroup.isEmpty() && !opponentCheckBoxGroup.isEmpty());
   }
 
   public void refresh() {
@@ -73,12 +64,20 @@ public class HelperWindow extends Window {
     opponentCheckBoxGroup.setDataProvider(DataProvider.ofCollection(opponentPokemonRowModel.values()));
 
     center();
-    setHeight(75f, Unit.PERCENTAGE);
-    setWidth(50f, Unit.PERCENTAGE);
+    setHeight(80f, Unit.PERCENTAGE);
+    setWidth(75f, Unit.PERCENTAGE);
   }
 
-  public void refreshResults() {
-    ownResultPanel = ownResultPanel.refresh(ownCheckBoxGroup, gridLayout);
-    opponentResultPanel = opponentResultPanel.refresh(opponentCheckBoxGroup, gridLayout);
+  /*
+   * Useful info?
+   * List duels between each pair of pokemon
+   * Colour code for easy winner, tough match up, balanced match up, to difficult to judge
+   * In tooltip ->
+   *   Damage calculation range of each attack
+   *   Possibility of OHKO, 2 OHKO, etc...
+   */
+
+  public Pair<Set<PokemonFactoryDTO>, Set<PokemonFactoryDTO>> getSelectedPokemons() {
+    return new Pair<>(ownCheckBoxGroup.getSelectedItems(), opponentCheckBoxGroup.getSelectedItems());
   }
 }

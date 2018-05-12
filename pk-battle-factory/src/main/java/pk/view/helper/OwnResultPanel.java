@@ -2,14 +2,13 @@ package pk.view.helper;
 
 import com.vaadin.ui.CheckBoxGroup;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
 import pk.model.dto.PokemonFactoryDTO;
 
 import java.util.Set;
 
-public class OwnResultPanel extends ResultPanel {
+public class OwnResultPanel extends Panel {
 
-  @Override
   public OwnResultPanel refresh(CheckBoxGroup<PokemonFactoryDTO> checkBoxGroup, GridLayout gridLayout) {
     Set<PokemonFactoryDTO> pokemons = checkBoxGroup.getSelectedItems();
 
@@ -24,7 +23,7 @@ public class OwnResultPanel extends ResultPanel {
 
     OwnResultPanel newResultPanel = new OwnResultPanel();
     for (PokemonFactoryDTO pokemon : pokemons) {
-      newResultPanel.addComponent(new Label(pokemon.getPkName()));
+//      newResultPanel.addComponent(new Label(pokemon.getPkName()));
     }
 
     gridLayout.replaceComponent(this, newResultPanel);
