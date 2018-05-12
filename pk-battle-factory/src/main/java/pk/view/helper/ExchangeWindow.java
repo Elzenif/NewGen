@@ -76,7 +76,5 @@ public class ExchangeWindow extends Window implements Button.ClickListener {
     opponentPokemonRowModel.replacePokemon(opponentPokemon, ownPokemon);
 
     button.setEnabled(false);
-
-    getUI().removeWindow(this);
   }
 }

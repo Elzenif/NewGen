@@ -1,5 +1,6 @@
 package pk.view.main;
 
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextArea;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import pk.controller.PokemonFactoryController;
 import pk.model.data.PokemonRowModel;
 import pk.model.dto.PokemonFactoryDTO;
 import pk.view.utils.PkImage;
+import pk.view.utils.PkImageType;
 
 import java.util.Map;
 import java.util.UUID;
@@ -20,7 +22,7 @@ public abstract class PkInfoRow extends HorizontalLayout {
   private static final Logger LOGGER = LoggerFactory.getLogger(PkInfoRow.class);
   private final PokemonFactoryController pokemonFactoryController;
   private final PokemonRowModel pokemonRowModel;
-  private PkImage pkImage;
+  private CssLayout imageLayout;
   private TextArea textArea;
   private TextArea statArea;
 
@@ -31,8 +33,8 @@ public abstract class PkInfoRow extends HorizontalLayout {
   }
 
   protected void postInit() {
-    pkImage = PkImage.empty();
-    addComponent(pkImage);
+    imageLayout = new CssLayout();
+    addComponent(imageLayout);
 
     textArea = new TextArea();
     textArea.setRows(7);
@@ -58,10 +60,19 @@ public abstract class PkInfoRow extends HorizontalLayout {
       PokemonFactoryDTO pokemonFactoryDTO = pokemonRowModel.get(this);
       LOGGER.debug(String.format("Refreshing %s", pokemonFactoryDTO));
 
-      PkImage newImage = PkImage.of(pokemonFactoryDTO);
-      replaceComponent(pkImage, newImage);
-      pkImage = newImage;
-      // Add type in vertical layout
+      CssLayout newImageLayout = new CssLayout();
+      newImageLayout.setWidth("32px");
+
+      PkImage pkImage = PkImage.of(pokemonFactoryDTO);
+      newImageLayout.addComponent(pkImage);
+
+
+      for (String type : pokemonFactoryDTO.getTypes()) {
+        newImageLayout.addComponent(PkImageType.of(type));
+      }
+
+      replaceComponent(imageLayout, newImageLayout);
+      imageLayout = newImageLayout;
 
       textArea.setValue(pokemonFactoryDTO.prettyPrint());
       textArea.setVisible(true);

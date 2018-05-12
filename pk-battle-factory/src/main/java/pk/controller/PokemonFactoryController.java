@@ -18,6 +18,7 @@ import pk.model.entity.PokemonFactoryStat;
 import pk.model.entity.PokemonFactoryStatId;
 import pk.model.entity.PokemonStat;
 import pk.model.entity.Stat;
+import pk.model.entity.Type;
 import pk.model.projection.PokemonFactoryProjection;
 import pk.model.repository.ItemNameRepository;
 import pk.model.repository.MoveNameRepository;
@@ -27,6 +28,7 @@ import pk.model.repository.PokemonFactoryStatRepository;
 import pk.model.repository.PokemonRepository;
 import pk.model.repository.PokemonStatRepository;
 import pk.model.repository.StatRepository;
+import pk.model.repository.TypeRepository;
 import pk.view.main.IVSlider;
 import pk.view.main.LevelSlider;
 
@@ -55,6 +57,7 @@ public class PokemonFactoryController {
   private final ItemNameRepository itemNameRepository;
   private final StatRepository statRepository;
   private final PokemonStatRepository pokemonStatRepository;
+  private final TypeRepository typeRepository;
 
   private double level = LevelSlider.DEFAULT_LEVEL;
   private double iv = IVSlider.DEFAULT_IV;
@@ -68,7 +71,8 @@ public class PokemonFactoryController {
                                   NatureNameRepository natureNameRepository,
                                   ItemNameRepository itemNameRepository,
                                   StatRepository statRepository,
-                                  PokemonStatRepository pokemonStatRepository) {
+                                  PokemonStatRepository pokemonStatRepository,
+                                  TypeRepository typeRepository) {
     this.pokemonFactoryRepository = pokemonFactoryRepository;
     this.pokemonFactoryStatRepository = pokemonFactoryStatRepository;
     this.moveNameRepository = moveNameRepository;
@@ -77,6 +81,7 @@ public class PokemonFactoryController {
     this.itemNameRepository = itemNameRepository;
     this.statRepository = statRepository;
     this.pokemonStatRepository = pokemonStatRepository;
+    this.typeRepository = typeRepository;
   }
 
   public Stream<PokemonFactoryDTO> findByName(String name) {
@@ -94,7 +99,7 @@ public class PokemonFactoryController {
     return find(pokemonFactoryRepository.findByMoveAndLanguage(move, language).stream(), language);
   }
 
-  private Stream<PokemonFactoryDTO> find(Stream<PokemonFactoryProjection> projections, String language) {
+  private Stream<PokemonFactoryDTO> find(@NotNull Stream<PokemonFactoryProjection> projections, String language) {
     return projections
         .map(p -> new PokemonFactoryDTO(p,
             pokemonFactoryStatRepository.find(p.getId())
@@ -104,6 +109,10 @@ public class PokemonFactoryController {
             moveNameRepository.find(p.getId(), language)
                 .stream()
                 .map(MoveName::getName)
+                .collect(Collectors.toList()),
+            typeRepository.find(p.getPokemonSpeciesId())
+                .stream()
+                .map(Type::getIdentifier)
                 .collect(Collectors.toList())));
   }
 

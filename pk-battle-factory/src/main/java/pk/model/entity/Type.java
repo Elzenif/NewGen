@@ -15,8 +15,11 @@ public class Type {
 
   @Id
   private Integer id;
+  private String identifier;
   private Integer generationId;
   private Integer damageClassId;
+  @OneToMany(mappedBy = "type")
+  private List<PokemonType> pokemonTypes;
   @OneToMany(mappedBy = "type")
   private List<TypeName> typeNames;
 
@@ -29,6 +32,14 @@ public class Type {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public String getIdentifier() {
+    return identifier;
+  }
+
+  public void setIdentifier(String identifier) {
+    this.identifier = identifier;
   }
 
   public Integer getGenerationId() {
@@ -47,6 +58,14 @@ public class Type {
     this.damageClassId = damageClassId;
   }
 
+  public List<PokemonType> getPokemonTypes() {
+    return pokemonTypes;
+  }
+
+  public void setPokemonTypes(List<PokemonType> pokemonTypes) {
+    this.pokemonTypes = pokemonTypes;
+  }
+
   public List<TypeName> getTypeNames() {
     return typeNames;
   }
@@ -59,6 +78,7 @@ public class Type {
   public String toString() {
     return "Type{" +
         "id=" + id +
+        ", identifier='" + identifier + '\'' +
         ", generationId=" + generationId +
         ", damageClassId=" + damageClassId +
         '}';

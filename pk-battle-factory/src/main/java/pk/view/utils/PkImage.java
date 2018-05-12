@@ -17,17 +17,10 @@ public class PkImage extends Image {
     }, imageNumber));
   }
 
-  private PkImage() {
-
-  }
-
   public static PkImage of(PokemonFactoryDTO pokemonFactoryDTO) {
     Integer pokemonSpeciesId = pokemonFactoryDTO.getPokemonSpeciesId();
     String imageNumber = "00" + pokemonSpeciesId;
     return new PkImage(imageNumber.substring(imageNumber.length() - 3));
   }
 
-  public static PkImage empty() {
-    return new PkImage();
-  }
 }
