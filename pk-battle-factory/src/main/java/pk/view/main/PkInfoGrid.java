@@ -86,6 +86,9 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
     });
   }
 
+  // TODO When iv or level change, refresh only stat
+  // TODO Coverage
+
   public void update(Function<String, Stream<PokemonFactoryDTO>> findFunction, String param) {
     newLine = false;
     setDataProvider(DataProvider.fromStream(findFunction.apply(param)));

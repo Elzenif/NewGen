@@ -41,4 +41,9 @@ public abstract class PokemonRowModel extends ForwardingMap<PkInfoRow, PokemonFa
     key.refresh();
     return result;
   }
+
+  public void removeKey(PkInfoRow key) {
+    delegate.remove(key);
+    key.refresh();
+  }
 }

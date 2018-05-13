@@ -34,6 +34,7 @@ public abstract class PkInfoRow extends HorizontalLayout {
 
   protected void postInit() {
     imageLayout = new CssLayout();
+    imageLayout.setVisible(false);
     addComponent(imageLayout);
 
     textArea = new TextArea();
@@ -53,6 +54,10 @@ public abstract class PkInfoRow extends HorizontalLayout {
 
   public void updatePokemon(PokemonFactoryDTO pokemonFactoryDTO) {
     pokemonRowModel.put(this, pokemonFactoryDTO);
+  }
+
+  public void removePokemon() {
+    pokemonRowModel.removeKey(this);
   }
 
   public void refresh() {
@@ -82,6 +87,11 @@ public abstract class PkInfoRow extends HorizontalLayout {
       String printedStats = pokemonFactoryController.printStats(stats);
       statArea.setValue(printedStats);
       statArea.setVisible(true);
+
+    } else {
+      imageLayout.setVisible(false);
+      textArea.setVisible(false);
+      statArea.setVisible(false);
     }
   }
 
