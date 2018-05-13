@@ -1,9 +1,8 @@
-package pk.view.main;
+package pk.view.helper;
 
 import com.vaadin.ui.Button;
 import commons.Constants;
 import org.springframework.stereotype.Component;
-import pk.view.helper.HelperWindow;
 
 @Component
 public class HelperButton extends Button implements Button.ClickListener {

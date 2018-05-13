@@ -2,7 +2,6 @@ package pk.view.helper;
 
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import commons.Constants;
 import commons.utils.Pair;
@@ -19,7 +18,6 @@ import java.util.Set;
 public class HelperWindow extends Window {
 
   private final ComputeButton computeButton;
-  private final ExchangeButton exchangeButton;
   private final ResultPanel resultPanel;
   private final OwnPokemonRowModel ownPokemonRowModel;
   private final OpponentPokemonRowModel opponentPokemonRowModel;
@@ -27,11 +25,10 @@ public class HelperWindow extends Window {
   private PkCheckBoxGroup ownCheckBoxGroup;
   private PkCheckBoxGroup opponentCheckBoxGroup;
 
-  public HelperWindow(ComputeButton computeButton, ExchangeButton exchangeButton, ResultPanel resultPanel,
+  public HelperWindow(ComputeButton computeButton, ResultPanel resultPanel,
                       OwnPokemonRowModel ownPokemonRowModel, OpponentPokemonRowModel opponentPokemonRowModel) {
     super(Constants.resourceBundle.getString("menu.helper"));
     this.computeButton = computeButton;
-    this.exchangeButton = exchangeButton;
     this.ownPokemonRowModel = ownPokemonRowModel;
     this.opponentPokemonRowModel = opponentPokemonRowModel;
     this.resultPanel = resultPanel;
@@ -44,9 +41,8 @@ public class HelperWindow extends Window {
     ownCheckBoxGroup.addSelectionListener(e -> checkComputeButtonEnableState(ownCheckBoxGroup, opponentCheckBoxGroup));
     opponentCheckBoxGroup.addSelectionListener(e -> checkComputeButtonEnableState(ownCheckBoxGroup, opponentCheckBoxGroup));
 
-    VerticalLayout buttonLayout = new VerticalLayout(computeButton, exchangeButton);
 
-    HorizontalLayout mainLayout = new HorizontalLayout(ownCheckBoxGroup, opponentCheckBoxGroup, buttonLayout,
+    HorizontalLayout mainLayout = new HorizontalLayout(ownCheckBoxGroup, opponentCheckBoxGroup, computeButton,
         resultPanel);
 //    mainLayout.setHeight(100f, Unit.PERCENTAGE);
 //    mainLayout.setWidth(100f, Unit.PERCENTAGE);
