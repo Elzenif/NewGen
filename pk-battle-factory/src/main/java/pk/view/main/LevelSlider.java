@@ -31,7 +31,7 @@ public class LevelSlider extends Slider implements HasValue.ValueChangeListener<
   @Override
   public void valueChange(ValueChangeEvent<Double> event) {
     pokemonFactoryController.setLevel(event.getValue().intValue());
-    pkInfoRows.forEach(PkInfoRow::refresh);
+    pkInfoRows.forEach(PkInfoRow::refreshStats);
   }
 
   @Autowired

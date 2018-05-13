@@ -30,7 +30,7 @@ public class IVSlider extends Slider implements HasValue.ValueChangeListener<Dou
   @Override
   public void valueChange(ValueChangeEvent<Double> event) {
     pokemonFactoryController.setIv(event.getValue().intValue());
-    pkInfoRows.forEach(PkInfoRow::refresh);
+    pkInfoRows.forEach(PkInfoRow::refreshStats);
   }
 
   @Autowired

@@ -3,6 +3,7 @@ package pk.view.main;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextArea;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pk.controller.PokemonFactoryController;
@@ -24,7 +25,7 @@ public abstract class PkInfoRow extends HorizontalLayout {
   private final PokemonRowModel pokemonRowModel;
   private CssLayout imageLayout;
   private TextArea textArea;
-  private TextArea statArea;
+  private TextArea statsArea;
 
   public PkInfoRow(PokemonFactoryController pokemonFactoryController, PokemonRowModel pokemonRowModel) {
     setId(UUID.randomUUID().toString());
@@ -44,12 +45,12 @@ public abstract class PkInfoRow extends HorizontalLayout {
     textArea.setVisible(false);
     addComponent(textArea);
 
-    statArea = new TextArea();
-    statArea.setRows(6);
-    statArea.setReadOnly(true);
-    statArea.setWidth(8, Unit.EM);
-    statArea.setVisible(false);
-    addComponent(statArea);
+    statsArea = new TextArea();
+    statsArea.setRows(6);
+    statsArea.setReadOnly(true);
+    statsArea.setWidth(8, Unit.EM);
+    statsArea.setVisible(false);
+    addComponent(statsArea);
   }
 
   public void updatePokemon(PokemonFactoryDTO pokemonFactoryDTO) {
@@ -65,34 +66,52 @@ public abstract class PkInfoRow extends HorizontalLayout {
       PokemonFactoryDTO pokemonFactoryDTO = pokemonRowModel.get(this);
       LOGGER.debug(String.format("Refreshing %s", pokemonFactoryDTO));
 
-      CssLayout newImageLayout = new CssLayout();
-      newImageLayout.setWidth("32px");
-
-      PkImage pkImage = PkImage.of(pokemonFactoryDTO);
-      newImageLayout.addComponent(pkImage);
-
-
-      for (String type : pokemonFactoryDTO.getTypes()) {
-        newImageLayout.addComponent(PkImageType.of(type));
-      }
-
-      replaceComponent(imageLayout, newImageLayout);
-      imageLayout = newImageLayout;
-
-      textArea.setValue(pokemonFactoryDTO.prettyPrint());
-      textArea.setVisible(true);
-
-      Map<Integer, Integer> stats = pokemonFactoryController.computeStats(pokemonFactoryDTO);
-
-      String printedStats = pokemonFactoryController.printStats(stats);
-      statArea.setValue(printedStats);
-      statArea.setVisible(true);
-
+      refreshImage(pokemonFactoryDTO);
+      refreshText(pokemonFactoryDTO);
+      refreshStats(pokemonFactoryDTO);
     } else {
       imageLayout.setVisible(false);
       textArea.setVisible(false);
-      statArea.setVisible(false);
+      statsArea.setVisible(false);
     }
+  }
+
+  public void refreshStats() {
+    if (pokemonRowModel.hasOnePokemon(this)) {
+      PokemonFactoryDTO pokemonFactoryDTO = pokemonRowModel.get(this);
+      LOGGER.debug(String.format("Refreshing stats of %s", pokemonFactoryDTO));
+
+      refreshStats(pokemonFactoryDTO);
+    }
+  }
+
+  private void refreshStats(@NotNull PokemonFactoryDTO pokemonFactoryDTO) {
+    Map<Integer, Integer> stats = pokemonFactoryController.computeStats(pokemonFactoryDTO);
+
+    String printedStats = pokemonFactoryController.printStats(stats);
+    statsArea.setValue(printedStats);
+    statsArea.setVisible(true);
+  }
+
+  private void refreshText(@NotNull PokemonFactoryDTO pokemonFactoryDTO) {
+    textArea.setValue(pokemonFactoryDTO.prettyPrint());
+    textArea.setVisible(true);
+  }
+
+  private void refreshImage(@NotNull PokemonFactoryDTO pokemonFactoryDTO) {
+    CssLayout newImageLayout = new CssLayout();
+    newImageLayout.setWidth("32px");
+
+    PkImage pkImage = PkImage.of(pokemonFactoryDTO);
+    newImageLayout.addComponent(pkImage);
+
+
+    for (String type : pokemonFactoryDTO.getTypes()) {
+      newImageLayout.addComponent(PkImageType.of(type));
+    }
+
+    replaceComponent(imageLayout, newImageLayout);
+    imageLayout = newImageLayout;
   }
 
 }
