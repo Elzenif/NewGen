@@ -14,6 +14,7 @@ import pk.view.utils.PkImageType;
 
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Created by Germain on 11/07/2017.
@@ -88,9 +89,20 @@ public abstract class PkInfoRow extends HorizontalLayout {
   private void refreshStats(@NotNull PokemonFactoryDTO pokemonFactoryDTO) {
     Map<Integer, Integer> stats = pokemonFactoryController.computeStats(pokemonFactoryDTO);
 
-    String printedStats = pokemonFactoryController.printStats(stats);
-    statsArea.setValue(printedStats);
+    statsArea.setValue(printStats(stats));
     statsArea.setVisible(true);
+  }
+
+  private String printStats(@NotNull Map<Integer, Integer> stats) {
+    return stats.entrySet().stream()
+        .map(entry -> printStat(entry.getKey(), entry.getValue()))
+        .collect(Collectors.joining("\n"));
+  }
+
+  private String printStat(Integer index, int computedStat) {
+    String s = PokemonFactoryDTO.STAT_NAMES.get(index);
+    s += " \t" + computedStat;
+    return s.length() <= 8 ? '\t' + s : s;
   }
 
   private void refreshText(@NotNull PokemonFactoryDTO pokemonFactoryDTO) {

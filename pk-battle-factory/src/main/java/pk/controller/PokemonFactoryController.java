@@ -186,18 +186,6 @@ public class PokemonFactoryController {
     return index == 0 ? getHPFormula(pokemonStat, ev) : getOtherFormula(pokemonStat, ev, natureBonus);
   }
 
-  public String printStats(Map<Integer, Integer> stats) {
-    return stats.entrySet().stream()
-        .map(entry -> printStat(entry.getKey(), entry.getValue()))
-        .collect(Collectors.joining("\n"));
-  }
-
-  private String printStat(Integer index, int computedStat) {
-    String s = PokemonFactoryDTO.STAT_NAMES.get(index);
-    s += " \t" + computedStat;
-    return s.length() <= 8 ? '\t' + s : s;
-  }
-
   private double getBonusFromNature(Integer index, Nature nature) {
     if (nature == null || nature.getIncreasedStat() == nature.getDecreasedStat()) {
       return 1;

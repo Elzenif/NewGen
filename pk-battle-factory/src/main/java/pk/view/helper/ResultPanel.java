@@ -13,6 +13,7 @@ import java.util.Set;
 @Component
 public class ResultPanel extends Panel {
 
+  // TODO test with extends GridLayout
   private final HelperModel helperModel;
   private GridLayout gridLayout = new GridLayout(4, 7);
 
@@ -42,6 +43,18 @@ public class ResultPanel extends Panel {
       gridLayout.addComponent(PkImage.of(opponentPokemon), j, 0);
       j++;
     }
+
+
+    /*
+     * Useful info?
+     * List duels between each pair of pokemon
+     * Colour code for easy winner, tough match up, balanced match up, to difficult to judge
+     * In tooltip ->
+     *   Damage calculation range of each attack
+     *   Possibility of OHKO, 2 OHKO, etc...
+     *   Speed ratio
+     */
+
 
     gridLayout.setHeight(100f, Unit.PERCENTAGE);
     gridLayout.setWidth(100f, Unit.PERCENTAGE);
