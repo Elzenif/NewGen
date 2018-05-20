@@ -1,8 +1,10 @@
 package pk.view.helper;
 
 import com.google.common.collect.Table;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import pk.model.data.HelperModel;
 import pk.model.dto.PokemonFactoryDTO;
@@ -54,14 +56,41 @@ public class TypeInfoPanel extends GridLayout {
       addComponent(PkImage.of(rowMap.getKey()), 0, i);
       j = 1;
       for (Float factor : rowMap.getValue().values()) {
-        addComponent(new Label("x" + factor / 100f), j, i);
+        addComponent(getFactorLabel(factor), j, i);
         j++;
       }
       i++;
     }
 
+    j = 1;
+    for (Map.Entry<Type, Map<PokemonFactoryDTO, Float>> columnMap : typeMultiplierTable.columnMap().entrySet()) {
+      int finalJ = j;
+      int finalI = i;
+      columnMap.getValue().values().stream()
+          .reduce((a, b) -> a * b / 100)
+          .ifPresent(factor -> addComponent(getFactorLabel(factor), finalJ, finalI));
+      j++;
+    }
 
     setHeight(100f, Unit.PERCENTAGE);
     setWidth(100f, Unit.PERCENTAGE);
+  }
+
+  @SuppressWarnings("SpellCheckingInspection")
+  @NotNull
+  private Label getFactorLabel(Float factor) {
+    float value = factor / 100f;
+
+    String colorCode;
+    if (value == 0f) {
+      colorCode = "737373";
+    } else if (value == 1f) {
+      colorCode = "D9D9D9";
+    } else if (value > 1f) {
+      colorCode = "E63900";
+    } else {
+      colorCode = "59B300";
+    }
+    return new Label("<div style=\"background-color:#" + colorCode + ";\">x" + value + "</div>", ContentMode.HTML);
   }
 }
