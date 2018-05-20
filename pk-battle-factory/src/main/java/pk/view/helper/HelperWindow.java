@@ -60,7 +60,7 @@ public class HelperWindow extends Window {
 
   private void checkComputeButtonEnableState(@NotNull PkCheckBoxGroup ownCheckBoxGroup,
                                              @NotNull PkCheckBoxGroup opponentCheckBoxGroup) {
-    computeButton.setEnabled(!ownCheckBoxGroup.isEmpty() && !opponentCheckBoxGroup.isEmpty());
+    computeButton.setEnabled(!ownCheckBoxGroup.isEmpty());// && !opponentCheckBoxGroup.isEmpty());
   }
 
   public void refresh() {

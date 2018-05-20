@@ -34,7 +34,8 @@ public class PkOpponentInfoRow extends PkInfoRow {
   private Component currentComponent;
 
   @Autowired
-  public PkOpponentInfoRow(PokemonFactoryController pokemonFactoryController, OpponentPokemonRowModel opponentPokemonRowModel,
+  public PkOpponentInfoRow(PokemonFactoryController pokemonFactoryController,
+                           OpponentPokemonRowModel opponentPokemonRowModel,
                            PkNameValueChangeListener pkNameValueChangeListener,
                            PkTypeValueChangeListener pkTypeValueChangeListener,
                            PkMoveValueChangeListener pkMoveValueChangeListener) {

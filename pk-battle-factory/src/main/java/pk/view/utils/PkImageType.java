@@ -3,6 +3,7 @@ package pk.view.utils;
 import com.vaadin.server.StreamResource;
 import com.vaadin.ui.Image;
 import org.jetbrains.annotations.NotNull;
+import pk.model.entity.Type;
 
 import java.io.InputStream;
 
@@ -18,8 +19,8 @@ public class PkImageType extends Image {
   }
 
   @NotNull
-  public static PkImageType of(String typeIdentifier) {
-    return new PkImageType(typeIdentifier);
+  public static PkImageType of(@NotNull Type type) {
+    return new PkImageType(type.getIdentifier());
   }
 
 }

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import pk.controller.PokemonFactoryController;
 import pk.model.data.PokemonRowModel;
 import pk.model.dto.PokemonFactoryDTO;
+import pk.model.entity.Type;
 import pk.view.utils.PkImage;
 import pk.view.utils.PkImageType;
 
@@ -118,7 +119,7 @@ public abstract class PkInfoRow extends HorizontalLayout {
     newImageLayout.addComponent(pkImage);
 
 
-    for (String type : pokemonFactoryDTO.getTypes()) {
+    for (Type type : pokemonFactoryDTO.getTypes()) {
       newImageLayout.addComponent(PkImageType.of(type));
     }
 

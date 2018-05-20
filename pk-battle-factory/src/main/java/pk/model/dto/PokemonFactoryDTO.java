@@ -2,6 +2,7 @@ package pk.model.dto;
 
 import commons.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import pk.model.entity.Type;
 import pk.model.projection.PokemonFactoryProjection;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -37,7 +39,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   private String encounter50;
   private String encounter100;
   private Integer pokemonSpeciesId;
-  private List<String> types = new ArrayList<>(2);
+  private List<Type> types = new ArrayList<>(2);
 
   public PokemonFactoryDTO() {
     for (int i = 1; i <= 6; i++) {
@@ -48,7 +50,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     }
   }
 
-  public PokemonFactoryDTO(PokemonFactoryProjection p, List<Integer> stats, List<String> moves, List<String> types) {
+  public PokemonFactoryDTO(PokemonFactoryProjection p, List<Integer> stats, List<String> moves, List<Type> types) {
     this.id = p.getId();
     this.pkName = p.getPkName();
     this.natureName = p.getNatureName();
@@ -150,11 +152,11 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.pokemonSpeciesId = pokemonSpeciesId;
   }
 
-  public List<String> getTypes() {
+  public List<Type> getTypes() {
     return types;
   }
 
-  public void setTypes(List<String> types) {
+  public void setTypes(List<Type> types) {
     this.types = types;
   }
 
@@ -165,20 +167,20 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         ", pkName='" + pkName + '\'' +
         ", natureName='" + natureName + '\'' +
         ", itemName='" + itemName + '\'' +
-        ", stats='" + getStringOfList(stats.values()) + '\'' +
-        ", moves='" + getStringOfList(moves.values()) + '\'' +
+        ", stats='" + getStringOfList(stats.values(), Object::toString) + '\'' +
+        ", moves='" + getStringOfList(moves.values(), Object::toString) + '\'' +
         ", encounter50='" + encounter50 + '\'' +
         ", encounter100='" + encounter100 + '\'' +
         ", pokemonSpeciesId=" + pokemonSpeciesId +
-        ", types='" + getStringOfList(types) + '\'' +
+        ", types='" + getStringOfList(types, Type::getIdentifier) + '\'' +
         '}';
   }
 
   @NotNull
-  private String getStringOfList(Collection<?> list) {
+  private <T> String getStringOfList(@NotNull Collection<T> list, Function<T, String> stringFunction) {
     return list.stream()
         .filter(Objects::nonNull)
-        .map(Object::toString)
+        .map(stringFunction)
         .collect(Collectors.joining(", "));
   }
 

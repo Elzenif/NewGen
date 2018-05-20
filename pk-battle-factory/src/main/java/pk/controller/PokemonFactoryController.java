@@ -18,7 +18,6 @@ import pk.model.entity.PokemonFactoryStat;
 import pk.model.entity.PokemonFactoryStatId;
 import pk.model.entity.PokemonStat;
 import pk.model.entity.Stat;
-import pk.model.entity.Type;
 import pk.model.projection.PokemonFactoryProjection;
 import pk.model.repository.ItemNameRepository;
 import pk.model.repository.MoveNameRepository;
@@ -110,10 +109,7 @@ public class PokemonFactoryController {
                 .stream()
                 .map(MoveName::getName)
                 .collect(Collectors.toList()),
-            typeRepository.find(p.getPokemonSpeciesId())
-                .stream()
-                .map(Type::getIdentifier)
-                .collect(Collectors.toList())));
+            typeRepository.find(p.getPokemonSpeciesId())));
   }
 
   @Transactional
