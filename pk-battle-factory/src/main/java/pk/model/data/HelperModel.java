@@ -4,6 +4,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import commons.Constants;
 import commons.utils.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import pk.model.dto.PokemonFactoryDTO;
 import pk.model.entity.Type;
@@ -22,7 +23,8 @@ public class HelperModel {
   private Set<PokemonFactoryDTO> ownPokemons;
   private Set<PokemonFactoryDTO> opponentPokemons;
   private Table<Type, Type, Integer> efficacyTable = HashBasedTable.create(17, 17);
-  private Table<PokemonFactoryDTO, Type, Float> typeMultiplierTable;
+  private Table<PokemonFactoryDTO, Type, Float> ownTypeMultiplierTable;
+  private Table<PokemonFactoryDTO, Type, Float> opponentTypeMultiplierTable;
 
   public HelperModel(TypeEfficacyRepository typeEfficacyRepository) {
     this.typeEfficacyRepository = typeEfficacyRepository;
@@ -42,13 +44,15 @@ public class HelperModel {
     opponentPokemons = selectedPokemons.getRight();
 
     // Type multiplier
-    computeTypeMultiplierTable();
+    ownTypeMultiplierTable = computeTypeMultiplierTable(ownPokemons);
+    opponentTypeMultiplierTable = computeTypeMultiplierTable(opponentPokemons);
   }
 
-  private void computeTypeMultiplierTable() {
-    typeMultiplierTable = HashBasedTable.create(ownPokemons.size() + 1, efficacyTable.rowKeySet().size());
+  private Table<PokemonFactoryDTO, Type, Float> computeTypeMultiplierTable(@NotNull Set<PokemonFactoryDTO> pokemons) {
+    Table<PokemonFactoryDTO, Type, Float> typeMultiplierTable = HashBasedTable
+        .create(pokemons.size() + 1, efficacyTable.rowKeySet().size());
 
-    for (PokemonFactoryDTO ownPokemon : ownPokemons) {
+    for (PokemonFactoryDTO ownPokemon : pokemons) {
       for (Type damageType : efficacyTable.rowKeySet()) {
         Float damageFactor = 100f;
         for (Type targetType : ownPokemon.getTypes()) {
@@ -57,6 +61,7 @@ public class HelperModel {
         typeMultiplierTable.put(ownPokemon, damageType, damageFactor);
       }
     }
+    return typeMultiplierTable;
   }
 
   public Set<PokemonFactoryDTO> getOwnPokemons() {
@@ -67,11 +72,11 @@ public class HelperModel {
     return opponentPokemons;
   }
 
-  public Table<Type, Type, Integer> getEfficacyTable() {
-    return efficacyTable;
+  public Table<PokemonFactoryDTO, Type, Float> getOwnTypeMultiplierTable() {
+    return ownTypeMultiplierTable;
   }
 
-  public Table<PokemonFactoryDTO, Type, Float> getTypeMultiplierTable() {
-    return typeMultiplierTable;
+  public Table<PokemonFactoryDTO, Type, Float> getOpponentTypeMultiplierTable() {
+    return opponentTypeMultiplierTable;
   }
 }

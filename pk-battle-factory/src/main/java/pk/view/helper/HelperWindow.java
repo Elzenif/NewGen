@@ -22,7 +22,8 @@ import java.util.Set;
 public class HelperWindow extends Window {
 
   private final ComputeButton computeButton;
-  private final TypeInfoPanel typeInfoPanel;
+  private final OwnTypeInfoPanel ownTypeInfoPanel;
+  private final OpponentTypeInfoPanel opponentTypeInfoPanel;
   private final ResultPanel resultPanel;
   private final OwnPokemonRowModel ownPokemonRowModel;
   private final OpponentPokemonRowModel opponentPokemonRowModel;
@@ -30,11 +31,13 @@ public class HelperWindow extends Window {
   private PkCheckBoxGroup ownCheckBoxGroup;
   private PkCheckBoxGroup opponentCheckBoxGroup;
 
-  public HelperWindow(ComputeButton computeButton, TypeInfoPanel typeInfoPanel, ResultPanel resultPanel,
+  public HelperWindow(ComputeButton computeButton, OwnTypeInfoPanel ownTypeInfoPanel,
+                      OpponentTypeInfoPanel opponentTypeInfoPanel, ResultPanel resultPanel,
                       OwnPokemonRowModel ownPokemonRowModel, OpponentPokemonRowModel opponentPokemonRowModel) {
     super(Constants.resourceBundle.getString("menu.helper"));
     this.computeButton = computeButton;
-    this.typeInfoPanel = typeInfoPanel;
+    this.ownTypeInfoPanel = ownTypeInfoPanel;
+    this.opponentTypeInfoPanel = opponentTypeInfoPanel;
     this.resultPanel = resultPanel;
     this.ownPokemonRowModel = ownPokemonRowModel;
     this.opponentPokemonRowModel = opponentPokemonRowModel;
@@ -44,13 +47,14 @@ public class HelperWindow extends Window {
   public void init() {
     ownCheckBoxGroup = new PkCheckBoxGroup("panel.team.own");
     opponentCheckBoxGroup = new PkCheckBoxGroup("panel.team.opponent");
-    ownCheckBoxGroup.addSelectionListener(e -> checkComputeButtonEnableState(ownCheckBoxGroup, opponentCheckBoxGroup));
-    opponentCheckBoxGroup
-        .addSelectionListener(e -> checkComputeButtonEnableState(ownCheckBoxGroup, opponentCheckBoxGroup));
+//    ownCheckBoxGroup.addSelectionListener(e -> checkComputeButtonEnableState(ownCheckBoxGroup, opponentCheckBoxGroup));
+//    opponentCheckBoxGroup
+//        .addSelectionListener(e -> checkComputeButtonEnableState(ownCheckBoxGroup, opponentCheckBoxGroup));
 
     VerticalLayout mainLayout = new VerticalLayout(
         new HorizontalLayout(ownCheckBoxGroup, opponentCheckBoxGroup, computeButton),
-        typeInfoPanel, resultPanel);
+        new HorizontalLayout(ownTypeInfoPanel, opponentTypeInfoPanel),
+        resultPanel);
 //    mainLayout.setHeight(100f, Unit.PERCENTAGE);
 //    mainLayout.setWidth(100f, Unit.PERCENTAGE);
 
