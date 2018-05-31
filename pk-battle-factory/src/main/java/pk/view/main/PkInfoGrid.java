@@ -86,8 +86,6 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
     });
   }
 
-  // TODO Coverage
-
   public void update(Function<String, Stream<PokemonFactoryDTO>> findFunction, String param) {
     newLine = false;
     setDataProvider(DataProvider.fromStream(findFunction.apply(param)));

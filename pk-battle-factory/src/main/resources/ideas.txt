@@ -1,0 +1,5 @@
+TODO Text Area in English to export to damage calc
+
+TODO Add type coverage panels based on the attacks of each pokemon
+
+TODO Add tooltip with info, like possible abilities

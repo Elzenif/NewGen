@@ -10,17 +10,17 @@ import pk.model.data.HelperModel;
 public class ComputeButton extends Button implements Button.ClickListener {
 
   private final HelperModel helperModel;
-  private final OwnTypeInfoPanel ownTypeInfoPanel;
-  private final OpponentTypeInfoPanel opponentTypeInfoPanel;
+  private final OwnTypeWeaknessPanel ownTypeWeaknessPanel;
+  private final OpponentTypeWeaknessPanel opponentTypeWeaknessPanel;
   private final ResultPanel resultPanel;
   private HelperWindow helperWindow;
 
-  public ComputeButton(HelperModel helperModel, OwnTypeInfoPanel ownTypeInfoPanel,
-                       OpponentTypeInfoPanel opponentTypeInfoPanel, ResultPanel resultPanel) {
+  public ComputeButton(HelperModel helperModel, OwnTypeWeaknessPanel ownTypeWeaknessPanel,
+                       OpponentTypeWeaknessPanel opponentTypeWeaknessPanel, ResultPanel resultPanel) {
     super(Constants.resourceBundle.getString("compute"));
     this.helperModel = helperModel;
-    this.ownTypeInfoPanel = ownTypeInfoPanel;
-    this.opponentTypeInfoPanel = opponentTypeInfoPanel;
+    this.ownTypeWeaknessPanel = ownTypeWeaknessPanel;
+    this.opponentTypeWeaknessPanel = opponentTypeWeaknessPanel;
     this.resultPanel = resultPanel;
 
     addClickListener(this);
@@ -30,8 +30,8 @@ public class ComputeButton extends Button implements Button.ClickListener {
   @Override
   public void buttonClick(ClickEvent event) {
     helperModel.compute(helperWindow.getSelectedPokemons());
-    ownTypeInfoPanel.refresh();
-    opponentTypeInfoPanel.refresh();
+    ownTypeWeaknessPanel.refresh();
+    opponentTypeWeaknessPanel.refresh();
     resultPanel.refresh();
   }
 

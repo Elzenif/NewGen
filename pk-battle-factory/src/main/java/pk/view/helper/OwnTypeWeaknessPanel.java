@@ -7,10 +7,10 @@ import pk.model.dto.PokemonFactoryDTO;
 import pk.model.entity.Type;
 
 @Component
-public class OwnTypeInfoPanel extends TypeInfoPanel {
+public class OwnTypeWeaknessPanel extends TypeWeaknessPanel {
 
-  public OwnTypeInfoPanel(HelperModel helperModel) {
-    super(helperModel, "panel.team.own");
+  public OwnTypeWeaknessPanel(HelperModel helperModel) {
+    super(helperModel, "panel.team.own.weaknesses");
   }
 
   @Override

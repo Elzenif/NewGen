@@ -200,7 +200,6 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     return s;
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -208,31 +207,11 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
 
     PokemonFactoryDTO that = (PokemonFactoryDTO) o;
 
-    if (id != null ? !id.equals(that.id) : that.id != null) return false;
-    if (pkName != null ? !pkName.equals(that.pkName) : that.pkName != null) return false;
-    if (natureName != null ? !natureName.equals(that.natureName) : that.natureName != null) return false;
-    if (itemName != null ? !itemName.equals(that.itemName) : that.itemName != null) return false;
-    if (stats != null ? !stats.equals(that.stats) : that.stats != null) return false;
-    if (moves != null ? !moves.equals(that.moves) : that.moves != null) return false;
-    if (encounter50 != null ? !encounter50.equals(that.encounter50) : that.encounter50 != null) return false;
-    if (encounter100 != null ? !encounter100.equals(that.encounter100) : that.encounter100 != null) return false;
-    if (pokemonSpeciesId != null ? !pokemonSpeciesId.equals(that.pokemonSpeciesId) : that.pokemonSpeciesId != null)
-      return false;
-    return types != null ? types.equals(that.types) : that.types == null;
+    return id != null ? id.equals(that.id) : that.id == null;
   }
 
   @Override
   public int hashCode() {
-    int result = id != null ? id.hashCode() : 0;
-    result = 31 * result + (pkName != null ? pkName.hashCode() : 0);
-    result = 31 * result + (natureName != null ? natureName.hashCode() : 0);
-    result = 31 * result + (itemName != null ? itemName.hashCode() : 0);
-    result = 31 * result + (stats != null ? stats.hashCode() : 0);
-    result = 31 * result + (moves != null ? moves.hashCode() : 0);
-    result = 31 * result + (encounter50 != null ? encounter50.hashCode() : 0);
-    result = 31 * result + (encounter100 != null ? encounter100.hashCode() : 0);
-    result = 31 * result + (pokemonSpeciesId != null ? pokemonSpeciesId.hashCode() : 0);
-    result = 31 * result + (types != null ? types.hashCode() : 0);
-    return result;
+    return id != null ? id.hashCode() : 0;
   }
 }

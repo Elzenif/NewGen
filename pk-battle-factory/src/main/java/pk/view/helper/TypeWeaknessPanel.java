@@ -14,11 +14,11 @@ import pk.view.utils.PkImageType;
 
 import java.util.Map;
 
-public abstract class TypeInfoPanel extends GridLayout {
+public abstract class TypeWeaknessPanel extends GridLayout {
 
   protected final HelperModel helperModel;
 
-  protected TypeInfoPanel(HelperModel helperModel, String captionKey) {
+  protected TypeWeaknessPanel(HelperModel helperModel, String captionKey) {
     this.helperModel = helperModel;
     setCaption(Constants.resourceBundle.getString(captionKey));
   }
