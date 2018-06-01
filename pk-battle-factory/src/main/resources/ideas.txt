@@ -1,5 +1,3 @@
-TODO Add column abbreviation in stat_names table
-
 TODO When exporting, add option to chose which ability (with "do not know" option for opponent)
 TODO Add tooltip with info, like possible abilities
 

@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pk.controller.PokemonFactoryController;
 import pk.model.data.PokemonRowModel;
+import pk.model.dto.PokemonFactoryDTO;
+import pk.model.entity.Ability;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -40,8 +42,15 @@ public class ExportButton extends Button implements Button.ClickListener {
 
   @Override
   public void buttonClick(ClickEvent event) {
+    PokemonFactoryDTO pokemonFactoryDTO = pokemonRowModel.get(pkInfoRow);
+
+    Ability ability = pokemonFactoryDTO.getPotentialAbilities().get(0);
+    if (pokemonFactoryDTO.getPotentialAbilities().size() > 1) {
+      // TODO ask ability name (based on language) -> choose ability
+    }
+
     String prettyPrint = pokemonFactoryController
-        .prettyPrint(pokemonRowModel.get(pkInfoRow), new Locale("en").getLanguage());
+        .prettyPrint(pokemonFactoryDTO, ability, new Locale("en").getLanguage());
     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     clipboard.setContents(new StringSelection(prettyPrint), null);
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pk.model.dto.PokemonFactoryDTO;
+import pk.model.entity.Ability;
 import pk.model.entity.ItemName;
 import pk.model.entity.MoveName;
 import pk.model.entity.Nature;
@@ -18,7 +19,10 @@ import pk.model.entity.PokemonFactoryStat;
 import pk.model.entity.PokemonFactoryStatId;
 import pk.model.entity.PokemonStat;
 import pk.model.entity.Stat;
+import pk.model.entity.StatName;
 import pk.model.projection.PokemonFactoryProjection;
+import pk.model.repository.AbilityNameRepository;
+import pk.model.repository.AbilityRepository;
 import pk.model.repository.ItemNameRepository;
 import pk.model.repository.MoveNameRepository;
 import pk.model.repository.NatureNameRepository;
@@ -27,13 +31,14 @@ import pk.model.repository.PokemonFactoryStatRepository;
 import pk.model.repository.PokemonRepository;
 import pk.model.repository.PokemonSpeciesNameRepository;
 import pk.model.repository.PokemonStatRepository;
+import pk.model.repository.StatNameRepository;
 import pk.model.repository.StatRepository;
 import pk.model.repository.TypeRepository;
 import pk.view.main.IVSlider;
 import pk.view.main.LevelSlider;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -43,30 +48,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static commons.Constants.enResourceBundle;
-import static commons.Constants.resourceBundle;
-
 /**
  * Created by Germain on 03/07/2017.
  */
 @Component
 public class PokemonFactoryController {
 
-  public static final List<String> STAT_NAMES = Arrays.asList(
-      resourceBundle.getString("hp"),
-      resourceBundle.getString("atk"),
-      resourceBundle.getString("def"),
-      resourceBundle.getString("spAtk"),
-      resourceBundle.getString("spDef"),
-      resourceBundle.getString("speed"));
-
-  private static final List<String> EN_STAT_NAMES = Arrays.asList(
-      enResourceBundle.getString("hp"),
-      enResourceBundle.getString("atk"),
-      enResourceBundle.getString("def"),
-      enResourceBundle.getString("spAtk"),
-      enResourceBundle.getString("spDef"),
-      enResourceBundle.getString("speed"));
+  public static List<String> STAT_NAMES;
+  private static List<String> EN_STAT_NAMES;
+  private static List<Stat> STATS;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PokemonFactoryController.class);
 
@@ -80,6 +70,9 @@ public class PokemonFactoryController {
   private final PokemonStatRepository pokemonStatRepository;
   private final TypeRepository typeRepository;
   private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
+  private final StatNameRepository statNameRepository;
+  private final AbilityRepository abilityRepository;
+  private final AbilityNameRepository abilityNameRepository;
 
   private double level = LevelSlider.DEFAULT_LEVEL;
   private double iv = IVSlider.DEFAULT_IV;
@@ -95,7 +88,10 @@ public class PokemonFactoryController {
                                   StatRepository statRepository,
                                   PokemonStatRepository pokemonStatRepository,
                                   TypeRepository typeRepository,
-                                  PokemonSpeciesNameRepository pokemonSpeciesNameRepository) {
+                                  PokemonSpeciesNameRepository pokemonSpeciesNameRepository,
+                                  StatNameRepository statNameRepository,
+                                  AbilityRepository abilityRepository,
+                                  AbilityNameRepository abilityNameRepository) {
     this.pokemonFactoryRepository = pokemonFactoryRepository;
     this.pokemonFactoryStatRepository = pokemonFactoryStatRepository;
     this.moveNameRepository = moveNameRepository;
@@ -106,6 +102,26 @@ public class PokemonFactoryController {
     this.pokemonStatRepository = pokemonStatRepository;
     this.typeRepository = typeRepository;
     this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
+    this.statNameRepository = statNameRepository;
+    this.abilityRepository = abilityRepository;
+    this.abilityNameRepository = abilityNameRepository;
+  }
+
+  @PostConstruct
+  public void init() {
+    STAT_NAMES = statNameRepository.findByLanguageId(Locale.getDefault().getLanguage())
+        .stream()
+        .map(StatName::getAbbrev)
+        .filter(Objects::nonNull)
+        .collect(Collectors.toList());
+
+    EN_STAT_NAMES = statNameRepository.findByLanguageId(new Locale("en").getLanguage())
+        .stream()
+        .map(StatName::getAbbrev)
+        .filter(Objects::nonNull)
+        .collect(Collectors.toList());
+
+    STATS = statRepository.findAll();
   }
 
   public Stream<PokemonFactoryDTO> findByName(String name) {
@@ -124,17 +140,22 @@ public class PokemonFactoryController {
   }
 
   private Stream<PokemonFactoryDTO> find(@NotNull Stream<PokemonFactoryProjection> projections, String language) {
-    return projections
-        .map(p -> new PokemonFactoryDTO(p,
-            pokemonFactoryStatRepository.find(p.getId())
-                .stream()
-                .map(PokemonFactoryStat::getEv)
-                .collect(Collectors.toList()),
-            moveNameRepository.find(p.getId(), language)
-                .stream()
-                .map(MoveName::getName)
-                .collect(Collectors.toList()),
-            typeRepository.find(p.getPokemonSpeciesId())));
+    return projections.map(p -> createPokemonFactoryDTO(p, language));
+  }
+
+  @NotNull
+  private PokemonFactoryDTO createPokemonFactoryDTO(PokemonFactoryProjection p, String language) {
+    return new PokemonFactoryDTO(p,
+        pokemonFactoryStatRepository.find(p.getId())
+            .stream()
+            .map(PokemonFactoryStat::getEv)
+            .collect(Collectors.toList()),
+        moveNameRepository.find(p.getId(), language)
+            .stream()
+            .map(MoveName::getName)
+            .collect(Collectors.toList()),
+        typeRepository.find(p.getPokemonSpeciesId()),
+        abilityRepository.findByPokemonId(p.getPokemonSpeciesId()));
   }
 
   @Transactional
@@ -173,7 +194,7 @@ public class PokemonFactoryController {
       PokemonFactoryStat pokemonFactoryStat = new PokemonFactoryStat();
       pokemonFactoryStat.setId(new PokemonFactoryStatId(pokemonFactory.getId(), entry.getKey()));
       pokemonFactoryStat.setPokemonFactory(pokemonFactory);
-      Stat stat = statRepository.getOne(entry.getKey());
+      Stat stat = STATS.get(entry.getKey() - 1);
       pokemonFactoryStat.setStat(stat);
       pokemonFactoryStat.setEv(entry.getValue() == null ? 0 : entry.getValue());
       pokemonFactoryStats.add(pokemonFactoryStat);
@@ -237,10 +258,12 @@ public class PokemonFactoryController {
     this.iv = iv;
   }
 
-  public String prettyPrint(@NotNull PokemonFactoryDTO pokemonFactoryDTO, String toLanguage) {
+  public String prettyPrint(@NotNull PokemonFactoryDTO pokemonFactoryDTO, Ability ability,
+                            String toLanguage) {
     String pkName = pokemonFactoryDTO.getPkName();
     String itemName = pokemonFactoryDTO.getItemName();
     String natureName = pokemonFactoryDTO.getNatureName();
+    String abilityName = abilityNameRepository.findByAbilityIdAndLanguage_Iso639(ability.getId(), toLanguage).getName();
     Map<Integer, String> moves = new HashMap<>(pokemonFactoryDTO.getMoves());
 
     String fromLanguage = Locale.getDefault().getLanguage();
@@ -258,13 +281,15 @@ public class PokemonFactoryController {
     s += '\n';
     s += StringUtils.isNull(natureName) ? "" : (natureName + " Nature");
     s += '\n';
+    s += StringUtils.isNull(abilityName) ? "" : ("Ability: " + abilityName);
+    s += '\n';
     s += "EVs: " + IntStream.rangeClosed(0, 5).boxed()
         .filter(i -> pokemonFactoryDTO.getStats().get(i + 1) != 0)
         .map(i -> pokemonFactoryDTO.getStats().get(i + 1) + " " + EN_STAT_NAMES.get(i))
         .collect(Collectors.joining(" / ")) + '\n';
     s += "IVs: " + IntStream.rangeClosed(0, 5).boxed()
         .map(i -> (int) iv + " " + EN_STAT_NAMES.get(i))
-        .collect(Collectors.joining(" / "))+ '\n';
+        .collect(Collectors.joining(" / ")) + '\n';
     s += "- " + moves.values().stream()
         .filter(move -> !StringUtils.isNull(move))
         .collect(Collectors.joining("\n- "));

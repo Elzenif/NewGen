@@ -8,43 +8,39 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-/**
- * Created by Germain on 03/07/2017.
- */
 @Entity
-@Table(name = "stat_names")
-public class StatName {
-  
+@Table(name = "ability_names")
+public class AbilityName {
+
   @EmbeddedId
-  private StatNameId id;
-  @MapsId("statId")
-  @JoinColumn(name = "stat_id", referencedColumnName = "id")
+  private AbilityNameId id;
+  @MapsId("abilityId")
+  @JoinColumn(name = "ability_id", referencedColumnName = "id")
   @ManyToOne(fetch = FetchType.LAZY)
-  private Stat stat;
+  private Ability ability;
   @MapsId("localLanguageId")
   @JoinColumn(name = "local_language_id", referencedColumnName = "id")
   @ManyToOne(fetch = FetchType.LAZY)
   private Language language;
   private String name;
-  private String abbrev;
 
-  public StatName() {
+  public AbilityName() {
   }
 
-  public StatNameId getId() {
+  public AbilityNameId getId() {
     return id;
   }
 
-  public void setId(StatNameId id) {
+  public void setId(AbilityNameId id) {
     this.id = id;
   }
 
-  public Stat getStat() {
-    return stat;
+  public Ability getAbility() {
+    return ability;
   }
 
-  public void setStat(Stat stat) {
-    this.stat = stat;
+  public void setAbility(Ability ability) {
+    this.ability = ability;
   }
 
   public Language getLanguage() {
@@ -63,22 +59,13 @@ public class StatName {
     this.name = name;
   }
 
-  public String getAbbrev() {
-    return abbrev;
-  }
-
-  public void setAbbrev(String abbrev) {
-    this.abbrev = abbrev;
-  }
-
   @Override
   public String toString() {
-    return "StatName{" +
+    return "AbilityName{" +
         "id=" + id +
-        ", stat=" + stat.getId() +
+        ", ability=" + ability.getId() +
         ", language=" + language.getId() +
         ", name='" + name + '\'' +
-        ", abbrev='" + abbrev + '\'' +
         '}';
   }
 
@@ -87,9 +74,9 @@ public class StatName {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    StatName statName = (StatName) o;
+    AbilityName that = (AbilityName) o;
 
-    return id != null ? id.equals(statName.id) : statName.id == null;
+    return id != null ? id.equals(that.id) : that.id == null;
   }
 
   @Override

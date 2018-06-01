@@ -1,6 +1,7 @@
 package pk.model.dto;
 
 import org.jetbrains.annotations.NotNull;
+import pk.model.entity.Ability;
 import pk.model.entity.Type;
 import pk.model.projection.PokemonFactoryProjection;
 
@@ -28,6 +29,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   private String encounter100;
   private Integer pokemonSpeciesId;
   private List<Type> types = new ArrayList<>(2);
+  private List<Ability> potentialAbilities = new ArrayList<>(2);
 
   public PokemonFactoryDTO() {
     for (int i = 1; i <= 6; i++) {
@@ -39,7 +41,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
   }
 
   public PokemonFactoryDTO(@NotNull PokemonFactoryProjection p, @NotNull List<Integer> stats, List<String> moves,
-                           List<Type> types) {
+                           List<Type> types, List<Ability> potentialAbilities) {
     this.id = p.getId();
     this.pkName = p.getPkName();
     this.natureName = p.getNatureName();
@@ -60,6 +62,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.encounter100 = p.getEncounter100();
     this.pokemonSpeciesId = p.getPokemonSpeciesId();
     this.types = types;
+    this.potentialAbilities = potentialAbilities;
   }
 
   @Override
@@ -149,6 +152,14 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     this.types = types;
   }
 
+  public List<Ability> getPotentialAbilities() {
+    return potentialAbilities;
+  }
+
+  public void setPotentialAbilities(List<Ability> potentialAbilities) {
+    this.potentialAbilities = potentialAbilities;
+  }
+
   @Override
   public String toString() {
     return "PokemonFactoryDTO{" +
@@ -162,6 +173,7 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         ", encounter100='" + encounter100 + '\'' +
         ", pokemonSpeciesId=" + pokemonSpeciesId +
         ", types='" + getStringOfList(types, Type::getIdentifier) + '\'' +
+        ", potentialAbilities='" + getStringOfList(potentialAbilities, Ability::getIdentifier) + '\'' +
         '}';
   }
 

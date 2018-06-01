@@ -87,10 +87,14 @@ public class PkApplicationTest {
     if (!optional.isPresent()) {
       fail("Could not find Salamèche");
     }
-    String prettyPrint = pokemonFactoryController.prettyPrint(optional.get(), new Locale("en").getLanguage());
+    PokemonFactoryDTO pokemonFactoryDTO = optional.get();
+    String prettyPrint = pokemonFactoryController
+        .prettyPrint(pokemonFactoryDTO, pokemonFactoryDTO.getPotentialAbilities().get(0),
+            new Locale("en").getLanguage());
     assertThat(prettyPrint).isEqualTo(
         "Charmander @ Scope Lens\n" +
             "Adamant Nature\n" +
+            "Ability: Blaze\n" +
             "EVs: 252 Atk / 252 Spe\n" +
             "IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe\n" +
             "- Smokescreen\n" +
@@ -108,11 +112,11 @@ public class PkApplicationTest {
     String prettyPrint = pokemonFactoryController.prettyPrint(optional.get());
     assertThat(prettyPrint).isEqualTo(
         "Salamèche @ Lentilscope\n" +
-        "Rigide Nature\n" +
-        "EVs: 252 Atq / 252 Vit\n" +
-        "- Brouillard\n" +
-        "- Grimace\n" +
-        "- Griffe Acier\n" +
-        "- Crocs Feu");
+            "Rigide Nature\n" +
+            "EVs: 252 Atq / 252 Vit\n" +
+            "- Brouillard\n" +
+            "- Grimace\n" +
+            "- Griffe Acier\n" +
+            "- Crocs Feu");
   }
 }

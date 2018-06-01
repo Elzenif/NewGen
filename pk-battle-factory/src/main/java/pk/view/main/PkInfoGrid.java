@@ -129,37 +129,37 @@ public class PkInfoGrid extends Grid<PokemonFactoryDTO> {
 
     TextField hpTextField = new TextField();
     addColumn(p -> p.getStats().get(1).toString(), new TextRenderer())
-        .setCaption(resourceBundle.getString("hp"))
+        .setCaption(PokemonFactoryController.STAT_NAMES.get(0))
         .setExpandRatio(0)
         .setEditorComponent(hpTextField, (p, ev) -> p.getStats().put(1, Integer.valueOf(ev)));
 
     TextField atkTextField = new TextField();
     addColumn(p -> p.getStats().get(2).toString(), new TextRenderer())
-        .setCaption(resourceBundle.getString("atk"))
+        .setCaption(PokemonFactoryController.STAT_NAMES.get(1))
         .setExpandRatio(0)
         .setEditorComponent(atkTextField, (p, ev) -> p.getStats().put(2, Integer.valueOf(ev)));
 
     TextField defTextField = new TextField();
     addColumn(p -> p.getStats().get(3).toString(), new TextRenderer())
-        .setCaption(resourceBundle.getString("def"))
+        .setCaption(PokemonFactoryController.STAT_NAMES.get(2))
         .setExpandRatio(0)
         .setEditorComponent(defTextField, (p, ev) -> p.getStats().put(3, Integer.valueOf(ev)));
 
     TextField spAtkTextField = new TextField();
     addColumn(p -> p.getStats().get(4).toString(), new TextRenderer())
-        .setCaption(resourceBundle.getString("spAtk"))
+        .setCaption(PokemonFactoryController.STAT_NAMES.get(3))
         .setExpandRatio(0)
         .setEditorComponent(spAtkTextField, (p, ev) -> p.getStats().put(4, Integer.valueOf(ev)));
 
     TextField spDefTextField = new TextField();
     addColumn(p -> p.getStats().get(5).toString(), new TextRenderer())
-        .setCaption(resourceBundle.getString("spDef"))
+        .setCaption(PokemonFactoryController.STAT_NAMES.get(4))
         .setExpandRatio(0)
         .setEditorComponent(spDefTextField, (p, ev) -> p.getStats().put(5, Integer.valueOf(ev)));
 
     TextField speedTextField = new TextField();
     addColumn(p -> p.getStats().get(6).toString(), new TextRenderer())
-        .setCaption(resourceBundle.getString("speed"))
+        .setCaption(PokemonFactoryController.STAT_NAMES.get(5))
         .setExpandRatio(0)
         .setEditorComponent(speedTextField, (p, ev) -> p.getStats().put(6, Integer.valueOf(ev)));
 
