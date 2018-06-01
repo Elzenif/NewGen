@@ -1,6 +1,7 @@
 package pk.view.main;
 
 import com.vaadin.ui.ComboBox;
+import org.jetbrains.annotations.NotNull;
 import pk.view.model.PkComboBoxModel;
 
 /**
@@ -10,7 +11,7 @@ public class PkComboBox<T> extends ComboBox<T> {
 
   private final PkComboBoxModel<T> model;
 
-  protected PkComboBox(PkComboBoxModel<T> model, String caption) {
+  protected PkComboBox(@NotNull PkComboBoxModel<T> model, String caption) {
     super(caption, model.getAllElements());
     this.model = model;
     setItemCaptionGenerator(model.getCaptionGenerator()::apply);

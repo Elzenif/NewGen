@@ -1,12 +1,10 @@
 package pk.model.dto;
 
-import commons.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import pk.model.entity.Type;
 import pk.model.projection.PokemonFactoryProjection;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,22 +12,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static commons.Constants.resourceBundle;
 
 /**
  * Created by Germain on 03/07/2017.
  */
 public class PokemonFactoryDTO implements PokemonFactoryProjection {
 
-  public static final List<String> STAT_NAMES = Arrays.asList(
-      resourceBundle.getString("hp"),
-      resourceBundle.getString("atk"),
-      resourceBundle.getString("def"),
-      resourceBundle.getString("spAtk"),
-      resourceBundle.getString("spDef"),
-      resourceBundle.getString("speed"));
   private Integer id;
   private String pkName;
   private String natureName;
@@ -50,7 +38,8 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
     }
   }
 
-  public PokemonFactoryDTO(PokemonFactoryProjection p, List<Integer> stats, List<String> moves, List<Type> types) {
+  public PokemonFactoryDTO(@NotNull PokemonFactoryProjection p, @NotNull List<Integer> stats, List<String> moves,
+                           List<Type> types) {
     this.id = p.getId();
     this.pkName = p.getPkName();
     this.natureName = p.getNatureName();
@@ -182,22 +171,6 @@ public class PokemonFactoryDTO implements PokemonFactoryProjection {
         .filter(Objects::nonNull)
         .map(stringFunction)
         .collect(Collectors.joining(", "));
-  }
-
-  public String prettyPrint() {
-    String s = pkName;
-    s += StringUtils.isNull(itemName) ? "" : (" @ " + itemName);
-    s += '\n';
-    s += StringUtils.isNull(natureName) ? "" : natureName;
-    s += '\n';
-    s += IntStream.rangeClosed(0, 5).boxed()
-        .filter(i -> stats.get(i + 1) != 0)
-        .map(i -> stats.get(i + 1) + " " + STAT_NAMES.get(i))
-        .collect(Collectors.joining(" / ")) + '\n';
-    s += " - " + moves.values().stream()
-        .filter(move -> !StringUtils.isNull(move))
-        .collect(Collectors.joining("\n - "));
-    return s;
   }
 
   @Override

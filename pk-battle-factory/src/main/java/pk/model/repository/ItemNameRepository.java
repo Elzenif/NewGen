@@ -32,4 +32,12 @@ public interface ItemNameRepository extends Repository<ItemName, ItemNameId> {
       "INNER JOIN itemName.language l " +
       "WHERE itemName.name = ?1 AND l.iso639 = ?2")
   ItemName findByName(String itemName, String language);
+
+  @Query("SELECT in2.name FROM ItemName in1 " +
+      "INNER JOIN in1.language l1 " +
+      "INNER JOIN in1.item i " +
+      "INNER JOIN i.itemNames in2 " +
+      "INNER JOIN in2.language l2 " +
+      "WHERE in1.name = ?1 AND l1.iso639 = ?2 AND l2.iso639 = ?3")
+  String translate(String itemName, String fromLanguage, String toLanguage);
 }

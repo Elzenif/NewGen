@@ -19,9 +19,11 @@ import pk.model.repository.TypeNameRepository;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 /**
  * Created by Germain on 02/07/2017.
@@ -77,5 +79,40 @@ public class PkApplicationTest {
     List<TypeName> typeNames = typeNameRepository.findAllByLanguage(language, 4);
     assertThat(typeNames).hasSize(17);
     assertThat(typeNames).extracting("name").doesNotContain("Fairy", "Fée");
+  }
+
+  @Test
+  public void testPrettyPrintEn() {
+    Optional<PokemonFactoryDTO> optional = pokemonFactoryController.findByName("Salamèche").findAny();
+    if (!optional.isPresent()) {
+      fail("Could not find Salamèche");
+    }
+    String prettyPrint = pokemonFactoryController.prettyPrint(optional.get(), new Locale("en").getLanguage());
+    assertThat(prettyPrint).isEqualTo(
+        "Charmander @ Scope Lens\n" +
+            "Adamant Nature\n" +
+            "EVs: 252 Atk / 252 Spe\n" +
+            "IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe\n" +
+            "- Smokescreen\n" +
+            "- Scary Face\n" +
+            "- Metal Claw\n" +
+            "- Fire Fang");
+  }
+
+  @Test
+  public void testPrettyPrintFr() {
+    Optional<PokemonFactoryDTO> optional = pokemonFactoryController.findByName("Salamèche").findAny();
+    if (!optional.isPresent()) {
+      fail("Could not find Salamèche");
+    }
+    String prettyPrint = pokemonFactoryController.prettyPrint(optional.get());
+    assertThat(prettyPrint).isEqualTo(
+        "Salamèche @ Lentilscope\n" +
+        "Rigide Nature\n" +
+        "EVs: 252 Atq / 252 Vit\n" +
+        "- Brouillard\n" +
+        "- Grimace\n" +
+        "- Griffe Acier\n" +
+        "- Crocs Feu");
   }
 }

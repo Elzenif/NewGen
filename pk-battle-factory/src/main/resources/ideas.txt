@@ -1,5 +1,6 @@
-TODO Text Area in English to export to damage calc
+TODO Add column abbreviation in stat_names table
+
+TODO When exporting, add option to chose which ability (with "do not know" option for opponent)
+TODO Add tooltip with info, like possible abilities
 
 TODO Add type coverage panels based on the attacks of each pokemon
-
-TODO Add tooltip with info, like possible abilities

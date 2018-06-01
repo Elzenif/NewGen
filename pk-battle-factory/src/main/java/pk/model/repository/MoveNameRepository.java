@@ -30,4 +30,12 @@ public interface MoveNameRepository extends Repository<MoveName, MoveNameId> {
       "INNER JOIN mn.language l " +
       "WHERE mn.name IN ?1 AND l.iso639 = ?2")
   List<MoveName> findByNames(Collection<String> moveNames, String language);
+
+  @Query("SELECT mn2.name FROM MoveName mn1 " +
+      "INNER JOIN mn1.language l1 " +
+      "INNER JOIN mn1.move m " +
+      "INNER JOIN m.moveNames mn2 " +
+      "INNER JOIN mn2.language l2 " +
+      "WHERE mn1.name = ?1 AND l1.iso639 = ?2 AND l2.iso639 = ?3")
+  String translate(String moveName, String fromLanguage, String toLanguage);
 }

@@ -25,6 +25,7 @@ import pk.model.repository.NatureNameRepository;
 import pk.model.repository.PokemonFactoryRepository;
 import pk.model.repository.PokemonFactoryStatRepository;
 import pk.model.repository.PokemonRepository;
+import pk.model.repository.PokemonSpeciesNameRepository;
 import pk.model.repository.PokemonStatRepository;
 import pk.model.repository.StatRepository;
 import pk.model.repository.TypeRepository;
@@ -32,6 +33,8 @@ import pk.view.main.IVSlider;
 import pk.view.main.LevelSlider;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -40,11 +43,30 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static commons.Constants.enResourceBundle;
+import static commons.Constants.resourceBundle;
+
 /**
  * Created by Germain on 03/07/2017.
  */
 @Component
 public class PokemonFactoryController {
+
+  public static final List<String> STAT_NAMES = Arrays.asList(
+      resourceBundle.getString("hp"),
+      resourceBundle.getString("atk"),
+      resourceBundle.getString("def"),
+      resourceBundle.getString("spAtk"),
+      resourceBundle.getString("spDef"),
+      resourceBundle.getString("speed"));
+
+  private static final List<String> EN_STAT_NAMES = Arrays.asList(
+      enResourceBundle.getString("hp"),
+      enResourceBundle.getString("atk"),
+      enResourceBundle.getString("def"),
+      enResourceBundle.getString("spAtk"),
+      enResourceBundle.getString("spDef"),
+      enResourceBundle.getString("speed"));
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PokemonFactoryController.class);
 
@@ -57,6 +79,7 @@ public class PokemonFactoryController {
   private final StatRepository statRepository;
   private final PokemonStatRepository pokemonStatRepository;
   private final TypeRepository typeRepository;
+  private final PokemonSpeciesNameRepository pokemonSpeciesNameRepository;
 
   private double level = LevelSlider.DEFAULT_LEVEL;
   private double iv = IVSlider.DEFAULT_IV;
@@ -71,7 +94,8 @@ public class PokemonFactoryController {
                                   ItemNameRepository itemNameRepository,
                                   StatRepository statRepository,
                                   PokemonStatRepository pokemonStatRepository,
-                                  TypeRepository typeRepository) {
+                                  TypeRepository typeRepository,
+                                  PokemonSpeciesNameRepository pokemonSpeciesNameRepository) {
     this.pokemonFactoryRepository = pokemonFactoryRepository;
     this.pokemonFactoryStatRepository = pokemonFactoryStatRepository;
     this.moveNameRepository = moveNameRepository;
@@ -81,6 +105,7 @@ public class PokemonFactoryController {
     this.statRepository = statRepository;
     this.pokemonStatRepository = pokemonStatRepository;
     this.typeRepository = typeRepository;
+    this.pokemonSpeciesNameRepository = pokemonSpeciesNameRepository;
   }
 
   public Stream<PokemonFactoryDTO> findByName(String name) {
@@ -194,12 +219,12 @@ public class PokemonFactoryController {
     }
   }
 
-  private int getOtherFormula(PokemonStat pokemonStat, int ev, double natureBonus) {
+  private int getOtherFormula(@NotNull PokemonStat pokemonStat, int ev, double natureBonus) {
     // Others:  (((IV + 2 * BaseStat + (EV/4) ) * Level/100 ) + 5) * Nature Value
     return (int) (((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 5) * natureBonus);
   }
 
-  private int getHPFormula(PokemonStat pokemonStat, int ev) {
+  private int getHPFormula(@NotNull PokemonStat pokemonStat, int ev) {
     // HP :     (((IV + 2 * BaseStat + (EV/4) ) * Level/100 ) + 10 + Level
     return (int) ((int) (((2.0 * pokemonStat.getBaseStat() + iv + (ev / 4)) * level) / 100.0) + 10 + level);
   }
@@ -210,5 +235,55 @@ public class PokemonFactoryController {
 
   public void setIv(int iv) {
     this.iv = iv;
+  }
+
+  public String prettyPrint(@NotNull PokemonFactoryDTO pokemonFactoryDTO, String toLanguage) {
+    String pkName = pokemonFactoryDTO.getPkName();
+    String itemName = pokemonFactoryDTO.getItemName();
+    String natureName = pokemonFactoryDTO.getNatureName();
+    Map<Integer, String> moves = new HashMap<>(pokemonFactoryDTO.getMoves());
+
+    String fromLanguage = Locale.getDefault().getLanguage();
+    if (!fromLanguage.equals(toLanguage)) {
+      pkName = pokemonSpeciesNameRepository.translate(pkName, fromLanguage, toLanguage);
+      itemName = itemNameRepository.translate(itemName, fromLanguage, toLanguage);
+      natureName = natureNameRepository.translate(natureName, fromLanguage, toLanguage);
+      for (Map.Entry<Integer, String> entry : moves.entrySet()) {
+        entry.setValue(moveNameRepository.translate(entry.getValue(), fromLanguage, toLanguage));
+      }
+    }
+
+    String s = pkName;
+    s += StringUtils.isNull(itemName) ? "" : (" @ " + itemName);
+    s += '\n';
+    s += StringUtils.isNull(natureName) ? "" : (natureName + " Nature");
+    s += '\n';
+    s += "EVs: " + IntStream.rangeClosed(0, 5).boxed()
+        .filter(i -> pokemonFactoryDTO.getStats().get(i + 1) != 0)
+        .map(i -> pokemonFactoryDTO.getStats().get(i + 1) + " " + EN_STAT_NAMES.get(i))
+        .collect(Collectors.joining(" / ")) + '\n';
+    s += "IVs: " + IntStream.rangeClosed(0, 5).boxed()
+        .map(i -> (int) iv + " " + EN_STAT_NAMES.get(i))
+        .collect(Collectors.joining(" / "))+ '\n';
+    s += "- " + moves.values().stream()
+        .filter(move -> !StringUtils.isNull(move))
+        .collect(Collectors.joining("\n- "));
+    return s;
+  }
+
+  public String prettyPrint(@NotNull PokemonFactoryDTO pokemonFactoryDTO) {
+    String s = pokemonFactoryDTO.getPkName();
+    s += StringUtils.isNull(pokemonFactoryDTO.getItemName()) ? "" : (" @ " + pokemonFactoryDTO.getItemName());
+    s += '\n';
+    s += StringUtils.isNull(pokemonFactoryDTO.getNatureName()) ? "" : (pokemonFactoryDTO.getNatureName() + " Nature");
+    s += '\n';
+    s += "EVs: " + IntStream.rangeClosed(0, 5).boxed()
+        .filter(i -> pokemonFactoryDTO.getStats().get(i + 1) != 0)
+        .map(i -> pokemonFactoryDTO.getStats().get(i + 1) + " " + STAT_NAMES.get(i))
+        .collect(Collectors.joining(" / ")) + '\n';
+    s += "- " + new HashMap<>(pokemonFactoryDTO.getMoves()).values().stream()
+        .filter(move -> !StringUtils.isNull(move))
+        .collect(Collectors.joining("\n- "));
+    return s;
   }
 }

@@ -9,6 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PkApplication {
 
+  static { // To be able to use Clipboard
+    System.setProperty("java.awt.headless", "false");
+  }
+
   public static void main(String[] args) {
     SpringApplication.run(PkApplication.class, args);
   }

@@ -6,6 +6,7 @@ import com.vaadin.ui.TextArea;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import pk.controller.PokemonFactoryController;
 import pk.model.data.PokemonRowModel;
 import pk.model.dto.PokemonFactoryDTO;
@@ -28,6 +29,7 @@ public abstract class PkInfoRow extends HorizontalLayout {
   private CssLayout imageLayout;
   private TextArea textArea;
   private TextArea statsArea;
+  private ExportButton exportButton;
 
   public PkInfoRow(PokemonFactoryController pokemonFactoryController, PokemonRowModel pokemonRowModel) {
     setId(UUID.randomUUID().toString());
@@ -53,6 +55,9 @@ public abstract class PkInfoRow extends HorizontalLayout {
     statsArea.setWidth(8, Unit.EM);
     statsArea.setVisible(false);
     addComponent(statsArea);
+
+    exportButton.setVisible(false);
+    addComponent(exportButton);
   }
 
   public void updatePokemon(PokemonFactoryDTO pokemonFactoryDTO) {
@@ -75,6 +80,7 @@ public abstract class PkInfoRow extends HorizontalLayout {
       imageLayout.setVisible(false);
       textArea.setVisible(false);
       statsArea.setVisible(false);
+      exportButton.setVisible(false);
     }
   }
 
@@ -101,14 +107,15 @@ public abstract class PkInfoRow extends HorizontalLayout {
   }
 
   private String printStat(Integer index, int computedStat) {
-    String s = PokemonFactoryDTO.STAT_NAMES.get(index);
+    String s = PokemonFactoryController.STAT_NAMES.get(index);
     s += " \t" + computedStat;
     return s.length() <= 8 ? '\t' + s : s;
   }
 
   private void refreshText(@NotNull PokemonFactoryDTO pokemonFactoryDTO) {
-    textArea.setValue(pokemonFactoryDTO.prettyPrint());
+    textArea.setValue(pokemonFactoryController.prettyPrint(pokemonFactoryDTO));
     textArea.setVisible(true);
+    exportButton.setVisible(true);
   }
 
   private void refreshImage(@NotNull PokemonFactoryDTO pokemonFactoryDTO) {
@@ -127,4 +134,10 @@ public abstract class PkInfoRow extends HorizontalLayout {
     imageLayout = newImageLayout;
   }
 
+  @Autowired
+  public void setExportButton(ExportButton exportButton) {
+    this.exportButton = exportButton;
+    this.exportButton.setPkInfoRow(this);
+    this.exportButton.setPokemonRowModel(pokemonRowModel);
+  }
 }

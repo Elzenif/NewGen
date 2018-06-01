@@ -24,6 +24,8 @@ public class Constants {
 
   @NonNls
   public static final ResourceBundle resourceBundle = ResourceBundle.getBundle("locale/user-interface");
+  @NonNls
+  public static final ResourceBundle enResourceBundle = ResourceBundle.getBundle("locale/user-interface_en");
 
   @NonNls
   public static final String SOURCE_CODE_PRO = "Source Code Pro";
